@@ -1,0 +1,40 @@
+<%= stylesheet_link_tag 'main', :cache => true %>
+<h1>Change Password</h1>
+
+<% if flash[:notice] -%> 
+<div id="notice"><%= flash[:notice] %></div>
+<% end -%>
+
+
+<div>
+  <% form_tag do %>
+    <fieldset>
+      <legend>Old passord</legend>
+
+      <div>
+        <label for="oldpassword">Old Password:</label>
+        <%= password_field_tag :oldpassword, params[:oldpassword] %>
+      </div>
+	</fieldset>
+
+    <fieldset>
+      <legend>New Password</legend>
+
+      <div>
+        <label for="password">Password:</label>
+        <%= password_field_tag :password, params[:password] %>
+      </div>
+
+      <div>
+        <label for="password_confirmation">Password Again:</label>
+        <%= password_field_tag :password_confirmation, params[:password_confirmation] %>
+      </div>
+  
+      <div>
+        <%= submit_tag "Change" %>
+      </div>
+    </fieldset>
+  <% end %>
+</div>
+
+<%= button_to "Cancel", :action => 'index' %>

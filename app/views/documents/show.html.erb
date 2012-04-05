@@ -1,0 +1,40 @@
+<% @title = t('.title')%>
+<div id="show_command">
+	<%= link_to t('common.title.edit'), edit_document_path(@document) %> |
+	<%= link_to t('common.title.destroy'), @document, :confirm => "Are you sure?", :method => :delete %> |
+	<%= link_to t('common.title.list'), documents_path %>
+</div>
+<h2><%=h @document.title %></h2>
+<div class="box">
+	<div id="descr">
+		<table>
+			<tr><th><%= Project.human_name %>:</th><td><%= @document.project.name %></td></tr>
+			<tr><th><%= Document.human_attribute_name("owner") %>:</th><td>
+				<% if !@document.users.blank? %>
+					<% user_names = @document.users.index_by {|u| u.name } %>
+					<%= user_names.keys.sort.join ", " %>
+				<% else %>
+				<% end %>
+			</td></tr>
+			<tr><th><%= Document.human_attribute_name("tags") %></th><td>
+				<% if !@document.tags.blank? %>
+				<% tag_names = @document.tags.index_by {|t| t.name } %>
+				<%= tag_names.keys.sort.join ", " %>
+				<% else %>
+				<% end %>
+			</td></tr>
+		</table>
+		<h3><%= t(".backlink") %></h3>
+		<ul>
+		<% u = @document.user_for_tag(Hrinfo.human_name)
+			if u
+		%>
+			<li><%= link_to Hrinfo.human_name, :controller => "hrinfos", :action => "show", :id => u.hrinfo %></li>
+		<% end %>
+		</ul>
+	</div>
+	<%= render :partial => "shared/show_attachment", :object => @document %>
+	<div style="clear:both;"></div>
+</div>
+
+

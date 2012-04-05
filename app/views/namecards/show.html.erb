@@ -1,0 +1,24 @@
+<% @title = t('.title')%>
+<div id="show_command">
+	<%= link_to t('common.title.edit'), edit_namecard_path(@namecard) %> |
+	<%= link_to t('common.title.destroy'), @namecard, :confirm => "Are you sure?", :method => :delete %> |
+	<%= link_to t('common.title.list'), namecards_path %>
+</div>
+<h2><%=h @namecard.name %></h2>
+<div class="box">
+	<div id="descr">
+		<table>
+			<tr><th><%= Namecard.human_attribute_name("name") %>:</th><td><%= @namecard.name %></td></tr>
+			<tr><th><%= Namecard.human_attribute_name("company") %>:</th><td><%= @namecard.company %></td></tr>
+			<tr><th><%= Namecard.human_attribute_name("department") %>:</th><td><%= @namecard.department %></td></tr>
+			<tr><th><%= Namecard.human_attribute_name("jobtitle") %>:</th><td><%= @namecard.jobtitle %></td></tr>
+			<tr><th><%= Namecard.human_attribute_name("phone") %>:</th><td><%= @namecard.phone %></td></tr>
+			<tr><th><%= Namecard.human_attribute_name("homepage") %>:</th><td><%= @namecard.homepage %></td></tr>
+			<tr><th><%= Namecard.human_attribute_name("email") %>:</th><td><%= @namecard.email %></td></tr>
+		</table>
+	</div>
+	<%= render :partial => "shared/show_attachment", :object => @namecard %>
+	<div style="clear:both;"></div>
+</div>
+
+

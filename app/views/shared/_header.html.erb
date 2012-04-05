@@ -1,0 +1,22 @@
+<div id="top-menu">
+	<div id="account">
+		<ul>
+			<li>
+				<%= link_to t("users.my.title"), :controller => "users", :action => "my" %>
+			</li>
+			<li>
+				<%= link_to t("common.link.logout"), :controller => "users", :action => "logout" %>
+			</li>
+		</ul>
+	</div>
+	<div id="loggedas">
+		<%= t "common.title.loggedas" %> : <%= @user.name %>
+	</div>
+	
+	<ul>
+		<li>
+			<%= link_to t("common.title.main"), :controller => "main", :action => "index" %>
+		</li>
+	</ul>
+</div>
+

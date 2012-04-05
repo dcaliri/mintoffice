@@ -1,0 +1,23 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  cardno: MyString
+  transdate: 2010-11-24 23:26:36
+  amount: 9.99
+  vat: 9.99
+  servicecharge: 9.99
+  totalamount: 9.99
+  storename: MyString
+  storeaddr: MyString
+  approveno: MyString
+
+two:
+  cardno: MyString
+  transdate: 2010-11-24 23:26:36
+  amount: 9.99
+  vat: 9.99
+  servicecharge: 9.99
+  totalamount: 9.99
+  storename: MyString
+  storeaddr: MyString
+  approveno: MyString

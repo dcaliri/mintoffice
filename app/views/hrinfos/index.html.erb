@@ -1,0 +1,45 @@
+<% 
+@title = t('.title') 
+if params[:retired] == 'on'
+	@title += " (" + t(".retired") + ")"
+else
+	@title += " (" + t(".current") + ")"
+end
+%>
+<div id="show_command">
+<% if @user.ingroup?("admin") %>	
+	<%= link_to t('hrinfos.new.title'), new_hrinfo_path %>
+<% end %>
+</div>
+<h2>Total : <%= @hrinfos_count %></h2>
+<table id="list-table">
+  <tr>
+    <th><%= Hrinfo.human_attribute_name('companyno') %></th>
+    <th><%= Hrinfo.human_attribute_name('fullname')%></th>
+    <th><%= Hrinfo.human_attribute_name('position')%></th>
+    <th><%= Hrinfo.human_attribute_name('username')%></th>
+    <th><%= Hrinfo.human_attribute_name('email')%></th>
+		<th><%= Hrinfo.human_attribute_name('joined_on')%></th>
+  </tr>
+
+<% @hrinfos.each do |hrinfo| %>
+<tr class="selectable" onclick="location.href='<%= hrinfo_path(hrinfo) %>'">
+		<td align="right"><%=h hrinfo.companyno %></td>
+		<td><%=h hrinfo.fullname %></td>
+		<td><%=h hrinfo.position %></td>
+    <td><%=h hrinfo.user.name %></td>
+    <td><a href="mailto:<%= hrinfo.email %>"><%=h hrinfo.email %></a></td>
+    <td><%=h hrinfo.joined_on %></td>
+    <!-- <td><%= link_to 'Show', hrinfo %></td>
+    <td><%= link_to 'Edit', edit_hrinfo_path(hrinfo) %></td>
+    <td><%= link_to 'Destroy', hrinfo, :confirm => 'Are you sure?', :method => :delete %></td> -->
+  </tr>
+<% end %>
+</table>
+<div id="show_command">
+<% if params[:retired] == 'on' %>
+	<%= link_to t('.list_current'), :action => "index"%>
+<% else %>
+	<%= link_to t('.list_retired'), :action => "index", :retired=>"on" %>
+<% end %>
+</div>

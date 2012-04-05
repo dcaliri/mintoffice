@@ -1,0 +1,13 @@
+<% 
+		attachments = Attachment.for_me(edit_attachment)
+%>
+<p>
+<% if !attachments.blank? %>
+  <% for attachment in attachments %>
+    <img src="<%= tiny_picture_path attachment %>" />
+	[<%= link_to t('common.title.destroy'), :controller => "attachments", :action => "delete", :id => attachment %>]<br />
+  <% end %>
+<% else %>  
+<% end %>
+</p>
+<%= render :partial => "shared/new_attachment" %>

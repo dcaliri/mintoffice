@@ -1,0 +1,2 @@
+module PettycashesHelper
+end

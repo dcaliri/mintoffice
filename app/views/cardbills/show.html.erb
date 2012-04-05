@@ -1,0 +1,51 @@
+<% @title = t('.title') %>
+<div id="show_command">
+<%= link_to t('common.title.edit'), edit_cardbill_path(@cardbill) %> |
+<%= link_to t('common.title.list'), cardbills_path %>
+</div>
+<h2><%=h @cardbill.cardno_long %></h2>
+<div class="box">
+<div id="descr">
+<span style="float:right;">
+	<%= Cardbill.human_attribute_name('transdate') %> : <%=h @cardbill.transdate.strftime("%Y.%m.%d %H:%M:%S %p") %>
+</span>
+<h3><%= Cardbill.human_attribute_name('totalamount') %>:<%= number_to_currency @cardbill.totalamount %></h3>
+
+<table border="0" cellspacing="5" cellpadding="5">
+	<tr>
+		<th align="right"><%= Cardbill.human_attribute_name('amount') %>:</th>
+		<td align="right"><%= number_to_currency @cardbill.amount %></td>
+	</tr>
+	<tr>
+		<th align="right"><%= Cardbill.human_attribute_name('vat') %>:</th>
+		<td align="right"><%= number_to_currency @cardbill.vat %></td>
+	</tr>
+	<tr>
+		<th align="right"><%= Cardbill.human_attribute_name('servicecharge') %>:</th>
+		<td align="right"><%= number_to_currency @cardbill.servicecharge %></td>
+	</tr>
+	<tr>
+		<th align="right"><%= Cardbill.human_attribute_name('totalamount') %>:</th>
+		<td align="right"><%= number_to_currency @cardbill.totalamount %></td>
+	</tr>
+</table>
+
+<table border="0" cellspacing="5" cellpadding="5">
+	<tr>
+		<th align="right"><%= Cardbill.human_attribute_name('storename') %>:</th>
+		<td><%=h @cardbill.storename %></td>
+	</tr>
+	<tr>
+		<th align="right"><%= Cardbill.human_attribute_name('storeaddr') %>:</th>
+		<td><%=h @cardbill.storeaddr %></td>
+	</tr>
+	<tr>
+		<th align="right"><%= Cardbill.human_attribute_name('approveno') %>:</th>
+		<td><%=h @cardbill.approveno %></td>
+	</tr>
+</table>
+
+</div>
+<%= render :partial => "shared/show_attachment", :object => @cardbill %>
+<div style="clear: both;"></div>
+</div>

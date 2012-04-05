@@ -1,0 +1,326 @@
+ko:
+    hello: "Hello world"
+    direction: ltr
+    date:
+        formats:
+            # Use the strftime parameters for formats.
+            # When no format has been given, it uses default.
+            # You can provide other formats here if you like!
+            default: "%Y/%m/%d"
+            short: "%m/%d"
+            long: "%Y년 %m월 %d일 (%a)"
+
+        day_names: [일요일, 월요일, 화요일, 수요일, 목요일, 금요일, 토요일]
+        abbr_day_names: [일, 월, 화, 수, 목, 금, 토]
+
+        # Don't forget the nil at the beginning; there's no such thing as a 0th month
+        month_names: [~, 1월, 2월, 3월, 4월, 5월, 6월, 7월, 8월, 9월, 10월, 11월, 12월]
+        abbr_month_names: [~, 1월, 2월, 3월, 4월, 5월, 6월, 7월, 8월, 9월, 10월, 11월, 12월]
+        # Used in date_select and datime_select.
+        order: [ :year, :month, :day ]
+
+    time:
+        formats:
+            default: "%Y/%m/%d %H:%M:%S"
+            time: "%H:%M"
+            short: "%y/%m/%d %H:%M"
+            long: "%Y년 %B월 %d일, %H시 %M분 %S초 %Z"
+        am: "오전"
+        pm: "오후"
+        
+    number:
+        # Used in number_with_delimiter()
+        # These are also the defaults for 'currency', 'percentage', 'precision', and 'human'
+        format:
+          # Sets the separator between the units, for more precision (e.g. 1.0 / 2.0 == 0.5)
+          separator: "."
+          # Delimets thousands (e.g. 1,000,000 is a million) (always in groups of three)
+          delimiter: ","
+          # Number of decimals, behind the separator (the number 1 with a precision of 2 gives: 1.00)
+          precision: 3
+          
+        # Used in number_to_currency()
+        currency:
+            format:
+                # Where is the currency sign? %u is the currency unit, %n the number (default: $5.00)
+                format: "%u%n"
+                unit: "₩"
+                # These three are to override number.format and are optional
+                separator: "."
+                delimiter: ","
+                precision: 0
+
+    activerecord:
+        models:
+            attachment: 첨부파일
+            cardbill: "카드 영수증"
+            creditcard: 신용카드
+            document: 문서
+            namecard: 명함정보
+            pettycashes: 소액현금
+            project: 프로젝트
+            hrinfo: 인사정보
+            required_tag: 필수 태그 항목
+        attributes:
+            attachment:
+                comments: 주석
+                content_type: 파일형식
+                file: 파일
+                filepath: 저장된 파일명
+                original_filename: 원 파일명
+                owner_table_name: 관계된 테이블명
+                owner_id : 관계된 테이블 ID
+                title: 제목
+            cardbill:
+                cardno: "카드 번호"
+                transdate: "사용일자"
+                amount: "금액"
+                vat: "부가가치세"
+                servicecharge: "봉사료"
+                totalamount: "총금액"
+                storename: "가맹점"
+                storeaddr: "가맹점 주소"
+                approveno: "승인번호"
+            creditcard:
+                cardno: 카드번호
+                expireyear: 만료연도
+                expiremonth: 만료월
+                nickname: 별칭
+                issuer: 발급사
+                cardholder: 소유자이름
+            document:
+                title: 문서제목
+                project: 프로젝트
+                owner: 소유자
+                tags: 태그목록
+            hrinfo:
+                juminno: 주민등록번호
+                retired_on: 퇴직일
+                companyno: 사번
+                firstname: 이름
+                lastname: 성
+                address: 주소
+                position: 직급
+                fullname: 이름
+                username: 계정
+                mphone: 핸드폰번호
+                joined_on: 입사일
+                email: 이메일
+            namecard:
+                name: "이름"
+                company: "회사명"
+                department: "부서명"
+                jobtitle: "직책"
+                phone: "전화번호"
+                homepage: "홈페이지"
+                email: "이메일주소"
+            pettycash:
+                description: 사용처 상세내역
+                transdate: 사용일자
+                inmoney: 수입금액
+                outmoney: 지출금액
+            project:
+                name: 프로젝트명
+                revenue: 계약금액
+                started_on: 시작일자
+                ending_on: 종료예정일자
+                ended_on: 실제 종료일자
+            required_tag:
+                modelname: 모델명
+            user:
+                name: 사용자계정
+                password: 비밀번호
+                password_confirmation: 비밀번호 확인
+        errors:
+            template:
+                header: 오류가 발생했습니다.
+                body: 아래 오류를 수정하세요.
+            messages:
+                blank: "은(는) 빈값을 허용할 수 없습니다."
+                not_a_number: "은(는) 반드시 숫자여야 합니다."
+                taken: 은(는) 이미 사용중입니다.
+            models:
+                required_tag:
+                    attributes:
+                        modelname:
+                            taken: 이미 사용중입니다.
+    attachments:
+        index:
+            new: 새로운 첨부 올리기
+            title: 첨부파일
+            uploadedby: 업로더
+        show:  
+            title: 첨부 상세 내역
+        edit:
+            title: 첨부 내역 수정
+        msg:
+            update: 첨부파일 내용이 성공적으로 업데이트 되었습니다.
+        new:
+            title: 첨부파일 신규 작성
+    cardbills:  
+        new:
+            title: 새로운 카드 영수증 입력
+        show:
+            title:  "카드 영수증 내역"
+        edit:  
+            title: "카드 영수증 내용 수정"
+        index:
+            title: "카드 영수증 목록"
+        messages:
+            create: "성공적으로 생성되었습니다."
+    creditcards:
+        index:
+            title: 신용카드 목록
+        show:
+            title: 신용카드 상세 내역
+        edit:
+            title: 신용카드 정보 수정
+        new:
+            title: 새로운 신용카드 등록
+    common:
+        button:
+            create: 만들기
+            update: 갱신하기
+            change: 변경하기
+            add: 추가하기
+        messages:
+            created: "{{model}}이(가) 성공적으로 생성되었습니다." 
+            not_allowed: 접근할 수 없습니다.
+            delete_confirm: 확실히 삭제하겠습니까?
+            confirm: 확실히 수행하겠습니까?
+            updated: "{{model}}이(가) 성공적으로 업데이트 되었습니다."
+            no_such_user: 해당 사용자는 존재하지 않습니다.
+            already_exist: 이미 존재합니다.
+        title:
+            main: 메인화면
+            back: "돌아가기"
+            edit: "수정하기"
+            show: "내용 보기"
+            destroy: "삭제하기"
+            loggedas: "로그인계정"
+            list: 목록
+            new: 신규 작성
+            attachment: 첨부파일
+            search: 검색
+            total: 총합
+        link:
+            logout: "로그아웃"
+    documents:
+        index: 
+            title: "문서 관리"
+        show:
+            title: "문서 상세 정보"
+            backlink: 연결고리
+        new:
+            title: 새로운 문서 작성
+        edit:
+            title: 문서 정보 수정
+            adduser: 사용자 추가
+            addtag: 태그 추가
+    hrinfos:
+        index:
+            title: 인사정보관리 - 사원목록
+            list_retired: 퇴직자 목록 조회
+            list_current: 현 재직자 목록 조회
+            retired: 퇴직자
+            current: 재직자
+        show:
+            title: 인사정보
+            related_documents: 관련 문서
+            changes: 변경사항
+            download: 다운로드
+        retire:
+            title: 퇴직 처리
+            retire_date: 퇴직일자
+        new:
+            title: 새로운 인사정보 입력
+            users_blank: 인사정보와 연결할 사용자 계정이 없습니다.
+        edit:
+            picture: 증명사진
+            title: 인사정보 수정
+        error:
+            juminno_invalid: "는 '111111-1111111' 형식으로 써 주세요."
+    main:
+        index:
+            human_resources: 인사관리
+            finance: 회계관리
+            project: 프로젝트
+            document: 문서관리
+    namecards:
+        edit:
+            title: 명함 정보 수정
+        index:
+            title: 명함 관리
+        new:
+            title: 새 명함정보 입력
+            name_example: "ex) 홍길동 (Hong, Gildong)"
+            phone_example: "ex) 회사: 02-xxx-xxxx, 핸드폰: 010-xxx-xxxx ..."
+            homepage_example: "ex) 회사 : http://www.google.com, 개인: http://www.naver.com"
+            email_example: "ex) 회사: xxx@xxx.com, 개인: xxx@xxx.com"
+        show:
+            title: 명함 내용 보기
+    pettycashes:
+        balance: 잔액
+        index:
+            title: 소액현금관리
+        edit:
+            title: 소액현금 거래내용 수정
+        new:
+            title: 새로운 소액 거래 작성
+        show:   
+            title: 소액현금 내역
+    permissions:
+        permission_denied: 접근이 제한되었습니다.
+    projects:
+        index:
+            title: 프로젝트 관리
+            in_progress: 진행중
+            completed: 완료
+        show:
+            title: 프로젝트 상세 내역
+        new:
+            title: 새 프로젝트 작성
+        edit:
+            title: 프로젝트 수정
+            completed: 프로젝트 완료
+            confirm_complete: 프로젝트를 종료하시겠습니까?
+    required_tags:
+        index:
+            title: 필수 태그 목록
+            new: 새로운 필수 태그 항목 작성
+        new:
+            title: 필수 태그 신규 작성
+            tagname: 태그명
+    shared:
+        show_attachment:
+            download: "다운로드"
+    users:
+        new:
+            title: 새 사용자 계정 만들기
+        my:
+            title: 내 계정
+        show:
+            title: 사용자 계정 정보
+            disable: 계정 불능화
+            loginas: 이 계정으로 로그인
+        edit:
+            title: 사용자 계정 편집
+        index:
+            title: 사용자 계정 목록
+            newuser: 새로운 사용자 등록
+        login:
+            name: 사용자계정
+            password: 비밀번호
+            login: 로그인
+            loginfail: 아이디 혹은 비밀번호가 잘못되었습니다.
+        changepw:
+            title: 비밀번호 변경
+            subtitle: 변경
+            password: 비밀번호
+            password_again: 비밀번호 확인
+            oldpassword: 이전 비밀번호
+            oldpassword_wrong: 이전 비밀번호가 틀렸습니다.
+            password_confirm_wrong: 비밀번호와 비밀번호 확인이 일치하지 않습니다.
+            successfully_changed: 성공적으로 변경하였습니다.
+        error:
+            missing_password: 는 공백일 수 없습니다.
