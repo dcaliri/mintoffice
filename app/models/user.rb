@@ -9,7 +9,8 @@ class User < ActiveRecord::Base
   has_many :pay_schedules, :order => 'payday ASC'
   has_one :hrinfo
 
-  named_scope :nohrinfo, :conditions =>['id not in (select user_id from hrinfos)']
+#  named_scope :nohrinfo, :conditions =>['id not in (select user_id from hrinfos)']
+  scope :nohrinfo, :conditions =>['id not in (select user_id from hrinfos)']
   
   validates_presence_of :name
   validates_uniqueness_of :name

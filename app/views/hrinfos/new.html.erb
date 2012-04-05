@@ -3,7 +3,7 @@
 <%= link_to t('common.title.back'), hrinfos_path %>
 </div>
 <h2><%= t("common.title.new") %></h2>
-<% form_for(@hrinfo, 
+<%= form_for(@hrinfo, 
 		:html => {:class => "tabular", :multipart => true}) do |f| %>
 <div class="box">
   <%= f.error_messages %>

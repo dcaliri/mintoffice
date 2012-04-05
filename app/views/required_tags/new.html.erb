@@ -3,7 +3,7 @@
 	...
 </div>
 <h2>New</h2>
-<% form_for @required_tag, 
+<%= form_for @required_tag, 
  			:html => { :class => 'tabular'} do |f| -%>
 <%= hidden_field_tag :returnurl, @returnurl %>
 <%= f.error_messages %>

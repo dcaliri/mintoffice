@@ -5,7 +5,7 @@ class AttachmentsController < ApplicationController
   # GET /attachments.xml
   protect_from_forgery :except => [:save]
   def index
-    @attachments = Attachment.paginate(:all, :page => params[:page], :per_page => 20)
+    @attachments = Attachment.paginate(:page => params[:page], :per_page => 20)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -32,7 +32,7 @@ class AttachmentsController < ApplicationController
       return
     end
 
-    path = "#{RAILS_ROOT}/files/#{@attachment.filepath}"
+    path = "#{Rails.root}/files/#{@attachment.filepath}"
     
     send_file path, :filename => (@attachment.original_filename.blank? ? @attachment.filepath : @attachment.original_filename),
                     :type => @attachment.contenttype, 
@@ -49,18 +49,18 @@ class AttachmentsController < ApplicationController
       width = params[:w].to_i
       height = params[:h].to_i
     
-      dir = "#{RAILS_ROOT}/files/#{width}x#{height}"
+      dir = "#{Rails.root}/files/#{width}x#{height}"
       path = "#{dir}/#{@attachment.id}"
       if ( ! File.exists?(path) )
         if ( ! File.exist?(dir) )
           Dir.mkdir(dir)
         end
-        img = Magick::Image::read("#{RAILS_ROOT}/files/#{@attachment.filepath}").first
+        img = Magick::Image::read("#{Rails.root}/files/#{@attachment.filepath}").first
         thumb = img.resize_to_fit(width,height)
         thumb.write("png:"+path) { self.quality = 90 }
       end
     else
-      path = "#{RAILS_ROOT}/files/#{@attachment.filepath}"
+      path = "#{Rails.root}/files/#{@attachment.filepath}"
     end
     send_file path, :filename => @attachment.filepath,
                                     :type => "image/png",
@@ -105,7 +105,7 @@ class AttachmentsController < ApplicationController
 
     respond_to do |format|
       if @attachment.save
-        flash[:notice] = I18n.t("common.messages.created", :model => Attachment.human_name )
+        flash[:notice] = I18n.t("common.messages.created", :model => Attachment.model_name.human )
         format.html { redirect_to(@attachment) }
         format.xml  { render :xml => @attachment, :status => :created, :location => @attachment }
       else

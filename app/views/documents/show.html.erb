@@ -8,7 +8,7 @@
 <div class="box">
 	<div id="descr">
 		<table>
-			<tr><th><%= Project.human_name %>:</th><td><%= @document.project.name %></td></tr>
+			<tr><th><%= Project.model_name.human %>:</th><td><%= @document.project.name %></td></tr>
 			<tr><th><%= Document.human_attribute_name("owner") %>:</th><td>
 				<% if !@document.users.blank? %>
 					<% user_names = @document.users.index_by {|u| u.name } %>
@@ -26,10 +26,10 @@
 		</table>
 		<h3><%= t(".backlink") %></h3>
 		<ul>
-		<% u = @document.user_for_tag(Hrinfo.human_name)
+		<% u = @document.user_for_tag(Hrinfo.model_name.human)
 			if u
 		%>
-			<li><%= link_to Hrinfo.human_name, :controller => "hrinfos", :action => "show", :id => u.hrinfo %></li>
+			<li><%= link_to Hrinfo.model_name.human, :controller => "hrinfos", :action => "show", :id => u.hrinfo %></li>
 		<% end %>
 		</ul>
 	</div>

@@ -6,7 +6,7 @@
 </div>
 <h2><%= t('common.title.edit') %></h2>
 
-<% form_for(@user,
+<%= form_for(@user,
 		:url => {:action => :update},
 		:html => {:multipart => true, :class => "tabular"}) do |f| %>
   <%= f.error_messages %>

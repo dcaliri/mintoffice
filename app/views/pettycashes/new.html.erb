@@ -3,8 +3,7 @@
 	<%= link_to t('common.title.back'), pettycashes_path %>
 </div>
 <h2><%= t("common.title.new") %></h2>
-<% form_for(@pettycash,
-		:url => { :action => 'save' },
+<%= form_for(@pettycash,
 		:html => { :multipart => true } ) do |f| %>
   <%= f.error_messages %>
 <div class="box">
