@@ -5,7 +5,7 @@
 <h2><%= t("common.title.new") %></h2>
 
 
-<% form_for(@project, :html => {:class => "tabular"}) do |f| %>
+<%= form_for(@project, :html => {:class => "tabular"}) do |f| %>
   <%= f.error_messages %>
 
 <div class="box">

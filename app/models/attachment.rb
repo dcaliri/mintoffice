@@ -4,7 +4,7 @@ class Attachment < ActiveRecord::Base
   has_one :pettycash
   
   validates_presence_of :filepath, :on => :create, :message => "can't be blank"
-  @@storage_path = "#{RAILS_ROOT}/files"
+  @@storage_path = "#{Rails.root}/files"
   
   def self.for_me(obj,order = "")
     if order.blank?

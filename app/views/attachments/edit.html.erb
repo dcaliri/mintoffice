@@ -4,7 +4,7 @@
 	<%= link_to t('common.title.list'), attachments_path %>
 </div>
 <h2><%= t("common.title.edit") %></h2>
-<% form_for(@attachment,
+<%= form_for(@attachment,
 		:html => {:class => "tabular"}) do |f| %>
   <%= f.error_messages %>
 <div class="box">

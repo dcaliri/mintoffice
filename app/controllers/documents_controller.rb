@@ -8,7 +8,8 @@ class DocumentsController < ApplicationController
     if q.nil?
       q = ""
     end
-    @documents = @user.documents.find(:all,:conditions => ["title like ?", "%"+q+"%"],:order => 'id desc').paginate(:page => params[:page], :per_page => 20)
+    # @documents = @user.documents.find(:all,:conditions => ["title like ?", "%"+q+"%"],:order => 'id desc').paginate(:page => params[:page], :per_page => 20)
+    @documents = @user.documents.where("title like ?", "%#{q}%").order('id desc').paginate(:page => params[:page], :per_page => 20)
     @documents_count = @user.documents.count(:all,:conditions => ["title like ?", "%"+q+"%"])
 
     respond_to do |format|
@@ -115,7 +116,7 @@ class DocumentsController < ApplicationController
     respond_to do |format|
       if @document.save
         Attachment.save_for(@document,@user,params[:attachment])
-        flash[:notice] = t('common.messages.created', :model => Document.human_name)
+        flash[:notice] = t('common.messages.created', :model => Document.model_name.human)
         format.html { redirect_to(@document) }
         format.xml  { render :xml => @document, :status => :created, :location => @document }
       else
@@ -134,7 +135,7 @@ class DocumentsController < ApplicationController
     respond_to do |format|
       if @document.update_attributes(params[:document])
         Attachment.save_for(@document,@user,params[:attachment])
-        flash[:notice] = t('common.messages.updated', :model => Document.human_name)
+        flash[:notice] = t('common.messages.updated', :model => Document.model_name.human)
         format.html { redirect_to(@document) }
         format.xml  { head :ok }
       else

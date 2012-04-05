@@ -2,7 +2,7 @@ class PettycashesController < ApplicationController
   # GET /pettycashes
   # GET /pettycashes.xml
   def index
-    @pettycashes = Pettycash.paginate(:all, :order => 'transdate desc', :page => params[:page], :per_page => 2)
+    @pettycashes = Pettycash.paginate(:order => 'transdate desc', :page => params[:page], :per_page => 2)
     inmoney_total = Pettycash.sum(:inmoney)
     outmoney_total = Pettycash.sum(:outmoney)
     @balance = inmoney_total - outmoney_total
@@ -17,7 +17,7 @@ class PettycashesController < ApplicationController
   def show
     @pettycash = Pettycash.find(params[:id])
     @attachments = Attachment.for_me(@pettycash)
-    session[:attachments] = [] if session[:attachments].nil?      
+    session[:attachments] = [] if session[:attachments].nil?
     @attachments.each { |at| session[:attachments] << at.id }
 
     respond_to do |format|
@@ -43,24 +43,25 @@ class PettycashesController < ApplicationController
     @attachments = Attachment.for_me(@pettycash)
   end
 
-  # POST /pettycashes
-  # POST /pettycashes.xml
-  def create
-    @pettycash = Pettycash.new(params[:pettycash])
-
-    respond_to do |format|
-      if @pettycash.save
-        flash[:notice] = 'Pettycash was successfully created.'
-        format.html { redirect_to(@pettycash) }
-        format.xml  { render :xml => @pettycash, :status => :created, :location => @pettycash }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @pettycash.errors, :status => :unprocessable_entity }
-      end
-    end
-  end
+  # # POST /pettycashes
+  # # POST /pettycashes.xml
+  # def create
+  #   @pettycash = Pettycash.new(params[:pettycash])
+  # 
+  #   respond_to do |format|
+  #     if @pettycash.save
+  #       flash[:notice] = 'Pettycash was successfully created.'
+  #       format.html { redirect_to(@pettycash) }
+  #       format.xml  { render :xml => @pettycash, :status => :created, :location => @pettycash }
+  #     else
+  #       format.html { render :action => "new" }
+  #       format.xml  { render :xml => @pettycash.errors, :status => :unprocessable_entity }
+  #     end
+  #   end
+  # end
   
-  def save
+#  def save
+  def create
     @pettycash = Pettycash.new(params[:pettycash])
     
     respond_to do |format|
@@ -86,7 +87,7 @@ class PettycashesController < ApplicationController
         @attachment = Attachment.new(params[:attachment])
         @attachment.save_for(@pettycash,@user)
 
-        flash[:notice] = I18n.t("common.messages.updated", :model => Pettycash.human_name)
+        flash[:notice] = I18n.t("common.messages.updated", :model => Pettycash.model_name.human)
         format.html { redirect_to(@pettycash) }
         format.xml  { head :ok }
       else

@@ -3,7 +3,7 @@ class CardbillsController < ApplicationController
   # GET /cardbills
   # GET /cardbills.xml
   def index
-    @cardbills = Cardbill.paginate(:all, :order => 'transdate desc', :page => params[:page], :per_page => 20)
+    @cardbills = Cardbill.paginate(:order => 'transdate desc', :page => params[:page], :per_page => 20)
     @cardbills_count = Cardbill.count(:all)
     respond_to do |format|
       format.html # index.html.erb
@@ -54,7 +54,7 @@ class CardbillsController < ApplicationController
     respond_to do |format|
       if @cardbill.save
         Attachment.save_for(@cardbill,@user,params[:attachment])
-        flash[:notice] = I18n.t "common.messages.created", :model => Cardbill.human_name 
+        flash[:notice] = I18n.t "common.messages.created", :model => Cardbill.model_name.human
         format.html { redirect_to(@cardbill) }
         format.xml  { render :xml => @cardbill, :status => :created, :location => @cardbill }
       else
@@ -73,7 +73,7 @@ class CardbillsController < ApplicationController
     respond_to do |format|
       if @cardbill.update_attributes(params[:cardbill])
         Attachment.save_for(@cardbill,@user,params[:attachment])
-        flash[:notice] = I18n.t("common.messages.updated", :model => Cardbill.human_name)
+        flash[:notice] = I18n.t("common.messages.updated", :model => Cardbill.model_name.human)
         format.html { redirect_to(@cardbill) }
         format.xml  { head :ok }
       else

@@ -2,16 +2,16 @@
 	<div id="account">
 		<ul>
 			<li>
-				<%= link_to t("users.my.title"), :controller => "users", :action => "my" %>
+				<%= link_to t("users.my.title"), users_my_path %>
 			</li>
 			<li>
-				<%= link_to t("common.link.logout"), :controller => "users", :action => "logout" %>
+				<%= link_to t("common.link.logout"), users_logout_path %>
 			</li>
 		</ul>
 	</div>
-	<div id="loggedas">
-		<%= t "common.title.loggedas" %> : <%= @user.name %>
-	</div>
+	<!-- <div id="loggedas">
+		<%= t "common.title.loggedas" %> : <%#= @user.name %>
+	</div> -->
 	
 	<ul>
 		<li>

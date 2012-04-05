@@ -1,6 +1,6 @@
 <% 	@title = t('.title') %>
 <% content_for :search do -%>
-	<% form_tag({:action => "index"}, :method => :get ) do %>
+	<%= form_tag({:action => "index"}, :method => :get ) do %>
 	<%= t("common.title.search") %> : <%= text_field_tag 'q' %>
 	<% end -%>
 <% end -%>

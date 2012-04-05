@@ -56,7 +56,7 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       if @project.save
-        flash[:notice] = t("common.messages.created", :model => Project.human_name )
+        flash[:notice] = t("common.messages.created", :model => Project.model_name.human )
         format.html { redirect_to(@project) }
         format.xml  { render :xml => @project, :status => :created, :location => @project }
       else
@@ -73,7 +73,7 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       if @project.update_attributes(params[:project])
-        flash[:notice] = I18n.t("common.messages.updated", :model => Project.human_name)
+        flash[:notice] = I18n.t("common.messages.updated", :model => Project.model_name.human)
         format.html { redirect_to(@project) }
         format.xml  { head :ok }
       else

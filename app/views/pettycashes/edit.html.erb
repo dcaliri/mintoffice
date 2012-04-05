@@ -5,7 +5,7 @@
 </div>
 <h2><%= t("common.title.edit") %></h2>
 
-<% form_for(@pettycash,
+<%= form_for(@pettycash,
 		:url => { :action => 'update' },
 		:html => { :multipart => true } ) do |f| %>
   <%= f.error_messages %>

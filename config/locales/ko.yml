@@ -17,7 +17,7 @@ ko:
         month_names: [~, 1월, 2월, 3월, 4월, 5월, 6월, 7월, 8월, 9월, 10월, 11월, 12월]
         abbr_month_names: [~, 1월, 2월, 3월, 4월, 5월, 6월, 7월, 8월, 9월, 10월, 11월, 12월]
         # Used in date_select and datime_select.
-        order: [ :year, :month, :day ]
+        order: [year, month, day]
 
     time:
         formats:
@@ -27,7 +27,7 @@ ko:
             long: "%Y년 %B월 %d일, %H시 %M분 %S초 %Z"
         am: "오전"
         pm: "오후"
-        
+
     number:
         # Used in number_with_delimiter()
         # These are also the defaults for 'currency', 'percentage', 'precision', and 'human'

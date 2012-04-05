@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   def authorize
     @user = User.find(session[:user_id]) if session[:user_id]
     unless @user
-      redirect_to :controller => 'users', :action => 'login'
+      redirect_to users_login_path
       return
     end
     if @user.ingroup? "admin"

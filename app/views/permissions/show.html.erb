@@ -17,7 +17,7 @@
   None
 <% end %>
 
-<% form_tag(:action => "adduser") do %>
+<%= form_tag(:action => "adduser") do %>
    Add User : <%= text_field_tag :username, params[:username] %>
 	<%= hidden_field_tag :id, @permission.id %>
 <% end -%>

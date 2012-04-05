@@ -11,7 +11,7 @@
 <div id="notice"><%= flash[:notice] %></div>
 <% end -%> -->
 
-<% form_tag :html => { :class => 'tabular' } do %>
+<%= form_tag :html => { :class => 'tabular' } do %>
 <%= hidden_field_tag :user_id, params[:id] %>
 <div class="box">
 <% unless @user.ingroup? "admin" %>
