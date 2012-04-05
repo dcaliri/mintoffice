@@ -34,7 +34,7 @@
 <% else %>
 
 <% end %>
-<%= fields_for :attachment, @attachment do |attachment| -%>
+<% fields_for :attachment, @attachment do |attachment| -%>
 	<p>
 		<%= attachment.label :uploaded_file, t("common.title.attachment") %>
 		<%= attachment.file_field :uploaded_file %>

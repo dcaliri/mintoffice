@@ -21,7 +21,7 @@
     <%= f.label :password_confirmation, User.human_attribute_name("password_confirmation")  %>
     <%= f.password_field :password_confirmation, :size => 40 %>
   </p>
-<%= fields_for :attachment, @attachment do |attachment| -%>
+<% fields_for :attachment, @attachment do |attachment| -%>
 	<p>
 		<%= attachment.label :uploaded_file, t("common.title.attachment") %>
 		<%= attachment.file_field :uploaded_file %>

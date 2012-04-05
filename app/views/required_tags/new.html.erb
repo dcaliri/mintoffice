@@ -12,7 +12,7 @@
 	<%= f.label :modelname, RequiredTag.human_attribute_name('modelname')%>
 	<%= f.text_field :modelname %>
 </p>
-<%= fields_for :tag, @tag do |tag| -%>
+<% fields_for :tag, @tag do |tag| -%>
 <p>
 	<%= tag.label :name, t('.tagname') %>
 	<%= tag.text_field :name %>

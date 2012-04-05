@@ -23,7 +23,7 @@
     <%= f.label :description, Pettycash.human_attribute_name('description') %>
     <%= f.text_area :description %>
   </p>
-<%= fields_for :attachment, @attachment do |attachment| -%>
+<% fields_for :attachment, @attachment do |attachment| -%>
 	<p>
 		<%= attachment.label :uploaded_file, t("common.title.attachment") %>
 		<%= attachment.file_field :uploaded_file %>
