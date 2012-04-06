@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   before_filter :authorize, :except => [:login, :logout]
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
-  
+
   protected
   def authorize
     @user = User.find(session[:user_id]) if session[:user_id]
@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
     if @user.ingroup? "admin"
       return
     end
-    
+
     unless Permission.can_access? @user, controller_name, action_name
       flash[:notice] = "You don't have to permission"
       redirect_to :controller => 'main', :action => 'index'
