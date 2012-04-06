@@ -1,6 +1,7 @@
 class NamecardsController < ApplicationController
   def index
-    @namecards = Namecard.order('id desc').paginate(:page => params[:page], :per_page => 20)
+#    @namecards = Namecard.order('id desc').paginate(:page => params[:page], :per_page => 20)
+    @namecards = Namecard.search(params[:q]).order('id desc').paginate(:page => params[:page], :per_page => 20)
   end
 
   def new

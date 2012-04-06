@@ -1,4 +1,11 @@
 <% 	@title = t('.title') %>
+
+<% content_for :search do -%>
+<%= form_tag :namecards, :method => :get do %>
+	<%= t("common.title.search") %> : <%= text_field_tag 'q', params[:q] %>
+	<% end -%>
+<% end -%>
+
 <div id="show_command">
 	<%= link_to t('namecards.new.title'), new_namecard_path %>
 </div>

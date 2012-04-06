@@ -86,7 +86,7 @@ class UsersController < ApplicationController
     @hrinfo = Hrinfo.new(params[:hrinfo])
     respond_to do |format|
       if @user.save
-        @user.hrinfo = @hrinfo
+#        @user.hrinfo = @hrinfo
         @attachment = Attachment.new(params[:attachment])
         @attachment.save_for(@hrinfo,@user)
         flash[:notice] = "User #{@user.name}was successfully created."
