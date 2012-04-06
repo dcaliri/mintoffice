@@ -302,6 +302,7 @@ ko:
         show:
             title: 사용자 계정 정보
             disable: 계정 불능화
+            change_password: 패스워드 변경
             loginas: 이 계정으로 로그인
         edit:
             title: 사용자 계정 편집
