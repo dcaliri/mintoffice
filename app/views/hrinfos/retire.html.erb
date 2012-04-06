@@ -7,7 +7,7 @@
   <div class="box">
 		<p>
 	  	<%= f.label :retired_on, Hrinfo.human_attribute_name("retired_on") %>
-			<%= f.date_select :retired_on %>
+			<%= f.date_select :retired_on, :order => [:year, :month, :day] %>
 		</p>
   </div>
 <%= f.submit t("common.button.update") %>

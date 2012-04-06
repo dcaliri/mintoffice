@@ -45,7 +45,7 @@
 	</p>
 	<p>
 		<%= f.label :joined_on, Hrinfo.human_attribute_name('joined_on')%>
-    <%= f.date_select :joined_on %>
+    <%= f.date_select :joined_on, :order => [:year, :month, :day] %>
 	</p>
 <%= fields_for :attachment, @attachment do |attachment| -%>
   <p>
