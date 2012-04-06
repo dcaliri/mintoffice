@@ -78,4 +78,9 @@ private
   def create_new_salt
     self.salt = self.object_id.to_s + rand.to_s
   end
+  
+  def self.search(query)
+    query = "%#{query || ""}%"
+    where('name like ?', query)
+  end
 end
