@@ -184,11 +184,11 @@ ko:
             change: 변경하기
             add: 추가하기
         messages:
-            created: "{{model}}이(가) 성공적으로 생성되었습니다." 
+            created: "%{model}이(가) 성공적으로 생성되었습니다." 
             not_allowed: 접근할 수 없습니다.
             delete_confirm: 확실히 삭제하겠습니까?
             confirm: 확실히 수행하겠습니까?
-            updated: "{{model}}이(가) 성공적으로 업데이트 되었습니다."
+            updated: "%{model}이(가) 성공적으로 업데이트 되었습니다."
             no_such_user: 해당 사용자는 존재하지 않습니다.
             already_exist: 이미 존재합니다.
         title:
