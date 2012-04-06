@@ -2,9 +2,6 @@
 
 <div id="login-form">
 	<%= form_tag do %>
-		<% if flash[:notice] %>
-			<div class="flash notice"><%= flash[:notice] %></div>
-		<% end %>
 		<div class="box">
 			<p>
 				<%= label_tag :name, t(".name") %>
