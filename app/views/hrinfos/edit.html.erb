@@ -49,7 +49,7 @@
 	</p>
 <% if @user.ingroup?("admin") %>
 	<p>
-		<% fields_for :attachment, @attachment do |attachform| -%>
+		<%= fields_for :attachment, @attachment do |attachform| -%>
 		<%= attachform.label t('hrinfos.edit.picture') %>
 			<% if !@attachments.blank? %>
 				<% 

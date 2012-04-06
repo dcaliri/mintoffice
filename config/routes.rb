@@ -10,7 +10,6 @@ Mintoffice::Application.routes.draw do
   match '/hrinfos/retire/:id', :controller => "hrinfos", :action => "retire_save", :conditions => {:method => :post}
 
   resources :hrinfos
-
   resources :attachments
 
   match '/users/changepw/:user_id', :controller => 'users', :action => 'changepw'

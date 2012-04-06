@@ -2,24 +2,24 @@ class Attachment < ActiveRecord::Base
   belongs_to  :user
   has_one :cardbill
   has_one :pettycash
-  
+
   validates_presence_of :filepath, :on => :create, :message => "can't be blank"
   @@storage_path = "#{Rails.root}/files"
-  
+
   def self.for_me(obj,order = "")
     if order.blank?
-      Attachment.all(:conditions=>{:owner_table_name => obj.class.table_name , 
-                                    :owner_id => obj.id})    
+      Attachment.all(:conditions=>{:owner_table_name => obj.class.table_name,
+                                    :owner_id => obj.id})
     else
-      Attachment.all(:conditions=>{:owner_table_name => obj.class.table_name , 
+      Attachment.all(:conditions=>{:owner_table_name => obj.class.table_name,
                                   :owner_id => obj.id},
-                                  :order => order)    
+                                  :order => order)
     end
   end
-    
+
   def self.maximum_seq_for_me(obj)
-      Attachment.maximum(:seq, :conditions=>{:owner_table_name => obj.class.table_name , 
-                                    :owner_id => obj.id})    
+      Attachment.maximum(:seq, :conditions=>{:owner_table_name => obj.class.table_name,
+                                    :owner_id => obj.id})
   end
 
   def self.save_for (obj,user,param)
@@ -54,6 +54,11 @@ class Attachment < ActiveRecord::Base
     
     self.filepath = filename
     self.contenttype = upload_file.content_type.chomp
+
+    if File.directory?(@@storage_path) == false
+      Dir.mkdir(@@storage_path)
+    end
+
     File.open("#{@@storage_path}/#{filename}", "wb") do |f|
       f.write(upload_file.read)
     end    
