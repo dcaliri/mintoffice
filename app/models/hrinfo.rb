@@ -11,5 +11,15 @@ class Hrinfo < ActiveRecord::Base
   def fullname
     lastname + " " + firstname
   end
-  
+
+  def self.search(text)
+    text = "%#{text || ""}%"
+
+    # fields = ['users.name', :email, :firstname, :lastname, :address, :position, :mphone]
+    # search = fields.map{|field| "#{field} LIKE ?"}.join(" OR ")
+    # joins(:user).where(search, Array.new(fields.count, text))
+
+
+    joins(:user).where('users.name LIKE ? OR email LIKE ? OR firstname like ? OR lastname LIKE ? OR address LIKE ? OR position LIKE ? OR mphone LIKE ?', text, text, text, text, text, text, text)
+  end
 end

@@ -21,4 +21,9 @@ class Document < ActiveRecord::Base
   def project_name
     if project then project.name else "none" end
   end
+  
+  def self.search(query)
+    query = "%#{query}%"
+    joins(:project).where('title like ? OR projects.name LIKE ?', query, query)
+  end
 end
