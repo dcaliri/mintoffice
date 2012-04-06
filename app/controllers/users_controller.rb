@@ -38,9 +38,9 @@ class UsersController < ApplicationController
     end
     
     if params[:disabled] == 'on'
-      @users = User.search(params[:q]).find(:all, :order => :id, :conditions => "name LIKE '[X] %'")
+      @users = User.find(:all, :order => :id, :conditions => "name LIKE '[X] %'")
     else
-      @users = User.search(params[:q]).find(:all, :order => :id, :conditions => "name NOT LIKE '[X] %'")
+      @users = User.find(:all, :order => :id, :conditions => "name NOT LIKE '[X] %'")
     end
 
     respond_to do |format|

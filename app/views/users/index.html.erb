@@ -6,7 +6,7 @@
 <% end -%>
 
 <% content_for :search do -%>
-	<%= form_tag({:action => "index"}, :method => :get ) do %>
+	<%= form_tag :users, :method => :get do %>
 		<%= hidden_field_tag 'disabled', params[:disabled] %>
 		<%= t("common.title.search") %> : <%= text_field_tag 'q', params[:q] %>
 	<% end %>
