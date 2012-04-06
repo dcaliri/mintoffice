@@ -105,7 +105,7 @@ class HrinfosController < ApplicationController
       if @hrinfo.save
         @attachment = Attachment.new(params[:attachment])
         @attachment.save_for(@hrinfo,@user)
-        flash[:notice] = I18n.t("common.title.created", :model => Hrinfo.model_name.human)
+        flash[:notice] = I18n.t("common.messages.created", :model => Hrinfo.model_name.human)
         format.html { redirect_to(@hrinfo) }
         format.xml  { render :xml => @hrinfo, :status => :created, :location => @hrinfo }
       else

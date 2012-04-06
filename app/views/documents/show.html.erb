@@ -8,7 +8,7 @@
 <div class="box">
 	<div id="descr">
 		<table>
-			<tr><th><%= Project.model_name.human %>:</th><td><%= @document.project.name %></td></tr>
+			<tr><th><%= Project.model_name.human %>:</th><td><%= @document.project_name %></td></tr>
 			<tr><th><%= Document.human_attribute_name("owner") %>:</th><td>
 				<% if !@document.users.blank? %>
 					<% user_names = @document.users.index_by {|u| u.name } %>

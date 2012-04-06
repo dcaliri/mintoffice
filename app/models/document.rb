@@ -17,4 +17,8 @@ class Document < ActiveRecord::Base
       nil
     end
   end
+  
+  def project_name
+    if project then project.name else "none" end
+  end
 end

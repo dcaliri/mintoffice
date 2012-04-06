@@ -18,7 +18,7 @@
 <% @documents.each do |document| %>
 	<tr class="selectable" onclick="location.href='<%= document_path(document) %>'">
     <td><%=h document.title %></td>
-    <td><%=h document.project.name %></td>
+    <td><%=h document.project_name  %></td>
 		<td>
 		<% if !document.users.blank? %>
 			<% user_names = document.users.index_by {|u| u.name } %>
