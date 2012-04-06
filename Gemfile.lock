@@ -57,6 +57,7 @@ GEM
     multi_json (1.2.0)
     pg (0.13.2)
     polyglot (0.3.3)
+    pow-client (0.1.1)
     rack (1.4.1)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -114,6 +115,7 @@ DEPENDENCIES
   dynamic_form
   jquery-rails
   pg
+  pow-client
   rails (= 3.2.3)
   rmagick
   sass-rails (~> 3.2.3)
