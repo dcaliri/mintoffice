@@ -18,7 +18,7 @@ class CardbillsController < ApplicationController
     @cardbill = Cardbill.find(params[:id])
     @attachments = Attachment.for_me(@cardbill)
 
-    session[:attachments] = [] if session[:attachments].nil?      
+    session[:attachments] = [] if session[:attachments].nil?
     @attachments.each { |at| session[:attachments] << at.id }
 
     respond_to do |format|
