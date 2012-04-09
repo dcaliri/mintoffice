@@ -9,7 +9,7 @@ class DocumentsController < ApplicationController
       q = ""
     end
     # @documents = @user.documents.find(:all,:conditions => ["title like ?", "%"+q+"%"],:order => 'id desc').paginate(:page => params[:page], :per_page => 20)
-    @documents = @user.documents.search(q).order('id desc').paginate(:page => params[:page], :per_page => 20)
+    @documents = @user.documents.search(q).paginate(:page => params[:page], :per_page => 20)
     @documents_count = @user.documents.count(:all,:conditions => ["title like ?", "%"+q+"%"])
 
     respond_to do |format|
