@@ -16,7 +16,7 @@ class PettycashesController < ApplicationController
   # GET /pettycashes/1.xml
   def show
     @pettycash = Pettycash.find(params[:id])
-    @attachments = Attachment.for_me(@pettycash)
+    @attachments = Attachment.for_me(@pettycash, "seq ASC")
     session[:attachments] = [] if session[:attachments].nil?
     @attachments.each { |at| session[:attachments] << at.id }
 
@@ -40,7 +40,7 @@ class PettycashesController < ApplicationController
   # GET /pettycashes/1/edit
   def edit
     @pettycash = Pettycash.find(params[:id])
-    @attachments = Attachment.for_me(@pettycash)
+    @attachments = Attachment.for_me(@pettycash, "seq ASC")
   end
 
   # # POST /pettycashes
