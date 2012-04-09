@@ -2,7 +2,7 @@ class PettycashesController < ApplicationController
   # GET /pettycashes
   # GET /pettycashes.xml
   def index
-    @pettycashes = Pettycash.paginate(:order => 'transdate desc', :page => params[:page], :per_page => 2)
+    @pettycashes = Pettycash.search(params[:q]).paginate(:order => 'transdate desc', :page => params[:page], :per_page => 2)
     inmoney_total = Pettycash.sum(:inmoney)
     outmoney_total = Pettycash.sum(:outmoney)
     @balance = inmoney_total - outmoney_total
