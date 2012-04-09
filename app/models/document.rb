@@ -25,6 +25,7 @@ class Document < ActiveRecord::Base
   def self.search(query)
     query = "%#{query || ""}%"
     includes(:project).where('title like ? OR projects.name like ?', query, query)
+#    includes(:project).joins(:tags => :projects_tags).where('title like ? OR projects.name like ?', query, query)
   end
 end
 
