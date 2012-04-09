@@ -4,10 +4,7 @@ class Pettycash < ActiveRecord::Base
   validates_numericality_of :outmoney
 
   def self.search(text)
-  end
-
-  def self.search(query)
-    query = "%#{query || ""}%"
-    where('description like ?', query)
+    text = "%#{text || ""}%"
+    where('description like ?', text)
   end
 end
