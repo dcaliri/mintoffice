@@ -395,7 +395,7 @@ ul#css3menu li:hover > a img.over{
 ul#css3menu ul span{
 	background-image:none;padding-right:16px;}
 ul#css3menu li.topitem>a{
-	background-color:traspar;border-width:1px 0 0 0;border-style:solid;border-color:;border-radius:1.6em;-moz-border-radius:1.6em;-webkit-border-radius:1.6em;font:bold 13px Arial,sans-serif;color:#E7E5E5;text-decoration:none;text-shadow:0 1px 1px #000000;}
+	background-color:traspar;border-width:1px 0 0 0;border-style:solid;border-color:#484848;;border-radius:1.6em;-moz-border-radius:1.6em;-webkit-border-radius:1.6em;font:bold 13px Arial,sans-serif;color:#E7E5E5;text-decoration:none;text-shadow:0 1px 1px #000000;}
 ul#css3menu li.topitem:hover>a{
 	background-color:#7dfa00; background-image:-moz-linear-gradient(50% 0%,rgba(255,255,255,0.77),rgba(85,170,0,0.7));background-image:-webkit-gradient(linear,50% 0%,50% 100%,from(rgba(255,255,255,0.77)),to(rgba(85,170,0,0.7)));border-style:solid;border-color:#F8F8F8;font:'bold 13px Arial,sans-serif';color:#444444;text-decoration:none;text-shadow:0 1px 0 #C5EAA1;filter:progid:DXImageTransform.Microsoft.gradient(gradientType=0,startColorstr=#C6FFFFFF,endColorstr=#B355AA00)}
 /*ul#css3menu .submenu>li{
