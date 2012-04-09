@@ -1,4 +1,4 @@
-# require 'RMagick'
+require 'RMagick'
 
 class AttachmentsController < ApplicationController
   # GET /attachments
