@@ -5,7 +5,7 @@ class UsersController < ApplicationController
     session[:user_id] = nil
     redirect_to(:controller => "main", :action => "index")
   end
-  
+
   def login
     if request.post?
       user = User.authenticate(params[:name], params[:password])
@@ -21,12 +21,10 @@ class UsersController < ApplicationController
   def disable
     @this_user = User.find(params[:id])
     @this_user.disable
-    
     redirect_to :action => "index"
   end
-  
+
   def my
-    
   end
   # GET /users
   # GET /users.xml
@@ -36,9 +34,9 @@ class UsersController < ApplicationController
       redirect_to :controller => "main", :action => "index"
       return
     end
-    
+
     if params[:disabled] == 'on'
-      @users = User.search(params[:q])find(:all, :order => :id, :conditions => "name LIKE '[X] %'")
+      @users = User.search(params[:q]).find(:all, :order => :id, :conditions => "name LIKE '[X] %'")
     else
       @users = User.search(params[:q]).find(:all, :order => :id, :conditions => "name NOT LIKE '[X] %'")
     end
@@ -54,7 +52,7 @@ class UsersController < ApplicationController
   def show
     @this_user = User.find(params[:id])
     @attachments = Attachment.for_me(@this_user.hrinfo) if @this_user.hrinfo
-  
+
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @this_user }
@@ -129,7 +127,7 @@ class UsersController < ApplicationController
       format.xml  { head :ok }
     end
   end
-  
+
   def changepw
     if request.post?
       this_user = User.find(params[:user_id])
@@ -154,7 +152,7 @@ class UsersController < ApplicationController
        end
      end
   end
-  
+
   def loginas
     target_user = User.find(params[:id])
     session[:user_id] = target_user.id
@@ -203,7 +201,7 @@ class UsersController < ApplicationController
         else
         end
         PaySchedule.create(:payday => b2_day, :category => 'bonus2', :amount => b2,:user => @user)
-      end    
+      end
       # if bonus 3 exists, make PaySchedule 
       if !params[:bonus_3_percent].blank?
         b3_p = params[:bonus_3_percent].to_i
