@@ -59,14 +59,15 @@ class PettycashesController < ApplicationController
   #     end
   #   end
   # end
-  
+
 #  def save
   def create
     @pettycash = Pettycash.new(params[:pettycash])
-    
+
     respond_to do |format|
       if @pettycash.save
         @attachment = Attachment.new(params[:attachment])
+        @attachment.seq = seq+1
         @attachment.save_for(@pettycash,@user)
         flash[:notice] = 'Pettycash was successfully created.'
         format.html { redirect_to(@pettycash) }
@@ -84,7 +85,9 @@ class PettycashesController < ApplicationController
 
     respond_to do |format|
       if @pettycash.update_attributes(params[:pettycash])
+        seq = Attachment.maximum_seq_for_me(@pettycash) || 0
         @attachment = Attachment.new(params[:attachment])
+        @attachment.seq = seq+1
         @attachment.save_for(@pettycash,@user)
 
         flash[:notice] = I18n.t("common.messages.updated", :model => Pettycash.model_name.human)

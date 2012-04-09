@@ -143,27 +143,28 @@ class AttachmentsController < ApplicationController
       format.xml  { head :ok }
     end
   end
-  
+
   def delete
     @attachment = Attachment.find(params[:id])
     @attachment.destroy
-    
     redirect_to :back
   end
-  
+
   def changeseq
     @attachment = Attachment.find(params[:id])
     tmp = 0
     unless params[:to].to_i == 0
       @a2 = Attachment.find(params[:to].to_i)
+      logger.info "attachment 1 = #{@attachment.seq}, 2 = #{@a2.seq}"
       tmp = @a2.seq
       @a2.seq = @attachment.seq
       @attachment.seq = tmp
+
       @a2.save
       @attachment.save
     end
-    
+
     redirect_to :back
-    
+
   end
 end
