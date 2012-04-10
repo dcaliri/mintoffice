@@ -24,6 +24,14 @@
 					<th align="right"><%= BusinessClient.human_attribute_name('condition') %>:</th>
 					<td align="right"><%= @business_client.condition %></td>
 				</tr>
+				<tr>
+					<td align="right"><p><%= Taxman.model_name.human %>:</p></td>
+					<% unless @business_client.taxmen.empty? %>
+						<td><%= @business_client.taxmen.map{|taxman| taxman.fullname}.join(', ') %></td>
+					<% else %>
+						<td><p><%= t('taxman.empty') %></p></td>
+					<% end %>
+				</tr>
 			</table>
 		</div>
 		<%= render :partial => "shared/show_attachment", :object => @business_client %>

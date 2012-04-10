@@ -62,6 +62,7 @@ ko:
             hrinfo: 인사정보
             required_tag: 필수 태그 항목
             business_clients: 거래처
+            taxman: 담당자
         attributes:
             attachment:
                 comments: 주석
@@ -284,6 +285,8 @@ ko:
             title: 새로운 거래처 입력
         edit:
             title: 거래처 수정
+    taxman:
+        empty: 담당자가 없습니다.
     permissions:
         permission_denied: 접근이 제한되었습니다.
     projects:
