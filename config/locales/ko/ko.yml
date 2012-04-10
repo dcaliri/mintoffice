@@ -66,6 +66,8 @@ ko:
             required_tag: 필수 태그 항목
             business_client: 거래처
             taxman: 담당자
+            taxbill: 세금계산서
+            taxbill_item: 항목
         attributes:
             attachment:
                 comments: 주석
@@ -147,6 +149,9 @@ ko:
                 fullname: 이름
                 email: 이메일
                 phonenumber: 전화번호
+            taxbill:
+                type: 타입
+                transacted_at: 거래날짜
         errors:
             template:
                 header: 오류가 발생했습니다.
@@ -304,7 +309,10 @@ ko:
             title: 새로운 담당자 입력
         edit:
             title: 담당자 수정
-
+    taxbill:
+        index:
+            title: 세금계산서 관리
+            empty: 세금계산서가 없습니다.
     permissions:
         permission_denied: 접근이 제한되었습니다.
     projects:

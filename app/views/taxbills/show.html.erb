@@ -1,0 +1,35 @@
+<% @title = t('.title') %>
+<div id="show_command">
+	<%= link_to t('common.title.edit'), [:edit, @taxbill] %> |
+	<%= link_to t('common.title.destroy'), @taxbill, :confirm => "Are you sure?", :method => :delete %> |
+	<%= link_to t('common.title.list'), :taxbills %>
+</div>
+<h2><%=h "거래처명" %></h2>
+	<div class="box">
+		<div id="descr">
+			<table border="0" cellspacing="5" cellpadding="5">
+				<tr>
+					<th align="right"><%= Taxbill.human_attribute_name('billtype') %>:</th>
+					<td align="right"><%= @taxbill.billtype %></td>
+				</tr>
+				<tr>
+					<th align="right"><%= Taxbill.human_attribute_name('transacted_at') %>:</th>
+					<td align="right"><%= @taxbill.transacted_at %></td>
+				</tr>
+				<tr>
+					<th align="right">총합 금액:</th>
+					<td align="right"><%= @taxbill.price %></td>
+				</tr>
+				<tr>
+					<th align="right">총합 세액:</th>
+					<td align="right"><%= @taxbill.tax %></td>
+				</tr>
+				<tr>
+					<th align="right">총합 합계액:</th>
+					<td align="right"><%= @taxbill.total %></td>
+				</tr>
+			</table>
+		</div>
+		<div style="clear: both;"></div>
+	</div>
+</div>

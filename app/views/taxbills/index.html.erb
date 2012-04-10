@@ -1,0 +1,35 @@
+<% @title  = t('.title') %>
+
+<% content_for :search do -%>
+	<%= form_tag :taxbills, :method => :get do %>
+		<%= t("common.title.search") %> : <%= text_field_tag 'query', params[:query] %>
+	<% end -%>
+<% end %>
+
+<div id="show_command">
+    <%= link_to t('common.title.new'), [:new, :taxbill] %>
+</div>
+
+<% unless @taxbills.empty? %>
+    <h2>Total : <%= @taxbills.count %></h2>
+    <table id="list-table">
+      <tr>
+        <th><%= BusinessClient.human_attribute_name('name') %></th>
+        <th><%= Taxbill.human_attribute_name('transacted_at') %></th>
+        <th><%= Taxman.human_attribute_name('name') %></th>
+      </tr>
+    <% @taxbills.each do |taxbill| %>
+      <tr class="selectable" onclick="location.href='<%= taxbill_path(taxbill) %>'">
+        <td><span><%=h "거래처명" %></span></td>
+        <td><%=h taxbill.transacted_at %></td>
+        <td><%=h "담당자명" %></td>
+      </tr>
+    <% end %>
+    </table>
+    <br />
+    <center>
+		<%= will_paginate @taxbills %>
+    </center>
+<% else %>
+    <h3><%= t 'taxbill.index.empty' %></h3>
+<% end %>
