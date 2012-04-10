@@ -207,6 +207,7 @@ ko:
             updated: "%{model}이(가) 성공적으로 업데이트 되었습니다."
             no_such_user: 해당 사용자는 존재하지 않습니다.
             already_exist: 이미 존재합니다.
+            destroyed: "%{model}이(가) 성공적으로 제거 되었습니다."
         title:
             main: 메인화면
             back: "돌아가기"

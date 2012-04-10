@@ -18,7 +18,7 @@ class BusinessClientsController < ApplicationController
     @business_client = BusinessClient.new(params[:business_client])
     @business_client.save!
     Attachment.save_for(@business_client, @user, params[:attachment])
-    redirect_to @business_client
+    redirect_to @business_client, notice: I18n.t("common.messages.created", :model => BusinessClient.model_name.human)
   rescue ActiveRecord::RecordInvalid
     render 'new'
   end
@@ -32,7 +32,7 @@ class BusinessClientsController < ApplicationController
     @business_client = BusinessClient.find(params[:id])
     @business_client.update_attributes!(params[:business_client])
     Attachment.save_for(@business_client, @user, params[:attachment])
-    redirect_to @business_client
+    redirect_to @business_client, notice: I18n.t("common.messages.updated", :model => BusinessClient.model_name.human)
   rescue ActiveRecord::RecordInvalid
     render 'edit'
   end
@@ -40,6 +40,6 @@ class BusinessClientsController < ApplicationController
   def destroy
     @business_client = BusinessClient.find(params[:id])
     @business_client.destroy
-    redirect_to :business_clients
+    redirect_to :business_clients, notice: I18n.t("common.messages.destroyed", :model => BusinessClient.model_name.human)
   end
 end
