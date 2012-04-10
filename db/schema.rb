@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120410044623) do
+ActiveRecord::Schema.define(:version => 20120410052455) do
 
   create_table "attachments", :force => true do |t|
     t.string   "title"
@@ -195,6 +195,27 @@ ActiveRecord::Schema.define(:version => 20120410044623) do
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "taxbill_items", :force => true do |t|
+    t.datetime "transacted_at"
+    t.text     "note"
+    t.decimal  "unitprice",     :default => 0.0, :null => false
+    t.integer  "quantity"
+    t.decimal  "price",         :default => 0.0, :null => false
+    t.decimal  "tax",           :default => 0.0, :null => false
+    t.decimal  "sumvalue",      :default => 0.0, :null => false
+    t.integer  "taxbill_id"
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+  end
+
+  create_table "taxbills", :force => true do |t|
+    t.string   "billtype"
+    t.datetime "transacted_at"
+    t.integer  "taxman_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "taxmen", :force => true do |t|
