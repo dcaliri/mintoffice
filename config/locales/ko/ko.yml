@@ -314,6 +314,8 @@ ko:
         index:
             title: 세금계산서 관리
             empty: 세금계산서가 없습니다.
+        show:
+            title: 담당자 내역
     permissions:
         permission_denied: 접근이 제한되었습니다.
     projects:
