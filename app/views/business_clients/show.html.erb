@@ -1,7 +1,8 @@
 <% @title = t('.title') %>
 <div id="show_command">
-	<%= link_to t('common.title.edit'), edit_business_client_path(@business_client) %> |
-	<%= link_to t('common.title.list'), business_clients_path %>
+	<%= link_to t('common.title.edit'), [:edit, @business_client] %> |
+	<%= link_to t('common.title.destroy'), @business_client, :confirm => "Are you sure?", :method => :delete %> |
+	<%= link_to t('common.title.list'), :business_clients %>
 </div>
 <h2><%=h @business_client.name %></h2>
 	<div class="box">

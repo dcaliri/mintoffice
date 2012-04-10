@@ -280,6 +280,10 @@ ko:
     business_clients:
         index:
             empty: 거래처가 없습니다.
+        new:
+            title: 새로운 거래처 입력
+        edit:
+            title: 거래처 수정
     permissions:
         permission_denied: 접근이 제한되었습니다.
     projects:
