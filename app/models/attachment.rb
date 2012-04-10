@@ -1,7 +1,9 @@
 class Attachment < ActiveRecord::Base
   belongs_to  :user
+
   has_one :cardbill
   has_one :pettycash
+  has_one :business_client
 
   validates_presence_of :filepath, :on => :create, :message => "can't be blank"
   @@storage_path = "#{Rails.root}/files"
@@ -26,7 +28,7 @@ class Attachment < ActiveRecord::Base
     attachment = Attachment.new(param)
     attachment.save_for(obj,user)
   end
-  
+
   def save_for(obj, user)
     self.owner_table_name = obj.class.table_name
     self.owner_id = obj.id

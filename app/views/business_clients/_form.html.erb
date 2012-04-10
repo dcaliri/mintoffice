@@ -7,7 +7,7 @@
 </div>
 
 <h2><%= t("common.title.#{form_type}") %></h2>
-<%= form_for @business_client do |f| %>
+<%= form_for @business_client, html: {multipart: true} do |f| %>
     <%= f.error_messages %>
     <div class="box">
         <p>
@@ -34,8 +34,7 @@
 			<%= f.label :owner %>
 			<%= f.text_field :owner %>
 		</p>
-
-		<%#= render :partial => "shared/new_attachment" %>
+		<%= render 'shared/attachments/form', label: t('business_clients.edit.picture') %>
         <p>
             <%= f.submit %>
         </p>

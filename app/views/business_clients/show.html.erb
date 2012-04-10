@@ -6,7 +6,7 @@
 </div>
 <h2><%=h @business_client.name %></h2>
 	<div class="box">
-		<div>
+		<div id="descr">
 			<table border="0" cellspacing="5" cellpadding="5">
 				<tr>
 					<th align="right"><%= BusinessClient.human_attribute_name('name') %>:</th>
@@ -44,6 +44,6 @@
 			</table>
 		</div>
 		<%= render :partial => "shared/show_attachment", :object => @business_client %>
+		<div style="clear: both;"></div>
 	</div>
-	<div style="clear: both;"></div>
 </div>
