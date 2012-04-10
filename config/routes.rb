@@ -23,7 +23,9 @@ Mintoffice::Application.routes.draw do
   resources :business_clients do
     resources :taxmen, :except => :index
   end
-  resources :taxbills
+  resources :taxbills do
+    resources :items, controller: 'taxbill_items'
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
 

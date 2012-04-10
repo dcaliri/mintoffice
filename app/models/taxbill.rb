@@ -2,7 +2,7 @@
 
 class Taxbill < ActiveRecord::Base
   belongs_to :taxman
-  has_many :taxbill_items, :dependent => :destroy
+  has_many :items, :class_name => 'TaxbillItem', :dependent => :destroy
 
   BILL_TYPE = [:purchase, :sale]
 

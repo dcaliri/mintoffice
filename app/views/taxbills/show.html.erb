@@ -28,11 +28,41 @@
 					<th align="right">총합 합계액:</th>
 					<td align="right"><%= @taxbill.total %></td>
 				</tr>
+
 				<tr>
 					<th align="right">담당자:</th>
 					<td align="right"><%= @taxbill.taxman.fullname %></td>
 				</tr>
 
+			</table>
+		</div>
+		<div id="taxbill-item-list">
+			<%= link_to "새로운 내역 추가", [:new, @taxbill, :item] %>
+			<table border="0" cellspacing="5" cellpadding="5">
+				<% unless @taxbill.items.empty? %>
+					<tr>
+						<th>날짜</th>
+						<th>내역</th>
+						<th>단가</th>
+						<th>수량</th>
+						<th>금액</th>
+						<th>세액</th>
+						<th>합계액</th>
+					</tr>
+					<% @taxbill.items.each do |taxbill| %>
+						<tr>
+							<td><%= taxbill.transacted_at %></td>
+							<td><%= taxbill.note %></td>
+							<td><%= taxbill.unitprice %></td>
+							<td><%= taxbill.quantity %></td>
+							<td><%= taxbill.price %></td>
+							<td><%= taxbill.tax %></td>
+							<td><%= taxbill.sumvalue %></td>
+						</td>
+					<% end %>
+				<% else %>
+					항목이 없습니다.
+				<% end %>
 			</table>
 		</div>
 		<div style="clear: both;"></div>
