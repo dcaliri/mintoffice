@@ -27,7 +27,7 @@
 		<% end %>
 		</td>
 		<td>
-			<% if !document.tags.blank? %>
+			<% if !document.tags(true).blank? %>
 				<% tag_names = document.tags.index_by {|t| t.name} %>
 				<%= tag_names.keys.sort.join ", " %>
 			<% else %>
