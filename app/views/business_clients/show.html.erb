@@ -27,10 +27,19 @@
 				<tr>
 					<td align="right"><p><%= Taxman.model_name.human %>:</p></td>
 					<% unless @business_client.taxmen.empty? %>
-						<td><%= @business_client.taxmen.map{|taxman| taxman.fullname}.join(', ') %></td>
+						<td align="right">
+							<% @business_client.taxmen.map do |taxman| %>
+								<%= taxman.fullname %>
+								<%= link_to "[수정", [:edit, @business_client, taxman] %>
+								|
+								<%= link_to "삭제]", [@business_client, taxman], confirm: "Are you sure?", :method => :delete %>
+								<br>
+							<% end %>
+						</td>
 					<% else %>
 						<td><p><%= t('taxman.empty') %></p></td>
 					<% end %>
+					<td><%= link_to "거래처 추가하기", [:new, @business_client, :taxman] %></td>
 				</tr>
 			</table>
 		</div>

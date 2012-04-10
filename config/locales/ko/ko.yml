@@ -140,6 +140,10 @@ ko:
                 condition: 업태
                 address: 주소
                 owner: 대표자
+            taxman: 
+                fullname: 이름
+                email: 이메일
+                phonenumber: 전화번호
         errors:
             template:
                 header: 오류가 발생했습니다.
@@ -285,8 +289,13 @@ ko:
             title: 새로운 거래처 입력
         edit:
             title: 거래처 수정
-    taxman:
+    taxmen:
         empty: 담당자가 없습니다.
+        new:
+            title: 새로운 담당자 입력
+        edit:
+            title: 담당자 수정
+
     permissions:
         permission_denied: 접근이 제한되었습니다.
     projects:
