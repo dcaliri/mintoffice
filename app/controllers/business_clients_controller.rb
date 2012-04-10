@@ -15,6 +15,8 @@ class BusinessClientsController < ApplicationController
     @business_client = BusinessClient.new(params[:business_client])
     @business_client.save!
     redirect_to @business_client
+  rescue ActiveRecord::RecordInvalid
+    render 'new'
   end
 
   def edit
@@ -25,6 +27,8 @@ class BusinessClientsController < ApplicationController
     @business_client = BusinessClient.find(params[:id])
     @business_client.update_attributes!(params[:business_client])
     redirect_to @business_client
+  rescue ActiveRecord::RecordInvalid
+    render 'edit'
   end
 
   def destroy
