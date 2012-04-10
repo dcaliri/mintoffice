@@ -28,6 +28,11 @@
 					<th align="right">총합 합계액:</th>
 					<td align="right"><%= @taxbill.total %></td>
 				</tr>
+				<tr>
+					<th align="right">담당자:</th>
+					<td align="right"><%= @taxbill.taxman.fullname %></td>
+				</tr>
+
 			</table>
 		</div>
 		<div style="clear: both;"></div>

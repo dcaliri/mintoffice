@@ -19,6 +19,9 @@
 			<%= f.date_select :transacted_at, :order => [:year, :month, :day] %>
 		</p>
 		<p>
+			<%= f.label :taxman_id %>
+			<%= f.select :taxman_id, options_for_select(Taxbill.taxmen_list, @taxbill.taxman_id) %>
+		</p>
 		<p>
 			<%= f.submit %>
 		</p>

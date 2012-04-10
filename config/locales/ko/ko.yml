@@ -150,8 +150,9 @@ ko:
                 email: 이메일
                 phonenumber: 전화번호
             taxbill:
-                type: 타입
+                billtype: 타입
                 transacted_at: 거래날짜
+                taxman_id: 담당자
         errors:
             template:
                 header: 오류가 발생했습니다.
