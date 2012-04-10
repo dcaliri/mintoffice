@@ -8,7 +8,7 @@ class CreateTaxbillItems < ActiveRecord::Migration
       t.decimal :price, :default => 0, :null => false
       t.decimal :tax, :default => 0, :null => false
       t.decimal :sumvalue, :default => 0, :null => false
-      t.references :taxbills
+      t.references :taxbill
       t.timestamps
     end
   end

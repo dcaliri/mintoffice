@@ -3,7 +3,7 @@ class CreateTaxbills < ActiveRecord::Migration
     create_table :taxbills do |t|
       t.string :billtype
       t.datetime :transacted_at
-      t.references :taxmans
+      t.references :taxman
       t.timestamps
     end
   end
