@@ -1,6 +1,6 @@
 <% unless @business_clients.empty? %>
     <div id="show_command">
-        <%= link_to t('common.title.new'), new_business_client_path %>
+        <%= link_to t('common.title.new'), [:new, :business_client] %>
     </div>
     <h2>Total : <%= @business_clients.count %></h2>
     <table id="list-table">
@@ -21,7 +21,7 @@
     </table>
     <br />
     <center>
-    <%= will_paginate @business_clients %>
+		<%= will_paginate @business_clients %>
     </center>
 <% else %>
     <h3><%= t 'business_clients.index.empty' %></h3>

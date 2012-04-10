@@ -1,7 +1,8 @@
 <% @title = t('.title') %>
 <div id="show_command">
-	<%= link_to t('common.title.edit'), edit_business_client_path(@business_client) %> |
-	<%= link_to t('common.title.list'), business_clients_path %>
+	<%= link_to t('common.title.edit'), [:edit, @business_client] %> |
+	<%= link_to t('common.title.destroy'), @business_client, :confirm => "Are you sure?", :method => :delete %> |
+	<%= link_to t('common.title.list'), :business_clients %>
 </div>
 <h2><%=h @business_client.name %></h2>
 	<div class="box">
@@ -22,6 +23,14 @@
 				<tr>
 					<th align="right"><%= BusinessClient.human_attribute_name('condition') %>:</th>
 					<td align="right"><%= @business_client.condition %></td>
+				</tr>
+				<tr>
+					<td align="right"><p><%= Taxman.model_name.human %>:</p></td>
+					<% unless @business_client.taxmen.empty? %>
+						<td><%= @business_client.taxmen.map{|taxman| taxman.fullname}.join(', ') %></td>
+					<% else %>
+						<td><p><%= t('taxman.empty') %></p></td>
+					<% end %>
 				</tr>
 			</table>
 		</div>
