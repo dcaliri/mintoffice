@@ -1,6 +1,6 @@
 class BusinessClientsController < ApplicationController
   def index
-    @business_clients = BusinessClient.page(params[:page])
+    @business_clients = BusinessClient.search(params[:query]).page(params[:page])
   end
 
   def new

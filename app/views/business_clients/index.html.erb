@@ -1,3 +1,7 @@
+<%= form_tag :business_clients, :method => :get do %>
+	<%= t("common.title.search") %> : <%= text_field_tag 'query', params[:query] %>
+<% end -%>
+
 <% unless @business_clients.empty? %>
     <div id="show_command">
         <%= link_to t('common.title.new'), [:new, :business_client] %>
