@@ -7,10 +7,10 @@
 	<li class="topitem"><a href="#"><span><%= t(".human_resources") %></span></a>
 		<ul class="submenu">
 			<li class="subfirst">#</li>
-			<li><%= link_to t("hrinfos.index.title"), :controller => "hrinfos" %></li>
+			<li><%= link_to t("hrinfos.@business_client"), :controller => "hrinfos" %></li>
 			<% if @user.permission.any? {|perm| perm.name == 'users'}  %>
 				<li>
-					<%= link_to t("users.index.title"), :controller => "users" %>
+					<%= link_to t("users.@business_client"), :controller => "users" %>
 				</li>
 			<% end %>
 			<li class="sublast">#</li>
@@ -21,12 +21,12 @@
 			<li class="subfirst">#</li>
 		<% if @user.permission.any? {|perm| perm.name == 'pettycashes'}  %>
 			<li>
-				<%= link_to t("pettycashes.index.title"), :controller => "pettycashes" %>
+				<%= link_to t("pettycashes.@business_client"), :controller => "pettycashes" %>
 			</li>
 		<% end %>
 		<% if @user.permission.any? {|perm| perm.name == 'cardbills'}  %>
 			<li>
-				<%= link_to t("cardbills.index.title"), :controller => "cardbills" %>
+				<%= link_to t("cardbills.@business_client"), :controller => "cardbills" %>
 			</li>
 		<% end %>
 		<li class="sublast">#</li>
@@ -37,7 +37,7 @@
 			<li class="subfirst">#qweqweqw</li>
 			<% if @user.permission.any? {|perm| perm.name == 'projects'}  %>
 				<li>
-					<%= link_to t("projects.index.title"), :controller => "projects" %>
+					<%= link_to t("projects.@business_client"), :controller => "projects" %>
 				</li>
 			<% end %>
 			<li class="sublast">#</li>
@@ -46,8 +46,8 @@
 	<li class="topitem"><a href="#"><span><%= t(".document") %></span></a>
 		<ul class="submenu">
 			<li class="subfirst">#</li>
-			<li><%= link_to t("documents.index.title"), :controller => "documents" %></li>
-			<li><%= link_to t("namecards.index.title"), :controller => "namecards" %></li>
+			<li><%= link_to t("documents.@business_client"), :controller => "documents" %></li>
+			<li><%= link_to t("namecards.@business_client"), :controller => "namecards" %></li>
 			<li class="sublast">#</li>
 		</ul>
 	</li>

@@ -20,7 +20,7 @@ Mintoffice::Application.routes.draw do
   resources :users
   resources :required_tags
   resources :namecards
-
+  resources :business_clients
   # The priority is based upon order of creation: first created -> highest priority.
 
   # Sample of regular route:

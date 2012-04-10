@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120405082459) do
+ActiveRecord::Schema.define(:version => 20120410010858) do
 
   create_table "attachments", :force => true do |t|
     t.string   "title"
@@ -25,6 +25,17 @@ ActiveRecord::Schema.define(:version => 20120405082459) do
     t.integer  "owner_id"
     t.string   "original_filename"
     t.integer  "seq"
+  end
+
+  create_table "business_clients", :force => true do |t|
+    t.string   "name"
+    t.string   "registration_number"
+    t.string   "category"
+    t.string   "condition"
+    t.string   "address"
+    t.string   "owner"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
   end
 
   create_table "cardbills", :force => true do |t|

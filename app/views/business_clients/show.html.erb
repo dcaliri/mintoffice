@@ -1,0 +1,31 @@
+<% @title = t('.title') %>
+<div id="show_command">
+	<%= link_to t('common.title.edit'), edit_business_client_path(@business_client) %> |
+	<%= link_to t('common.title.list'), business_clients_path %>
+</div>
+<h2><%=h @business_client.name %></h2>
+	<div class="box">
+		<div id="descr">
+			<table border="0" cellspacing="5" cellpadding="5">
+				<tr>
+					<th align="right"><%= BusinessClient.human_attribute_name('name') %>:</th>
+					<td align="right"><%= @business_client.name %></td>
+				</tr>
+				<tr>
+					<th align="right"><%= BusinessClient.human_attribute_name('registration_number') %>:</th>
+					<td align="right"><%= @business_client.registration_number %></td>
+				</tr>
+				<tr>
+					<th align="right"><%= BusinessClient.human_attribute_name('category') %>:</th>
+					<td align="right"><%= @business_client.category %></td>
+				</tr>
+				<tr>
+					<th align="right"><%= BusinessClient.human_attribute_name('condition') %>:</th>
+					<td align="right"><%= @business_client.condition %></td>
+				</tr>
+			</table>
+		</div>
+		<%= render :partial => "shared/show_attachment", :object => @business_client %>
+	</div>
+	<div style="clear: both;"></div>
+</div>

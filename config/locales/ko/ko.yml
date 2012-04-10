@@ -61,6 +61,7 @@ ko:
             project: 프로젝트
             hrinfo: 인사정보
             required_tag: 필수 태그 항목
+            business_clients: 거래처
         attributes:
             attachment:
                 comments: 주석
@@ -131,6 +132,13 @@ ko:
                 name: 사용자계정
                 password: 비밀번호
                 password_confirmation: 비밀번호 확인
+            business_client:
+                name: 거래처명
+                registration_number: 사업자 등록번호
+                category: 업종
+                condition: 업태
+                address: 주소
+                owner: 대표자
         errors:
             template:
                 header: 오류가 발생했습니다.
@@ -269,6 +277,9 @@ ko:
             title: 새로운 소액 거래 작성
         show:   
             title: 소액현금 내역
+    business_clients:
+        index:
+            empty: 거래처가 없습니다.
     permissions:
         permission_denied: 접근이 제한되었습니다.
     projects:
