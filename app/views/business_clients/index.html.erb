@@ -6,10 +6,11 @@
 	<% end -%>
 <% end %>
 
+<div id="show_command">
+    <%= link_to t('common.title.new'), [:new, :business_client] %>
+</div>
+
 <% unless @business_clients.empty? %>
-    <div id="show_command">
-        <%= link_to t('common.title.new'), [:new, :business_client] %>
-    </div>
     <h2>Total : <%= @business_clients.count %></h2>
     <table id="list-table">
       <tr>
