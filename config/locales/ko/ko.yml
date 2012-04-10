@@ -57,7 +57,7 @@ ko:
             creditcard: 신용카드
             document: 문서
             namecard: 명함정보
-            pettycashes: 소액현금
+            pettycash: 소액현금
             project: 프로젝트
             hrinfo: 인사정보
             required_tag: 필수 태그 항목
