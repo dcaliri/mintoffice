@@ -25,7 +25,8 @@
 		<%= f.label :owners, Document.human_attribute_name('owner') %>
 		<% if !@document.users.blank? %>
 		  <% for user in @document.users %>
-			<%=h user.name %> [<%= link_to t('common.title.destroy'), :action => :remove_owner, :id => @document, :uid => user.id %>]<%= "<br />" unless user == @document.users.last %>
+			<%=h user.name %> [<%= link_to t('common.title.destroy'), :action => :remove_owner, :id => @document, :uid => user.id %>]
+												<% unless user == @document.users.last %><br /><% end %>
 		  <% end %>
 		<% else %>
 		<% end %>
@@ -34,7 +35,8 @@
 		<%= f.label :tags, Document.human_attribute_name('tags') %>
 		<% if !@document.tags.blank? %>
 		  <% for tag in @document.tags %>
-		    <%= tag.name %> [<%= link_to t('common.title.destroy'), :action => :remove_tag, :id => @document, :tid => tag.id %>]<%= "<br />" unless tag == @document.tags.last %>
+		    <%= tag.name %> [<%= link_to t('common.title.destroy'), :action => :remove_tag, :id => @document, :tid => tag.id %>]
+												<% unless tag == @document.tags.last %><br /><% end %>
 		  <% end %>
 		<% else %>
 		<% end %>
