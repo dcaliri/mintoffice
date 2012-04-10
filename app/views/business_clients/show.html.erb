@@ -6,7 +6,7 @@
 </div>
 <h2><%=h @business_client.name %></h2>
 	<div class="box">
-		<div id="descr">
+		<div>
 			<table border="0" cellspacing="5" cellpadding="5">
 				<tr>
 					<th align="right"><%= BusinessClient.human_attribute_name('name') %>:</th>
@@ -39,7 +39,7 @@
 					<% else %>
 						<td><p><%= t('taxman.empty') %></p></td>
 					<% end %>
-					<td><%= link_to "거래처 추가하기", [:new, @business_client, :taxman] %></td>
+					<td><%= link_to "담당자 추가하기", [:new, @business_client, :taxman] %></td>
 				</tr>
 			</table>
 		</div>

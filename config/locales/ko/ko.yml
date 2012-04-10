@@ -38,7 +38,7 @@ ko:
           delimiter: ","
           # Number of decimals, behind the separator (the number 1 with a precision of 2 gives: 1.00)
           precision: 3
-          
+
         # Used in number_to_currency()
         currency:
             format:
@@ -49,7 +49,10 @@ ko:
                 separator: "."
                 delimiter: ","
                 precision: 0
-
+    helpers:
+        submit:
+            create: "%{model} 만들기"
+            update: "%{model} 수정하기"
     activerecord:
         models:
             attachment: 첨부파일
@@ -61,7 +64,7 @@ ko:
             project: 프로젝트
             hrinfo: 인사정보
             required_tag: 필수 태그 항목
-            business_clients: 거래처
+            business_client: 거래처
             taxman: 담당자
         attributes:
             attachment:
@@ -259,6 +262,7 @@ ko:
             finance: 회계관리
             project: 프로젝트
             document: 문서관리
+            business_client: 거래처관리
     namecards:
         edit:
             title: 명함 정보 수정
@@ -284,7 +288,10 @@ ko:
             title: 소액현금 내역
     business_clients:
         index:
+            title: 거래처 관리
             empty: 거래처가 없습니다.
+        show:
+            title: 거래처 내역
         new:
             title: 새로운 거래처 입력
         edit:

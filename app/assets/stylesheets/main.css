@@ -299,7 +299,6 @@ td.money {
 	top: 100px;
 	height: 200px;
 /*  background-color: #999999;*/
-	
 }
 ul#css3menu_top,ul#css3menu_top ul{
 	margin:0;list-style:none;padding:0;background-color:#dedede;border-width:1px;border-style:solid;border-color:#5f5f5f;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;}
@@ -365,7 +364,7 @@ ul#css3menu ul ul{
 ul#css3menu,ul#css3menu ul{
 	margin:0;list-style:none;background-color:#000000; background-image:-moz-linear-gradient(50% 0%,rgba(255,255,255,0.38),rgba(255,255,255,0.16));background-image:-webkit-gradient(linear,50% 0%,50% 100%,from(rgba(255,255,255,0.38)),to(rgba(255,255,255,0.16)));background-repeat:repeat;border-width:1px;border-style:solid;border-color:#343434;-moz-border-radius:28px;-webkit-border-radius:28px;border-radius:28px;-moz-box-shadow:1.4px 1px 2px #B1B1B1;-webkit-box-shadow:1.4px 1px 2px #B1B1B1;box-shadow:1.4px 1px 2px #B1B1B1;}
 ul#css3menu{
-	padding:6px 6px 6px 0;display:block;font-size:0;position:absolute;z-index:1000;left:10px;top:10px;}
+	width:530px;padding:6px 6px 6px 0;display:block;font-size:0;position:absolute;z-index:1000;left:10px;top:10px;}
 ul#css3menu li{
 	display:block;white-space:nowrap;font-size:0;float:left;}
 ul#css3menu>li,ul#css3menu li{
