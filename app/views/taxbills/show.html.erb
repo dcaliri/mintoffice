@@ -16,7 +16,7 @@
         </tr>
         <tr>
           <th align="right"><%= Taxbill.human_attribute_name('transacted_at') %>:</th>
-          <td align="right"><%= taxbill.transacted_at %></td>
+          <td align="right"><%= taxbill.transacted_at.strftime("%Y-%m-%d") %></td>
         </tr>
         <tr>
           <th align="right"><%= Taxbill.human_attribute_name('price') %></th>
@@ -53,7 +53,7 @@
           </tr>
           <% taxbill.items.each do |item| %>
             <tr>
-              <td><%= item.transacted_at %></td>
+              <td><%= item.transacted_at.strftime("%Y-%m-%d") %></td>
               <td><%= item.note %></td>
               <td><%= item.unitprice %></td>
               <td><%= item.quantity %></td>

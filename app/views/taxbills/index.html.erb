@@ -20,9 +20,9 @@
       </tr>
     <% taxbills.each do |taxbill| %>
       <tr class="selectable" onclick="location.href='<%= taxbill_path(taxbill) %>'">
-        <td><span><%=h "거래처명" %></span></td>
-        <td><%=h taxbill.transacted_at %></td>
-        <td><%=h "담당자명" %></td>
+        <td><span><%=h taxbill.taxman.business_client.name %></span></td>
+        <td><%=h taxbill.transacted_at.strftime("%Y-%m-%d") %></td>
+        <td><%=h taxbill.taxman.fullname %></td>
       </tr>
     <% end %>
     </table>
