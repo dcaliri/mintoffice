@@ -1,29 +1,29 @@
-<% form_type = if @taxbill.new_record? then 'new' else 'edit' end %>
+<% form_type = if taxbill.new_record? then 'new' else 'edit' end %>
 <% @title = t("taxmen.#{form_type}.title") %>
 
 <div id="show_command">
-	<%= link_to t('common.title.back'), @taxbill %>
+  <%= link_to t('common.title.back'), taxbill %>
 </div>
 
 <h2><%= t("common.title.#{form_type}") %></h2>
 
-<%= form_for @taxbill do |f| %>
+<%= form_for taxbill do |f| %>
    <%= f.error_messages %>
-	<div class="box">
-		<p>
-			<%= f.label :billtype %>
-			<%= f.select :billtype, options_for_select(Taxbill::BILL_TYPE) %>
-		</p>
-		<p>
-			<%= f.label :transacted_at %>
-			<%= f.date_select :transacted_at, :order => [:year, :month, :day] %>
-		</p>
-		<p>
-			<%= f.label :taxman_id %>
-			<%= f.select :taxman_id, options_for_select(Taxbill.taxmen_list, @taxbill.taxman_id) %>
-		</p>
-		<p>
-			<%= f.submit %>
-		</p>
-	</div>
+  <div class="box">
+    <p>
+      <%= f.label :billtype %>
+      <%= f.select :billtype, options_for_select(Taxbill::BILL_TYPE) %>
+    </p>
+    <p>
+      <%= f.label :transacted_at %>
+      <%= f.date_select :transacted_at, :order => [:year, :month, :day] %>
+    </p>
+    <p>
+      <%= f.label :taxman_id %>
+      <%= f.select :taxman_id, options_for_select(Taxbill.taxmen_list, taxbill.taxman_id) %>
+    </p>
+    <p>
+      <%= f.submit %>
+    </p>
+  </div>
 <% end %>

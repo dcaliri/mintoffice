@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120410052455) do
+ActiveRecord::Schema.define(:version => 20120412021850) do
 
   create_table "attachments", :force => true do |t|
     t.string   "title"
@@ -202,9 +202,8 @@ ActiveRecord::Schema.define(:version => 20120410052455) do
     t.text     "note"
     t.decimal  "unitprice",     :default => 0.0, :null => false
     t.integer  "quantity"
-    t.decimal  "price",         :default => 0.0, :null => false
+    t.decimal  "total",         :default => 0.0, :null => false
     t.decimal  "tax",           :default => 0.0, :null => false
-    t.decimal  "sumvalue",      :default => 0.0, :null => false
     t.integer  "taxbill_id"
     t.datetime "created_at",                     :null => false
     t.datetime "updated_at",                     :null => false

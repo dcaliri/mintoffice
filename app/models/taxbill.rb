@@ -13,14 +13,14 @@ class Taxbill < ActiveRecord::Base
   end
 
   def price
-    100
+    items.sum{|item| item.unitprice }
   end
 
   def tax
-    10
+    items.sum{|item| item.tax }
   end
 
   def total
-    90
+    items.sum{|item| item.total }
   end
 end

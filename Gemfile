@@ -6,6 +6,7 @@ gem 'jquery-rails'
 gem 'dynamic_form'
 gem 'will_paginate', '~> 3.0'
 gem 'rmagick'
+gem 'decent_exposure'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
