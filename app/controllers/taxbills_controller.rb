@@ -1,5 +1,5 @@
 class TaxbillsController < ApplicationController
-  expose(:taxbills) { Taxbill.page(params[:page]) }
+  expose(:taxbills) { Taxbill.search(params[:query]).page(params[:page]) }
   expose(:taxbill)
 
   def create

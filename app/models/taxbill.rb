@@ -13,7 +13,7 @@ class Taxbill < ActiveRecord::Base
   end
 
   def price
-    items.sum{|item| item.unitprice }
+    items.sum{|item| item.price }
   end
 
   def tax
@@ -22,5 +22,10 @@ class Taxbill < ActiveRecord::Base
 
   def total
     items.sum{|item| item.total }
+  end
+
+  def self.search(text)
+    text = "%#{text || ""}%"
+    includes(:taxman).where('taxmen.fullname like ?', text)
   end
 end

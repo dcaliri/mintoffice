@@ -10,10 +10,4 @@ class TaxbillItem < ActiveRecord::Base
       0
     end
   end
-
-  # def total
-  #   read_attribute(:price)
-  # end
-
-
 end
