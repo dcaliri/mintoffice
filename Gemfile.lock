@@ -37,6 +37,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.2.0)
+    diff-lcs (1.1.3)
     dynamic_form (1.1.4)
     erubis (2.7.0)
     execjs (1.3.0)
@@ -84,6 +85,19 @@ GEM
     rdoc (3.12)
       json (~> 1.4)
     rmagick (2.13.1)
+    rspec (2.9.0)
+      rspec-core (~> 2.9.0)
+      rspec-expectations (~> 2.9.0)
+      rspec-mocks (~> 2.9.0)
+    rspec-core (2.9.0)
+    rspec-expectations (2.9.1)
+      diff-lcs (~> 1.1.3)
+    rspec-mocks (2.9.0)
+    rspec-rails (2.9.0)
+      actionpack (>= 3.0)
+      activesupport (>= 3.0)
+      railties (>= 3.0)
+      rspec (~> 2.9.0)
     sass (3.1.15)
     sass-rails (3.2.5)
       railties (~> 3.2.0)
@@ -118,6 +132,7 @@ DEPENDENCIES
   pow-client
   rails (= 3.2.3)
   rmagick
+  rspec-rails
   sass-rails (~> 3.2.3)
   sqlite3
   therubyracer
