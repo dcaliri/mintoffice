@@ -24,6 +24,9 @@ end
 
 group :test do
   gem 'rspec-rails'
+  gem 'database_cleaner'
+  gem 'guard-rspec'
+  gem 'growl'
 end
 
 group :production do
