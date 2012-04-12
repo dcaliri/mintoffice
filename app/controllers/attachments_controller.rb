@@ -154,6 +154,14 @@ class AttachmentsController < ApplicationController
     unless params[:to].to_i == 0
       @a2 = Attachment.find(params[:to].to_i)
       logger.info "attachment 1 = #{@attachment.seq}, 2 = #{@a2.seq}"
+
+      if @attachment.seq.blank?
+        @attachment.seq = @attachment.id + 1#@a2.id
+      end
+      if @a2.seq.blank?
+        @a2.seq = @a2.id + 1
+      end
+
       tmp = @a2.seq
       @a2.seq = @attachment.seq
       @attachment.seq = tmp

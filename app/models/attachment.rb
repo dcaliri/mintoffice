@@ -12,7 +12,8 @@ class Attachment < ActiveRecord::Base
   def self.for_me(obj,order = "")
     if order.blank?
       Attachment.all(:conditions=>{:owner_table_name => obj.class.table_name,
-                                    :owner_id => obj.id})
+                                    :owner_id => obj.id},
+                                    :order => "seq ASC")
     else
       Attachment.all(:conditions=>{:owner_table_name => obj.class.table_name,
                                   :owner_id => obj.id},

@@ -331,8 +331,10 @@ ko:
             title: 세금계산서 내역
         new:
             title: 새로운 세금계산서 입력
+            picture: 첨부파일
         edit:
             title: 세금계산서 수정
+            picture: 첨부파일
     permissions:
         permission_denied: 접근이 제한되었습니다.
     projects:
