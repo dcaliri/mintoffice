@@ -151,6 +151,9 @@ ko:
                 phonenumber: 전화번호
             taxbill:
                 billtype: 타입
+                price: 총합 금액
+                tax: 총합 세액
+                total: 총합 합계액
                 transacted_at: 거래날짜
                 taxman_id: 담당자
             taxbill_item:
@@ -158,8 +161,9 @@ ko:
               quantity: 수량
               price: 금액
               tax: 세액
+              total: 합계액
               note: 내역
-
+              transacted_at: 거래날짜
         errors:
             template:
                 header: 오류가 발생했습니다.
@@ -235,6 +239,8 @@ ko:
             total: 총합
         link:
             logout: "로그아웃"
+            edit: "수정"
+            destroy: "삭제"
     documents:
         index:
             title: "문서 관리"

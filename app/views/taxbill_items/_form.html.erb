@@ -19,18 +19,17 @@
       <%= f.text_field :quantity %>
     </p>
     <p>
-      <%= f.label :price %>
-      <%= f.text_field :price %>
-    </p>
-    <p>
       <%= f.label :tax %>
       <%= f.text_field :tax %>
+    </p>
+    <p>
+      <%= f.label :total %>
+      <%= f.text_field :total %>
     </p>
     <p>
       <%= f.label :transacted_at %>
       <%= f.date_select :transacted_at, :order => [:year, :month, :day] %>
     </p>
-
     <p>
       <%= f.label :note %>
       <%= f.text_area :note %>

@@ -19,20 +19,19 @@
           <td align="right"><%= taxbill.transacted_at %></td>
         </tr>
         <tr>
-          <th align="right">총합 금액:</th>
+          <th align="right"><%= Taxbill.human_attribute_name('price') %></th>
           <td align="right"><%= taxbill.price %></td>
         </tr>
         <tr>
-          <th align="right">총합 세액:</th>
+          <th align="right"><%= Taxbill.human_attribute_name('tax') %></th>
           <td align="right"><%= taxbill.tax %></td>
         </tr>
         <tr>
-          <th align="right">총합 합계액:</th>
+          <th align="right"><%= Taxbill.human_attribute_name('total') %></th>
           <td align="right"><%= taxbill.total %></td>
         </tr>
-
         <tr>
-          <th align="right">담당자:</th>
+          <th align="right"><%= Taxbill.human_attribute_name('taxman_id') %></th>
           <td align="right"><%= taxbill.taxman.fullname %></td>
         </tr>
 
@@ -44,14 +43,13 @@
       <table border="0" cellspacing="5" cellpadding="5">
         <% unless taxbill.items.empty? %>
           <tr>
-            <th>날짜</th>
-            <th>내역</th>
-            <th>단가</th>
-            <th>수량</th>
-            <th>금액</th>
-            <th>세액</th>
-            <th>합계액</th>
-            <th>메뉴</th>
+            <th><%= TaxbillItem.human_attribute_name(:transacted_at) %></th>
+            <th><%= TaxbillItem.human_attribute_name(:note) %></th>
+            <th><%= TaxbillItem.human_attribute_name(:unitprice) %></th>
+            <th><%= TaxbillItem.human_attribute_name(:quantity) %></th>
+            <th><%= TaxbillItem.human_attribute_name(:price) %></th>
+            <th><%= TaxbillItem.human_attribute_name(:tax) %></th>
+            <th><%= TaxbillItem.human_attribute_name(:total) %></th>
           </tr>
           <% taxbill.items.each do |item| %>
             <tr>
@@ -61,11 +59,11 @@
               <td><%= item.quantity %></td>
               <td><%= item.price %></td>
               <td><%= item.tax %></td>
-              <td><%= item.sumvalue %></td>
+              <td><%= item.total %></td>
               <td>
-                <%= link_to "수정", [:edit, taxbill, item] %>
+                <%= link_to t("common.link.edit"), [:edit, taxbill, item] %>
                 |
-                <%= link_to "삭제", [taxbill, item], :method => :delete, :confirm => "Are you sure?" %>
+                <%= link_to t("common.link.destroy"), [taxbill, item], :method => :delete, :confirm => "Are you sure?" %>
               </td>
             </td>
           <% end %>
