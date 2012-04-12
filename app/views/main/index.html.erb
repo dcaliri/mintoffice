@@ -31,7 +31,7 @@
     <% end %>
     <% if @user.permission.any? {|perm| perm.name == 'taxbills'}  %>
       <li>
-        <li><%= link_to t("taxbills.index.title"), :taxbills %></li>
+        <%= link_to t("taxbills.index.title"), :taxbills %>
       </li>
     <% end %>
     <li class="sublast">#</li>
@@ -53,10 +53,14 @@
       <li class="subfirst">#</li>
       <li><%= link_to t("documents.index.title"), :controller => "documents" %></li>
       <% if @user.permission.any? {|perm| perm.name == 'namecards'}  %>
-        <li><%= link_to t("namecards.index.title"), :controller => "namecards" %></li>
+        <li>
+          <%= link_to t("namecards.index.title"), :controller => "namecards" %>
+        </li>
       <% end %>
       <% if @user.permission.any? {|perm| perm.name == 'business_clients'}  %>
-        <li><%= link_to t("business_clients.index.title"), :business_clients %></li>
+        <li>
+          <%= link_to t("business_clients.index.title"), :business_clients %>
+        </li>
       <% end %>
       <li class="sublast">#</li>
     </ul>
