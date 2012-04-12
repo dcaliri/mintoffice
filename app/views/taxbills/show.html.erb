@@ -31,8 +31,40 @@
           <td align="right"><%= number_to_currency taxbill.total %></td>
         </tr>
         <tr>
-          <th align="right"><%= Taxbill.human_attribute_name('taxman_id') %></th>
+          <th align="right"><h4><%= Taxbill.human_attribute_name('taxman_id') %></h4></th>
           <td align="right"><%= taxbill.taxman.fullname %></td>
+        </tr>
+        <tr>
+          <th align="right"><%= Taxman.human_attribute_name('email') %></th>
+          <td align="right"><%= taxbill.taxman.email %></td>
+        </tr>
+        <tr>
+          <th align="right"><%= Taxman.human_attribute_name('phonenumber') %></th>
+          <td align="right"><%= taxbill.taxman.phonenumber %></td>
+        </tr>
+        <tr>
+          <th align="right"><h4><%= BusinessClient.human_attribute_name('name') %></h4></th>
+          <td align="right"><%= taxbill.taxman.business_client.name %></td>
+        </tr>
+        <tr>
+          <th align="right"><%= BusinessClient.human_attribute_name('registration_number') %></th>
+          <td align="right"><%= taxbill.taxman.business_client.registration_number %></td>
+        </tr>
+        <tr>
+          <th align="right"><%= BusinessClient.human_attribute_name('category') %></th>
+          <td align="right"><%= taxbill.taxman.business_client.category %></td>
+        </tr>
+        <tr>
+          <th align="right"><%= BusinessClient.human_attribute_name('condition') %></th>
+          <td align="right"><%= taxbill.taxman.business_client.condition %></td>
+        </tr>
+        <tr>
+          <th align="right"><%= BusinessClient.human_attribute_name('address') %></th>
+          <td align="right"><%= taxbill.taxman.business_client.address %></td>
+        </tr>
+        <tr>
+          <th align="right"><%= BusinessClient.human_attribute_name('owner') %></th>
+          <td align="right"><%= taxbill.taxman.business_client.owner %></td>
         </tr>
       </table>
     </div>

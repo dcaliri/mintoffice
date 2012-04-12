@@ -13,6 +13,10 @@ user.permission.build(name: 'users')
 user.permission.build(name: 'pettycashes')
 user.permission.build(name: 'cardbills')
 user.permission.build(name: 'projects')
+user.permission.build(name: 'taxbills')
+user.permission.build(name: 'namecards')
+user.permission.build(name: 'business_clients')
+
 user.groups.build(name: 'admin')
 
 user.save!
