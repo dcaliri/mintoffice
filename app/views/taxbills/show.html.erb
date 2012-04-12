@@ -20,15 +20,15 @@
         </tr>
         <tr>
           <th align="right"><%= Taxbill.human_attribute_name('price') %></th>
-          <td align="right"><%= taxbill.price %></td>
+          <td align="right"><%= number_to_currency taxbill.price %></td>
         </tr>
         <tr>
           <th align="right"><%= Taxbill.human_attribute_name('tax') %></th>
-          <td align="right"><%= taxbill.tax %></td>
+          <td align="right"><%= number_to_currency taxbill.tax %></td>
         </tr>
         <tr>
           <th align="right"><%= Taxbill.human_attribute_name('total') %></th>
-          <td align="right"><%= taxbill.total %></td>
+          <td align="right"><%= number_to_currency taxbill.total %></td>
         </tr>
         <tr>
           <th align="right"><%= Taxbill.human_attribute_name('taxman_id') %></th>
@@ -55,11 +55,11 @@
             <tr>
               <td><%= item.transacted_at.strftime("%Y-%m-%d") %></td>
               <td><%= item.note %></td>
-              <td><%= item.unitprice %></td>
+              <td><%= number_to_currency item.unitprice %></td>
               <td><%= item.quantity %></td>
-              <td><%= item.price %></td>
-              <td><%= item.tax %></td>
-              <td><%= item.total %></td>
+              <td><%= number_to_currency item.price %></td>
+              <td><%= number_to_currency item.tax %></td>
+              <td><%= number_to_currency item.total %></td>
               <td>
                 <%= link_to t("common.link.edit"), [:edit, taxbill, item] %>
                 |
