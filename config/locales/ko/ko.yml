@@ -391,3 +391,6 @@ ko:
             successfully_changed: 성공적으로 변경하였습니다.
         error:
             missing_password: 는 공백일 수 없습니다.
+    payments:
+        index:
+            title: 연봉 관리
