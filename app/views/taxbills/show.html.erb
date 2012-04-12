@@ -39,7 +39,8 @@
       </table>
     </div>
     <div id="taxbill-item-list">
-      <%= link_to "새로운 내역 추가", [:new, taxbill, :item] %>
+      <%#= link_to "새로운 내역 추가", [:new, taxbill, :item] %>
+      <%= link_to "새로운 내역 추가", [:new, taxbill, :taxbill_item] %>
       <table border="0" cellspacing="5" cellpadding="5">
         <% unless taxbill.items.empty? %>
           <tr>

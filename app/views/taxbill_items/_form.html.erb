@@ -1,13 +1,13 @@
-<% form_type = if @item.new_record? then 'new' else 'edit' end %>
+<% form_type = if taxbill_item.new_record? then 'new' else 'edit' end %>
 <% @title = t("taxmen.#{form_type}.title") %>
 
 <div id="show_command">
-  <%= link_to t('common.title.back'), @item %>
+  <%= link_to t('common.title.back'), taxbill %>
 </div>
 
 <h2><%= t("common.title.#{form_type}") %></h2>
 
-<%= form_for [@taxbill, @item] do |f| %>
+<%= form_for [taxbill, taxbill_item] do |f| %>
    <%= f.error_messages %>
   <div class="box">
     <p>
