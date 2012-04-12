@@ -328,7 +328,11 @@ ko:
             title: 세금계산서 관리
             empty: 세금계산서가 없습니다.
         show:
-            title: 담당자 내역
+            title: 세금계산서 내역
+        new:
+            title: 새로운 세금계산서 입력
+        edit:
+            title: 세금계산서 수정
     permissions:
         permission_denied: 접근이 제한되었습니다.
     projects:
