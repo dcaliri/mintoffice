@@ -29,7 +29,7 @@
         <%= link_to t("cardbills.index.title"), :controller => "cardbills" %>
       </li>
     <% end %>
-    <% if @user.permission.any? {|perm| perm.name == 'cardbills'}  %>
+    <% if @user.permission.any? {|perm| perm.name == 'taxbills'}  %>
       <li>
         <li><%= link_to t("taxbills.index.title"), :taxbills %></li>
       </li>
@@ -52,8 +52,12 @@
     <ul class="submenu">
       <li class="subfirst">#</li>
       <li><%= link_to t("documents.index.title"), :controller => "documents" %></li>
-      <li><%= link_to t("namecards.index.title"), :controller => "namecards" %></li>
-      <li><%= link_to t("business_clients.index.title"), :business_clients %></li>
+      <% if @user.permission.any? {|perm| perm.name == 'namecards'}  %>
+        <li><%= link_to t("namecards.index.title"), :controller => "namecards" %></li>
+      <% end %>
+      <% if @user.permission.any? {|perm| perm.name == 'business_clients'}  %>
+        <li><%= link_to t("business_clients.index.title"), :business_clients %></li>
+      <% end %>
       <li class="sublast">#</li>
     </ul>
   </li>
