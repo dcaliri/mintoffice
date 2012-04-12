@@ -1,3 +1,5 @@
+require 'RMagick'
+
 class AttachmentsController < ApplicationController
   # GET /attachments
   # GET /attachments.xml
