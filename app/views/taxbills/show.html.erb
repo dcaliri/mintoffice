@@ -34,9 +34,10 @@
           <th align="right"><%= Taxbill.human_attribute_name('taxman_id') %></th>
           <td align="right"><%= taxbill.taxman.fullname %></td>
         </tr>
-
       </table>
     </div>
+    <%= render :partial => "shared/show_attachment", :object => taxbill %>
+    <div style="clear: both;"></div>
     <div id="taxbill-item-list">
       <%#= link_to "새로운 내역 추가", [:new, taxbill, :item] %>
       <%= link_to "새로운 내역 추가", [:new, taxbill, :taxbill_item] %>
@@ -74,6 +75,5 @@
         <% end %>
       </table>
     </div>
-    <div style="clear: both;"></div>
   </div>
 </div>
