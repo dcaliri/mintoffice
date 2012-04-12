@@ -25,7 +25,11 @@ class Taxbill < ActiveRecord::Base
   end
 
   def self.search(text)
-    text = "%#{text || ""}%"
-    includes(:taxman).where('taxmen.fullname like ?', text)
+    unless text.blank?
+      text = "%#{text || ""}%"
+      includes(:taxman).where('taxmen.fullname like ?', text)
+    else
+      self
+    end
   end
 end
