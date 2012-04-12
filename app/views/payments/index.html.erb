@@ -1,3 +1,28 @@
 <%   @title = t('.title') %>
 
-<h3>아직 준비되지 않았습니다.</h3>
+<% content_for :search do -%>
+<%= form_tag :payments, :method => :get do %>
+  <%= t("common.title.search") %> : <%= text_field_tag 'q', params[:q] %>
+  <% end -%>
+<% end -%>
+
+<div id="show_command">
+  <%= link_to t('namecards.new.title'), new_payment_path %>
+</div>
+
+<h2><%= t('common.title.list') %></h2>
+<table id="list-table">
+  <tr>
+    <th><%= User.human_attribute_name("name") %></th>
+  </tr>
+<% users.each do |user| %>
+  <tr class="selectable" onclick="location.href='<%= payment_path(user) %>'">
+    <td><%=h user.name %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+<center>
+  <%= will_paginate users %>
+</center>
