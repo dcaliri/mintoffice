@@ -22,10 +22,17 @@ group :development do
   gem 'pow-client'
 end
 
-group :development, :test do
-  gem 'sqlite3'
+group :test do
+  gem 'rspec-rails'
+  gem 'database_cleaner'
+  gem 'guard-rspec'
+  gem 'growl'
 end
 
 group :production do
   gem 'pg'
+end
+
+group :development, :test do
+  gem 'sqlite3'
 end

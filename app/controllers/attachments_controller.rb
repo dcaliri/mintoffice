@@ -1,5 +1,3 @@
-require 'RMagick'
-
 class AttachmentsController < ApplicationController
   # GET /attachments
   # GET /attachments.xml
@@ -23,7 +21,7 @@ class AttachmentsController < ApplicationController
       format.xml  { render :xml => @attachment }
     end
   end
-  
+
   def download
     @attachment = Attachment.find(params[:id])
     unless session[:attachments] && (session[:attachments].include? (@attachment.id))
@@ -33,9 +31,9 @@ class AttachmentsController < ApplicationController
     end
 
     path = "#{Rails.root}/files/#{@attachment.filepath}"
-    
+
     send_file path, :filename => (@attachment.original_filename.blank? ? @attachment.filepath : @attachment.original_filename),
-                    :type => @attachment.contenttype, 
+                    :type => @attachment.contenttype,
                     :disposition => 'attachment'
   end
   def picture
@@ -48,7 +46,7 @@ class AttachmentsController < ApplicationController
     if params[:w] && params[:h]
       width = params[:w].to_i
       height = params[:h].to_i
-    
+
       dir = "#{Rails.root}/files/#{width}x#{height}"
       path = "#{dir}/#{@attachment.id}"
       if ( ! File.exists?(path) )
@@ -78,10 +76,10 @@ class AttachmentsController < ApplicationController
       format.xml  { render :xml => @attachment }
     end
   end
-  
+
   def save
     @attachment = Attachment.new(params[:attachment])
-    if session[:user_id] 
+    if session[:user_id]
       @attachment.user = User.find(session[:user_id])
     else
       @attachment.user = User.find(1)
