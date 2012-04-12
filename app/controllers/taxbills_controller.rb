@@ -1,5 +1,6 @@
 class TaxbillsController < ApplicationController
-  expose(:taxbills) { Taxbill.search(params[:query]).page(params[:page]) }
+  expose(:taxbill_with_pagination) { Taxbill.search(params[:query]).page(params[:page]) }
+  expose(:taxbills)
   expose(:taxbill)
 
   def create

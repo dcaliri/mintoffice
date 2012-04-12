@@ -10,15 +10,15 @@
     <%= link_to t('common.title.new'), [:new, :taxbill] %>
 </div>
 
-<% unless taxbills.empty? %>
-    <h2>Total : <%= taxbills.count %></h2>
+<% unless taxbill_with_pagination.empty? %>
+    <h2>Total : <%= taxbill_with_pagination.count %></h2>
     <table id="list-table">
       <tr>
         <th><%= BusinessClient.human_attribute_name('name') %></th>
         <th><%= Taxbill.human_attribute_name('transacted_at') %></th>
         <th><%= Taxman.human_attribute_name('name') %></th>
       </tr>
-    <% taxbills.each do |taxbill| %>
+    <% taxbill_with_pagination.each do |taxbill| %>
       <tr class="selectable" onclick="location.href='<%= taxbill_path(taxbill) %>'">
         <td><span><%=h taxbill.taxman.business_client.name %></span></td>
         <td><%=h taxbill.transacted_at.strftime("%Y-%m-%d") %></td>
@@ -28,7 +28,7 @@
     </table>
     <br />
     <center>
-    <%= will_paginate taxbills %>
+    <%= will_paginate taxbill_with_pagination %>
     </center>
 <% else %>
     <h3><%= t 'taxbills.index.empty' %></h3>
