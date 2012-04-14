@@ -5,7 +5,7 @@
 </div>
 <h2><%= t("common.title.edit") %></h2>
 
-<% form_for(@cardbill,
+<%= form_for(@cardbill,
 		:url => { :action => 'update' },
 		:html => { :class => 'tabular', :multipart => true } ) do |f| %>
   <%= f.error_messages %>
@@ -16,7 +16,7 @@
   </p>
   <p>
     <%= f.label :transdate, Cardbill.human_attribute_name('transdate')  %>
-    <%= f.datetime_select :transdate %>
+    <%= f.datetime_select :transdate, :order => [:year, :month, :day] %>
   </p>
   <p>
     <%= f.label :amount, Cardbill.human_attribute_name('amount')  %>

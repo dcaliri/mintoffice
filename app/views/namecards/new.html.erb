@@ -3,7 +3,7 @@
 	<%= link_to t('common.title.back'), documents_path %>
 </div>
 <h2><%= t("common.title.new") %></h2>
-<% form_for(@namecard,
+<%= form_for(@namecard,
 		:url => {:action => 'create'},
 		:html => {:class => "tabular", :multipart => true}) do |f| %>
 <div id="box">

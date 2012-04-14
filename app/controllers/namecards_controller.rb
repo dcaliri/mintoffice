@@ -1,6 +1,7 @@
 class NamecardsController < ApplicationController
   def index
-    @namecards = Namecard.all(:order => 'id desc').paginate(:page => params[:page], :per_page => 20)
+#    @namecards = Namecard.order('id desc').paginate(:page => params[:page], :per_page => 20)
+    @namecards = Namecard.search(params[:q]).order('id desc').paginate(:page => params[:page], :per_page => 20)
   end
 
   def new
@@ -13,7 +14,7 @@ class NamecardsController < ApplicationController
     respond_to do |format|
       if @namecard.save
         Attachment.save_for(@namecard,@user,params[:attachment])
-        flash[:notice] = t('common.messages.created', :model => Namecard.human_name)
+        flash[:notice] = t('common.messages.created', :model => Namecard.model_name.human)
         format.html { redirect_to(@namecard) }
         format.xml  { render :xml => @namecard, :status => :created, :location => @namecard }
       else
@@ -45,7 +46,7 @@ class NamecardsController < ApplicationController
     respond_to do |format|
       if @namecard.update_attributes(params[:namecard])
         Attachment.save_for(@namecard,@user,params[:attachment])
-        flash[:notice] = t('common.messages.updated', :model => Namecard.human_name)
+        flash[:notice] = t('common.messages.updated', :model => Namecard.model_name.human)
         format.html { redirect_to(@namecard) }
         format.xml  { head :ok }
       else

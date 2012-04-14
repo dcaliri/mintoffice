@@ -17,7 +17,7 @@ ko:
         month_names: [~, 1월, 2월, 3월, 4월, 5월, 6월, 7월, 8월, 9월, 10월, 11월, 12월]
         abbr_month_names: [~, 1월, 2월, 3월, 4월, 5월, 6월, 7월, 8월, 9월, 10월, 11월, 12월]
         # Used in date_select and datime_select.
-        order: [ :year, :month, :day ]
+        order: [year, month, day]
 
     time:
         formats:
@@ -27,7 +27,7 @@ ko:
             long: "%Y년 %B월 %d일, %H시 %M분 %S초 %Z"
         am: "오전"
         pm: "오후"
-        
+
     number:
         # Used in number_with_delimiter()
         # These are also the defaults for 'currency', 'percentage', 'precision', and 'human'
@@ -38,7 +38,7 @@ ko:
           delimiter: ","
           # Number of decimals, behind the separator (the number 1 with a precision of 2 gives: 1.00)
           precision: 3
-          
+
         # Used in number_to_currency()
         currency:
             format:
@@ -49,7 +49,10 @@ ko:
                 separator: "."
                 delimiter: ","
                 precision: 0
-
+    helpers:
+        submit:
+            create: "%{model} 만들기"
+            update: "%{model} 수정하기"
     activerecord:
         models:
             attachment: 첨부파일
@@ -57,10 +60,14 @@ ko:
             creditcard: 신용카드
             document: 문서
             namecard: 명함정보
-            pettycashes: 소액현금
+            pettycash: 소액현금
             project: 프로젝트
             hrinfo: 인사정보
             required_tag: 필수 태그 항목
+            business_client: 거래처
+            taxman: 담당자
+            taxbill: 세금계산서
+            taxbill_item: 항목
         attributes:
             attachment:
                 comments: 주석
@@ -131,6 +138,32 @@ ko:
                 name: 사용자계정
                 password: 비밀번호
                 password_confirmation: 비밀번호 확인
+            business_client:
+                name: 거래처명
+                registration_number: 사업자 등록번호
+                category: 업종
+                condition: 업태
+                address: 주소
+                owner: 대표자
+            taxman:
+                fullname: 이름
+                email: 이메일
+                phonenumber: 전화번호
+            taxbill:
+                billtype: 타입
+                price: 총합 금액
+                tax: 총합 세액
+                total: 총합 합계액
+                transacted_at: 거래날짜
+                taxman_id: 담당자
+            taxbill_item:
+              unitprice: 단가
+              quantity: 수량
+              price: 금액
+              tax: 세액
+              total: 합계액
+              note: 내역
+              transacted_at: 거래날짜
         errors:
             template:
                 header: 오류가 발생했습니다.
@@ -149,7 +182,7 @@ ko:
             new: 새로운 첨부 올리기
             title: 첨부파일
             uploadedby: 업로더
-        show:  
+        show:
             title: 첨부 상세 내역
         edit:
             title: 첨부 내역 수정
@@ -157,12 +190,12 @@ ko:
             update: 첨부파일 내용이 성공적으로 업데이트 되었습니다.
         new:
             title: 첨부파일 신규 작성
-    cardbills:  
+    cardbills:
         new:
             title: 새로운 카드 영수증 입력
         show:
             title:  "카드 영수증 내역"
-        edit:  
+        edit:
             title: "카드 영수증 내용 수정"
         index:
             title: "카드 영수증 목록"
@@ -184,13 +217,14 @@ ko:
             change: 변경하기
             add: 추가하기
         messages:
-            created: "{{model}}이(가) 성공적으로 생성되었습니다." 
+            created: "%{model}이(가) 성공적으로 생성되었습니다."
             not_allowed: 접근할 수 없습니다.
             delete_confirm: 확실히 삭제하겠습니까?
             confirm: 확실히 수행하겠습니까?
-            updated: "{{model}}이(가) 성공적으로 업데이트 되었습니다."
+            updated: "%{model}이(가) 성공적으로 업데이트 되었습니다."
             no_such_user: 해당 사용자는 존재하지 않습니다.
             already_exist: 이미 존재합니다.
+            destroyed: "%{model}이(가) 성공적으로 제거 되었습니다."
         title:
             main: 메인화면
             back: "돌아가기"
@@ -205,8 +239,10 @@ ko:
             total: 총합
         link:
             logout: "로그아웃"
+            edit: "수정"
+            destroy: "삭제"
     documents:
-        index: 
+        index:
             title: "문서 관리"
         show:
             title: "문서 상세 정보"
@@ -246,6 +282,7 @@ ko:
             finance: 회계관리
             project: 프로젝트
             document: 문서관리
+            business_client: 거래처관리
     namecards:
         edit:
             title: 명함 정보 수정
@@ -267,8 +304,37 @@ ko:
             title: 소액현금 거래내용 수정
         new:
             title: 새로운 소액 거래 작성
-        show:   
+        show:
             title: 소액현금 내역
+    business_clients:
+        index:
+            title: 거래처 관리
+            empty: 거래처가 없습니다.
+        show:
+            title: 거래처 내역
+        new:
+            title: 새로운 거래처 입력
+        edit:
+            title: 거래처 수정
+            picture: 사업자등록증
+    taxmen:
+        empty: 담당자가 없습니다.
+        new:
+            title: 새로운 담당자 입력
+        edit:
+            title: 담당자 수정
+    taxbills:
+        index:
+            title: 세금계산서 관리
+            empty: 세금계산서가 없습니다.
+        show:
+            title: 세금계산서 내역
+        new:
+            title: 새로운 세금계산서 입력
+            picture: 첨부파일
+        edit:
+            title: 세금계산서 수정
+            picture: 첨부파일
     permissions:
         permission_denied: 접근이 제한되었습니다.
     projects:
@@ -302,6 +368,7 @@ ko:
         show:
             title: 사용자 계정 정보
             disable: 계정 불능화
+            change_password: 패스워드 변경
             loginas: 이 계정으로 로그인
         edit:
             title: 사용자 계정 편집
@@ -324,3 +391,6 @@ ko:
             successfully_changed: 성공적으로 변경하였습니다.
         error:
             missing_password: 는 공백일 수 없습니다.
+    payments:
+        index:
+            title: 연봉 관리

@@ -1,19 +1,17 @@
-<%= stylesheet_link_tag 'main', :cache => true %>
+<%#= stylesheet_link_tag 'main', :cache => true %>
 
 <div id="login-form">
-<% form_tag do %>
-<% if flash[:notice] %><div class="flash notice"><%= flash[:notice] %></div><% end %>
-<div class="box">
-
-	<p>
-		<%= label_tag :name, t(".name") %>
-	  <%= text_field_tag :name, params[:name] %>		
-	</p>
-	<p>
-		<%= label_tag :password, t(".password") %>
-	  <%= password_field_tag :password, params[:password] %>
-	</p>
-	<%= submit_tag t('.login') %>
-</div>
-<% end %>
+	<%= form_tag do %>
+		<div class="box">
+			<p>
+				<%= label_tag :name, t(".name") %>
+				<%= text_field_tag :name, params[:name] %>
+			</p>
+			<p>
+				<%= label_tag :password, t(".password") %>
+				<%= password_field_tag :password, params[:password] %>
+			</p>
+			<%= submit_tag t('.login') %>
+		</div>
+	<% end %>
 </div>

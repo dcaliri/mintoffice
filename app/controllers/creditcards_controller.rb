@@ -62,7 +62,7 @@ class CreditcardsController < ApplicationController
     respond_to do |format|
       if @creditcard.update_attributes(params[:creditcard])
         Attachment.save_for(@creditcard,@user,params[:attachment])
-        flash[:notice] = t("common.messages.updated", :model => Creditcard.human_name)
+        flash[:notice] = t("common.messages.updated", :model => Creditcard.model_name.human)
         format.html { redirect_to(@creditcard) }
         format.xml  { head :ok }
       else

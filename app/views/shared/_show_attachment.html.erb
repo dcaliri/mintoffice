@@ -6,21 +6,23 @@
 	end
 
 	at = params[:at].to_i || 0
-	if  at < @attachments.count
+	if @attachments && at < @attachments.count
 		attachment = @attachments[at] 
 %>
 <div id="attach">
 			<img src="<%= url_for(:controller => "attachments", :action => 'picture', :id => attachment.id, :w => "600", :h => "800") %>" />
 	<% end %>
 			<center>
-	<% if at < @attachments.count %>
+	<% if @attachments && at < @attachments.count %>
 				<%= link_to t(".download"), :controller => "attachments", :action => "download", :id => attachment.id %> ... 
 	<% end %>
-				<% 0.upto(@attachments.count - 1) do |i| %>
-					<% if i == params[:at].to_i %>
-						<u><%= (i+1) %></u>
-					<% else %>
-						<%= link_to (i+1).to_s, :at => i %>
+				<% if @attachments %>
+					<% 0.upto(@attachments.count - 1) do |i| %>
+						<% if i == params[:at].to_i %>
+							<u><%= (i+1) %></u>
+						<% else %>
+							<%= link_to (i+1).to_s, :at => i %>
+						<% end %>
 					<% end %>
 				<% end %>
 			</center>

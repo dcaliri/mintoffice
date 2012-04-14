@@ -6,7 +6,7 @@
 </div>
 <h2><%= t("common.title.edit") %></h2>
 
-<% form_for(@project, :html => {:class => "tabular"}) do |f| %>
+<%= form_for(@project, :html => {:class => "tabular"}) do |f| %>
 <%= f.error_messages %>
 <div class="box">	
 	<p>
@@ -15,11 +15,11 @@
 	</p>
 	<p>
 		<%= f.label :started_on, Project.human_attribute_name("started_on") %>
-		<%= f.date_select :started_on %>
+		<%= f.date_select :started_on, :order => [:year, :month, :day] %>
 	</p>
 	<p>
 		<%= f.label :ending_on, Project.human_attribute_name("ending_on") %>
-		<%= f.date_select :ending_on %>
+		<%= f.date_select :ending_on, :order => [:year, :month, :day] %>
 	</p>
 	<p>
 		<%= f.label :revenue, Project.human_attribute_name("revenue") %>
@@ -28,7 +28,7 @@
 </div>
 <%= f.submit t('common.button.update') %>
 <% end %>
-<% form_tag({:action => "add_user", :id => @project, }, {:class => "tabular"}) do %>
+<%= form_tag({:action => "add_user", :id => @project, }, {:class => "tabular"}) do %>
   <div class="box">
   	<p>
   		<%= label_tag :username, User.human_attribute_name("name") %>

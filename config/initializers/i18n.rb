@@ -1,3 +1,3 @@
 I18n.default_locale = 'ko'
 
-LOCALES_DIRECTORY = '#{RAILS_ROOT}/config/locales'
+LOCALES_DIRECTORY = '#{Rails.root}/config/locales'

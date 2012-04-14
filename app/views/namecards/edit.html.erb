@@ -4,7 +4,7 @@
 	<%= link_to t('common.title.list'),  namecards_path %>
 </div>
 <h2><%= t 'common.title.edit' %></h2>
-<% form_for(@namecard,
+<%= form_for(@namecard,
 		:url => { :action => "update" },
 		:html => { :class=>"tabular", :multipart => true }) do |f| %>
 <div class="box">		

@@ -17,4 +17,9 @@ class Cardbill < ActiveRecord::Base
       cardno    
     end
   end
+
+  def self.search(query)
+    query = "%#{query || ""}%"
+    where('storename like ? OR storeaddr like ?', query, query)
+  end
 end

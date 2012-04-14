@@ -1,0 +1,111 @@
+<% @title = t('.title') %>
+
+<div id="show_command">
+  <%= link_to t('common.title.edit'), [:edit, taxbill] %> |
+  <%= link_to t('common.title.destroy'), taxbill, :confirm => "Are you sure?", :method => :delete %> |
+  <%= link_to t('common.title.list'), :taxbills %>
+</div>
+
+<h2><%=h "거래처명" %></h2>
+  <div class="box">
+    <div id="descr">
+      <table border="0" cellspacing="5" cellpadding="5">
+        <tr>
+          <th align="right"><%= Taxbill.human_attribute_name('billtype') %>:</th>
+          <td align="right"><%= taxbill.billtype %></td>
+        </tr>
+        <tr>
+          <th align="right"><%= Taxbill.human_attribute_name('transacted_at') %>:</th>
+          <td align="right"><%= taxbill.transacted_at.strftime("%Y-%m-%d") %></td>
+        </tr>
+        <tr>
+          <th align="right"><%= Taxbill.human_attribute_name('price') %></th>
+          <td align="right"><%= number_to_currency taxbill.price %></td>
+        </tr>
+        <tr>
+          <th align="right"><%= Taxbill.human_attribute_name('tax') %></th>
+          <td align="right"><%= number_to_currency taxbill.tax %></td>
+        </tr>
+        <tr>
+          <th align="right"><%= Taxbill.human_attribute_name('total') %></th>
+          <td align="right"><%= number_to_currency taxbill.total %></td>
+        </tr>
+        <tr>
+          <th align="right"><h4><%= Taxbill.human_attribute_name('taxman_id') %></h4></th>
+          <td align="right"><%= taxbill.taxman.fullname %></td>
+        </tr>
+        <tr>
+          <th align="right"><%= Taxman.human_attribute_name('email') %></th>
+          <td align="right"><%= taxbill.taxman.email %></td>
+        </tr>
+        <tr>
+          <th align="right"><%= Taxman.human_attribute_name('phonenumber') %></th>
+          <td align="right"><%= taxbill.taxman.phonenumber %></td>
+        </tr>
+        <tr>
+          <th align="right"><h4><%= BusinessClient.human_attribute_name('name') %></h4></th>
+          <td align="right"><%= taxbill.taxman.business_client.name %></td>
+        </tr>
+        <tr>
+          <th align="right"><%= BusinessClient.human_attribute_name('registration_number') %></th>
+          <td align="right"><%= taxbill.taxman.business_client.registration_number %></td>
+        </tr>
+        <tr>
+          <th align="right"><%= BusinessClient.human_attribute_name('category') %></th>
+          <td align="right"><%= taxbill.taxman.business_client.category %></td>
+        </tr>
+        <tr>
+          <th align="right"><%= BusinessClient.human_attribute_name('condition') %></th>
+          <td align="right"><%= taxbill.taxman.business_client.condition %></td>
+        </tr>
+        <tr>
+          <th align="right"><%= BusinessClient.human_attribute_name('address') %></th>
+          <td align="right"><%= taxbill.taxman.business_client.address %></td>
+        </tr>
+        <tr>
+          <th align="right"><%= BusinessClient.human_attribute_name('owner') %></th>
+          <td align="right"><%= taxbill.taxman.business_client.owner %></td>
+        </tr>
+      </table>
+    </div>
+    <%= render :partial => "shared/show_attachment", :object => taxbill %>
+    <div style="clear: both;"></div>
+    <div id="taxbill-item-list">
+      <%#= link_to "새로운 내역 추가", [:new, taxbill, :item] %>
+      <%= link_to "새로운 내역 추가", [:new, taxbill, :taxbill_item] %>
+      <table border="0" cellspacing="5" cellpadding="5">
+        <% unless taxbill.items.empty? %>
+          <tr>
+            <th><%= TaxbillItem.human_attribute_name(:transacted_at) %></th>
+            <th><%= TaxbillItem.human_attribute_name(:note) %></th>
+            <th><%= TaxbillItem.human_attribute_name(:unitprice) %></th>
+            <th><%= TaxbillItem.human_attribute_name(:quantity) %></th>
+            <th><%= TaxbillItem.human_attribute_name(:price) %></th>
+            <th><%= TaxbillItem.human_attribute_name(:tax) %></th>
+            <th><%= TaxbillItem.human_attribute_name(:total) %></th>
+          </tr>
+          <% taxbill.items.each do |item| %>
+            <tr>
+              <td><%= item.transacted_at.strftime("%Y-%m-%d") %></td>
+              <td><%= item.note %></td>
+              <td><%= number_to_currency item.unitprice %></td>
+              <td><%= item.quantity %></td>
+              <td><%= number_to_currency item.price %></td>
+              <td><%= number_to_currency item.tax %></td>
+              <td><%= number_to_currency item.total %></td>
+              <td>
+                <%= link_to t("common.link.edit"), [:edit, taxbill, item] %>
+                |
+                <%= link_to t("common.link.destroy"), [taxbill, item], :method => :delete, :confirm => "Are you sure?" %>
+              </td>
+            </td>
+          <% end %>
+        <% else %>
+          <tr>
+            <td>항목이 없습니다.</td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>

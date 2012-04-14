@@ -14,16 +14,16 @@ class PermissionsController < ApplicationController
     @user = User.find_by_name(params[:username])
     @permission = Permission.find(params[:id])
     @permission.user << @user
-    
-    redirect_to (:action => "show", :id => @permission)
+
+    redirect_to @permission
   end
-  
+
   def removeuser
     @user = User.find(params[:user_id])
     @permission = Permission.find(params[:id])
     @permission.user.delete(@user)
-    
-    redirect_to (:action => "show", :id => @permission)
+
+    redirect_to @permission
   end
   # GET /permissions/1
   # GET /permissions/1.xml

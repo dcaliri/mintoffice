@@ -1,7 +1,7 @@
 <% 	@title = t('.title') %>
 <% content_for :search do -%>
-	<% form_tag({:action => "index"}, :method => :get ) do %>
-	<%= t("common.title.search") %> : <%= text_field_tag 'q' %>
+	<%= form_tag({:action => "index"}, :method => :get ) do %>
+		<%= t("common.title.search") %> : <%= text_field_tag 'q', params[:q] %>
 	<% end -%>
 <% end -%>
 <div id="show_command">
@@ -18,7 +18,7 @@
 <% @documents.each do |document| %>
 	<tr class="selectable" onclick="location.href='<%= document_path(document) %>'">
     <td><%=h document.title %></td>
-    <td><%=h document.project.name %></td>
+    <td><%=h document.project_name  %></td>
 		<td>
 		<% if !document.users.blank? %>
 			<% user_names = document.users.index_by {|u| u.name } %>
@@ -27,7 +27,7 @@
 		<% end %>
 		</td>
 		<td>
-			<% if !document.tags.blank? %>
+			<% if !document.tags(true).blank? %>
 				<% tag_names = document.tags.index_by {|t| t.name} %>
 				<%= tag_names.keys.sort.join ", " %>
 			<% else %>

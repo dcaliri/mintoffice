@@ -15,10 +15,6 @@
 		  <%=simple_format @pettycash.description %>
 		</p>
 	</div>
-	<div id="attach">
-		<% @attachments.each do |attachment| %>
-		<img src="<%= url_for(:controller => "attachments", :action => 'picture', :id => attachment.id, :w => "400", :h => "800") %>" /><br />
-		<% end %>
-	</div>
+	<%= render :partial => "shared/show_attachment", :object => @pettycash  %>
 	<div style="clear: both;"></div>
 </div>
