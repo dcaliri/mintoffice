@@ -174,11 +174,11 @@ class UsersController < ApplicationController
       end
       # for loop for 12 month  & make PaySchedule
       for m in startmonth .. (startmonth+11)
-        payday = startday + m.month      
+        payday = startday + m.month
         payday = Time.local(payday.year, payday.month, 25)
         PaySchedule.create(:payday => payday, :category => 'mpay', :amount => mpay,:user => @user)
       end
-      # if bonus 1 exists, make PaySchedule 
+      # if bonus 1 exists, make PaySchedule
       if !params[:bonus_1_percent].blank?
         b1_p = params[:bonus_1_percent].to_i
         b1_m = params[:bonus_1_month].to_i
@@ -190,7 +190,7 @@ class UsersController < ApplicationController
         end
         PaySchedule.create(:payday => b1_day, :category => 'bonus1', :amount => b1,:user => @user)
       end
-      # if bonus 2 exists, make PaySchedule 
+      # if bonus 2 exists, make PaySchedule
       if !params[:bonus_2_percent].blank?
         b2_p = params[:bonus_2_percent].to_i
         b2_m = params[:bonus_2_month].to_i
@@ -202,7 +202,7 @@ class UsersController < ApplicationController
         end
         PaySchedule.create(:payday => b2_day, :category => 'bonus2', :amount => b2,:user => @user)
       end
-      # if bonus 3 exists, make PaySchedule 
+      # if bonus 3 exists, make PaySchedule
       if !params[:bonus_3_percent].blank?
         b3_p = params[:bonus_3_percent].to_i
         b3_m = params[:bonus_3_month].to_i
@@ -214,7 +214,7 @@ class UsersController < ApplicationController
         end
         PaySchedule.create(:payday => b3_day, :category => 'bonus3', :amount => b3,:user => @user)
       end
-      # if bonus 4 exists, make PaySchedule 
+      # if bonus 4 exists, make PaySchedule
       if !params[:bonus_4_percent].blank?
         b4_p = params[:bonus_4_percent].to_i
         b4_m = params[:bonus_4_month].to_i
