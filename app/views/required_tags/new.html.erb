@@ -3,7 +3,7 @@
 	...
 </div>
 <h2>New</h2>
-<% form_for @required_tag, 
+<%= form_for @required_tag, 
  			:html => { :class => 'tabular'} do |f| -%>
 <%= hidden_field_tag :returnurl, @returnurl %>
 <%= f.error_messages %>
@@ -12,7 +12,7 @@
 	<%= f.label :modelname, RequiredTag.human_attribute_name('modelname')%>
 	<%= f.text_field :modelname %>
 </p>
-<% fields_for :tag, @tag do |tag| -%>
+<%= fields_for :tag, @tag do |tag| -%>
 <p>
 	<%= tag.label :name, t('.tagname') %>
 	<%= tag.text_field :name %>

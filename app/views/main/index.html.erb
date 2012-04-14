@@ -1,59 +1,77 @@
-<center><img src="/images/mint_logo.png" style="margin-left: 10px; margin-top: 50px;"></center>
+<div id="logo">
+  <%= image_tag 'mint_logo.png' %>
+</div>
+
 <div id="mainmenu">
 <ul id="css3menu">
-	<li class="topitem"><a href="#"><span><%= t(".human_resources") %></span></a>
-		<ul class="submenu">
-			<li class="subfirst">#</li>
-			<li><%= link_to t("hrinfos.index.title"), :controller => "hrinfos" %></li>
-			<% if @user.permission.any? {|perm| perm.name == 'users'}  %>
-				<li>
-					<%= link_to t("users.index.title"), :controller => "users" %>
-				</li>
-			<% end %>
-			<li class="sublast">#</li>
-		</ul>
-	</li>
-	<li class="topitem"><a href="#"><span><%= t(".finance") %></span></a>
-		<ul class="submenu">
-			<li class="subfirst">#</li>
-		<% if @user.permission.any? {|perm| perm.name == 'pettycashes'}  %>
-			<li>
-				<%= link_to t("pettycashes.index.title"), :controller => "pettycashes" %>
-			</li>
-		<% end %>
-		<% if @user.permission.any? {|perm| perm.name == 'cardbills'}  %>
-			<li>
-				<%= link_to t("cardbills.index.title"), :controller => "cardbills" %>
-			</li>
-		<% end %>
-		<li class="sublast">#</li>
-		</ul>
-	</li>
-	<li class="topitem"><a href="#"><span><%= t(".project") %></span></a>
-		<ul class="submenu">
-			<li class="subfirst">#</li>
-			<% if @user.permission.any? {|perm| perm.name == 'projects'}  %>
-				<li>
-					<%= link_to t("projects.index.title"), :controller => "projects" %>
-				</li>
-			<% end %>
-			<li class="sublast">#</li>			
-		</ul>
-	</li>
-	<li class="topitem"><a href="#"><span><%= t(".document") %></span></a>
-		<ul class="submenu">
-			<li class="subfirst">#</li>
-			<%= link_to t("documents.index.title"), :controller => "documents" %>
-			<%= link_to t("namecards.index.title"), :controller => "namecards" %>
-				<li class="sublast">#</li>			
-			</ul>
-		</li>
-	<!-- <li>
-		<%= link_to "Change Password", :action => "changepw" %>		
-	</li>
-	<li>
-		<%= link_to "Attachment", :controller => "attachments" %>
-	</li> -->
+  <li class="topitem"><a href="#"><span><%= t(".human_resources") %></span></a>
+    <ul class="submenu">
+      <li class="subfirst">#</li>
+      <li><%= link_to t("hrinfos.index.title"), :controller => "hrinfos" %></li>
+      <% if @user.permission.any? {|perm| perm.name == 'users'}  %>
+        <li>
+          <%= link_to t("users.index.title"), :controller => "users" %>
+        </li>
+      <% end %>
+      <%= link_to t("payments.index.title"), :payments %>
+      <li class="sublast">#</li>
+    </ul>
+  </li>
+  <li class="topitem"><a href="#"><span><%= t(".finance") %></span></a>
+    <ul class="submenu">
+      <li class="subfirst">#</li>
+    <% if @user.permission.any? {|perm| perm.name == 'pettycashes'}  %>
+      <li>
+        <%= link_to t("pettycashes.index.title"), :controller => "pettycashes" %>
+      </li>
+    <% end %>
+    <% if @user.permission.any? {|perm| perm.name == 'cardbills'}  %>
+      <li>
+        <%= link_to t("cardbills.index.title"), :controller => "cardbills" %>
+      </li>
+    <% end %>
+    <% if @user.permission.any? {|perm| perm.name == 'taxbills'}  %>
+      <li>
+        <%= link_to t("taxbills.index.title"), :taxbills %>
+      </li>
+    <% end %>
+    <li class="sublast">#</li>
+    </ul>
+  </li>
+  <li class="topitem"><a href="#"><span><%= t(".project") %></span></a>
+    <ul class="submenu">
+      <li class="subfirst">#qweqweqw</li>
+      <% if @user.permission.any? {|perm| perm.name == 'projects'}  %>
+        <li>
+          <%= link_to t("projects.index.title"), :controller => "projects" %>
+        </li>
+      <% end %>
+      <li class="sublast">#</li>
+    </ul>
+  </li>
+  <li class="topitem"><a href="#"><span><%= t(".document") %></span></a>
+    <ul class="submenu">
+      <li class="subfirst">#</li>
+      <li><%= link_to t("documents.index.title"), :controller => "documents" %></li>
+      <% if @user.permission.any? {|perm| perm.name == 'namecards'}  %>
+        <li>
+          <%= link_to t("namecards.index.title"), :controller => "namecards" %>
+        </li>
+      <% end %>
+      <% if @user.permission.any? {|perm| perm.name == 'business_clients'}  %>
+        <li>
+          <%= link_to t("business_clients.index.title"), :business_clients %>
+        </li>
+      <% end %>
+      <li class="sublast">#</li>
+    </ul>
+  </li>
+  <!-- <li>
+    <%#= link_to "Change Password", :action => "changepw" %>
+  </li>
+  <li>
+    <%#= link_to "Attachment", :controller => "attachments" %>
+  </li> -->
 </ul>
 </div>
 <div style="clear: both;"></div>

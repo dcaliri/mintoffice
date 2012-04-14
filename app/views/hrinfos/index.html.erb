@@ -6,6 +6,13 @@ else
 	@title += " (" + t(".current") + ")"
 end
 %>
+<% content_for :search do -%>
+	<%= form_tag({:action => "index"}, :method => :get ) do %>
+		<%= hidden_field_tag 'retired', params[:retired] %>
+		<%= t("common.title.search") %> : <%= text_field_tag 'q', params[:q] %>
+	<% end %>
+<% end -%>
+
 <div id="show_command">
 <% if @user.ingroup?("admin") %>	
 	<%= link_to t('hrinfos.new.title'), new_hrinfo_path %>

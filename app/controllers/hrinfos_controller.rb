@@ -4,13 +4,13 @@ class HrinfosController < ApplicationController
   def index
     retired = params[:retired]
     if retired == "on"
-      @hrinfos = Hrinfo.find(:all, :conditions => "retired_on IS NOT NULL")
+      @hrinfos = Hrinfo.search(params[:q]).find(:all, :conditions => "retired_on IS NOT NULL")
       @hrinfos_count = Hrinfo.count(:all, :conditions => "retired_on IS NOT NULL")
     else
-      @hrinfos = Hrinfo.find(:all, :conditions => "retired_on IS NULL")
+      @hrinfos = Hrinfo.search(params[:q]).find(:all, :conditions => "retired_on IS NULL")
       @hrinfos_count = Hrinfo.count(:all, :conditions => "retired_on IS NULL")
     end
-    
+
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @hrinfos }
@@ -34,23 +34,25 @@ class HrinfosController < ApplicationController
     else
       format.html { render :action => "retire" }
     end
-    
   end
+
   # GET /hrinfos/1
   # GET /hrinfos/1.xml
   def show
     @hrinfo = Hrinfo.find(params[:id])
     @attachments = Attachment.for_me(@hrinfo, "seq ASC")
     at = params[:at] || "0"
-    if session[:attachments].nil?
-      session[:attachments] = [@attachments[at.to_i].id]
-    else
-      session[:attachments] << @attachments[at.to_i].id
-    end
-    @related_documents = Tag.related_documents(@hrinfo.user.name, Hrinfo.human_name)
+   unless @attachments.empty?
+      if session[:attachments].nil?
+        session[:attachments] = [@attachments[at.to_i].id]
+      else
+        session[:attachments] << @attachments[at.to_i].id
+      end
+   end
+    @related_documents = Tag.related_documents(@hrinfo.user.name, Hrinfo.model_name.human)
     @required_tagnames = RequiredTag.find_all_by_modelname(Hrinfo.name).collect do |rt| rt.tag.name end
     @required_tagnames = @required_tagnames.uniq.sort
-    
+
     @required_documents = {}
     @unrequired_documents = []
     @related_documents.each do |rd|
@@ -103,7 +105,7 @@ class HrinfosController < ApplicationController
       if @hrinfo.save
         @attachment = Attachment.new(params[:attachment])
         @attachment.save_for(@hrinfo,@user)
-        flash[:notice] = I18n.t("common.title.created", :model => Hrinfo.human_name)
+        flash[:notice] = I18n.t("common.messages.created", :model => Hrinfo.model_name.human)
         format.html { redirect_to(@hrinfo) }
         format.xml  { render :xml => @hrinfo, :status => :created, :location => @hrinfo }
       else
@@ -133,7 +135,7 @@ class HrinfosController < ApplicationController
         @attachment = Attachment.new(params[:attachment])
         @attachment.seq = seq+1
         @attachment.save_for(@hrinfo,@user)
-        flash[:notice] = I18n.t("common.messages.updated", :model => Hrinfo.human_name)
+        flash[:notice] = I18n.t("common.messages.updated", :model => Hrinfo.model_name.human)
         format.html { redirect_to(@hrinfo) }
         format.xml  { head :ok }
       else

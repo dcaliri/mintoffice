@@ -4,7 +4,7 @@
 	<%= link_to t("common.title.list"), creditcards_path %>
 </div>
 <h2><%= t("common.title.edit") %></h2>
-<% form_for(@creditcard,
+<%= form_for(@creditcard,
 		:html => {:class => "tabular", :multipart => true} ) do |f| %>
   <%= f.error_messages %>
 <div class="box">

@@ -1,10 +1,11 @@
 class UsersController < ApplicationController
   layout "application", :except => ["login"]
+
   def logout
     session[:user_id] = nil
     redirect_to(:controller => "main", :action => "index")
   end
-  
+
   def login
     if request.post?
       user = User.authenticate(params[:name], params[:password])
@@ -20,12 +21,10 @@ class UsersController < ApplicationController
   def disable
     @this_user = User.find(params[:id])
     @this_user.disable
-    
     redirect_to :action => "index"
   end
-  
+
   def my
-    
   end
   # GET /users
   # GET /users.xml
@@ -35,11 +34,11 @@ class UsersController < ApplicationController
       redirect_to :controller => "main", :action => "index"
       return
     end
-    
+
     if params[:disabled] == 'on'
-      @users = User.find(:all, :order => :id, :conditions => "name LIKE '[X] %'")
+      @users = User.search(params[:q]).find(:all, :order => :id, :conditions => "name LIKE '[X] %'")
     else
-      @users = User.find(:all, :order => :id, :conditions => "name NOT LIKE '[X] %'")
+      @users = User.search(params[:q]).find(:all, :order => :id, :conditions => "name NOT LIKE '[X] %'")
     end
 
     respond_to do |format|
@@ -53,7 +52,7 @@ class UsersController < ApplicationController
   def show
     @this_user = User.find(params[:id])
     @attachments = Attachment.for_me(@this_user.hrinfo) if @this_user.hrinfo
-  
+
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @this_user }
@@ -85,7 +84,7 @@ class UsersController < ApplicationController
     @hrinfo = Hrinfo.new(params[:hrinfo])
     respond_to do |format|
       if @user.save
-        @user.hrinfo = @hrinfo
+#        @user.hrinfo = @hrinfo
         @attachment = Attachment.new(params[:attachment])
         @attachment.save_for(@hrinfo,@user)
         flash[:notice] = "User #{@user.name}was successfully created."
@@ -128,7 +127,7 @@ class UsersController < ApplicationController
       format.xml  { head :ok }
     end
   end
-  
+
   def changepw
     if request.post?
       this_user = User.find(params[:user_id])
@@ -153,7 +152,7 @@ class UsersController < ApplicationController
        end
      end
   end
-  
+
   def loginas
     target_user = User.find(params[:id])
     session[:user_id] = target_user.id
@@ -175,11 +174,11 @@ class UsersController < ApplicationController
       end
       # for loop for 12 month  & make PaySchedule
       for m in startmonth .. (startmonth+11)
-        payday = startday + m.month      
+        payday = startday + m.month
         payday = Time.local(payday.year, payday.month, 25)
         PaySchedule.create(:payday => payday, :category => 'mpay', :amount => mpay,:user => @user)
       end
-      # if bonus 1 exists, make PaySchedule 
+      # if bonus 1 exists, make PaySchedule
       if !params[:bonus_1_percent].blank?
         b1_p = params[:bonus_1_percent].to_i
         b1_m = params[:bonus_1_month].to_i
@@ -191,7 +190,7 @@ class UsersController < ApplicationController
         end
         PaySchedule.create(:payday => b1_day, :category => 'bonus1', :amount => b1,:user => @user)
       end
-      # if bonus 2 exists, make PaySchedule 
+      # if bonus 2 exists, make PaySchedule
       if !params[:bonus_2_percent].blank?
         b2_p = params[:bonus_2_percent].to_i
         b2_m = params[:bonus_2_month].to_i
@@ -202,8 +201,8 @@ class UsersController < ApplicationController
         else
         end
         PaySchedule.create(:payday => b2_day, :category => 'bonus2', :amount => b2,:user => @user)
-      end    
-      # if bonus 3 exists, make PaySchedule 
+      end
+      # if bonus 3 exists, make PaySchedule
       if !params[:bonus_3_percent].blank?
         b3_p = params[:bonus_3_percent].to_i
         b3_m = params[:bonus_3_month].to_i
@@ -215,7 +214,7 @@ class UsersController < ApplicationController
         end
         PaySchedule.create(:payday => b3_day, :category => 'bonus3', :amount => b3,:user => @user)
       end
-      # if bonus 4 exists, make PaySchedule 
+      # if bonus 4 exists, make PaySchedule
       if !params[:bonus_4_percent].blank?
         b4_p = params[:bonus_4_percent].to_i
         b4_m = params[:bonus_4_month].to_i

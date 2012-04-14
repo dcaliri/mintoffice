@@ -1,0 +1,42 @@
+<% form_type = if @business_client.new_record? then 'new' else 'edit' end %>
+
+<% @title = t("business_clients.#{form_type}.title") %>
+
+<div id="show_command">
+  <%= link_to t('common.title.back'), :business_clients %>
+</div>
+
+<h2><%= t("common.title.#{form_type}") %></h2>
+<%= form_for @business_client, html: {multipart: true} do |f| %>
+    <%= f.error_messages %>
+    <div class="box">
+        <p>
+            <%= f.label :name %>
+            <%= f.text_field :name%>
+        </p>
+    <p>
+      <%= f.label :registration_number %>
+      <%= f.text_field :registration_number %>
+    </p>
+    <p>
+      <%= f.label :category %>
+      <%= f.text_field :category %>
+    </p>
+    <p>
+      <%= f.label :condition %>
+      <%= f.text_field :condition %>
+    </p>
+    <p>
+      <%= f.label :address %>
+      <%= f.text_field :address %>
+    </p>
+    <p>
+      <%= f.label :owner %>
+      <%= f.text_field :owner %>
+    </p>
+    <%= render 'shared/attachments/form', label: t('business_clients.edit.picture') %>
+      <p>
+          <%= f.submit %>
+      </p>
+  </div>
+<% end %>

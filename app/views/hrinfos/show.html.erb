@@ -40,7 +40,7 @@
 				<% if @required_documents[rtn] %>
 					<%= link_to @required_documents[rtn].title, :controller => "documents", :action => "show", :id => @required_documents[rtn]  %>
 				<% else %>
-					<%= link_to "Register", :controller => "documents", :action => "new", :tag => [rtn, Hrinfo.human_name, @hrinfo.user.name].join(',') %>
+					<%= link_to "Register", :controller => "documents", :action => "new", :tag => [rtn, Hrinfo.model_name.human, @hrinfo.user.name].join(',') %>
 				<% end %>
 				</li>
 		  <% end %>

@@ -5,9 +5,9 @@
 </div>
 <h2><%= t("common.title.edit") %></h2>
 
-<% form_for(@pettycash,
+<%= form_for(@pettycash,
 		:url => { :action => 'update' },
-		:html => { :multipart => true } ) do |f| %>
+		:html => { :class => "tabular", :multipart => true } ) do |f| %>
   <%= f.error_messages %>
 <div class="box">
   <p>
@@ -26,7 +26,15 @@
     <%= f.label :description, Pettycash.human_attribute_name('description') %>
     <%= f.text_area :description %>
   </p>
-<% if !@attachments.blank? %>
+  <p>
+        <%= render 'shared/attachments/form', label: t("common.title.attachment") %>
+  </p>
+  <p>
+        <%= f.submit t("common.button.update") %>
+  </p>
+</div>
+
+<!-- <% if !@attachments.blank? %>
   <% for attachment in @attachments %>
     <img src="<%= url_for(:controller => "attachments", :action => 'picture', :id => attachment.id, :w => "100", :h => "80") %>" />
 	[<%= link_to "Delete", :controller => "attachments", :action => "delete", :id => attachment %>]
@@ -34,15 +42,15 @@
 <% else %>
 
 <% end %>
-<% fields_for :attachment, @attachment do |attachment| -%>
-	<p>
-		<%= attachment.label :uploaded_file, t("common.title.attachment") %>
-		<%= attachment.file_field :uploaded_file %>
-	</p>
-<% end -%>
+	<%= fields_for :attachment, @attachment do |attachment| -%>
+		<p>
+			<%= attachment.label :uploaded_file, t("common.title.attachment") %>
+			<%= attachment.file_field :uploaded_file %>
+		</p>
+	<% end -%>
 </div>
   <p>
     <%= f.submit t("common.button.update") %>
   </p>
-<% end %>
+<% end %> -->
 

@@ -1,0 +1,37 @@
+<% @title  = t('.title') %>
+
+<% content_for :search do -%>
+	<%= form_tag :business_clients, :method => :get do %>
+		<%= t("common.title.search") %> : <%= text_field_tag 'query', params[:query] %>
+	<% end -%>
+<% end %>
+
+<div id="show_command">
+    <%= link_to t('common.title.new'), [:new, :business_client] %>
+</div>
+
+<% unless @business_clients.empty? %>
+    <h2>Total : <%= @business_clients.count %></h2>
+    <table id="list-table">
+      <tr>
+        <th><%= BusinessClient.human_attribute_name('name') %></th>
+        <th><%= BusinessClient.human_attribute_name('category') %></th>
+        <th><%= BusinessClient.human_attribute_name('condition') %></th>
+        <th><%= BusinessClient.human_attribute_name('owner') %></th>
+      </tr>
+    <% @business_clients.each do |client| %>
+      <tr class="selectable" onclick="location.href='<%= business_client_path(client) %>'">
+        <td><span><%=h client.name %></span></td>
+        <td><%=h client.category %></td>
+        <td><%=h client.condition %></td>
+        <td><%=h client.owner %></td>
+      </tr>
+    <% end %>
+    </table>
+    <br />
+    <center>
+		<%= will_paginate @business_clients %>
+    </center>
+<% else %>
+    <h3><%= t 'business_clients.index.empty' %></h3>
+<% end %>

@@ -1,0 +1,49 @@
+<% @title = t('.title') %>
+<div id="show_command">
+	<%= link_to t('common.title.edit'), [:edit, @business_client] %> |
+	<%= link_to t('common.title.destroy'), @business_client, :confirm => "Are you sure?", :method => :delete %> |
+	<%= link_to t('common.title.list'), :business_clients %>
+</div>
+<h2><%=h @business_client.name %></h2>
+	<div class="box">
+		<div id="descr">
+			<table border="0" cellspacing="5" cellpadding="5">
+				<tr>
+					<th align="right"><%= BusinessClient.human_attribute_name('name') %>:</th>
+					<td align="right"><%= @business_client.name %></td>
+				</tr>
+				<tr>
+					<th align="right"><%= BusinessClient.human_attribute_name('registration_number') %>:</th>
+					<td align="right"><%= @business_client.registration_number %></td>
+				</tr>
+				<tr>
+					<th align="right"><%= BusinessClient.human_attribute_name('category') %>:</th>
+					<td align="right"><%= @business_client.category %></td>
+				</tr>
+				<tr>
+					<th align="right"><%= BusinessClient.human_attribute_name('condition') %>:</th>
+					<td align="right"><%= @business_client.condition %></td>
+				</tr>
+				<tr>
+					<td align="right"><p><%= Taxman.model_name.human %>:</p></td>
+					<% unless @business_client.taxmen.empty? %>
+						<td align="right">
+							<% @business_client.taxmen.map do |taxman| %>
+								<%= taxman.fullname %>
+								<%= link_to "[수정", [:edit, @business_client, taxman] %>
+								|
+								<%= link_to "삭제]", [@business_client, taxman], confirm: "Are you sure?", :method => :delete %>
+								<br>
+							<% end %>
+						</td>
+					<% else %>
+						<td><p><%= t('taxmen.empty') %></p></td>
+					<% end %>
+					<td><%= link_to "담당자 추가하기", [:new, @business_client, :taxman] %></td>
+				</tr>
+			</table>
+		</div>
+		<%= render :partial => "shared/show_attachment", :object => @business_client %>
+		<div style="clear: both;"></div>
+	</div>
+</div>
