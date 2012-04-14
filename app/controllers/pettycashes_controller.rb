@@ -67,7 +67,7 @@ class PettycashesController < ApplicationController
     respond_to do |format|
       if @pettycash.save
         @attachment = Attachment.new(params[:attachment])
-        @attachment.seq = seq+1
+        @attachment.seq = 1
         @attachment.save_for(@pettycash,@user)
         flash[:notice] = 'Pettycash was successfully created.'
         format.html { redirect_to(@pettycash) }
