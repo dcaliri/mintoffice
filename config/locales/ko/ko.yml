@@ -407,3 +407,13 @@ ko:
             title: 연봉 관리
         show:
             title: 연봉 이력
+    pay_schedules:
+        new:
+            title: 새로운 기본급 입력
+        edit:
+            title: 기본급 수정
+    bonuses:
+        new:
+            title: 새로운 상여금 입력
+        edit:
+            title: 상여금 수정
