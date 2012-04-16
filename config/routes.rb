@@ -19,6 +19,7 @@ Mintoffice::Application.routes.draw do
 
   resources :users do
     resources :annual_pay_schedules, only: [:new, :create, :edit, :update, :destroy]
+    resources :bonuses, only: [:new, :create, :edit, :update, :destroy]
   end
 
   resources :required_tags

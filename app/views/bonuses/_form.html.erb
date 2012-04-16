@@ -1,0 +1,29 @@
+<% form_type = if bonus.new_record? then 'new' else 'edit' end %>
+<% @title = t("bonuses.#{form_type}.title") %>
+
+<div id="show_command">
+  <%= link_to t('common.title.back'), payment_path(user) %>
+</div>
+
+<h2><%= t("common.title.#{form_type}") %></h2>
+
+<%= form_for [user, bonus] do |f| %>
+   <%= f.error_messages %>
+  <div class="box">
+    <p>
+      <%= f.label :given_at %>
+      <%= f.date_select :given_at, :order => [:year, :month, :day] %>
+    </p>
+    <p>
+      <%= f.label :amount %>
+      <%= f.text_field :amount %>
+    </p>
+    <p>
+      <%= f.label :note %>
+      <%= f.text_field :note %>
+    </p>
+    <p>
+      <%= f.submit %>
+    </p>
+  </div>
+<% end %>

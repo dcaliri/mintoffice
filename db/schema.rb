@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120416005936) do
+ActiveRecord::Schema.define(:version => 20120416015154) do
 
   create_table "annual_pay_schedules", :force => true do |t|
     t.decimal  "income"
@@ -45,6 +45,15 @@ ActiveRecord::Schema.define(:version => 20120416005936) do
     t.integer  "owner_id"
     t.string   "original_filename"
     t.integer  "seq"
+  end
+
+  create_table "bonuses", :force => true do |t|
+    t.date     "given_at"
+    t.decimal  "amount",     :default => 0.0
+    t.text     "note"
+    t.integer  "user_id"
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
   end
 
   create_table "business_clients", :force => true do |t|
