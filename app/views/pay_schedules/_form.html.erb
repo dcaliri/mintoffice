@@ -20,7 +20,7 @@
     </p>
     <% (1..12).each do |month| %>
       <p>
-        <%= f.label Date::MONTHNAMES[month] %>
+        <%= f.label Date::MONTHNAMES[month], t('date.month_names')[month] %>
         <%= f.text_field Date::MONTHNAMES[month] %>
       </p>
     <% end %>

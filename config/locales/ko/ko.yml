@@ -68,6 +68,8 @@ ko:
             taxman: 담당자
             taxbill: 세금계산서
             taxbill_item: 항목
+            pay_schedule: 기본급
+            bonus: 상여금
         attributes:
             attachment:
                 comments: 주석
@@ -164,6 +166,14 @@ ko:
               total: 합계액
               note: 내역
               transacted_at: 거래날짜
+            pay_schedule:
+                started_at: 시작일
+                income: 총 연봉 금액
+                basic_pay: 기본급
+            bonus:
+                gave_at: 지급일
+                amount: 금액
+                note: 내역
         errors:
             template:
                 header: 오류가 발생했습니다.
@@ -241,6 +251,7 @@ ko:
             logout: "로그아웃"
             edit: "수정"
             destroy: "삭제"
+        menu: 메뉴
     documents:
         index:
             title: "문서 관리"
@@ -394,3 +405,5 @@ ko:
     payments:
         index:
             title: 연봉 관리
+        show:
+            title: 연봉 이력
