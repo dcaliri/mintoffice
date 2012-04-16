@@ -1,0 +1,23 @@
+- form_type = if pay_schedule.new_record? then 'new' else 'edit' end
+- @title = t("pay_schedules.#{form_type}.title")
+
+#show_command
+  = link_to t('common.title.back'), payment_path(user)
+
+h2= t("common.title.#{form_type}")
+
+= form_for [user, pay_schedule] do |f|
+  = f.error_messages
+  .box
+    p
+      = f.label :started_at
+      = f.date_select :started_at, :order => [:year, :month, :day]
+    p
+      = f.label :income
+      = f.text_field :income
+      - (1..12).each do |month|
+        p
+          = f.label Date::MONTHNAMES[month], t('date.month_names')[month]
+          = f.text_field Date::MONTHNAMES[month]
+    p
+      = f.submit
