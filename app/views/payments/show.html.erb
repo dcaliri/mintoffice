@@ -3,7 +3,7 @@
 <h2><%=h "연봉 이력" %></h2>
 <div id="show_command">
   <% if @user.ingroup?(:admin) %>
-    <%= link_to t('common.title.new'), [:new, user, :annual_pay_schedule] %>
+    <%= link_to t('common.title.new'), [:new, user, :pay_schedule] %>
     |
   <% end %>
   <%= link_to t('common.title.list'), :payments %>
@@ -11,7 +11,7 @@
 <div class="box">
   <div id="descr">
     <table border="0" cellspacing="5" cellpadding="5">
-      <% unless user.annual_pay_schedules.empty? %>
+      <% unless user.pay_schedules.empty? %>
         <tr>
           <th>시작일</th>
           <th>총 연봉 금액</th>
@@ -23,7 +23,7 @@
             <th>메뉴</th>
           <% end %>
         </tr>
-        <% user.annual_pay_schedules.each do |schedule| %>
+        <% user.pay_schedules.each do |schedule| %>
           <tr>
             <td><%= schedule.started_at %></td>
             <td><%= number_to_currency schedule.income %></td>

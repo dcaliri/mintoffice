@@ -1,5 +1,5 @@
-<% form_type = if annual_pay_schedule.new_record? then 'new' else 'edit' end %>
-<% @title = t("annual_pay_schedules.#{form_type}.title") %>
+<% form_type = if pay_schedule.new_record? then 'new' else 'edit' end %>
+<% @title = t("pay_schedules.#{form_type}.title") %>
 
 <div id="show_command">
   <%= link_to t('common.title.back'), payment_path(user) %>
@@ -7,7 +7,7 @@
 
 <h2><%= t("common.title.#{form_type}") %></h2>
 
-<%= form_for [user, annual_pay_schedule] do |f| %>
+<%= form_for [user, pay_schedule] do |f| %>
   <%= f.error_messages %>
   <div class="box">
     <p>

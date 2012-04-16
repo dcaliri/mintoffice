@@ -7,5 +7,6 @@ class PaymentsController < ApplicationController
             end
    users.page(params[:page])
   end
+
   expose(:user)
 end

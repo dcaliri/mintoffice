@@ -7,9 +7,8 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :groups
   has_and_belongs_to_many :permission
   has_and_belongs_to_many :projects
-  has_many :pay_schedules, :order => 'payday ASC'
   has_one :hrinfo
-  has_many :annual_pay_schedules
+  has_many :pay_schedules
   has_many :bonuses
 
   scope :nohrinfo, :conditions =>['id not in (select user_id from hrinfos)']

@@ -1,6 +1,4 @@
 class BonusesController < ApplicationController
-  before_filter :check_payment_permission, :check_admin
-
   expose(:user)
   expose(:bonuses) { user.bonuses }
   expose(:bonus)

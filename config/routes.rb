@@ -18,8 +18,9 @@ Mintoffice::Application.routes.draw do
   match '/users/my', :controller => "users", :action => "my", :conditions => {:method => :get}
 
   resources :users do
-    resources :annual_pay_schedules, only: [:new, :create, :edit, :update, :destroy]
-    resources :bonuses, only: [:new, :create, :edit, :update, :destroy]
+#    resources :annual_pay_schedules, :except => :index
+    resources :pay_schedules, :except => :index
+    resources :bonuses, :except => :index
   end
 
   resources :required_tags
