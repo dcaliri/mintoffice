@@ -11,7 +11,27 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120412021850) do
+ActiveRecord::Schema.define(:version => 20120416005936) do
+
+  create_table "annual_pay_schedules", :force => true do |t|
+    t.decimal  "income"
+    t.integer  "January",    :default => 0
+    t.integer  "February",   :default => 0
+    t.integer  "March",      :default => 0
+    t.integer  "April",      :default => 0
+    t.integer  "May",        :default => 0
+    t.integer  "June",       :default => 0
+    t.integer  "July",       :default => 0
+    t.integer  "August",     :default => 0
+    t.integer  "September",  :default => 0
+    t.integer  "October",    :default => 0
+    t.integer  "November",   :default => 0
+    t.integer  "December",   :default => 0
+    t.date     "started_at"
+    t.integer  "user_id"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
 
   create_table "attachments", :force => true do |t|
     t.string   "title"

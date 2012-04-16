@@ -1,0 +1,46 @@
+<% @title = t('.title') %>
+
+<div id="show_command">
+  <%= link_to t('common.title.new'), [:new, user, :annual_pay_schedule] %>
+  |
+  <%= link_to t('common.title.list'), :payments %>
+</div>
+
+<h2><%=h "연봉 이력" %></h2>
+  <div class="box">
+    <div id="descr">
+      <table border="0" cellspacing="5" cellpadding="5">
+        <% unless user.annual_pay_schedules.empty? %>
+          <tr>
+            <th>시작일</th>
+            <th>총 연봉 금액</th>
+            <% (1..12).each do |month| %>
+              <th><%= month %>월</th>
+            <% end %>
+            <th>기본급</th>
+            <th>메뉴</th>
+          </tr>
+          <% user.annual_pay_schedules.each do |schedule| %>
+            <tr>
+              <td><%= schedule.started_at %></td>
+              <td><%= number_to_currency schedule.income %></td>
+              <% (1..12).each do |month| %>
+                <td><%= number_to_percentage(schedule.send(Date::MONTHNAMES[month]), precision: 0)%></td>
+              <% end %>
+              <td><%= number_to_currency schedule.basic_pay %>
+              <td>
+                <%= link_to t("common.link.edit"), [:edit, user, schedule] %>
+                |
+                <%= link_to t("common.link.destroy"), [user, schedule], :method => :delete, :confirm => "Are you sure?" %>
+              </td>
+            </td>
+          <% end %>
+        <% else %>
+          <tr>
+            <td>항목이 없습니다.</td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>

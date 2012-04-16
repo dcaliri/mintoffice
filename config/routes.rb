@@ -17,7 +17,10 @@ Mintoffice::Application.routes.draw do
   match '/users/logout', :controller => 'users', :action => 'logout', :conditions => { :method => :get}
   match '/users/my', :controller => "users", :action => "my", :conditions => {:method => :get}
 
-  resources :users
+  resources :users do
+    resources :annual_pay_schedules, only: [:new, :create, :edit, :update, :destroy]
+  end
+
   resources :required_tags
   resources :namecards
   resources :business_clients do

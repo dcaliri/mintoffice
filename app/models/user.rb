@@ -1,4 +1,5 @@
 require 'digest/sha1'
+
 class User < ActiveRecord::Base
   has_many :attachment
   has_many :document_owners, :order => 'created_at DESC'
@@ -8,8 +9,8 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :projects
   has_many :pay_schedules, :order => 'payday ASC'
   has_one :hrinfo
+  has_many :annual_pay_schedules
 
-#  named_scope :nohrinfo, :conditions =>['id not in (select user_id from hrinfos)']
   scope :nohrinfo, :conditions =>['id not in (select user_id from hrinfos)']
 
   validates_presence_of :name
