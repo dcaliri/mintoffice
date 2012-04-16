@@ -1,8 +1,9 @@
 class AnnualPaySchedulesController < ApplicationController
+  before_filter :check_payment_permission, :check_admin
+
   expose(:user)
   expose(:annual_pay_schedules) { user.annual_pay_schedules }
   expose(:annual_pay_schedule)
-
 
   def create
     annual_pay_schedule.save!

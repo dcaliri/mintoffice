@@ -11,6 +11,10 @@
   <%= f.error_messages %>
   <div class="box">
     <p>
+      <%= f.label :started_at %>
+      <%= f.date_select :started_at, :order => [:year, :month, :day] %>
+    </p>
+    <p>
       <%= f.label :income %>
       <%= f.text_field :income %>
     </p>
@@ -20,10 +24,6 @@
         <%= f.text_field Date::MONTHNAMES[month] %>
       </p>
     <% end %>
-    <p>
-      <%= f.label :started_at %>
-      <%= f.date_select :started_at, :order => [:year, :month, :day] %>
-    </p>
     <p>
       <%= f.submit %>
     </p>

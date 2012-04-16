@@ -2,8 +2,10 @@
 
 <h2><%=h "연봉 이력" %></h2>
 <div id="show_command">
-  <%= link_to t('common.title.new'), [:new, user, :annual_pay_schedule] %>
-  |
+  <% if @user.ingroup?(:admin) %>
+    <%= link_to t('common.title.new'), [:new, user, :annual_pay_schedule] %>
+    |
+  <% end %>
   <%= link_to t('common.title.list'), :payments %>
 </div>
 <div class="box">
@@ -17,7 +19,9 @@
             <th><%= month %>월</th>
           <% end %>
           <th>기본급</th>
-          <th>메뉴</th>
+          <% if @user.ingroup?(:admin) %>
+            <th>메뉴</th>
+          <% end %>
         </tr>
         <% user.annual_pay_schedules.each do |schedule| %>
           <tr>
@@ -27,11 +31,13 @@
               <td><%= number_to_percentage(schedule.send(Date::MONTHNAMES[month]), precision: 0)%></td>
             <% end %>
             <td><%= number_to_currency schedule.basic_pay %>
-            <td>
-              <%= link_to t("common.link.edit"), [:edit, user, schedule] %>
-              |
-              <%= link_to t("common.link.destroy"), [user, schedule], :method => :delete, :confirm => "Are you sure?" %>
-            </td>
+            <% if @user.ingroup?(:admin) %>
+              <td>
+                <%= link_to t("common.link.edit"), [:edit, user, schedule] %>
+                |
+                <%= link_to t("common.link.destroy"), [user, schedule], :method => :delete, :confirm => "Are you sure?" %>
+              </td>
+            <% end %>
           </td>
         <% end %>
       <% else %>
@@ -45,8 +51,10 @@
 <div style="clear: both;"></div>
 <h2>상여금</h2>
 <div id="show_command">
-  <%= link_to t('common.title.new'), [:new, user, :bonus] %>
-  |
+  <% if @user.ingroup?(:admin) %>
+    <%= link_to t('common.title.new'), [:new, user, :bonus] %>
+    |
+  <% end %>
   <%= link_to t('common.title.list'), :payments %>
 </div>
 <div class="box">
@@ -57,18 +65,22 @@
             <th>지급일</th>
             <th>금액</th>
             <th>내역</th>
-            <th>메뉴</th>
+            <% if @user.ingroup?(:admin) %>
+              <th>메뉴</th>
+            <% end %>
           </tr>
           <% user.bonuses.each do |bonus| %>
             <tr>
               <td><%= bonus.given_at %></td>
               <td><%= number_to_currency bonus.amount %></td>
               <td><%= bonus.note %>
-              <td>
-                <%= link_to t("common.link.edit"), [:edit, user, bonus] %>
-                |
-                <%= link_to t("common.link.destroy"), [user, bonus], :method => :delete, :confirm => "Are you sure?" %>
-              </td>
+              <% if @user.ingroup?(:admin) %>
+                <td>
+                  <%= link_to t("common.link.edit"), [:edit, user, bonus] %>
+                  |
+                  <%= link_to t("common.link.destroy"), [user, bonus], :method => :delete, :confirm => "Are you sure?" %>
+                </td>
+              <% end %>
             </td>
           <% end %>
         <% else %>
