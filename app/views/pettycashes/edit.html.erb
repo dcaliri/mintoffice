@@ -12,7 +12,7 @@
 <div class="box">
   <p>
     <%= f.label :transdate, Pettycash.human_attribute_name('transdate') %>
-    <%= f.datetime_select :transdate %>
+    <%= f.datetime_select :transdate, :order => [:year, :month, :day] %>
   </p>
   <p>
     <%= f.label :inmoney, Pettycash.human_attribute_name('inmoney') %>

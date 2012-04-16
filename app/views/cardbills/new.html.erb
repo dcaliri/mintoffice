@@ -14,7 +14,7 @@
   </p>
   <p>
     <%= f.label :transdate, Cardbill.human_attribute_name('transdate') %>
-    <%= f.datetime_select :transdate %>
+    <%= f.datetime_select :transdate, :order => [:year, :month, :day] %>
   </p>
   <p>
     <%= f.label :amount, Cardbill.human_attribute_name('amount') %>
