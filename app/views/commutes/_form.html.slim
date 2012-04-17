@@ -11,7 +11,7 @@ h2= t("common.title.#{form_type}")
   .box
     p
       = f.label type
-      = DateTime.now
+      p= DateTime.now.strftime("%Y년 %m월 %d일 %H시 %M분")
     p
     = render 'shared/attachments/form', label: t("commutes.#{form_type}.picture")
     p

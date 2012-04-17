@@ -71,6 +71,7 @@ ko:
             pay_schedule: 기본급
             bonus: 상여금
             payment: 연봉
+            commute: 출퇴근
         attributes:
             attachment:
                 comments: 주석
@@ -182,6 +183,9 @@ ko:
                 pay_start: 지급 시작일
                 total: 총액
                 after: "%{month}개월 후"
+            commute:
+                go: 출근
+                leave: 퇴근
 
 
         errors:
