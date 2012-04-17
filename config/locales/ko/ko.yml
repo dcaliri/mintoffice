@@ -81,6 +81,17 @@ ko:
                 owner_table_name: 관계된 테이블명
                 owner_id : 관계된 테이블 ID
                 title: 제목
+            bonus:
+                gave_at: 지급일
+                amount: 금액
+                note: 내역
+            business_client:
+                name: 거래처명
+                registration_number: 사업자 등록번호
+                category: 업종
+                condition: 업태
+                address: 주소
+                owner: 대표자
             cardbill:
                 cardno: "카드 번호"
                 transdate: "사용일자"
@@ -124,6 +135,10 @@ ko:
                 phone: "전화번호"
                 homepage: "홈페이지"
                 email: "이메일주소"
+            pay_schedule:
+                started_at: 시작일
+                income: 총 연봉 금액
+                basic_pay: 기본급
             payment:
                 pay_at: 지급월
                 note: 내역
@@ -148,13 +163,6 @@ ko:
                 name: 사용자계정
                 password: 비밀번호
                 password_confirmation: 비밀번호 확인
-            business_client:
-                name: 거래처명
-                registration_number: 사업자 등록번호
-                category: 업종
-                condition: 업태
-                address: 주소
-                owner: 대표자
             taxman:
                 fullname: 이름
                 email: 이메일
@@ -174,14 +182,6 @@ ko:
               total: 합계액
               note: 내역
               transacted_at: 거래날짜
-            pay_schedule:
-                started_at: 시작일
-                income: 총 연봉 금액
-                basic_pay: 기본급
-            bonus:
-                gave_at: 지급일
-                amount: 금액
-                note: 내역
         errors:
             template:
                 header: 오류가 발생했습니다.
