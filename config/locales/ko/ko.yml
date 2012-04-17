@@ -441,3 +441,6 @@ ko:
             link: 특별 상여금 작성
         edit:
             title: 특별 상여금 수정
+    commutes:
+        index:
+            title: 출퇴근 관리

@@ -25,9 +25,15 @@ Mintoffice::Application.routes.draw do
       end
     end
 
+    resources :commutes do
+    end
+
     resources :pay_schedules, :except => :index
     resources :bonuses, :except => :index
   end
+
+  resources :payments, :only => [:index, :show]
+  resources :commutes
 
   resources :required_tags
   resources :namecards
@@ -38,8 +44,6 @@ Mintoffice::Application.routes.draw do
   resources :taxbills do
     resources :taxbill_items#, :path => "items", :as => "items"
   end
-
-  resources :payments, :only => [:index, :show]
 
   # The priority is based upon order of creation: first created -> highest priority.
 
