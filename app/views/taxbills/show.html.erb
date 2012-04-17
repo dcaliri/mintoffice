@@ -48,7 +48,7 @@
     <div style="clear: both;"></div>
 
 		<div>
-			<h3><%= taxbill.billtype %> (<%= taxbill.transacted_at.strftime("%Y-%m-%d") %>)</h3>
+			<h3><%= taxbill.billtype == 'purchase' ? t('taxbills.purchase_bill') : t('taxbills.sales_bill') %> (<%= taxbill.transacted_at.strftime("%Y-%m-%d") %>)</h3>
 			<div  <%= taxbill.billtype == 'purchase' ? "style='padding: 6px; border: 1px solid royalblue; background-color: lavender;'" : "style='padding: 6px; border: 1px solid purple; background-color: pink;'"%>>
       <table border="0" cellspacing="0" cellpadding="5" width="100%">
 			<tr><td align="right">[<%= link_to t("taxbill_items.new.title"), [:new, taxbill, :taxbill_item] %>]</td></tr>

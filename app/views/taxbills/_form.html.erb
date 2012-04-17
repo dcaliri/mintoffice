@@ -12,7 +12,7 @@
   <div class="box">
     <p>
       <%= f.label :billtype %>
-      <%= f.select :billtype, options_for_select(Taxbill::BILL_TYPE) %>
+      <%= f.select :billtype, options_for_select([t('taxbills.purchase_bill'),t('taxbills.sales_bill')].zip(Taxbill::BILL_TYPE)) %>
     </p>
     <p>
       <%= f.label :transacted_at %>

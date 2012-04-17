@@ -357,6 +357,8 @@ ko:
         edit:
             title: 세금계산서 수정
             picture: 첨부파일
+        purchase_bill: 매입세금계산서
+        sales_bill: 매출세금계산서
     taxbill_items:
         new:
             title: 새로운 내역 추가
