@@ -35,26 +35,29 @@
 <% end %>
     <h3><%= t('.related_documents') %></h3>
     <ul>
-    <% if !@required_tagnames.blank? %>
-      <% for rtn in @required_tagnames %>
-        <li>[<%= rtn %>]
-        <% if @required_documents[rtn] %>
-          <%= link_to @required_documents[rtn].title, :controller => "documents", :action => "show", :id => @required_documents[rtn]  %>
-        <% else %>
-          <%= link_to "Register", :controller => "documents", :action => "new", :tag => [rtn, Hrinfo.model_name.human, @hrinfo.user.name].join(',') %>
+      <% if !@required_tagnames.blank? %>
+        <% for rtn in @required_tagnames %>
+          <li>[<%= rtn %>]
+            <% if @required_documents[rtn] %>
+              <%= link_to @required_documents[rtn].title, :controller => "documents", :action => "show", :id => @required_documents[rtn]  %>
+            <% else %>
+              <%= link_to "Register", :controller => "documents", :action => "new", :tag => [rtn, Hrinfo.model_name.human, @hrinfo.user.name].join(',') %>
+            <% end %>
+          </li>
         <% end %>
-        </li>
       <% end %>
-    <% else %>
-    <% end %>
-    <% if !@unrequired_documents.blank? %>
-      <% for d in @unrequired_documents %>
-        <li><%= link_to d.title, :controller => "documents", :action => "show", :id => d %></li>
+      <% if !@unrequired_documents.blank? %>
+        <% for d in @unrequired_documents %>
+          <li><%= link_to d.title, :controller => "documents", :action => "show", :id => d %></li>
+        <% end %>
       <% end %>
-    <% else %>
-
-    <% end %>
-  </ul>
+    </ul>
+    <h3>관련 직업</h3>
+    <ul>
+      <% if @user.ingroup?("admin") || @hrinfo.user == @user %>
+        <li><%= link_to "연봉 관리", payment_path(@user) %></li>
+      <% end %>
+    </ul>
 <% end %>
   </div>
   <div id="attach">
