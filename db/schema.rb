@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120417043130) do
+ActiveRecord::Schema.define(:version => 20120417061955) do
 
   create_table "attachments", :force => true do |t|
     t.string   "title"
@@ -25,15 +25,6 @@ ActiveRecord::Schema.define(:version => 20120417043130) do
     t.integer  "owner_id"
     t.string   "original_filename"
     t.integer  "seq"
-  end
-
-  create_table "bonuses", :force => true do |t|
-    t.date     "given_at"
-    t.decimal  "amount",     :default => 0.0
-    t.text     "note"
-    t.integer  "user_id"
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
   end
 
   create_table "business_clients", :force => true do |t|
@@ -152,26 +143,6 @@ ActiveRecord::Schema.define(:version => 20120417043130) do
     t.string   "email"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-  end
-
-  create_table "pay_schedules", :force => true do |t|
-    t.decimal  "income"
-    t.integer  "January",    :default => 0
-    t.integer  "February",   :default => 0
-    t.integer  "March",      :default => 0
-    t.integer  "April",      :default => 0
-    t.integer  "May",        :default => 0
-    t.integer  "June",       :default => 0
-    t.integer  "July",       :default => 0
-    t.integer  "August",     :default => 0
-    t.integer  "September",  :default => 0
-    t.integer  "October",    :default => 0
-    t.integer  "November",   :default => 0
-    t.integer  "December",   :default => 0
-    t.date     "started_at"
-    t.integer  "user_id"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
   end
 
   create_table "payments", :force => true do |t|

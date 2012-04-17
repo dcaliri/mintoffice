@@ -9,43 +9,43 @@
   <% end %>
   <%= link_to t('common.title.list'), :payments %>
 </div>
-<h2><%= payment.user.hrinfo.fullname %></h2>
+<h2><%= user.hrinfo.fullname %></h2>
 
 <table id="list-table">
-	<tr>
-		<th><%= Payment.human_attribute_name('pay_at') %></th>
-		<th><%= Payment.human_attribute_name('note') %></th>
-		<th><%= Payment.human_attribute_name('amount') %></th>
-		<th><%= Payment.human_attribute_name('total') %></th>
-		<th></th>
-	</tr>
-	<% current_bg = '#e6e6e6' %>
-	<% payments.latest.group_by{|payment| payment.pay_at.strftime("%Y-%m")}.each do |month, payments| %>
-		<% show_sum = true %>
-		<% payments.each do |payment| %>
-		<%
-			if show_sum
-				if current_bg == 'white'
-					 current_bg = '#e6e6e6'
-				else
-					current_bg = 'white' 
-				end
-			end
-		%>
-	  <tr style="background-color:<%= current_bg %>;">
-			<td><%= show_sum ? month : '' %></td>
-			<td><%= payment.note %></td>
-			<td class="numrow"><%= number_to_currency(payment.amount) %></td>
-			<td class="numrow">
-				<%= show_sum ? (number_to_currency payments.sum{|payment| payment.amount}) : '' %>
-			</td>
-			<td style="text-align:center;">
-				[<%= link_to t("common.link.edit"), [:edit, user, payment] %>]
+  <tr>
+    <th><%= Payment.human_attribute_name('pay_at') %></th>
+    <th><%= Payment.human_attribute_name('note') %></th>
+    <th><%= Payment.human_attribute_name('amount') %></th>
+    <th><%= Payment.human_attribute_name('total') %></th>
+    <th></th>
+  </tr>
+  <% current_bg = '#e6e6e6' %>
+  <% payments.latest.group_by{|payment| payment.pay_at.strftime("%Y-%m")}.each do |month, payments| %>
+    <% show_sum = true %>
+    <% payments.each do |payment| %>
+    <%
+      if show_sum
+        if current_bg == 'white'
+           current_bg = '#e6e6e6'
+        else
+          current_bg = 'white'
+        end
+      end
+    %>
+    <tr style="background-color:<%= current_bg %>;">
+      <td><%= show_sum ? month : '' %></td>
+      <td><%= payment.note %></td>
+      <td class="numrow"><%= number_to_currency(payment.amount) %></td>
+      <td class="numrow">
+        <%= show_sum ? (number_to_currency payments.sum{|payment| payment.amount}) : '' %>
+      </td>
+      <td style="text-align:center;">
+        [<%= link_to t("common.link.edit"), [:edit, user, payment] %>]
         |
         [<%= link_to t("common.link.destroy"), [user, payment], :method => :delete, :confirm => "Are you sure?" %>]
-			</td>
-		</tr>
-		<% show_sum = false %>
-		<% end %>
-	<% end %>
+      </td>
+    </tr>
+    <% show_sum = false %>
+    <% end %>
+  <% end %>
 </table>

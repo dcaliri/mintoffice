@@ -37,9 +37,6 @@ Mintoffice::Application.routes.draw do
         put 'leave', :action => 'leave!'
       end
     end
-
-    resources :pay_schedules, :except => :index
-    resources :bonuses, :except => :index
   end
 
   resources :payments, :only => [:index, :show]

@@ -2,8 +2,7 @@
 
 h2 출퇴근 기록
 #show_command
-  - if @user.ingroup?(:admin)
-    = link_to t('commutes.new.link'), [:go, user, :commutes]
+  = link_to t('commutes.new.link'), [:go, user, :commutes]
   = " | "
   = link_to t('common.title.list'), :commutes
 
