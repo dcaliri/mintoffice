@@ -26,6 +26,10 @@ Mintoffice::Application.routes.draw do
     end
 
     resources :commutes do
+      member do
+        get 'detail'
+        get 'leave'
+      end
     end
 
     resources :pay_schedules, :except => :index

@@ -11,7 +11,7 @@ class TaxbillsController < ApplicationController
 
   def create
     taxbill.save!
-      Attachment.save_for(taxbill, @user, params[:attachment])
+    Attachment.save_for(taxbill, @user, params[:attachment])
     redirect_to taxbill, notice: I18n.t("common.messages.created", :model => Taxbill.model_name.human)
   rescue ActiveRecord::RecordInvalid
     render 'new'
