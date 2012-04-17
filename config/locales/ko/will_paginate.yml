@@ -1,7 +1,7 @@
 ko:
   will_paginate:
-    previous_label: "&#8592; Previous"
-    next_label: "Next &#8594;"
+    previous_label: "&#8592; 이전"
+    next_label: "다음 &#8594;"
     page_gap: "&hellip;"
 
     page_entries_info:

@@ -30,16 +30,16 @@
 						<td align="right">
 							<% @business_client.taxmen.map do |taxman| %>
 								<%= taxman.fullname %>
-								<%= link_to "[수정", [:edit, @business_client, taxman] %>
+								<%= link_to "[#{t('common.link.edit')}]", [:edit, @business_client, taxman] %>
 								|
-								<%= link_to "삭제]", [@business_client, taxman], confirm: "Are you sure?", :method => :delete %>
+								<%= link_to "[#{t('common.link.destroy')}]", [@business_client, taxman], confirm: "Are you sure?", :method => :delete %>
 								<br>
 							<% end %>
 						</td>
 					<% else %>
 						<td><p><%= t('taxmen.empty') %></p></td>
 					<% end %>
-					<td><%= link_to "담당자 추가하기", [:new, @business_client, :taxman] %></td>
+					<td><%= link_to  "[#{t('taxmen.new.title')}]", [:new, @business_client, :taxman] %></td>
 				</tr>
 			</table>
 		</div>

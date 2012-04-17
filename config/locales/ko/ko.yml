@@ -245,6 +245,7 @@ ko:
             no_such_user: 해당 사용자는 존재하지 않습니다.
             already_exist: 이미 존재합니다.
             destroyed: "%{model}이(가) 성공적으로 제거 되었습니다."
+            no_entries: 항목이 없습니다.
         title:
             main: 메인화면
             back: "돌아가기"
@@ -356,6 +357,9 @@ ko:
         edit:
             title: 세금계산서 수정
             picture: 첨부파일
+    taxbill_items:
+        new:
+            title: 새로운 내역 추가
     permissions:
         permission_denied: 접근이 제한되었습니다.
     projects:
