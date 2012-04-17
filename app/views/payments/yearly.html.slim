@@ -8,14 +8,14 @@ h2= t("common.title.new")
 = form_tag [:yearly, user, payment] do
   #box
     p
-      = label_tag :pay_start
+      = label_tag :pay_start, t('activerecord.attributes.payment.pay_start')
       = date_select :payments, :pay_start, :order => [:year, :month]
     p
-      = label_tag "payments[total]"
+      = label_tag "payments[total]", t('activerecord.attributes.payment.total')
       = text_field_tag "payments[total]"
     - 0.upto(11).each do |month|
       p
-        = label_tag "payments[after][#{month}]", "After #{month} month"
+        = label_tag "payments[after][#{month}]", t('activerecord.attributes.payment.after', :month => month)
         = text_field_tag "payments[after][#{month}]", 0
     p
       = submit_tag t("common.button.add"), :id => "submit"

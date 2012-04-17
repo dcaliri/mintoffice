@@ -70,6 +70,7 @@ ko:
             taxbill_item: 항목
             pay_schedule: 기본급
             bonus: 상여금
+            payment: 연봉
         attributes:
             attachment:
                 comments: 주석
@@ -174,6 +175,15 @@ ko:
                 gave_at: 지급일
                 amount: 금액
                 note: 내역
+            payment:
+                pay_at: 지급월
+                note: 내역
+                amount: 금액
+                pay_start: 지급 시작일
+                total: 총액
+                after: "%{month}개월 후"
+
+
         errors:
             template:
                 header: 오류가 발생했습니다.
@@ -407,6 +417,12 @@ ko:
             title: 연봉 관리
         show:
             title: 연봉 이력
+        new:
+            title: 새로운 특별상여금 입력
+        yearly:
+            title: 새로운 기본급 입력
+        edit:
+            title: 특별상여금 수정
     pay_schedules:
         new:
             title: 새로운 기본급 입력
@@ -415,7 +431,7 @@ ko:
             title: 기본급 수정
     bonuses:
         new:
-            title: 새로운 상여금 입력
-            link: 상여금 작성
+            title: 새로운 특별 상여금 입력
+            link: 특별 상여금 작성
         edit:
-            title: 상여금 수정
+            title: 특별 상여금 수정

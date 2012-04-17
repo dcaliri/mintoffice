@@ -17,8 +17,7 @@ class PaymentsController < ApplicationController
   end
 
   def create_yearly
-    logger.info "payments = #{params[:payments]}"
-    user.payments.create_yearly!(params[:payments])
+    payments.create_yearly!(params[:payments])
     redirect_to payment_path(user)
   end
 
