@@ -12,32 +12,32 @@
 </div>
 
 <div class="box">
-  <div>
-    <table border="0" cellspacing="5" cellpadding="5">
-      <% unless user.payments.empty? %>
-        <tr>
-          <th><%= Payment.human_attribute_name(:pay_at) %></th>
-          <th><%= Payment.human_attribute_name(:note) %></th>
-          <th><%= Payment.human_attribute_name(:amount) %></th>
-          <th><%= t('common.menu')%> </th>
-        </tr>
-        <% user.payments.latest.each do |payment| %>
-          <tr>
-            <td><%= payment.pay_at.strftime("%Y-%m") %></td>
-            <td><%= payment.note %></td>
-            <td><%= number_to_currency(payment.amount) %></td>
-            <td align="right">
-              <%= link_to t("common.link.edit"), [:edit, user, payment] %>
-              |
-              <%= link_to t("common.link.destroy"), [user, payment], :method => :delete, :confirm => "Are you sure?" %>
-            </td>
-          </tr>
-        <% end %>
-      <% else %>
-        <tr>
-          <td>항목이 없습니다.</td>
-        </tr>
-      <% end %>
-    </table>
-  </div>
-</div>
+  <% payments.latest.group_by{|payment| payment.pay_at.strftime("%Y-%m")}.each do |month, payments| %>
+  <table width='400'>
+    <tr>
+      <th align="right"><%= month %></th>
+      <th></th>
+      <th></th>
+      <td align="right">총액 <b><%= number_to_currency payments.sum{|payment| payment.amount} %></b></td>
+    </tr>
+    <tr>
+      <th></th>
+      <th><%= Payment.human_attribute_name(:note) %></th>
+      <th><%= Payment.human_attribute_name(:amount) %></th>
+      <th><%= t('common.menu')%> </th>
+    </tr>
+  <% payments.each do |payment| %>
+    <tr>
+      <td align="right" width="100"></td>
+      <td align="right" width="100"><%= payment.note %></td>
+      <td align="right" width="100"><%= number_to_currency(payment.amount) %></td>
+      <td align="right" width="100">
+        <%= link_to t("common.link.edit"), [:edit, user, payment] %>
+        |
+        <%= link_to t("common.link.destroy"), [user, payment], :method => :delete, :confirm => "Are you sure?" %>
+      </td>
+    </tr>
+  <% end %>
+  </table>
+  </br>
+<% end %>

@@ -28,4 +28,8 @@ class Payment < ActiveRecord::Base
   def self.latest
     order('pay_at DESC')
   end
+
+  # def self.each_per_month
+  #   group_by{|c| c.date.strftime("%Y-%m")}
+  # end
 end
