@@ -1,66 +1,66 @@
-<% @title = t('.title')%>
+<% title t('.title')%>
 <div id="show_command">
-	<%= link_to t('common.title.show'), document_path(@document) %> |
-	<%= link_to t('common.title.list'),  documents_path %>
+  <%= link_to t('common.title.show'), document_path(@document) %> |
+  <%= link_to t('common.title.list'),  documents_path %>
 </div>
 <h2><%= t 'common.title.edit' %></h2>
 <%= form_for(@document,
-		:url => { :action => "update" },
-		:html => { :class=>"tabular", :multipart => true }) do |f| %>
-<div class="box">		
+    :url => { :action => "update" },
+    :html => { :class=>"tabular", :multipart => true }) do |f| %>
+<div class="box">
   <%= f.error_messages %>
 
   <p>
     <%= f.label :title, Document.human_attribute_name('title') %>
     <%= f.text_field :title %>
   </p>
-	<p>
-		<%= f.label :project, Project.model_name.human %>
-		<%= f.collection_select(:project_id, @projects, :id, :name)%>
-	</p>
+  <p>
+    <%= f.label :project, Project.model_name.human %>
+    <%= f.collection_select(:project_id, @projects, :id, :name)%>
+  </p>
 
-	<%= render :partial => "shared/edit_attachment", :object => @document %>
+  <%= render :partial => "shared/edit_attachment", :object => @document %>
 
-	<p>
-		<%= f.label :owners, Document.human_attribute_name('owner') %>
-		<% if !@document.users.blank? %>
-		  <% for user in @document.users %>
-			<%=h user.name %> [<%= link_to t('common.title.destroy'), :action => :remove_owner, :id => @document, :uid => user.id %>]
-												<% unless user == @document.users.last %><br /><% end %>
-		  <% end %>
-		<% else %>
-		<% end %>
-	</p>
-	<p>
-		<%= f.label :tags, Document.human_attribute_name('tags') %>
-		<% if !@document.tags.blank? %>
-		  <% for tag in @document.tags %>
-		    <%= tag.name %> [<%= link_to t('common.title.destroy'), :action => :remove_tag, :id => @document, :tid => tag.id %>]
-												<% unless tag == @document.tags.last %><br /><% end %>
-		  <% end %>
-		<% else %>
-		<% end %>
-	</p>
+  <p>
+    <%= f.label :owners, Document.human_attribute_name('owner') %>
+    <% if !@document.users.blank? %>
+      <% for user in @document.users %>
+      <%=h user.name %> [<%= link_to t('common.title.destroy'), :action => :remove_owner, :id => @document, :uid => user.id %>]
+                        <% unless user == @document.users.last %><br /><% end %>
+      <% end %>
+    <% else %>
+    <% end %>
+  </p>
+  <p>
+    <%= f.label :tags, Document.human_attribute_name('tags') %>
+    <% if !@document.tags.blank? %>
+      <% for tag in @document.tags %>
+        <%= tag.name %> [<%= link_to t('common.title.destroy'), :action => :remove_tag, :id => @document, :tid => tag.id %>]
+                        <% unless tag == @document.tags.last %><br /><% end %>
+      <% end %>
+    <% else %>
+    <% end %>
+  </p>
 </div>
 <%= f.submit t('common.button.update') %>
 <% end %>
 
 <%= form_tag({:action => :add_owner, :id => @document},{:class => 'tabular'}) do %>
 <div class="box">
-	<p>
-		<%= label_tag :username, t(".adduser") %>
-		<%= text_field_tag :username %>
-	</p>
-</div>	
+  <p>
+    <%= label_tag :username, t(".adduser") %>
+    <%= text_field_tag :username %>
+  </p>
+</div>
 <%= submit_tag t("common.button.add"), :id => "submit" %>
 <% end -%>
 
 <%= form_tag({:action => :add_tag, :id => @document},{:class => "tabular"}) do %>
 <div class="box">
-	<p>
-		<%= label_tag :tagname, t(".addtag") %>
-		<%= text_field_tag :tagname %>
-	</p>
-</div>	
+  <p>
+    <%= label_tag :tagname, t(".addtag") %>
+    <%= text_field_tag :tagname %>
+  </p>
+</div>
 <%= submit_tag t("common.button.add"), :id => "submit" %>
 <% end -%>

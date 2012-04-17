@@ -11,19 +11,19 @@
 </head>
 <body>
 <%= render(:partial => "shared/header") %><div id="wrapper">
-	<div id="header">
-		<div id="quick-search">
-			<%= yield :search %>
-		</div>
-		<h1><%= @title %></h1>
-	</div>
-		<!-- <div id="title_area">
+  <div id="header">
+    <div id="quick-search">
+      <%= yield :search %>
+    </div>
+    <h1><%= title %></h1>
+  </div>
+    <!-- <div id="title_area">
 
-	</div> -->
-	<div id="content">
-		<% if flash[:notice] %><div class="flash notice"><%= flash[:notice] %></div><% end %>
-		<%= yield %>
-	</div>
+  </div> -->
+  <div id="content">
+    <% if flash[:notice] %><div class="flash notice"><%= flash[:notice] %></div><% end %>
+    <%= yield %>
+  </div>
 </div>
 <%= render(:partial => "shared/footer") %>
 </body>

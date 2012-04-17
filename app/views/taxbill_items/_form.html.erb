@@ -1,5 +1,6 @@
+
 <% form_type = if taxbill_item.new_record? then 'new' else 'edit' end %>
-<% @title = t("taxmen.#{form_type}.title") %>
+<% title t("taxmen.#{form_type}.title") %>
 
 <div id="show_command">
   <%= link_to t('common.title.back'), taxbill %>

@@ -1,4 +1,4 @@
-<% @title = t('.title') %>
+<% title t('.title') %>
 <div id="show_command">
 <%= link_to "연봉 관리", payment_path(@user) %> |
 <% if @user.ingroup?("admin") && ! @hrinfo.retired_on %>

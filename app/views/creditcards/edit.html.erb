@@ -1,11 +1,11 @@
-<% @title = t(".title") %>
+<% title t(".title") %>
 <div id="show_command">
-	<%= link_to t("common.title.show"), @creditcard %> |
-	<%= link_to t("common.title.list"), creditcards_path %>
+  <%= link_to t("common.title.show"), @creditcard %> |
+  <%= link_to t("common.title.list"), creditcards_path %>
 </div>
 <h2><%= t("common.title.edit") %></h2>
 <%= form_for(@creditcard,
-		:html => {:class => "tabular", :multipart => true} ) do |f| %>
+    :html => {:class => "tabular", :multipart => true} ) do |f| %>
   <%= f.error_messages %>
 <div class="box">
   <p>
@@ -32,7 +32,7 @@
     <%= f.label :cardholder, Creditcard.human_attribute_name("cardholder") %>
     <%= f.text_field :cardholder %>
   </p>
-	<%= render :partial => "shared/edit_attachment", :object => @creditcard %>
+  <%= render :partial => "shared/edit_attachment", :object => @creditcard %>
 </div>
 <%= f.submit t("common.button.update") %>
 <% end %>

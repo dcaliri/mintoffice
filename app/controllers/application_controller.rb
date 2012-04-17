@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
   before_filter :authorize, :except => [:login, :logout]
+  helper_method :title
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
 
@@ -23,6 +24,14 @@ class ApplicationController < ActionController::Base
     unless Permission.can_access? @user, controller_name, action_name
       flash[:notice] = "You don't have to permission"
       redirect_to :controller => 'main', :action => 'index'
+    end
+  end
+
+  def title(text="")
+    unless text.blank?
+      @title = text
+    else
+      @title || t("#{controller_name}.#{action_name}.title")
     end
   end
 end

@@ -1,39 +1,39 @@
-<% @title = t(".title") %>
+<% title t(".title") %>
 <div id="show_command">
-	<%= link_to t("common.title.edit"), edit_creditcard_path(@creditcard) %> |
-	<%= link_to t("common.title.list"), creditcards_path %>
+  <%= link_to t("common.title.edit"), edit_creditcard_path(@creditcard) %> |
+  <%= link_to t("common.title.list"), creditcards_path %>
 </div>
 <h2><%= t("common.title.show") %></h2>
 <div class="box">
-	<div id="descr">
-	<table border="0" cellspacing="5" cellpadding="5">
-		<tr>
-			<th><%= Creditcard.human_attribute_name("cardno") %></th>
-			<td><%= @creditcard.cardno %></td>
-		</tr>
-		<tr>
-			<th><%= Creditcard.human_attribute_name("expireyear") %></th>
-			<td><%= @creditcard.expireyear %></td>
-		</tr>
-		<tr>
-			<th><%= Creditcard.human_attribute_name("expiremonth") %></th>
-			<td><%= @creditcard.expiremonth %></td>
-		</tr>
-		<tr>
-			<th><%= Creditcard.human_attribute_name("nickname") %></th>
-			<td><%= @creditcard.nickname %></td>
-		</tr>
-		<tr>
-			<th><%= Creditcard.human_attribute_name("issuer") %></th>
-			<td><%= @creditcard.issuer %></td>
-		</tr>
-		<tr>
-			<th><%= Creditcard.human_attribute_name("cardholder") %></th>
-			<td><%= @creditcard.cardholder %></td>
-		</tr>
-	</table>
-	</div>
-	<%= render :partial => "shared/show_attachment", :object => @creditcard  %>
-	<div style="clear:both;"></div>
+  <div id="descr">
+  <table border="0" cellspacing="5" cellpadding="5">
+    <tr>
+      <th><%= Creditcard.human_attribute_name("cardno") %></th>
+      <td><%= @creditcard.cardno %></td>
+    </tr>
+    <tr>
+      <th><%= Creditcard.human_attribute_name("expireyear") %></th>
+      <td><%= @creditcard.expireyear %></td>
+    </tr>
+    <tr>
+      <th><%= Creditcard.human_attribute_name("expiremonth") %></th>
+      <td><%= @creditcard.expiremonth %></td>
+    </tr>
+    <tr>
+      <th><%= Creditcard.human_attribute_name("nickname") %></th>
+      <td><%= @creditcard.nickname %></td>
+    </tr>
+    <tr>
+      <th><%= Creditcard.human_attribute_name("issuer") %></th>
+      <td><%= @creditcard.issuer %></td>
+    </tr>
+    <tr>
+      <th><%= Creditcard.human_attribute_name("cardholder") %></th>
+      <td><%= @creditcard.cardholder %></td>
+    </tr>
+  </table>
+  </div>
+  <%= render :partial => "shared/show_attachment", :object => @creditcard  %>
+  <div style="clear:both;"></div>
 </div>
 

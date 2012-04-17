@@ -1,20 +1,20 @@
-<% @title = t('.title') %>
+<% title t('.title') %>
 <div id="show_command">
-	<%= link_to t('common.title.edit'), edit_pettycash_path(@pettycash) %> |
-	<%= link_to t('common.title.back'), pettycashes_path %>
+  <%= link_to t('common.title.edit'), edit_pettycash_path(@pettycash) %> |
+  <%= link_to t('common.title.back'), pettycashes_path %>
 </div>
 <h2><%= Pettycash.human_attribute_name('transdate') %>: <%=h @pettycash.transdate.strftime("%Y.%m.%d %H:%M:%S %p") %></h2>
 <div class="box">
-	<div id="descr">
-		<table border="0" cellspacing="5" cellpadding="5">
-			<tr><th align="right"><%= Pettycash.human_attribute_name('inmoney') %></th><td align="right"><%= number_to_currency @pettycash.inmoney %></td></tr>
-			<tr><th align="right"><%= Pettycash.human_attribute_name('outmoney') %></th><td align="right"><%= number_to_currency @pettycash.outmoney %></td></tr>
-		</table>
-		<p>
-		  <b><%= Pettycash.human_attribute_name('description') %></b><br />
-		  <%=simple_format @pettycash.description %>
-		</p>
-	</div>
-	<%= render :partial => "shared/show_attachment", :object => @pettycash  %>
-	<div style="clear: both;"></div>
+  <div id="descr">
+    <table border="0" cellspacing="5" cellpadding="5">
+      <tr><th align="right"><%= Pettycash.human_attribute_name('inmoney') %></th><td align="right"><%= number_to_currency @pettycash.inmoney %></td></tr>
+      <tr><th align="right"><%= Pettycash.human_attribute_name('outmoney') %></th><td align="right"><%= number_to_currency @pettycash.outmoney %></td></tr>
+    </table>
+    <p>
+      <b><%= Pettycash.human_attribute_name('description') %></b><br />
+      <%=simple_format @pettycash.description %>
+    </p>
+  </div>
+  <%= render :partial => "shared/show_attachment", :object => @pettycash  %>
+  <div style="clear: both;"></div>
 </div>

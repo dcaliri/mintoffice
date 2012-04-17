@@ -1,13 +1,14 @@
-<% @title = t('.title')%>
+
+<% title t('.title')%>
 <div id="show_command">
-	<%= link_to t('common.title.show'), namecard_path(@namecard) %> |
-	<%= link_to t('common.title.list'),  namecards_path %>
+  <%= link_to t('common.title.show'), namecard_path(@namecard) %> |
+  <%= link_to t('common.title.list'),  namecards_path %>
 </div>
 <h2><%= t 'common.title.edit' %></h2>
 <%= form_for(@namecard,
-		:url => { :action => "update" },
-		:html => { :class=>"tabular", :multipart => true }) do |f| %>
-<div class="box">		
+    :url => { :action => "update" },
+    :html => { :class=>"tabular", :multipart => true }) do |f| %>
+<div class="box">
   <%= f.error_messages %>
 
   <p>
@@ -39,7 +40,7 @@
     <%= f.text_field :email %>
   </p>
 
-	<%= render :partial => "shared/edit_attachment", :object => @namecard %>
+  <%= render :partial => "shared/edit_attachment", :object => @namecard %>
 
 </div>
 <%= f.submit t('common.button.update') %>
