@@ -6,7 +6,7 @@
   <%= link_to t('common.title.list'), :taxbills %>
 </div>
 
-<h2><%= user.name %></h2>
+<h2>...</h2>
   <div class="box">
     <div id="descr">
 			<h3>
@@ -51,7 +51,7 @@
 			<h3><%= taxbill.billtype %> (<%= taxbill.transacted_at.strftime("%Y-%m-%d") %>)</h3>
 			<div  <%= taxbill.billtype == 'purchase' ? "style='padding: 6px; border: 1px solid royalblue; background-color: lavender;'" : "style='padding: 6px; border: 1px solid purple; background-color: pink;'"%>>
       <table border="0" cellspacing="0" cellpadding="5" width="100%">
-			<tr><td align="right">[<%= link_to "새로운 내역 추가", [:new, taxbill, :taxbill_item] %>]</td></tr>
+			<tr><td align="right">[<%= link_to t("taxbill_items.new.title"), [:new, taxbill, :taxbill_item] %>]</td></tr>
 			</table>
       <table border="1" cellspacing="0" cellpadding="5" width="100%">
         <% unless taxbill.items.empty? %>
@@ -69,11 +69,11 @@
             <tr>
               <td><%= item.transacted_at.strftime("%Y-%m-%d") %></td>
               <td><%= item.note %></td>
-              <td style="text-align: right"><%= number_to_currency item.unitprice %></td>
-              <td style="text-align: right"><%= item.quantity %></td>
-              <td style="text-align: right"><%= number_to_currency item.price %></td>
-              <td style="text-align: right"><%= number_to_currency item.tax %></td>
-              <td style="text-align: right"><%= number_to_currency item.total %></td>
+              <td class="numrow"><%= number_to_currency item.unitprice %></td>
+              <td class="numrow"><%= item.quantity %></td>
+              <td class="numrow"><%= number_to_currency item.price %></td>
+              <td class="numrow"><%= number_to_currency item.tax %></td>
+              <td class="numrow"><%= number_to_currency item.total %></td>
               <td style="text-align: center">
                 <%= link_to t("common.link.edit"), [:edit, taxbill, item] %>
                 |
@@ -83,18 +83,18 @@
           <% end %>
         <% else %>
           <tr>
-            <td>항목이 없습니다.</td>
+            <td style="text-align: center; font-weight: bold; color: red;"><%= t('common.messages.no_entries')%></td>
           </tr>
         <% end %>
       </table>
       <table border="1" cellspacing="0" cellpadding="5" width="100%">
         <tr>
-          <th align="right"><%= Taxbill.human_attribute_name('price') %></th>
-          <td align="right"><%= number_to_currency taxbill.price %></td>
-          <th align="right"><%= Taxbill.human_attribute_name('tax') %></th>
-          <td align="right"><%= number_to_currency taxbill.tax %></td>
-          <th align="right"><%= Taxbill.human_attribute_name('total') %></th>
-          <td align="right"><%= number_to_currency taxbill.total %></td>
+          <th class="numrow"><%= Taxbill.human_attribute_name('price') %></th>
+          <td class="numrow"><%= number_to_currency taxbill.price %></td>
+          <th class="numrow"><%= Taxbill.human_attribute_name('tax') %></th>
+          <td class="numrow"><%= number_to_currency taxbill.tax %></td>
+          <th class="numrow"><%= Taxbill.human_attribute_name('total') %></th>
+          <td class="numrow"><%= number_to_currency taxbill.total %></td>
         </tr>
       </table>
 			</div>
