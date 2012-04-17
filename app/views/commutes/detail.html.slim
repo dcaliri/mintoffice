@@ -1,0 +1,27 @@
+- @title = t('.title')
+
+h2 출퇴근 상세정보
+#show_command
+  = link_to t('common.title.list'), commute_path(user)
+
+.box
+  #descr
+    table
+      tr
+        th 출근
+        td= commute.go.strftime("%Y-%m-%d %H-%M")
+      tr
+        th 퇴근
+        td
+          - unless commute.leave
+            = link_to "퇴근 입력하기", [:leave, user, commute]
+          - else
+            = commute.leave.strftime("%Y-%m-%d %H-%M")
+      tr
+        th 메뉴
+        td
+          = link_to "수정", [:edit, user, commute]
+          = " | "
+          = link_to t("common.link.destroy"), [user, commute], :method => :delete, :confirm => "Are you sure?"
+  = render :partial => "shared/show_attachment", :object => commute
+div style="clear: both;"
