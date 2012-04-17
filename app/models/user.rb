@@ -13,6 +13,8 @@ class User < ActiveRecord::Base
   has_many :pay_schedules
   has_many :bonuses
 
+  has_many :commutes
+
   scope :nohrinfo, :conditions =>['id not in (select user_id from hrinfos)']
 
   validates_presence_of :name

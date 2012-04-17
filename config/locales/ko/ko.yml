@@ -444,3 +444,7 @@ ko:
     commutes:
         index:
             title: 출퇴근 관리
+        new:
+            link: 출근 기록 생성
+        show:
+            title: 출퇴근 내역
