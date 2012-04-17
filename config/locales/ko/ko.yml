@@ -124,6 +124,13 @@ ko:
                 phone: "전화번호"
                 homepage: "홈페이지"
                 email: "이메일주소"
+            payment:
+                pay_at: 지급월
+                note: 내역
+                amount: 금액
+                pay_start: 지급 시작일
+                total: 총액
+                after: "%{month}개월 후"
             pettycash:
                 description: 사용처 상세내역
                 transdate: 사용일자
@@ -175,15 +182,6 @@ ko:
                 gave_at: 지급일
                 amount: 금액
                 note: 내역
-            payment:
-                pay_at: 지급월
-                note: 내역
-                amount: 금액
-                pay_start: 지급 시작일
-                total: 총액
-                after: "%{month}개월 후"
-
-
         errors:
             template:
                 header: 오류가 발생했습니다.
@@ -210,6 +208,23 @@ ko:
             update: 첨부파일 내용이 성공적으로 업데이트 되었습니다.
         new:
             title: 첨부파일 신규 작성
+    bonuses:
+        new:
+            title: 새로운 특별 상여금 입력
+            link: 특별 상여금 작성
+        edit:
+            title: 특별 상여금 수정
+    business_clients:
+        index:
+            title: 거래처 관리
+            empty: 거래처가 없습니다.
+        show:
+            title: 거래처 내역
+        new:
+            title: 새로운 거래처 입력
+        edit:
+            title: 거래처 수정
+            picture: 사업자등록증
     cardbills:
         new:
             title: 새로운 카드 영수증 입력
@@ -221,15 +236,6 @@ ko:
             title: "카드 영수증 목록"
         messages:
             create: "성공적으로 생성되었습니다."
-    creditcards:
-        index:
-            title: 신용카드 목록
-        show:
-            title: 신용카드 상세 내역
-        edit:
-            title: 신용카드 정보 수정
-        new:
-            title: 새로운 신용카드 등록
     common:
         button:
             create: 만들기
@@ -263,6 +269,18 @@ ko:
             edit: "수정"
             destroy: "삭제"
         menu: 메뉴
+    commutes:
+        index:
+            title: 출퇴근 관리
+    creditcards:
+        index:
+            title: 신용카드 목록
+        show:
+            title: 신용카드 상세 내역
+        edit:
+            title: 신용카드 정보 수정
+        new:
+            title: 새로운 신용카드 등록
     documents:
         index:
             title: "문서 관리"
@@ -318,6 +336,25 @@ ko:
             email_example: "ex) 회사: xxx@xxx.com, 개인: xxx@xxx.com"
         show:
             title: 명함 내용 보기
+    payments:
+        index:
+            title: 연봉 관리
+        show:
+            title: 연봉 이력
+        new:
+            title: 새로운 특별상여금 입력
+        yearly:
+            title: 새로운 기본급 입력
+        edit:
+            title: 특별상여금 수정
+    pay_schedules:
+        new:
+            title: 새로운 기본급 입력
+            link: 기본급 작성
+        edit:
+            title: 기본급 수정
+    permissions:
+        permission_denied: 접근이 제한되었습니다.
     pettycashes:
         balance: 잔액
         index:
@@ -328,42 +365,6 @@ ko:
             title: 새로운 소액 거래 작성
         show:
             title: 소액현금 내역
-    business_clients:
-        index:
-            title: 거래처 관리
-            empty: 거래처가 없습니다.
-        show:
-            title: 거래처 내역
-        new:
-            title: 새로운 거래처 입력
-        edit:
-            title: 거래처 수정
-            picture: 사업자등록증
-    taxmen:
-        empty: 담당자가 없습니다.
-        new:
-            title: 새로운 담당자 입력
-        edit:
-            title: 담당자 수정
-    taxbills:
-        index:
-            title: 세금계산서 관리
-            empty: 세금계산서가 없습니다.
-        show:
-            title: 세금계산서 내역
-        new:
-            title: 새로운 세금계산서 입력
-            picture: 첨부파일
-        edit:
-            title: 세금계산서 수정
-            picture: 첨부파일
-        purchase_bill: 매입세금계산서
-        sales_bill: 매출세금계산서
-    taxbill_items:
-        new:
-            title: 새로운 내역 추가
-    permissions:
-        permission_denied: 접근이 제한되었습니다.
     projects:
         index:
             title: 프로젝트 관리
@@ -387,6 +388,29 @@ ko:
     shared:
         show_attachment:
             download: "다운로드"
+    taxbills:
+        index:
+            title: 세금계산서 관리
+            empty: 세금계산서가 없습니다.
+        show:
+            title: 세금계산서 내역
+        new:
+            title: 새로운 세금계산서 입력
+            picture: 첨부파일
+        edit:
+            title: 세금계산서 수정
+            picture: 첨부파일
+        purchase_bill: 매입세금계산서
+        sales_bill: 매출세금계산서
+    taxbill_items:
+        new:
+            title: 새로운 내역 추가
+    taxmen:
+        empty: 담당자가 없습니다.
+        new:
+            title: 새로운 담당자 입력
+        edit:
+            title: 담당자 수정
     users:
         new:
             title: 새 사용자 계정 만들기
@@ -418,29 +442,3 @@ ko:
             successfully_changed: 성공적으로 변경하였습니다.
         error:
             missing_password: 는 공백일 수 없습니다.
-    payments:
-        index:
-            title: 연봉 관리
-        show:
-            title: 연봉 이력
-        new:
-            title: 새로운 특별상여금 입력
-        yearly:
-            title: 새로운 기본급 입력
-        edit:
-            title: 특별상여금 수정
-    pay_schedules:
-        new:
-            title: 새로운 기본급 입력
-            link: 기본급 작성
-        edit:
-            title: 기본급 수정
-    bonuses:
-        new:
-            title: 새로운 특별 상여금 입력
-            link: 특별 상여금 작성
-        edit:
-            title: 특별 상여금 수정
-    commutes:
-        index:
-            title: 출퇴근 관리
