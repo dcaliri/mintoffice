@@ -17,24 +17,15 @@ class CommutesController < ApplicationController
     @attachments.each { |at| session[:attachments] << at.id }
   end
 
-  def create
-    commute.save!
+  def go!
+    commute.go!
     Attachment.save_for(commute, @user, params[:attachment])
     redirect_to commute_path(user)
   end
 
-  def edit
-    @attachments = Attachment.for_me(commute)
-  end
-
-  def update
-    commute.save!
+  def leave!
+    commute.leave!
     Attachment.save_for(commute, @user, params[:attachment])
-    redirect_to commute_path(user)
-  end
-
-  def destroy
-    commute.destroy
     redirect_to commute_path(user)
   end
 end

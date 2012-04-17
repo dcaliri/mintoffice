@@ -6,18 +6,13 @@
 
 h2= t("common.title.#{form_type}")
 
-= form_for [user, commute], html: {multipart: true} do |f|
+= form_for [type, user, commute], html: {multipart: true} do |f|
   = f.error_messages
   .box
-    - if go
-      p
-        = f.label :go
-        = f.datetime_select :go, :order => [:year, :month, :day, :hour, :minute], default: DateTime.now
-    - if leave
-      p
-        = f.label :leave
-        = f.datetime_select :leave, :order => [:year, :month, :day, :hour, :minute], default: DateTime.now
     p
-      = render 'shared/attachments/form', label: t("commutes.#{form_type}.picture")
+      = f.label type
+      = DateTime.now
+    p
+    = render 'shared/attachments/form', label: t("commutes.#{form_type}.picture")
     p
       = f.submit

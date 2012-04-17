@@ -3,7 +3,7 @@
 h2 출퇴근 기록
 #show_command
   - if @user.ingroup?(:admin)
-    = link_to t('commutes.new.link'), [:new, user, :commute]
+    = link_to t('commutes.new.link'), [:go, user, :commutes]
   = " | "
   = link_to t('common.title.list'), :commutes
 
@@ -25,9 +25,5 @@ h2 출퇴근 기록
               = commute.leave.strftime("%Y-%m-%d %H-%M")
           td width="150" align="right"
             = link_to "상세정보", [:detail, user, commute]
-            = " | "
-            = link_to "수정", [:edit, user, commute]
-            = " | "
-            = link_to t("common.link.destroy"), [user, commute], :method => :delete, :confirm => "Are you sure?"
   - else
     h4 출근 기록이 없습니다

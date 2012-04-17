@@ -26,9 +26,15 @@ Mintoffice::Application.routes.draw do
     end
 
     resources :commutes do
+      collection do
+        get 'go'
+        post 'go', :action => 'go!'
+      end
+
       member do
         get 'detail'
         get 'leave'
+        put 'leave', :action => 'leave!'
       end
     end
 
