@@ -1,12 +1,12 @@
 <% title t('.title') %>
 <div id="show_command">
-<%= link_to "연봉 관리", payment_path(@user) %> |
-<% if @user.ingroup?("admin") && ! @hrinfo.retired_on %>
-  <%= link_to t('hrinfos.retire.title'), :action => :retire, :id => @hrinfo %> |
-<% end %>
-<% if @user.ingroup?("admin") || @hrinfo.user == @user %>
-  <%= link_to t('common.title.edit'), edit_hrinfo_path(@hrinfo) %> |
-<% end %>
+  <% if @user.ingroup?("admin") && ! @hrinfo.retired_on %>
+    <%= link_to t('hrinfos.retire.title'), :action => :retire, :id => @hrinfo %> |
+  <% end %>
+  <% if @user.ingroup?("admin") || @hrinfo.user == @user %>
+    <%= link_to "연봉 관리", payment_path(@user) %> |
+    <%= link_to t('common.title.edit'), edit_hrinfo_path(@hrinfo) %> |
+  <% end %>
   <%= link_to t('common.title.back'), hrinfos_path %>
 </div>
 <h2><%= @hrinfo.fullname %></h2>
