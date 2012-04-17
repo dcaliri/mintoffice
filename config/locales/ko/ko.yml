@@ -410,10 +410,12 @@ ko:
     pay_schedules:
         new:
             title: 새로운 기본급 입력
+            link: 기본급 작성
         edit:
             title: 기본급 수정
     bonuses:
         new:
             title: 새로운 상여금 입력
+            link: 상여금 작성
         edit:
             title: 상여금 수정

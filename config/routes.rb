@@ -18,7 +18,13 @@ Mintoffice::Application.routes.draw do
   match '/users/my', :controller => "users", :action => "my", :conditions => {:method => :get}
 
   resources :users do
-#    resources :annual_pay_schedules, :except => :index
+    resources :payments do
+      collection do
+        get 'yearly'
+        post 'yearly', :action => 'create_yearly'
+      end
+    end
+
     resources :pay_schedules, :except => :index
     resources :bonuses, :except => :index
   end
@@ -33,7 +39,7 @@ Mintoffice::Application.routes.draw do
     resources :taxbill_items#, :path => "items", :as => "items"
   end
 
-  resources :payments
+  resources :payments, :only => [:index, :show]
 
   # The priority is based upon order of creation: first created -> highest priority.
 

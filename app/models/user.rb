@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :permission
   has_and_belongs_to_many :projects
   has_one :hrinfo
+
+  has_many :payments
   has_many :pay_schedules
   has_many :bonuses
 

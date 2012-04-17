@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120416023947) do
+ActiveRecord::Schema.define(:version => 20120416063742) do
 
   create_table "attachments", :force => true do |t|
     t.string   "title"
@@ -164,6 +164,15 @@ ActiveRecord::Schema.define(:version => 20120416023947) do
     t.integer  "user_id"
     t.datetime "created_at",                :null => false
     t.datetime "updated_at",                :null => false
+  end
+
+  create_table "payments", :force => true do |t|
+    t.date     "pay_at"
+    t.decimal  "amount",     :default => 0.0
+    t.text     "note"
+    t.integer  "user_id"
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
   end
 
   create_table "permissions", :force => true do |t|

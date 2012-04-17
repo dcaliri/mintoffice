@@ -1,9 +1,11 @@
 <% @title = t('.title') %>
 
-<h2>기본급</h2>
+<h2>연봉 내역</h2>
 <div id="show_command">
   <% if @user.ingroup?(:admin) %>
-    <%= link_to t('common.title.new'), [:new, user, :pay_schedule] %>
+    <%= link_to t('pay_schedules.new.link'), [:yearly, user, :payments] %>
+    |
+    <%= link_to t('bonuses.new.link'), [:new, user, :payment] %>
     |
   <% end %>
   <%= link_to t('common.title.list'), :payments %>
@@ -11,35 +13,25 @@
 
 <div class="box">
   <div>
-    <table width="1000" border="0" cellspacing="5" cellpadding="5">
-      <% unless user.pay_schedules.empty? %>
+    <table border="0" cellspacing="5" cellpadding="5">
+      <% unless user.payments.empty? %>
         <tr>
-          <th><%= PaySchedule.human_attribute_name(:started_at) %></th>
-          <th><%= PaySchedule.human_attribute_name(:income) %></th>
-          <% (1..12).each do |month| %>
-            <th><%= t('date.month_names')[month] %></th>
-          <% end %>
-          <th><%= PaySchedule.human_attribute_name(:basic_pay) %></th>
-          <% if @user.ingroup?(:admin) %>
-            <th><%= t('common.menu')%> </th>
-          <% end %>
+          <th><%= Payment.human_attribute_name(:pay_at) %></th>
+          <th><%= Payment.human_attribute_name(:note) %></th>
+          <th><%= Payment.human_attribute_name(:amount) %></th>
+          <th><%= t('common.menu')%> </th>
         </tr>
-        <% user.pay_schedules.each do |schedule| %>
+        <% user.payments.latest.each do |payment| %>
           <tr>
-            <td align="right"><%= schedule.started_at %></td>
-            <td align="right"><%= number_to_currency schedule.income %></td>
-            <% (1..12).each do |month| %>
-              <td align="right"><%= number_to_percentage(schedule.send(Date::MONTHNAMES[month]), precision: 0)%></td>
-            <% end %>
-            <td align="right"><%= number_to_currency schedule.basic_pay %>
-            <% if @user.ingroup?(:admin) %>
-              <td align="right">
-                <%= link_to t("common.link.edit"), [:edit, user, schedule] %>
-                |
-                <%= link_to t("common.link.destroy"), [user, schedule], :method => :delete, :confirm => "Are you sure?" %>
-              </td>
-            <% end %>
-          </td>
+            <td><%= payment.pay_at.strftime("%Y-%m") %></td>
+            <td><%= payment.note %></td>
+            <td><%= number_to_currency(payment.amount) %></td>
+            <td align="right">
+              <%= link_to t("common.link.edit"), [:edit, user, payment] %>
+              |
+              <%= link_to t("common.link.destroy"), [user, payment], :method => :delete, :confirm => "Are you sure?" %>
+            </td>
+          </tr>
         <% end %>
       <% else %>
         <tr>
@@ -48,47 +40,4 @@
       <% end %>
     </table>
   </div>
-</div>
-<div style="clear: both;"></div>
-<h2>상여금</h2>
-<div id="show_command">
-  <% if @user.ingroup?(:admin) %>
-    <%= link_to t('common.title.new'), [:new, user, :bonus] %>
-    |
-  <% end %>
-  <%= link_to t('common.title.list'), :payments %>
-</div>
-<div class="box">
-   <div>
-     <table border="0" cellspacing="5" cellpadding="5">
-        <% unless user.bonuses.empty? %>
-          <tr>
-            <th><%= Bonus.human_attribute_name(:gave_at) %></th>
-            <th><%= Bonus.human_attribute_name(:amount) %></th>
-            <th><%= Bonus.human_attribute_name(:note) %></th>
-            <% if @user.ingroup?(:admin) %>
-              <th><%= t('common.menu')%> </th>
-            <% end %>
-          </tr>
-          <% user.bonuses.each do |bonus| %>
-            <tr>
-              <td><%= bonus.given_at %></td>
-              <td><%= number_to_currency bonus.amount %></td>
-              <td><%= bonus.note %>
-              <% if @user.ingroup?(:admin) %>
-                <td>
-                  <%= link_to t("common.link.edit"), [:edit, user, bonus] %>
-                  |
-                  <%= link_to t("common.link.destroy"), [user, bonus], :method => :delete, :confirm => "Are you sure?" %>
-                </td>
-              <% end %>
-            </td>
-          <% end %>
-        <% else %>
-          <tr>
-            <td>항목이 없습니다.</td>
-          </tr>
-        <% end %>
-    </table>
-   </div>
 </div>

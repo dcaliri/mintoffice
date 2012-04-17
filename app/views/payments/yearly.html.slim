@@ -1,0 +1,21 @@
+- @title = t("payments.yearly.title")
+
+#show_command
+  = link_to t('common.title.back'), payment_path(user)
+
+h2= t("common.title.new")
+
+= form_tag [:yearly, user, payment] do
+  #box
+    p
+      = label_tag :pay_start
+      = date_select :payments, :pay_start, :order => [:year, :month]
+    p
+      = label_tag "payments[total]"
+      = text_field_tag "payments[total]"
+    - 0.upto(11).each do |month|
+      p
+        = label_tag "payments[after][#{month}]", "After #{month} month"
+        = text_field_tag "payments[after][#{month}]", 0
+    p
+      = submit_tag t("common.button.add"), :id => "submit"
