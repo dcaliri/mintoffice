@@ -1,9 +1,8 @@
 <%
-title t('.title')
 if params[:retired] == 'on'
-  @title += " (" + t(".retired") + ")"
+  title t('.title') + " (" + t(".retired") + ")"
 else
-  @title += " (" + t(".current") + ")"
+  title t('.title') + " (" + t(".current") + ")"
 end
 %>
 <% content_for :search do -%>
