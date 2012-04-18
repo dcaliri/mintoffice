@@ -1,8 +1,20 @@
 <% title t('.title') %>
 
 <% content_for :search do -%>
+
   <%= form_tag :taxbills, :method => :get do %>
     <%= t("common.title.search") %> : <%= text_field_tag 'query', params[:query] %>
+  	<%= select_tag :billtype, options_for_select(
+						{ t('taxbills.purchase_sales_bill') => "all",
+							t('taxbills.purchase_bill') => Taxbill::BILL_TYPE[0],
+						 	t('taxbills.sales_bill') =>Taxbill::BILL_TYPE[1]},
+							params[:billtype]
+						),
+						"onchange" => "this.form.submit()"
+		%>
+    <%= select_tag :taxman_id, options_for_select([ ["all" ,"0"] ] + Taxbill.taxmen_list, params[:taxman_id]),
+					"onchange" => "this.form.submit()"
+		%>
   <% end -%>
 <% end %>
 
