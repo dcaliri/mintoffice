@@ -201,8 +201,8 @@ ko:
                 total: 총액
                 after: "%{month}개월 후"
             commute:
-                go: 출근
-                leave: 퇴근
+                go: 출근 시간
+                leave: 퇴근 시간
             vacation:
                 from: 시작
                 to: 종료
@@ -303,10 +303,12 @@ ko:
         index:
             title: 출퇴근 관리
         new:
-            link: 출근 기록 생성
+            link: 출근기록 생성
             picture: 첨부 사진
+            submit: 출근기록 생성
         edit:
             picture: 첨부 사진
+            submit: 퇴근기록 생성
         show:
             title: 출퇴근 내역
     creditcards:

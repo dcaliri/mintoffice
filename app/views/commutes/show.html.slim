@@ -9,16 +9,16 @@ h2 출퇴근 기록
 - unless commutes.empty?
   table#list-table
     tr
-      th 출근
-      th 퇴근
+      th 출근 시간
+      th 퇴근 시간
       th 메뉴
     - commutes.each do |commute|
-      tr.selectable onclick="location.href='#{}'"
+      tr.selectable onclick="location.href='#{detail_user_commute_path(user, commute)}'"
         td width="120" align="right"
           = commute.go.strftime("%Y-%m-%d %H-%M")
         td width="120" align="right"
           - unless commute.leave
-            = link_to "퇴근 입력하기", [:leave, user, commute]
+            = link_to "퇴근기록 생성", [:leave, user, commute]
           - else
             = commute.leave.strftime("%Y-%m-%d %H-%M")
         td width="150" align="right"

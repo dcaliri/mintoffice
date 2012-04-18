@@ -8,7 +8,7 @@ class CommutesController < ApplicationController
    users.page(params[:page])
   end
   expose(:user)
-  expose(:commutes) { user.commutes }
+  expose(:commutes) { user.commutes.order("go DESC") }
   expose(:commute)
 
   def detail
