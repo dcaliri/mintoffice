@@ -44,7 +44,7 @@ Mintoffice::Application.routes.draw do
   resources :payments, :only => [:index, :show]
   resources :commutes
   resources :vacations do
-    resources :used_vacations do
+    resources :used_vacations, :path => "used" do
       put 'approve'
     end
   end
