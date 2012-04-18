@@ -1,12 +1,13 @@
-<% @title = t('.title') %>
+
+<% title t('.title') %>
 <div id="show_command">
-	<%= link_to t("common.title.back"), users_path %>
+  <%= link_to t("common.title.back"), users_path %>
 </div>
 <h2><%= t("common.title.new") %></h2>
 
 <%= form_for(@user,
-		:url => {:action =>:create},
-		:html => {:multipart => true}) do |f| %>
+    :url => {:action =>:create},
+    :html => {:multipart => true}) do |f| %>
   <%= f.error_messages %>
 <div class="box">
   <p>
@@ -22,10 +23,10 @@
     <%= f.password_field :password_confirmation, :size => 40 %>
   </p>
 <%= fields_for :attachment, @attachment do |attachment| -%>
-	<p>
-		<%= attachment.label :uploaded_file, t("common.title.attachment") %>
-		<%= attachment.file_field :uploaded_file %>
-	</p>
+  <p>
+    <%= attachment.label :uploaded_file, t("common.title.attachment") %>
+    <%= attachment.file_field :uploaded_file %>
+  </p>
 <% end -%>
 </div>
   <p>

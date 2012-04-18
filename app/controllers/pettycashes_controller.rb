@@ -2,7 +2,7 @@ class PettycashesController < ApplicationController
   # GET /pettycashes
   # GET /pettycashes.xml
   def index
-    @pettycashes = Pettycash.paginate(:order => 'transdate desc', :page => params[:page], :per_page => 2)
+    @pettycashes = Pettycash.search(params[:q]).paginate(:order => 'transdate desc', :page => params[:page], :per_page => 20)
     inmoney_total = Pettycash.sum(:inmoney)
     outmoney_total = Pettycash.sum(:outmoney)
     @balance = inmoney_total - outmoney_total
@@ -16,7 +16,7 @@ class PettycashesController < ApplicationController
   # GET /pettycashes/1.xml
   def show
     @pettycash = Pettycash.find(params[:id])
-    @attachments = Attachment.for_me(@pettycash)
+    @attachments = Attachment.for_me(@pettycash, "seq ASC")
     session[:attachments] = [] if session[:attachments].nil?
     @attachments.each { |at| session[:attachments] << at.id }
 
@@ -40,7 +40,7 @@ class PettycashesController < ApplicationController
   # GET /pettycashes/1/edit
   def edit
     @pettycash = Pettycash.find(params[:id])
-    @attachments = Attachment.for_me(@pettycash)
+    @attachments = Attachment.for_me(@pettycash, "seq ASC")
   end
 
   # # POST /pettycashes
@@ -59,14 +59,15 @@ class PettycashesController < ApplicationController
   #     end
   #   end
   # end
-  
+
 #  def save
   def create
     @pettycash = Pettycash.new(params[:pettycash])
-    
+
     respond_to do |format|
       if @pettycash.save
         @attachment = Attachment.new(params[:attachment])
+        @attachment.seq = 1
         @attachment.save_for(@pettycash,@user)
         flash[:notice] = 'Pettycash was successfully created.'
         format.html { redirect_to(@pettycash) }
@@ -84,7 +85,9 @@ class PettycashesController < ApplicationController
 
     respond_to do |format|
       if @pettycash.update_attributes(params[:pettycash])
+        seq = Attachment.maximum_seq_for_me(@pettycash) || 0
         @attachment = Attachment.new(params[:attachment])
+        @attachment.seq = seq+1
         @attachment.save_for(@pettycash,@user)
 
         flash[:notice] = I18n.t("common.messages.updated", :model => Pettycash.model_name.human)

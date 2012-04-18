@@ -1,0 +1,20 @@
+- title t('commutes.title')
+
+#show_command
+  = link_to t('common.title.list'), commute_path(user)
+h2 =t('.title')
+
+.box
+  #descr
+    table cellspacing="5" cellpadding="5"
+      tr
+        th =t('commutes.arrive_at_work')+":"
+        td= commute.go.strftime("%Y-%m-%d %H:%M")
+      tr
+        th =t('commutes.leave_work')+":"
+        td
+          - unless commute.leave
+            = link_to t('commutes.leave.link'), [:leave, user, commute]
+          - else
+            = commute.leave.strftime("%Y-%m-%d %H:%M")
+  = render :partial => "shared/show_attachment", :object => commute

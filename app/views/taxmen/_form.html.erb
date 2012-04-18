@@ -1,0 +1,30 @@
+<% form_type = if @taxman.new_record? then 'new' else 'edit' end %>
+
+<% title t("taxmen.#{form_type}.title") %>
+
+<div id="show_command">
+  <%= link_to t('common.title.back'), @business_client %>
+</div>
+
+<h2><%= t("common.title.#{form_type}") %></h2>
+
+<%= form_for [@business_client, @taxman] do |f| %>
+   <%= f.error_messages %>
+  <div class="box">
+    <p>
+      <%= f.label :fullname %>
+      <%= f.text_field :fullname %>
+    </p>
+    <p>
+      <%= f.label :email %>
+      <%= f.text_field :email %>
+    </p>
+    <p>
+      <%= f.label :phonenumber %>
+      <%= f.text_field :phonenumber %>
+    </p>
+    <p>
+      <%= f.submit %>
+    </p>
+  </div>
+<% end %>

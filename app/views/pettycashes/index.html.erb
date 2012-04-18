@@ -1,6 +1,13 @@
-<% @title = t('.title') %>
+<% title t('.title') %>
+
+<% content_for :search do -%>
+  <%= form_tag :pettycashes, :method => :get do %>
+    <%= t("common.title.search") %> : <%= text_field_tag 'q', params[:q] %>
+  <% end -%>
+<% end -%>
+
 <div id="show_command">
-	<%= link_to t('pettycashes.new.title'), new_pettycash_path %>
+  <%= link_to t('pettycashes.new.title'), new_pettycash_path %>
 </div>
 <h2><%= t('pettycashes.balance')%>: <%= number_to_currency @balance %></h2>
 
@@ -25,6 +32,6 @@
 </table>
 <br />
 <center>
-	<%= will_paginate @cardbills %>
+  <%= will_paginate @cardbills %>
 </center>
 

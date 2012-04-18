@@ -18,7 +18,49 @@ ko:
         abbr_month_names: [~, 1월, 2월, 3월, 4월, 5월, 6월, 7월, 8월, 9월, 10월, 11월, 12월]
         # Used in date_select and datime_select.
         order: [year, month, day]
-
+    datetime:
+      distance_in_words:
+        about_x_hours:
+          one: 약 한 시간
+          other: 약 %{count}시간
+        about_x_months:
+          one: 약 한 달
+          other: 약 %{count}달
+        about_x_years:
+          one: 약 일 년
+          other: 약 %{count}년
+        almost_x_years:
+          one: 일 년 이하
+          other: ! '%{count}년 이하'
+        half_a_minute: 30초
+        less_than_x_minutes:
+          one: 일 분 이하
+          other: ! '%{count}분 이하'
+        less_than_x_seconds:
+          one: 일 초 이하
+          other: ! '%{count}초 이하'
+        over_x_years:
+          one: 일 년 이상
+          other: ! '%{count}년 이상'
+        x_days:
+          one: 하루
+          other: ! '%{count}일'
+        x_minutes:
+          one: 일 분
+          other: ! '%{count}분'
+        x_months:
+          one: 한 달
+          other: ! '%{count}달'
+        x_seconds:
+          one: 일 초
+          other: ! '%{count}초'
+      prompts:
+        day: 일
+        hour: 시
+        minute: 분
+        month: 월
+        second: 초
+        year: 년
     time:
         formats:
             default: "%Y/%m/%d %H:%M:%S"
@@ -38,7 +80,7 @@ ko:
           delimiter: ","
           # Number of decimals, behind the separator (the number 1 with a precision of 2 gives: 1.00)
           precision: 3
-          
+
         # Used in number_to_currency()
         currency:
             format:
@@ -49,7 +91,10 @@ ko:
                 separator: "."
                 delimiter: ","
                 precision: 0
-
+    helpers:
+        submit:
+            create: "%{model} 만들기"
+            update: "%{model} 수정하기"
     activerecord:
         models:
             attachment: 첨부파일
@@ -57,10 +102,20 @@ ko:
             creditcard: 신용카드
             document: 문서
             namecard: 명함정보
-            pettycashes: 소액현금
+            pettycash: 소액현금
             project: 프로젝트
             hrinfo: 인사정보
             required_tag: 필수 태그 항목
+            business_client: 거래처
+            taxman: 담당자
+            taxbill: 세금계산서
+            taxbill_item: 항목
+            pay_schedule: 기본급
+            bonus: 상여금
+            payment: 연봉
+            commute: 출퇴근
+            vacation: 연차
+            used_vacation: 사용한 연차
         attributes:
             attachment:
                 comments: 주석
@@ -71,6 +126,17 @@ ko:
                 owner_table_name: 관계된 테이블명
                 owner_id : 관계된 테이블 ID
                 title: 제목
+            bonus:
+                gave_at: 지급일
+                amount: 금액
+                note: 내역
+            business_client:
+                name: 거래처명
+                registration_number: 사업자 등록번호
+                category: 업종
+                condition: 업태
+                address: 주소
+                owner: 대표자
             cardbill:
                 cardno: "카드 번호"
                 transdate: "사용일자"
@@ -114,6 +180,17 @@ ko:
                 phone: "전화번호"
                 homepage: "홈페이지"
                 email: "이메일주소"
+            pay_schedule:
+                started_at: 시작일
+                income: 총 연봉 금액
+                basic_pay: 기본급
+            payment:
+                pay_at: 지급월
+                note: 내역
+                amount: 금액
+                pay_start: 지급 시작일
+                total: 총액
+                after: "%{month}개월 후"
             pettycash:
                 description: 사용처 상세내역
                 transdate: 사용일자
@@ -131,6 +208,54 @@ ko:
                 name: 사용자계정
                 password: 비밀번호
                 password_confirmation: 비밀번호 확인
+            taxman:
+                fullname: 이름
+                email: 이메일
+                phonenumber: 전화번호
+            taxbill:
+                billtype: 거래구분
+                price: 총합 금액
+                tax: 총합 세액
+                total: 총합 합계액
+                transacted_at: 거래날짜
+                taxman_id: 담당자
+            taxbill_item:
+              unitprice: 단가
+              quantity: 수량
+              price: 금액
+              tax: 세액
+              total: 합계액
+              note: 내역
+              transacted_at: 거래날짜
+            pay_schedule:
+                started_at: 시작일
+                income: 총 연봉 금액
+                basic_pay: 기본급
+            bonus:
+                gave_at: 지급일
+                amount: 금액
+                note: 내역
+            payment:
+                pay_at: 지급월
+                note: 내역
+                amount: 금액
+                pay_start: 지급 시작일
+                total: 총액
+                after: "%{month}개월 후"
+            commute:
+                go: 출근 시간
+                leave: 퇴근 시간
+            vacation:
+                from: 시작
+                to: 종료
+                period: 기간
+                note: 사유
+                approve: 승인 여부
+            used_vacation:
+                from: 시작
+                to: 종료
+                period: 기간
+                note: 사유
         errors:
             template:
                 header: 오류가 발생했습니다.
@@ -149,7 +274,7 @@ ko:
             new: 새로운 첨부 올리기
             title: 첨부파일
             uploadedby: 업로더
-        show:  
+        show:
             title: 첨부 상세 내역
         edit:
             title: 첨부 내역 수정
@@ -157,26 +282,34 @@ ko:
             update: 첨부파일 내용이 성공적으로 업데이트 되었습니다.
         new:
             title: 첨부파일 신규 작성
-    cardbills:  
+    bonuses:
+        new:
+            title: 새로운 특별 상여금 입력
+            link: 특별 상여금 작성
+        edit:
+            title: 특별 상여금 수정
+    business_clients:
+        index:
+            title: 거래처 관리
+            empty: 거래처가 없습니다.
+        show:
+            title: 거래처 내역
+        new:
+            title: 새로운 거래처 입력
+        edit:
+            title: 거래처 수정
+            picture: 사업자등록증
+    cardbills:
         new:
             title: 새로운 카드 영수증 입력
         show:
             title:  "카드 영수증 내역"
-        edit:  
+        edit:
             title: "카드 영수증 내용 수정"
         index:
             title: "카드 영수증 목록"
         messages:
             create: "성공적으로 생성되었습니다."
-    creditcards:
-        index:
-            title: 신용카드 목록
-        show:
-            title: 신용카드 상세 내역
-        edit:
-            title: 신용카드 정보 수정
-        new:
-            title: 새로운 신용카드 등록
     common:
         button:
             create: 만들기
@@ -184,13 +317,15 @@ ko:
             change: 변경하기
             add: 추가하기
         messages:
-            created: "%{model}이(가) 성공적으로 생성되었습니다." 
+            created: "%{model}이(가) 성공적으로 생성되었습니다."
             not_allowed: 접근할 수 없습니다.
             delete_confirm: 확실히 삭제하겠습니까?
             confirm: 확실히 수행하겠습니까?
             updated: "%{model}이(가) 성공적으로 업데이트 되었습니다."
             no_such_user: 해당 사용자는 존재하지 않습니다.
             already_exist: 이미 존재합니다.
+            destroyed: "%{model}이(가) 성공적으로 제거 되었습니다."
+            no_entries: 항목이 없습니다.
         title:
             main: 메인화면
             back: "돌아가기"
@@ -205,8 +340,45 @@ ko:
             total: 총합
         link:
             logout: "로그아웃"
+            edit: "수정"
+            destroy: "삭제"
+        menu: 메뉴
+    commutes:
+        title: 출퇴근 기록 관리
+        arrive_at_work: 출근
+        leave_work: 퇴근
+        index:
+            title: 출퇴근 관리
+        new:
+            title: 출근기록 생성
+            link: 출근기록 생성
+            picture: 첨부 사진
+            submit: 출근기록 생성
+        edit:
+            title: 퇴근기록 생성
+            picture: 첨부 사진
+            submit: 퇴근기록 생성
+        show:
+            title: 출퇴근 기록 목록
+            empty: 출근 기록이 없습니다
+        detail:
+            title: 상세정보
+        go:
+            title: 출퇴근 기록 관리
+        leave:
+            link: 퇴근기록 생성
+            title: 출퇴근 기록 관리
+    creditcards:
+        index:
+            title: 신용카드 목록
+        show:
+            title: 신용카드 상세 내역
+        edit:
+            title: 신용카드 정보 수정
+        new:
+            title: 새로운 신용카드 등록
     documents:
-        index: 
+        index:
             title: "문서 관리"
         show:
             title: "문서 상세 정보"
@@ -246,6 +418,7 @@ ko:
             finance: 회계관리
             project: 프로젝트
             document: 문서관리
+            business_client: 거래처관리
     namecards:
         edit:
             title: 명함 정보 수정
@@ -259,6 +432,26 @@ ko:
             email_example: "ex) 회사: xxx@xxx.com, 개인: xxx@xxx.com"
         show:
             title: 명함 내용 보기
+    payments:
+        index:
+            title: 연봉 관리
+        show:
+            title: 연봉 이력
+            link: 연봉 관리
+        new:
+            title: 새로운 특별상여금 입력
+        yearly:
+            title: 새로운 기본급 입력
+        edit:
+            title: 특별상여금 수정
+    pay_schedules:
+        new:
+            title: 새로운 기본급 입력
+            link: 기본급 작성
+        edit:
+            title: 기본급 수정
+    permissions:
+        permission_denied: 접근이 제한되었습니다.
     pettycashes:
         balance: 잔액
         index:
@@ -267,10 +460,8 @@ ko:
             title: 소액현금 거래내용 수정
         new:
             title: 새로운 소액 거래 작성
-        show:   
+        show:
             title: 소액현금 내역
-    permissions:
-        permission_denied: 접근이 제한되었습니다.
     projects:
         index:
             title: 프로젝트 관리
@@ -294,6 +485,54 @@ ko:
     shared:
         show_attachment:
             download: "다운로드"
+    taxbills:
+        index:
+            title: 세금계산서 관리
+            empty: 세금계산서가 없습니다.
+        show:
+            title: 세금계산서 내역
+        new:
+            title: 새로운 세금계산서 입력
+            picture: 첨부파일
+        edit:
+            title: 세금계산서 수정
+            picture: 첨부파일
+        purchase_bill: 매입 세금계산서
+        sales_bill: 매출 세금계산서
+        purchase_sales_bill: 매입/매출 세금계산서
+    taxbill_items:
+        new:
+            title: 새로운 내역 추가
+    taxmen:
+        empty: 담당자가 없습니다.
+        new:
+            title: 새로운 담당자 입력
+        edit:
+            title: 담당자 수정
+    vacations:
+        index:
+            title: 연차 정보
+            info: "할당 연차: %{total}일, 사용 연차: %{used}일, 잔여 연차: %{remain}일"
+            link: 연차 관리
+            empty: 연차 내역이 없습니다
+        show:
+            link: 연차 관리
+        new:
+            title: 새로운 연차 할당하기
+            link: 연차 할당
+        edit:
+            title: 연차 수정하기
+        approve:
+            approve: 승인
+            cancel: 승인 취소
+
+    used_vacations:
+        show:
+            empty: 사용한 연차 내역이 없습니다
+        new:
+            link: 연차 사용하기
+        edit:
+            title: 연차 수정하기
     users:
         new:
             title: 새 사용자 계정 만들기
@@ -310,6 +549,7 @@ ko:
             title: 사용자 계정 목록
             newuser: 새로운 사용자 등록
         login:
+            title: 로그인
             name: 사용자계정
             password: 비밀번호
             login: 로그인
@@ -324,4 +564,3 @@ ko:
             password_confirm_wrong: 비밀번호와 비밀번호 확인이 일치하지 않습니다.
             successfully_changed: 성공적으로 변경하였습니다.
         error:
-            missing_password: 는 공백일 수 없습니다.

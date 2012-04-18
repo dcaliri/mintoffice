@@ -10,7 +10,7 @@ class MainController < ApplicationController
   end
 
 # if RAILS_ENV == 'development'
-if ENV["RAILS_ENV"] = "development"
+if ENV["RAILS_ENV"] == "development"
   def method_missing(name, *args)
     render(:inline => %{
       <h2>Unknown action: #{name}</h2>

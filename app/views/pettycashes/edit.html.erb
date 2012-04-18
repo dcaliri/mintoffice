@@ -1,18 +1,18 @@
-<% @title = t('.title') %>
+<% title t('.title') %>
 <div id="show_command">
-	<%= link_to t("common.title.show"), @pettycash %> |
-	<%= link_to t("common.title.back"), pettycashes_path %>
+  <%= link_to t("common.title.show"), @pettycash %> |
+  <%= link_to t("common.title.back"), pettycashes_path %>
 </div>
 <h2><%= t("common.title.edit") %></h2>
 
 <%= form_for(@pettycash,
-		:url => { :action => 'update' },
-		:html => { :multipart => true } ) do |f| %>
+    :url => { :action => 'update' },
+    :html => { :class => "tabular", :multipart => true } ) do |f| %>
   <%= f.error_messages %>
 <div class="box">
   <p>
     <%= f.label :transdate, Pettycash.human_attribute_name('transdate') %>
-    <%= f.datetime_select :transdate %>
+    <%= f.datetime_select :transdate, :order => [:year, :month, :day] %>
   </p>
   <p>
     <%= f.label :inmoney, Pettycash.human_attribute_name('inmoney') %>
@@ -26,23 +26,31 @@
     <%= f.label :description, Pettycash.human_attribute_name('description') %>
     <%= f.text_area :description %>
   </p>
-<% if !@attachments.blank? %>
+  <p>
+        <%= render 'shared/attachments/form', label: t("common.title.attachment") %>
+  </p>
+  <p>
+        <%= f.submit t("common.button.update") %>
+  </p>
+</div>
+
+<!-- <% if !@attachments.blank? %>
   <% for attachment in @attachments %>
     <img src="<%= url_for(:controller => "attachments", :action => 'picture', :id => attachment.id, :w => "100", :h => "80") %>" />
-	[<%= link_to "Delete", :controller => "attachments", :action => "delete", :id => attachment %>]
+  [<%= link_to "Delete", :controller => "attachments", :action => "delete", :id => attachment %>]
   <% end %>
 <% else %>
 
 <% end %>
-<%= fields_for :attachment, @attachment do |attachment| -%>
-	<p>
-		<%= attachment.label :uploaded_file, t("common.title.attachment") %>
-		<%= attachment.file_field :uploaded_file %>
-	</p>
-<% end -%>
+  <%= fields_for :attachment, @attachment do |attachment| -%>
+    <p>
+      <%= attachment.label :uploaded_file, t("common.title.attachment") %>
+      <%= attachment.file_field :uploaded_file %>
+    </p>
+  <% end -%>
 </div>
   <p>
     <%= f.submit t("common.button.update") %>
   </p>
-<% end %>
+<% end %> -->
 

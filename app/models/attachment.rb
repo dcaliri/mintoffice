@@ -1,7 +1,11 @@
 class Attachment < ActiveRecord::Base
   belongs_to  :user
+
   has_one :cardbill
   has_one :pettycash
+  has_one :business_client
+  has_one :taxbill
+  has_one :commute
 
   validates_presence_of :filepath, :on => :create, :message => "can't be blank"
   @@storage_path = "#{Rails.root}/files"
@@ -9,7 +13,8 @@ class Attachment < ActiveRecord::Base
   def self.for_me(obj,order = "")
     if order.blank?
       Attachment.all(:conditions=>{:owner_table_name => obj.class.table_name,
-                                    :owner_id => obj.id})
+                                    :owner_id => obj.id},
+                                    :order => "seq ASC")
     else
       Attachment.all(:conditions=>{:owner_table_name => obj.class.table_name,
                                   :owner_id => obj.id},
@@ -26,7 +31,7 @@ class Attachment < ActiveRecord::Base
     attachment = Attachment.new(param)
     attachment.save_for(obj,user)
   end
-  
+
   def save_for(obj, user)
     self.owner_table_name = obj.class.table_name
     self.owner_id = obj.id
@@ -44,14 +49,14 @@ class Attachment < ActiveRecord::Base
       false
     end
   end
-  
+
   def uploaded_file=(upload_file)
     filename = base_part_of(upload_file.original_filename)
     self.original_filename = filename
     filename = Attachment.disk_filename(filename)
-    
+
     # puts upload_file.content_type.chomp
-    
+
     self.filepath = filename
     self.contenttype = upload_file.content_type.chomp
 
@@ -61,13 +66,13 @@ class Attachment < ActiveRecord::Base
 
     File.open("#{@@storage_path}/#{filename}", "wb") do |f|
       f.write(upload_file.read)
-    end    
+    end
   end
-  
-  def base_part_of(file_name) 
+
+  def base_part_of(file_name)
     File.basename(file_name).gsub(/[^\w._-]/, '')
   end
-  
+
   def self.disk_filename(filename)
     timestamp = DateTime.now.strftime("%y%m%d%H%M%S")
     ascii = ''

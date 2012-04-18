@@ -1,11 +1,11 @@
-<% @title = t('.title')%>
+<% title t('.title')%>
 <div id="show_command">
-	<%= link_to t('common.title.back'), documents_path %>
+  <%= link_to t('common.title.back'), documents_path %>
 </div>
 <h2><%= t("common.title.new") %></h2>
 <%= form_for(@namecard,
-		:url => {:action => 'create'},
-		:html => {:class => "tabular", :multipart => true}) do |f| %>
+    :url => {:action => 'create'},
+    :html => {:class => "tabular", :multipart => true}) do |f| %>
 <div id="box">
   <%= f.error_messages %>
 
@@ -37,7 +37,7 @@
     <%= f.label Namecard.human_attribute_name('email') %>
     <%= f.text_field :email %> <%= t(".email_example") %>
   </p>
-	<%= render :partial => "shared/new_attachment" %>
+  <%= render :partial => "shared/new_attachment" %>
 </div>
 <%= f.submit t('common.button.create') %>
 <% end %>

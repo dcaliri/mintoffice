@@ -1,0 +1,42 @@
+
+<% form_type = if taxbill_item.new_record? then 'new' else 'edit' end %>
+<% title t("taxmen.#{form_type}.title") %>
+
+<div id="show_command">
+  <%= link_to t('common.title.back'), taxbill %>
+</div>
+
+<h2><%= t("common.title.#{form_type}") %></h2>
+
+<%= form_for [taxbill, taxbill_item] do |f| %>
+   <%= f.error_messages %>
+  <div class="box">
+    <p>
+      <%= f.label :unitprice %>
+      <%= f.text_field :unitprice %>
+    </p>
+    <p>
+      <%= f.label :quantity %>
+      <%= f.text_field :quantity %>
+    </p>
+    <p>
+      <%= f.label :tax %>
+      <%= f.text_field :tax %>
+    </p>
+    <p>
+      <%= f.label :total %>
+      <%= f.text_field :total %>
+    </p>
+    <p>
+      <%= f.label :transacted_at %>
+      <%= f.date_select :transacted_at, :order => [:year, :month, :day] %>
+    </p>
+    <p>
+      <%= f.label :note %>
+      <%= f.text_area :note %>
+    </p>
+    <p>
+      <%= f.submit %>
+    </p>
+  </div>
+<% end %>

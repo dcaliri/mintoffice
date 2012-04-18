@@ -1,11 +1,11 @@
-<% @title = t('.title')%>
+<% title t('.title')%>
 <div id="show_command">
-	<%= link_to t('common.title.back'), documents_path %>
+  <%= link_to t('common.title.back'), documents_path %>
 </div>
 <h2><%= t("common.title.new") %></h2>
 <%= form_for(@document,
-		:url => {:action => 'create'},
-		:html => {:class => "tabular", :multipart => true}) do |f| %>
+    :url => {:action => 'create'},
+    :html => {:class => "tabular", :multipart => true}) do |f| %>
 <div id="box">
   <%= f.error_messages %>
 
@@ -13,17 +13,17 @@
     <%= f.label Document.human_attribute_name('title') %>
     <%= f.text_field :title %>
   </p>
-	<p>
-		<%= f.label Project.model_name.human %>
-		<%= f.collection_select(:project_id, @projects, :id, :name)%>
-	</p>
-	<%= render :partial => "shared/new_attachment" %>
+  <p>
+    <%= f.label Project.model_name.human %>
+    <%= f.collection_select(:project_id, @projects, :id, :name)%>
+  </p>
+  <%= render :partial => "shared/new_attachment" %>
 <% unless params[:tag].blank? %>
-	<p>
-		<%= label_tag "Tag" %>
-		<%= params[:tag] %>
-		<%= hidden_field_tag :tag, params[:tag] %>
-	</p>
+  <p>
+    <%= label_tag "Tag" %>
+    <%= params[:tag] %>
+    <%= hidden_field_tag :tag, params[:tag] %>
+  </p>
 <% end %>
 </div>
 <%= f.submit t('common.button.create') %>

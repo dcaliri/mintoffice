@@ -1,15 +1,15 @@
-<% @title = t('.title') %>
+<% title t('.title') %>
 <div id="show_command">
-	<%= link_to t('common.title.back'), pettycashes_path %>
+  <%= link_to t('common.title.back'), pettycashes_path %>
 </div>
 <h2><%= t("common.title.new") %></h2>
 <%= form_for(@pettycash,
-		:html => { :multipart => true } ) do |f| %>
+    :html => { :multipart => true } ) do |f| %>
   <%= f.error_messages %>
 <div class="box">
   <p>
     <%= f.label :transdate, Pettycash.human_attribute_name('transdate') %>
-    <%= f.datetime_select :transdate %>
+    <%= f.datetime_select :transdate, :order => [:year, :month, :day] %>
   </p>
   <p>
     <%= f.label :inmoney, Pettycash.human_attribute_name('inmoney') %>
@@ -24,10 +24,10 @@
     <%= f.text_area :description %>
   </p>
 <%= fields_for :attachment, @attachment do |attachment| -%>
-	<p>
-		<%= attachment.label :uploaded_file, t("common.title.attachment") %>
-		<%= attachment.file_field :uploaded_file %>
-	</p>
+  <p>
+    <%= attachment.label :uploaded_file, t("common.title.attachment") %>
+    <%= attachment.file_field :uploaded_file %>
+  </p>
 <% end -%>
 </div>
   <p>

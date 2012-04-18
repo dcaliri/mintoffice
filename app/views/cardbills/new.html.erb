@@ -1,11 +1,11 @@
-<% @title = t(".title") %>
+<% title t(".title") %>
 <div id="show_command">
-	<%= link_to t('common.title.back'), cardbills_path %>
+  <%= link_to t('common.title.back'), cardbills_path %>
 </div>
 <h2><%= t("common.title.new") %></h2>
 <%= form_for(@cardbill,
-		:url => { :action => 'create' },
-		:html => { :class => "tabular", :multipart => true } ) do |f| %>
+    :url => { :action => 'create' },
+    :html => { :class => "tabular", :multipart => true } ) do |f| %>
   <%= f.error_messages %>
 <div class="box">
   <p>
@@ -14,7 +14,7 @@
   </p>
   <p>
     <%= f.label :transdate, Cardbill.human_attribute_name('transdate') %>
-    <%= f.datetime_select :transdate %>
+    <%= f.datetime_select :transdate, :order => [:year, :month, :day] %>
   </p>
   <p>
     <%= f.label :amount, Cardbill.human_attribute_name('amount') %>
@@ -44,7 +44,7 @@
     <%= f.label :approveno, Cardbill.human_attribute_name('approveno') %>
     <%= f.text_field :approveno %>
   </p>
-	<%= render :partial => "shared/new_attachment" %>
+  <%= render :partial => "shared/new_attachment" %>
 </div>
 <%= f.submit t('common.button.create') %>
 <% end %>

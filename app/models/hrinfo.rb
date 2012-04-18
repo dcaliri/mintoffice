@@ -9,7 +9,11 @@ class Hrinfo < ActiveRecord::Base
   validates_uniqueness_of :companyno
 
   def fullname
-    lastname + " " + firstname
+    if lastname == nil || firstname == nil
+      "unknown"
+    else
+      lastname + " " + firstname
+    end
   end
 
   def self.search(text)

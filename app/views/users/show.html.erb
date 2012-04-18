@@ -1,12 +1,12 @@
-<% @title = t('.title') %>
+<% title t('.title') %>
 <div id="show_command">
 <% if @user.ingroup?("admin") && ! @this_user.disabled? %>
-	<%= link_to t('.loginas'), :action => "loginas", :id => @this_user %> |
-	<%= link_to t('.disable'), :action => "disable", :id => @this_user %> |
-	<%= link_to t('.change_password'), :action => "changepw", :id => @this_user %> |
+  <%= link_to t('.loginas'), :action => "loginas", :id => @this_user %> |
+  <%= link_to t('.disable'), :action => "disable", :id => @this_user %> |
+  <%= link_to t('.change_password'), :action => "changepw", :id => @this_user %> |
 <% end %>
-	<%= link_to t('common.title.edit'), edit_user_path(@this_user) %> |
-	<%= link_to t('common.title.back'), users_path %>
+  <%= link_to t('common.title.edit'), edit_user_path(@this_user) %> |
+  <%= link_to t('common.title.back'), users_path %>
 </div>
 <h2><%=h @this_user.name %></h2>
 

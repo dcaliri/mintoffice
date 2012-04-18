@@ -1,14 +1,14 @@
-<% @title = t(".title") %>
+<% title t(".title") %>
 <div id="show_command">
-	<%= link_to t('common.title.show'), @user %> |
-	<%= link_to t('users.changepw.title'), :action => "changepw", :id => @user %> |
-	<%= link_to t('common.title.back'), users_path %>	
+  <%= link_to t('common.title.show'), @user %> |
+  <%= link_to t('users.changepw.title'), :action => "changepw", :id => @user %> |
+  <%= link_to t('common.title.back'), users_path %>
 </div>
 <h2><%= t('common.title.edit') %></h2>
 
 <%= form_for(@user,
-		:url => {:action => :update},
-		:html => {:multipart => true, :class => "tabular"}) do |f| %>
+    :url => {:action => :update},
+    :html => {:multipart => true, :class => "tabular"}) do |f| %>
   <%= f.error_messages %>
 <div class="box">
   <p>

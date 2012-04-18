@@ -2,7 +2,7 @@
 	<div id="account">
 		<ul>
 			<li>
-				<%= link_to t("users.my.title"), users_my_path %>
+				<%= link_to t("users.my.title")+(@user != nil ? "(#{@user.name})" : ""), users_my_path %>
 			</li>
 			<li>
 				<%= link_to t("common.link.logout"), users_logout_path %>
