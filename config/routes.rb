@@ -56,7 +56,7 @@ Mintoffice::Application.routes.draw do
   end
 
   resources :taxbills do
-    resources :taxbill_items#, :path => "items", :as => "items"
+    resources :taxbill_items, :path => "items"
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
