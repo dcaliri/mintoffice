@@ -14,6 +14,7 @@
     <h2>Total : <%= taxbill_with_pagination.count %></h2>
     <table id="list-table">
       <tr>
+				<th><%= Taxbill.human_attribute_name('billtype') %></th>
         <th><%= Taxbill.human_attribute_name('transacted_at') %></th>
         <th><%= BusinessClient.human_attribute_name('name') %></th>
         <th><%= BusinessClient.human_attribute_name('owner') %></th>
@@ -21,10 +22,11 @@
       </tr>
     <% taxbill_with_pagination.each do |taxbill| %>
       <tr class="selectable" onclick="location.href='<%= taxbill_path(taxbill) %>'">
+        <td><%=h taxbill.billtype == 'purchase' ? t('taxbills.purchase_bill') : t('taxbills.sales_bill') %></td>
         <td><%=h taxbill.transacted_at.strftime("%Y-%m-%d") %></td>
         <td><span><%=h taxbill.taxman.business_client.name %></span></td>
         <td><span><%=h taxbill.taxman.business_client.owner %></span></td>
-        <td><%=h taxbill.total %></td>
+        <td class="numrow"><%=h number_to_currency taxbill.total %></td>
       </tr>
     <% end %>
     </table>

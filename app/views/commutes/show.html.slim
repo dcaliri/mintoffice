@@ -1,28 +1,27 @@
 - title t('.title')
 
-h2 출퇴근 기록
 #show_command
   = link_to t('commutes.new.link'), [:go, user, :commutes]
   = " | "
   = link_to t('common.title.list'), :commutes
+h2 출퇴근 기록
 
-.box
-  - unless commutes.empty?
-    table
-      tr
-        th 출근
-        th 퇴근
-        th 메뉴
-      - commutes.each do |commute|
-        tr
-          td width="120" align="right"
-            = commute.go.strftime("%Y-%m-%d %H-%M")
-          td width="120" align="right"
-            - unless commute.leave
-              = link_to "퇴근 입력하기", [:leave, user, commute]
-            - else
-              = commute.leave.strftime("%Y-%m-%d %H-%M")
-          td width="150" align="right"
-            = link_to "상세정보", [:detail, user, commute]
-  - else
-    h4 출근 기록이 없습니다
+- unless commutes.empty?
+  table#list-table
+    tr
+      th 출근
+      th 퇴근
+      th 메뉴
+    - commutes.each do |commute|
+      tr.selectable onclick="location.href='#{}'"
+        td width="120" align="right"
+          = commute.go.strftime("%Y-%m-%d %H-%M")
+        td width="120" align="right"
+          - unless commute.leave
+            = link_to "퇴근 입력하기", [:leave, user, commute]
+          - else
+            = commute.leave.strftime("%Y-%m-%d %H-%M")
+        td width="150" align="right"
+          = link_to "상세정보", [:detail, user, commute]
+- else
+  h4 출근 기록이 없습니다
