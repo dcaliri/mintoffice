@@ -2,8 +2,9 @@
 
 #show_command
   = link_to t('commutes.new.link'), [:go, user, :commutes]
-  = " | "
-  = link_to t('common.title.list'), :commutes
+  - if @user.ingroup?(:admin)
+    = " | "
+    = link_to t('common.title.list'), :commutes
 h2= t('.title')
 
 - unless commutes.empty?

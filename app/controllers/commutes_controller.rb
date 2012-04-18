@@ -1,4 +1,7 @@
 class CommutesController < ApplicationController
+  def redirect_unless_permission
+  end
+
   expose(:users) do
     users = if @user.ingroup?(:admin)
               User
@@ -10,6 +13,8 @@ class CommutesController < ApplicationController
   expose(:user)
   expose(:commutes) { user.commutes.order("go DESC") }
   expose(:commute)
+
+  before_filter :redirect_unless_admin, :only => :index
 
   def detail
     @attachments = Attachment.for_me(commute)

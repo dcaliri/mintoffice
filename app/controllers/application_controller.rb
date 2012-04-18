@@ -21,10 +21,22 @@ class ApplicationController < ActionController::Base
       return
     end
 
+    redirect_unless_permission
+  end
+
+  def redirect_unless_permission
     unless Permission.can_access? @user, controller_name, action_name
-      flash[:notice] = "You don't have to permission"
-      redirect_to :controller => 'main', :action => 'index'
+      force_redirect
     end
+  end
+
+  def redirect_unless_admin
+    force_redirect unless @user.ingroup? "admin"
+  end
+
+  def force_redirect
+    flash[:notice] = "You don't have to permission"
+    redirect_to :controller => 'main', :action => 'index'
   end
 
   def title(text="")
