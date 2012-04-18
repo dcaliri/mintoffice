@@ -14,7 +14,7 @@ h2 출퇴근 상세정보
         th 퇴근
         td
           - unless commute.leave
-            = link_to "퇴근기록 생성", [:leave, user, commute]
+            = link_to t('commutes.leave.link'), [:leave, user, commute]
           - else
             = commute.leave.strftime("%Y-%m-%d %H-%M")
   = render :partial => "shared/show_attachment", :object => commute
