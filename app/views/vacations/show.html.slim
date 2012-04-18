@@ -10,7 +10,7 @@
       h3= "할당 연차: #{vacation.period}일, 사용 연차: #{vacation.used.total}일, 잔여 연차: #{vacation.remain}일"
 
       div align="right"
-        = link_to "연차 사용하기", [:new, user, vacation, :used_vacation]
+        = link_to "연차 사용하기", [:new, vacation, :used_vacation]
         - if @user.ingroup?("admin")
           = " | "
           = link_to "수정하기", [:edit, user, vacation]
@@ -41,16 +41,16 @@
                 - if @user.ingroup?("admin")
                   = " ("
                   - if used.approve
-                    = link_to "승인 취소", user_vacation_used_vacation_approve_path(user, vacation, used, approve: false), :method => :put
+                    = link_to "승인 취소", vacation_used_vacation_approve_path(vacation, used, approve: false), :method => :put
                   - else
-                    = link_to "승인", user_vacation_used_vacation_approve_path(user, vacation, used, approve: true), :method => :put
+                    = link_to "승인", vacation_used_vacation_approve_path(vacation, used, approve: true), :method => :put
                   = ")"
 
               - if @user.ingroup?("admin")
                 td width="150" align="right"
-                  = link_to "수정", [:edit, user, vacation, used]
+                  = link_to "수정", [:edit, vacation, used]
                   = " | "
-                  = link_to "삭제", [user, vacation, used], :method => :delete, :confirm => "Are you sure?"
+                  = link_to "삭제", [vacation, used], :method => :delete, :confirm => "Are you sure?"
         br
       - else
         h4 사용한 연차 내역이 없습니다.

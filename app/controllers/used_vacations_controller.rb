@@ -1,9 +1,9 @@
 class UsedVacationsController < ApplicationController
-  expose(:user)
-  expose(:vacations) { user.vacations }
   expose(:vacation)
   expose(:used_vacations) { vacation.used }
   expose(:used_vacation)
+
+  expose(:user) { vacation.user }
 
   def create
     used_vacation.save!

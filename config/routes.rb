@@ -38,20 +38,16 @@ Mintoffice::Application.routes.draw do
       end
     end
 
-    resources :vacations do
-      resources :used_vacations do
-        put 'approve'
-      end
-
-      # member do
-      #   get 'use', controller: 'UsedVacations', action: 'new'
-      # end
-    end
+    resources :vacations
   end
 
   resources :payments, :only => [:index, :show]
   resources :commutes
-  resources :vacations
+  resources :vacations do
+    resources :used_vacations do
+      put 'approve'
+    end
+  end
 
   resources :required_tags
   resources :namecards
