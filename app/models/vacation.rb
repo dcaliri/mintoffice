@@ -5,4 +5,8 @@ class Vacation < ActiveRecord::Base
   def remain
     (period - used.total)
   end
+
+  def period
+    read_attribute(:period) || 0
+  end
 end

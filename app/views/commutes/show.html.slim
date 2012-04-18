@@ -4,7 +4,7 @@
   = link_to t('commutes.new.link'), [:go, user, :commutes]
   = " | "
   = link_to t('common.title.list'), :commutes
-h2 출퇴근 기록
+h2= t('.title')
 
 - unless commutes.empty?
   table#list-table
@@ -24,4 +24,4 @@ h2 출퇴근 기록
         td width="150" align="right"
           = link_to t('commutes.detail.link'), [:detail, user, commute]
 - else
-  h4 출근 기록이 없습니다
+  h4= t('.empty')

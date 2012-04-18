@@ -53,7 +53,7 @@
                   = link_to t('common.link.destroy'), [vacation, used], :method => :delete, :confirm => "Are you sure?"
         br
       - else
-        h4 사용한 연차 내역이 없습니다.
+        h4= t('used_vacations.show.empty')
 
 - else
-  h4 연차 내역이 없습니다
+  h4= t('.empty')

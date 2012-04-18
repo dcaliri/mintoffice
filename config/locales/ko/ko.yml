@@ -357,6 +357,7 @@ ko:
             submit: 퇴근기록 생성
         show:
             title: 출퇴근 내역
+            empty: 출근 기록이 없습니다
         detail:
             link: 상세정보
     creditcards:
@@ -507,6 +508,7 @@ ko:
             title: 연차 정보
             link: 연차 관리
             info: "할당 연차: %{total}일, 사용 연차: %{used}일, 잔여 연차: %{remain}일"
+            empty: 연차 내역이 없습니다
         new:
             title: 새로운 연차 할당하기
             link: 연차 할당
@@ -517,6 +519,8 @@ ko:
             cancel: 승인 취소
 
     used_vacations:
+        show:
+            empty: 사용한 연차 내역이 없습니다
         new:
             link: 연차 사용하기
         edit:
