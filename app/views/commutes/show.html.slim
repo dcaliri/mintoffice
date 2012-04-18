@@ -1,4 +1,4 @@
-- title t('.title')
+- title t('commutes.title')
 
 #show_command
   = link_to t('commutes.new.link'), [:go, user, :commutes]
@@ -12,17 +12,14 @@ h2= t('.title')
     tr
       th= Commute.human_attribute_name(:go)
       th= Commute.human_attribute_name(:leave)
-      th= t('common.menu')
     - commutes.each do |commute|
       tr.selectable onclick="location.href='#{detail_user_commute_path(user, commute)}'"
-        td width="120" align="right"
+        td
           = commute.go.strftime("%Y-%m-%d %H-%M")
-        td width="120" align="right"
+        td
           - unless commute.leave
             = link_to t('commutes.leave.link'), [:leave, user, commute]
           - else
             = commute.leave.strftime("%Y-%m-%d %H-%M")
-        td width="150" align="right"
-          = link_to t('commutes.detail.link'), [:detail, user, commute]
 - else
   h4= t('.empty')
