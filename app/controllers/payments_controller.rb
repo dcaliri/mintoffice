@@ -11,6 +11,9 @@ class PaymentsController < ApplicationController
   expose(:payments) { user.payments }
   expose(:payment)
 
+  def redirect_unless_permission
+  end
+
   def create
     payment.save!
     redirect_to payment_path(user)
