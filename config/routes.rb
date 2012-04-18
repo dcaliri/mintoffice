@@ -37,10 +37,19 @@ Mintoffice::Application.routes.draw do
         put 'leave', :action => 'leave!'
       end
     end
+
+    resources :vacations do
+      resources :used_vacations
+
+      # member do
+      #   get 'use', controller: 'UsedVacations', action: 'new'
+      # end
+    end
   end
 
   resources :payments, :only => [:index, :show]
   resources :commutes
+  resources :vacations
 
   resources :required_tags
   resources :namecards

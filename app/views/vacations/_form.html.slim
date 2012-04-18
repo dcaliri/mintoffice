@@ -1,0 +1,22 @@
+- form_type = if vacation.new_record? then 'new' else 'edit' end
+- title t("vacations.#{form_type}.title")
+
+#show_command
+  = link_to t('common.title.back'), vacation_path(user)
+
+h2= t("common.title.#{form_type}")
+
+= form_for [user, vacation] do |f|
+  = f.error_messages
+  .box
+    p
+      = f.label :from, :default => Time.zone.now
+      = f.date_select :from, :order => [:year, :month, :day]
+    p
+      = f.label :to
+      = f.date_select :to, :order => [:year, :month, :day], :default => Time.zone.now + 1.year - 1.day
+    p
+      = f.label :period
+      = f.text_field :period
+    p
+      = f.submit
