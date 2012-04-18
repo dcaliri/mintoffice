@@ -10,22 +10,22 @@ class UsedVacationsController < ApplicationController
 
   def create
     used_vacation.save!
-    redirect_to vacation_path(user)
+    redirect_to [user, :vacations]
   end
 
   def update
     used_vacation.save!
-    redirect_to vacation_path(user)
+    redirect_to [user, :vacations]
   end
 
   def approve
     used_vacation.approve = params[:approve]
     used_vacation.save!
-    redirect_to vacation_path(user)
+    redirect_to [user, :vacations]
   end
 
   def destroy
     used_vacation.destroy
-    redirect_to vacation_path(user)
+    redirect_to [user, :vacations]
   end
 end

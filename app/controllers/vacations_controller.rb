@@ -8,16 +8,16 @@ class VacationsController < ApplicationController
 
   def create
     vacation.save!
-    redirect_to vacation_path(user)
+    redirect_to [user, :vacations]
   end
 
   def update
     vacation.save!
-    redirect_to vacation_path(user)
+    redirect_to [user, :vacations]
   end
 
   def destroy
     vacation.destroy
-    redirect_to vacation_path(user)
+    redirect_to [user, :vacations]
   end
 end
