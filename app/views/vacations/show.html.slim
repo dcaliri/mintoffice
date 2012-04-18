@@ -23,6 +23,7 @@
             th 연차 종료
             th 기간
             th 사유
+            th 승인 여부
             - if @user.ingroup?("admin")
               th 메뉴
           - vacation.used.each do |used|
@@ -33,8 +34,18 @@
                 = used.to
               td width="120" align="right"
                 = "#{used.period} 일"
-              td width="150" align="right"
+              td width="120" align="right"
                 = used.note
+              td width="120" align="right"
+                = used.approve ? "yes" : "no"
+                - if @user.ingroup?("admin")
+                  = " ("
+                  - if used.approve
+                    = link_to "승인 취소", user_vacation_used_vacation_approve_path(user, vacation, used, approve: false), :method => :put
+                  - else
+                    = link_to "승인", user_vacation_used_vacation_approve_path(user, vacation, used, approve: true), :method => :put
+                  = ")"
+
               - if @user.ingroup?("admin")
                 td width="150" align="right"
                   = link_to "수정", [:edit, user, vacation, used]

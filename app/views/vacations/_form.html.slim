@@ -10,8 +10,8 @@ h2= t("common.title.#{form_type}")
   = f.error_messages
   .box
     p
-      = f.label :from, :default => Time.zone.now
-      = f.date_select :from, :order => [:year, :month, :day]
+      = f.label :from
+      = f.date_select :from, :order => [:year, :month, :day], :default => Time.zone.now
     p
       = f.label :to
       = f.date_select :to, :order => [:year, :month, :day], :default => Time.zone.now + 1.year - 1.day

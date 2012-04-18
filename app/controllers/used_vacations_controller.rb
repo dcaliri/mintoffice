@@ -15,6 +15,12 @@ class UsedVacationsController < ApplicationController
     redirect_to vacation_path(user)
   end
 
+  def approve
+    used_vacation.approve = params[:approve]
+    used_vacation.save!
+    redirect_to vacation_path(user)
+  end
+
   def destroy
     used_vacation.destroy
     redirect_to vacation_path(user)

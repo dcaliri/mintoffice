@@ -72,6 +72,8 @@ ko:
             bonus: 상여금
             payment: 연봉
             commute: 출퇴근
+            vacation: 연차
+            used_vacation: 사용한 연차
         attributes:
             attachment:
                 comments: 주석
@@ -201,6 +203,15 @@ ko:
             commute:
                 go: 출근
                 leave: 퇴근
+            vacation:
+                from: 시작
+                to: 종료
+                period: 기간
+            used_vacation:
+                from: 시작
+                to: 종료
+                period: 기간
+                note: 사유
         errors:
             template:
                 header: 오류가 발생했습니다.
@@ -447,6 +458,11 @@ ko:
         new:
             title: 새로운 연차 할당하기
             link: 연차 할당
+        edit:
+            title: 연차 수정하기
+    used_vacations:
+        edit:
+            title: 연차 수정하기
     users:
         new:
             title: 새 사용자 계정 만들기

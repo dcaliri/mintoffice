@@ -39,7 +39,9 @@ Mintoffice::Application.routes.draw do
     end
 
     resources :vacations do
-      resources :used_vacations
+      resources :used_vacations do
+        put 'approve'
+      end
 
       # member do
       #   get 'use', controller: 'UsedVacations', action: 'new'
