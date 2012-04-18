@@ -9,4 +9,8 @@ class Vacation < ActiveRecord::Base
   def period
     read_attribute(:period) || 0
   end
+
+  def self.latest
+    order('id DESC')
+  end
 end

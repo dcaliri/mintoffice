@@ -2,14 +2,15 @@
   - if @user.ingroup?("admin")
     = link_to t('vacations.new.link'), [:new, user, :vacation]
     = " | "
-  = link_to t('common.title.list'), :vacations
+  = link_to t('common.title.list'), hrinfo_path(user.hrinfo)
 
 - unless vacations.empty?
   .box
     - vacations.each do |vacation|
-      h3= t('vacations.show.info', total: vacation.period, used: vacation.used.total, remain: vacation.remain)
+      h3= "#{vacation.from} ~ #{vacation.to}"
 
       div align="right"
+        p= t('vacations.show.info', total: vacation.period, used: vacation.used.total, remain: vacation.remain)
         = link_to t('used_vacations.new.link'), [:new, vacation, :used_vacation]
         - if @user.ingroup?("admin")
           = " | "

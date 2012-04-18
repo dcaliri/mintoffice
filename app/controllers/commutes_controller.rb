@@ -11,7 +11,7 @@ class CommutesController < ApplicationController
    users.page(params[:page])
   end
   expose(:user)
-  expose(:commutes) { user.commutes.order("go DESC") }
+  expose(:commutes) { user.commutes.latest }
   expose(:commute)
 
   before_filter :redirect_unless_admin, :only => :index

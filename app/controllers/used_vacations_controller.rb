@@ -1,4 +1,7 @@
 class UsedVacationsController < ApplicationController
+  def redirect_unless_permission
+  end
+
   expose(:vacation)
   expose(:used_vacations) { vacation.used }
   expose(:used_vacation)

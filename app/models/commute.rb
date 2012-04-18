@@ -2,6 +2,10 @@ class Commute < ActiveRecord::Base
   belongs_to :user
   belongs_to :attachment
 
+  def self.latest
+    order("go DESC")
+  end
+
   def go!
     unless read_attribute(:go)
       write_attribute(:go, Time.zone.now)

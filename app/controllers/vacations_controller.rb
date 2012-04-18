@@ -1,6 +1,9 @@
 class VacationsController < ApplicationController
+  def redirect_unless_permission
+  end
+
   expose(:user)
-  expose(:vacations) { user.vacations }
+  expose(:vacations) { user.vacations.latest }
   expose(:vacation)
 
   def create
