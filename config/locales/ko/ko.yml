@@ -18,7 +18,49 @@ ko:
         abbr_month_names: [~, 1월, 2월, 3월, 4월, 5월, 6월, 7월, 8월, 9월, 10월, 11월, 12월]
         # Used in date_select and datime_select.
         order: [year, month, day]
-
+    datetime:
+      distance_in_words:
+        about_x_hours:
+          one: 약 한 시간
+          other: 약 %{count}시간
+        about_x_months:
+          one: 약 한 달
+          other: 약 %{count}달
+        about_x_years:
+          one: 약 일 년
+          other: 약 %{count}년
+        almost_x_years:
+          one: 일 년 이하
+          other: ! '%{count}년 이하'
+        half_a_minute: 30초
+        less_than_x_minutes:
+          one: 일 분 이하
+          other: ! '%{count}분 이하'
+        less_than_x_seconds:
+          one: 일 초 이하
+          other: ! '%{count}초 이하'
+        over_x_years:
+          one: 일 년 이상
+          other: ! '%{count}년 이상'
+        x_days:
+          one: 하루
+          other: ! '%{count}일'
+        x_minutes:
+          one: 일 분
+          other: ! '%{count}분'
+        x_months:
+          one: 한 달
+          other: ! '%{count}달'
+        x_seconds:
+          one: 일 초
+          other: ! '%{count}초'
+      prompts:
+        day: 일
+        hour: 시
+        minute: 분
+        month: 월
+        second: 초
+        year: 년
     time:
         formats:
             default: "%Y/%m/%d %H:%M:%S"
@@ -207,6 +249,8 @@ ko:
                 from: 시작
                 to: 종료
                 period: 기간
+                note: 사유
+                approve: 승인 여부
             used_vacation:
                 from: 시작
                 to: 종료
@@ -458,12 +502,19 @@ ko:
         show:
             title: 연차 정보
             link: 연차 관리
+            info: "할당 연차: %{total}일, 사용 연차: %{used}일, 잔여 연차: %{remain}일"
         new:
             title: 새로운 연차 할당하기
             link: 연차 할당
         edit:
             title: 연차 수정하기
+        approve:
+            approve: 승인
+            cancel: 승인 취소
+
     used_vacations:
+        new:
+            link: 연차 사용하기
         edit:
             title: 연차 수정하기
     users:

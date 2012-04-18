@@ -7,25 +7,25 @@
 - unless vacations.empty?
   .box
     - vacations.each do |vacation|
-      h3= "할당 연차: #{vacation.period}일, 사용 연차: #{vacation.used.total}일, 잔여 연차: #{vacation.remain}일"
+      h3= t('vacations.show.info', total: vacation.period, used: vacation.used.total, remain: vacation.remain)
 
       div align="right"
-        = link_to "연차 사용하기", [:new, vacation, :used_vacation]
+        = link_to t('used_vacations.new.link'), [:new, vacation, :used_vacation]
         - if @user.ingroup?("admin")
           = " | "
-          = link_to "수정하기", [:edit, user, vacation]
+          = link_to t('common.link.edit'), [:edit, user, vacation]
           = " | "
-          = link_to "삭제하기", [user, vacation], :method => :delete, :confirm => "Are you sure?"
+          = link_to t('common.link.destroy'), [user, vacation], :method => :delete, :confirm => "Are you sure?"
       - unless vacation.used.empty?
         table
           tr
-            th 연차 시작
-            th 연차 종료
-            th 기간
-            th 사유
-            th 승인 여부
+            th= Vacation.human_attribute_name(:from)
+            th= Vacation.human_attribute_name(:to)
+            th= Vacation.human_attribute_name(:period)
+            th= Vacation.human_attribute_name(:note)
+            th= Vacation.human_attribute_name(:approve)
             - if @user.ingroup?("admin")
-              th 메뉴
+              th= t('common.menu')
           - vacation.used.each do |used|
             tr
               td width="120" align="right"
@@ -33,7 +33,7 @@
               td width="120" align="right"
                 = used.to
               td width="120" align="right"
-                = "#{used.period} 일"
+                = "#{used.period} #{t('datetime.prompts.day')}"
               td width="120" align="right"
                 = used.note
               td width="120" align="right"
@@ -41,16 +41,16 @@
                 - if @user.ingroup?("admin")
                   = " ("
                   - if used.approve
-                    = link_to "승인 취소", vacation_used_vacation_approve_path(vacation, used, approve: false), :method => :put
+                    = link_to t('vacations.approve.cancel'), vacation_used_vacation_approve_path(vacation, used, approve: false), :method => :put
                   - else
-                    = link_to "승인", vacation_used_vacation_approve_path(vacation, used, approve: true), :method => :put
+                    = link_to t('vacations.approve.approve'), vacation_used_vacation_approve_path(vacation, used, approve: true), :method => :put
                   = ")"
 
               - if @user.ingroup?("admin")
                 td width="150" align="right"
-                  = link_to "수정", [:edit, vacation, used]
+                  = link_to t('common.link.edit'), [:edit, vacation, used]
                   = " | "
-                  = link_to "삭제", [vacation, used], :method => :delete, :confirm => "Are you sure?"
+                  = link_to t('common.link.destroy'), [vacation, used], :method => :delete, :confirm => "Are you sure?"
         br
       - else
         h4 사용한 연차 내역이 없습니다.
