@@ -13,7 +13,11 @@
           <%= link_to t("users.index.title"), :controller => "users" %>
         </li>
       <% end %>
-      <%= link_to t("payments.index.title"), :payments %>
+      <% if @user.ingroup?(:admin) %>
+        <li><%= link_to t("commutes.index.title"), :commutes %></li>
+      <% else %>
+        <li><%= link_to t("commutes.index.title"), commute_path(@user) %></li>
+      <% end %>
       <li class="sublast">#</li>
     </ul>
   </li>

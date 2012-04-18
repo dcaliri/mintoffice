@@ -256,6 +256,11 @@ div.flash.notice {
   color: #669;
 }
 
+.numrow
+{
+	text-align: right;
+}
+
 .tabular label {
   float: left;
   font-weight: bold;

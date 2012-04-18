@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120412021850) do
+ActiveRecord::Schema.define(:version => 20120418024952) do
 
   create_table "attachments", :force => true do |t|
     t.string   "title"
@@ -53,6 +53,14 @@ ActiveRecord::Schema.define(:version => 20120412021850) do
     t.datetime "updated_at",    :null => false
     t.integer  "attachment_id"
     t.integer  "creditcard_id"
+  end
+
+  create_table "commutes", :force => true do |t|
+    t.datetime "go"
+    t.datetime "leave"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "creditcards", :force => true do |t|
@@ -137,13 +145,13 @@ ActiveRecord::Schema.define(:version => 20120412021850) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "pay_schedules", :force => true do |t|
+  create_table "payments", :force => true do |t|
+    t.date     "pay_at"
+    t.decimal  "amount",     :default => 0.0
+    t.text     "note"
     t.integer  "user_id"
-    t.date     "payday"
-    t.decimal  "amount"
-    t.string   "category"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
   end
 
   create_table "permissions", :force => true do |t|
@@ -226,12 +234,32 @@ ActiveRecord::Schema.define(:version => 20120412021850) do
     t.datetime "updated_at",         :null => false
   end
 
+  create_table "used_vacations", :force => true do |t|
+    t.integer  "vacation_id"
+    t.date     "from"
+    t.date     "to"
+    t.text     "note"
+    t.boolean  "approve"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.decimal  "period"
+  end
+
   create_table "users", :force => true do |t|
     t.string   "name"
     t.string   "hashed_password"
     t.string   "salt"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+  end
+
+  create_table "vacations", :force => true do |t|
+    t.integer  "user_id"
+    t.date     "from"
+    t.date     "to"
+    t.decimal  "period"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
 end

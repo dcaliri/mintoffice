@@ -1,102 +1,107 @@
-<% @title = t('.title') %>
+<% title t('.title') %>
 <div id="show_command">
-<% if @user.ingroup?("admin") && ! @hrinfo.retired_on %>
-	<%= link_to t('hrinfos.retire.title'), :action => :retire, :id => @hrinfo %> |	
-<% end %>
-<% if @user.ingroup?("admin") || @hrinfo.user == @user %>
-	<%= link_to t('common.title.edit'), edit_hrinfo_path(@hrinfo) %> |
-<% end %>
-	<%= link_to t('common.title.back'), hrinfos_path %>	
+  <% if @user.ingroup?("admin") && ! @hrinfo.retired_on %>
+    <%= link_to t('hrinfos.retire.title'), :action => :retire, :id => @hrinfo %> |
+  <% end %>
+  <% if @user.ingroup?("admin") || @hrinfo.user == @user %>
+    <%= link_to t('payments.show.link'), payment_path(@hrinfo.user) %> |
+    <%= link_to t('vacations.show.link'), [@hrinfo.user, :vacations] %> |
+    <%= link_to t('common.title.edit'), edit_hrinfo_path(@hrinfo) %> |
+  <% end %>
+  <%= link_to t('common.title.back'), hrinfos_path %>
 </div>
 <h2><%= @hrinfo.fullname %></h2>
 <div class="box">
-	<div id="descr">
-		<table border="0" cellspacing="5" cellpadding="5">
-			<tr><th align="right"><%= Hrinfo.human_attribute_name('companyno') %>:</th><td><%= @hrinfo.companyno %></td></tr>
-			<tr><th align="right"><%= Hrinfo.human_attribute_name('position') %>:</th><td><%= @hrinfo.position %></td></tr>
-			<tr><th align="right"><%= Hrinfo.human_attribute_name('username') %>:</th><td><%= @hrinfo.user.name %></td></tr>
-			<tr><th align="right"><%= Hrinfo.human_attribute_name('mphone') %>:</th><td><%= @hrinfo.mphone %></td></tr>
-			<tr><th align="right"><%= Hrinfo.human_attribute_name('email') %>:</th><td><a href="mailto:<%= @hrinfo.email %>"><%= @hrinfo.email %><a href="mailto:"></td></tr>
+  <div id="descr">
+    <table border="0" cellspacing="5" cellpadding="5">
+      <tr><th align="right"><%= Hrinfo.human_attribute_name('companyno') %>:</th><td><%= @hrinfo.companyno %></td></tr>
+      <tr><th align="right"><%= Hrinfo.human_attribute_name('position') %>:</th><td><%= @hrinfo.position %></td></tr>
+      <tr><th align="right"><%= Hrinfo.human_attribute_name('username') %>:</th><td><%= @hrinfo.user.name %></td></tr>
+      <tr><th align="right"><%= Hrinfo.human_attribute_name('mphone') %>:</th><td><%= @hrinfo.mphone %></td></tr>
+      <tr><th align="right"><%= Hrinfo.human_attribute_name('email') %>:</th><td><a href="mailto:<%= @hrinfo.email %>"><%= @hrinfo.email %><a href="mailto:"></td></tr>
 <% if @user.ingroup?("admin") || @hrinfo.user == @user %>
-			<tr><th align="right"><%= Hrinfo.human_attribute_name('juminno') %>:</th><td><%= @hrinfo.juminno %></td></tr>
-			<tr><th align="right"><%= Hrinfo.human_attribute_name('address') %>:</th><td><%= @hrinfo.address %></td></tr>
+      <tr><th align="right"><%= Hrinfo.human_attribute_name('juminno') %>:</th><td><%= @hrinfo.juminno %></td></tr>
+      <tr><th align="right"><%= Hrinfo.human_attribute_name('address') %>:</th><td><%= @hrinfo.address %></td></tr>
 <% end %>
-			<tr><th align="right"><%= Hrinfo.human_attribute_name('joined_on') %>:</th><td><%= @hrinfo.joined_on %></td></tr>
+      <tr><th align="right"><%= Hrinfo.human_attribute_name('joined_on') %>:</th><td><%= @hrinfo.joined_on %></td></tr>
 <% if @hrinfo.retired_on %>
-			<tr><th align="right"><%= Hrinfo.human_attribute_name('retired_on') %>:</th><td><%= @hrinfo.retired_on %></td></tr>
+      <tr><th align="right"><%= Hrinfo.human_attribute_name('retired_on') %>:</th><td><%= @hrinfo.retired_on %></td></tr>
 <% end %>
-		</table>
+    </table>
 <% if @user.ingroup?("admin") || @hrinfo.user == @user %>
 <% if @user.ingroup? "admin" %>
-		<div id="show_command">
-			<%= link_to t('required_tags.new.title'), :controller => "required_tags",	:action => "new", :modelname => Hrinfo.name, :returnurl => request.url %>
-		</div>
+    <div id="show_command">
+      <%= link_to t('required_tags.new.title'), :controller => "required_tags",  :action => "new", :modelname => Hrinfo.name, :returnurl => request.url %>
+    </div>
 <% end %>
-		<h3><%= t('.related_documents') %></h3>
-		<ul>
-		<% if !@required_tagnames.blank? %>
-		  <% for rtn in @required_tagnames %>
-		    <li>[<%= rtn %>] 
-				<% if @required_documents[rtn] %>
-					<%= link_to @required_documents[rtn].title, :controller => "documents", :action => "show", :id => @required_documents[rtn]  %>
-				<% else %>
-					<%= link_to "Register", :controller => "documents", :action => "new", :tag => [rtn, Hrinfo.model_name.human, @hrinfo.user.name].join(',') %>
-				<% end %>
-				</li>
-		  <% end %>
-		<% else %>
-		<% end %>
-		<% if !@unrequired_documents.blank? %>
-		  <% for d in @unrequired_documents %>
-		    <li><%= link_to d.title, :controller => "documents", :action => "show", :id => d %></li>
-		  <% end %>
-		<% else %>
-		  
-		<% end %>
-	</ul>
+    <h3><%= t('.related_documents') %></h3>
+    <ul>
+      <% if !@required_tagnames.blank? %>
+        <% for rtn in @required_tagnames %>
+          <li>[<%= rtn %>]
+            <% if @required_documents[rtn] %>
+              <%= link_to @required_documents[rtn].title, :controller => "documents", :action => "show", :id => @required_documents[rtn]  %>
+            <% else %>
+              <%= link_to "Register", :controller => "documents", :action => "new", :tag => [rtn, Hrinfo.model_name.human, @hrinfo.user.name].join(',') %>
+            <% end %>
+          </li>
+        <% end %>
+      <% end %>
+      <% if !@unrequired_documents.blank? %>
+        <% for d in @unrequired_documents %>
+          <li><%= link_to d.title, :controller => "documents", :action => "show", :id => d %></li>
+        <% end %>
+      <% end %>
+    </ul>
+    <h3>관련 직업</h3>
+    <ul>
+      <% if @user.ingroup?("admin") || @hrinfo.user == @user %>
+        <li><%= link_to "연봉 관리", payment_path(@user) %></li>
+      <% end %>
+    </ul>
 <% end %>
-	</div>
-	<div id="attach">
-<% 
-	at = params[:at].to_i || 0
-	if  at < @attachments.count
-		attachment = @attachments[at] 
+  </div>
+  <div id="attach">
+<%
+  at = params[:at].to_i || 0
+  if  at < @attachments.count
+    attachment = @attachments[at]
 %>
-		<img src="<%= url_for(:controller => "attachments", :action => 'picture', :id => attachment.id, :w => "600", :h => "800") %>" />
+    <img src="<%= url_for(:controller => "attachments", :action => 'picture', :id => attachment.id, :w => "600", :h => "800") %>" />
 <% end %>
-		<center>
+    <center>
 <% if at < @attachments.count %>
-			<%= link_to t(".download"), :controller => "attachments", :action => "download", :id => attachment.id %> ... 
+      <%= link_to t(".download"), :controller => "attachments", :action => "download", :id => attachment.id %> ...
 <% end %>
-			<% 0.upto(@attachments.count - 1) do |i| %>
-				<% if i == params[:at].to_i %>
-					<u><%= (i+1) %></u>
-				<% else %>
-					<%= link_to (i+1).to_s, :controller => "hrinfos", :action => "show", :id => @hrinfo, :at => i %>
-				<% end %>
-			<% end %>
-		</center>
-	</div>
-	<div style="clear: both;">
+      <% 0.upto(@attachments.count - 1) do |i| %>
+        <% if i == params[:at].to_i %>
+          <u><%= (i+1) %></u>
+        <% else %>
+          <%= link_to (i+1).to_s, :controller => "hrinfos", :action => "show", :id => @hrinfo, :at => i %>
+        <% end %>
+      <% end %>
+    </center>
+  </div>
+  <div style="clear: both;">
 <% if @user.ingroup? "admin" %>
-		<h3><%= t(".changes") %></h3>
-		<% if !@hrinfo.hrinfo_histories.blank? %>
-		<ul>
-		  <% for history in @hrinfo.hrinfo_histories.all(:order => "updated_at ASC") %>
-		    <li>[<%= history.updated_at.strftime("%Y.%m.%d %H:%M:%S %p") %>] <%= history.change %> (<%= history.user.name %>)</li>
-		  <% end %>
-		</ul>
-		<% else %>
-		  
-		<% end %>
+    <h3><%= t(".changes") %></h3>
+    <% if !@hrinfo.hrinfo_histories.blank? %>
+    <ul>
+      <% for history in @hrinfo.hrinfo_histories.all(:order => "updated_at ASC") %>
+        <li>[<%= history.updated_at.strftime("%Y.%m.%d %H:%M:%S %p") %>] <%= history.change %> (<%= history.user.name %>)</li>
+      <% end %>
+    </ul>
+    <% else %>
+
+    <% end %>
 <% end %>
-		</div>
+    </div>
 </div>
 
 <!-- <pre>
-	required_documents:
-	<%= @required_documents.values.collect(&:title).join(',') %>
-	
-	unrequired_documents:
-	<%= @unrequired_documents.collect(&:title).join(',') %>
+  required_documents:
+  <%= @required_documents.values.collect(&:title).join(',') %>
+
+  unrequired_documents:
+  <%= @unrequired_documents.collect(&:title).join(',') %>
 </pre> -->

@@ -2,7 +2,7 @@ source :rubygems
 
 gem 'rails', '3.2.3'
 gem 'jquery-rails'
-
+gem 'slim'
 gem 'dynamic_form'
 gem 'will_paginate', '~> 3.0'
 gem 'rmagick'

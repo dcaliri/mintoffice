@@ -1,6 +1,6 @@
 <% form_type = if @business_client.new_record? then 'new' else 'edit' end %>
 
-<% @title = t("business_clients.#{form_type}.title") %>
+<% title t("business_clients.#{form_type}.title") %>
 
 <div id="show_command">
   <%= link_to t('common.title.back'), :business_clients %>

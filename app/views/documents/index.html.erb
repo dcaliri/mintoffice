@@ -1,11 +1,11 @@
-<% 	@title = t('.title') %>
+<%   title t('.title') %>
 <% content_for :search do -%>
-	<%= form_tag({:action => "index"}, :method => :get ) do %>
-		<%= t("common.title.search") %> : <%= text_field_tag 'q', params[:q] %>
-	<% end -%>
+  <%= form_tag({:action => "index"}, :method => :get ) do %>
+    <%= t("common.title.search") %> : <%= text_field_tag 'q', params[:q] %>
+  <% end -%>
 <% end -%>
 <div id="show_command">
-	<%= link_to t('documents.new.title'), new_document_path %>
+  <%= link_to t('documents.new.title'), new_document_path %>
 </div>
 <h2><%= t("common.title.total") %>: <%= @documents_count %></h2>
 <table id="list-table">
@@ -13,26 +13,26 @@
     <th><%= Document.human_attribute_name("title") %></th>
     <th><%= Document.human_attribute_name("project") %></th>
     <th><%= Document.human_attribute_name("owner") %></th>
-		<th><%= Document.human_attribute_name("tags") %></th>
+    <th><%= Document.human_attribute_name("tags") %></th>
   </tr>
 <% @documents.each do |document| %>
-	<tr class="selectable" onclick="location.href='<%= document_path(document) %>'">
+  <tr class="selectable" onclick="location.href='<%= document_path(document) %>'">
     <td><%=h document.title %></td>
     <td><%=h document.project_name  %></td>
-		<td>
-		<% if !document.users.blank? %>
-			<% user_names = document.users.index_by {|u| u.name } %>
-			<%= user_names.keys.sort.join(", ") %>
-		<% else %>
-		<% end %>
-		</td>
-		<td>
-			<% if !document.tags(true).blank? %>
-				<% tag_names = document.tags.index_by {|t| t.name} %>
-				<%= tag_names.keys.sort.join ", " %>
-			<% else %>
-			<% end %>
-		</td>
+    <td>
+    <% if !document.users.blank? %>
+      <% user_names = document.users.index_by {|u| u.name } %>
+      <%= user_names.keys.sort.join(", ") %>
+    <% else %>
+    <% end %>
+    </td>
+    <td>
+      <% if !document.tags(true).blank? %>
+        <% tag_names = document.tags.index_by {|t| t.name} %>
+        <%= tag_names.keys.sort.join ", " %>
+      <% else %>
+      <% end %>
+    </td>
   </tr>
 <% end %>
 </table>

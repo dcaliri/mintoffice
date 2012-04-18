@@ -1,19 +1,19 @@
-<% @title = t('.title') %>
+<% title t('.title') %>
 <% content_for :title_area do -%>
-	<div id="title_area">
-		<h1>Listing users</h1>
-	</div>
+  <div id="title_area">
+    <h1>Listing users</h1>
+  </div>
 <% end -%>
 
 <% content_for :search do -%>
-	<%= form_tag :users, :method => :get do %>
-		<%= hidden_field_tag 'disabled', params[:disabled] %>
-		<%= t("common.title.search") %> : <%= text_field_tag 'q', params[:q] %>
-	<% end %>
+  <%= form_tag :users, :method => :get do %>
+    <%= hidden_field_tag 'disabled', params[:disabled] %>
+    <%= t("common.title.search") %> : <%= text_field_tag 'q', params[:q] %>
+  <% end %>
 <% end -%>
 
 <div id="show_command">
-	<%= link_to t('.newuser'), new_user_path %>
+  <%= link_to t('.newuser'), new_user_path %>
 </div>
 <h2><%= t("common.title.list") %></h2>
 
@@ -33,8 +33,8 @@
 </table>
 <div id="show_command">
 <% if params[:disabled] == 'on' %>
-	<%= link_to "Enabled", :action => "index" %>
+  <%= link_to "Enabled", :action => "index" %>
 <% else %>
-	<%= link_to "Disabled", :action => "index", :disabled => 'on' %>
+  <%= link_to "Disabled", :action => "index", :disabled => 'on' %>
 <% end %>
 </div>

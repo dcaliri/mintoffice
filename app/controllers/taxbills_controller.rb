@@ -1,8 +1,8 @@
 class TaxbillsController < ApplicationController
-  expose(:taxbill_with_pagination) { Taxbill.search(params[:query]).page(params[:page]) }
+  expose(:taxbill_with_pagination) { Taxbill.search(params[:query]).seachbilltype(params[:billtype]).searchbytaxman(params[:taxman_id]).order("transacted_at desc").page(params[:page]) }
   expose(:taxbills)
   expose(:taxbill)
-
+  
   def show
     @attachments = Attachment.for_me(taxbill)
     session[:attachments] = [] if session[:attachments].nil?
@@ -11,7 +11,7 @@ class TaxbillsController < ApplicationController
 
   def create
     taxbill.save!
-      Attachment.save_for(taxbill, @user, params[:attachment])
+    Attachment.save_for(taxbill, @user, params[:attachment])
     redirect_to taxbill, notice: I18n.t("common.messages.created", :model => Taxbill.model_name.human)
   rescue ActiveRecord::RecordInvalid
     render 'new'

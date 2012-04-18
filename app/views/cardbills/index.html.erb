@@ -1,14 +1,15 @@
-<% @title  = t('.title') %>
+<% title = t('.title') %>
 
 <% content_for :search do -%>
-	<%= form_tag :cardbills, :method => :get do %>
-		<%= t("common.title.search") %> : <%= text_field_tag 'q', params[:q] %>
-	<% end -%>
+  <%= form_tag :cardbills, :method => :get do %>
+    <%= t("common.title.search") %> : <%= text_field_tag 'q', params[:q] %>
+  <% end -%>
 <% end -%>
 
 <div id="show_command">
 <%= link_to t('common.title.new'), new_cardbill_path %>
 </div>
+
 <h2>Total : <%= @cardbills_count %></h2>
 <table id="list-table">
   <tr>

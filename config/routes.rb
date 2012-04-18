@@ -17,7 +17,38 @@ Mintoffice::Application.routes.draw do
   match '/users/logout', :controller => 'users', :action => 'logout', :conditions => { :method => :get}
   match '/users/my', :controller => "users", :action => "my", :conditions => {:method => :get}
 
-  resources :users
+  resources :users do
+    resources :payments do
+      collection do
+        get 'yearly'
+        post 'yearly', :action => 'create_yearly'
+      end
+    end
+
+    resources :commutes do
+      collection do
+        get 'go'
+        post 'go', :action => 'go!'
+      end
+
+      member do
+        get 'detail'
+        get 'leave'
+        put 'leave', :action => 'leave!'
+      end
+    end
+
+    resources :vacations
+  end
+
+  resources :payments, :only => [:index, :show]
+  resources :commutes
+  resources :vacations do
+    resources :used_vacations, :path => "used" do
+      put 'approve'
+    end
+  end
+
   resources :required_tags
   resources :namecards
   resources :business_clients do
@@ -25,10 +56,8 @@ Mintoffice::Application.routes.draw do
   end
 
   resources :taxbills do
-    resources :taxbill_items#, :path => "items", :as => "items"
+    resources :taxbill_items, :path => "items"
   end
-
-  resources :payments
 
   # The priority is based upon order of creation: first created -> highest priority.
 

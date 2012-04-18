@@ -1,40 +1,40 @@
-<% @title = t(".title") %>
+<% title t(".title") %>
 <div id="show_command">
-	<%= link_to t('common.title.edit'), edit_attachment_path(@attachment) %> |
-	<%= link_to t('common.title.list'), attachments_path %>
+  <%= link_to t('common.title.edit'), edit_attachment_path(@attachment) %> |
+  <%= link_to t('common.title.list'), attachments_path %>
 </div>
 <h2><%= t("common.title.show") %></h2>
-<div class="box">	
+<div class="box">
 <div id="descr">
 <table border="0" cellspacing="5" cellpadding="5">
-	<tr>
-		<th><%= Attachment.human_attribute_name('title') %></th>
-		<td><%=h @attachment.title %></td>
-	</tr>
-	<tr>
-		<th><%= Attachment.human_attribute_name('comments') %></th>
-		<td><%=h @attachment.comments %></td>
-	</tr>
-	<tr>
-		<th><%= Attachment.human_attribute_name('contenttype') %></th>
-		<td><%=h @attachment.contenttype %></td>
-	</tr>
-	<tr>
-		<th><%= Attachment.human_attribute_name('original_filename') %></th>
-		<td><%=h @attachment.original_filename %></td>
-	</tr>
-	<tr>
-		<th><%= Attachment.human_attribute_name('filepath') %></th>
-		<td><%=h @attachment.filepath %></td>
-	</tr>
-	<tr>
-		<th><%= Attachment.human_attribute_name('owner_table_name') %></th>
-		<td><%=h @attachment.owner_table_name %></td>
-	</tr>
-	<tr>
-		<th><%= Attachment.human_attribute_name('owner_id') %></th>
-		<td><%=h @attachment.owner_id %></td>
-	</tr>
+  <tr>
+    <th><%= Attachment.human_attribute_name('title') %></th>
+    <td><%=h @attachment.title %></td>
+  </tr>
+  <tr>
+    <th><%= Attachment.human_attribute_name('comments') %></th>
+    <td><%=h @attachment.comments %></td>
+  </tr>
+  <tr>
+    <th><%= Attachment.human_attribute_name('contenttype') %></th>
+    <td><%=h @attachment.contenttype %></td>
+  </tr>
+  <tr>
+    <th><%= Attachment.human_attribute_name('original_filename') %></th>
+    <td><%=h @attachment.original_filename %></td>
+  </tr>
+  <tr>
+    <th><%= Attachment.human_attribute_name('filepath') %></th>
+    <td><%=h @attachment.filepath %></td>
+  </tr>
+  <tr>
+    <th><%= Attachment.human_attribute_name('owner_table_name') %></th>
+    <td><%=h @attachment.owner_table_name %></td>
+  </tr>
+  <tr>
+    <th><%= Attachment.human_attribute_name('owner_id') %></th>
+    <td><%=h @attachment.owner_id %></td>
+  </tr>
 </table>
 </div>
 <%= render :partial => "shared/show_attachment", :object => @attachment  %>

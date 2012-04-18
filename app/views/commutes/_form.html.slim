@@ -1,0 +1,16 @@
+- form_type = if commute.new_record? then 'new' else 'edit' end
+
+#show_command
+  = link_to t('common.title.back'), commute_path(user)
+
+h2= t("commutes.#{form_type}.title")
+
+= form_for [type, user, commute], html: {multipart: true, class: "tabular"} do |f|
+  = f.error_messages
+  .box
+    p
+      = f.label type
+      = DateTime.now.strftime("%Y-%m-%d %H:%M")
+    p
+      = render 'shared/attachments/form', label: t("commutes.#{form_type}.picture")
+  = f.submit t("commutes.#{form_type}.submit")

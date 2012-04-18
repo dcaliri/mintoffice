@@ -1,9 +1,9 @@
-<% @title  = t('.title') %>
+<% title t('.title') %>
 
 <% content_for :search do -%>
-	<%= form_tag :business_clients, :method => :get do %>
-		<%= t("common.title.search") %> : <%= text_field_tag 'query', params[:query] %>
-	<% end -%>
+  <%= form_tag :business_clients, :method => :get do %>
+    <%= t("common.title.search") %> : <%= text_field_tag 'query', params[:query] %>
+  <% end -%>
 <% end %>
 
 <div id="show_command">
@@ -30,7 +30,7 @@
     </table>
     <br />
     <center>
-		<%= will_paginate @business_clients %>
+    <%= will_paginate @business_clients %>
     </center>
 <% else %>
     <h3><%= t 'business_clients.index.empty' %></h3>
