@@ -437,6 +437,16 @@ ko:
             title: 새로운 담당자 입력
         edit:
             title: 담당자 수정
+    payments:
+        show:
+            link: 연봉 관리
+    vacations:
+        show:
+            title: 연차 정보
+            link: 연차 관리
+        new:
+            title: 새로운 연차 신청하기
+            link: 연차 신청
     users:
         new:
             title: 새 사용자 계정 만들기

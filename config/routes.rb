@@ -37,10 +37,13 @@ Mintoffice::Application.routes.draw do
         put 'leave', :action => 'leave!'
       end
     end
+
+    resources :vacations
   end
 
   resources :payments, :only => [:index, :show]
   resources :commutes
+  resources :vacations
 
   resources :required_tags
   resources :namecards

@@ -1,0 +1,30 @@
+h1 아직 구현되지 않았습니다.
+
+#show_command
+  = link_to t('vacations.new.link'), [:new, user, :vacation]
+  = " | "
+  = link_to t('common.title.list'), :vacations
+
+.box
+  - unless vacations.empty?
+    table
+      tr
+        th 연차 시작
+        th 연차 종료
+        th 사유
+        th 메뉴
+      - vacations.each do |vacation|
+        tr
+          td width="120" align="right"
+            = vacation.from
+          td width="120" align="right"
+            = vacation.to
+          td width="150" align="right"
+            = vacation.note
+          td width="150" align="right"
+            = link_to "수정", [:edit, user, vacation]
+            = " | "
+            = link_to "삭제", [user, vacation], :method => :delete, :confirm => "Are you sure?"
+
+  - else
+    h4 연차 기록이 없습니다
