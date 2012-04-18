@@ -445,8 +445,8 @@ ko:
             title: 연차 정보
             link: 연차 관리
         new:
-            title: 새로운 연차 신청하기
-            link: 연차 신청
+            title: 새로운 연차 할당하기
+            link: 연차 할당
     users:
         new:
             title: 새 사용자 계정 만들기

@@ -1,30 +1,44 @@
-h1 아직 구현되지 않았습니다.
-
 #show_command
   = link_to t('vacations.new.link'), [:new, user, :vacation]
   = " | "
   = link_to t('common.title.list'), :vacations
 
-.box
-  - unless vacations.empty?
-    table
-      tr
-        th 연차 시작
-        th 연차 종료
-        th 사유
-        th 메뉴
-      - vacations.each do |vacation|
-        tr
-          td width="120" align="right"
-            = vacation.from
-          td width="120" align="right"
-            = vacation.to
-          td width="150" align="right"
-            = vacation.note
-          td width="150" align="right"
-            = link_to "수정", [:edit, user, vacation]
-            = " | "
-            = link_to "삭제", [user, vacation], :method => :delete, :confirm => "Are you sure?"
+- unless vacations.empty?
+  .box
+    - vacations.each do |vacation|
+      h3= "할당 연차: #{vacation.period}일, 사용 연차: #{vacation.used.total}일, 잔여 연차: #{vacation.remain}일"
 
-  - else
-    h4 연차 기록이 없습니다
+      div align="right"
+        = link_to "연차 사용하기", [:new, user, vacation, :used_vacation]
+        = " | "
+        = link_to "수정하기", [:edit, user, vacation]
+        = " | "
+        = link_to "삭제하기", [user, vacation], :method => :delete, :confirm => "Are you sure?"
+      - unless vacation.used.empty?
+        table
+          tr
+            th 연차 시작
+            th 연차 종료
+            th 기간
+            th 사유
+            th 메뉴
+          - vacation.used.each do |used|
+            tr
+              td width="120" align="right"
+                = used.from
+              td width="120" align="right"
+                = used.to
+              td width="120" align="right"
+                = "#{used.period} 일"
+              td width="150" align="right"
+                = used.note
+              td width="150" align="right"
+                = link_to "수정", [:edit, user, vacation, used]
+                = " | "
+                = link_to "삭제", [user, vacation, used], :method => :delete, :confirm => "Are you sure?"
+        br
+      - else
+        h4 사용한 연차 내역이 없습니다.
+
+- else
+  h4 연차 내역이 없습니다

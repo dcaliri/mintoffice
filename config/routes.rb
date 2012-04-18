@@ -38,7 +38,13 @@ Mintoffice::Application.routes.draw do
       end
     end
 
-    resources :vacations
+    resources :vacations do
+      resources :used_vacations
+
+      # member do
+      #   get 'use', controller: 'UsedVacations', action: 'new'
+      # end
+    end
   end
 
   resources :payments, :only => [:index, :show]
