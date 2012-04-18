@@ -169,7 +169,7 @@ ko:
                 email: 이메일
                 phonenumber: 전화번호
             taxbill:
-                billtype: 타입
+                billtype: 거래구분
                 price: 총합 금액
                 tax: 총합 세액
                 total: 총합 합계액
@@ -453,6 +453,7 @@ ko:
             title: 사용자 계정 목록
             newuser: 새로운 사용자 등록
         login:
+            title: 로그인
             name: 사용자계정
             password: 비밀번호
             login: 로그인
