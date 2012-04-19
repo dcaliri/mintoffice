@@ -25,8 +25,6 @@ class BankTransaction < ActiveRecord::Base
         "branchname" => sheet.cell(i, 7)
       }
 
-      logger.info params
-
       transactions = where(transacted_at: Time.zone.parse(params["transacted_at"]), in: params["in"], out: params["out"], remain: params["remain"])
       if transactions.empty?
         create!(params)
