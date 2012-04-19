@@ -8,7 +8,7 @@ h2= t("common.title.#{form_type}")
 = form_tag [:excel, bank_account, bank_transaction], multipart: true do
   .box
     p
-      = label_tag :bank_transaction, :file
+      = label_tag :file, t('file')
       = file_field :bank_transaction, :file
     p
-      = submit_tag
+      = submit_tag t('.submit')

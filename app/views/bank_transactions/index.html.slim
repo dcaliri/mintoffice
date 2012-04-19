@@ -19,12 +19,12 @@
       th 메뉴
     - bank_transactions.each do |transaction|
       tr
-        td= transaction.transacted_at
+        td= transaction.transacted_at.strftime("%Y-%m-%d %H.%M")
         td= transaction.transaction_type
-        td= transaction.in
-        td= transaction.out
+        td= number_to_currency transaction.in
+        td= number_to_currency transaction.out
         td= transaction.note
-        td= transaction.remain
+        td= number_to_currency transaction.remain
         td= transaction.branchname
         td
           = link_to t('common.link.edit'), [:edit, bank_account, transaction]

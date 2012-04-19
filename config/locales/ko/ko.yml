@@ -556,6 +556,8 @@ ko:
             empty: 입출금 내역이 없습니다
         excel:
             title: 엑셀로 올리기
+            file: 엑셀 파일
+            submit: 엑셀 파일 올리기
         new:
             title: 입출금 내역 올리기
         edit:
