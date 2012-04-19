@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120419015329) do
+ActiveRecord::Schema.define(:version => 20120419043655) do
 
   create_table "attachments", :force => true do |t|
     t.string   "title"
@@ -25,6 +25,12 @@ ActiveRecord::Schema.define(:version => 20120419015329) do
     t.integer  "owner_id"
     t.string   "original_filename"
     t.integer  "seq"
+  end
+
+  create_table "bank_accounts", :force => true do |t|
+    t.string "name"
+    t.string "number"
+    t.text   "note"
   end
 
   create_table "bank_transactions", :force => true do |t|
