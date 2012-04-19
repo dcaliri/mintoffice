@@ -1,0 +1,18 @@
+#show_command
+  = link_to t('common.title.back'), :bank_accounts
+
+h2= t("common.title.#{action_name}")
+
+= form_for bank_account do |f|
+  .box
+    p
+      = f.label :name
+      = f.text_field :name
+    p
+      = f.label :number
+      = f.text_field :number
+    p
+      = f.label :note
+      = f.text_area :note
+    p
+      = f.submit

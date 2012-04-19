@@ -353,6 +353,7 @@ ko:
             attachment: 첨부파일
             search: 검색
             total: 총합
+            excel: 엑셀 파일 올리기
         link:
             logout: "로그아웃"
             edit: "수정"

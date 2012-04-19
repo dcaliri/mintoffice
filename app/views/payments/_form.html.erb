@@ -1,11 +1,8 @@
-<% form_type = if payment.new_record? then 'new' else 'edit' end %>
-<% title t("payments.#{form_type}.title") %>
-
 <div id="show_command">
   <%= link_to t('common.title.back'), payment_path(user) %>
 </div>
 
-<h2><%= t("common.title.#{form_type}") %></h2>
+<h2><%= t("common.title.#{action_name}") %></h2>
 
 <%= form_for [user, payment] do |f| %>
    <%= f.error_messages %>
