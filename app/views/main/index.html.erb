@@ -39,6 +39,11 @@
         <%= link_to t("taxbills.index.title"), :taxbills %>
       </li>
     <% end %>
+    <% if @user.permission.any? {|perm| perm.name == 'bank_accounts'}  %>
+      <li>
+        <%= link_to t("bank_accounts.index.title"), :bank_accounts %>
+      </li>
+    <% end %>
     <li class="sublast">#</li>
     </ul>
   </li>

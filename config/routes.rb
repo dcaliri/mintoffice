@@ -49,6 +49,15 @@ Mintoffice::Application.routes.draw do
     end
   end
 
+  resources :bank_accounts, path: 'banks' do
+    resources :bank_transactions, path: "transactions" do
+      collection do
+        get 'excel'
+        post 'excel', :action => 'upload'
+      end
+    end
+  end
+
   resources :required_tags
   resources :namecards
   resources :business_clients do
