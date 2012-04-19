@@ -49,7 +49,7 @@ Mintoffice::Application.routes.draw do
     end
   end
 
-  resources :bank_accounts do
+  resources :bank_accounts, path: 'banks' do
     resources :bank_transactions, path: "transactions" do
       collection do
         get 'excel'
