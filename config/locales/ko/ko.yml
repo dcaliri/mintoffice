@@ -353,6 +353,7 @@ ko:
             attachment: 첨부파일
             search: 검색
             total: 총합
+            excel: 엑셀 파일 올리기
         link:
             logout: "로그아웃"
             edit: "수정"
@@ -518,6 +519,8 @@ ko:
     taxbill_items:
         new:
             title: 새로운 내역 추가
+        edit:
+            title: 세금계산서 내역 수정
     taxmen:
         empty: 담당자가 없습니다.
         new:
