@@ -4,23 +4,24 @@
   = " | "
   = link_to t('common.title.back'), :root
 
-- unless bank_accounts.empty?
-  table
-    tr
-      th 은행
-      th 계정
-      th 설명
-      th 메뉴
-    - bank_accounts.each do |account|
+.box
+  - unless bank_accounts.empty?
+    table
       tr
-        td= account.name
-        td= account.number
-        td= account.note
-        td
-          = link_to t('bank_transactions.index.title'), [account, :bank_transactions]
-          = " | "
-          = link_to t('common.link.edit'), [:edit, account]
-          = " | "
-          = link_to t('common.link.destroy'), account, :method => :delete, :confirm => "Are you sure?"
-- else
-  h4= t('.empty')
+        th= BankAccount.human_attribute_name(:name)
+        th= BankAccount.human_attribute_name(:number)
+        th= BankAccount.human_attribute_name(:note)
+        th= t('common.menu')
+      - bank_accounts.each do |account|
+        tr
+          td= account.name
+          td= account.number
+          td= account.note
+          td
+            = link_to t('bank_transactions.index.title'), [account, :bank_transactions]
+            = " | "
+            = link_to t('common.link.edit'), [:edit, account]
+            = " | "
+            = link_to t('common.link.destroy'), account, :method => :delete, :confirm => "Are you sure?"
+  - else
+    h4= t('.empty')
