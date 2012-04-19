@@ -15,7 +15,7 @@ describe BankTransaction do
       transaction.remain.should == 227599082
       transaction.branchname.should == "여중대"
 
-      BankTransaction.count.should == 10
+      BankTransaction.count.should == 9
     end
   end
 end

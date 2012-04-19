@@ -1,3 +1,9 @@
+
+#show_command
+  = link_to "입출금 내역 올리기", [:new, :bank_transaction]
+  = " | "
+  = link_to t('common.title.back'), :root
+
 - unless bank_transactions.empty?
   table
     tr
