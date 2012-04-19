@@ -13,6 +13,14 @@ class PaymentsController < ApplicationController
 
   def redirect_unless_permission
   end
+  
+  before_filter :redirect_unless_me, :only => :show
+  
+  def redirect_unless_me
+    unless @user.ingroup?(:admin)
+      force_redirect if @user.id != params[:id].to_i
+    end
+  end
 
   def create
     payment.save!

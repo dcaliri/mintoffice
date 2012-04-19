@@ -30,17 +30,17 @@ class Taxbill < ActiveRecord::Base
     includes(:taxman).where('taxmen.fullname like ?', text)
   end
   
-  def self.seachbilltype(text)
-    if text == "all"
-      return self
+  def self.seachbybilltype(text)
+    if text == "all" or text == nil
+      where("1 IS 1")
     else
       where("billtype is ?", text)
     end
   end
   
   def self.searchbytaxman(text)
-    if text == "0"
-      return self
+    if text == "0" or text == nil
+      where("1 IS 1")
     else
       where("taxman_id is ?",text)
     end
