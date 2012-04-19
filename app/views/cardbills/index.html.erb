@@ -3,6 +3,10 @@
 <% content_for :search do -%>
   <%= form_tag :cardbills, :method => :get do %>
     <%= t("common.title.search") %> : <%= text_field_tag 'q', params[:q] %>
+    <%= select_tag :creditcard_id, 
+			options_from_collection_for_select([Creditcard.new(:cardno => "all")]+Creditcard.all, :id, :cardno_long, params[:creditcard_id]),
+			"onchange" => "this.form.submit()"
+		%>
   <% end -%>
 <% end -%>
 

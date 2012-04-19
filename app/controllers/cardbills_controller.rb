@@ -4,8 +4,9 @@ class CardbillsController < ApplicationController
   # GET /cardbills.xml
   def index
 #    @cardbills = Cardbill.paginate(:order => 'transdate desc', :page => params[:page], :per_page => 20)
-    @cardbills = Cardbill.search(params[:q]).paginate(:order => 'transdate desc', :page => params[:page], :per_page => 20)
+    @cardbills = Cardbill.search(params[:q]).searchbycreditcard(params[:creditcard_id]).paginate(:order => 'transdate desc', :page => params[:page], :per_page => 20)
     @cardbills_count = Cardbill.count(:all)
+    
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @cardbills }
