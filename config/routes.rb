@@ -56,6 +56,13 @@ Mintoffice::Application.routes.draw do
         post 'excel', :action => 'upload'
       end
     end
+
+    resources :bank_transfers, path: "tranfers" do
+      collection do
+        get 'excel'
+        post 'excel', :action => 'upload'
+      end
+    end
   end
 
   resources :required_tags
