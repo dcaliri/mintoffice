@@ -118,6 +118,7 @@ ko:
             used_vacation: 사용한 연차
             bank_account: 은행계좌
             bank_transaction: 입출금 내역
+            bank_transfer: 이체 내역
         attributes:
             attachment:
                 comments: 주석
@@ -271,6 +272,23 @@ ko:
                 remain: 잔액
                 branchname: 거래점명
                 file: 엑셀 파일
+            bank_transfer:
+                transfer_type: 이체구분
+                transfered_at: 거래일시
+                result: 처리결과
+                out_bank_account: 출금계좌
+                in_bank_name: 입금은행
+                in_bank_account: 입금계좌
+                money: 처리금액
+                transfer_fee: 수수료
+                error_money: 오류금액
+                registered_at: 등록일자
+                error_code: 오류코드
+                transfer_note: 거래메모
+                incode: 입금인코드
+                out_account_note: 출금통장표시내용
+                in_account_note: 입금통장표시내용
+                in_person_name: 입금인성명
         errors:
             template:
                 header: 오류가 발생했습니다.
@@ -567,6 +585,21 @@ ko:
             link: 입출금 내역 올리기
         edit:
             title: 입출금 내역 수정하기
+    bank_transfers:
+        index:
+            title: 이체 내역
+            empty: 이체 내역이 없습니다
+        excel:
+            title: 엑셀로 올리기
+            link: 엑셀 파일로 올리기
+            file: 엑셀 파일
+            submit: 엑셀 파일 올리기
+        new:
+            title: 이체 내역 올리기
+            link: 이체 내역 올리기
+        edit:
+            title: 이체 내역 수정하기
+
     used_vacations:
         show:
             empty: 사용한 연차 내역이 없습니다
