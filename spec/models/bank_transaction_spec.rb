@@ -15,7 +15,20 @@ describe BankTransaction do
       transaction.remain.should == 227599082
       transaction.branchname.should == "여중대"
 
-      BankTransaction.count.should == 9
+      BankTransaction.count.should == 10
+    end
+
+    it "should renewal exist stylesheet" do
+      BankTransaction.parse_stylesheet('./spec/fixtures/yesterday.xls')
+      BankTransaction.parse_stylesheet('./spec/fixtures/today.xls')
+
+      transaction = BankTransaction.last
+      transaction.transacted_at.should == Time.zone.parse("2012-04-09(11:25:12)")
+      transaction.out.should == 1790275
+      transaction.note.should == "좋은곳"
+      transaction.remain.should == 199238327
+
+      BankTransaction.count.should == 11
     end
   end
 end

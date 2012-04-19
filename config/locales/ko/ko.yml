@@ -116,6 +116,8 @@ ko:
             commute: 출퇴근
             vacation: 연차
             used_vacation: 사용한 연차
+            bank_account: 은행계좌
+            bank_transaction: 입출금 내역
         attributes:
             attachment:
                 comments: 주석
@@ -256,6 +258,18 @@ ko:
                 to: 종료
                 period: 기간
                 note: 사유
+            bank_account:
+                name: 은행
+                number: 계정
+                note: 설명
+            bank_transaction:
+                transacted_at: 거래일자
+                transaction_type: 적요
+                in: 입금액
+                out: 출금액
+                note: 내용
+                remain: 잔액
+                branchname: 거래점명
         errors:
             template:
                 header: 오류가 발생했습니다.
@@ -527,6 +541,14 @@ ko:
         approve:
             approve: 승인
             cancel: 승인 취소
+    bank_accounts:
+        index:
+            title: 은행계좌 목록
+            empty: 은행계좌가 없습니다
+        new:
+            title: 새로운 은행계좌 만들기
+        edit:
+            title: 은행계좌 수정하기
     bank_transactions:
         index:
             title: 입출금 내역
