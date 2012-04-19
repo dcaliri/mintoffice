@@ -7,6 +7,7 @@ gem 'dynamic_form'
 gem 'will_paginate', '~> 3.0'
 gem 'rmagick'
 gem 'decent_exposure'
+gem 'roo'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
@@ -28,10 +29,10 @@ group :test do
   gem 'growl'
 end
 
-group :production do
-  gem 'pg'
-end
-
 group :development, :test do
   gem 'sqlite3'
+end
+
+group :production do
+  gem 'pg'
 end

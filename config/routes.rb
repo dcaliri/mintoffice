@@ -49,6 +49,8 @@ Mintoffice::Application.routes.draw do
     end
   end
 
+  resources :bank_transactions
+
   resources :required_tags
   resources :namecards
   resources :business_clients do

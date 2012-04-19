@@ -45,6 +45,14 @@ class ApplicationController < ActionController::Base
     redirect_to :controller => 'main', :action => 'index'
   end
 
+  def User(permission)
+    if permission == :protedted && @user.ingroup?(:admin) == false
+      User.where(name: @user.name)
+    else
+      User
+    end
+  end
+
   def title(text="")
     unless text.blank?
       @title = text

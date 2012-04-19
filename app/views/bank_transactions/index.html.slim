@@ -1,0 +1,21 @@
+- unless bank_transactions.empty?
+  table
+    tr
+      th 거래일자
+      th 적요
+      th 입금액
+      th 출금액
+      th 내용
+      th 잔액
+      th 거래처명
+    - bank_transactions.each do |transaction|
+      tr
+        td= transaction.transacted_at
+        td= transaction.transaction_type
+        td= transaction.in
+        td= transaction.out
+        td= transaction.note
+        td= transaction.remain
+        td= transaction.branchname
+- else
+  h4= t('.empty')

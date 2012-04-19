@@ -527,7 +527,10 @@ ko:
         approve:
             approve: 승인
             cancel: 승인 취소
-
+    bank_transactions:
+        index:
+            title: 입출금 내역
+            empty: 입출금 내역이 없습니다
     used_vacations:
         show:
             empty: 사용한 연차 내역이 없습니다
