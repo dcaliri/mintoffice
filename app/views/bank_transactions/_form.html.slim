@@ -3,7 +3,7 @@
 
 h2= t("common.title.#{action_name}")
 
-= form_for [bank_account, bank_transaction] do |f|
+= form_for [bank_account, bank_transaction], html: {:class => "tabular"} do |f|
   .box
     p
       = f.label :transacted_at
@@ -26,5 +26,5 @@ h2= t("common.title.#{action_name}")
     p
       = f.label :branchname
       = f.text_field :branchname
-    p
-      = f.submit
+  p
+    = f.submit
