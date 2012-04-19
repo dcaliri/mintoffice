@@ -4,7 +4,7 @@ class BankTransfersController < ApplicationController
   expose(:bank_transfer)
 
   def upload
-    bank_transfer.open_and_parse_stylesheet(params[:bank_transaction])
+    bank_transfers.open_and_parse_stylesheet(params[:upload])
     redirect_to [bank_account, :bank_transfers]
   end
 
