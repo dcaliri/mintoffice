@@ -2,11 +2,11 @@
 - title t("vacations.#{form_type}.title")
 
 #show_command
-  = link_to t('common.title.back'), vacation_path(user)
+  = link_to t('common.title.back'), [user, :vacations]
 
 h2= t("common.title.#{form_type}")
 
-= form_for [user, vacation] do |f|
+= form_for [user, vacation], html: {class: "tabular"} do |f|
   = f.error_messages
   .box
     p
@@ -18,5 +18,5 @@ h2= t("common.title.#{form_type}")
     p
       = f.label :period
       = f.text_field :period
-    p
-      = f.submit
+  p
+    = f.submit
