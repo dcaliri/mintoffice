@@ -2,6 +2,8 @@
 #show_command
   = link_to "입출금 내역 올리기", [:new, bank_account, :bank_transaction]
   = " | "
+  = link_to "엑셀 파일로 올리기 올리기", [:excel, bank_account, :bank_transactions]
+  = " | "
   = link_to t('common.title.back'), :root
 
 - unless bank_transactions.empty?
@@ -14,6 +16,7 @@
       th 내용
       th 잔액
       th 거래처명
+      th 메뉴
     - bank_transactions.each do |transaction|
       tr
         td= transaction.transacted_at
@@ -23,5 +26,9 @@
         td= transaction.note
         td= transaction.remain
         td= transaction.branchname
+        td
+          = link_to t('common.link.edit'), [:edit, bank_account, transaction]
+          = " | "
+          = link_to t('common.link.destroy'), [bank_account, transaction], :method => :delete, :confirm => "Are you sure?"
 - else
   h4= t('.empty')

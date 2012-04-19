@@ -1,0 +1,14 @@
+- form_type = if bank_transaction.new_record? then 'new' else 'edit' end
+
+#show_command
+  = link_to t('common.title.back'), [bank_account, :bank_transactions]
+
+h2= t("common.title.#{form_type}")
+
+= form_tag [:excel, bank_account, bank_transaction], multipart: true do
+  .box
+    p
+      = label_tag :bank_transaction, :file
+      = file_field :bank_transaction, :file
+    p
+      = submit_tag

@@ -270,6 +270,7 @@ ko:
                 note: 내용
                 remain: 잔액
                 branchname: 거래점명
+                file: 엑셀 파일
         errors:
             template:
                 header: 오류가 발생했습니다.
@@ -553,6 +554,12 @@ ko:
         index:
             title: 입출금 내역
             empty: 입출금 내역이 없습니다
+        excel:
+            title: 엑셀로 올리기
+        new:
+            title: 입출금 내역 올리기
+        edit:
+            title: 입출금 내역 수정하기
     used_vacations:
         show:
             empty: 사용한 연차 내역이 없습니다
