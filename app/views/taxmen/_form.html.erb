@@ -1,12 +1,8 @@
-<% form_type = if @taxman.new_record? then 'new' else 'edit' end %>
-
-<% title t("taxmen.#{form_type}.title") %>
-
 <div id="show_command">
   <%= link_to t('common.title.back'), @business_client %>
 </div>
 
-<h2><%= t("common.title.#{form_type}") %></h2>
+<h2><%= t("common.title.#{action_name}") %></h2>
 
 <%= form_for [@business_client, @taxman] do |f| %>
    <%= f.error_messages %>

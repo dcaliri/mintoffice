@@ -1,11 +1,8 @@
-<% form_type = if taxbill.new_record? then 'new' else 'edit' end %>
-<% title t("taxbills.#{form_type}.title") %>
-
 <div id="show_command">
   <%= link_to t('common.title.back'), taxbill %>
 </div>
 
-<h2><%= t("common.title.#{form_type}") %></h2>
+<h2><%= t("common.title.#{action_name}") %></h2>
 
 <%= form_for taxbill, html: {multipart: true} do |f| %>
    <%= f.error_messages %>
@@ -22,7 +19,7 @@
       <%= f.label :taxman_id %>
       <%= f.select :taxman_id, options_for_select(Taxbill.taxmen_list, taxbill.taxman_id) %>
     </p>
-    <%= render 'shared/attachments/form', label: t("taxbills.#{form_type}.picture") %>
+    <%= render 'shared/attachments/form', label: t("taxbills.#{action_name}.picture") %>
     <p>
       <%= f.submit %>
     </p>
