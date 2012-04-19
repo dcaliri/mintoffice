@@ -7,7 +7,7 @@
     <%= link_to t('bonuses.new.link'), [:new, user, :payment] %>
     |
   <% end %>
-  <%= link_to t('common.title.list'), :payments %>
+  <%= link_to t('hrinfos.show.title'), hrinfo_path(user.hrinfo) %>
 </div>
 <h2><%= user.hrinfo.fullname %></h2>
 

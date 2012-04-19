@@ -514,6 +514,8 @@ ko:
             title: 연차 정보
             info: "할당 연차: %{total}일, 사용 연차: %{used}일, 잔여 연차: %{remain}일"
             link: 연차 관리
+            approved: 승인완료
+            not_approved: 미승인
             empty: 연차 내역이 없습니다
         show:
             link: 연차 관리
@@ -530,6 +532,7 @@ ko:
         show:
             empty: 사용한 연차 내역이 없습니다
         new:
+            title: 연차 사용하기
             link: 연차 사용하기
         edit:
             title: 연차 수정하기
