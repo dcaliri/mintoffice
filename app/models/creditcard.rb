@@ -10,6 +10,10 @@ class Creditcard < ActiveRecord::Base
   validates_uniqueness_of :cardno
   
   def cardno_long
-    self.cardno + " (" + self.nickname + ")"
+    if self.nickname == nil
+      self.cardno
+    else
+     self.cardno + " (" + self.nickname + ")"
+   end
   end
 end

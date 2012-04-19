@@ -29,15 +29,15 @@
               th= t('common.menu')
           - vacation.used.each do |used|
             tr
-              td width="120" align="right"
+              td
                 = used.from
-              td width="120" align="right"
+              td
                 = used.to
-              td width="120" align="right"
+              td
                 = "#{used.period} #{t('datetime.prompts.day')}"
-              td width="120" align="right"
+              td
                 = used.note
-              td width="120" align="right"
+              td
                 = used.approve ? "yes" : "no"
                 - if @user.ingroup?("admin")
                   = " ("

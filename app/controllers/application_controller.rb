@@ -34,6 +34,12 @@ class ApplicationController < ActionController::Base
     force_redirect unless @user.ingroup? "admin"
   end
 
+  def redirect_unless_me
+    unless @user.ingroup?(:admin)
+      force_redirect if @user.id != params[:id].to_i
+    end
+  end
+
   def force_redirect
     flash[:notice] = "You don't have to permission"
     redirect_to :controller => 'main', :action => 'index'

@@ -2,10 +2,11 @@
   - if @user.ingroup?("admin")
     = link_to t('vacations.new.link'), [:new, user, :vacation]
     = " | "
-  = link_to t('common.title.list'), hrinfo_path(user.hrinfo)
+  = link_to t('hrinfos.show.title'), hrinfo_path(user.hrinfo)
+
+h2 ...
 
 - unless vacations.empty?
-  .box
     - vacations.each do |vacation|
       h3= "#{vacation.from} ~ #{vacation.to}"
 
@@ -18,7 +19,7 @@
           = " | "
           = link_to t('common.link.destroy'), [user, vacation], :method => :delete, :confirm => "Are you sure?"
       - unless vacation.used.empty?
-        table
+        table#list-table
           tr
             th= Vacation.human_attribute_name(:from)
             th= Vacation.human_attribute_name(:to)
@@ -29,16 +30,16 @@
               th= t('common.menu')
           - vacation.used.each do |used|
             tr
-              td width="120" align="right"
+              td
                 = used.from
-              td width="120" align="right"
+              td
                 = used.to
-              td width="120" align="right"
+              td
                 = "#{used.period} #{t('datetime.prompts.day')}"
-              td width="120" align="right"
+              td
                 = used.note
-              td width="120" align="right"
-                = used.approve ? "yes" : "no"
+              td
+                = used.approve ? t(".approved") : t(".not_approved")
                 - if @user.ingroup?("admin")
                   = " ("
                   - if used.approve
@@ -48,7 +49,7 @@
                   = ")"
 
               - if @user.ingroup?("admin")
-                td width="150" align="right"
+                td
                   = link_to t('common.link.edit'), [:edit, vacation, used]
                   = " | "
                   = link_to t('common.link.destroy'), [vacation, used], :method => :delete, :confirm => "Are you sure?"
