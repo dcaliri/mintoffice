@@ -1,4 +1,6 @@
 class PaymentsController < ApplicationController
+  before_filter :redirect_unless_me, :only => :show
+
   expose(:users) do
     users = if @user.ingroup?(:admin)
               User
