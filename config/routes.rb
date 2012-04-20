@@ -6,6 +6,13 @@ Mintoffice::Application.routes.draw do
         post 'excel', :action => 'upload'
       end
     end
+
+    resources :card_approved_sources, path: 'approved' do
+      collection do
+        get 'excel'
+        post 'excel', :action => 'upload'
+      end
+    end
   end
 
   resources :documents
