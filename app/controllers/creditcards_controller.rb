@@ -14,6 +14,17 @@ class CreditcardsController < ApplicationController
   # GET /creditcards/1.xml
   def show
     @creditcard = Creditcard.find(params[:id])
+    @attachments = Attachment.for_me(@creditcard, "seq ASC")
+    at = params[:at] || "0"
+    
+    unless @attachments.empty?
+       if session[:attachments].nil?
+         session[:attachments] = [@attachments[at.to_i].id]
+       else
+         session[:attachments] << @attachments[at.to_i].id
+       end
+    end
+    
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @creditcard }
@@ -34,6 +45,17 @@ class CreditcardsController < ApplicationController
   # GET /creditcards/1/edit
   def edit
     @creditcard = Creditcard.find(params[:id])
+    @attachments = Attachment.for_me(@creditcard, "seq ASC")
+    at = params[:at] || "0"
+    
+    unless @attachments.empty?
+       if session[:attachments].nil?
+         session[:attachments] = [@attachments[at.to_i].id]
+       else
+         session[:attachments] << @attachments[at.to_i].id
+       end
+    end
+    
   end
 
   # POST /creditcards
