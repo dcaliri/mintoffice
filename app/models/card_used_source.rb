@@ -34,7 +34,7 @@ class CardUsedSource < ActiveRecord::Base
   ]
 
   def self.latest
-    order('approved_at DESC')
+    order('approved_at DESC, approved_time DESC')
   end
 
   def self.make_unique_key(params)
