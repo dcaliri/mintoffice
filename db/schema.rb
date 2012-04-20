@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120419054544) do
+ActiveRecord::Schema.define(:version => 20120420035959) do
 
   create_table "attachments", :force => true do |t|
     t.string   "title"
@@ -76,6 +76,35 @@ ActiveRecord::Schema.define(:version => 20120419054544) do
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
     t.integer  "attachment_id"
+  end
+
+  create_table "card_used_sources", :force => true do |t|
+    t.integer  "creditcard_id"
+    t.string   "card_no"
+    t.string   "bank_account"
+    t.string   "bank_name"
+    t.string   "card_holder_name"
+    t.string   "used_area"
+    t.string   "approve_no"
+    t.datetime "approved_at"
+    t.datetime "approved_time"
+    t.string   "sales_type"
+    t.integer  "money_krw"
+    t.integer  "money_foreign"
+    t.integer  "price"
+    t.integer  "tax"
+    t.integer  "tip"
+    t.string   "monthly_duration"
+    t.string   "exchange_krw"
+    t.string   "foreign_country_code"
+    t.string   "foreign_country_name"
+    t.string   "store_business_no"
+    t.string   "store_name"
+    t.string   "store_type"
+    t.string   "store_zipcode"
+    t.string   "store_addr1"
+    t.string   "store_addr2"
+    t.string   "store_tel"
   end
 
   create_table "cardbills", :force => true do |t|

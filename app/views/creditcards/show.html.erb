@@ -1,6 +1,9 @@
 <% title t(".title") %>
 <div id="show_command">
-  <%= link_to t("common.title.edit"), edit_creditcard_path(@creditcard) %> |
+  <%= link_to t('card_used_sources.index.title'), [@creditcard, :card_used_sources] %>
+  |
+  <%= link_to t("common.title.edit"), edit_creditcard_path(@creditcard) %>
+  |
   <%= link_to t("common.title.list"), creditcards_path %>
 </div>
 <h2><%= t("common.title.show") %></h2>

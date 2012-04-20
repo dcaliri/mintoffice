@@ -1,6 +1,6 @@
 class BankTransfersController < ApplicationController
   expose(:bank_account)
-  expose(:bank_transfers) { bank_account.bank_transfers }
+  expose(:bank_transfers) { bank_account.bank_transfers.latest.page(params[:page]) }
   expose(:bank_transfer)
 
   expose(:bank_transaction) { BankTransaction.find(params[:from]) if params[:from] }
