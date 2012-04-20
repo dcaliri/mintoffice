@@ -8,6 +8,10 @@ class BankTransaction < ActiveRecord::Base
     {transacted_at: Time.zone.parse(params[:transacted_at]), in: params[:in], out: params[:out], remain: params[:remain]}
   end
 
+  def self.latest
+    order("transacted_at DESC")
+  end
+
   def related?(transfer)
     if transfer
       transacted_at == transfer.transfered_at && out == transfer.money
