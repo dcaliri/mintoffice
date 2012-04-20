@@ -575,6 +575,8 @@ ko:
         index:
             title: 입출금 내역
             empty: 입출금 내역이 없습니다
+        show:
+            to_bank_transfer: 이체 내역
         excel:
             title: 엑셀로 올리기
             link: 엑셀 파일로 올리기
@@ -597,6 +599,8 @@ ko:
         new:
             title: 이체 내역 올리기
             link: 이체 내역 올리기
+        show:
+            to_bank_transaction: 입출금 내역
         edit:
             title: 이체 내역 수정하기
 

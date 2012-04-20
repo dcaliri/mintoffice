@@ -28,7 +28,7 @@ h2 #{bank_account.name}: #{bank_account.number}
       th= BankTransfer.human_attribute_name(:in_person_name)
       th= t('common.menu')
     - bank_transfers.each do |transfer|
-      tr.selectable
+      = content_tag_for(:tr, transfer, class: transfer.related?(bank_transaction) ? 'selectable related' : 'selectable' ) do
         td= transfer.transfer_type
         td= transfer.transfered_at.strftime("%Y-%m-%d %H.%M")
         /!td= transfer.result
@@ -36,11 +36,11 @@ h2 #{bank_account.name}: #{bank_account.number}
         td= transfer.in_bank_name
         td= transfer.in_bank_account
         td align="right"
-					= number_to_currency transfer.money
+          = number_to_currency transfer.money
         td align="right"
-					= number_to_currency transfer.transfer_fee
+          = number_to_currency transfer.transfer_fee
         td align="right"
-					= number_to_currency transfer.error_money
+          = number_to_currency transfer.error_money
         /!td= transfer.registered_at.strftime("%Y-%m-%d %H.%M")
         /!td= transfer.error_code
         /!td= transfer.transfer_note
@@ -49,8 +49,15 @@ h2 #{bank_account.name}: #{bank_account.number}
         /!td= transfer.in_account_note
         td= transfer.in_person_name
         td
+          = link_to t('bank_transfers.show.to_bank_transaction'), bank_account_bank_transactions_path(bank_account, from: transfer)
+          = " | "
           = link_to t('common.link.edit'), [:edit, bank_account, transfer]
           = " | "
           = link_to t('common.link.destroy'), [bank_account, transfer], :method => :delete, :confirm => "Are you sure?"
 - else
   h4= t('.empty')
+
+
+javascript:
+  var position = $('tr.related').position();
+  $(window).scrollTop(position.top);
