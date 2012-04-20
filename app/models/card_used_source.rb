@@ -33,5 +33,4 @@ class CardUsedSource < ActiveRecord::Base
   def self.make_unique_key(params)
     {approved_at: Time.zone.parse(params[:approved_at]), approved_time: Time.zone.parse(params[:approved_time]), money_krw: params[:money_krw]}
   end
-
 end

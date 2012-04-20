@@ -120,6 +120,7 @@ ko:
             bank_transaction: 입출금 내역
             bank_transfer: 이체 내역
             card_used_source: 카드 이용내역
+            card_approved_source: 카드 승인내역
         attributes:
             attachment:
                 comments: 주석
@@ -316,7 +317,19 @@ ko:
                 store_addr1: 가맹점주소1
                 store_addr2: 가맹점주소2
                 store_tel: 가맹점전화번호
-
+            card_approved_source:
+                used_at: 이용일시
+                approve_no: 승인번호
+                card_no: 이용카드
+                card_holder_name: 이용자명
+                store_name: 가맹점
+                money: 이용금액
+                used_type: 이용구분
+                monthly_duration: 할부개월수
+                card_type: 카드구분
+                canceled_at: 취소일자
+                status: 매입상태
+                will_be_paied_at: 결제예정일
         errors:
             template:
                 header: 오류가 발생했습니다.
@@ -648,6 +661,22 @@ ko:
             link: 이용내역 올리기
         edit:
             title: 이용내역 수정하기
+    card_approved_sources:
+        index:
+            title: 카드별 승인내역
+            empty: 카드 승인내역이 없습니다
+        show:
+            title: 카드 승인내역
+        excel:
+            title: 엑셀로 올리기
+            link: 엑셀 파일로 올리기
+            file: 엑셀 파일
+            submit: 엑셀 파일 올리기
+        new:
+            title: 새로운 승인내역 올리기
+            link: 승인내역 올리기
+        edit:
+            title: 승인내역 수정하기
     used_vacations:
         show:
             empty: 사용한 연차 내역이 없습니다
