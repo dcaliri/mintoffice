@@ -25,6 +25,8 @@
 					prev_id = attachment.id
 				%>
 			<% end %>
+		<% else %>
+			No attachment<br />
 		<% end %>
 	<%= attachform.file_field :uploaded_file %>
 <% end -%>

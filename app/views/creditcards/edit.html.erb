@@ -32,7 +32,9 @@
     <%= f.label :cardholder, Creditcard.human_attribute_name("cardholder") %>
     <%= f.text_field :cardholder %>
   </p>
-  <%= render :partial => "shared/edit_attachment", :object => @creditcard %>
+	<p>
+    <%= render 'shared/attachments/form', label: t('hrinfos.edit.picture') %>
+	</p>
 </div>
 <%= f.submit t("common.button.update") %>
 <% end %>

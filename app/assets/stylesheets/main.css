@@ -294,12 +294,15 @@ td.money {
   text-align: right;
 }
 
+#mainmenu-table {
+	top: 80px;
+}
 tr.related {
   background-color: orange;
 }
 
 #mainmenu {
-  display: block;
+  display: none;
   position: relative;
   margin-right: auto;
   margin-left: auto;
