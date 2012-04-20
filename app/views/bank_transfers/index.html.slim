@@ -60,4 +60,6 @@ h2 #{bank_account.name}: #{bank_account.number}
 
 javascript:
   var position = $('tr.related').position();
-  $(window).scrollTop(position.top);
+  $('html,body').animate({
+    scrollTop: position.top - 200
+  }, 500);
