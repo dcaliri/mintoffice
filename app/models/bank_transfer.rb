@@ -25,7 +25,7 @@ class BankTransfer < ActiveRecord::Base
   end
 
   def transaction
-    collection = BankTransaction.where(transacted_at: transfered_at, out: money)
+    collection = BankTransaction.where(transacted_at: transfered_at, out: money + transfer_fee)
     unless collection.empty?
       collection.first
     else
