@@ -1,5 +1,13 @@
 Mintoffice::Application.routes.draw do
-  resources :creditcards
+  resources :creditcards do
+    resources :card_used_sources, path: 'used' do
+      collection do
+        get 'excel'
+        post 'excel', :action => 'upload'
+      end
+    end
+  end
+
   resources :documents
   resources :projects
   resources :pettycashes

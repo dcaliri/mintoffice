@@ -119,6 +119,7 @@ ko:
             bank_account: 은행계좌
             bank_transaction: 입출금 내역
             bank_transfer: 이체 내역
+            card_used_source: 카드 이용내역
         attributes:
             attachment:
                 comments: 주석
@@ -289,6 +290,33 @@ ko:
                 out_account_note: 출금통장표시내용
                 in_account_note: 입금통장표시내용
                 in_person_name: 입금인성명
+            card_used_source:
+                card_no: 카드번호
+                bank_account: 결제계좌번호
+                bank_name: 결제은행명
+                card_holder_name: 카드소유자명
+                used_area: 사용구분
+                approve_no: 승인번호
+                approved_at: 승인일자
+                approved_time: 승인시간
+                sales_type: 매출종류코드
+                money_krw: 승인금액(원화)
+                money_foreign: 승인금액(외화)
+                price: 공금가액(원화)
+                tax: 부가세
+                tip: 봉사료
+                monthly_duration: 할부기간
+                exchange_krw: 외화거래일환률
+                foreign_country_code: 외화거래국가코드
+                foreign_country_name: 외화거래국가명
+                store_business_no: 가맹점사업자번호
+                store_name: 가맹점명
+                store_type: 가맹점업종명
+                store_zipcode: 가맹점우편번호
+                store_addr1: 가맹점주소1
+                store_addr2: 가맹점주소2
+                store_tel: 가맹점전화번호
+
         errors:
             template:
                 header: 오류가 발생했습니다.
@@ -603,7 +631,20 @@ ko:
             to_bank_transaction: 입출금 내역
         edit:
             title: 이체 내역 수정하기
-
+    card_used_sources:
+        index:
+            title: 카드별 이용내역
+            empty: 카드 이용내역이 없습니다
+        excel:
+            title: 엑셀로 올리기
+            link: 엑셀 파일로 올리기
+            file: 엑셀 파일
+            submit: 엑셀 파일 올리기
+        new:
+            title: 새로운 이용내역 올리기
+            link: 이용내역 올리기
+        edit:
+            title: 이용내역 수정하기
     used_vacations:
         show:
             empty: 사용한 연차 내역이 없습니다

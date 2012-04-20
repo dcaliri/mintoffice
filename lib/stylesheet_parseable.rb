@@ -22,8 +22,8 @@ module StylesheetParseable
   end
 
   module ClassMethods
-    def set_parser_columns(*columns)
-      @excel_columns = *columns
+    def set_parser_columns(columns)
+      @excel_columns = columns
     end
 
     def open_and_parse_stylesheet(upload)
@@ -44,14 +44,13 @@ module StylesheetParseable
           next
         end
 
-        create!(params)
-        # collections = where(make_unique_key(params))
-        # if collections.empty?
-        #   create!(params)
-        # else
-        #   resource = collections.first
-        #   resource.update_attributes!(params)
-        # end
+        collections = where(make_unique_key(params))
+        if collections.empty?
+          create!(params)
+        else
+          resource = collections.first
+          resource.update_attributes!(params)
+        end
       end
     end
   end

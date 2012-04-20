@@ -3,7 +3,7 @@ class BankTransfer < ActiveRecord::Base
 
   include StylesheetParseable
 
-  set_parser_columns :transfer_type, :transfered_at, :result, :out_bank_account, :in_bank_name, :in_bank_account, :money, :transfer_fee, :error_money, :registered_at, :error_code, :transfer_note, :incode, :out_account_note, :in_account_note, :in_person_name
+  set_parser_columns [:transfer_type, :transfered_at, :result, :out_bank_account, :in_bank_name, :in_bank_account, :money, :transfer_fee, :error_money, :registered_at, :error_code, :transfer_note, :incode, :out_account_note, :in_account_note, :in_person_name]
 
   def self.open_and_parse_stylesheet(account, upload)
     @account = account
