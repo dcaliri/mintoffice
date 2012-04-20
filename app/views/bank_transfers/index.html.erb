@@ -1,0 +1,70 @@
+<div id="show_command">
+  <%= link_to t('bank_transfers.new.link'), [:new, bank_account, :bank_transfer] %>
+  |
+  <%= link_to t('bank_transfers.excel.link'), [:excel, bank_account, :bank_transfers] %>
+  |
+  <%= link_to t('common.title.back'), :bank_accounts %>
+</div>
+
+<div class='box'>
+  <h3><%= "#{bank_account.name}: #{bank_account.number}" %></h3>
+  <% unless bank_transfers.empty? %>
+    <table>
+      <tr>
+        <th><%= BankTransfer.human_attribute_name(:transfer_type) %></th>
+        <th><%= BankTransfer.human_attribute_name(:transfered_at) %></th>
+        <th><%= BankTransfer.human_attribute_name(:result) %></th>
+        <th><%= BankTransfer.human_attribute_name(:out_bank_account) %></th>
+        <th><%= BankTransfer.human_attribute_name(:in_bank_name) %></th>
+        <th><%= BankTransfer.human_attribute_name(:in_bank_account) %></th>
+        <th><%= BankTransfer.human_attribute_name(:money) %></th>
+        <th><%= BankTransfer.human_attribute_name(:transfer_fee) %></th>
+        <th><%= BankTransfer.human_attribute_name(:error_money) %></th>
+        <th><%= BankTransfer.human_attribute_name(:registered_at) %></th>
+        <th><%= BankTransfer.human_attribute_name(:error_code) %></th>
+        <th><%= BankTransfer.human_attribute_name(:transfer_note) %></th>
+        <th><%= BankTransfer.human_attribute_name(:incode) %></th>
+        <th><%= BankTransfer.human_attribute_name(:out_account_note) %></th>
+        <th><%= BankTransfer.human_attribute_name(:in_account_note) %></th>
+        <th><%= BankTransfer.human_attribute_name(:in_person_name) %></th>
+        <th><%= t('common.menu') %></th>
+      </tr>
+      <% bank_transfers.each do |transfer| %>
+        <% if transfer.related?(bank_transaction)%>
+          <tr class='related'>
+        <% else %>
+          <tr>
+        <% end %>
+            <td><%= transfer.transfer_type %></td>
+            <td><%= transfer.transfered_at.strftime("%Y-%m-%d %H.%M") %></td>
+            <td><%= transfer.result %></td>
+            <td><%= transfer.out_bank_account %></td>
+            <td><%= transfer.in_bank_name %></td>
+            <td><%= transfer.in_bank_account %></td>
+            <td><%= transfer.money %></td>
+            <td><%= transfer.transfer_fee %></td>
+            <td><%= transfer.error_money %></td>
+            <td><%= transfer.registered_at.strftime("%Y-%m-%d %H.%M") %></td>
+            <td><%= transfer.error_code %></td>
+            <td><%= transfer.transfer_note %></td>
+            <td><%= transfer.incode %></td>
+            <td><%= transfer.out_account_note %></td>
+            <td><%= transfer.in_account_note %></td>
+            <td><%= transfer.in_person_name %></td>
+            <td>
+              <%= link_to t('common.link.edit'), [:edit, bank_account, transfer] %>
+              |
+              <%= link_to t('common.link.destroy'), [bank_account, transfer], :method => :delete, :confirm => "Are you sure?" %>
+        </tr>
+      <% end %>
+  <% else %>
+    <h4><%= t('.empty') %></h4>
+  <% end %>
+</div>
+
+<script type="text/javascript">
+  $(function(){
+    var position = $('tr.related').position();
+    $(window).scrollTop(position.top);
+  });
+</script>

@@ -258,7 +258,7 @@ div.flash.notice {
 
 .numrow
 {
-	text-align: right;
+  text-align: right;
 }
 
 .tabular label {
@@ -293,6 +293,10 @@ table th {
 
 td.money {
   text-align: right;
+}
+
+tr.related {
+  background-color: orange;
 }
 
 #mainmenu {

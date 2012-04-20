@@ -17,4 +17,12 @@ class BankTransfer < ActiveRecord::Base
   def self.make_unique_key(params)
     {transfer_type: params[:transfer_type], transfered_at: Time.zone.parse(params[:transfered_at])}
   end
+
+  def related?(transaction)
+    if transaction
+      transaction.transacted_at == transfered_at && transaction.out == money
+    else
+      false
+    end
+  end
 end
