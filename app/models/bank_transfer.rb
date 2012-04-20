@@ -24,11 +24,12 @@ class BankTransfer < ActiveRecord::Base
     order("transfered_at DESC")
   end
 
-  def related?(transaction)
-    if transaction
-      transaction.transacted_at == transfered_at && transaction.out == money
+  def transaction
+    collection = BankTransaction.where(transacted_at: transfered_at, out: money)
+    unless collection.empty?
+      collection.first
     else
-      false
+      nil
     end
   end
 end

@@ -1,0 +1,64 @@
+
+#show_command
+  - if bank_transfer.transaction
+    = link_to t('bank_transfers.show.to_bank_transaction'), [bank_account, bank_transfer.transaction]
+    = " | "
+  = link_to t('common.link.edit'), [:edit, bank_account, bank_transfer]
+  = " | "
+  = link_to t('common.link.destroy'), [bank_account, bank_transfer], :method => :delete, :confirm => "Are you sure?"
+  = " | "
+  = link_to t('common.title.back'), [bank_account, :bank_transfers]
+
+
+h2 #{bank_account.name}: #{bank_account.number}
+
+.box
+  table
+    tr
+      th= BankTransfer.human_attribute_name(:transfer_type)
+      td= bank_transfer.transfer_type
+    tr
+      th= BankTransfer.human_attribute_name(:transfered_at)
+      td= bank_transfer.transfered_at.strftime("%Y.%m.%d %H:%M")
+    tr
+      th= BankTransfer.human_attribute_name(:result)
+      td= bank_transfer.result
+    tr
+      th= BankTransfer.human_attribute_name(:out_bank_account)
+      td= bank_transfer.out_bank_account
+    tr
+      th= BankTransfer.human_attribute_name(:in_bank_name)
+      td= bank_transfer.in_bank_name
+    tr
+      th= BankTransfer.human_attribute_name(:in_bank_account)
+      td= bank_transfer.in_bank_account
+    tr
+      th= BankTransfer.human_attribute_name(:money)
+      td= number_to_currency bank_transfer.money
+    tr
+      th= BankTransfer.human_attribute_name(:transfer_fee)
+      td= number_to_currency bank_transfer.transfer_fee
+    tr
+      th= BankTransfer.human_attribute_name(:error_money)
+      td= number_to_currency bank_transfer.error_money
+    tr
+      th= BankTransfer.human_attribute_name(:registered_at)
+      td= number_to_currency bank_transfer.transfer_fee
+    tr
+      th= BankTransfer.human_attribute_name(:error_code)
+      td= bank_transfer.error_code
+    tr
+      th= BankTransfer.human_attribute_name(:transfer_note)
+      td= bank_transfer.transfer_note
+    tr
+      th= BankTransfer.human_attribute_name(:incode)
+      td= bank_transfer.incode
+    tr
+      th= BankTransfer.human_attribute_name(:out_account_note)
+      td= bank_transfer.out_account_note
+    tr
+      th= BankTransfer.human_attribute_name(:in_account_note)
+      td= bank_transfer.in_account_note
+    tr
+      th= BankTransfer.human_attribute_name(:in_person_name)
+      td= bank_transfer.in_person_name

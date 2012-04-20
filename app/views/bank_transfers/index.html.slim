@@ -28,7 +28,7 @@ h2 #{bank_account.name}: #{bank_account.number}
       th= BankTransfer.human_attribute_name(:in_person_name)
       th= t('common.menu')
     - bank_transfers.each do |transfer|
-      = content_tag_for(:tr, transfer, class: transfer.related?(bank_transaction) ? 'selectable related' : 'selectable' ) do
+      tr.selectable
         td= transfer.transfer_type
         td= transfer.transfered_at.strftime("%Y-%m-%d %H.%M")
         /!td= transfer.result
@@ -48,8 +48,11 @@ h2 #{bank_account.name}: #{bank_account.number}
         /!td= transfer.out_account_note
         /!td= transfer.in_account_note
         td= transfer.in_person_name
-        td
-          = link_to t('bank_transfers.show.to_bank_transaction'), bank_account_bank_transactions_path(bank_account, from: transfer)
+        td align="right"
+          - if transfer.transaction
+            = link_to t('bank_transfers.show.to_bank_transaction'), [bank_account, transfer.transaction]
+            = " | "
+          = link_to t('common.link.show'), [bank_account, transfer]
           = " | "
           = link_to t('common.link.edit'), [:edit, bank_account, transfer]
           = " | "
@@ -59,10 +62,3 @@ h2 #{bank_account.name}: #{bank_account.number}
     = will_paginate bank_transfers
 - else
   h4= t('.empty')
-
-
-javascript:
-  var position = $('tr.related').position();
-  $('html,body').animate({
-    scrollTop: position.top - 200
-  }, 500);

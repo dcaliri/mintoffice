@@ -1,0 +1,36 @@
+
+#show_command
+  - if bank_transaction.transfer
+    = link_to t('bank_transactions.show.to_bank_transfer'), [bank_account, bank_transaction.transfer]
+    = " | "
+  = link_to t('common.link.edit'), [:edit, bank_account, bank_transaction]
+  = " | "
+  = link_to t('common.link.destroy'), [bank_account, bank_transaction], :method => :delete, :confirm => "Are you sure?"
+  = " | "
+  = link_to t('common.title.back'), [bank_account, :bank_transactions]
+
+h2 #{bank_account.name}: #{bank_account.number}
+
+.box
+  table
+    tr
+      th= BankTransaction.human_attribute_name(:transacted_at)
+      td= bank_transaction.transacted_at.strftime("%Y.%m.%d %H:%M")
+    tr
+      th= BankTransaction.human_attribute_name(:transaction_type)
+      td= bank_transaction.transaction_type
+    tr
+      th= BankTransaction.human_attribute_name(:in)
+      td= number_to_currency bank_transaction.in
+    tr
+      th= BankTransaction.human_attribute_name(:out)
+      td= number_to_currency bank_transaction.out
+    tr
+      th= BankTransaction.human_attribute_name(:note)
+      td= bank_transaction.note
+    tr
+      th= BankTransaction.human_attribute_name(:remain)
+      td= number_to_currency bank_transaction.remain
+    tr
+      th= BankTransaction.human_attribute_name(:branchname)
+      td= bank_transaction.branchname
