@@ -54,6 +54,9 @@ h2 #{bank_account.name}: #{bank_account.number}
           = link_to t('common.link.edit'), [:edit, bank_account, transfer]
           = " | "
           = link_to t('common.link.destroy'), [bank_account, transfer], :method => :delete, :confirm => "Are you sure?"
+  br
+  center
+    = will_paginate bank_transfers
 - else
   h4= t('.empty')
 
