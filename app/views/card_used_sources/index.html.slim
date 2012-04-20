@@ -46,5 +46,8 @@ h2= "#{creditcard.nickname}: #{creditcard.cardno}"
           = link_to t('common.link.edit'), [:edit, creditcard, source]
           = " | "
           = link_to t('common.link.destroy'), [creditcard, source], :method => :delete, :confirm => "Are you sure?"
+  br
+  center
+    = will_paginate card_used_sources
 - else
   h4= t('.empty')

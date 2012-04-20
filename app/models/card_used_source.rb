@@ -1,5 +1,8 @@
 class CardUsedSource < ActiveRecord::Base
   belongs_to :creditcard
+
+  self.per_page = 20
+
   include StylesheetParseable
 
   set_parser_columns [
@@ -29,6 +32,10 @@ class CardUsedSource < ActiveRecord::Base
     :store_addr2,
     :store_tel
   ]
+
+  def self.latest
+    order('approved_at DESC')
+  end
 
   def self.make_unique_key(params)
     {approved_at: Time.zone.parse(params[:approved_at]), approved_time: Time.zone.parse(params[:approved_time]), money_krw: params[:money_krw]}

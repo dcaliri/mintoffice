@@ -1,6 +1,6 @@
 class CardUsedSourcesController < ApplicationController
   expose(:creditcard)
-  expose(:card_used_sources) { creditcard.card_used_sources }
+  expose(:card_used_sources) { creditcard.card_used_sources.latest.page(params[:page]) }
   expose(:card_used_source)
 
   def upload
