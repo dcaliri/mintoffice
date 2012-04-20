@@ -5,7 +5,7 @@
 
 h2= t("common.title.#{form_type}")
 
-= form_for [bank_account, bank_transfer] do |f|
+= form_for [bank_account, bank_transfer], html: {class: "tabular"} do |f|
   .box
     p
       = f.label :transfer_type
@@ -55,5 +55,5 @@ h2= t("common.title.#{form_type}")
     p
       = f.label :in_person_name
       = f.text_field :in_person_name
-    p
-      = f.submit
+  p
+    = f.submit

@@ -1,0 +1,61 @@
+
+#show_command
+  = link_to t('bank_transfers.new.link'), [:new, bank_account, :bank_transfer]
+  = " | "
+  = link_to t('bank_transfers.excel.link'), [:excel, bank_account, :bank_transfers]
+  = " | "
+  = link_to t('common.title.back'), :bank_accounts
+h2 #{bank_account.name}: #{bank_account.number}
+
+- unless bank_transfers.empty?
+  table#list-table
+    tr
+      th= BankTransfer.human_attribute_name(:transfer_type)
+      th= BankTransfer.human_attribute_name(:transfered_at)
+      /!th= BankTransfer.human_attribute_name(:result)
+      th= BankTransfer.human_attribute_name(:out_bank_account)
+      th= BankTransfer.human_attribute_name(:in_bank_name)
+      th= BankTransfer.human_attribute_name(:in_bank_account)
+      th= BankTransfer.human_attribute_name(:money)
+      th= BankTransfer.human_attribute_name(:transfer_fee)
+      th= BankTransfer.human_attribute_name(:error_money)
+      /!th= BankTransfer.human_attribute_name(:registered_at)
+      /!th= BankTransfer.human_attribute_name(:error_code)
+      /!th= BankTransfer.human_attribute_name(:transfer_note)
+      /!th= BankTransfer.human_attribute_name(:incode)
+      /!th= BankTransfer.human_attribute_name(:out_account_note)
+      /!th= BankTransfer.human_attribute_name(:in_account_note)
+      th= BankTransfer.human_attribute_name(:in_person_name)
+      th= t('common.menu')
+    - bank_transfers.each do |transfer|
+      = content_tag_for(:tr, transfer, class: transfer.related?(bank_transaction) ? 'selectable related' : 'selectable' ) do
+        td= transfer.transfer_type
+        td= transfer.transfered_at.strftime("%Y-%m-%d %H.%M")
+        /!td= transfer.result
+        td= transfer.out_bank_account
+        td= transfer.in_bank_name
+        td= transfer.in_bank_account
+        td align="right"
+          = number_to_currency transfer.money
+        td align="right"
+          = number_to_currency transfer.transfer_fee
+        td align="right"
+          = number_to_currency transfer.error_money
+        /!td= transfer.registered_at.strftime("%Y-%m-%d %H.%M")
+        /!td= transfer.error_code
+        /!td= transfer.transfer_note
+        /!td= transfer.incode
+        /!td= transfer.out_account_note
+        /!td= transfer.in_account_note
+        td= transfer.in_person_name
+        td
+          = link_to t('common.link.edit'), [:edit, bank_account, transfer]
+          = " | "
+          = link_to t('common.link.destroy'), [bank_account, transfer], :method => :delete, :confirm => "Are you sure?"
+- else
+  h4= t('.empty')
+
+
+javascript:
+  var position = $('tr.related').position();
+  $(window).scrollTop(position.top);
