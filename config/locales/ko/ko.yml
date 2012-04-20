@@ -401,6 +401,7 @@ ko:
             total: 총합
             excel: 엑셀 파일 올리기
         link:
+            show: 내용 보기
             logout: "로그아웃"
             edit: "수정"
             destroy: "삭제"
@@ -635,6 +636,8 @@ ko:
         index:
             title: 카드별 이용내역
             empty: 카드 이용내역이 없습니다
+        show:
+            title: 카드 이용내역
         excel:
             title: 엑셀로 올리기
             link: 엑셀 파일로 올리기
