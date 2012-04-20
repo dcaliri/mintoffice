@@ -3,7 +3,7 @@
 
 h2= t("common.title.#{action_name}")
 
-= form_tag [:excel, bank_account, bank_transaction], html: {multipart: true, class: "tabular"} do
+= form_tag [:excel, bank_account, bank_transaction], multipart: true, class: "tabular" do
   .box
     p
       = label_tag :file, t('.file')

@@ -44,13 +44,14 @@ module StylesheetParseable
           next
         end
 
-        collections = where(make_unique_key(params))
-        if collections.empty?
-          create!(params)
-        else
-          resource = collections.first
-          resource.update_attributes!(params)
-        end
+        create!(params)
+        # collections = where(make_unique_key(params))
+        # if collections.empty?
+        #   create!(params)
+        # else
+        #   resource = collections.first
+        #   resource.update_attributes!(params)
+        # end
       end
     end
   end
