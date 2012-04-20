@@ -40,6 +40,10 @@ module StylesheetParseable
       parser.column @excel_columns
 
       parser.parse(file) do |params|
+        if respond_to?(:before_parser_filter) && before_parser_filter(params) == false
+          next
+        end
+
         collections = where(make_unique_key(params))
         if collections.empty?
           create!(params)
