@@ -6,7 +6,10 @@ h2= t("common.title.#{action_name}")
 = form_tag [:excel, bank_account, bank_transaction], multipart: true, class: "tabular" do
   .box
     p
+      = label_tag :bank_type, t('.type')
+      = select_tag :bank_type, options_for_select(BankTransaction::BANK_LIST)
+    p
       = label_tag :file, t('.file')
       = file_field :bank_transaction, :file
-  p
-    = submit_tag t('.submit')
+    p
+      = submit_tag t('.submit')

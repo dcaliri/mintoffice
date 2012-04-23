@@ -1,12 +1,72 @@
+# encoding: UTF-8
+
 class BankTransaction < ActiveRecord::Base
   belongs_to :bank_account
 
   include StylesheetParseable
 
-  set_parser_columns [:transacted_at, :transaction_type, :in, :out, :note, :remain, :branchname]
-  def self.make_unique_key(params)
-    {transacted_at: Time.zone.parse(params[:transacted_at]), in: params[:in], out: params[:out], remain: params[:remain]}
-  end
+  BANK_LIST = [
+    ["일반 은행", :default],
+    ["기업 은행", :ibk]
+  ]
+
+  DEFAULT = {
+    :name => :default,
+    :keys => {
+      :transacted_at => :time,
+      :in => :integer,
+      :out => :integer,
+      :remain => :integer
+    },
+    :columns => [
+      :transacted_at,
+      :transaction_type,
+      :in,
+      :out,
+      :note,
+      :remain,
+      :branchname
+    ],
+    :position => {
+      :start => {
+        x: 2,
+        y: 1
+      },
+      :end => 0
+    }
+  }
+
+  IBK = {
+    :name => :ibk,
+    :keys => {
+      :transacted_at => :time,
+      :in => :integer,
+      :out => :integer,
+      :remain => :integer
+    },
+    :columns => [
+      :transacted_at,
+      :out,
+      :in,
+      :remain,
+      :note,
+      :out_bank_account,
+      :out_bank_name,
+      :transaction_type,
+      :promissory_check_amount,
+      :cms_code
+    ],
+    :position => {
+      :start => {
+        x: 8,
+        y: 2
+      },
+      :end => 0
+    }
+  }
+
+  set_parser_options DEFAULT
+  set_parser_options IBK
 
   def self.latest
     order("transacted_at DESC")

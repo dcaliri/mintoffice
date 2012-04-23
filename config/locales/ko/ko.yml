@@ -274,6 +274,10 @@ ko:
                 remain: 잔액
                 branchname: 거래점명
                 file: 엑셀 파일
+                out_bank_account: 상대 계좌번호
+                out_bank_name: 상대 은행
+                promissory_check_amount: 수표 어음금액
+                cms_code: CMS 코드
             bank_transfer:
                 transfer_type: 이체구분
                 transfered_at: 거래일시
@@ -291,6 +295,8 @@ ko:
                 out_account_note: 출금통장표시내용
                 in_account_note: 입금통장표시내용
                 in_person_name: 입금인성명
+                cms_code: CMS코드
+                currency_code: 통화 코드
             card_used_source:
                 card_no: 카드번호
                 bank_account: 결제계좌번호
@@ -623,6 +629,7 @@ ko:
         excel:
             title: 엑셀로 올리기
             link: 엑셀 파일로 올리기
+            type: 은행명
             file: 엑셀 파일
             submit: 엑셀 파일 올리기
         new:
@@ -637,6 +644,7 @@ ko:
         excel:
             title: 엑셀로 올리기
             link: 엑셀 파일로 올리기
+            type: 은행명
             file: 엑셀 파일
             submit: 엑셀 파일 올리기
         new:

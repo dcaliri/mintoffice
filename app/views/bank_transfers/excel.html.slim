@@ -5,7 +5,10 @@ h2 ..
 = form_tag [:excel, bank_account, bank_transfer], multipart: true, class: "tabular" do
   .box
     p
+      = label_tag :bank_type, t('.type')
+      = select_tag :bank_type, options_for_select(BankTransfer::BANK_LIST)
+    p
       = label_tag :file, t('.file')
       = file_field :upload, :file
-  p
-    = submit_tag t('.submit')
+    p
+      = submit_tag t('.submit')
