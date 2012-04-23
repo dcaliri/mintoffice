@@ -26,6 +26,10 @@ module StylesheetParseable
       @excel_columns = columns
     end
 
+    def set_parser_keys(keys)
+      @excel_keys = keys
+    end
+
     def open_and_parse_stylesheet(upload)
       name = upload['file'].original_filename
       directory = "tmp"
@@ -44,7 +48,15 @@ module StylesheetParseable
           next
         end
 
-        collections = where(make_unique_key(params))
+        if @excel_keys
+          query = {}
+          @excel_keys.each do |key|
+            query[key] = params[key]
+          end
+          collections = where(query)
+        else
+          collections = where(make_unique_key(params))
+        end
         if collections.empty?
           create!(params)
         else
