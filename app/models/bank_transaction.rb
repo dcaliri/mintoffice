@@ -6,12 +6,12 @@ class BankTransaction < ActiveRecord::Base
   include StylesheetParseable
 
   BANK_LIST = [
-    ["일반 은행", :default],
+    ["신한 은행", :shinhan],
     ["기업 은행", :ibk]
   ]
 
-  DEFAULT = {
-    :name => :default,
+  SHINHAN = {
+    :name => :shinhan,
     :keys => {
       :transacted_at => :time,
       :in => :integer,
@@ -65,7 +65,7 @@ class BankTransaction < ActiveRecord::Base
     }
   }
 
-  set_parser_options DEFAULT
+  set_parser_options SHINHAN
   set_parser_options IBK
 
   def self.latest

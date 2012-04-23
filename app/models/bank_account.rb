@@ -1,4 +1,4 @@
 class BankAccount < ActiveRecord::Base
-  has_many :bank_transactions
-  has_many :bank_transfers
+  has_many :bank_transactions, :dependent => :destroy
+  has_many :bank_transfers, :dependent => :destroy
 end

@@ -8,13 +8,13 @@ class BankTransfer < ActiveRecord::Base
   include StylesheetParseable
 
   BANK_LIST = [
-    ["일반 은행", :default],
+    ["신한 은행", :shinhan],
     ["기업 은행", :ibk]
   ]
 
 
-  DEFAULT = {
-    :name => :default,
+  SHINHAN = {
+    :name => :shinhan,
     :keys => {
       :transfer_type => :integer,
       :transfered_at => :time,
@@ -77,10 +77,20 @@ class BankTransfer < ActiveRecord::Base
     }
   }
 
-  set_parser_options DEFAULT
+  set_parser_options SHINHAN
   set_parser_options IBK
 
   def self.open_and_parse_stylesheet(account, upload, type)
+    @account = account
+    super(upload, type)
+  end
+
+  def self.preview_stylesheet(account, upload, type)
+    @account = account
+    super(upload, type)
+  end
+
+  def self.create_with_stylesheet(account, upload, type)
     @account = account
     super(upload, type)
   end
