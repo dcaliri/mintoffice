@@ -61,7 +61,7 @@ class BankTransaction < ActiveRecord::Base
         x: 8,
         y: 2
       },
-      :end => 0
+      :end => -1
     }
   }
 
