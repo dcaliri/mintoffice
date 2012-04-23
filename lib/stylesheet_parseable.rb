@@ -9,7 +9,10 @@ module StylesheetParseable
     end
 
     def parse(file)
-      sheet = Excel.new(file)
+      parser = Excel
+      parser = Excelx if(file.last == 'x')
+
+      sheet = parser.new(file)
 
       2.upto(sheet.last_row) do |i|
         params = {}
