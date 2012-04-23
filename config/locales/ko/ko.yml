@@ -419,6 +419,7 @@ ko:
             search: 검색
             total: 총합
             excel: 엑셀 파일 올리기
+            upload: 업로드하기
         link:
             show: 내용 보기
             logout: "로그아웃"
@@ -632,6 +633,12 @@ ko:
             type: 은행명
             file: 엑셀 파일
             submit: 엑셀 파일 올리기
+        upload:
+            title: 엑셀로 올리기
+            link: 엑셀 파일로 올리기
+            type: 은행명
+            file: 엑셀 파일
+            submit: 엑셀 파일 올리기
         new:
             title: 입출금 내역 올리기
             link: 입출금 내역 올리기
@@ -642,6 +649,12 @@ ko:
             title: 이체 내역
             empty: 이체 내역이 없습니다
         excel:
+            title: 엑셀로 올리기
+            link: 엑셀 파일로 올리기
+            type: 은행명
+            file: 엑셀 파일
+            submit: 엑셀 파일 올리기
+        upload:
             title: 엑셀로 올리기
             link: 엑셀 파일로 올리기
             type: 은행명
