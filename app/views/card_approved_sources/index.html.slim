@@ -24,6 +24,7 @@ t.datetime    :will_be_paied_at
     tr
       th= CardApprovedSource.human_attribute_name(:used_at)
       th= CardApprovedSource.human_attribute_name(:approve_no)
+      th= CardApprovedSource.human_attribute_name(:card_no)
       th= CardApprovedSource.human_attribute_name(:card_holder_name)
       th= CardApprovedSource.human_attribute_name(:store_name)
       th= CardApprovedSource.human_attribute_name(:money)
@@ -38,6 +39,7 @@ t.datetime    :will_be_paied_at
       tr
         td= source.used_at
         td= source.approve_no
+        td= source.card_no
         td= source.card_holder_name
         td= source.store_name
         td class="numrow"= number_to_currency source.money

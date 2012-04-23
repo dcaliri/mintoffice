@@ -7,6 +7,7 @@ class CardApprovedSource < ActiveRecord::Base
   set_parser_columns [
     :used_at,
     :approve_no,
+    :card_no,
     :card_holder_name,
     :store_name,
     :money,
