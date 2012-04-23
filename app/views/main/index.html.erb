@@ -34,6 +34,9 @@
 		    <% if @user.permission.any? {|perm| perm.name == 'taxbills'}  %>
 		      <li><%= link_to t("taxbills.index.title"), :taxbills %></li>
 		    <% end %>
+	      <% if @user.ingroup?(:admin) %>
+		      <li><%= link_to t("creditcards.index.title"), :creditcards %></li>
+		    <% end %>
 		    <% if @user.permission.any? {|perm| perm.name == 'bank_accounts'}  %>
 		      <li><%= link_to t("bank_accounts.index.title"), :bank_accounts %></li>
 		    <% end %>
