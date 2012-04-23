@@ -4,23 +4,35 @@ class CardApprovedSource < ActiveRecord::Base
 
   self.per_page = 20
 
-  set_parser_columns [
-    :used_at,
-    :approve_no,
-    :card_no,
-    :card_holder_name,
-    :store_name,
-    :money,
-    :used_type,
-    :monthly_duration,
-    :card_type,
-    :canceled_at,
-    :status,
-    :will_be_paied_at
-  ]
-  set_parser_keys [
-    :approve_no
-  ]
+  DEFAULT = {
+    :name => :default,
+    :keys => {
+      :approve_no => :integer
+    },
+    :columns => [
+      :used_at,
+      :approve_no,
+      :card_no,
+      :card_holder_name,
+      :store_name,
+      :money,
+      :used_type,
+      :monthly_duration,
+      :card_type,
+      :canceled_at,
+      :status,
+      :will_be_paied_at
+    ],
+    :position => {
+      :start => {
+        x: 2,
+        y: 1
+      },
+      :end => 0
+    }
+  }
+
+  set_parser_options DEFAULT
 
   def self.latest
     order("used_at DESC")

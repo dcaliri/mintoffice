@@ -12,8 +12,72 @@ class BankTransfer < ActiveRecord::Base
     ["기업 은행", :ibk]
   ]
 
-  set_parser_columns [:transfer_type, :transfered_at, :result, :out_bank_account, :in_bank_name, :in_bank_account, :money, :transfer_fee, :error_money, :registered_at, :error_code, :transfer_note, :incode, :out_account_note, :in_account_note, :in_person_name], :default, position:{:start => [2, 1], :end => 0}
-  set_parser_columns [:transfer_type, :transfered_at, :transfered_at, :result, :out_bank_account, :money, :transfer_fee, :in_bank_name, :in_bank_account, :out_account_note, :in_account_note, :in_person_name], :ibk, position: {:start => [7, 2], :end => -1}
+
+  DEFAULT = {
+    :name => :default,
+    :keys => {
+      :transfer_type => :integer,
+      :transfered_at => :time,
+    },
+    :columns => [
+      :transfer_type,
+      :transfered_at,
+      :result,
+      :out_bank_account,
+      :in_bank_name,
+      :in_bank_account,
+      :money,
+      :transfer_fee,
+      :error_money,
+      :registered_at,
+      :error_code,
+      :transfer_note,
+      :incode,
+      :out_account_note,
+      :in_account_note,
+      :in_person_name
+    ],
+    :position => {
+      :start => {
+        x: 2,
+        y: 1
+      },
+      :end => 0
+    }
+  }
+
+  IBK = {
+    :name => :ibk,
+    :keys => {
+      :transfer_type => :integer,
+      :transfered_at => :time,
+    },
+    :columns => [
+      :transfer_type,
+      :transfered_at,
+      :transfered_at,
+      :result,
+      :out_bank_account,
+      :money,
+      :transfer_fee,
+      :in_bank_name,
+      :in_bank_account,
+      :out_account_note,
+      :in_account_note,
+      :in_person_name
+    ],
+    :position => {
+      :start => {
+        x: 7,
+        y: 2
+      },
+      :end => -1
+    }
+  }
+
+  set_parser_options DEFAULT
+  set_parser_options IBK
+
   def self.open_and_parse_stylesheet(account, upload, type)
     @account = account
     super(upload, type)
@@ -21,10 +85,6 @@ class BankTransfer < ActiveRecord::Base
 
   def self.before_parser_filter(params)
     @account.number == params[:out_bank_account]
-  end
-
-  def self.make_unique_key(params)
-    {transfer_type: params[:transfer_type], transfered_at: Time.zone.parse(params[:transfered_at])}
   end
 
   def self.latest

@@ -9,8 +9,7 @@ module StylesheetParseable
     end
 
     def option(opts)
-#      @options = {position: {:start => [0, 0], :end => 0}}.merge(opts)
-      @options = {position: {:start => [2, 1], :end => 0}}.merge(opts)
+      @options = {position: {:start => {x: 2, y: 1}, :end => 0}}.merge(opts)
     end
 
     def parse(file)
@@ -20,10 +19,10 @@ module StylesheetParseable
       position = @options[:position]
 
       sheet = parser.new(file)
-      position[:start][0].upto(sheet.last_row + position[:end]) do |i|
+      position[:start][:x].upto(sheet.last_row + position[:end]) do |i|
         params = {}
         @columns.each_with_index do |column, j|
-          params[column] = sheet.cell(i, j + position[:start][1])
+          params[column] = sheet.cell(i, j + position[:start][:y])
         end
         yield params
       end
@@ -31,15 +30,15 @@ module StylesheetParseable
   end
 
   module ClassMethods
-    def set_parser_columns(columns, type = :default, opts = {})
+    def set_parser_options(opts)
       @excel_columns ||= {}
+      @excel_keys ||= {}
       @excel_options ||= {}
-      @excel_columns[type] = columns
-      @excel_options[type] = opts
-    end
 
-    def set_parser_keys(keys)
-      @excel_keys = keys
+      type = opts[:name]
+      @excel_columns[type] = opts[:columns]
+      @excel_keys[type] = opts[:keys]
+      @excel_options[type] = {position: opts[:position]}
     end
 
     def open_and_parse_stylesheet(upload, type = :default)
@@ -61,15 +60,16 @@ module StylesheetParseable
           next
         end
 
-        if @excel_keys
-          query = {}
-          @excel_keys.each do |key|
+        query = {}
+        @excel_keys[type].each do |key, value|
+          if value == :time
+            query[key] = Time.zone.parse(params[key])
+          else
             query[key] = params[key]
           end
-          collections = where(query)
-        else
-          collections = where(make_unique_key(params))
         end
+
+        collections = where(query)
         if collections.empty?
           create!(params)
         else
