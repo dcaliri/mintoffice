@@ -17,10 +17,9 @@ class CardApprovedSource < ActiveRecord::Base
     :status,
     :will_be_paied_at
   ]
-
-  def self.make_unique_key(params)
-    {approve_no: params[:approve_no]}
-  end
+  set_parser_keys [
+    :approve_no
+  ]
 
   def self.latest
     order("used_at DESC")
