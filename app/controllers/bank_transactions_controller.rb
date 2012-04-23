@@ -6,7 +6,7 @@ class BankTransactionsController < ApplicationController
   expose(:bank_transfer) { BankTransfer.find(params[:from]) if params[:from] }
 
   def upload
-    bank_transactions.open_and_parse_stylesheet(params[:bank_transaction])
+    bank_transactions.open_and_parse_stylesheet(params[:bank_transaction], params[:bank_type].to_sym)
     redirect_to [bank_account, :bank_transactions]
   end
 

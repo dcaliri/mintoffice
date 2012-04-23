@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class BankTransfer < ActiveRecord::Base
   belongs_to :bank_account
 
@@ -5,11 +7,16 @@ class BankTransfer < ActiveRecord::Base
 
   include StylesheetParseable
 
-  set_parser_columns [:transfer_type, :transfered_at, :result, :out_bank_account, :in_bank_name, :in_bank_account, :money, :transfer_fee, :error_money, :registered_at, :error_code, :transfer_note, :incode, :out_account_note, :in_account_note, :in_person_name]
+  BANK_LIST = [
+    ["일반 은행", :default],
+    ["기업 은행", :ibk]
+  ]
 
-  def self.open_and_parse_stylesheet(account, upload)
+  set_parser_columns [:transfer_type, :transfered_at, :result, :out_bank_account, :in_bank_name, :in_bank_account, :money, :transfer_fee, :error_money, :registered_at, :error_code, :transfer_note, :incode, :out_account_note, :in_account_note, :in_person_name], :default, position:{:start => [2, 1], :end => 0}
+  set_parser_columns [:transfer_type, :transfered_at, :transfered_at, :result, :out_bank_account, :money, :transfer_fee, :in_bank_name, :in_bank_account, :out_account_note, :in_account_note, :in_person_name], :ibk, position: {:start => [7, 2], :end => -1}
+  def self.open_and_parse_stylesheet(account, upload, type)
     @account = account
-    super(upload)
+    super(upload, type)
   end
 
   def self.before_parser_filter(params)
