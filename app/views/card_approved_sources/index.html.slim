@@ -37,7 +37,7 @@ t.datetime    :will_be_paied_at
       th= t('common.menu')
     - card_approved_sources.each do |source|
       tr
-        td= source.used_at
+        td= source.used_at.strftime("%Y.%m.%d %H:%M")
         td= source.approve_no
         td= source.card_no
         td= source.card_holder_name
