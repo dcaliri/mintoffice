@@ -10,9 +10,7 @@ class BankTransactionsController < ApplicationController
       bank_transactions.create_with_stylesheet(params[:upload], params[:bank_type].to_sym)
       redirect_to [bank_account, :bank_transactions]
     else
-      @account = BankAccount.new
-      @account.id = -1
-      @account.bank_transactions.preview_stylesheet(params[:upload], params[:bank_type].to_sym)
+      @transactions = BankTransaction.preview_stylesheet(params[:upload], params[:bank_type].to_sym)
       params[:previewed] = true
       render 'excel'
     end

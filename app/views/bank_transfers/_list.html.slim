@@ -16,7 +16,8 @@ table#list-table
     /!th= BankTransfer.human_attribute_name(:out_account_note)
     /!th= BankTransfer.human_attribute_name(:in_account_note)
     th= BankTransfer.human_attribute_name(:in_person_name)
-    th= t('common.menu')
+    - unless @preview
+      th= t('common.menu')
   - bank_transfers.each do |transfer|
     tr.selectable
       td= transfer.transfer_type
@@ -38,12 +39,13 @@ table#list-table
       /!td= transfer.out_account_note
       /!td= transfer.in_account_note
       td= transfer.in_person_name
-      td align="right"
-        - if transfer.transaction
-          = link_to t('bank_transfers.show.to_bank_transaction'), [bank_account, transfer.transaction]
+      - unless @preview
+        td align="right"
+          - if transfer.transaction
+            = link_to t('bank_transfers.show.to_bank_transaction'), [bank_account, transfer.transaction]
+            = " | "
+          = link_to t('common.link.show'), [bank_account, transfer]
           = " | "
-        = link_to t('common.link.show'), [bank_account, transfer]
-        = " | "
-        = link_to t('common.link.edit'), [:edit, bank_account, transfer]
-        = " | "
-        = link_to t('common.link.destroy'), [bank_account, transfer], :method => :delete, :confirm => "Are you sure?"
+          = link_to t('common.link.edit'), [:edit, bank_account, transfer]
+          = " | "
+          = link_to t('common.link.destroy'), [bank_account, transfer], :method => :delete, :confirm => "Are you sure?"

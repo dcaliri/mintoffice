@@ -5,9 +5,6 @@ h2 ..
 = form_tag [:excel, bank_account, bank_transfer], multipart: true, class: "tabular" do
   = hidden_field_tag :previewed, params[:previewed]
 
-  - if @account
-    = hidden_field_tag :bank_account_id, @account.id
-
   .box
     p
       = label_tag :bank_type, t('.type')
@@ -27,6 +24,7 @@ h2 ..
         = submit_tag t('.submit')
 
 br
-- if @account
+- if @transfers
   h3 프리뷰
-  = render 'list', bank_transfers: @account.bank_transfers
+  - @preview = true
+  = render 'list', bank_transfers: @transfers

@@ -70,6 +70,7 @@ module StylesheetParseable
       parser.column @excel_columns[type]
       parser.option @excel_options[type]
 
+      previews = []
       parser.parse(file) do |params|
         if respond_to?(:before_parser_filter) && before_parser_filter(params) == false
           next
@@ -84,6 +85,11 @@ module StylesheetParseable
           end
         end
 
+        if opts[:preview]
+          previews << new(params)
+          next
+        end
+
         collections = where(query)
         if collections.empty?
           create!(params)
@@ -92,6 +98,8 @@ module StylesheetParseable
           resource.update_attributes!(params)
         end
       end
+
+      previews
     end
   end
 

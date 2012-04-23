@@ -5,14 +5,10 @@ h2= t("common.title.#{action_name}")
 
 = form_tag [:excel, bank_account, bank_transaction], multipart: true, class: "tabular" do
   = hidden_field_tag :previewed, params[:previewed]
-
-  - if @account
-    = hidden_field_tag :bank_account_id, @account.id
-
   .box
     p
       = label_tag :bank_type, t('.type')
-      = select_tag :bank_type, options_for_select(BankTransaction::BANK_LIST)
+      = select_tag :bank_type, options_for_select(BankTransaction::BANK_LIST, params[:bank_type])
 
     - unless params[:upload]
       p
@@ -27,7 +23,8 @@ h2= t("common.title.#{action_name}")
       p
         = submit_tag t('.submit')
 
-br
-- if @account
+  br
+- if @transactions
   h3 프리뷰
-  = render 'list', bank_transactions: @account.bank_transactions
+  - @preview = true
+  = render 'list', bank_transactions: @transactions
