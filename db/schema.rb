@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120423010647) do
+ActiveRecord::Schema.define(:version => 20120423043006) do
 
   create_table "attachments", :force => true do |t|
     t.string   "title"
@@ -37,13 +37,17 @@ ActiveRecord::Schema.define(:version => 20120423010647) do
     t.integer  "bank_account_id"
     t.datetime "transacted_at"
     t.string   "transaction_type"
-    t.integer  "in",               :default => 0
-    t.integer  "out",              :default => 0
+    t.integer  "in",                      :default => 0
+    t.integer  "out",                     :default => 0
     t.text     "note"
-    t.integer  "remain",           :default => 0
+    t.integer  "remain",                  :default => 0
     t.string   "branchname"
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
+    t.string   "out_bank_account"
+    t.string   "out_bank_name"
+    t.integer  "promissory_check_amount"
+    t.string   "cms_code"
   end
 
   create_table "bank_transfers", :force => true do |t|
@@ -64,6 +68,8 @@ ActiveRecord::Schema.define(:version => 20120423010647) do
     t.string   "out_account_note"
     t.string   "in_account_note"
     t.string   "in_person_name"
+    t.string   "cms_code"
+    t.string   "currency_code"
   end
 
   create_table "business_clients", :force => true do |t|

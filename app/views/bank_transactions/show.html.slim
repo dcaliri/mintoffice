@@ -34,3 +34,15 @@ h2 #{bank_account.name}: #{bank_account.number}
     tr
       th= BankTransaction.human_attribute_name(:branchname)
       td= bank_transaction.branchname
+    tr
+      th= BankTransaction.human_attribute_name(:out_bank_account)
+      td= bank_transaction.out_bank_account
+    tr
+      th= BankTransaction.human_attribute_name(:out_bank_name)
+      td= bank_transaction.out_bank_name
+    tr
+      th= BankTransaction.human_attribute_name(:promissory_check_amount)
+      td= number_to_currency bank_transaction.promissory_check_amount
+    tr
+      th= BankTransaction.human_attribute_name(:cms_code)
+      td= bank_transaction.cms_code

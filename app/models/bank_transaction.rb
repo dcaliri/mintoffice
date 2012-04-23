@@ -35,6 +35,7 @@ class BankTransaction < ActiveRecord::Base
       :end => 0
     }
   }
+
   IBK = {
     :name => :ibk,
     :keys => {
@@ -43,7 +44,18 @@ class BankTransaction < ActiveRecord::Base
       :out => :integer,
       :remain => :integer
     },
-    :columns => [:transacted_at, :in, :out, :remain, :note],
+    :columns => [
+      :transacted_at,
+      :out,
+      :in,
+      :remain,
+      :note,
+      :out_bank_account,
+      :out_bank_name,
+      :transaction_type,
+      :promissory_check_amount,
+      :cms_code
+    ],
     :position => {
       :start => {
         x: 8,

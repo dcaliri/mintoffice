@@ -64,7 +64,9 @@ class BankTransfer < ActiveRecord::Base
       :in_bank_account,
       :out_account_note,
       :in_account_note,
-      :in_person_name
+      :in_person_name,
+      :cms_code,
+      :currency_code
     ],
     :position => {
       :start => {

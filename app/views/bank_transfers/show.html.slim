@@ -62,3 +62,9 @@ h2 #{bank_account.name}: #{bank_account.number}
     tr
       th= BankTransfer.human_attribute_name(:in_person_name)
       td= bank_transfer.in_person_name
+    tr
+      th= BankTransfer.human_attribute_name(:cms_code)
+      td= bank_transfer.cms_code
+    tr
+      th= BankTransfer.human_attribute_name(:currency_code)
+      td= bank_transfer.currency_code
