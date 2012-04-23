@@ -7,14 +7,12 @@ class BankTransactionsController < ApplicationController
 
   def upload
     if params[:previewed] == 'true'
-      @account = BankAccount.find(session[:preview_bank_account])
-      @account.destroy
       bank_transactions.create_with_stylesheet(params[:upload], params[:bank_type].to_sym)
       redirect_to [bank_account, :bank_transactions]
     else
-      @account = BankAccount.create()
+      @account = BankAccount.new
+      @account.id = -1
       @account.bank_transactions.preview_stylesheet(params[:upload], params[:bank_type].to_sym)
-      session[:preview_bank_account] = @account.id
       params[:previewed] = true
       render 'excel'
     end

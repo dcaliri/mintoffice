@@ -46,7 +46,7 @@ module StylesheetParseable
       directory = "tmp"
       path = File.join(directory, name)
       File.open(path, "wb") { |f| f.write(upload['file'].read) }
-      parse_stylesheet(path, type.to_sym)
+      parse_stylesheet(path, type.to_sym, preview: true)
     end
 
     def create_with_stylesheet(name, type = :default)
@@ -65,7 +65,7 @@ module StylesheetParseable
       File.delete(path)
     end
 
-    def parse_stylesheet(file, type = :default)
+    def parse_stylesheet(file, type = :default, opts = {})
       parser = ExcelParser.new
       parser.column @excel_columns[type]
       parser.option @excel_options[type]
