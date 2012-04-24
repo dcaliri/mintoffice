@@ -34,6 +34,17 @@ class CardApprovedSource < ActiveRecord::Base
 
   set_parser_options DEFAULT
 
+  class << self
+    def open_and_parse_stylesheet(card, upload)
+      @card = card
+      super(upload)
+    end
+
+    def before_parser_filter(params)
+      @card.cardno == params[:card_no]
+    end
+  end
+
   def self.latest
     order("used_at DESC")
   end

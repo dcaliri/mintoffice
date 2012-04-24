@@ -51,6 +51,15 @@ class CardUsedSource < ActiveRecord::Base
   set_parser_options DEFAULT
 
   class << self
+    def open_and_parse_stylesheet(card, upload)
+      @card = card
+      super(upload)
+    end
+
+    def before_parser_filter(params)
+      @card.cardno == params[:card_no]
+    end
+
     def group_by_bank_name
       group("bank_name").select("card_used_sources.*, sum(tax) as tax")
     end
