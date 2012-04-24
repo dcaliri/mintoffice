@@ -4,7 +4,7 @@
 
 <h2><%= t("common.title.#{action_name}") %></h2>
 
-<%= form_for taxbill, html: {multipart: true} do |f| %>
+<%= form_for taxbill, html: {multipart: true, class: "tabular"} do |f| %>
    <%= f.error_messages %>
   <div class="box">
     <p>
@@ -19,9 +19,12 @@
       <%= f.label :taxman_id %>
       <%= f.select :taxman_id, options_for_select(Taxbill.taxmen_list, taxbill.taxman_id) %>
     </p>
-    <%= render 'shared/attachments/form', label: t("taxbills.#{action_name}.picture") %>
-    <p>
-      <%= f.submit %>
-    </p>
+		<p>
+    	<%= render 'shared/attachments/form', label: t("taxbills.#{action_name}.picture") %>
+		</p>
   </div>
+  <p>
+    <%= f.submit %>
+  </p>
+
 <% end %>
