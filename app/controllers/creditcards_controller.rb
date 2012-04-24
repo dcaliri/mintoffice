@@ -80,9 +80,19 @@ class CreditcardsController < ApplicationController
   # PUT /creditcards/1.xml
   def update
     @creditcard = Creditcard.find(params[:id])
-
     respond_to do |format|
-      if @creditcard.update_attributes(params[:creditcard])
+      @creditcard.attributes = params[:creditcard]
+      if @creditcard.valid?
+        @creditcard.changes.each do |k,v|
+          ChangeHistory.create(
+            :fieldname => k,
+            :before_value => v[0].to_s,
+            :after_value => v[1].to_s,
+            :user => @user,
+            :changable => @creditcard)
+        end
+        @creditcard.save
+        
         Attachment.save_for(@creditcard,@user,params[:attachment])
         flash[:notice] = t("common.messages.updated", :model => Creditcard.model_name.human)
         format.html { redirect_to(@creditcard) }
