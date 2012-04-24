@@ -243,8 +243,15 @@ div.flash.notice {
 #list-table tr.selectable {
   cursor: pointer;
 }
-
 #list-table tr.selectable:hover {
+  background-color: lightgrey;
+}
+
+#list-table td.selectable {
+  cursor: pointer;
+}
+
+#list-table td.selectable:hover {
   background-color: lightgrey;
 }
 
@@ -295,7 +302,7 @@ td.money {
 }
 
 #mainmenu-table {
-	top: 80px;
+  top: 80px;
 }
 tr.related {
   background-color: orange;

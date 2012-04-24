@@ -25,26 +25,31 @@
       <tbody>
         <% header.zip(purchases.all, sales.all, cards).each do |_, purchase, sale, card| %>
           <tr>
-            <td>
-              <% if purchase %>
+            <% if purchase %>
+              <td class="selectable" onclick="location.href='<%= taxbill_path(purchase) %>'">
                 <%= purchase.taxman.business_client.name %>
                 :
                 <%= number_to_currency purchase.tax %>
-              <% end %>
-            </td>
-            <td>
-              <% if sale %>
+              </td>
+            <% else %>
+              <td></td>
+            <% end %>
+            <% if sale %>
+              <td class="selectable" onclick="location.href='<%= taxbill_path(sale) %>'">
                 <%= sale.taxman.business_client.name %>
                 :
                 <%= number_to_currency sale.tax %>
-              <% end %>
+              </td>
+            <% else %>
+              <td></td>
+            <% end %>
             </td>
             <td>
-              <% if card %>
-                <%= card.bank_name %>
-                :
-                <%= number_to_currency card.tax %>
-              <% end %>
+            <% if card %>
+              <%= card.bank_name %>
+              :
+              <%= number_to_currency card.tax %>
+            <% end %>
             </td>
           </tr>
         <% end %>
