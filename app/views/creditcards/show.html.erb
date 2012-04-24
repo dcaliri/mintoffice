@@ -17,6 +17,10 @@
       <td><%= @creditcard.cardno %></td>
     </tr>
     <tr>
+      <th><%= Creditcard.human_attribute_name("short_name") %></th>
+      <td><%= @creditcard.short_name %></td>
+    </tr>
+    <tr>
       <th><%= Creditcard.human_attribute_name("expireyear") %></th>
       <td><%= @creditcard.expireyear %></td>
     </tr>

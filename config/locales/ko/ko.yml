@@ -154,6 +154,7 @@ ko:
                 approveno: "승인번호"
             creditcard:
                 cardno: 카드번호
+                short_name: 카드명칭
                 expireyear: 만료연도
                 expiremonth: 만료월
                 nickname: 별칭

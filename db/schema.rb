@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120424023309) do
+ActiveRecord::Schema.define(:version => 20120424062157) do
 
   create_table "attachments", :force => true do |t|
     t.string   "title"
@@ -175,6 +175,7 @@ ActiveRecord::Schema.define(:version => 20120424023309) do
     t.string   "cardholder"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.string   "short_name"
   end
 
   create_table "document_owners", :force => true do |t|
