@@ -25,12 +25,16 @@ class Taxbill < ActiveRecord::Base
     items.sum{|item| item.total }
   end
 
-  def self.search(text)
+  def self.search(params)
+    text_search(params[:query]).billtype(params[:billtype]).taxmen(params[:taxman_id])
+  end
+
+  def self.text_search(text)
     text = "%#{text || ""}%"
     includes(:taxman).where('taxmen.fullname like ?', text)
   end
 
-  def self.seachbybilltype(text)
+  def self.billtype(text)
     if text == "all" or text == nil
       where("")
     else
@@ -38,7 +42,7 @@ class Taxbill < ActiveRecord::Base
     end
   end
 
-  def self.searchbytaxman(text)
+  def self.taxmen(text)
     if text == "0" or text == nil
       where("")
     else

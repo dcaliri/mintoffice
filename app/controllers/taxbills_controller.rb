@@ -1,6 +1,5 @@
 class TaxbillsController < ApplicationController
-#  expose(:taxbills) { Taxbill.search(params[:query]).seachbybilltype(params[:billtype]).searchbytaxman(params[:taxman_id]).order("transacted_at desc").page(params[:page]) }
-  expose(:taxbills) { Taxbill.search(params[:query]).seachbybilltype(params[:billtype]).searchbytaxman(params[:taxman_id]).latest.page(params[:page]) }
+  expose(:taxbills) { Taxbill.search(params).latest.page(params[:page]) }
   expose(:taxbill)
 
   def show
