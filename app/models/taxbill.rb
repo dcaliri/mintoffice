@@ -25,6 +25,10 @@ class Taxbill < ActiveRecord::Base
     items.sum{|item| item.total }
   end
 
+  def self.total
+    sum{|taxbill| taxbill.total }
+  end
+
   class << self
     def search(params)
       text_search(params[:query]).billtype(params[:billtype]).taxmen(params[:taxman_id])

@@ -580,6 +580,8 @@ ko:
         edit:
             title: 세금계산서 수정
             picture: 첨부파일
+        total:
+            title: 세금계산서 합계표
         purchase_bill: 매입 세금계산서
         sales_bill: 매출 세금계산서
         purchase_sales_bill: 매입/매출 세금계산서

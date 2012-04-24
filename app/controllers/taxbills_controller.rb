@@ -2,6 +2,12 @@ class TaxbillsController < ApplicationController
   expose(:taxbills) { Taxbill.search(params).latest.page(params[:page]) }
   expose(:taxbill)
 
+  def total
+    @purchases = taxbills.where(billtype: "purchase")
+    @sales = taxbills.where(billtype: "sale")
+    @cards = CardUsedSource.where("")
+  end
+
   def show
     @attachments = Attachment.for_me(taxbill)
     session[:attachments] = [] if session[:attachments].nil?

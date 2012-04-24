@@ -1,0 +1,53 @@
+<% header = Array.new([@purchases.size, @sales.size, @cards.size].max) %>
+<% unless header.empty? %>
+  <table id="list-table">
+    <thead>
+      <tr>
+        <th>매입처별 합계</th>
+        <th>매출처별 합계</th>
+        <th>신용카드 합계</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% header.zip(@purchases.all, @sales.all, @cards).each do |_, purchase, sale, card| %>
+        <tr>
+          <td>
+            <%= purchase.taxman.business_client.name %>
+            :
+            <%= purchase.total %>
+          </td>
+          <td>
+            <% if sale %>
+              <%= sale.taxman.business_client.name %>
+              :
+              <%= sale.total %>
+            <% end %>
+          </td>
+          <td>
+            <% if card %>
+              <%= card.store_name %>
+              :
+              <%= card.money_krw %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+      <tr>
+        <td>
+          합계:
+          <%= @purchases.total %>
+        </td>
+        <td>
+          합계:
+          <%= @sales.total %>
+        </td>
+        <td>
+          합계:
+          <%= @cards.total %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+<% else %>
+  <h4>합계표가 없습니다</h4>
+<% end %>

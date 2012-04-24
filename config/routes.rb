@@ -87,6 +87,8 @@ Mintoffice::Application.routes.draw do
   end
 
   resources :taxbills do
+    get 'total', :on => :collection
+
     resources :taxbill_items, :path => "items"
   end
 
