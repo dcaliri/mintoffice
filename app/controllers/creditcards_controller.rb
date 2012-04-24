@@ -14,6 +14,17 @@ class CreditcardsController < ApplicationController
   # GET /creditcards/1.xml
   def show
     @creditcard = Creditcard.find(params[:id])
+    @attachments = Attachment.for_me(@creditcard, "seq ASC")
+    at = params[:at] || "0"
+    
+    unless @attachments.empty?
+       if session[:attachments].nil?
+         session[:attachments] = [@attachments[at.to_i].id]
+       else
+         session[:attachments] << @attachments[at.to_i].id
+       end
+    end
+    
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @creditcard }
@@ -34,6 +45,17 @@ class CreditcardsController < ApplicationController
   # GET /creditcards/1/edit
   def edit
     @creditcard = Creditcard.find(params[:id])
+    @attachments = Attachment.for_me(@creditcard, "seq ASC")
+    at = params[:at] || "0"
+    
+    unless @attachments.empty?
+       if session[:attachments].nil?
+         session[:attachments] = [@attachments[at.to_i].id]
+       else
+         session[:attachments] << @attachments[at.to_i].id
+       end
+    end
+    
   end
 
   # POST /creditcards
@@ -58,9 +80,19 @@ class CreditcardsController < ApplicationController
   # PUT /creditcards/1.xml
   def update
     @creditcard = Creditcard.find(params[:id])
-
     respond_to do |format|
-      if @creditcard.update_attributes(params[:creditcard])
+      @creditcard.attributes = params[:creditcard]
+      if @creditcard.valid?
+        @creditcard.changes.each do |k,v|
+          ChangeHistory.create(
+            :fieldname => k,
+            :before_value => v[0].to_s,
+            :after_value => v[1].to_s,
+            :user => @user,
+            :changable => @creditcard)
+        end
+        @creditcard.save
+        
         Attachment.save_for(@creditcard,@user,params[:attachment])
         flash[:notice] = t("common.messages.updated", :model => Creditcard.model_name.human)
         format.html { redirect_to(@creditcard) }

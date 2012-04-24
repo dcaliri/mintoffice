@@ -1,0 +1,30 @@
+#show_command
+  = link_to t('common.title.back'), [bank_account, :bank_transfers]
+h2 ..
+
+= form_tag [:excel, bank_account, bank_transfer], multipart: true, class: "tabular" do
+  = hidden_field_tag :previewed, params[:previewed]
+
+  .box
+    p
+      = label_tag :bank_type, t('.type')
+      = select_tag :bank_type, options_for_select(BankTransfer::BANK_LIST, params[:bank_type])
+
+    - unless params[:upload]
+      p
+        = label_tag :file, t('.file')
+        = file_field :upload, :file
+      p
+        = submit_tag "미리보기"
+    - else
+      p
+        = label_tag :file, t('.file')
+        = text_field_tag :upload, params[:upload][:file].original_filename
+      p
+        = submit_tag t('.submit')
+
+br
+- if @transfers
+  h3 프리뷰
+  - @preview = true
+  = render 'list', bank_transfers: @transfers

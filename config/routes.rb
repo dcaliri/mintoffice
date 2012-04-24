@@ -1,5 +1,20 @@
 Mintoffice::Application.routes.draw do
-  resources :creditcards
+  resources :creditcards do
+    resources :card_used_sources, path: 'used' do
+      collection do
+        get 'excel'
+        post 'excel', :action => 'upload'
+      end
+    end
+
+    resources :card_approved_sources, path: 'approved' do
+      collection do
+        get 'excel'
+        post 'excel', :action => 'upload'
+      end
+    end
+  end
+
   resources :documents
   resources :projects
   resources :pettycashes
@@ -49,6 +64,22 @@ Mintoffice::Application.routes.draw do
     end
   end
 
+  resources :bank_accounts, path: 'banks' do
+    resources :bank_transactions, path: "transactions" do
+      collection do
+        get 'excel'
+        post 'excel', :action => 'upload'
+      end
+    end
+
+    resources :bank_transfers, path: "tranfers" do
+      collection do
+        get 'excel'
+        post 'excel', :action => 'upload'
+      end
+    end
+  end
+
   resources :required_tags
   resources :namecards
   resources :business_clients do
@@ -56,6 +87,8 @@ Mintoffice::Application.routes.draw do
   end
 
   resources :taxbills do
+    get 'total', :on => :collection
+
     resources :taxbill_items, :path => "items"
   end
 

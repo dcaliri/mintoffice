@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120418024952) do
+ActiveRecord::Schema.define(:version => 20120424062157) do
 
   create_table "attachments", :force => true do |t|
     t.string   "title"
@@ -27,6 +27,51 @@ ActiveRecord::Schema.define(:version => 20120418024952) do
     t.integer  "seq"
   end
 
+  create_table "bank_accounts", :force => true do |t|
+    t.string "name"
+    t.string "number"
+    t.text   "note"
+  end
+
+  create_table "bank_transactions", :force => true do |t|
+    t.integer  "bank_account_id"
+    t.datetime "transacted_at"
+    t.string   "transaction_type"
+    t.integer  "in",                      :default => 0
+    t.integer  "out",                     :default => 0
+    t.text     "note"
+    t.integer  "remain",                  :default => 0
+    t.string   "branchname"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
+    t.string   "out_bank_account"
+    t.string   "out_bank_name"
+    t.integer  "promissory_check_amount"
+    t.string   "cms_code"
+  end
+
+  create_table "bank_transfers", :force => true do |t|
+    t.integer  "bank_account_id"
+    t.string   "transfer_type"
+    t.datetime "transfered_at"
+    t.string   "result"
+    t.string   "out_bank_account"
+    t.string   "in_bank_name"
+    t.string   "in_bank_account"
+    t.integer  "money"
+    t.integer  "transfer_fee"
+    t.integer  "error_money"
+    t.datetime "registered_at"
+    t.string   "error_code"
+    t.string   "transfer_note"
+    t.string   "incode"
+    t.string   "out_account_note"
+    t.string   "in_account_note"
+    t.string   "in_person_name"
+    t.string   "cms_code"
+    t.string   "currency_code"
+  end
+
   create_table "business_clients", :force => true do |t|
     t.string   "name"
     t.string   "registration_number"
@@ -37,6 +82,53 @@ ActiveRecord::Schema.define(:version => 20120418024952) do
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
     t.integer  "attachment_id"
+  end
+
+  create_table "card_approved_sources", :force => true do |t|
+    t.integer  "creditcard_id"
+    t.datetime "used_at"
+    t.string   "approve_no"
+    t.string   "card_holder_name"
+    t.string   "store_name"
+    t.integer  "money"
+    t.string   "used_type"
+    t.string   "monthly_duration"
+    t.string   "card_type"
+    t.datetime "canceled_at"
+    t.string   "status"
+    t.datetime "will_be_paied_at"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.string   "card_no"
+  end
+
+  create_table "card_used_sources", :force => true do |t|
+    t.integer  "creditcard_id"
+    t.string   "card_no"
+    t.string   "bank_account"
+    t.string   "bank_name"
+    t.string   "card_holder_name"
+    t.string   "used_area"
+    t.string   "approve_no"
+    t.datetime "approved_at"
+    t.datetime "approved_time"
+    t.string   "sales_type"
+    t.integer  "money_krw"
+    t.integer  "money_foreign"
+    t.integer  "price"
+    t.integer  "tax"
+    t.integer  "tip"
+    t.string   "monthly_duration"
+    t.string   "exchange_krw"
+    t.string   "foreign_country_code"
+    t.string   "foreign_country_name"
+    t.string   "store_business_no"
+    t.string   "store_name"
+    t.string   "store_type"
+    t.string   "store_zipcode"
+    t.string   "store_addr1"
+    t.string   "store_addr2"
+    t.string   "store_tel"
   end
 
   create_table "cardbills", :force => true do |t|
@@ -53,6 +145,17 @@ ActiveRecord::Schema.define(:version => 20120418024952) do
     t.datetime "updated_at",    :null => false
     t.integer  "attachment_id"
     t.integer  "creditcard_id"
+  end
+
+  create_table "change_histories", :force => true do |t|
+    t.string   "fieldname"
+    t.string   "before_value"
+    t.string   "after_value"
+    t.integer  "user_id"
+    t.integer  "changable_id"
+    t.string   "changable_type"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   create_table "commutes", :force => true do |t|
@@ -72,6 +175,7 @@ ActiveRecord::Schema.define(:version => 20120418024952) do
     t.string   "cardholder"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.string   "short_name"
   end
 
   create_table "document_owners", :force => true do |t|
