@@ -2,6 +2,7 @@
 
 class Taxbill < ActiveRecord::Base
   belongs_to :taxman
+  belongs_to :business_client
   belongs_to :attachment
   has_many :items, :class_name => 'TaxbillItem', :dependent => :destroy
 
@@ -47,6 +48,10 @@ class Taxbill < ActiveRecord::Base
   end
 
   class << self
+    def group_by_client_name
+      includes([:taxman => :business_client]).group("business_clients.name").select("business_clients.name as client_nane")#.select("sum(taxbill_items.tax) as taxbills.tax")
+    end
+
     def search(params)
       text_search(params[:query]).billtype(params[:billtype]).taxmen(params[:taxman_id])
     end
