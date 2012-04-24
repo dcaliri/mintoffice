@@ -4,7 +4,7 @@ class CardApprovedSourcesController < ApplicationController
   expose(:card_approved_source)
 
   def upload
-    card_approved_sources.open_and_parse_stylesheet(params[:upload])
+    card_approved_sources.open_and_parse_stylesheet(creditcard, params[:upload])
     redirect_to [creditcard, :card_approved_sources]
   end
 
