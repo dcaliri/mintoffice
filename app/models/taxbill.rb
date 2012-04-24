@@ -23,7 +23,7 @@ class Taxbill < ActiveRecord::Base
 
   def self.oldest_at
     resource = order('transacted_at DESC').last
-    if resource
+    if resource && resource.transacted_at
       resource.transacted_at
     else
       Time.zone.now

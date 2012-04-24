@@ -5,7 +5,7 @@ class TaxbillsController < ApplicationController
   def total
     @purchases = taxbills.purchases
     @sales = taxbills.sales
-    @cards = CardUsedSource.where("")
+    @cards = CardUsedSource.group_by_bank_name
   end
 
   def show

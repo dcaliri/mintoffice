@@ -11,7 +11,7 @@
   <% sales = @sales.where(transacted_at: between) %>
   <% cards = @cards.where(approved_at: between) %>
 
-  <% header = Array.new([purchases.size, sales.size, cards.size].max) %>
+  <% header = Array.new([purchases.size, sales.size, cards.to_a.size].max) %>
   <% unless header.empty? %>
     <h3><%= t('.quarter', year: current_year.year, quarter: quarter+1)%></h3>
     <table id="list-table">
@@ -41,7 +41,7 @@
             </td>
             <td>
               <% if card %>
-                <%= card.store_name %>
+                <%= card.bank_name %>
                 :
                 <%= number_to_currency card.tax %>
               <% end %>
