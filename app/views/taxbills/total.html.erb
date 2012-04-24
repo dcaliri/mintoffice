@@ -5,8 +5,8 @@
 
 
 <% 3.downto(0).each do |quarter|%>
-  <h4><%= t('.quarter', year: @current_year.year, quarter: quarter+1)%></h3>
-  <% between = (@current_year + (3*(quarter)).month..@current_year + (3*(quarter+1)).month) %>
+  <h4><%= t('.quarter', year: current_year.year, quarter: quarter+1)%></h3>
+  <% between = (current_year + (3*(quarter)).month..current_year + (3*(quarter+1)).month) %>
 
   <% purchases = @purchases.where(transacted_at: between) %>
   <% sales = @sales.where(transacted_at: between) %>

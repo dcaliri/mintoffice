@@ -22,7 +22,12 @@ class Taxbill < ActiveRecord::Base
   end
 
   def self.oldest_at
-    order('transacted_at DESC').last.transacted_at
+    resource = order('transacted_at DESC').last
+    if resource
+      resource.transacted_at
+    else
+      Time.zone.now
+    end
   end
 
   def price

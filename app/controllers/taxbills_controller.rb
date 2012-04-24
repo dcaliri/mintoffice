@@ -3,7 +3,6 @@ class TaxbillsController < ApplicationController
   expose(:taxbill)
 
   def total
-    @current_year = current_year
     @purchases = taxbills.purchases
     @sales = taxbills.sales
     @cards = CardUsedSource.where("")
@@ -45,6 +44,7 @@ class TaxbillsController < ApplicationController
       params[:at] = Time.zone.now.year unless params[:at]
       Time.zone.parse("#{params[:at]}-01-01 00:00:00")
     end
+    helper_method :current_year
 
     def oldest_year
       purchase = @purchases.oldest_at
