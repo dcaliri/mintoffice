@@ -1,0 +1,52 @@
+#show_command
+  = link_to t('card_used_sources.new.link'), [:new, creditcard, :card_used_source]
+  = " | "
+  = link_to t('card_used_sources.excel.link'), [:excel, creditcard, :card_used_sources]
+  = " | "
+  = link_to t('common.title.back'), creditcard
+
+h2= "#{creditcard.nickname}: #{creditcard.cardno}"
+
+- unless card_used_sources.empty?
+  table#list-table
+    tr
+      th= CardUsedSource.human_attribute_name(:card_no)
+      th= CardUsedSource.human_attribute_name(:bank_account)
+      th= CardUsedSource.human_attribute_name(:bank_name)
+      th= CardUsedSource.human_attribute_name(:card_holder_name)
+      th= CardUsedSource.human_attribute_name(:used_area)
+      th= CardUsedSource.human_attribute_name(:approve_no)
+      th= CardUsedSource.human_attribute_name(:approved_at)
+      th= CardUsedSource.human_attribute_name(:approved_time)
+      th= CardUsedSource.human_attribute_name(:sales_type)
+      th= CardUsedSource.human_attribute_name(:money_krw)
+      th= CardUsedSource.human_attribute_name(:store_name)
+      th= CardUsedSource.human_attribute_name(:store_type)
+      th= CardUsedSource.human_attribute_name(:store_tel)
+      th= t('common.menu')
+    - card_used_sources.each do |source|
+      tr
+        td= source.card_no
+        td= source.bank_account
+        td= source.bank_name
+        td= source.card_holder_name
+        td= source.used_area
+        td= source.approve_no
+        td= source.approved_at ? source.approved_at.strftime("%Y %m.%d") : 0
+        td= source.approved_time ? source.approved_time.strftime("%H:%M:%S") : 0
+        td= source.sales_type
+        td class="numrow"= number_to_currency source.money_krw
+        td= source.store_name
+        td= source.store_type
+        td= source.store_tel
+        td align="right"
+          = link_to t('common.link.show'), [creditcard, source]
+          = " | "
+          = link_to t('common.link.edit'), [:edit, creditcard, source]
+          = " | "
+          = link_to t('common.link.destroy'), [creditcard, source], :method => :delete, :confirm => "Are you sure?"
+  br
+  center
+    = will_paginate card_used_sources
+- else
+  h4= t('.empty')

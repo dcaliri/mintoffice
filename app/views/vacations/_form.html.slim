@@ -1,12 +1,9 @@
-- form_type = if vacation.new_record? then 'new' else 'edit' end
-- title t("vacations.#{form_type}.title")
-
 #show_command
-  = link_to t('common.title.back'), vacation_path(user)
+  = link_to t('common.title.back'), [user, :vacations]
 
-h2= t("common.title.#{form_type}")
+h2= t("common.title.#{action_name}")
 
-= form_for [user, vacation] do |f|
+= form_for [user, vacation], html: {class: "tabular"} do |f|
   = f.error_messages
   .box
     p

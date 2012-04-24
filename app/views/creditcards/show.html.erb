@@ -1,6 +1,11 @@
 <% title t(".title") %>
 <div id="show_command">
-  <%= link_to t("common.title.edit"), edit_creditcard_path(@creditcard) %> |
+  <%= link_to t('card_used_sources.index.title'), [@creditcard, :card_used_sources] %>
+  |
+  <%= link_to t('card_approved_sources.index.title'), [@creditcard, :card_approved_sources] %>
+  |
+  <%= link_to t("common.title.edit"), edit_creditcard_path(@creditcard) %>
+  |
   <%= link_to t("common.title.list"), creditcards_path %>
 </div>
 <h2><%= t("common.title.show") %></h2>
@@ -10,6 +15,10 @@
     <tr>
       <th><%= Creditcard.human_attribute_name("cardno") %></th>
       <td><%= @creditcard.cardno %></td>
+    </tr>
+    <tr>
+      <th><%= Creditcard.human_attribute_name("short_name") %></th>
+      <td><%= @creditcard.short_name %></td>
     </tr>
     <tr>
       <th><%= Creditcard.human_attribute_name("expireyear") %></th>
@@ -34,6 +43,25 @@
   </table>
   </div>
   <%= render :partial => "shared/show_attachment", :object => @creditcard  %>
-  <div style="clear:both;"></div>
+  <div style="clear:both;">
+  	
+		<% if @user.ingroup? "admin" %>
+		    <h3><%= t(".changes") %></h3>
+		    <% if !@creditcard.change_histories.blank? %>
+		    <ul>
+		      <% for history in @creditcard.change_histories.all(:order => "updated_at DESC") %>
+		        <li>[<%= history.updated_at.strftime("%Y.%m.%d %H:%M:%S %p") %>] 
+									<%= Creditcard.human_attribute_name(history.fieldname) %>:
+									<%= history.before_value %> &rarr;	
+									<%= history.after_value %> (<%= history.user.name %>)</li>
+		      <% end %>
+		    </ul>
+		    <% else %>
+
+		    <% end %>
+		<% end %>
+
+  </div>
+
 </div>
 

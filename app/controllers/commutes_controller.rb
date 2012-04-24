@@ -2,14 +2,7 @@ class CommutesController < ApplicationController
   def redirect_unless_permission
   end
 
-  expose(:users) do
-    users = if @user.ingroup?(:admin)
-              User
-            else
-              User.where(name: @user.name)
-            end
-   users.page(params[:page])
-  end
+  expose(:users) { User(:protected).page(params[:page]) }
   expose(:user)
   expose(:commutes) { user.commutes.latest }
   expose(:commute)

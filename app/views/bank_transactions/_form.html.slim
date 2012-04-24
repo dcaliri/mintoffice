@@ -1,0 +1,42 @@
+#show_command
+  = link_to t('common.title.back'), [bank_account, :bank_transactions]
+
+h2= t("common.title.#{action_name}")
+
+= form_for [bank_account, bank_transaction], html: {:class => "tabular"} do |f|
+  .box
+    p
+      = f.label :transacted_at
+      = f.datetime_select :transacted_at, :order => [:year, :month, :day, :hour, :minute]
+    p
+      = f.label :transaction_type
+      = f.text_field :transaction_type
+    p
+      = f.label :in
+      = f.text_field :in
+    p
+      = f.label :out
+      = f.text_field :out
+    p
+      = f.label :note
+      = f.text_area :note
+    p
+      = f.label :remain
+      = f.text_field :remain
+    p
+      = f.label :branchname
+      = f.text_field :branchname
+    p
+      = f.label :out_bank_account
+      = f.text_field :out_bank_account
+    p
+      = f.label :out_bank_name
+      = f.text_field :out_bank_name
+    p
+      = f.label :promissory_check_amount
+      = f.text_field :promissory_check_amount
+    p
+      = f.label :cms_code
+      = f.text_field :cms_code
+  p
+    = f.submit

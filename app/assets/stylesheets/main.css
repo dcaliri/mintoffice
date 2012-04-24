@@ -243,8 +243,15 @@ div.flash.notice {
 #list-table tr.selectable {
   cursor: pointer;
 }
-
 #list-table tr.selectable:hover {
+  background-color: lightgrey;
+}
+
+#list-table td.selectable {
+  cursor: pointer;
+}
+
+#list-table td.selectable:hover {
   background-color: lightgrey;
 }
 
@@ -255,10 +262,9 @@ div.flash.notice {
   border-left: 30px solid #fff;
   color: #669;
 }
-
 .numrow
 {
-	text-align: right;
+  text-align: right;
 }
 
 .tabular label {
@@ -295,8 +301,15 @@ td.money {
   text-align: right;
 }
 
+#mainmenu-table {
+  top: 80px;
+}
+tr.related {
+  background-color: orange;
+}
+
 #mainmenu {
-  display: block;
+  display: none;
   position: relative;
   margin-right: auto;
   margin-left: auto;

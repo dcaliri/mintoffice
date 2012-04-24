@@ -12,6 +12,10 @@
     <%= f.text_field :cardno %>
   </p>
   <p>
+    <%= f.label :short_name, Creditcard.human_attribute_name("short_name") %>
+    <%= f.text_field :short_name %>
+  </p>
+  <p>
     <%= f.label :expireyear, Creditcard.human_attribute_name('expireyear') %>
     <%= f.text_field :expireyear %>
   </p>

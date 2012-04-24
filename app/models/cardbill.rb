@@ -22,4 +22,12 @@ class Cardbill < ActiveRecord::Base
     query = "%#{query || ""}%"
     where('storename like ? OR storeaddr like ?', query, query)
   end
+  
+  def self.searchbycreditcard(query)
+    if query == nil or query == ""
+      where( "1 is 1" )
+    else
+      where("creditcard_id = ?", query)
+    end
+  end
 end

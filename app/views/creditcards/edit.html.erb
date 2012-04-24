@@ -13,6 +13,10 @@
     <%= f.text_field :cardno %>
   </p>
   <p>
+    <%= f.label :short_name, Creditcard.human_attribute_name("short_name") %>
+    <%= f.text_field :short_name %>
+  </p>
+  <p>
     <%= f.label :expireyear, Creditcard.human_attribute_name("expireyear") %>
     <%= f.text_field :expireyear %>
   </p>
@@ -32,7 +36,9 @@
     <%= f.label :cardholder, Creditcard.human_attribute_name("cardholder") %>
     <%= f.text_field :cardholder %>
   </p>
-  <%= render :partial => "shared/edit_attachment", :object => @creditcard %>
+	<p>
+    <%= render 'shared/attachments/form', label: t('hrinfos.edit.picture') %>
+	</p>
 </div>
 <%= f.submit t("common.button.update") %>
 <% end %>

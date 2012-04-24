@@ -1,15 +1,21 @@
 class PaymentsController < ApplicationController
-  expose(:users) do
-    users = if @user.ingroup?(:admin)
-              User
-            else
-              User.where(name: @user.name)
-            end
-   users.page(params[:page])
-  end
+  before_filter :redirect_unless_me, :only => :show
+
+  expose(:users) { User(:protected).page(params[:page]) }
   expose(:user)
   expose(:payments) { user.payments }
   expose(:payment)
+
+  def redirect_unless_permission
+  end
+
+  before_filter :redirect_unless_me, :only => :show
+
+  def redirect_unless_me
+    unless @user.ingroup?(:admin)
+      force_redirect if @user.id != params[:id].to_i
+    end
+  end
 
   def create
     payment.save!
