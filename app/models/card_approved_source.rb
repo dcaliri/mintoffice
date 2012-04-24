@@ -41,7 +41,7 @@ class CardApprovedSource < ActiveRecord::Base
     end
 
     def before_parser_filter(params)
-      @card.cardno == params[:card_no]
+      @card.short_name == params[:card_no]
     end
   end
 
