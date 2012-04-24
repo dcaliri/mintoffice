@@ -5,7 +5,6 @@
 
 
 <% 3.downto(0).each do |quarter|%>
-  <h4><%= t('.quarter', year: current_year.year, quarter: quarter+1)%></h3>
   <% between = (current_year + (3*(quarter)).month..current_year + (3*(quarter+1)).month) %>
 
   <% purchases = @purchases.where(transacted_at: between) %>
@@ -14,6 +13,7 @@
 
   <% header = Array.new([purchases.size, sales.size, cards.size].max) %>
   <% unless header.empty? %>
+    <h3><%= t('.quarter', year: current_year.year, quarter: quarter+1)%></h3>
     <table id="list-table">
       <thead>
         <tr>
@@ -29,21 +29,21 @@
               <% if purchase %>
                 <%= purchase.taxman.business_client.name %>
                 :
-                <%= number_to_currency purchase.total %>
+                <%= number_to_currency purchase.tax %>
               <% end %>
             </td>
             <td>
               <% if sale %>
                 <%= sale.taxman.business_client.name %>
                 :
-                <%= number_to_currency sale.total %>
+                <%= number_to_currency sale.tax %>
               <% end %>
             </td>
             <td>
               <% if card %>
                 <%= card.store_name %>
                 :
-                <%= number_to_currency card.money_krw %>
+                <%= number_to_currency card.tax %>
               <% end %>
             </td>
           </tr>
@@ -51,15 +51,15 @@
         <tr>
           <td>
             <%= t('common.total') %>
-            <%= number_to_currency purchases.total %>
+            <%= number_to_currency purchases.total_tax %>
           </td>
           <td>
             <%= t('common.total') %>
-            <%= number_to_currency sales.total %>
+            <%= number_to_currency sales.total_tax %>
           </td>
           <td>
             <%= t('common.total') %>
-            <%= number_to_currency cards.total %>
+            <%= number_to_currency cards.total_tax %>
           </td>
         </tr>
       </tbody>

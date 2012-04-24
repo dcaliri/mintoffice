@@ -58,7 +58,7 @@ class CardUsedSource < ActiveRecord::Base
     order('approved_at DESC').last.approved_at
   end
 
-  def self.total
-    sum{|used| used.money_krw }
+  def self.total_tax
+    sum{|used| used.tax }
   end
 end

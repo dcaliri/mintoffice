@@ -42,8 +42,8 @@ class Taxbill < ActiveRecord::Base
     items.sum{|item| item.total }
   end
 
-  def self.total
-    sum{|taxbill| taxbill.total }
+  def self.total_tax
+    sum{|taxbill| taxbill.tax }
   end
 
   class << self
