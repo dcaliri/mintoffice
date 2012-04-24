@@ -45,4 +45,8 @@ class Taxbill < ActiveRecord::Base
       where(taxman_id: text)
     end
   end
+
+  def self.latest
+    order("transacted_at DESC")
+  end
 end
