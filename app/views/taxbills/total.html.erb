@@ -5,15 +5,15 @@
 
 
 <% 3.downto(0).each do |quarter|%>
-  <h4><%= t('.quarter', year: current_year.year, quarter: quarter+1)%></h3>
   <% between = (current_year + (3*(quarter)).month..current_year + (3*(quarter+1)).month) %>
 
   <% purchases = @purchases.where(transacted_at: between) %>
   <% sales = @sales.where(transacted_at: between) %>
   <% cards = @cards.where(approved_at: between) %>
 
-  <% header = Array.new([purchases.size, sales.size, cards.size].max) %>
+  <% header = Array.new([purchases.size, sales.size, cards.to_a.size].max) %>
   <% unless header.empty? %>
+    <h3><%= t('.quarter', year: current_year.year, quarter: quarter+1)%></h3>
     <table id="list-table">
       <thead>
         <tr>
@@ -25,41 +25,46 @@
       <tbody>
         <% header.zip(purchases.all, sales.all, cards).each do |_, purchase, sale, card| %>
           <tr>
-            <td>
-              <% if purchase %>
+            <% if purchase %>
+              <td class="selectable" onclick="location.href='<%= taxbill_path(purchase) %>'">
                 <%= purchase.taxman.business_client.name %>
                 :
-                <%= number_to_currency purchase.total %>
-              <% end %>
-            </td>
-            <td>
-              <% if sale %>
+                <%= number_to_currency purchase.tax %>
+              </td>
+            <% else %>
+              <td></td>
+            <% end %>
+            <% if sale %>
+              <td class="selectable" onclick="location.href='<%= taxbill_path(sale) %>'">
                 <%= sale.taxman.business_client.name %>
                 :
-                <%= number_to_currency sale.total %>
-              <% end %>
+                <%= number_to_currency sale.tax %>
+              </td>
+            <% else %>
+              <td></td>
+            <% end %>
             </td>
             <td>
-              <% if card %>
-                <%= card.store_name %>
-                :
-                <%= number_to_currency card.money_krw %>
-              <% end %>
+            <% if card %>
+              <%= card.bank_name %>
+              :
+              <%= number_to_currency card.tax %>
+            <% end %>
             </td>
           </tr>
         <% end %>
         <tr>
           <td>
             <%= t('common.total') %>
-            <%= number_to_currency purchases.total %>
+            <%= number_to_currency purchases.total_tax %>
           </td>
           <td>
             <%= t('common.total') %>
-            <%= number_to_currency sales.total %>
+            <%= number_to_currency sales.total_tax %>
           </td>
           <td>
             <%= t('common.total') %>
-            <%= number_to_currency cards.total %>
+            <%= number_to_currency cards.total_tax %>
           </td>
         </tr>
       </tbody>

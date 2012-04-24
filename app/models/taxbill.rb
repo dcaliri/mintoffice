@@ -23,7 +23,7 @@ class Taxbill < ActiveRecord::Base
 
   def self.oldest_at
     resource = order('transacted_at DESC').last
-    if resource
+    if resource && resource.transacted_at
       resource.transacted_at
     else
       Time.zone.now
@@ -42,8 +42,8 @@ class Taxbill < ActiveRecord::Base
     items.sum{|item| item.total }
   end
 
-  def self.total
-    sum{|taxbill| taxbill.total }
+  def self.total_tax
+    sum{|taxbill| taxbill.tax }
   end
 
   class << self
