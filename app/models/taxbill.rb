@@ -25,32 +25,34 @@ class Taxbill < ActiveRecord::Base
     items.sum{|item| item.total }
   end
 
-  def self.search(params)
-    text_search(params[:query]).billtype(params[:billtype]).taxmen(params[:taxman_id])
-  end
-
-  def self.text_search(text)
-    text = "%#{text || ""}%"
-    includes(:taxman).where('taxmen.fullname like ?', text)
-  end
-
-  def self.billtype(text)
-    if text == "all" or text == nil
-      where("")
-    else
-      where(billtype: text)
+  class << self
+    def search(params)
+      text_search(params[:query]).billtype(params[:billtype]).taxmen(params[:taxman_id])
     end
-  end
 
-  def self.taxmen(text)
-    if text == "0" or text == nil
-      where("")
-    else
-      where(taxman_id: text)
+    def text_search(text)
+      text = "%#{text || ""}%"
+      includes(:taxman).where('taxmen.fullname like ?', text)
     end
-  end
 
-  def self.latest
-    order("transacted_at DESC")
+    def billtype(text)
+      if text == "all" or text == nil
+        where("")
+      else
+        where(billtype: text)
+      end
+    end
+
+    def taxmen(text)
+      if text == "0" or text == nil
+        where("")
+      else
+        where(taxman_id: text)
+      end
+    end
+
+    def latest
+      order("transacted_at DESC")
+    end
   end
 end
