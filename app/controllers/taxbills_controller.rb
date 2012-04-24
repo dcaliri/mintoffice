@@ -3,9 +3,9 @@ class TaxbillsController < ApplicationController
   expose(:taxbill)
 
   def total
-    @year = year
-    @purchases = taxbills.where(billtype: "purchase")
-    @sales = taxbills.where(billtype: "sale")
+    @current_year = current_year
+    @purchases = taxbills.purchases
+    @sales = taxbills.sales
     @cards = CardUsedSource.where("")
   end
 
@@ -41,12 +41,17 @@ class TaxbillsController < ApplicationController
   end
 
   private
-    def year_between
-      year.all_year
-    end
-
-    def year
+    def current_year
       params[:at] = Time.zone.now.year unless params[:at]
       Time.zone.parse("#{params[:at]}-01-01 00:00:00")
     end
+
+    def oldest_year
+      purchase = @purchases.oldest_at
+      sales = @sales.oldest_at
+      card = @cards.oldest_at
+
+      [purchase, sales, card].min.year
+    end
+    helper_method :oldest_year
 end

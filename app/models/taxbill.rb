@@ -13,6 +13,18 @@ class Taxbill < ActiveRecord::Base
     end
   end
 
+  def self.purchases
+    where(billtype: "purchase")
+  end
+
+  def self.sales
+    where(billtype: "sale")
+  end
+
+  def self.oldest_at
+    order('transacted_at DESC').last.transacted_at
+  end
+
   def price
     items.sum{|item| item.price }
   end

@@ -1,6 +1,7 @@
 <% 3.downto(0).each do |quarter|%>
-  <h3><%= "#{@year.year}년도 #{quarter+1} 분기"%></h3>
-  <% between = (@year + (3*(quarter)).month..@year + (3*(quarter+1)).month) %>
+  <h4><%= "#{@current_year.year}년도 #{quarter+1} 분기"%></h3>
+  <% between = (@current_year + (3*(quarter)).month..@current_year + (3*(quarter+1)).month) %>
+
   <% purchases = @purchases.where(transacted_at: between) %>
   <% sales = @sales.where(transacted_at: between) %>
   <% cards = @cards.where(approved_at: between) %>
@@ -57,15 +58,18 @@
         </tr>
       </tbody>
     </table>
-  <% else %>
-    <h4>합계표가 없습니다</h4>
   <% end %>
-  <br>
 <% end %>
 
 <h4>분기 목록</h4>
 <ul>
-  <li><%= link_to "2012년", total_taxbills_path %></li>
-  <li><%= link_to "2011년", total_taxbills_path(:at => 2011) %></li>
-  <li><%= link_to "2010년", total_taxbills_path(:at => 2010) %></li>
+  <% current = Time.zone.now.year %>
+  <% oldest = oldest_year %>
+  <% current.downto(oldest) do |year| %>
+    <% if year != params[:at].to_i %>
+      <li><%= link_to "#{year}년", total_taxbills_path(:at => year) %></li>
+    <% else %>
+      <li><%= "#{year}년"%></li>
+    <% end %>
+  <% end %>
 </ul>
