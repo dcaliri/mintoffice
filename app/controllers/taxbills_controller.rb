@@ -1,8 +1,7 @@
 class TaxbillsController < ApplicationController
-  expose(:taxbill_with_pagination) { Taxbill.search(params[:query]).seachbybilltype(params[:billtype]).searchbytaxman(params[:taxman_id]).order("transacted_at desc").page(params[:page]) }
-  expose(:taxbills)
+  expose(:taxbills) { Taxbill.search(params[:query]).seachbybilltype(params[:billtype]).searchbytaxman(params[:taxman_id]).order("transacted_at desc").page(params[:page]) }
   expose(:taxbill)
-  
+
   def show
     @attachments = Attachment.for_me(taxbill)
     session[:attachments] = [] if session[:attachments].nil?

@@ -29,20 +29,20 @@ class Taxbill < ActiveRecord::Base
     text = "%#{text || ""}%"
     includes(:taxman).where('taxmen.fullname like ?', text)
   end
-  
+
   def self.seachbybilltype(text)
     if text == "all" or text == nil
-      where("1 IS 1")
+      where("")
     else
-      where("billtype is ?", text)
+      where(billtype: text)
     end
   end
-  
+
   def self.searchbytaxman(text)
     if text == "0" or text == nil
-      where("1 IS 1")
+      where("")
     else
-      where("taxman_id is ?",text)
+      where(taxman_id: text)
     end
   end
 end
