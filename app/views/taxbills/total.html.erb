@@ -1,5 +1,11 @@
+
+<div id="show_command">
+    <%= link_to t('common.title.back'), :taxbills %>
+</div>
+
+
 <% 3.downto(0).each do |quarter|%>
-  <h4><%= "#{@current_year.year}년도 #{quarter+1} 분기"%></h3>
+  <h4><%= t('.quarter', year: @current_year.year, quarter: quarter+1)%></h3>
   <% between = (@current_year + (3*(quarter)).month..@current_year + (3*(quarter+1)).month) %>
 
   <% purchases = @purchases.where(transacted_at: between) %>
@@ -11,9 +17,9 @@
     <table id="list-table">
       <thead>
         <tr>
-          <th>매입처별 합계</th>
-          <th>매출처별 합계</th>
-          <th>신용카드 합계</th>
+          <th><%= t('.purchase') %></th>
+          <th><%= t('.sale') %></th>
+          <th><%= t('.card') %></th>
         </tr>
       </thead>
       <tbody>
@@ -23,37 +29,37 @@
               <% if purchase %>
                 <%= purchase.taxman.business_client.name %>
                 :
-                <%= purchase.total %>
+                <%= number_to_currency purchase.total %>
               <% end %>
             </td>
             <td>
               <% if sale %>
                 <%= sale.taxman.business_client.name %>
                 :
-                <%= sale.total %>
+                <%= number_to_currency sale.total %>
               <% end %>
             </td>
             <td>
               <% if card %>
                 <%= card.store_name %>
                 :
-                <%= card.money_krw %>
+                <%= number_to_currency card.money_krw %>
               <% end %>
             </td>
           </tr>
         <% end %>
         <tr>
           <td>
-            합계:
-            <%= purchases.total %>
+            <%= t('common.total') %>
+            <%= number_to_currency purchases.total %>
           </td>
           <td>
-            합계:
-            <%= sales.total %>
+            <%= t('common.total') %>
+            <%= number_to_currency sales.total %>
           </td>
           <td>
-            합계:
-            <%= cards.total %>
+            <%= t('common.total') %>
+            <%= number_to_currency cards.total %>
           </td>
         </tr>
       </tbody>
@@ -61,15 +67,15 @@
   <% end %>
 <% end %>
 
-<h4>분기 목록</h4>
+<h4><%= t('.list')%></h4>
 <ul>
   <% current = Time.zone.now.year %>
   <% oldest = oldest_year %>
   <% current.downto(oldest) do |year| %>
     <% if year != params[:at].to_i %>
-      <li><%= link_to "#{year}년", total_taxbills_path(:at => year) %></li>
+      <li><%= link_to "#{year}#{t('datetime.prompts.year')}", total_taxbills_path(:at => year) %></li>
     <% else %>
-      <li><%= "#{year}년"%></li>
+      <li><%= "#{year}#{t('datetime.prompts.year')}" %></li>
     <% end %>
   <% end %>
 </ul>
