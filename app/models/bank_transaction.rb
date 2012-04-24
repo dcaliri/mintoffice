@@ -73,7 +73,10 @@ class BankTransaction < ActiveRecord::Base
   end
 
   def transfer
-    collection = BankTransfer.where("transfered_at = ? AND money + transfer_fee = ?", transacted_at, out)
+    time_start = transacted_at - 1.minutes
+    time_end = transacted_at + 1.minutes
+
+    collection = BankTransfer.where("transfered_at BETWEEN ? AND ? AND money + transfer_fee = ?", time_start, time_end, out)
     unless collection.empty?
       collection.first
     else
