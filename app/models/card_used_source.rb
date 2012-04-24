@@ -50,24 +50,26 @@ class CardUsedSource < ActiveRecord::Base
 
   set_parser_options DEFAULT
 
-  def self.group_by_bank_name
-    group("bank_name").select("card_used_sources.*, sum(tax) as tax")
-  end
-
-  def self.latest
-    order('approved_at DESC, approved_time DESC')
-  end
-
-  def self.oldest_at
-    resource = order('approved_at DESC').last
-    if resource && resource.approved_at
-      resource.approved_at
-    else
-      Time.zone.now
+  class << self
+    def group_by_bank_name
+      group("bank_name").select("card_used_sources.*, sum(tax) as tax")
     end
-  end
 
-  def self.total_tax
-    sum{|used| used.tax }
+    def latest
+      order('approved_at DESC, approved_time DESC')
+    end
+
+    def oldest_at
+      resource = order('approved_at DESC').last
+      if resource && resource.approved_at
+        resource.approved_at
+      else
+        Time.zone.now
+      end
+    end
+
+    def total_tax
+      sum{|used| used.tax }
+    end
   end
 end
