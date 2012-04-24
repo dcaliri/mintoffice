@@ -41,6 +41,15 @@ module StylesheetParseable
       @excel_options[type] = {position: opts[:position]}
     end
 
+    def open_and_parse_stylesheet(upload, type = :default)
+      name = upload['file'].original_filename
+      directory = "tmp"
+      path = File.join(directory, name)
+      File.open(path, "wb") { |f| f.write(upload['file'].read) }
+      parse_stylesheet(path, type.to_sym)
+      File.delete(path)
+    end
+
     def preview_stylesheet(upload, type = :default)
       name = upload['file'].original_filename
       directory = "tmp"
@@ -52,15 +61,6 @@ module StylesheetParseable
     def create_with_stylesheet(name, type = :default)
       directory = "tmp"
       path = File.join(directory, name)
-      parse_stylesheet(path, type.to_sym)
-      File.delete(path)
-    end
-
-    def open_and_parse_stylesheet(upload, type = :default)
-      name = upload['file'].original_filename
-      directory = "tmp"
-      path = File.join(directory, name)
-      File.open(path, "wb") { |f| f.write(upload['file'].read) }
       parse_stylesheet(path, type.to_sym)
       File.delete(path)
     end

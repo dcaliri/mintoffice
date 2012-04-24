@@ -46,9 +46,15 @@ t.datetime    :will_be_paied_at
         td= source.used_type
         td= source.monthly_duration
         td= source.card_type
-        td= source.canceled_at
+        - if source.canceled_at
+          td= source.canceled_at.strftime("%Y.%m.%d")
+        -else
+          td
         td= source.status
-        td= source.will_be_paied_at
+        - if source.will_be_paied_at
+          td= source.will_be_paied_at.strftime("%Y.%m.%d")
+        else
+          td
         td align="right"
           = link_to t('common.link.edit'), [:edit, creditcard, source]
           = " | "
