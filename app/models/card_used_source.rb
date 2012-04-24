@@ -53,4 +53,12 @@ class CardUsedSource < ActiveRecord::Base
   def self.latest
     order('approved_at DESC, approved_time DESC')
   end
+
+  def self.oldest_at
+    order('approved_at DESC').last.approved_at
+  end
+
+  def self.total
+    sum{|used| used.money_krw }
+  end
 end

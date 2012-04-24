@@ -426,6 +426,7 @@ ko:
             edit: "수정"
             destroy: "삭제"
         menu: 메뉴
+        total: 합계
     commutes:
         title: 출퇴근 기록 관리
         arrive_at_work: 출근
@@ -580,6 +581,14 @@ ko:
         edit:
             title: 세금계산서 수정
             picture: 첨부파일
+        total:
+            title: 세금계산서 합계표
+            link: 합계표 보기
+            purchase: 매입처별 합계
+            sale: 매출처별 합계
+            card: 신용카드 합계
+            list: 분기 목록
+            quarter: "%{year}년도 %{quarter} 분기"
         purchase_bill: 매입 세금계산서
         sales_bill: 매출 세금계산서
         purchase_sales_bill: 매입/매출 세금계산서

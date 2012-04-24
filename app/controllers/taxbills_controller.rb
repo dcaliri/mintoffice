@@ -2,6 +2,13 @@ class TaxbillsController < ApplicationController
   expose(:taxbills) { Taxbill.search(params).latest.page(params[:page]) }
   expose(:taxbill)
 
+  def total
+    @current_year = current_year
+    @purchases = taxbills.purchases
+    @sales = taxbills.sales
+    @cards = CardUsedSource.where("")
+  end
+
   def show
     @attachments = Attachment.for_me(taxbill)
     session[:attachments] = [] if session[:attachments].nil?
@@ -32,4 +39,19 @@ class TaxbillsController < ApplicationController
     taxbill.destroy
     redirect_to :taxbills, notice: I18n.t("common.messages.destroyed", :model => Taxbill.model_name.human)
   end
+
+  private
+    def current_year
+      params[:at] = Time.zone.now.year unless params[:at]
+      Time.zone.parse("#{params[:at]}-01-01 00:00:00")
+    end
+
+    def oldest_year
+      purchase = @purchases.oldest_at
+      sales = @sales.oldest_at
+      card = @cards.oldest_at
+
+      [purchase, sales, card].min.year
+    end
+    helper_method :oldest_year
 end
