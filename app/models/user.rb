@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   has_many :payments
   has_many :commutes
   has_many :vacations
+  has_many :change_histories
 
   scope :nohrinfo, :conditions =>['id not in (select user_id from hrinfos)']
 

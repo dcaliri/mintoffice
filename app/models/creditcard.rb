@@ -2,7 +2,9 @@ class Creditcard < ActiveRecord::Base
   has_many :cardbills
   has_many :card_used_sources
   has_many :card_approved_sources
-
+  
+  has_many :change_histories, :as => :changable
+  
   validates_presence_of :cardno
   validates_presence_of :expireyear
   validates_presence_of :expiremonth
