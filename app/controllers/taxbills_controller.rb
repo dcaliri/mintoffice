@@ -3,6 +3,7 @@ class TaxbillsController < ApplicationController
   expose(:taxbill)
 
   def total
+    @year = year
     @purchases = taxbills.where(billtype: "purchase")
     @sales = taxbills.where(billtype: "sale")
     @cards = CardUsedSource.where("")
@@ -38,4 +39,14 @@ class TaxbillsController < ApplicationController
     taxbill.destroy
     redirect_to :taxbills, notice: I18n.t("common.messages.destroyed", :model => Taxbill.model_name.human)
   end
+
+  private
+    def year_between
+      year.all_year
+    end
+
+    def year
+      params[:at] = Time.zone.now.year unless params[:at]
+      Time.zone.parse("#{params[:at]}-01-01 00:00:00")
+    end
 end

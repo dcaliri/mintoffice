@@ -1,53 +1,71 @@
-<% header = Array.new([@purchases.size, @sales.size, @cards.size].max) %>
-<% unless header.empty? %>
-  <table id="list-table">
-    <thead>
-      <tr>
-        <th>매입처별 합계</th>
-        <th>매출처별 합계</th>
-        <th>신용카드 합계</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% header.zip(@purchases.all, @sales.all, @cards).each do |_, purchase, sale, card| %>
+<% 3.downto(0).each do |quarter|%>
+  <h3><%= "#{@year.year}년도 #{quarter+1} 분기"%></h3>
+  <% between = (@year + (3*(quarter)).month..@year + (3*(quarter+1)).month) %>
+  <% purchases = @purchases.where(transacted_at: between) %>
+  <% sales = @sales.where(transacted_at: between) %>
+  <% cards = @cards.where(approved_at: between) %>
+
+  <% header = Array.new([purchases.size, sales.size, cards.size].max) %>
+  <% unless header.empty? %>
+    <table id="list-table">
+      <thead>
+        <tr>
+          <th>매입처별 합계</th>
+          <th>매출처별 합계</th>
+          <th>신용카드 합계</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% header.zip(purchases.all, sales.all, cards).each do |_, purchase, sale, card| %>
+          <tr>
+            <td>
+              <% if purchase %>
+                <%= purchase.taxman.business_client.name %>
+                :
+                <%= purchase.total %>
+              <% end %>
+            </td>
+            <td>
+              <% if sale %>
+                <%= sale.taxman.business_client.name %>
+                :
+                <%= sale.total %>
+              <% end %>
+            </td>
+            <td>
+              <% if card %>
+                <%= card.store_name %>
+                :
+                <%= card.money_krw %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
         <tr>
           <td>
-            <%= purchase.taxman.business_client.name %>
-            :
-            <%= purchase.total %>
+            합계:
+            <%= purchases.total %>
           </td>
           <td>
-            <% if sale %>
-              <%= sale.taxman.business_client.name %>
-              :
-              <%= sale.total %>
-            <% end %>
+            합계:
+            <%= sales.total %>
           </td>
           <td>
-            <% if card %>
-              <%= card.store_name %>
-              :
-              <%= card.money_krw %>
-            <% end %>
+            합계:
+            <%= cards.total %>
           </td>
         </tr>
-      <% end %>
-      <tr>
-        <td>
-          합계:
-          <%= @purchases.total %>
-        </td>
-        <td>
-          합계:
-          <%= @sales.total %>
-        </td>
-        <td>
-          합계:
-          <%= @cards.total %>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-<% else %>
-  <h4>합계표가 없습니다</h4>
+      </tbody>
+    </table>
+  <% else %>
+    <h4>합계표가 없습니다</h4>
+  <% end %>
+  <br>
 <% end %>
+
+<h4>분기 목록</h4>
+<ul>
+  <li><%= link_to "2012년", total_taxbills_path %></li>
+  <li><%= link_to "2011년", total_taxbills_path(:at => 2011) %></li>
+  <li><%= link_to "2010년", total_taxbills_path(:at => 2010) %></li>
+</ul>
