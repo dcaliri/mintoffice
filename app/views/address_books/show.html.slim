@@ -1,0 +1,28 @@
+
+#show_command
+  = link_to t('common.link.edit'), [:edit, address_book]
+  = " | "
+  = link_to t('common.link.destroy'), address_book, :method => :delete, :confirm => "Are you sure?"
+  = " | "
+  = link_to t('common.title.back'), :address_books
+
+
+h2 #{address_book.firstname} #{address_book.lastname}
+
+.box
+  table
+    tr
+      th= AddressBook.human_attribute_name(:firstname)
+      td= address_book.firstname
+    tr
+      th= AddressBook.human_attribute_name(:lastname)
+      td= address_book.lastname
+    tr
+      th= AddressBook.human_attribute_name(:company)
+      td= address_book.company
+    tr
+      th= AddressBook.human_attribute_name(:department)
+      td= address_book.department
+    tr
+      th= AddressBook.human_attribute_name(:position)
+      td= address_book.position

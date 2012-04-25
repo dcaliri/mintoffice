@@ -1,0 +1,24 @@
+#show_command
+  = link_to t('common.title.back'), :address_books
+
+h2= t("common.title.#{action_name}")
+
+= form_for address_book do |f|
+  .box
+    p
+      = f.label :firstname
+      = f.text_field :firstname
+    p
+      = f.label :lastname
+      = f.text_field :lastname
+    p
+      = f.label :company
+      = f.text_field :company
+    p
+      = f.label :department
+      = f.text_field :department
+    p
+      = f.label :position
+      = f.text_field :position
+    p
+      = f.submit
