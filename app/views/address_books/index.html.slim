@@ -25,6 +25,8 @@ h2 ..
         td= address.department
         td= address.position
         td
+          = link_to t('common.link.show'), address
+          = " | "
           = link_to t('common.link.edit'), [:edit, address]
           = " | "
           = link_to t('common.link.destroy'), address, :method => :delete, :confirm => "Are you sure?"

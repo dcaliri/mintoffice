@@ -732,6 +732,8 @@ ko:
             empty: 주소록이 없습니다
         show:
             title: 주소록 상세정보
+        new:
+            title: 주소록 만들기
         edit:
             title: 주소록 수정하기
     users:
