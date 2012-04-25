@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120425061309) do
+ActiveRecord::Schema.define(:version => 20120425064618) do
 
   create_table "address_book_addresses", :force => true do |t|
     t.integer  "address_book_id"
@@ -391,6 +391,7 @@ ActiveRecord::Schema.define(:version => 20120425061309) do
     t.datetime "updated_at",      :null => false
     t.string   "provider"
     t.string   "uid"
+    t.string   "gmail_account"
   end
 
   create_table "vacations", :force => true do |t|
