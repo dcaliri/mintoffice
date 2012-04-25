@@ -60,8 +60,10 @@ class CardUsedSource < ActiveRecord::Base
       @card.short_name == params[:card_no]
     end
 
-    def group_by_bank_name
-      group("bank_name").select("card_used_sources.*, sum(tax) as tax")
+    def group_by_name_anx_tax
+      all.group_by{|cards| cards.bank_name }.map do |name, cards|
+        {name: name, tax: cards.sum{|card| card.tax}}
+      end
     end
 
     def latest

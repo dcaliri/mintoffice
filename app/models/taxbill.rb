@@ -43,13 +43,38 @@ class Taxbill < ActiveRecord::Base
     items.sum{|item| item.total }
   end
 
-  def self.total_tax
-    sum{|taxbill| taxbill.tax }
-  end
-
   class << self
-    def group_by_client_name
-      includes([:taxman => :business_client]).group("business_clients.name").select("business_clients.name as client_nane")#.select("sum(taxbill_items.tax) as taxbills.tax")
+    def taxmen_list
+      Taxman.all.map do |taxman|
+        ["#{taxman.fullname} / #{taxman.business_client.name}", taxman.id]
+      end
+    end
+
+    def purchases
+      where(billtype: "purchase")
+    end
+
+    def sales
+      where(billtype: "sale")
+    end
+
+    def oldest_at
+      resource = order('transacted_at DESC').last
+      if resource && resource.transacted_at
+        resource.transacted_at
+      else
+        Time.zone.now
+      end
+    end
+
+    def total_tax
+      sum{|taxbill| taxbill.tax }
+    end
+
+    def group_by_name_anx_tax
+      all.group_by{|purchase| purchase.taxman.business_client.name }.map do |name, purchases|
+        {name: name, tax: purchases.sum{|p| p.tax}}
+      end
     end
 
     def search(params)
