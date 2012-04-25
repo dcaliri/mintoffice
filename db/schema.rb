@@ -11,7 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120425025457) do
+ActiveRecord::Schema.define(:version => 20120425054042) do
+
+  create_table "address_book_emails", :force => true do |t|
+    t.integer "address_book_id"
+    t.string  "target"
+    t.string  "email"
+  end
+
+  create_table "address_book_phone_numbers", :force => true do |t|
+    t.integer "address_book_id"
+    t.string  "target"
+    t.string  "number"
+  end
 
   create_table "address_books", :force => true do |t|
     t.string "firstname"
@@ -19,6 +31,7 @@ ActiveRecord::Schema.define(:version => 20120425025457) do
     t.string "company"
     t.string "department"
     t.string "position"
+    t.text   "email_list"
   end
 
   create_table "attachments", :force => true do |t|

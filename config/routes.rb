@@ -58,7 +58,10 @@ Mintoffice::Application.routes.draw do
 
   match "/auth/:provider/callback" => "providers#create"
 
-  resources :address_books
+  resources :address_books do
+    resources :address_book_emails, :path => 'emails', :only => :destroy
+    resources :address_book_phone_numbers, :path => 'phone_number', :only => :destroy
+  end
 
   resources :payments, :only => [:index, :show]
   resources :commutes

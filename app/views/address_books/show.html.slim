@@ -26,3 +26,15 @@ h2 #{address_book.firstname} #{address_book.lastname}
     tr
       th= AddressBook.human_attribute_name(:position)
       td= address_book.position
+    tr
+      td
+    - address_book.emails.each do |email|
+      tr
+        th= "이메일(#{email.target})"
+        td= email.email
+        td= link_to "제거", [address_book, email], :method => :delete, :confirm => "Are you sure?"
+    - address_book.phone_numbers.each do |phone_number|
+      tr
+        th= "전화번호(#{phone_number.target})"
+        td= phone_number.number
+        td= link_to "제거", [address_book, phone_number], :method => :delete, :confirm => "Are you sure?"

@@ -20,5 +20,25 @@ h2= t("common.title.#{action_name}")
     p
       = f.label :position
       = f.text_field :position
+
+    - address_book.emails.new
+    h3 이메일
+    = f.fields_for :emails do |email_field|
+      p
+        = email_field.label :target
+        = email_field.text_field :target
+      p
+        = email_field.label :email
+        = email_field.email_field :email
+
+    - address_book.phone_numbers.new
+    h3 전화번호
+    = f.fields_for :phone_numbers do |phone_number_field|
+      p
+        = phone_number_field.label :target
+        = phone_number_field.text_field :target
+      p
+        = phone_number_field.label :number
+        = phone_number_field.text_field :number
     p
       = f.submit
