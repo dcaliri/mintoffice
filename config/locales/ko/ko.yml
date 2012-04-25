@@ -350,9 +350,9 @@ ko:
             address_book_email:
                 target: 대상
                 email: 이메일
-            address_book_phonenumber:
+            address_book_phone_number:
                 target: 대상
-                phonenumber: 전화번호
+                number: 전화번호
             address_book_address:
                 target: 대상
                 country: 국가
