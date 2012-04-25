@@ -24,49 +24,52 @@ h2= t("common.title.#{action_name}")
     - address_book.emails.new
     h3 이메일
     = f.fields_for :emails do |email_field|
-      p
-        = email_field.label :target
-        = email_field.text_field :target
-      p
-        = email_field.label :email
-        = email_field.email_field :email
+      = div_for(email_field.object) do
+        p
+          = email_field.label :target
+          = email_field.select :target, options_for_select(AddressBook::EMAIL_TARGET, email_field.object.target)
+        p
+          = email_field.label :email
+          = email_field.email_field :email
       br
 
     - address_book.phone_numbers.new
     h3 전화번호
     = f.fields_for :phone_numbers do |phone_number_field|
-      p
-        = phone_number_field.label :target
-        = phone_number_field.text_field :target
-      p
-        = phone_number_field.label :number
-        = phone_number_field.text_field :number
+      = div_for(phone_number_field.object) do
+        p
+          = phone_number_field.label :target
+          = phone_number_field.select :target, options_for_select(AddressBook::PHONENUMBER_TARGET, phone_number_field.object.target)
+        p
+          = phone_number_field.label :number
+          = phone_number_field.text_field :number
       br
 
     - address_book.addresses.new
     h3 주소
     = f.fields_for :addresses do |address_field|
-      p
-        = address_field.label :target
-        = address_field.text_field :target
-      p
-        = address_field.label :country
-        = address_field.text_field :country
-      p
-        = address_field.label :province
-        = address_field.text_field :province
-      p
-        = address_field.label :city
-        = address_field.text_field :city
-      p
-        = address_field.label :other1
-        = address_field.text_field :other1
-      p
-        = address_field.label :other2
-        = address_field.text_field :other2
-      p
-        = address_field.label :postal_code
-        = address_field.text_field :postal_code
+      = div_for(address_field.object) do
+        p
+          = address_field.label :target
+          = address_field.select :target, options_for_select(AddressBook::ADDRESS_TARGET, address_field.object.target)
+        p
+          = address_field.label :country
+          = address_field.text_field :country
+        p
+          = address_field.label :province
+          = address_field.text_field :province
+        p
+          = address_field.label :city
+          = address_field.text_field :city
+        p
+          = address_field.label :other1
+          = address_field.text_field :other1
+        p
+          = address_field.label :other2
+          = address_field.text_field :other2
+        p
+          = address_field.label :postal_code
+          = address_field.text_field :postal_code
       br
 
     p
