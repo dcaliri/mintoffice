@@ -122,6 +122,9 @@ ko:
             card_used_source: 카드 이용내역
             card_approved_source: 카드 승인내역
             address_book: 주소록
+            address_book_email: 이메일
+            address_book_phone_number: 전화번호
+            address_book_address: 주소
         attributes:
             attachment:
                 comments: 주석
@@ -344,7 +347,20 @@ ko:
                 company: 회사
                 department: 부서
                 position: 직위
-
+            address_book_email:
+                target: 대상
+                email: 이메일
+            address_book_phonenumber:
+                target: 대상
+                phonenumber: 전화번호
+            address_book_address:
+                target: 대상
+                country: 국가
+                province: 주
+                city: 도시
+                other1: 군/구
+                other2: 나머지
+                postal_code: 우편번호
         errors:
             template:
                 header: 오류가 발생했습니다.
