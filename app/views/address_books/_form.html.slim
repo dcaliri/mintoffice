@@ -26,7 +26,7 @@ h2= t("common.title.#{action_name}")
     = f.fields_for :emails do |email_field|
       p
         = email_field.label :target
-        = email_field.text_field :target
+        = email_field.select :target, options_for_select(AddressBook::EMAIL_TARGET, email_field.object.target)
       p
         = email_field.label :email
         = email_field.email_field :email
@@ -37,7 +37,7 @@ h2= t("common.title.#{action_name}")
     = f.fields_for :phone_numbers do |phone_number_field|
       p
         = phone_number_field.label :target
-        = phone_number_field.text_field :target
+        = phone_number_field.select :target, options_for_select(AddressBook::PHONENUMBER_TARGET, phone_number_field.object.target)
       p
         = phone_number_field.label :number
         = phone_number_field.text_field :number
@@ -48,7 +48,7 @@ h2= t("common.title.#{action_name}")
     = f.fields_for :addresses do |address_field|
       p
         = address_field.label :target
-        = address_field.text_field :target
+        = address_field.select :target, options_for_select(AddressBook::ADDRESS_TARGET, address_field.object.target)
       p
         = address_field.label :country
         = address_field.text_field :country
