@@ -3,8 +3,8 @@ class TaxbillsController < ApplicationController
   expose(:taxbill)
 
   def total
-    @purchases = taxbills.purchases
-    @sales = taxbills.sales
+    @purchases = Taxbill.purchases
+    @sales = Taxbill.sales
     @cards = CardUsedSource
   end
 
