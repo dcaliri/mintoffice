@@ -1,4 +1,6 @@
 class TaxbillsController < ApplicationController
+  before_filter :save_search_option, :only => :index
+
   expose(:taxbills) { Taxbill.search(params).latest.page(params[:page]) }
   expose(:taxbill)
 
@@ -54,4 +56,17 @@ class TaxbillsController < ApplicationController
       [purchase, sales, card].min.year
     end
     helper_method :oldest_year
+
+    def save_search_option
+      [:billtype, :taxman_id].each do |option|
+        option_for_params = option
+        option_for_session = "taxbills_#{option}".to_sym
+
+        if params[option_for_params]
+          session[option_for_session] = params[option_for_params]
+        else
+          params[option_for_params] = session[option_for_session]
+        end
+      end
+    end
 end
