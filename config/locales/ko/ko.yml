@@ -121,6 +121,10 @@ ko:
             bank_transfer: 이체 내역
             card_used_source: 카드 이용내역
             card_approved_source: 카드 승인내역
+            address_book: 주소록
+            address_book_email: 이메일
+            address_book_phone_number: 전화번호
+            address_book_address: 주소
         attributes:
             attachment:
                 comments: 주석
@@ -337,6 +341,26 @@ ko:
                 canceled_at: 취소일자
                 status: 매입상태
                 will_be_paied_at: 결제예정일
+            address_book:
+                firstname: 성
+                lastname: 이름
+                company: 회사
+                department: 부서
+                position: 직위
+            address_book_email:
+                target: 대상
+                email: 이메일
+            address_book_phonenumber:
+                target: 대상
+                phonenumber: 전화번호
+            address_book_address:
+                target: 대상
+                country: 국가
+                province: 주
+                city: 도시
+                other1: 군/구
+                other2: 나머지
+                postal_code: 우편번호
         errors:
             template:
                 header: 오류가 발생했습니다.
@@ -718,6 +742,16 @@ ko:
             link: 연차 사용하기
         edit:
             title: 연차 수정하기
+    address_books:
+        index:
+            title: 주소록 리스트
+            empty: 주소록이 없습니다
+        show:
+            title: 주소록 상세정보
+        new:
+            title: 주소록 만들기
+        edit:
+            title: 주소록 수정하기
     users:
         new:
             title: 새 사용자 계정 만들기
