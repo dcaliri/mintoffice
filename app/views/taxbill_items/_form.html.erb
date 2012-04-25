@@ -36,3 +36,37 @@
     </p>
   </div>
 <% end %>
+
+
+<% content_for :javascript do %>
+  <script type="text/javascript">
+    $(function(){
+      var unitprice = $('#taxbill_item_unitprice');
+      var quantity = $('#taxbill_item_quantity');
+      var tax = $('#taxbill_item_tax');
+      var total = $('#taxbill_item_total');
+
+      var calculateTax = function(){
+        return Math.round(unitprice.val() * quantity.val() * 0.1);
+      }
+
+      var calculateTotal = function(){
+        return unitprice.val() * quantity.val() - calculateTax();
+      }
+
+      var applyTotal = function(){
+        total.val(calculateTotal());
+      };
+
+      var applyTax = function(){
+        tax.val(calculateTax());
+      }
+
+      unitprice.keyup(applyTotal);
+      unitprice.keyup(applyTax);
+
+      quantity.keyup(applyTotal);
+      quantity.keyup(applyTax);
+    });
+  </script>
+<% end -%>
