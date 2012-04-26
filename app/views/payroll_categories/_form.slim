@@ -1,0 +1,19 @@
+#show_command
+  = link_to "back", payroll_categories_path()
+
+h2= t("common.title.#{action_name}")
+
+= form_for [payroll_category], html: {class: "tabular"} do |f|
+  = f.error_messages
+  .box
+    p
+      = f.label :prtype
+      = f.text_field :prtype
+    p
+      = f.label :code
+      = f.text_field :code
+    p
+      = f.label :title
+      = f.text_field :title
+  p
+    = f.submit
