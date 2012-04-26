@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120426005225) do
+ActiveRecord::Schema.define(:version => 20120426022536) do
 
   create_table "attachments", :force => true do |t|
     t.string   "title"
@@ -424,6 +424,9 @@ ActiveRecord::Schema.define(:version => 20120426005225) do
     t.datetime "updated_at",      :null => false
     t.string   "provider"
     t.string   "uid"
+    t.string   "gmail_account"
+    t.string   "boxcar_account"
+    t.string   "email"
   end
 
   create_table "vacations", :force => true do |t|

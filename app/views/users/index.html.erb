@@ -20,11 +20,19 @@
 <table id="list-table">
   <tr>
     <th><%= User.human_attribute_name('name') %></th>
+    <th><%= User.human_attribute_name('gmail_account') %></th>
+    <th><%= User.human_attribute_name('email') %></th>
+    <th><%= User.human_attribute_name('boxcar_account') %></th>
+
   </tr>
 
 <% @users.each do |user| %>
 <tr class="selectable" onclick="location.href='<%= user_path(user) %>'">
-    <td><%=h user.name %></td>
+  <td><%=h user.name %></td>
+  <td><%=h user.gmail_account %></td>
+  <td><%=h user.email %></td>
+  <td><%=h user.boxcar_account %></td>
+
     <!-- <td><%= link_to 'Show', user %></td>
     <td><%= link_to 'Edit', edit_user_path(user) %></td>
     <td><%= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete %></td> -->

@@ -24,18 +24,20 @@ class User < ActiveRecord::Base
   validate :password_non_blank, :if => Proc.new{|user| user.provider.blank? and user.uid.blank?}
 
   def self.find_or_create_with_omniauth!(auth)
-    users = where(:provider => auth['provider'], :uid => auth['uid'])
+#    users = where(:provider => auth['provider'], :uid => auth['uid'])
+    users = where(:gmail_account => auth['info']['email'])
     user = if not users.empty?
       users.first
     else
-      self.new(:provider => auth['provider'], :uid => auth['uid'])
+      nil
+#      self.new(:provider => auth['provider'], :uid => auth['uid'])
     end
 
 #    user.name = auth['info']['name']
-    user.name = auth['info']['email'].split('@').first
+#    user.name = auth['info']['email'].split('@').first
 
 #    user.save(:validate => false)
-    user.save!
+#    user.save!
     user
   end
 

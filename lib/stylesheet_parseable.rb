@@ -30,17 +30,6 @@ module StylesheetParseable
   end
 
   module ClassMethods
-    def set_parser_options(opts)
-      @excel_columns ||= {}
-      @excel_keys ||= {}
-      @excel_options ||= {}
-
-      type = opts[:name]
-      @excel_columns[type] = opts[:columns]
-      @excel_keys[type] = opts[:keys]
-      @excel_options[type] = {position: opts[:position]}
-    end
-
     def open_and_parse_stylesheet(upload, type = :default)
       name = upload['file'].original_filename
       directory = "tmp"
@@ -65,7 +54,18 @@ module StylesheetParseable
       File.delete(path)
     end
 
-    def parse_stylesheet(file, type = :default, opts = {})
+    def set_parser_options(opts)
+      @excel_columns ||= {}
+      @excel_keys ||= {}
+      @excel_options ||= {}
+
+      type = opts[:name]
+      @excel_columns[type] = opts[:columns]
+      @excel_keys[type] = opts[:keys]
+      @excel_options[type] = {position: opts[:position]}
+    end
+
+    def parse_stylesheet(file, type, opts = {})
       parser = ExcelParser.new
       parser.column @excel_columns[type]
       parser.option @excel_options[type]

@@ -6,32 +6,11 @@
 <% 3.downto(0).each do |quarter|%>
   <% between = (current_year + (3*(quarter)).month..current_year + (3*(quarter+1)).month) %>
 
-  <% purchase_group = @purchases.where(transacted_at: between).group_by{|purchase| purchase.taxman.business_client.name } %>
-  <% sales_group = @sales.where(transacted_at: between).group_by{|sales| sales.taxman.business_client.name } %>
-  <% card_group = @cards.where(approved_at: between).group_by{|cards| cards.bank_name } %>
+  <% purchase_list = @purchases.where(transacted_at: between).group_by_name_anx_tax %>
+  <% sales_list = @sales.where(transacted_at: between).group_by_name_anx_tax %>
+  <% card_list = @cards.where(approved_at: between).group_by_name_anx_tax %>
 
-  <%
-    purchase_list = []
-    purchase_group.each do |name, purchases|
-      purchase_list.push({name: name, tax: purchases.sum{|p| p.tax}})
-    end
-  %>
-
-  <%
-    sales_list = []
-    sales_group.each do |name, purchases|
-      sales_list.push({name: name, tax: purchases.sum{|p| p.tax}})
-    end
-  %>
-
-  <%
-    cards_list = []
-    card_group.each do |name, card|
-      cards_list.push({name: name, tax: card.sum{|p| p.tax}})
-    end
-  %>
-
-  <% header = Array.new([purchase_list.size, sales_list.size, cards_list.size].max) %>
+  <% header = Array.new([purchase_list.size, sales_list.size, card_list.size].max) %>
 
   <% unless header.empty? %>
     <h3><%= t('.quarter', year: current_year.year, quarter: quarter+1)%></h3>
@@ -44,7 +23,7 @@
         </tr>
       </thead>
       <tbody>
-        <% header.zip(purchase_list, sales_list, cards_list).each do |_, purchase, sale, card| %>
+        <% header.zip(purchase_list, sales_list, card_list).each do |_, purchase, sale, card| %>
           <tr>
             <% if purchase %>
               <td>
@@ -74,15 +53,15 @@
         <tr>
           <td>
             <%= t('common.total') %>
-            <%= number_to_currency purchase_list.sum{|p| p[:tax]} %>
+            <%= number_to_currency purchase_list.sum{|purchase| purchase[:tax]} %>
           </td>
           <td>
             <%= t('common.total') %>
-            <%= number_to_currency sales_list.sum{|p| p[:tax]} %>
+            <%= number_to_currency sales_list.sum{|sales| sales[:tax]} %>
           </td>
             <td>
               <%= t('common.total') %>
-              <%= number_to_currency cards_list.sum{|p| p[:tax]} %>
+              <%= number_to_currency card_list.sum{|card| card[:tax]} %>
             </td>
         </tr>
       </tbody>
@@ -95,7 +74,7 @@
   <% current = Time.zone.now.year %>
   <% oldest = oldest_year %>
   <% current.downto(oldest) do |year| %>
-    <% if year != params[:at].to_i %>
+    <% if year != current_year.year %>
       <li><%= link_to "#{year}#{t('datetime.prompts.year')}", total_taxbills_path(:at => year) %></li>
     <% else %>
       <li><%= "#{year}#{t('datetime.prompts.year')}" %></li>
