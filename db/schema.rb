@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120425235628) do
+ActiveRecord::Schema.define(:version => 20120426005225) do
 
   create_table "attachments", :force => true do |t|
     t.string   "title"
@@ -166,6 +166,17 @@ ActiveRecord::Schema.define(:version => 20120425235628) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "contact_address_tags", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "contact_address_tags_contact_addresses", :id => false, :force => true do |t|
+    t.integer "contact_address_tag_id"
+    t.integer "contact_address_id"
+  end
+
   create_table "contact_addresses", :force => true do |t|
     t.integer  "contact_id"
     t.string   "target"
@@ -179,10 +190,32 @@ ActiveRecord::Schema.define(:version => 20120425235628) do
     t.datetime "updated_at",  :null => false
   end
 
+  create_table "contact_email_tags", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "contact_email_tags_contact_emails", :id => false, :force => true do |t|
+    t.integer "contact_email_tag_id"
+    t.integer "contact_email_id"
+  end
+
   create_table "contact_emails", :force => true do |t|
     t.integer "contact_id"
     t.string  "target"
     t.string  "email"
+  end
+
+  create_table "contact_phone_number_tags", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "contact_phone_number_tags_contact_phone_numbers", :id => false, :force => true do |t|
+    t.integer "contact_phone_number_tag_id"
+    t.integer "contact_phone_number_id"
   end
 
   create_table "contact_phone_numbers", :force => true do |t|
