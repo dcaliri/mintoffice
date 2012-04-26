@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120425064618) do
+ActiveRecord::Schema.define(:version => 20120426022536) do
 
   create_table "address_book_addresses", :force => true do |t|
     t.integer  "address_book_id"
@@ -392,6 +392,8 @@ ActiveRecord::Schema.define(:version => 20120425064618) do
     t.string   "provider"
     t.string   "uid"
     t.string   "gmail_account"
+    t.string   "boxcar_account"
+    t.string   "email"
   end
 
   create_table "vacations", :force => true do |t|

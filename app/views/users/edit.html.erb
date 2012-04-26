@@ -19,6 +19,14 @@
     <%= f.label :gmail_account, User.human_attribute_name('gmail_account') %>
     <%= f.text_field :gmail_account %>
   </p>
+  <p>
+    <%= f.label :email, User.human_attribute_name('email') %>
+    <%= f.text_field :email %>
+  </p>
+  <p>
+    <%= f.label :boxcar_account, User.human_attribute_name('boxcar_account') %>
+    <%= f.text_field :boxcar_account %>
+  </p>
 
 </div>
 <%= f.submit t('common.button.update') %>

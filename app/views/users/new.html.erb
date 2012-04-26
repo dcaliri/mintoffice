@@ -26,6 +26,15 @@
     <%= f.label :gmail_account, User.human_attribute_name("gmail_account")  %>
     <%= f.text_field :gmail_account, :size => 40 %>
   </p>
+  <p>
+    <%= f.label :email, User.human_attribute_name("email")  %>
+    <%= f.text_field :email, :size => 40 %>
+  </p>
+  <p>
+    <%= f.label :boxcar_account, User.human_attribute_name("boxcar_account")  %>
+    <%= f.text_field :boxcar_account, :size => 40 %>
+  </p>
+
 <%= fields_for :attachment, @attachment do |attachment| -%>
   <p>
     <%= attachment.label :uploaded_file, t("common.title.attachment") %>
