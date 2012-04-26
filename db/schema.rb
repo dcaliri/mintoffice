@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120426022536) do
+ActiveRecord::Schema.define(:version => 20120426030729) do
 
   create_table "attachments", :force => true do |t|
     t.string   "title"
@@ -325,6 +325,14 @@ ActiveRecord::Schema.define(:version => 20120426022536) do
     t.datetime "updated_at",                  :null => false
   end
 
+  create_table "payroll_categories", :force => true do |t|
+    t.integer  "prtype"
+    t.integer  "code"
+    t.string   "title"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "permissions", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
@@ -426,7 +434,7 @@ ActiveRecord::Schema.define(:version => 20120426022536) do
     t.string   "uid"
     t.string   "gmail_account"
     t.string   "boxcar_account"
-    t.string   "email"
+    t.string   "notify_email"
   end
 
   create_table "vacations", :force => true do |t|

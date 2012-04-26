@@ -1,0 +1,17 @@
+#show_command
+  = link_to t('common.title.edit'), edit_payroll_category_path()
+  = " | "
+  = link_to t('common.title.list'), payroll_categories_path()
+
+h3= "Payroll Category"
+.box
+  table
+    tr
+      th= PayrollCategory.human_attribute_name(:prtype)
+      td= payroll_category.prtype
+    tr
+      th= PayrollCategory.human_attribute_name(:code)
+      td= payroll_category.code
+    tr
+      th= PayrollCategory.human_attribute_name(:title)
+      td= payroll_category.title
