@@ -3,7 +3,7 @@
 
 h2= t("common.title.#{action_name}")
 
-= form_for contact do |f|
+= form_for contact, html: {multipart: true} do |f|
   .box
     p
       = f.label :firstname
@@ -73,6 +73,7 @@ h2= t("common.title.#{action_name}")
         = phone_number_field.label :number
         = phone_number_field.text_field :number
     br
-
+    h3 첨부파일
+    = render 'shared/attachments/form', label: t("taxbills.#{action_name}.picture")
     p
       = f.submit
