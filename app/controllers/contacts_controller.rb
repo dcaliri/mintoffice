@@ -2,6 +2,18 @@ class ContactsController < ApplicationController
   expose(:contacts) { Contact.all }
   expose(:contact)
 
+  def find
+    @target = Hrinfo.find(params[:target])
+    @contacts = Contact.search(params[:query])
+  end
+
+  def select
+    @target = Hrinfo.find(params[:target])
+    @contact = Contact.find(params[:id])
+    @target.contact = @contact
+    @target.save!
+  end
+
   def show
     @attachments = Attachment.for_me(contact, "seq ASC")
     session[:attachments] = [] if session[:attachments].nil?

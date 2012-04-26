@@ -59,6 +59,15 @@
         <li><%= link_to "연봉 관리", payment_path(@user) %></li>
       <% end %>
     </ul>
+    <div id="show_command">
+      <%= link_to "주소록 찾기", find_contacts_path(target: @hrinfo), :class => 'popup' %>
+    </div>
+    <h3>주소록</h3>
+    <ul>
+      <% if @hrinfo.contact %>
+        <li><%= link_to @hrinfo.contact.name, @hrinfo.contact %></li>
+      <% end %>
+    </ul>
 <% end %>
   </div>
   <div id="attach">

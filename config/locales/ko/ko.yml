@@ -761,6 +761,8 @@ ko:
             title: 주소록 만들기
         edit:
             title: 주소록 수정하기
+        find:
+            title: 주소록 찾기
     contact_address_tags:
         new:
             title: 새로운 주소 대상 만들기
