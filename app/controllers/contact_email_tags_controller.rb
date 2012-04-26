@@ -1,13 +1,12 @@
 class ContactEmailTagsController < ApplicationController
-  expose(:contact_email)
-
   def new
-    @contact_tag = contact_email.tags.build
+    session[:return_to] = request.referer
+    @contact_tag = ContactEmailTag.new
   end
 
   def create
-    @contact_tag = contact_email.tags.build(params[:contact_email_tag])
+    @contact_tag = ContactEmailTag.new(params[:contact_email_tag])
     @contact_tag.save!
-    redirect_to [:edit, contact_email.contact]
+    redirect_to session[:return_to]
   end
 end

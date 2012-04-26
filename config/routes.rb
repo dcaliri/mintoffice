@@ -64,6 +64,10 @@ Mintoffice::Application.routes.draw do
     resources :contact_addresses, :path => 'addresses', :only => :destroy
   end
 
+  resources :contact_address_tags, :only => [:new, :create]
+  resources :contact_email_tags, :only => [:new, :create]
+  resources :contact_phone_number_tags, :only => [:new, :create]
+
   resources :contact_emails do
     resources :contact_email_tags, path: 'tags', :only => [:new, :create]
   end

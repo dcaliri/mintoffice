@@ -29,8 +29,7 @@ h2= t("common.title.#{action_name}")
         p
           = address_field.label :target
           = address_field.select :target, options_for_select([""] + ContactAddressTag.all.map{|tag| tag.name}, address_field.object.target)
-          - unless address_field.object.new_record?
-            = link_to "새로운 대상 만들기", [:new, address_field.object, :contact_address_tag]
+          = link_to "새로운 대상 만들기", [:new, :contact_address_tag]
         p
           = address_field.label :country
           = address_field.text_field :country
@@ -58,8 +57,7 @@ h2= t("common.title.#{action_name}")
         p
           = email_field.label :target
           = email_field.select :target, options_for_select([""] + ContactEmailTag.all.map{|tag| tag.name}, email_field.object.target)
-          - unless email_field.object.new_record?
-            = link_to "새로운 대상 만들기", [:new, email_field.object, :contact_email_tag]
+          = link_to "새로운 대상 만들기", [:new, :contact_email_tag]
 
 
         p
@@ -74,8 +72,7 @@ h2= t("common.title.#{action_name}")
         p
           = phone_number_field.label :target
           = phone_number_field.select :target, options_for_select([""] + ContactPhoneNumberTag.all.map{|tag| tag.name}, phone_number_field.object.target)
-          - unless phone_number_field.object.new_record?
-            = link_to "새로운 대상 만들기", [:new, phone_number_field.object, :contact_phone_number_tag]
+          = link_to "새로운 대상 만들기", [:new, :contact_phone_number_tag]
         p
           = phone_number_field.label :number
           = phone_number_field.text_field :number

@@ -1,14 +1,13 @@
 class ContactAddressTagsController < ApplicationController
-  before_filter :find_contact_address
-
   def new
-    @contact_tag = @address.tags.build
+    session[:return_to] = request.referer
+    @contact_tag = ContactAddressTag.new
   end
 
   def create
-    @contact_tag = @address.tags.build(params[:contact_address_tag])
+    @contact_tag = ContactAddressTag.new(params[:contact_address_tag])
     @contact_tag.save!
-    redirect_to [:edit, @address.contact]
+    redirect_to session[:return_to]
   end
 
   private
