@@ -1,6 +1,6 @@
 
 #show_command
-  = link_to "새로운 주소록 만들기", [:new, :address_book]
+  = link_to "새로운 주소록 만들기", [:new, :contact]
   = " | "
   = link_to t('common.title.back'), :root
 
@@ -8,16 +8,16 @@ h2 ..
 
 
 
-- unless address_books.empty?
+- unless contacts.empty?
   table#list-table
     tr
-      th= AddressBook.human_attribute_name(:firstname)
-      th= AddressBook.human_attribute_name(:lastname)
-      th= AddressBook.human_attribute_name(:company)
-      th= AddressBook.human_attribute_name(:department)
-      th= AddressBook.human_attribute_name(:position)
+      th= contact.class.human_attribute_name(:firstname)
+      th= contact.class.human_attribute_name(:lastname)
+      th= contact.class.human_attribute_name(:company)
+      th= contact.class.human_attribute_name(:department)
+      th= contact.class.human_attribute_name(:position)
       th= t('common.menu')
-    - address_books.each do |address|
+    - contacts.each do |address|
       tr.selectable
         td= address.firstname
         td= address.lastname

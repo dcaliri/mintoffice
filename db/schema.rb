@@ -11,41 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120425061309) do
-
-  create_table "address_book_addresses", :force => true do |t|
-    t.integer  "address_book_id"
-    t.string   "target"
-    t.string   "country"
-    t.string   "province"
-    t.string   "city"
-    t.string   "other1"
-    t.string   "other2"
-    t.string   "postal_code"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
-  end
-
-  create_table "address_book_emails", :force => true do |t|
-    t.integer "address_book_id"
-    t.string  "target"
-    t.string  "email"
-  end
-
-  create_table "address_book_phone_numbers", :force => true do |t|
-    t.integer "address_book_id"
-    t.string  "target"
-    t.string  "number"
-  end
-
-  create_table "address_books", :force => true do |t|
-    t.string "firstname"
-    t.string "lastname"
-    t.string "company"
-    t.string "department"
-    t.string "position"
-    t.text   "email_list"
-  end
+ActiveRecord::Schema.define(:version => 20120425235628) do
 
   create_table "attachments", :force => true do |t|
     t.string   "title"
@@ -198,6 +164,40 @@ ActiveRecord::Schema.define(:version => 20120425061309) do
     t.integer  "user_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "contact_addresses", :force => true do |t|
+    t.integer  "contact_id"
+    t.string   "target"
+    t.string   "country"
+    t.string   "province"
+    t.string   "city"
+    t.string   "other1"
+    t.string   "other2"
+    t.string   "postal_code"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "contact_emails", :force => true do |t|
+    t.integer "contact_id"
+    t.string  "target"
+    t.string  "email"
+  end
+
+  create_table "contact_phone_numbers", :force => true do |t|
+    t.integer "contact_id"
+    t.string  "target"
+    t.string  "number"
+  end
+
+  create_table "contacts", :force => true do |t|
+    t.string "firstname"
+    t.string "lastname"
+    t.string "company"
+    t.string "department"
+    t.string "position"
+    t.text   "email_list"
   end
 
   create_table "creditcards", :force => true do |t|
