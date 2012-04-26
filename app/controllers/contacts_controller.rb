@@ -3,15 +3,28 @@ class ContactsController < ApplicationController
   expose(:contact)
 
   def find
-    @target = Hrinfo.find(params[:target])
-    @contacts = Contact.search(params[:query])
+    if params[:target_class]
+      @target = BusinessClient.find(params[:target])
+      @contacts = Contact.search(params[:query])
+    else
+      @target = Hrinfo.find(params[:target])
+      @contacts = Contact.search(params[:query])
+    end
   end
 
   def select
-    @target = Hrinfo.find(params[:target])
-    @contact = Contact.find(params[:id])
-    @target.contact = @contact
-    @target.save!
+    if params[:target_class]
+      @target = BusinessClient.find(params[:target])
+      @contact = Contact.find(params[:id])
+      @taxman = @target.taxmen.build
+      @taxman.contact = @contact
+      @taxman.save!
+    else
+      @target = Hrinfo.find(params[:target])
+      @contact = Contact.find(params[:id])
+      @target.contact = @contact
+      @target.save!
+    end
   end
 
   def show
