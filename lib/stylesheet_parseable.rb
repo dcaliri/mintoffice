@@ -65,7 +65,7 @@ module StylesheetParseable
       @excel_options[type] = {position: opts[:position]}
     end
 
-    def parse_stylesheet(file, type, opts = {})
+    def parse_stylesheet(file, type = :default, opts = {})
       parser = ExcelParser.new
       parser.column @excel_columns[type]
       parser.option @excel_options[type]
