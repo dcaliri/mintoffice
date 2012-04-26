@@ -1,7 +1,7 @@
 # encoding: UTF-8
 
 class Contact < ActiveRecord::Base
-  belongs_to :hrinfo
+  belongs_to :target, :polymorphic => true
 
   REJECT_IF_EMPTY = proc { |attrs| attrs.all? { |k, v| k != "target" ? v.blank? : true  } }
 

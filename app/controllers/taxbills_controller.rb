@@ -1,7 +1,8 @@
 class TaxbillsController < ApplicationController
   before_filter :save_search_option, :only => :index
 
-  expose(:taxbills) { Taxbill.search(params).latest.page(params[:page]) }
+  expose(:taxbills) { Taxbill.all }
+  expose(:taxbills_pagination) { Taxbill.search(params).latest.page(params[:page]) }
   expose(:taxbill)
 
   def total

@@ -1,10 +1,6 @@
 class TaxmenController < ApplicationController
   before_filter :find_business_client
 
-  def new
-    @taxman = @business_client.taxmen.new
-  end
-
   def create
     @taxman = @business_client.taxmen.build(params[:taxman])
     @taxman.save!

@@ -24,8 +24,8 @@
     <%= link_to t('common.title.new'), [:new, :taxbill] %>
 </div>
 
-<% unless taxbills.empty? %>
-    <h2>Total : <%= taxbills.size %></h2>
+<% unless taxbills_pagination.empty? %>
+    <h2>Total : <%= taxbills_pagination.size %></h2>
     <table id="list-table">
       <tr>
         <th><%= Taxbill.human_attribute_name('billtype') %></th>
@@ -34,7 +34,7 @@
         <th><%= BusinessClient.human_attribute_name('owner') %></th>
         <th><%= Taxbill.human_attribute_name('total') %></th>
       </tr>
-    <% taxbills.each do |taxbill| %>
+    <% taxbills_pagination.each do |taxbill| %>
       <tr class="selectable" onclick="location.href='<%= taxbill_path(taxbill) %>'">
         <td><%=h taxbill.billtype == 'purchase' ? t('taxbills.purchase_bill') : t('taxbills.sales_bill') %></td>
         <td><%=h taxbill.transacted_at.strftime("%Y-%m-%d") %></td>
@@ -46,7 +46,7 @@
     </table>
     <br />
     <center>
-    <%= will_paginate taxbills %>
+    <%= will_paginate taxbills_pagination %>
     </center>
 <% else %>
     <h3><%= t 'taxbills.index.empty' %></h3>
