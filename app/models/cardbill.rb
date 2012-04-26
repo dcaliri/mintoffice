@@ -9,12 +9,12 @@ class Cardbill < ActiveRecord::Base
   validates_numericality_of :amount
   validates_numericality_of :servicecharge
   validates_numericality_of :vat
-  
+
   def cardno_long
     unless self.creditcard.nil?
       self.creditcard.cardno_long
     else
-      cardno    
+      cardno
     end
   end
 
@@ -22,10 +22,10 @@ class Cardbill < ActiveRecord::Base
     query = "%#{query || ""}%"
     where('storename like ? OR storeaddr like ?', query, query)
   end
-  
+
   def self.searchbycreditcard(query)
     if query == nil or query == ""
-      where( "1 is 1" )
+      where("")
     else
       where("creditcard_id = ?", query)
     end
