@@ -21,7 +21,7 @@
   <tr>
     <th><%= User.human_attribute_name('name') %></th>
     <th><%= User.human_attribute_name('gmail_account') %></th>
-    <th><%= User.human_attribute_name('email') %></th>
+    <th><%= User.human_attribute_name('notify_email') %></th>
     <th><%= User.human_attribute_name('boxcar_account') %></th>
 
   </tr>
@@ -30,7 +30,7 @@
 <tr class="selectable" onclick="location.href='<%= user_path(user) %>'">
   <td><%=h user.name %></td>
   <td><%=h user.gmail_account %></td>
-  <td><%=h user.email %></td>
+  <td><%=h user.notify_email %></td>
   <td><%=h user.boxcar_account %></td>
 
     <!-- <td><%= link_to 'Show', user %></td>
