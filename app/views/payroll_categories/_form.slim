@@ -1,5 +1,5 @@
 #show_command
-  = link_to "back", payroll_categories_path()
+  = link_to t("common.title.back"), payroll_categories_path()
 
 h2= t("common.title.#{action_name}")
 
@@ -8,10 +8,10 @@ h2= t("common.title.#{action_name}")
   .box
     p
       = f.label :prtype
-      = f.text_field :prtype
+      = f.select :prtype, options_for_select(PayrollCategory::PAYROLL_TYPE.map {|x| [t("payroll_categories.#{x[0]}"), x[1]]}, payroll_category.prtype)
     p
       = f.label :code
-      = f.text_field :code
+      = f.select :code, options_for_select(PayrollCategory::PAYROLL_CODE.map {|x| [t("payroll_categories.#{x[0]}"), x[1]]}, payroll_category.code)
     p
       = f.label :title
       = f.text_field :title

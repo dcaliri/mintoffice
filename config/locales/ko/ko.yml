@@ -110,6 +110,7 @@ ko:
             taxman: 담당자
             taxbill: 세금계산서
             taxbill_item: 항목
+            payroll_category: 급여구분
             pay_schedule: 기본급
             bonus: 상여금
             payment: 연봉
@@ -193,6 +194,10 @@ ko:
                 phone: "전화번호"
                 homepage: "홈페이지"
                 email: "이메일주소"
+            payroll_category:
+                prtype: 지급/차감 구분
+                code: 연결코드
+                title: 항목이름
             pay_schedule:
                 started_at: 시작일
                 income: 총 연봉 금액
@@ -563,6 +568,25 @@ ko:
             title: 새로운 기본급 입력
         edit:
             title: 특별상여금 수정
+    payroll_categories:
+        index:
+            title: 급여구분
+        new:
+            title: 급여구분
+        etc: 기타
+        payable: 지급항목
+        deductable: 공제항목
+        basepay: 기본급
+        bonus: 상여금
+        mealsupport: 식대
+        carsupport: 차량지원금
+        pansion: 국민연금
+        healthcare: 건강보험
+        unemployment: 고용보험
+        healthcare2: 장기요양보험
+        incometax: 소득세
+        local_incometax: 지방소득세
+        healthcare_adjustment: 건강보험 연말정산분
     pay_schedules:
         new:
             title: 새로운 기본급 입력
