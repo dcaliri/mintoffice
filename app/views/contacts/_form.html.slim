@@ -1,5 +1,5 @@
 #show_command
-  = link_to t('common.title.back'), :contact
+  = link_to t('common.title.back'), contact
 
 h2= t("common.title.#{action_name}")
 
@@ -25,54 +25,54 @@ h2= t("common.title.#{action_name}")
     - contact.addresses.new
     h3 주소
     = f.fields_for :addresses do |address_field|
-      = div_for(address_field.object) do
-        p
-          = address_field.label :target
-          = address_field.select :target, options_for_select(Contact::ADDRESS_TARGET, address_field.object.target)
-        p
-          = address_field.label :country
-          = address_field.text_field :country
-        p
-          = address_field.label :province
-          = address_field.text_field :province
-        p
-          = address_field.label :city
-          = address_field.text_field :city
-        p
-          = address_field.label :other1
-          = address_field.text_field :other1
-        p
-          = address_field.label :other2
-          = address_field.text_field :other2
-        p
-          = address_field.label :postal_code
-          = address_field.text_field :postal_code
-      br
+      p
+        = address_field.label :target
+        = address_field.select :target, options_for_select([""] + ContactAddressTag.all.map{|tag| tag.name}, address_field.object.target)
+        = link_to "새로운 대상 만들기", [:new, :contact_address_tag]
+      p
+        = address_field.label :country
+        = address_field.text_field :country
+      p
+        = address_field.label :province
+        = address_field.text_field :province
+      p
+        = address_field.label :city
+        = address_field.text_field :city
+      p
+        = address_field.label :other1
+        = address_field.text_field :other1
+      p
+        = address_field.label :other2
+        = address_field.text_field :other2
+      p
+        = address_field.label :postal_code
+        = address_field.text_field :postal_code
+    br
 
     - contact.emails.new
     h3 이메일
     = f.fields_for :emails do |email_field|
-      = div_for(email_field.object) do
-        p
-          = email_field.label :target
-          = email_field.select :target, options_for_select(Contact::EMAIL_TARGET, email_field.object.target)
-        p
-          = email_field.label :email
-          = email_field.email_field :email
-      br
+      p
+        = email_field.label :target
+        = email_field.select :target, options_for_select([""] + ContactEmailTag.all.map{|tag| tag.name}, email_field.object.target)
+        = link_to "새로운 대상 만들기", [:new, :contact_email_tag]
+
+      p
+        = email_field.label :email
+        = email_field.email_field :email
+    br
 
     - contact.phone_numbers.new
     h3 전화번호
     = f.fields_for :phone_numbers do |phone_number_field|
-      = div_for(phone_number_field.object) do
-        p
-          = phone_number_field.label :target
-          = phone_number_field.select :target, options_for_select(Contact::PHONENUMBER_TARGET, phone_number_field.object.target)
-        p
-          = phone_number_field.label :number
-          = phone_number_field.text_field :number
-      br
+      p
+        = phone_number_field.label :target
+        = phone_number_field.select :target, options_for_select([""] + ContactPhoneNumberTag.all.map{|tag| tag.name}, phone_number_field.object.target)
+        = link_to "새로운 대상 만들기", [:new, :contact_phone_number_tag]
+      p
+        = phone_number_field.label :number
+        = phone_number_field.text_field :number
+    br
 
     p
       = f.submit
-
