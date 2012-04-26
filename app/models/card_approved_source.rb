@@ -34,6 +34,11 @@ class CardApprovedSource < ActiveRecord::Base
 
   set_parser_options DEFAULT
 
+  def cardbill
+    collection = Cardbill.where(approveno: approve_no)
+    collection.first unless collection.empty?
+  end
+
   class << self
     def open_and_parse_stylesheet(card, upload)
       @card = card

@@ -7,18 +7,6 @@
 
 h2= "#{creditcard.nickname}: #{creditcard.cardno}"
 
-t.datetime    :used_at
-t.string      :approve_no
-t.string      :card_holder_name
-t.string      :store_name
-t.integer     :money
-t.string      :used_type
-t.string      :monthly_duration
-t.string      :card_type
-t.datetime    :canceled
-t.string      :status
-t.datetime    :will_be_paied_at
-
 - unless card_approved_sources.empty?
   table#list-table
     tr
@@ -56,6 +44,8 @@ t.datetime    :will_be_paied_at
         else
           td
         td align="right"
+          = link_to t('common.link.show'), [creditcard, source]
+          = " | "
           = link_to t('common.link.edit'), [:edit, creditcard, source]
           = " | "
           = link_to t('common.link.destroy'), [creditcard, source], :method => :delete, :confirm => "Are you sure?"

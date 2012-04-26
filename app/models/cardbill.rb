@@ -10,6 +10,11 @@ class Cardbill < ActiveRecord::Base
   validates_numericality_of :servicecharge
   validates_numericality_of :vat
 
+  def approved
+    collection = CardApprovedSource.where(approve_no: approveno)
+    return collection.first unless collection.empty?
+  end
+
   def cardno_long
     unless self.creditcard.nil?
       self.creditcard.cardno_long

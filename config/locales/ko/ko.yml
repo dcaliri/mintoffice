@@ -418,6 +418,7 @@ ko:
             title: 새로운 카드 영수증 입력
         show:
             title:  "카드 영수증 내역"
+            to_approved: "승인내역"
         edit:
             title: "카드 영수증 내용 수정"
         index:
@@ -733,6 +734,7 @@ ko:
             empty: 카드 승인내역이 없습니다
         show:
             title: 카드 승인내역
+            to_cardbill: 카드 영수증
         excel:
             title: 엑셀로 올리기
             link: 엑셀 파일로 올리기

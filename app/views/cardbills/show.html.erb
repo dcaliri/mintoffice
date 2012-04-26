@@ -1,6 +1,9 @@
 <% title t('.title') %>
 
 <div id="show_command">
+  <% if @cardbill.approved %>
+    <%= link_to t('.to_approved'), [@cardbill.approved.creditcard, @cardbill.approved] %> |
+  <% end %>
   <%= link_to t('common.title.edit'), edit_cardbill_path(@cardbill) %> |
   <%= link_to t('common.title.list'), cardbills_path %>
 </div>
