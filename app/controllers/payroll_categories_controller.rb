@@ -11,7 +11,7 @@ class PayrollCategoriesController < ApplicationController
   
   def create
     payroll_category.save!
-    redirect_to [:payroll_category]
+    redirect_to [:payroll_categories]
   end
   
   def update
