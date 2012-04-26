@@ -125,6 +125,9 @@ ko:
             contact_email: 이메일
             contact_phone_number: 전화번호
             contact_address: 주소
+            contact_email_tag: 이메일 대상
+            contact_phone_number_tag: 전화번호 대상
+            contact_address_tag: 주소 대상
         attributes:
             attachment:
                 comments: 주석
@@ -361,6 +364,12 @@ ko:
                 other1: 군/구
                 other2: 나머지
                 postal_code: 우편번호
+            contact_address_tag:
+                name: 대상
+            contact_email_tag:
+                name: 대상
+            contact_phone_number_tag:
+                name: 대상
         errors:
             template:
                 header: 오류가 발생했습니다.
@@ -752,6 +761,15 @@ ko:
             title: 주소록 만들기
         edit:
             title: 주소록 수정하기
+    contact_address_tags:
+        new:
+            title: 새로운 주소 대상 만들기
+    contact_email_tags:
+        new:
+            title: 새로운 이메일 대상 만들기
+    contact_phone_number_tags:
+        new:
+            title: 새로운 전화번호 대상 만들기
     users:
         new:
             title: 새 사용자 계정 만들기

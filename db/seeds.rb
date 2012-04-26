@@ -25,7 +25,18 @@ unless User.exists?(name: "admin")
   user.save!
 end
 
+if ContactAddressTag.all.empty?
+  ContactAddressTag.create!(name: "집")
+  ContactAddressTag.create!(name: "직장")
+end
+
 if ContactEmailTag.all.empty?
   ContactEmailTag.create!(name: "집")
   ContactEmailTag.create!(name: "주소")
+end
+
+if ContactPhoneNumberTag.all.empty?
+  ContactPhoneNumberTag.create!(name: "집")
+  ContactPhoneNumberTag.create!(name: "회사")
+  ContactPhoneNumberTag.create!(name: "핸드폰")
 end

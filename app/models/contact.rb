@@ -1,10 +1,6 @@
 # encoding: UTF-8
 
 class Contact < ActiveRecord::Base
-  ADDRESS_TARGET = ["", "집", "직장"]
-  EMAIL_TARGET = ["", "집", "회사"]
-  PHONENUMBER_TARGET = ["", "집", "회사", "핸드폰"]
-
   has_many :addresses, class_name: 'ContactAddress', :dependent => :destroy
   accepts_nested_attributes_for :addresses, :allow_destroy => :true, :reject_if => proc { |attrs| attrs.all? { |k, v| v.blank? } }
 
