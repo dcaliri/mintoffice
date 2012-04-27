@@ -17,6 +17,10 @@ class Hrinfo < ActiveRecord::Base
     end
   end
 
+  def email
+    read_attribute(:email) || contact.emails.first.email
+  end
+
   def self.search(text)
     text = "%#{text || ""}%"
     joins(:user).where('users.name LIKE ? OR hrinfos.email LIKE ? OR users.email LIKE ? OR firstname like ? OR lastname LIKE ? OR address LIKE ? OR position LIKE ? OR mphone LIKE ?', text, text, text, text, text, text, text, text)
