@@ -2,6 +2,10 @@ class ContactsController < ApplicationController
   expose(:contacts) { Contact.all }
   expose(:contact)
 
+  def index
+    @contacts = Contact.search(params[:query])
+  end
+
   def find
     @contacts = Contact.search(params[:query])
   end
