@@ -507,6 +507,19 @@ ko:
             link: 합계표 보기
             purchase: 매입처별 합계
             money: 합계
+        excel:
+            title: 엑셀로 올리기
+            link: 엑셀 파일로 올리기
+            type: 내역명
+            file: 엑셀 파일
+            submit: 미리보기
+        preview:
+            title: 미리보기
+            link: 엑셀 파일로 올리기
+            type: 내역명
+            file: 엑셀 파일
+            submit: 엑셀 파일 올리기
+
     documents:
         index:
             title: "문서 관리"

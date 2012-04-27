@@ -1,3 +1,4 @@
+#encodig: UTF-8
 class Creditcard < ActiveRecord::Base
   has_many :cardbills
   has_many :card_used_sources
@@ -12,6 +13,8 @@ class Creditcard < ActiveRecord::Base
   validates_presence_of :issuer
   validates_presence_of :cardholder
   validates_uniqueness_of :cardno
+
+  CARD_LIST = [:used, :approved]
 
   def cardno_long
     if self.nickname == nil
