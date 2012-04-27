@@ -3,8 +3,12 @@ class CardUsedSourcesController < ApplicationController
   expose(:card_used_sources) { creditcard.card_used_sources.latest.page(params[:page]) }
   expose(:card_used_source)
 
+  def preview
+    @card_used_sources = CardUsedSource.preview_stylesheet(creditcard, params[:upload])
+  end
+
   def upload
-    card_used_sources.open_and_parse_stylesheet(creditcard, params[:upload])
+    card_used_sources.create_with_stylesheet(creditcard, params[:upload])
     redirect_to [creditcard, :card_used_sources]
   end
 

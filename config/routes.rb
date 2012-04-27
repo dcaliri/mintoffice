@@ -3,6 +3,7 @@ Mintoffice::Application.routes.draw do
     resources :card_used_sources, path: 'used' do
       collection do
         get 'excel'
+        post 'preview'
         post 'excel', :action => 'upload'
       end
     end
@@ -10,6 +11,7 @@ Mintoffice::Application.routes.draw do
     resources :card_approved_sources, path: 'approved' do
       collection do
         get 'excel'
+        post 'preview'
         post 'excel', :action => 'upload'
       end
     end

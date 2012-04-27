@@ -758,6 +758,11 @@ ko:
             title: 엑셀로 올리기
             link: 엑셀 파일로 올리기
             file: 엑셀 파일
+            submit: 미리보기
+        preview:
+            title: 엑셀로 올리기
+            link: 엑셀 파일로 올리기
+            file: 엑셀 파일
             submit: 엑셀 파일 올리기
         new:
             title: 새로운 이용내역 올리기
@@ -772,6 +777,11 @@ ko:
             title: 카드 승인내역
             to_cardbill: 카드 영수증
         excel:
+            title: 엑셀로 올리기
+            link: 엑셀 파일로 올리기
+            file: 엑셀 파일
+            submit: 미리보기
+        preview:
             title: 엑셀로 올리기
             link: 엑셀 파일로 올리기
             file: 엑셀 파일

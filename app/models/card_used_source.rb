@@ -51,7 +51,12 @@ class CardUsedSource < ActiveRecord::Base
   set_parser_options DEFAULT
 
   class << self
-    def open_and_parse_stylesheet(card, upload)
+    def preview_stylesheet(card, upload)
+      @card = card
+      super(upload)
+    end
+
+    def create_with_stylesheet(card, upload)
       @card = card
       super(upload)
     end
