@@ -693,6 +693,8 @@ ko:
             title: 새로운 은행계좌 만들기
         edit:
             title: 은행계좌 수정하기
+        total:
+            title: 입출금 합계표
     bank_transactions:
         index:
             title: 입출금 내역
