@@ -408,11 +408,11 @@ ActiveRecord::Schema.define(:version => 20120426053732) do
 
   create_table "taxmen", :force => true do |t|
     t.integer  "business_client_id"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
     t.string   "fullname"
     t.string   "email"
     t.string   "phonenumber"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
   end
 
   create_table "used_vacations", :force => true do |t|
