@@ -25,7 +25,7 @@ h2= "#{creditcard.nickname}: #{creditcard.cardno}"
       th= t('common.menu')
     - card_approved_sources.each do |source|
       tr
-        td= source.used_at.strftime("%Y.%m.%d %H:%M")
+        td= source.used_at_to_s
         td= source.approve_no
         td= source.card_no
         td= source.card_holder_name
@@ -34,15 +34,9 @@ h2= "#{creditcard.nickname}: #{creditcard.cardno}"
         td= source.used_type
         td= source.monthly_duration
         td= source.card_type
-        - if source.canceled_at
-          td= source.canceled_at.strftime("%Y.%m.%d")
-        -else
-          td
+        td= source.canceled_at_to_s
         td= source.status
-        - if source.will_be_paied_at
-          td= source.will_be_paied_at.strftime("%Y.%m.%d")
-        else
-          td
+        td= source.will_be_paied_at_to_s
         td align="right"
           = link_to t('common.link.show'), [creditcard, source]
           = " | "

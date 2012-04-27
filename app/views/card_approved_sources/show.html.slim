@@ -16,7 +16,7 @@ h2= "#{creditcard.nickname}: #{creditcard.cardno}"
   table
     tr
       th= CardApprovedSource.human_attribute_name(:used_at)
-      td= card_approved_source.used_at.strftime("%Y %m.%d")
+      td= card_approved_source.used_at_to_s
     tr
       th= CardApprovedSource.human_attribute_name(:approve_no)
       td= card_approved_source.approve_no
@@ -43,7 +43,7 @@ h2= "#{creditcard.nickname}: #{creditcard.cardno}"
       td= card_approved_source.card_type
     tr
       th= CardApprovedSource.human_attribute_name(:canceled_at)
-      td= card_approved_source.canceled_at
+      td= card_approved_source.canceled_at_to_s
     tr
       th= CardApprovedSource.human_attribute_name(:status)
       td= card_approved_source.status
