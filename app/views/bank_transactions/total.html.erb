@@ -1,0 +1,45 @@
+<div id="show_command">
+    <%= link_to t('common.title.back'), :taxbills %>
+</div>
+
+<% 3.downto(0).each do |quarter|%>
+  <% between = (current_year + (3*(quarter)).month..current_year + (3*(quarter+1)).month) %>
+
+  <% in_list = @in.where(transacted_at: between).group_by_note_and_in %>
+  <% out_list = @out.where(transacted_at: between).group_by_note_and_out %>
+
+  <% header = Array.new([in_list.size, out_list.size].max) %>
+
+  <% unless header.empty? %>
+    <h3><%= t('.quarter', year: current_year.year, quarter: quarter+1)%></h3>
+    <table id="list-table">
+      <thead>
+        <tr>
+          <th><%= t('.in') %></th>
+          <th><%= t('.out') %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% header.zip(in_list, out_list).each do |_, in_, out_| %>
+          <%= in_.inspect %>
+          <%= out_.inspect %>
+        <% end %>
+        <tr>
+        </tr>
+      </tbody>
+    </table>
+  <% end %>
+<% end %>
+
+<h4><%= t('.list')%></h4>
+<ul>
+  <% current = Time.zone.now.year %>
+  <% oldest = oldest_year %>
+  <% current.downto(oldest) do |year| %>
+    <% if year != current_year.year %>
+      <li><%= link_to "#{year}#{t('datetime.prompts.year')}", total_taxbills_path(:at => year) %></li>
+    <% else %>
+      <li><%= "#{year}#{t('datetime.prompts.year')}" %></li>
+    <% end %>
+  <% end %>
+</ul>

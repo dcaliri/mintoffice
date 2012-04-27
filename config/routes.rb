@@ -85,6 +85,7 @@ Mintoffice::Application.routes.draw do
   resources :bank_accounts, path: 'banks' do
     resources :bank_transactions, path: "transactions" do
       collection do
+        get 'total'
         get 'excel'
         post 'preview'
         post 'excel', :action => 'upload'
