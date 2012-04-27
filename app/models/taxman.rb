@@ -4,14 +4,17 @@ class Taxman < ActiveRecord::Base
   has_one :contact, :as => :target
 
   def fullname
-    read_attribute(:fullname) || contact ? contact.name : ""
+    contact.name
+    # contact ? contact.name : read_attribute(:fullname)
   end
 
   def email
-    read_attribute(:email) || contact.emails.first.email
+    contact.emails.first.email
+    # contact ? contact.emails.first.email : read_attribute(:email)
   end
 
   def phonenumber
-    read_attribute(:phonenumber) || contact.phone_numbers.first.number
+    contact.phone_numbers.first.number
+    # contact ? contact.phone_numbers.first.number : read_attribute(:phonenumber)
   end
 end

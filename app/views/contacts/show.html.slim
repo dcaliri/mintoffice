@@ -11,56 +11,7 @@ h2 #{contact.firstname} #{contact.lastname}
 
 .box
   #descr
-    table
-      tr
-        th= contact.class.human_attribute_name(:firstname)
-        td= contact.firstname
-      tr
-        th= contact.class.human_attribute_name(:lastname)
-        td= contact.lastname
-      tr
-        th= contact.class.human_attribute_name(:company)
-        td= contact.company
-      tr
-        th= contact.class.human_attribute_name(:department)
-        td= contact.department
-      tr
-        th= contact.class.human_attribute_name(:position)
-        td= contact.position
-      tr
-        td
-      - contact.emails.each do |email|
-        tr
-          th= "이메일(#{email.target})"
-          td= email.email
-          td
-            = link_to t('common.link.edit'), [:edit, contact]
-            = " | "
-            = link_to "제거", [contact, email], :method => :delete, :confirm => "Are you sure?"
-
-      - contact.phone_numbers.each do |phone_number|
-        tr
-          th= "전화번호(#{phone_number.target})"
-          td= phone_number.number
-          td
-            = link_to t('common.link.edit'), [:edit, contact]
-            = " | "
-            = link_to "제거", [contact, phone_number], :method => :delete, :confirm => "Are you sure?"
-
-      - contact.addresses.each do |address|
-        tr
-          th= "주소(#{address.target})"
-          td
-            p= address.country
-            p= address.province
-            p= address.city
-            p= address.other1
-            p= address.other2
-            p= address.postal_code
-          td
-            = link_to t('common.link.edit'), [:edit, contact]
-            = " | "
-            = link_to "제거", [contact, address], :method => :delete, :confirm => "Are you sure?"
+    = render 'item', menu: true
 
   = render :partial => "shared/show_attachment", :object => contact
   .clear

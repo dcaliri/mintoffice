@@ -18,7 +18,30 @@ class Hrinfo < ActiveRecord::Base
   end
 
   def email
-    read_attribute(:email) || contact.emails.first.email
+    email = read_attribute(:email)
+    if email.blank?
+      (!contact or contact.emails.empty?) ? "" : contact.emails.first.email
+    else
+      email
+    end
+  end
+
+  def mphone
+    number = read_attribute(:mphone)
+    if number.blank?
+      (!contact or contact.phone_numbers.empty?) ? "" : contact.phone_numbers.first.number
+    else
+      number
+    end
+  end
+
+  def address
+    address = read_attribute(:address)
+    if address.blank?
+      (!contact or contact.addresses.empty?) ? "" : contact.addresses.first.info
+    else
+      address
+    end
   end
 
   def self.search(text)

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120426053732) do
+ActiveRecord::Schema.define(:version => 20120427015811) do
 
   create_table "attachments", :force => true do |t|
     t.string   "title"
@@ -233,6 +233,7 @@ ActiveRecord::Schema.define(:version => 20120426053732) do
     t.text    "email_list"
     t.integer "target_id"
     t.string  "target_type"
+    t.boolean "migrated_data", :default => false
   end
 
   create_table "creditcards", :force => true do |t|
