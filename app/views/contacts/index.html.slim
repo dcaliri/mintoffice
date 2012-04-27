@@ -1,3 +1,8 @@
+- content_for :search do
+  = form_tag :contacts, :method => :get do
+    = t("common.title.search")
+    = " : "
+    = text_field_tag 'query', params[:query]
 
 #show_command
   = link_to "새로운 주소록 만들기", [:new, :contact]
@@ -6,9 +11,7 @@
 
 h2 ..
 
-
-
-- unless contacts.empty?
+- unless @contacts.empty?
   table#list-table
     tr
       th= contact.class.human_attribute_name(:firstname)
@@ -17,7 +20,7 @@ h2 ..
       th= contact.class.human_attribute_name(:department)
       th= contact.class.human_attribute_name(:position)
       th= t('common.menu')
-    - contacts.each do |address|
+    - @contacts.each do |address|
       tr.selectable
         td= address.firstname
         td= address.lastname
