@@ -1,7 +1,5 @@
 
 #show_command
-  = link_to "합계표 보기", [:total, bank_account, :bank_transactions]
-  = " | "
   = link_to t('bank_transactions.new.link'), [:new, bank_account, :bank_transaction]
   = " | "
   = link_to t('bank_transactions.excel.link'), [:excel, bank_account, :bank_transactions]
