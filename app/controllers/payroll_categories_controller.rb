@@ -10,13 +10,19 @@ class PayrollCategoriesController < ApplicationController
   end
   
   def create
-    payroll_category.save!
-    redirect_to [:payroll_categories]
+    if payroll_category.save
+      redirect_to [:payroll_categories]
+    else
+      render "new"
+    end
   end
   
   def update
-    payroll_category.save!
-    redirect_to [:payroll_category]
+    if payroll_category.save 
+      redirect_to [:payroll_category]
+    else
+      render "edit"
+    end
   end
   
 end

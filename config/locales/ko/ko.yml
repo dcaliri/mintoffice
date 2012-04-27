@@ -380,6 +380,7 @@ ko:
                 header: 오류가 발생했습니다.
                 body: 아래 오류를 수정하세요.
             messages:
+                record_invalid: 잘못된 데이타
                 blank: "은(는) 빈값을 허용할 수 없습니다."
                 not_a_number: "은(는) 반드시 숫자여야 합니다."
                 taken: 은(는) 이미 사용중입니다.
@@ -573,6 +574,10 @@ ko:
             title: 급여구분
         new:
             title: 급여구분
+        validate:
+            payable_code_not_match: 지급항목에 잘못된 연결코드를 선택하였습니다.
+            deductable_code_not_match: 공제항목에 잘못된 연결코드를 선택하였습니다.
+            already_exists: 이미 존재하는 코드입니다.
         etc: 기타
         payable: 지급항목
         deductable: 공제항목
