@@ -2,9 +2,9 @@ class Creditcard < ActiveRecord::Base
   has_many :cardbills
   has_many :card_used_sources
   has_many :card_approved_sources
-  
+
   has_many :change_histories, :as => :changable
-  
+
   validates_presence_of :cardno
   validates_presence_of :expireyear
   validates_presence_of :expiremonth
@@ -19,5 +19,15 @@ class Creditcard < ActiveRecord::Base
     else
      self.cardno + " (" + self.nickname + ")"
    end
+  end
+
+  class << self
+    def newest_used_source
+        CardUsedSource.order('approved_at DESC').first.approved_at
+    end
+
+    def oldest_used_source
+        CardUsedSource.order('approved_at ASC').first.approved_at - 1.month
+    end
   end
 end

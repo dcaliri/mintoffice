@@ -87,5 +87,9 @@ class CardUsedSource < ActiveRecord::Base
     def total_tax
       sum{|used| used.tax }
     end
+
+    def total_price
+      sum{|used| used.money_krw }
+    end
   end
 end

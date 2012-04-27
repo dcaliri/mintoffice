@@ -501,6 +501,11 @@ ko:
             title: 신용카드 정보 수정
         new:
             title: 새로운 신용카드 등록
+        total:
+            title: 신용카드 사용금액 합계표
+            link: 합계표 보기
+            purchase: 매입처별 합계
+            money: 합계
     documents:
         index:
             title: "문서 관리"
