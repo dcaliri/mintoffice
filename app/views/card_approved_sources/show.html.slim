@@ -49,4 +49,4 @@ h2= "#{creditcard.nickname}: #{creditcard.cardno}"
       td= card_approved_source.status
     tr
       th= CardApprovedSource.human_attribute_name(:will_be_paied_at)
-      td= card_approved_source.will_be_paied_at.strftime("%Y %m.%d")
+      td= card_approved_source.will_be_paied_at_to_s
