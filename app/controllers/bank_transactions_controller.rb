@@ -5,15 +5,13 @@ class BankTransactionsController < ApplicationController
 
   expose(:bank_transfer) { BankTransfer.find(params[:from]) if params[:from] }
 
+  def preview
+    @transactions = BankTransaction.preview_stylesheet(params[:upload], params[:bank_type])
+  end
+
   def upload
-    if params[:previewed] == 'true'
-      bank_transactions.create_with_stylesheet(params[:upload], params[:bank_type].to_sym)
-      redirect_to [bank_account, :bank_transactions]
-    else
-      @transactions = BankTransaction.preview_stylesheet(params[:upload], params[:bank_type].to_sym)
-      params[:previewed] = true
-      render 'excel'
-    end
+    bank_transactions.create_with_stylesheet(params[:upload], params[:bank_type])
+    redirect_to [bank_account, :bank_transactions]
   end
 
   def create

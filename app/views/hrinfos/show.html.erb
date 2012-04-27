@@ -60,7 +60,7 @@
       <% end %>
     </ul>
     <div id="show_command">
-      <%= link_to "주소록 찾기", find_contacts_path(target: @hrinfo), :class => 'popup' %>
+      <%= link_to "주소록 찾기", find_contacts_path(target_class: @hrinfo.class, target: @hrinfo), :class => 'popup' %>
     </div>
     <h3>주소록</h3>
     <ul>

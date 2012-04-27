@@ -30,26 +30,35 @@ module StylesheetParseable
   end
 
   module ClassMethods
-    def open_and_parse_stylesheet(upload, type = :default)
-      name = upload['file'].original_filename
+    def file_path(name)
       directory = "tmp"
-      path = File.join(directory, name)
-      File.open(path, "wb") { |f| f.write(upload['file'].read) }
-      parse_stylesheet(path, type.to_sym)
+      File.join(directory, name)
+    end
+
+    def create_file(path, file)
+      File.open(path, "wb") { |f| f.write(file.read) }
+    end
+
+    def remove_file(path)
       File.delete(path)
     end
 
+    def open_and_parse_stylesheet(upload, type = :default)
+      type = type.to_sym
+      path = file_path(upload['file'].original_filename)
+      create_file(path, upload['file'])
+      parse_stylesheet(path, type.to_sym)
+      remove_file(path)
+    end
+
     def preview_stylesheet(upload, type = :default)
-      name = upload['file'].original_filename
-      directory = "tmp"
-      path = File.join(directory, name)
-      File.open(path, "wb") { |f| f.write(upload['file'].read) }
+      path = file_path(upload['file'].original_filename)
+      create_file(path, upload['file'])
       parse_stylesheet(path, type.to_sym, preview: true)
     end
 
     def create_with_stylesheet(name, type = :default)
-      directory = "tmp"
-      path = File.join(directory, name)
+      path = file_path(name)
       parse_stylesheet(path, type.to_sym)
       File.delete(path)
     end
@@ -66,6 +75,7 @@ module StylesheetParseable
     end
 
     def parse_stylesheet(file, type = :default, opts = {})
+      type = type.to_sym
       parser = ExcelParser.new
       parser.column @excel_columns[type]
       parser.option @excel_options[type]

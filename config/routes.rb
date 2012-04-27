@@ -84,13 +84,15 @@ Mintoffice::Application.routes.draw do
     resources :bank_transactions, path: "transactions" do
       collection do
         get 'excel'
+        post 'preview'
         post 'excel', :action => 'upload'
       end
     end
 
-    resources :bank_transfers, path: "tranfers" do
+    resources :bank_transfers, path: "transfers" do
       collection do
         get 'excel'
+        post 'preview'
         post 'excel', :action => 'upload'
       end
     end

@@ -9,7 +9,8 @@
 h2 #{bank_account.name}: #{bank_account.number}
 
 - unless bank_transactions.empty?
-  = render 'list', preview: false
+  = render 'list', menu: true
+
   br
   center
     = will_paginate bank_transactions

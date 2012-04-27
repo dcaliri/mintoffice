@@ -700,6 +700,12 @@ ko:
             link: 엑셀 파일로 올리기
             type: 은행명
             file: 엑셀 파일
+            submit: 미리보기
+        preview:
+            title: 미리보기
+            link: 엑셀 파일로 올리기
+            type: 은행명
+            file: 엑셀 파일
             submit: 엑셀 파일 올리기
         upload:
             title: 엑셀로 올리기
@@ -718,6 +724,12 @@ ko:
             empty: 이체 내역이 없습니다
         excel:
             title: 엑셀로 올리기
+            link: 엑셀 파일로 올리기
+            type: 은행명
+            file: 엑셀 파일
+            submit: 엑셀 파일 올리기
+        preview:
+            title: 미리보기
             link: 엑셀 파일로 올리기
             type: 은행명
             file: 엑셀 파일

@@ -4,7 +4,7 @@ class Taxman < ActiveRecord::Base
   has_one :contact, :as => :target
 
   def fullname
-    read_attribute(:fullname) || contact.name
+    read_attribute(:fullname) || contact ? contact.name : ""
   end
 
   def email
