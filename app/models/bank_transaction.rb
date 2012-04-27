@@ -73,12 +73,22 @@ class BankTransaction < ActiveRecord::Base
   end
 
   def self.in
-    where('in > 0')
+    where("\"in\" > 0")
   end
 
   def self.out
-    where('out > 0')
+    where("\"out\" > 0")
   end
+
+  def self.oldest_at
+    resource = order('transacted_at DESC').last
+    if resource && resource.transacted_at
+      resource.transacted_at
+    else
+      Time.zone.now
+    end
+  end
+
 
   def self.group_by_note_and_in
     all.group_by{|transaction| transaction.note }.map do |note, transaction|
@@ -86,7 +96,7 @@ class BankTransaction < ActiveRecord::Base
     end
   end
 
-  def self.group_by_name_and_out
+  def self.group_by_note_and_out
     all.group_by{|transaction| transaction.note }.map do |note, transaction|
       {note: note, amount: transaction.sum{|p| p.out}}
     end

@@ -718,6 +718,14 @@ ko:
             link: 입출금 내역 올리기
         edit:
             title: 입출금 내역 수정하기
+        total:
+            title: 입출금 합계표
+            link: 합계표 보기
+            in: 입금 합계
+            out: 출금 합계
+            list: 분기 목록
+            quarter: "%{year}년도 %{quarter} 분기"
+
     bank_transfers:
         index:
             title: 이체 내역

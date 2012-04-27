@@ -1,5 +1,5 @@
 <div id="show_command">
-    <%= link_to t('common.title.back'), :taxbills %>
+    <%= link_to t('common.title.back'), [bank_account, :bank_transactions] %>
 </div>
 
 <% 3.downto(0).each do |quarter|%>
@@ -21,10 +21,34 @@
       </thead>
       <tbody>
         <% header.zip(in_list, out_list).each do |_, in_, out_| %>
-          <%= in_.inspect %>
-          <%= out_.inspect %>
+          <tr>
+            <% if in_ %>
+              <td>
+                <%= in_[:note] %>
+                :
+                <%= number_to_currency in_[:amount] %>
+              </td>
+            <% else %>
+              <td></td>
+            <% end %>
+            <td>
+              <% if out_ %>
+                <%= out_[:note] %>
+                :
+                <%= number_to_currency out_[:amount] %>
+              <% end %>
+            </td>
+          </tr>
         <% end %>
         <tr>
+          <td>
+            <%= t('common.total') %>
+            <%= number_to_currency in_list.sum{|in_| in_[:amount]} %>
+          </td>
+          <td>
+            <%= t('common.total') %>
+            <%= number_to_currency out_list.sum{|out_| out_[:amount]} %>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -37,7 +61,7 @@
   <% oldest = oldest_year %>
   <% current.downto(oldest) do |year| %>
     <% if year != current_year.year %>
-      <li><%= link_to "#{year}#{t('datetime.prompts.year')}", total_taxbills_path(:at => year) %></li>
+      <li><%= link_to "#{year}#{t('datetime.prompts.year')}", total_bank_account_bank_transactions_path(bank_account, :at => year) %></li>
     <% else %>
       <li><%= "#{year}#{t('datetime.prompts.year')}" %></li>
     <% end %>
