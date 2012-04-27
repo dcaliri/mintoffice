@@ -6,7 +6,7 @@ h2 ..
   .box
     p
       = label_tag :card_type, t('.type')
-      = select_tag :card, options_for_select(Creditcard::CARD_LIST, params[:card_type])
+      = select_tag :card_type, options_for_select(Creditcard::CARD_LIST, params[:card_type])
     p
       = label_tag :file, t('.file')
       = file_field :upload, :file

@@ -14,7 +14,11 @@ class Creditcard < ActiveRecord::Base
   validates_presence_of :cardholder
   validates_uniqueness_of :cardno
 
-  CARD_LIST = [:used, :approved]
+  CARD_LIST = [:card_used_sources, :card_approved_sources]
+
+  def self.preview_stylesheet(type, upload)
+    []
+  end
 
   def cardno_long
     if self.nickname == nil

@@ -17,4 +17,4 @@ h2= t(".title")
   br
 
 h3 프리뷰
-#= render 'list', bank_transactions: @transactions, menu: false
+= render "#{params[:card_type]}/list", bank_transactions: @collection, menu: false

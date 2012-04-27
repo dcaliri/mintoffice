@@ -1,6 +1,10 @@
 class CreditcardsController < ApplicationController
   # GET /creditcards
   # GET /creditcards.xml
+  def preview
+    @collection = Creditcard.preview_stylesheet(params[:card_type], params[:upload])
+  end
+
   def index
     @creditcards = Creditcard.all
 
