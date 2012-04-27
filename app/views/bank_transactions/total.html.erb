@@ -1,0 +1,69 @@
+<div id="show_command">
+    <%= link_to t('common.title.back'), [bank_account, :bank_transactions] %>
+</div>
+
+<% 3.downto(0).each do |quarter|%>
+  <% between = (current_year + (3*(quarter)).month..current_year + (3*(quarter+1)).month) %>
+
+  <% in_list = @in.where(transacted_at: between).group_by_note_and_in %>
+  <% out_list = @out.where(transacted_at: between).group_by_note_and_out %>
+
+  <% header = Array.new([in_list.size, out_list.size].max) %>
+
+  <% unless header.empty? %>
+    <h3><%= t('.quarter', year: current_year.year, quarter: quarter+1)%></h3>
+    <table id="list-table">
+      <thead>
+        <tr>
+          <th><%= t('.in') %></th>
+          <th><%= t('.out') %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% header.zip(in_list, out_list).each do |_, in_, out_| %>
+          <tr>
+            <% if in_ %>
+              <td>
+                <%= in_[:note] %>
+                :
+                <%= number_to_currency in_[:amount] %>
+              </td>
+            <% else %>
+              <td></td>
+            <% end %>
+            <td>
+              <% if out_ %>
+                <%= out_[:note] %>
+                :
+                <%= number_to_currency out_[:amount] %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+        <tr>
+          <td>
+            <%= t('common.total') %>
+            <%= number_to_currency in_list.sum{|in_| in_[:amount]} %>
+          </td>
+          <td>
+            <%= t('common.total') %>
+            <%= number_to_currency out_list.sum{|out_| out_[:amount]} %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  <% end %>
+<% end %>
+
+<h4><%= t('.list')%></h4>
+<ul>
+  <% current = Time.zone.now.year %>
+  <% oldest = oldest_year %>
+  <% current.downto(oldest) do |year| %>
+    <% if year != current_year.year %>
+      <li><%= link_to "#{year}#{t('datetime.prompts.year')}", total_bank_account_bank_transactions_path(bank_account, :at => year) %></li>
+    <% else %>
+      <li><%= "#{year}#{t('datetime.prompts.year')}" %></li>
+    <% end %>
+  <% end %>
+</ul>
