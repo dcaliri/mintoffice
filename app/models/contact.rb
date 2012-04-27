@@ -15,8 +15,8 @@ class Contact < ActiveRecord::Base
   accepts_nested_attributes_for :phone_numbers, :allow_destroy => :true, :reject_if => REJECT_IF_EMPTY
 
   def self.search(query)
-    firstname = "%#{query[0]}%"
-    lastname = "%#{query[1..-1]}%"
+    firstname = "%#{query ? query[0] : ""}%"
+    lastname = "%#{query ? query[1..-1] : ""}%"
     query = "%#{query || ""}%"
     where('firstname like ? OR lastname like ? OR firstname like ? OR lastname like ?', firstname, lastname, query, query)
   end
