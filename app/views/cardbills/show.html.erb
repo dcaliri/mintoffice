@@ -1,6 +1,11 @@
 <% title t('.title') %>
 
 <div id="show_command">
+  <% if @cardbill.used %>
+    <%#= link_to t('.to_used'), [@cardbill.used.creditcard, @cardbill.used] %>
+    <%= link_to "사용 내역", [@cardbill.used.creditcard, @cardbill.used] %>
+    |
+  <% end %>
   <% if @cardbill.approved %>
     <%= link_to t('.to_approved'), [@cardbill.approved.creditcard, @cardbill.approved] %> |
   <% end %>
@@ -22,15 +27,15 @@
 <table border="0" cellspacing="5" cellpadding="5">
   <tr>
     <th align="right"><%= Cardbill.human_attribute_name('amount') %>:</th>
-    <td align="right"><%= number_to_currency @cardbill.amount %></td>
+    <td align="right" class="<%= @cardbill.mismatch?(:amount) %>"><%= number_to_currency @cardbill.amount %></td>
   </tr>
   <tr>
     <th align="right"><%= Cardbill.human_attribute_name('vat') %>:</th>
-    <td align="right"><%= number_to_currency @cardbill.vat %></td>
+    <td align="right" class="<%= @cardbill.mismatch?(:vat) %>"><%= number_to_currency @cardbill.vat %></td>
   </tr>
   <tr>
     <th align="right"><%= Cardbill.human_attribute_name('servicecharge') %>:</th>
-    <td align="right"><%= number_to_currency @cardbill.servicecharge %></td>
+    <td align="right" class="<%= @cardbill.mismatch?(:servicecharge) %>"><%= number_to_currency @cardbill.servicecharge %></td>
   </tr>
   <tr>
     <th align="right"><%= Cardbill.human_attribute_name('totalamount') %>:</th>
