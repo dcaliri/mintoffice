@@ -817,6 +817,7 @@ ko:
         purchase_bill: 매입 세금계산서
         sales_bill: 매출 세금계산서
         purchase_sales_bill: 매입/매출 세금계산서
+        title: 세금계산서 관리
     taxbill_items:
         new:
             title: 새로운 내역 추가

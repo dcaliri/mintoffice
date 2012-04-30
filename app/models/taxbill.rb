@@ -79,7 +79,7 @@ class Taxbill < ActiveRecord::Base
           "기타"
         end
       end.map do |name, purchases|
-        {name: name, tax: purchases.sum{|p| p.tax}}
+        {name: name, tax: purchases.sum{|p| p.tax}, price: purchases.sum{|p| p.price}}
       end
     end
 
