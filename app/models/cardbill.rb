@@ -28,6 +28,7 @@ class Cardbill < ActiveRecord::Base
   end
 
   def mismatch?(type)
+    return unless approved
     result =  if type == :totalamount
                 totalamount != approved.money
               elsif type == :transdate
