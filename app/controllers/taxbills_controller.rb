@@ -3,7 +3,6 @@ class TaxbillsController < ApplicationController
 
   expose(:taxbills) { Taxbill.all }
   expose(:taxbills_pagination) { Taxbill.search(params).latest.page(params[:page]) }
-#  expose(:taxbills_pagination) { Taxbill.all }
   expose(:taxbill)
 
   def total
