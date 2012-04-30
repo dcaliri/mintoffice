@@ -1,5 +1,7 @@
 module Excels
   module CardUsedSourcesInfo
+    extend ActiveSupport::Concern
+
     EXCEL_COLUMNS ||= {}
     EXCEL_COLUMNS[:card_used_sources] = [
       :card_no,
@@ -46,5 +48,19 @@ module Excels
         :end => 0
       }
     }
+
+    module ClassMethods
+      def used_sources_parser
+        parser = ExcelParser.new
+        parser.column EXCEL_COLUMNS[:card_used_sources]
+        parser.key EXCEL_KEYS[:card_used_sources]
+        parser.option EXCEL_OPTIONS[:card_used_sources]
+        parser
+      end
+    end
+
+    included do
+      extend ClassMethods
+    end
   end
 end

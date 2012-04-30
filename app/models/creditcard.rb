@@ -27,6 +27,13 @@ class Creditcard < ActiveRecord::Base
     excel_parser.preview(parser_class_name, path)
   end
 
+  def self.create_with_stylesheet(type, name)
+    @parser_type = type.to_sym
+    path = file_path(name)
+    parse_stylesheet(path, type.to_sym)
+    File.delete(path)
+  end
+
   def self.parser_class_name
     if @parser_type == :card_used_sources
       CardUsedSource
@@ -35,19 +42,13 @@ class Creditcard < ActiveRecord::Base
     end
   end
 
-  def self.create_with_stylesheet(type, name)
-    @parser_type = type.to_sym
-    path = file_path(name)
-    parse_stylesheet(path, type.to_sym)
-    File.delete(path)
-  end
-
   def self.excel_parser
     unless @parser
-      @parser = ExcelParser.new
-      @parser.column EXCEL_COLUMNS[@parser_type]
-      @parser.key EXCEL_KEYS[@parser_type]
-      @parser.option EXCEL_KEYS[@parser_type]
+      @parser = if @parser_type == :card_used_sources
+                  used_sources_parser
+                else
+                  approved_sources_parser
+                end
     end
     @parser
   end
