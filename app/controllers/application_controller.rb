@@ -10,6 +10,10 @@ class ApplicationController < ActionController::Base
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
 
+  before_filter do |controller|
+    User.current_user = User.find(controller.session[:user_id]) unless controller.session[:user_id].nil?
+  end
+
   protected
   def authorize
     @user = User.find(session[:user_id]) if session[:user_id]
@@ -57,7 +61,7 @@ class ApplicationController < ActionController::Base
     unless text.blank?
       @title = text
     else
-      @title || t("#{controller_name}.#{action_name}.title")
+      @title || t("#{controller_name}.title")
     end
   end
 end

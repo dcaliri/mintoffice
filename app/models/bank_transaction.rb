@@ -72,6 +72,44 @@ class BankTransaction < ActiveRecord::Base
     order("transacted_at DESC")
   end
 
+  def self.in
+    where("\"in\" > 0")
+  end
+
+  def self.out
+    where("\"out\" > 0")
+  end
+
+  def self.total_in
+    sum {|transaction| transaction.in }
+  end
+
+  def self.total_out
+    sum {|transaction| transaction.out }
+  end
+
+  def self.oldest_at
+    resource = order('transacted_at DESC').last
+    if resource && resource.transacted_at
+      resource.transacted_at
+    else
+      Time.zone.now
+    end
+  end
+
+
+  def self.group_by_note_and_in
+    all.group_by{|transaction| transaction.note }.map do |note, transaction|
+      {note: note, amount: transaction.sum{|p| p.in}}
+    end
+  end
+
+  def self.group_by_note_and_out
+    all.group_by{|transaction| transaction.note }.map do |note, transaction|
+      {note: note, amount: transaction.sum{|p| p.out}}
+    end
+  end
+
   def transfer
     time_start = transacted_at - 1.minutes
     time_end = transacted_at + 1.minutes

@@ -3,6 +3,10 @@ class TaxbillItemsController < ApplicationController
   expose(:taxbill_items) { taxbill.items }
   expose(:taxbill_item)
 
+  def new
+    @item = taxbill.items.where(transacted_at: taxbill.transacted_at).new
+  end
+
   def create
     taxbill_item.save!
     redirect_to taxbill, notice: I18n.t("common.messages.created", :model => TaxbillItem.model_name.human)

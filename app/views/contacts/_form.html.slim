@@ -1,0 +1,79 @@
+#show_command
+  = link_to t('common.title.back'), contact
+
+h2= t("common.title.#{action_name}")
+
+= form_for contact, html: {multipart: true} do |f|
+  .box
+    p
+      = f.label :firstname
+      = f.text_field :firstname
+    p
+      = f.label :lastname
+      = f.text_field :lastname
+    p
+      = f.label :company
+      = f.text_field :company
+    p
+      = f.label :department
+      = f.text_field :department
+    p
+      = f.label :position
+      = f.text_field :position
+
+
+    - contact.addresses.new
+    h3 주소
+    = f.fields_for :addresses do |address_field|
+      p
+        = address_field.label :target
+        = address_field.select :target, options_for_select(ContactAddressTag.all.map{|tag| tag.name}, address_field.object.target)
+        = link_to "새로운 대상 만들기", [:new, :contact_address_tag]
+      p
+        = address_field.label :country
+        = address_field.text_field :country
+      p
+        = address_field.label :province
+        = address_field.text_field :province
+      p
+        = address_field.label :city
+        = address_field.text_field :city
+      p
+        = address_field.label :other1
+        = address_field.text_field :other1
+      p
+        = address_field.label :other2
+        = address_field.text_field :other2
+      p
+        = address_field.label :postal_code
+        = address_field.text_field :postal_code
+    br
+
+    - contact.emails.new
+    h3 이메일
+    = f.fields_for :emails do |email_field|
+      p
+        = email_field.label :target
+        = email_field.select :target, options_for_select(ContactEmailTag.all.map{|tag| tag.name}, email_field.object.target)
+        = link_to "새로운 대상 만들기", [:new, :contact_email_tag]
+
+      p
+        = email_field.label :email
+        = email_field.email_field :email
+    br
+
+    - contact.phone_numbers.new
+    h3 전화번호
+    = f.fields_for :phone_numbers do |phone_number_field|
+      p
+        = phone_number_field.label :target
+        = phone_number_field.select :target, options_for_select(ContactPhoneNumberTag.all.map{|tag| tag.name}, phone_number_field.object.target)
+        = link_to "새로운 대상 만들기", [:new, :contact_phone_number_tag]
+      p
+        = phone_number_field.label :number
+        = phone_number_field.text_field :number
+    br
+    h3 첨부파일
+    = render 'shared/attachments/form', label: t("taxbills.#{action_name}.picture")
+    p
+      = f.submit

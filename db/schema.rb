@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120424062157) do
+ActiveRecord::Schema.define(:version => 20120427015811) do
 
   create_table "attachments", :force => true do |t|
     t.string   "title"
@@ -166,6 +166,76 @@ ActiveRecord::Schema.define(:version => 20120424062157) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "contact_address_tags", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "contact_address_tags_contact_addresses", :id => false, :force => true do |t|
+    t.integer "contact_address_tag_id"
+    t.integer "contact_address_id"
+  end
+
+  create_table "contact_addresses", :force => true do |t|
+    t.integer  "contact_id"
+    t.string   "target"
+    t.string   "country"
+    t.string   "province"
+    t.string   "city"
+    t.string   "other1"
+    t.string   "other2"
+    t.string   "postal_code"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "contact_email_tags", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "contact_email_tags_contact_emails", :id => false, :force => true do |t|
+    t.integer "contact_email_tag_id"
+    t.integer "contact_email_id"
+  end
+
+  create_table "contact_emails", :force => true do |t|
+    t.integer "contact_id"
+    t.string  "target"
+    t.string  "email"
+  end
+
+  create_table "contact_phone_number_tags", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "contact_phone_number_tags_contact_phone_numbers", :id => false, :force => true do |t|
+    t.integer "contact_phone_number_tag_id"
+    t.integer "contact_phone_number_id"
+  end
+
+  create_table "contact_phone_numbers", :force => true do |t|
+    t.integer "contact_id"
+    t.string  "target"
+    t.string  "number"
+  end
+
+  create_table "contacts", :force => true do |t|
+    t.string  "firstname"
+    t.string  "lastname"
+    t.string  "company"
+    t.string  "department"
+    t.string  "position"
+    t.text    "email_list"
+    t.integer "target_id"
+    t.string  "target_type"
+    t.boolean "migrated_data", :default => false
+  end
+
   create_table "creditcards", :force => true do |t|
     t.string   "cardno"
     t.string   "expireyear"
@@ -258,6 +328,14 @@ ActiveRecord::Schema.define(:version => 20120424062157) do
     t.datetime "updated_at",                  :null => false
   end
 
+  create_table "payroll_categories", :force => true do |t|
+    t.integer  "prtype"
+    t.integer  "code"
+    t.string   "title"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "permissions", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
@@ -313,7 +391,7 @@ ActiveRecord::Schema.define(:version => 20120424062157) do
     t.datetime "transacted_at"
     t.text     "note"
     t.decimal  "unitprice",     :default => 0.0, :null => false
-    t.integer  "quantity"
+    t.integer  "quantity",      :default => 1
     t.decimal  "total",         :default => 0.0, :null => false
     t.decimal  "tax",           :default => 0.0, :null => false
     t.integer  "taxbill_id"
@@ -355,6 +433,11 @@ ActiveRecord::Schema.define(:version => 20120424062157) do
     t.string   "salt"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "gmail_account"
+    t.string   "boxcar_account"
+    t.string   "notify_email"
   end
 
   create_table "vacations", :force => true do |t|

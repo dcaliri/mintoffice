@@ -1,0 +1,20 @@
+#show_command
+  = link_to t('common.title.back'), [bank_account, :bank_transactions]
+
+h2= t(".title")
+
+= form_tag [:excel, bank_account, bank_transaction], multipart: true, class: "tabular" do
+  .box
+    p
+      = label_tag :bank_type, t('.type')
+      = select_tag :bank_type, options_for_select(BankTransaction::BANK_LIST, params[:bank_type])
+    p
+      = label_tag :file, t('.file')
+      = text_field_tag :upload, params[:upload][:file].original_filename
+    p
+      = submit_tag t('.submit')
+
+  br
+
+h3 프리뷰
+= render 'list', bank_transactions: @transactions, menu: false

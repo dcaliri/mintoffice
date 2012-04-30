@@ -318,6 +318,11 @@ tr.related {
   height: 200px;
 /*  background-color: #999999;*/
 }
+
+.clear {
+  clear: both;
+}
+
 ul#css3menu_top,ul#css3menu_top ul{
   margin:0;list-style:none;padding:0;background-color:#dedede;border-width:1px;border-style:solid;border-color:#5f5f5f;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;}
 ul#css3menu_top ul{

@@ -1,0 +1,37 @@
+table#list-table
+  tr
+    th= CardApprovedSource.human_attribute_name(:used_at)
+    th= CardApprovedSource.human_attribute_name(:approve_no)
+    th= CardApprovedSource.human_attribute_name(:card_no)
+    th= CardApprovedSource.human_attribute_name(:card_holder_name)
+    th= CardApprovedSource.human_attribute_name(:store_name)
+    th= CardApprovedSource.human_attribute_name(:money)
+    th= CardApprovedSource.human_attribute_name(:used_type)
+    th= CardApprovedSource.human_attribute_name(:monthly_duration)
+    th= CardApprovedSource.human_attribute_name(:card_type)
+    th= CardApprovedSource.human_attribute_name(:canceled_at)
+    th= CardApprovedSource.human_attribute_name(:status)
+    th= CardApprovedSource.human_attribute_name(:will_be_paied_at)
+    - if menu
+      th= t('common.menu')
+  - card_approved_sources.each do |source|
+    tr
+      td= source.used_at_to_s
+      td= source.approve_no
+      td= source.card_no
+      td= source.card_holder_name
+      td= source.store_name
+      td class="numrow"= number_to_currency source.money
+      td= source.used_type
+      td= source.monthly_duration
+      td= source.card_type
+      td= source.canceled_at_to_s
+      td= source.status
+      td= source.will_be_paied_at_to_s
+      - if menu
+        td align="right"
+          = link_to t('common.link.show'), [creditcard, source]
+          = " | "
+          = link_to t('common.link.edit'), [:edit, creditcard, source]
+          = " | "
+          = link_to t('common.link.destroy'), [creditcard, source], :method => :delete, :confirm => "Are you sure?"

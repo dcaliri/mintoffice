@@ -1,64 +1,13 @@
 #show_command
   = link_to t('card_approved_sources.new.link'), [:new, creditcard, :card_approved_source]
   = " | "
-  = link_to t('card_approved_sources.excel.link'), [:excel, creditcard, :card_approved_sources]
-  = " | "
   = link_to t('common.title.back'), creditcard
 
 h2= "#{creditcard.nickname}: #{creditcard.cardno}"
 
-t.datetime    :used_at
-t.string      :approve_no
-t.string      :card_holder_name
-t.string      :store_name
-t.integer     :money
-t.string      :used_type
-t.string      :monthly_duration
-t.string      :card_type
-t.datetime    :canceled
-t.string      :status
-t.datetime    :will_be_paied_at
-
 - unless card_approved_sources.empty?
-  table#list-table
-    tr
-      th= CardApprovedSource.human_attribute_name(:used_at)
-      th= CardApprovedSource.human_attribute_name(:approve_no)
-      th= CardApprovedSource.human_attribute_name(:card_no)
-      th= CardApprovedSource.human_attribute_name(:card_holder_name)
-      th= CardApprovedSource.human_attribute_name(:store_name)
-      th= CardApprovedSource.human_attribute_name(:money)
-      th= CardApprovedSource.human_attribute_name(:used_type)
-      th= CardApprovedSource.human_attribute_name(:monthly_duration)
-      th= CardApprovedSource.human_attribute_name(:card_type)
-      th= CardApprovedSource.human_attribute_name(:canceled_at)
-      th= CardApprovedSource.human_attribute_name(:status)
-      th= CardApprovedSource.human_attribute_name(:will_be_paied_at)
-      th= t('common.menu')
-    - card_approved_sources.each do |source|
-      tr
-        td= source.used_at.strftime("%Y.%m.%d %H:%M")
-        td= source.approve_no
-        td= source.card_no
-        td= source.card_holder_name
-        td= source.store_name
-        td class="numrow"= number_to_currency source.money
-        td= source.used_type
-        td= source.monthly_duration
-        td= source.card_type
-        - if source.canceled_at
-          td= source.canceled_at.strftime("%Y.%m.%d")
-        -else
-          td
-        td= source.status
-        - if source.will_be_paied_at
-          td= source.will_be_paied_at.strftime("%Y.%m.%d")
-        else
-          td
-        td align="right"
-          = link_to t('common.link.edit'), [:edit, creditcard, source]
-          = " | "
-          = link_to t('common.link.destroy'), [creditcard, source], :method => :delete, :confirm => "Are you sure?"
+  = render 'list', card_approved_sources: card_approved_sources, menu: true
+
   br
   center
     = will_paginate card_approved_sources
