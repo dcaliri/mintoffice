@@ -3,7 +3,7 @@
 <% if @user.ingroup? "admin" %>
   <%= link_to t("common.title.back"), :action => 'index' %>
 <% else %>
-  <%= link_to t("common.title.back"), :controller => "users", :action => 'my' %>
+  <%= link_to t("common.title.back"), users_my_path() %>
 <% end %>
 </div>
 <h2><%= t('.subtitle') %></h2>

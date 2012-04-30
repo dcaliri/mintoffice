@@ -9,4 +9,23 @@
   <%= link_to t('common.title.back'), users_path %>
 </div>
 <h2><%=h @this_user.name %></h2>
-
+<div class="box">
+	<div id="descr">
+	<table>
+		<tr>
+			<th>Gmail Account<th>
+			<td><%= @user.gmail_account %></td>
+		</th>
+		<tr>
+			<th>Email<th>
+			<td><%= @user.notify_email %></td>
+		</th>
+		<tr>
+			<th>Boxcar Account<th>
+			<td><%= @user.boxcar_account %></td>
+		</th>
+		
+	</table>
+	</div>
+	<div style="clear: both;"></div>
+</div>

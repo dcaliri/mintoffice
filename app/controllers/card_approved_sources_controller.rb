@@ -3,8 +3,12 @@ class CardApprovedSourcesController < ApplicationController
   expose(:card_approved_sources) { creditcard.card_approved_sources.latest.page(params[:page]) }
   expose(:card_approved_source)
 
+  def preview
+    @card_approved_sources = CardApprovedSource.preview_stylesheet(creditcard, params[:upload])
+  end
+
   def upload
-    card_approved_sources.open_and_parse_stylesheet(creditcard, params[:upload])
+    card_approved_sources.create_with_stylesheet(creditcard, params[:upload])
     redirect_to [creditcard, :card_approved_sources]
   end
 

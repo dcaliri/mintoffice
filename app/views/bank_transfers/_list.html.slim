@@ -16,7 +16,7 @@ table#list-table
     /!th= BankTransfer.human_attribute_name(:out_account_note)
     /!th= BankTransfer.human_attribute_name(:in_account_note)
     th= BankTransfer.human_attribute_name(:in_person_name)
-    - unless @preview
+    - if menu
       th= t('common.menu')
   - bank_transfers.each do |transfer|
     tr.selectable
@@ -39,7 +39,7 @@ table#list-table
       /!td= transfer.out_account_note
       /!td= transfer.in_account_note
       td= transfer.in_person_name
-      - unless @preview
+      - if menu
         td align="right"
           - if transfer.transaction
             = link_to t('bank_transfers.show.to_bank_transaction'), [bank_account, transfer.transaction]

@@ -1,4 +1,3 @@
-
 <div id="show_command">
     <%= link_to t('common.title.back'), :taxbills %>
 </div>
@@ -17,9 +16,9 @@
     <table id="list-table">
       <thead>
         <tr>
-          <th><%= t('.purchase') %></th>
-          <th><%= t('.sale') %></th>
-          <th><%= t('.card') %></th>
+          <th colspan="3"><%= t('.purchase') %></th>
+          <th colspan="3"><%= t('.sale') %></th>
+          <th colspan="2"><%= t('.card') %></th>
         </tr>
       </thead>
       <tbody>
@@ -27,42 +26,66 @@
           <tr>
             <% if purchase %>
               <td>
-                <%= purchase[:name] %>
-                :
+                <%= purchase[:name] %> :
+              </td>
+              <td class="numrow">
                 <%= number_to_currency purchase[:tax] %>
               </td>
+              <td class="numrow">
+                <%= number_to_currency purchase[:price] %>
+              </td>
             <% else %>
+              <td></td>
               <td></td>
             <% end %>
             <td>
               <% if sale %>
-                <%= sale[:name] %>
-                :
-                <%= number_to_currency sale[:tax] %>
+                <%= sale[:name] %> :
               <% end %>
+            </td>
+            <td class="numrow">
+              <%= number_to_currency sale[:tax] %>
+            </td>
+            <td class="numrow">
+              <%= number_to_currency sale[:price] %>
             </td>
             <td>
             <% if card %>
-              <%= card[:name] %>
-              :
-              <%= number_to_currency card[:tax] %>
+              <%= card[:name] %> :
             <% end %>
+            </td>
+            <td class="numrow">
+              <%= number_to_currency card[:tax] %>
             </td>
           </tr>
         <% end %>
         <tr>
           <td>
             <%= t('common.total') %>
+          </td>
+          <td class="numrow">
             <%= number_to_currency purchase_list.sum{|purchase| purchase[:tax]} %>
           </td>
+          <td class="numrow">
+            <%= number_to_currency purchase_list.sum{|purchase| purchase[:price]} %>
+          </td>
+          
           <td>
             <%= t('common.total') %>
+          </td>
+          <td class="numrow">
             <%= number_to_currency sales_list.sum{|sales| sales[:tax]} %>
           </td>
-            <td>
-              <%= t('common.total') %>
-              <%= number_to_currency card_list.sum{|card| card[:tax]} %>
-            </td>
+          <td class="numrow">
+            <%= number_to_currency sales_list.sum{|sales| sales[:price]} %>
+          </td>
+          
+          <td>
+            <%= t('common.total') %>
+          </td>
+          <td class="numrow">
+            <%= number_to_currency card_list.sum{|card| card[:tax]} %>
+          </td>
         </tr>
       </tbody>
     </table>

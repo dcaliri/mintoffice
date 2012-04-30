@@ -1,0 +1,39 @@
+
+- content_for :search do
+  = form_tag({:action => "find"}, :method => :get ) do
+    = hidden_field_tag 'target_class', params[:target_class]
+    = hidden_field_tag 'target', params[:target]
+    = hidden_field_tag 'parent_class', params[:parent_class]
+    = hidden_field_tag 'parent', params[:parent]
+    = t("common.title.search")
+    = " : "
+    = text_field_tag 'query', params[:query]
+
+h2 ..
+
+- unless @contacts.empty?
+  table#list-table
+    tr
+      th= contact.class.human_attribute_name(:firstname)
+      th= contact.class.human_attribute_name(:lastname)
+      th= contact.class.human_attribute_name(:company)
+      th= contact.class.human_attribute_name(:department)
+      th= contact.class.human_attribute_name(:position)
+      th= t('common.menu')
+    - @contacts.each do |contact|
+      tr.selectable
+        td= contact.firstname
+        td= contact.lastname
+        td= contact.company
+        td= contact.department
+        td= contact.position
+        td
+          = link_to "선택하기", select_contact_path(contact, :target_class => params[:target_class], :target => params[:target], :parent_class => params[:parent_class], :parent => params[:parent]), :method => :put
+- else
+  h4= t('.empty')
+
+
+javascript:
+  window.addEventListener("unload", function(){
+    window.opener.location.reload(true);
+  }, false);

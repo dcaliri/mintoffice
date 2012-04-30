@@ -1,0 +1,14 @@
+#show_command
+  = link_to t("common.title.new"), new_payroll_category_path()
+h2 ...
+
+table#list-table
+  tr
+    th= PayrollCategory.human_attribute_name("prtype")
+    th= PayrollCategory.human_attribute_name("code")
+    th= PayrollCategory.human_attribute_name("title")
+  - PayrollCategory.all.each do |payroll_category|
+    tr.selectable onclick="location.href='#{payroll_category_path(payroll_category)}'"
+      td= t("payroll_categories.#{PayrollCategory::PAYROLL_TYPE.rassoc(payroll_category.prtype)[0]}")
+      td= t("payroll_categories.#{PayrollCategory::PAYROLL_CODE.rassoc(payroll_category.code)[0]}")
+      td= payroll_category.title

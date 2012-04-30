@@ -1,5 +1,7 @@
 
 #show_command
+  = link_to "합계표 보기", [:total, :bank_accounts]
+  = " | "
   = link_to "은행계좌 만들기", [:new, :bank_account]
   = " | "
   = link_to t('common.title.back'), :root

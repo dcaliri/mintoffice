@@ -20,9 +20,28 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :name
 
   attr_accessor :password_confirmation
-  validates_confirmation_of :password
+  validates_confirmation_of :password, :if => Proc.new{|user| user.provider.blank? and user.uid.blank?}
+  validate :password_non_blank, :if => Proc.new{|user| user.provider.blank? and user.uid.blank?}
 
-  validate :password_non_blank
+  cattr_accessor :current_user
+
+  def self.find_or_create_with_omniauth!(auth)
+#    users = where(:provider => auth['provider'], :uid => auth['uid'])
+    users = where(:gmail_account => auth['info']['email'])
+    user = if not users.empty?
+      users.first
+    else
+      nil
+#      self.new(:provider => auth['provider'], :uid => auth['uid'])
+    end
+
+#    user.name = auth['info']['name']
+#    user.name = auth['info']['email'].split('@').first
+
+#    user.save(:validate => false)
+#    user.save!
+    user
+  end
 
   def password
     @password
@@ -71,7 +90,9 @@ class User < ActiveRecord::Base
 
 private
   def password_non_blank
-    errors.add(:password, I18n.t('users.error.missing_password')) if hashed_password.blank?
+    if hashed_password.blank?
+      errors.add(:password, I18n.t('users.error.missing_password'))
+    end
   end
 
   def self.encrypted_password(password, salt)

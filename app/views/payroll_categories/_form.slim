@@ -1,0 +1,19 @@
+#show_command
+  = link_to t("common.title.back"), payroll_categories_path()
+
+h2= t("common.title.#{action_name}")
+
+= form_for [payroll_category], html: {class: "tabular"} do |f|
+  = f.error_messages
+  .box
+    p
+      = f.label :prtype
+      = f.select :prtype, options_for_select(PayrollCategory::PAYROLL_TYPE.map {|x| [t("payroll_categories.#{x[0]}"), x[1]]}, payroll_category.prtype)
+    p
+      = f.label :code
+      = f.select :code, options_for_select(PayrollCategory::PAYROLL_CODE.map {|x| [t("payroll_categories.#{x[0]}"), x[1]]}, payroll_category.code)
+    p
+      = f.label :title
+      = f.text_field :title
+  p
+    = f.submit

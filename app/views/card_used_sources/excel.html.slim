@@ -2,10 +2,10 @@
   = link_to t('common.title.back'), [creditcard, :card_used_sources]
 h2 ..
 
-= form_tag [:excel, creditcard, card_used_source], multipart: true, class: "tabular" do
+= form_tag [:preview, creditcard, card_used_source], multipart: true, class: "tabular" do
   .box
     p
       = label_tag :file, t('.file')
       = file_field :upload, :file
-  p
-    = submit_tag t('.submit')
+    p
+      = submit_tag "미리보기"
