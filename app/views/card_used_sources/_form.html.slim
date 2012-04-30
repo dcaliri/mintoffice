@@ -21,6 +21,9 @@ h2= t("common.title.#{action_name}")
       = f.label :used_area
       = f.text_field :used_area
     p
+      = f.label :approve_no
+      = f.text_field :approve_no
+    p
       = f.label :approved_at
       = f.datetime_select :approved_at, :order => [:year, :month, :day, :hour, :minute]
     p

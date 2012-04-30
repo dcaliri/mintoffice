@@ -10,6 +10,11 @@ class Cardbill < ActiveRecord::Base
   validates_numericality_of :servicecharge
   validates_numericality_of :vat
 
+  def used
+    collection = CardUsedSource.where(approve_no: approveno)
+    return collection.first unless collection.empty?
+  end
+
   def approved
     collection = CardApprovedSource.where(approve_no: approveno)
     return collection.first unless collection.empty?
@@ -18,7 +23,7 @@ class Cardbill < ActiveRecord::Base
   def cardno_long
     unless self.creditcard.nil?
       self.creditcard.cardno_long
-    else
+    else`x`
       cardno
     end
   end
@@ -27,21 +32,38 @@ class Cardbill < ActiveRecord::Base
     mismatch?(:totalamount) || mismatch?(:transdate)
   end
 
-  def mismatch?(type)
-    return unless approved
-    result =  if type == :totalamount
-                totalamount != approved.money
-              elsif type == :transdate
-                transdate.between?(approved.used_at - 1.minute, approved.used_at + 1.minute) == false
-              end
-    result ? 'misnatch-approved-sources' : ''
+  def mismatch?(type=nil)
+    if type == nil
+      types = [:totalamount, :transdate, :amount, :vat, :servicecharge]
+    else
+      types = [type]
+    end
+
+    result = types.any? do |type|
+      case type
+      when :totalamount
+        approved == nil || totalamount != approved.money
+      when :transdate
+        approved == nil ||transdate.between?(approved.used_at - 1.minute, approved.used_at + 1.minute) == false
+      when :amount
+        used == nil || amount != used.price
+      when :vat
+        used == nil || vat != used.tax
+      when :servicecharge
+        used == nil || servicecharge != used.tip
+      else
+        false
+      end
+    end
+
+    result ? 'misnatch-sources' : nil
   end
 
   def status
-    if approved == nil
-      "not-connected-to-approved-sources"
-    elsif approved_mismatch
-      "misnatch-approved-sources"
+    if approved == nil || used == nil
+      "not-connected-to-sources"
+    elsif mismatch?
+      "misnatch-sources"
     else
       ""
     end
