@@ -42,15 +42,15 @@ class Cardbill < ActiveRecord::Base
     result = types.any? do |type|
       case type
       when :totalamount
-        approved == nil || totalamount != approved.money
+        approved &&  totalamount != approved.money
       when :transdate
-        approved == nil ||transdate.between?(approved.used_at - 1.minute, approved.used_at + 1.minute) == false
+        approved && transdate.between?(approved.used_at - 1.minute, approved.used_at + 1.minute) == false
       when :amount
-        used == nil || amount != used.price
+        used && amount != used.price
       when :vat
-        used == nil || vat != used.tax
+        used && vat != used.tax
       when :servicecharge
-        used == nil || servicecharge != used.tip
+        used && servicecharge != used.tip
       else
         false
       end
