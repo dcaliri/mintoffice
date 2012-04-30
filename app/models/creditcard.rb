@@ -1,4 +1,5 @@
-#encodig: UTF-8
+#encoding: UTF-8
+
 class Creditcard < ActiveRecord::Base
   has_many :cardbills
   has_many :card_used_sources
@@ -15,6 +16,7 @@ class Creditcard < ActiveRecord::Base
   validates_uniqueness_of :cardno
 
   CARD_LIST = [:card_used_sources, :card_approved_sources]
+  CARD_LIST_FOR_SELECT = [["이용내역", CARD_LIST[0]],["승인내역", CARD_LIST[1]]]
 
   include NewStylesheetParsable
   include Excels::CardUsedSourcesInfo
