@@ -5,8 +5,6 @@ class Creditcard < ActiveRecord::Base
   has_many :card_used_sources
   has_many :card_approved_sources
 
-  has_many :change_histories, :as => :changable
-
   validates_presence_of :cardno
   validates_presence_of :expireyear
   validates_presence_of :expiremonth
@@ -14,6 +12,8 @@ class Creditcard < ActiveRecord::Base
   validates_presence_of :issuer
   validates_presence_of :cardholder
   validates_uniqueness_of :cardno
+
+  include Historiable
 
   CARD_LIST = [:card_used_sources, :card_approved_sources]
   CARD_LIST_FOR_SELECT = [["이용내역", CARD_LIST[0]],["승인내역", CARD_LIST[1]]]

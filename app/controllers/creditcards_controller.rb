@@ -92,15 +92,7 @@ class CreditcardsController < ApplicationController
     respond_to do |format|
       @creditcard.attributes = params[:creditcard]
       if @creditcard.valid?
-        @creditcard.changes.each do |k,v|
-          ChangeHistory.create(
-            :fieldname => k,
-            :before_value => v[0].to_s,
-            :after_value => v[1].to_s,
-            :user => @user,
-            :changable => @creditcard)
-        end
-        @creditcard.save
+        @creditcard.save!
 
         Attachment.save_for(@creditcard,@user,params[:attachment])
         flash[:notice] = t("common.messages.updated", :model => Creditcard.model_name.human)

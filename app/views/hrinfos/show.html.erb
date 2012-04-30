@@ -93,16 +93,7 @@
   </div>
   <div style="clear: both;">
 <% if @user.ingroup? "admin" %>
-    <h3><%= t(".changes") %></h3>
-    <% if !@hrinfo.hrinfo_histories.blank? %>
-    <ul>
-      <% for history in @hrinfo.hrinfo_histories.all(:order => "updated_at ASC") %>
-        <li>[<%= history.updated_at.strftime("%Y.%m.%d %H:%M:%S %p") %>] <%= history.change %> (<%= history.user.name %>)</li>
-      <% end %>
-    </ul>
-    <% else %>
-
-    <% end %>
+  <%= render 'changelog', target: @hrinfo %>
 <% end %>
     </div>
 </div>

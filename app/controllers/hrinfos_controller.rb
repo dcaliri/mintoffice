@@ -18,16 +18,16 @@ class HrinfosController < ApplicationController
   end
 
   def edit_required_tag
-    
+
   end
-  
+
   def retire
     @hrinfo = Hrinfo.find(params[:id])
   end
 
   def retire_save
     @hrinfo = Hrinfo.find(params[:id])
-    
+
     if @hrinfo.save
       flash[:notice] = 'retired.'
       format.html { redirect_to(@hrinfo) }
@@ -122,15 +122,8 @@ class HrinfosController < ApplicationController
     respond_to do |format|
       @hrinfo.attributes = params[:hrinfo]
       if @hrinfo.valid?
-        @hrinfo.changes.each do |k,v|
-          from = v[0].nil? ? "" : v[0].to_s
-          to = v[1].nil? ? "" : v[1].to_s
-          HrinfoHistory.create(:change => Hrinfo.human_attribute_name(k) + ": " + from + " => " + to,
-                            :user => @user,
-                            :hrinfo => @hrinfo)
-        end
         @hrinfo.save
-        
+
         seq = Attachment.maximum_seq_for_me(@hrinfo) || 0
         @attachment = Attachment.new(params[:attachment])
         @attachment.seq = seq+1
