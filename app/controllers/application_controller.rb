@@ -57,7 +57,7 @@ class ApplicationController < ActionController::Base
     unless text.blank?
       @title = text
     else
-      @title || t("#{controller_name}.#{action_name}.title")
+      @title || t("#{controller_name}.title")
     end
   end
 end

@@ -402,6 +402,84 @@ ko:
             update: 첨부파일 내용이 성공적으로 업데이트 되었습니다.
         new:
             title: 첨부파일 신규 작성
+    bank_accounts:
+        index:
+            title: 은행계좌 목록
+            empty: 은행계좌가 없습니다
+        new:
+            title: 새로운 은행계좌 만들기
+        edit:
+            title: 은행계좌 수정하기
+        total:
+            title: 입출금 합계표
+        title: 은행계좌 관리
+    bank_transactions:
+        index:
+            title: 입출금 내역
+            empty: 입출금 내역이 없습니다
+        show:
+            title: 입출금 내역
+            to_bank_transfer: 이체 내역
+        excel:
+            title: 엑셀로 올리기
+            link: 엑셀 파일로 올리기
+            type: 은행명
+            file: 엑셀 파일
+            submit: 미리보기
+        preview:
+            title: 미리보기
+            link: 엑셀 파일로 올리기
+            type: 은행명
+            file: 엑셀 파일
+            submit: 엑셀 파일 올리기
+        upload:
+            title: 엑셀로 올리기
+            link: 엑셀 파일로 올리기
+            type: 은행명
+            file: 엑셀 파일
+            submit: 엑셀 파일 올리기
+        new:
+            title: 입출금 내역 올리기
+            link: 입출금 내역 올리기
+        edit:
+            title: 입출금 내역 수정하기
+        total:
+            title: 입출금 합계표
+            link: 합계표 보기
+            in: 입금 합계
+            out: 출금 합계
+            list: 분기 목록
+            quarter: "%{year}년도 %{quarter} 분기"
+    bank_transfers:
+        index:
+            title: 이체 내역
+            empty: 이체 내역이 없습니다
+        excel:
+            title: 엑셀로 올리기
+            link: 엑셀 파일로 올리기
+            type: 은행명
+            file: 엑셀 파일
+            submit: 엑셀 파일 올리기
+        preview:
+            title: 미리보기
+            link: 엑셀 파일로 올리기
+            type: 은행명
+            file: 엑셀 파일
+            submit: 엑셀 파일 올리기
+        upload:
+            title: 엑셀로 올리기
+            link: 엑셀 파일로 올리기
+            type: 은행명
+            file: 엑셀 파일
+            submit: 엑셀 파일 올리기
+        new:
+            title: 이체 내역 올리기
+            link: 이체 내역 올리기
+        show:
+            title: 이체 내역
+            to_bank_transaction: 입출금 내역
+        edit:
+            title: 이체 내역 수정하기
     bonuses:
         new:
             title: 새로운 특별 상여금 입력
@@ -419,6 +497,51 @@ ko:
         edit:
             title: 거래처 수정
             picture: 사업자등록증
+    card_approved_sources:
+        index:
+            title: 카드별 승인내역
+            empty: 카드 승인내역이 없습니다
+        show:
+            title: 카드 승인내역
+            to_cardbill: 카드 영수증
+        excel:
+            title: 엑셀로 올리기
+            link: 엑셀 파일로 올리기
+            file: 엑셀 파일
+            submit: 미리보기
+        preview:
+            title: 엑셀로 올리기
+            link: 엑셀 파일로 올리기
+            file: 엑셀 파일
+            submit: 엑셀 파일 올리기
+        new:
+            title: 새로운 승인내역 올리기
+            link: 승인내역 올리기
+        edit:
+            title: 승인내역 수정하기
+        title: 카드승인내역
+    card_used_sources:
+        index:
+            title: 카드별 이용내역
+            empty: 카드 이용내역이 없습니다
+        show:
+            title: 카드 이용내역
+        excel:
+            title: 엑셀로 올리기
+            link: 엑셀 파일로 올리기
+            file: 엑셀 파일
+            submit: 미리보기
+        preview:
+            title: 엑셀로 올리기
+            link: 엑셀 파일로 올리기
+            file: 엑셀 파일
+            submit: 엑셀 파일 올리기
+        new:
+            title: 새로운 이용내역 올리기
+            link: 이용내역 올리기
+        edit:
+            title: 이용내역 수정하기
+        title: 신용카드 이용내역
     cardbills:
         new:
             title: 새로운 카드 영수증 입력
@@ -431,6 +554,7 @@ ko:
             title: "카드 영수증 목록"
         messages:
             create: "성공적으로 생성되었습니다."
+        title: 카드영수증 관리
     common:
         button:
             create: 만들기
@@ -493,6 +617,28 @@ ko:
         leave:
             link: 퇴근기록 생성
             title: 출퇴근 기록 관리
+    contacts:
+        index:
+            title: 주소록 리스트
+            empty: 주소록이 없습니다
+        show:
+            title: 주소록 상세정보
+        new:
+            title: 주소록 만들기
+        edit:
+            title: 주소록 수정하기
+        find:
+            title: 주소록 찾기
+        title: 연락처 관리
+    contact_address_tags:
+        new:
+            title: 새로운 주소 대상 만들기
+    contact_email_tags:
+        new:
+            title: 새로운 이메일 대상 만들기
+    contact_phone_number_tags:
+        new:
+            title: 새로운 전화번호 대상 만들기
     creditcards:
         index:
             title: 신용카드 목록
@@ -507,6 +653,7 @@ ko:
             link: 합계표 보기
             purchase: 매입처별 합계
             money: 합계
+        title: 신용카드 관리
         excel:
             title: 엑셀로 올리기
             link: 엑셀 파일로 올리기
@@ -519,7 +666,6 @@ ko:
             type: 내역명
             file: 엑셀 파일
             submit: 엑셀 파일 올리기
-
     documents:
         index:
             title: "문서 관리"
@@ -588,15 +734,12 @@ ko:
         edit:
             title: 특별상여금 수정
     payroll_categories:
-        index:
-            title: 급여구분
-        new:
-            title: 급여구분
         validate:
             payable_code_not_match: 지급항목에 잘못된 연결코드를 선택하였습니다.
             deductable_code_not_match: 공제항목에 잘못된 연결코드를 선택하였습니다.
             already_exists: 이미 존재하는 코드입니다.
         etc: 기타
+        title: 급여 구분 관리
         payable: 지급항목
         deductable: 공제항목
         basepay: 기본급
@@ -674,6 +817,7 @@ ko:
         purchase_bill: 매입 세금계산서
         sales_bill: 매출 세금계산서
         purchase_sales_bill: 매입/매출 세금계산서
+        title: 세금계산서 관리
     taxbill_items:
         new:
             title: 새로운 내역 추가
@@ -685,145 +829,6 @@ ko:
             title: 새로운 담당자 입력
         edit:
             title: 담당자 수정
-    vacations:
-        index:
-            title: 연차 정보
-            info: "할당 연차: %{total}일, 사용 연차: %{used}일, 잔여 연차: %{remain}일"
-            link: 연차 관리
-            approved: 승인완료
-            not_approved: 미승인
-            empty: 연차 내역이 없습니다
-        show:
-            link: 연차 관리
-        new:
-            title: 새로운 연차 할당하기
-            link: 연차 할당
-        edit:
-            title: 연차 수정하기
-        approve:
-            approve: 승인
-            cancel: 승인 취소
-    bank_accounts:
-        index:
-            title: 은행계좌 목록
-            empty: 은행계좌가 없습니다
-        new:
-            title: 새로운 은행계좌 만들기
-        edit:
-            title: 은행계좌 수정하기
-        total:
-            title: 입출금 합계표
-    bank_transactions:
-        index:
-            title: 입출금 내역
-            empty: 입출금 내역이 없습니다
-        show:
-            title: 입출금 내역
-            to_bank_transfer: 이체 내역
-        excel:
-            title: 엑셀로 올리기
-            link: 엑셀 파일로 올리기
-            type: 은행명
-            file: 엑셀 파일
-            submit: 미리보기
-        preview:
-            title: 미리보기
-            link: 엑셀 파일로 올리기
-            type: 은행명
-            file: 엑셀 파일
-            submit: 엑셀 파일 올리기
-        upload:
-            title: 엑셀로 올리기
-            link: 엑셀 파일로 올리기
-            type: 은행명
-            file: 엑셀 파일
-            submit: 엑셀 파일 올리기
-        new:
-            title: 입출금 내역 올리기
-            link: 입출금 내역 올리기
-        edit:
-            title: 입출금 내역 수정하기
-        total:
-            title: 입출금 합계표
-            link: 합계표 보기
-            in: 입금 합계
-            out: 출금 합계
-            list: 분기 목록
-            quarter: "%{year}년도 %{quarter} 분기"
-
-    bank_transfers:
-        index:
-            title: 이체 내역
-            empty: 이체 내역이 없습니다
-        excel:
-            title: 엑셀로 올리기
-            link: 엑셀 파일로 올리기
-            type: 은행명
-            file: 엑셀 파일
-            submit: 엑셀 파일 올리기
-        preview:
-            title: 미리보기
-            link: 엑셀 파일로 올리기
-            type: 은행명
-            file: 엑셀 파일
-            submit: 엑셀 파일 올리기
-        upload:
-            title: 엑셀로 올리기
-            link: 엑셀 파일로 올리기
-            type: 은행명
-            file: 엑셀 파일
-            submit: 엑셀 파일 올리기
-        new:
-            title: 이체 내역 올리기
-            link: 이체 내역 올리기
-        show:
-            title: 이체 내역
-            to_bank_transaction: 입출금 내역
-        edit:
-            title: 이체 내역 수정하기
-    card_used_sources:
-        index:
-            title: 카드별 이용내역
-            empty: 카드 이용내역이 없습니다
-        show:
-            title: 카드 이용내역
-        excel:
-            title: 엑셀로 올리기
-            link: 엑셀 파일로 올리기
-            file: 엑셀 파일
-            submit: 미리보기
-        preview:
-            title: 엑셀로 올리기
-            link: 엑셀 파일로 올리기
-            file: 엑셀 파일
-            submit: 엑셀 파일 올리기
-        new:
-            title: 새로운 이용내역 올리기
-            link: 이용내역 올리기
-        edit:
-            title: 이용내역 수정하기
-    card_approved_sources:
-        index:
-            title: 카드별 승인내역
-            empty: 카드 승인내역이 없습니다
-        show:
-            title: 카드 승인내역
-            to_cardbill: 카드 영수증
-        excel:
-            title: 엑셀로 올리기
-            link: 엑셀 파일로 올리기
-            file: 엑셀 파일
-            submit: 미리보기
-        preview:
-            title: 엑셀로 올리기
-            link: 엑셀 파일로 올리기
-            file: 엑셀 파일
-            submit: 엑셀 파일 올리기
-        new:
-            title: 새로운 승인내역 올리기
-            link: 승인내역 올리기
-        edit:
-            title: 승인내역 수정하기
     used_vacations:
         show:
             empty: 사용한 연차 내역이 없습니다
@@ -832,27 +837,7 @@ ko:
             link: 연차 사용하기
         edit:
             title: 연차 수정하기
-    contacts:
-        index:
-            title: 주소록 리스트
-            empty: 주소록이 없습니다
-        show:
-            title: 주소록 상세정보
-        new:
-            title: 주소록 만들기
-        edit:
-            title: 주소록 수정하기
-        find:
-            title: 주소록 찾기
-    contact_address_tags:
-        new:
-            title: 새로운 주소 대상 만들기
-    contact_email_tags:
-        new:
-            title: 새로운 이메일 대상 만들기
-    contact_phone_number_tags:
-        new:
-            title: 새로운 전화번호 대상 만들기
+        title: 연차 신청
     users:
         new:
             title: 새 사용자 계정 만들기
@@ -884,3 +869,22 @@ ko:
             password_confirm_wrong: 비밀번호와 비밀번호 확인이 일치하지 않습니다.
             successfully_changed: 성공적으로 변경하였습니다.
         error:
+    vacations:
+        index:
+            title: 연차 정보
+            info: "할당 연차: %{total}일, 사용 연차: %{used}일, 잔여 연차: %{remain}일"
+            link: 연차 관리
+            approved: 승인완료
+            not_approved: 미승인
+            empty: 연차 내역이 없습니다
+        show:
+            link: 연차 관리
+        new:
+            title: 새로운 연차 할당하기
+            link: 연차 할당
+        edit:
+            title: 연차 수정하기
+        approve:
+            approve: 승인
+            cancel: 승인 취소
+        title: "연차 관리"
