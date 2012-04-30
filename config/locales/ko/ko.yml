@@ -419,6 +419,50 @@ ko:
         edit:
             title: 거래처 수정
             picture: 사업자등록증
+    card_approved_sources:
+        index:
+            title: 카드별 승인내역
+            empty: 카드 승인내역이 없습니다
+        show:
+            title: 카드 승인내역
+            to_cardbill: 카드 영수증
+        excel:
+            title: 엑셀로 올리기
+            link: 엑셀 파일로 올리기
+            file: 엑셀 파일
+            submit: 미리보기
+        preview:
+            title: 엑셀로 올리기
+            link: 엑셀 파일로 올리기
+            file: 엑셀 파일
+            submit: 엑셀 파일 올리기
+        new:
+            title: 새로운 승인내역 올리기
+            link: 승인내역 올리기
+        edit:
+            title: 승인내역 수정하기
+        title: 카드승인내역
+    card_used_sources:
+        index:
+            title: 카드별 이용내역
+            empty: 카드 이용내역이 없습니다
+        show:
+            title: 카드 이용내역
+        excel:
+            title: 엑셀로 올리기
+            link: 엑셀 파일로 올리기
+            file: 엑셀 파일
+            submit: 미리보기
+        preview:
+            title: 엑셀로 올리기
+            link: 엑셀 파일로 올리기
+            file: 엑셀 파일
+            submit: 엑셀 파일 올리기
+        new:
+            title: 새로운 이용내역 올리기
+            link: 이용내역 올리기
+        edit:
+            title: 이용내역 수정하기
     cardbills:
         new:
             title: 새로운 카드 영수증 입력
@@ -431,6 +475,7 @@ ko:
             title: "카드 영수증 목록"
         messages:
             create: "성공적으로 생성되었습니다."
+        title: 카드영수증 관리
     common:
         button:
             create: 만들기
@@ -507,6 +552,7 @@ ko:
             link: 합계표 보기
             purchase: 매입처별 합계
             money: 합계
+        title: 신용카드 관리
     documents:
         index:
             title: "문서 관리"
@@ -768,49 +814,6 @@ ko:
             to_bank_transaction: 입출금 내역
         edit:
             title: 이체 내역 수정하기
-    card_used_sources:
-        index:
-            title: 카드별 이용내역
-            empty: 카드 이용내역이 없습니다
-        show:
-            title: 카드 이용내역
-        excel:
-            title: 엑셀로 올리기
-            link: 엑셀 파일로 올리기
-            file: 엑셀 파일
-            submit: 미리보기
-        preview:
-            title: 엑셀로 올리기
-            link: 엑셀 파일로 올리기
-            file: 엑셀 파일
-            submit: 엑셀 파일 올리기
-        new:
-            title: 새로운 이용내역 올리기
-            link: 이용내역 올리기
-        edit:
-            title: 이용내역 수정하기
-    card_approved_sources:
-        index:
-            title: 카드별 승인내역
-            empty: 카드 승인내역이 없습니다
-        show:
-            title: 카드 승인내역
-            to_cardbill: 카드 영수증
-        excel:
-            title: 엑셀로 올리기
-            link: 엑셀 파일로 올리기
-            file: 엑셀 파일
-            submit: 미리보기
-        preview:
-            title: 엑셀로 올리기
-            link: 엑셀 파일로 올리기
-            file: 엑셀 파일
-            submit: 엑셀 파일 올리기
-        new:
-            title: 새로운 승인내역 올리기
-            link: 승인내역 올리기
-        edit:
-            title: 승인내역 수정하기
     used_vacations:
         show:
             empty: 사용한 연차 내역이 없습니다
