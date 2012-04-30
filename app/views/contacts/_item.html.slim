@@ -1,19 +1,10 @@
 table
   tr
-    th= contact.class.human_attribute_name(:firstname)
-    td= contact.firstname
+    th= contact.class.human_attribute_name(:lastname)+contact.class.human_attribute_name(:firstname)
+    td= contact.lastname+contact.firstname
   tr
-    th= contact.class.human_attribute_name(:lastname)
-    td= contact.lastname
-  tr
-    th= contact.class.human_attribute_name(:company)
-    td= contact.company
-  tr
-    th= contact.class.human_attribute_name(:department)
-    td= contact.department
-  tr
-    th= contact.class.human_attribute_name(:position)
-    td= contact.position
+    th= "#{contact.class.human_attribute_name(:company)}-#{contact.class.human_attribute_name(:department)}-#{contact.class.human_attribute_name(:position)}"
+    td= "#{contact.company}-#{contact.department}-#{contact.position}"
   tr
     td
   - contact.emails.each do |email|
@@ -39,13 +30,7 @@ table
   - contact.addresses.each do |address|
     tr
       th= "주소(#{address.target})"
-      td
-        p= address.country
-        p= address.province
-        p= address.city
-        p= address.other1
-        p= address.other2
-        p= address.postal_code
+      td = "#{address.country} #{address.province} #{address.city} #{address.other1} #{address.other2} #{address.postal_code}"
       - if menu
         td
           = link_to t('common.link.edit'), [:edit, contact]
