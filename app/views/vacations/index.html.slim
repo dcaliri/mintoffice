@@ -8,6 +8,9 @@ h2 ...
 
 - unless vacations.empty?
     - vacations.each do |vacation|
+      - if @user.ingroup?(:admin) == false and vacation.current? == false
+        - next
+
       h3= "#{vacation.from} ~ #{vacation.to}"
 
       div align="right"

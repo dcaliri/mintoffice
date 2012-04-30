@@ -90,7 +90,7 @@ class Taxbill < ActiveRecord::Base
 
     def text_search(text)
       text = "%#{text || ""}%"
-      joins(:taxman).where('taxmen.fullname like ?', "")
+      joins(:taxman).where('taxmen.fullname like ?', text)
 #      joins(:taxman).merge(Taxman.where("fullname like ?", text))
     end
 
