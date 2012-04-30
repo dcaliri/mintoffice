@@ -734,15 +734,12 @@ ko:
         edit:
             title: 특별상여금 수정
     payroll_categories:
-        index:
-            title: 급여구분
-        new:
-            title: 급여구분
         validate:
             payable_code_not_match: 지급항목에 잘못된 연결코드를 선택하였습니다.
             deductable_code_not_match: 공제항목에 잘못된 연결코드를 선택하였습니다.
             already_exists: 이미 존재하는 코드입니다.
         etc: 기타
+        title: 급여 구분 관리
         payable: 지급항목
         deductable: 공제항목
         basepay: 기본급

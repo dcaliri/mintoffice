@@ -24,6 +24,11 @@
             <li><%= link_to t("users.index.title"), :controller => "users" %></li>
         <% end %>
       </ul>
+      <ul>
+        <% if @user.ingroup?(:admin) %>
+            <li><%= link_to t("payroll_categories.title"), :controller => "payroll_categories" %></li>
+        <% end %>
+      </ul>
     </td>
     <td style="text-align: left;" valign="top">
       <ul>
