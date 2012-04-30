@@ -23,6 +23,29 @@ class Cardbill < ActiveRecord::Base
     end
   end
 
+  def approved_mismatch
+    mismatch?(:totalamount) || mismatch?(:transdate)
+  end
+
+  def mismatch?(type)
+    result =  if type == :totalamount
+                totalamount != approved.money
+              elsif type == :transdate
+                transdate.between?(approved.used_at - 1.minute, approved.used_at + 1.minute) == false
+              end
+    result ? 'misnatch-approved-sources' : ''
+  end
+
+  def status
+    if approved == nil
+      "not-connected-to-approved-sources"
+    elsif approved_mismatch
+      "misnatch-approved-sources"
+    else
+      ""
+    end
+  end
+
   def self.search(query)
     query = "%#{query || ""}%"
     where('storename like ? OR storeaddr like ?', query, query)
