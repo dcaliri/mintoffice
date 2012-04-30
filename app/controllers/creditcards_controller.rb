@@ -5,6 +5,11 @@ class CreditcardsController < ApplicationController
     @collection = Creditcard.preview_stylesheet(params[:card_type], params[:upload])
   end
 
+  def upload
+    Creditcard.create_with_stylesheet(params[:card_type], params[:upload])
+    redirect_to :creditcards
+  end
+
   def index
     @creditcards = Creditcard.all
 
