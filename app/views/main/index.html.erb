@@ -10,7 +10,7 @@
     <th style="text-align: center;"><%= t(".document") %></th>
   </tr>
   <tr>
-    <td style="text-align: left; text-valign: top;">
+    <td style="text-align: left;" valign="top">
       <ul>
         <li><%= link_to t("hrinfos.index.title"), :controller => "hrinfos" %></li>
         <% if @user.permission.any? {|perm| perm.name == 'users'}  %>
@@ -23,7 +23,7 @@
         <% end %>
       </ul>
     </td>
-    <td style="text-align: left; text-valign: top;">
+    <td style="text-align: left;" valign="top">
       <ul>
         <% if @user.permission.any? {|perm| perm.name == 'pettycashes'}  %>
           <li><%= link_to t("pettycashes.index.title"), :controller => "pettycashes" %></li>
@@ -42,14 +42,14 @@
         <% end %>
       </ul>
     </td>
-    <td style="text-align: left; text-valign: top;">
+    <td style="text-align: left;" valign="top">
       <ul>
         <% if @user.permission.any? {|perm| perm.name == 'projects'}  %>
           <li><%= link_to t("projects.index.title"), :controller => "projects" %></li>
         <% end %>
       </ul>
     </td>
-    <td style="text-align: left; text-valign: top;">
+    <td style="text-align: left;" valign="top">
       <ul>
         <li><%= link_to t("documents.index.title"), :controller => "documents" %></li>
         <% if @user.permission.any? {|perm| perm.name == 'namecards'}  %>
