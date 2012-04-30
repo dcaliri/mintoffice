@@ -15,6 +15,19 @@ class Creditcard < ActiveRecord::Base
   validates_presence_of :cardholder
   validates_uniqueness_of :cardno
 
+  def save_with_history(user)
+    changes.each do |k,v|
+      change_histories.create!(
+        :fieldname => k,
+        :before_value => v[0].to_s,
+        :after_value => v[1].to_s,
+        :user => user
+      )
+#        :changable => self
+    end
+    save
+  end
+
   CARD_LIST = [:card_used_sources, :card_approved_sources]
   CARD_LIST_FOR_SELECT = [["이용내역", CARD_LIST[0]],["승인내역", CARD_LIST[1]]]
 
