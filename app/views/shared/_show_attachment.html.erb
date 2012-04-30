@@ -18,11 +18,8 @@
   <% end %>
         <% if @attachments %>
           <% 0.upto(@attachments.count - 1) do |i| %>
-            <% if i == params[:at].to_i %>
-              <u><%= (i+1) %></u>
-            <% else %>
-              <%= link_to (i+1).to_s, {:at => i, :attachment_id => @attachments[i].id}, :class => "move-attachment"  %>
-            <% end %>
+            <%= link_to (i+1).to_s, {:at => i}, :id => @attachments[i].id, :class => "move-attachment"  %>
+
           <% end %>
         <% end %>
       </center>
@@ -31,14 +28,12 @@
 <% content_for :javascript do %>
 <script type="text/javascript">
   $(function(){
-    // $('.move-attachment').click(function(e){
-    //   e.preventDefault();
-    //   var params = $(e.target).data('url').split('&');
-    //   var id = params[params.length - 1];
-    //   console.log(id)
-    //   var imageUrl = "<%= url_for(:controller => 'attachments', :action => 'picture', :id => 51, :w => "600", :h => "800") %>";
-    //   $('#attach img').attr('src', imageUrl);
-    // });
+    $('.move-attachment').click(function(e){
+      e.preventDefault();
+
+      var imageUrl = "/attachments/picture/" + e.target.id + "?h=800&amp;w=600";
+      $('#attach img').attr('src', imageUrl);
+    });
 
   });
 </script>
