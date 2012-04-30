@@ -14,7 +14,7 @@
 
 <div class="box">
 <div id="descr">
-<span style="float:right;">
+<span style="float:right;" class="<%= @cardbill.mismatch?(:transdate) %>">
   <%= Cardbill.human_attribute_name('transdate') %> : <%=h @cardbill.transdate.strftime("%Y.%m.%d %H:%M:%S %p") %>
 </span>
 <h3><%= Cardbill.human_attribute_name('totalamount') %>:<%= number_to_currency @cardbill.totalamount %></h3>
@@ -34,7 +34,7 @@
   </tr>
   <tr>
     <th align="right"><%= Cardbill.human_attribute_name('totalamount') %>:</th>
-    <td align="right"><%= number_to_currency @cardbill.totalamount %></td>
+    <td align="right" class="<%= @cardbill.mismatch?(:totalamount) %>"><%= number_to_currency @cardbill.totalamount %></td>
   </tr>
 </table>
 
