@@ -72,18 +72,26 @@ class Taxbill < ActiveRecord::Base
     end
 
     def group_by_name_anx_tax
-      all.group_by{|purchase| purchase.taxman.business_client.name }.map do |name, purchases|
+      all.group_by do |purchase|
+        if purchase.taxman and purchase.taxman.business_client
+          purchase.taxman.business_client.name
+        else
+          "기타"
+        end
+      end.map do |name, purchases|
         {name: name, tax: purchases.sum{|p| p.tax}}
       end
     end
 
     def search(params)
-      text_search(params[:query]).billtype(params[:billtype]).taxmen(params[:taxman_id])
+      billtype(params[:billtype]) || taxmen(params[:taxman_id])
+#      text_search(params[:query]) || billtype(params[:billtype]) || taxmen(params[:taxman_id])
     end
 
     def text_search(text)
       text = "%#{text || ""}%"
-      includes(:taxman).where('taxmen.fullname like ?', text)
+      joins(:taxman).where('taxmen.fullname like ?', "")
+#      joins(:taxman).merge(Taxman.where("fullname like ?", text))
     end
 
     def billtype(text)
