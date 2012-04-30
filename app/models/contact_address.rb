@@ -5,4 +5,13 @@ class ContactAddress < ActiveRecord::Base
   def info
     [country, province, city, other1, other2, postal_code].join(" ")
   end
+
+  def self.search(query)
+    where("country like ? OR
+          province like ? OR
+          city like ? OR
+          other1 like ? OR
+          other2 like ? OR
+          postal_code like ?", query, query, query, query, query, query)
+  end
 end

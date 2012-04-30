@@ -1,8 +1,6 @@
 #show_command
   = link_to t('card_used_sources.new.link'), [:new, creditcard, :card_used_source]
   = " | "
-  = link_to t('card_used_sources.excel.link'), [:excel, creditcard, :card_used_sources]
-  = " | "
   = link_to t('common.title.back'), creditcard
 
 h2= "#{creditcard.nickname}: #{creditcard.cardno}"
