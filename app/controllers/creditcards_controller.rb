@@ -1,6 +1,15 @@
 class CreditcardsController < ApplicationController
   # GET /creditcards
   # GET /creditcards.xml
+  def preview
+    @collection = Creditcard.preview_stylesheet(params[:card_type], params[:upload])
+  end
+
+  def upload
+    Creditcard.create_with_stylesheet(params[:card_type], params[:upload])
+    redirect_to :creditcards
+  end
+
   def index
     @creditcards = Creditcard.all
 
@@ -16,7 +25,7 @@ class CreditcardsController < ApplicationController
     @creditcard = Creditcard.find(params[:id])
     @attachments = Attachment.for_me(@creditcard, "seq ASC")
     at = params[:at] || "0"
-    
+
     unless @attachments.empty?
        if session[:attachments].nil?
          session[:attachments] = [@attachments[at.to_i].id]
@@ -24,7 +33,7 @@ class CreditcardsController < ApplicationController
          session[:attachments] << @attachments[at.to_i].id
        end
     end
-    
+
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @creditcard }
@@ -47,7 +56,7 @@ class CreditcardsController < ApplicationController
     @creditcard = Creditcard.find(params[:id])
     @attachments = Attachment.for_me(@creditcard, "seq ASC")
     at = params[:at] || "0"
-    
+
     unless @attachments.empty?
        if session[:attachments].nil?
          session[:attachments] = [@attachments[at.to_i].id]
@@ -55,7 +64,7 @@ class CreditcardsController < ApplicationController
          session[:attachments] << @attachments[at.to_i].id
        end
     end
-    
+
   end
 
   # POST /creditcards
@@ -92,7 +101,7 @@ class CreditcardsController < ApplicationController
             :changable => @creditcard)
         end
         @creditcard.save
-        
+
         Attachment.save_for(@creditcard,@user,params[:attachment])
         flash[:notice] = t("common.messages.updated", :model => Creditcard.model_name.human)
         format.html { redirect_to(@creditcard) }
