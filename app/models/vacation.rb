@@ -13,4 +13,8 @@ class Vacation < ActiveRecord::Base
   def self.latest
     order('id DESC')
   end
+
+  def current?
+    Time.zone.now.between?(from, to)
+  end
 end
