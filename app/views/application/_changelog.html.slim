@@ -1,0 +1,17 @@
+- if @user.ingroup? "admin"
+  h3= t(".changes")
+  - if !target.change_histories.blank?
+    ul
+      - for history in target.change_histories.all(:order => "updated_at DESC")
+        li
+          ="["
+          = history.updated_at.strftime("%Y.%m.%d %H:%M:%S %p")
+          ="] "
+          = target.class.human_attribute_name(history.fieldname)
+          = ": "
+          = history.before_value
+          == " &rarr; "
+          = history.after_value
+          = "("
+          = history.user.name
+          = ")"

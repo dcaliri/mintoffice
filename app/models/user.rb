@@ -23,6 +23,8 @@ class User < ActiveRecord::Base
   validates_confirmation_of :password, :if => Proc.new{|user| user.provider.blank? and user.uid.blank?}
   validate :password_non_blank, :if => Proc.new{|user| user.provider.blank? and user.uid.blank?}
 
+  cattr_accessor :current_user
+
   def self.find_or_create_with_omniauth!(auth)
 #    users = where(:provider => auth['provider'], :uid => auth['uid'])
     users = where(:gmail_account => auth['info']['email'])
