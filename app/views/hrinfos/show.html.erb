@@ -4,7 +4,7 @@
     <%= link_to t('hrinfos.retire.title'), :action => :retire, :id => @hrinfo %> |
   <% end %>
   <% if @user.ingroup?("admin") || @hrinfo.user == @user %>
-    <%= link_to t('payments.show.link'), payment_path(@hrinfo.user) %> |
+    <%= link_to t('payments.title'), payment_path(@hrinfo.user) %> |
     <%= link_to t('vacations.show.link'), [@hrinfo.user, :vacations] %> |
     <%= link_to t('common.title.edit'), edit_hrinfo_path(@hrinfo) %> |
   <% end %>

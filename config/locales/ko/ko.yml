@@ -710,17 +710,13 @@ ko:
         show:
             title: 명함 내용 보기
     payments:
-        index:
-            title: 연봉 관리
-        show:
-            title: 연봉 이력
-            link: 연봉 관리
         new:
             title: 새로운 특별상여금 입력
         yearly:
             title: 새로운 기본급 입력
         edit:
             title: 특별상여금 수정
+        title: 연봉관리
     payroll_categories:
         validate:
             payable_code_not_match: 지급항목에 잘못된 연결코드를 선택하였습니다.
