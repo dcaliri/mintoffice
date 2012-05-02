@@ -83,8 +83,8 @@ class Creditcard < ActiveRecord::Base
   class << self
 
     def used_source_per_period(query)
-      collection = CardUsedSource.order(query)
-      if collection.empty? || collection.first.approved_at == nil
+      collection = CardUsedSource.where('approved_at IS NOT NULL').order(query)
+      if collection.empty?
         Time.zone.now
       else
         collection.first.approved_at
