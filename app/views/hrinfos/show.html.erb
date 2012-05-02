@@ -2,6 +2,7 @@
 <div id="show_command">
   <% if @user.ingroup?("admin") && ! @hrinfo.retired_on %>
     <%= link_to t('hrinfos.retire.title'), :action => :retire, :id => @hrinfo %> |
+    <%= link_to t('common.title.edit'), edit_hrinfo_path(@hrinfo) %> |
   <% end %>
   <%= link_to t('common.title.back'), hrinfos_path %>
 </div>
@@ -60,8 +61,6 @@
       <% if @user.ingroup?("admin") || @hrinfo.user == @user %>
         <li><%= link_to t('payments.title'), payment_path(@hrinfo.user) %></li>
         <li><%= link_to t('vacations.show.link'), [@hrinfo.user, :vacations] %></li>
-        <li><%= link_to t('common.title.edit'), edit_hrinfo_path(@hrinfo) %></li>
-        
       <% end %>
     </ul>
 <% end %>
