@@ -2,7 +2,8 @@ Mintoffice::Application.routes.draw do
   namespace :api do
     resources :commutes do
       collection do
-        post 'go', :action => 'go!'
+        post 'go'
+        post 'leave'
       end
     end
   end
