@@ -84,15 +84,15 @@ class Taxbill < ActiveRecord::Base
     end
 
     def search(params)
-      text_search(params[:query]) || billtype(params[:billtype]) || taxmen(params[:taxman_id])
+      text_search(params[:query]).search_billtype(params[:billtype]).search_taxmen(params[:taxman_id])
     end
 
     def text_search(text)
       text = "%#{text || ""}%"
-      joins(:taxman => :contact).merge(Contact.search_by_name(text))#
+      joins(:taxman => :contact).merge(Contact.search_by_name(text))
     end
 
-    def billtype(text)
+    def search_billtype(text)
       if text == "all" or text == nil
         where("")
       else
@@ -100,7 +100,7 @@ class Taxbill < ActiveRecord::Base
       end
     end
 
-    def taxmen(text)
+    def search_taxmen(text)
       if text == "0" or text == nil
         where("")
       else
