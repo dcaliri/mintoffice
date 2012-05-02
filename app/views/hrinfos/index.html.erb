@@ -24,7 +24,6 @@ end
     <th><%= Hrinfo.human_attribute_name('fullname')%></th>
     <th><%= Hrinfo.human_attribute_name('position')%></th>
     <th><%= Hrinfo.human_attribute_name('username')%></th>
-    <th><%= Hrinfo.human_attribute_name('email')%></th>
     <th><%= Hrinfo.human_attribute_name('joined_on')%></th>
   </tr>
 
@@ -38,7 +37,6 @@ end
     <% else %>
       <td></td>
     <% end %>
-    <td><a href="mailto:<%= hrinfo.email %>"><%=h hrinfo.email %></a></td>
     <td><%=h hrinfo.joined_on %></td>
     <!-- <td><%= link_to 'Show', hrinfo %></td>
     <td><%= link_to 'Edit', edit_hrinfo_path(hrinfo) %></td>
