@@ -641,14 +641,6 @@ ko:
         new:
             title: 새로운 전화번호 대상 만들기
     creditcards:
-        index:
-            title: 신용카드 목록
-        show:
-            title: 신용카드 상세 내역
-        edit:
-            title: 신용카드 정보 수정
-        new:
-            title: 새로운 신용카드 등록
         total:
             title: 신용카드 사용금액 합계표
             link: 합계표 보기
