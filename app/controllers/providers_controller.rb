@@ -6,9 +6,9 @@ class ProvidersController < ApplicationController
     user = User.find_or_create_with_omniauth!(auth)
     if user
       session[:user_id] = user.id
-      redirect_to :root, :notice => "Successfully Signed in!"
+      redirect_to :root, :notice => I18n.t("users.login.successfully_signed_in")
     else
-      redirect_to users_login_path(), :notice => "Not Registered"
+      redirect_to users_login_path(), :notice => I18n.t("users.login.not_registered")
     end
   end
 end

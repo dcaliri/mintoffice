@@ -1,4 +1,13 @@
 Mintoffice::Application.routes.draw do
+  namespace :api do
+    resources :commutes do
+      collection do
+        post 'go'
+        post 'leave'
+      end
+    end
+  end
+
   resources :creditcards do
     collection do
       get 'total'
