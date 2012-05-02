@@ -1,7 +1,7 @@
 table
   tr
-    th= contact.class.human_attribute_name(:lastname)+contact.class.human_attribute_name(:firstname)
-    td= contact.lastname+contact.firstname
+    th= contact.class.human_attribute_name(:lastname) + contact.class.human_attribute_name(:firstname)
+    td= contact.name
   tr
     th= "#{contact.class.human_attribute_name(:company)}-#{contact.class.human_attribute_name(:department)}-#{contact.class.human_attribute_name(:position)}"
     td= "#{contact.company}-#{contact.department}-#{contact.position}"

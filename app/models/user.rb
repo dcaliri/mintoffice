@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
   scope :nohrinfo, :conditions =>['id not in (select user_id from hrinfos)']
 
   validates_presence_of :name
-  validates_uniqueness_of :name
+  validates_uniqueness_of :name, :gmail_account
 
   attr_accessor :password_confirmation
   validates_confirmation_of :password, :if => Proc.new{|user| user.provider.blank? and user.uid.blank?}
