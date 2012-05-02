@@ -88,6 +88,16 @@ class User < ActiveRecord::Base
     end
   end
 
+
+  def self.search(query)
+    query = "%#{query || ""}%"
+    where('name like ?', query)
+  end
+
+  def self.enabled
+    where("name NOT LIKE '[X] %'")
+  end
+
 private
   def password_non_blank
     if hashed_password.blank?
@@ -102,10 +112,5 @@ private
 
   def create_new_salt
     self.salt = self.object_id.to_s + rand.to_s
-  end
-
-  def self.search(query)
-    query = "%#{query || ""}%"
-    where('name like ?', query)
   end
 end
