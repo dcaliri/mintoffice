@@ -1,21 +1,16 @@
-- title t('.title')
+#show_command
+  = link_to t('common.title.back'), :root
 
-- content_for :search do
-  = form_tag :payments, :method => :get do
-    == "#{t('common.title.search')} : #{text_field_tag 'q', params[:q]}"
+h2= t('common.title.list')
 
-  #show_command
-    = link_to t('common.title.back'), :root
+table#list-table
+  tr
+    th= User.human_attribute_name("name")
+    - @users.each do |user|
+      tr.selectable onclick="location.href='#{payment_path(user)}'"
+        td=h user.name
 
-  h2= t('common.title.list')
-  table#list-table
-    tr
-      th= User.human_attribute_name("name")
-      - users.each do |user|
-        tr.selectable onclick="location.href='#{payment_path(user)}'"
-          td=h user.name
+br
 
-  br
-
-  center
-    = will_paginate users
+center
+  = will_paginate @users

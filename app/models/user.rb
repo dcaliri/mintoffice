@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
   scope :nohrinfo, :conditions =>['id not in (select user_id from hrinfos)']
 
   validates_presence_of :name
-  validates_uniqueness_of :name
+  validates_uniqueness_of :name, :gmail_account
 
   attr_accessor :password_confirmation
   validates_confirmation_of :password, :if => Proc.new{|user| user.provider.blank? and user.uid.blank?}
@@ -88,6 +88,16 @@ class User < ActiveRecord::Base
     end
   end
 
+
+  def self.search(query)
+    query = "%#{query || ""}%"
+    where('name like ?', query)
+  end
+
+  def self.enabled
+    where("name NOT LIKE '[X] %'")
+  end
+
 private
   def password_non_blank
     if hashed_password.blank?
@@ -102,10 +112,5 @@ private
 
   def create_new_salt
     self.salt = self.object_id.to_s + rand.to_s
-  end
-
-  def self.search(query)
-    query = "%#{query || ""}%"
-    where('name like ?', query)
   end
 end

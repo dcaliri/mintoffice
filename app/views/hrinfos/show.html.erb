@@ -2,10 +2,6 @@
 <div id="show_command">
   <% if @user.ingroup?("admin") && ! @hrinfo.retired_on %>
     <%= link_to t('hrinfos.retire.title'), :action => :retire, :id => @hrinfo %> |
-  <% end %>
-  <% if @user.ingroup?("admin") || @hrinfo.user == @user %>
-    <%= link_to t('payments.show.link'), payment_path(@hrinfo.user) %> |
-    <%= link_to t('vacations.show.link'), [@hrinfo.user, :vacations] %> |
     <%= link_to t('common.title.edit'), edit_hrinfo_path(@hrinfo) %> |
   <% end %>
   <%= link_to t('common.title.back'), hrinfos_path %>
@@ -17,17 +13,24 @@
       <tr><th align="right"><%= Hrinfo.human_attribute_name('companyno') %>:</th><td><%= @hrinfo.companyno %></td></tr>
       <tr><th align="right"><%= Hrinfo.human_attribute_name('position') %>:</th><td><%= @hrinfo.position %></td></tr>
       <tr><th align="right"><%= Hrinfo.human_attribute_name('username') %>:</th><td><%= @hrinfo.user.name %></td></tr>
-      <tr><th align="right"><%= Hrinfo.human_attribute_name('mphone') %>:</th><td><%= @hrinfo.mphone %></td></tr>
-      <tr><th align="right"><%= Hrinfo.human_attribute_name('email') %>:</th><td><a href="mailto:<%= @hrinfo.email %>"><%= @hrinfo.email %><a href="mailto:"></td></tr>
 <% if @user.ingroup?("admin") || @hrinfo.user == @user %>
       <tr><th align="right"><%= Hrinfo.human_attribute_name('juminno') %>:</th><td><%= @hrinfo.juminno %></td></tr>
-      <tr><th align="right"><%= Hrinfo.human_attribute_name('address') %>:</th><td><%= @hrinfo.address %></td></tr>
 <% end %>
       <tr><th align="right"><%= Hrinfo.human_attribute_name('joined_on') %>:</th><td><%= @hrinfo.joined_on %></td></tr>
 <% if @hrinfo.retired_on %>
       <tr><th align="right"><%= Hrinfo.human_attribute_name('retired_on') %>:</th><td><%= @hrinfo.retired_on %></td></tr>
 <% end %>
     </table>
+    <div id="show_command">
+      <%= link_to "주소록 찾기", find_contacts_path(target_class: @hrinfo.class, target: @hrinfo, query: @hrinfo.fullname), :class => 'popup' %>
+    </div>
+    
+    <h3><%= t("contacts.show.title")%></h3>
+    <ul>
+      <% if @hrinfo.contact %>
+        <%= render 'contacts/item', contact: @hrinfo.contact, menu: false %>
+      <% end %>
+    </ul>
 <% if @user.ingroup?("admin") || @hrinfo.user == @user %>
 <% if @user.ingroup? "admin" %>
     <div id="show_command">
@@ -53,19 +56,11 @@
         <% end %>
       <% end %>
     </ul>
-    <h3>관련 직업</h3>
+    <h3><%= t(".related_admin_actions")%></h3>
     <ul>
       <% if @user.ingroup?("admin") || @hrinfo.user == @user %>
-        <li><%= link_to "연봉 관리", payment_path(@user) %></li>
-      <% end %>
-    </ul>
-    <div id="show_command">
-      <%= link_to "주소록 찾기", find_contacts_path(target_class: @hrinfo.class, target: @hrinfo, query: @hrinfo.fullname), :class => 'popup' %>
-    </div>
-    <h3>주소록</h3>
-    <ul>
-      <% if @hrinfo.contact %>
-        <%= render 'contacts/item', contact: @hrinfo.contact, menu: false %>
+        <li><%= link_to t('payments.title'), payment_path(@hrinfo.user) %></li>
+        <li><%= link_to t('vacations.show.link'), [@hrinfo.user, :vacations] %></li>
       <% end %>
     </ul>
 <% end %>

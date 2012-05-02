@@ -98,30 +98,15 @@ ko:
     activerecord:
         models:
             attachment: 첨부파일
-            cardbill: "카드 영수증"
-            creditcard: 신용카드
-            document: 문서
-            namecard: 명함정보
-            pettycash: 소액현금
-            project: 프로젝트
-            hrinfo: 인사정보
-            required_tag: 필수 태그 항목
-            business_client: 거래처
-            taxman: 담당자
-            taxbill: 세금계산서
-            taxbill_item: 항목
-            payroll_category: 급여구분
-            pay_schedule: 기본급
-            bonus: 상여금
-            payment: 연봉
-            commute: 출퇴근
-            vacation: 연차
-            used_vacation: 사용한 연차
             bank_account: 은행계좌
             bank_transaction: 입출금 내역
             bank_transfer: 이체 내역
-            card_used_source: 카드 이용내역
+            bonus: 상여금
+            business_client: 거래처
             card_approved_source: 카드 승인내역
+            card_used_source: 카드 이용내역
+            cardbill: "카드 영수증"
+            commute: 출퇴근
             contact: 주소록
             contact_email: 이메일
             contact_phone_number: 전화번호
@@ -129,6 +114,21 @@ ko:
             contact_email_tag: 이메일 대상
             contact_phone_number_tag: 전화번호 대상
             contact_address_tag: 주소 대상
+            creditcard: 신용카드
+            document: 문서
+            hrinfo: 인사정보
+            namecard: 명함정보
+            pay_schedule: 기본급
+            payroll_category: 급여구분
+            payment: 연봉
+            pettycash: 소액현금
+            project: 프로젝트
+            required_tag: 필수 태그 항목
+            taxman: 담당자
+            taxbill: 세금계산서
+            taxbill_item: 항목
+            used_vacation: 사용한 연차
+            vacation: 연차
         attributes:
             attachment:
                 comments: 주석
@@ -350,8 +350,9 @@ ko:
                 status: 매입상태
                 will_be_paied_at: 결제예정일
             contact:
-                firstname: 성
-                lastname: 이름
+                name: 이름
+                firstname: 이름
+                lastname: 성
                 company: 회사
                 department: 부서
                 position: 직위
@@ -412,13 +413,15 @@ ko:
             title: 은행계좌 수정하기
         total:
             title: 입출금 합계표
+            date: 날짜
+            inmoney: 입금액
+            outmoney: 출금액
         title: 은행계좌 관리
     bank_transactions:
+        title: 입출금 내역
         index:
-            title: 입출금 내역
             empty: 입출금 내역이 없습니다
         show:
-            title: 입출금 내역
             to_bank_transfer: 이체 내역
         excel:
             title: 엑셀로 올리기
@@ -439,10 +442,7 @@ ko:
             file: 엑셀 파일
             submit: 엑셀 파일 올리기
         new:
-            title: 입출금 내역 올리기
             link: 입출금 내역 올리기
-        edit:
-            title: 입출금 내역 수정하기
         total:
             title: 입출금 합계표
             link: 합계표 보기
@@ -451,8 +451,8 @@ ko:
             list: 분기 목록
             quarter: "%{year}년도 %{quarter} 분기"
     bank_transfers:
+        title: 이체 내역
         index:
-            title: 이체 내역
             empty: 이체 내역이 없습니다
         excel:
             title: 엑셀로 올리기
@@ -473,13 +473,9 @@ ko:
             file: 엑셀 파일
             submit: 엑셀 파일 올리기
         new:
-            title: 이체 내역 올리기
             link: 이체 내역 올리기
         show:
-            title: 이체 내역
             to_bank_transaction: 입출금 내역
-        edit:
-            title: 이체 내역 수정하기
     bonuses:
         new:
             title: 새로운 특별 상여금 입력
@@ -631,23 +627,12 @@ ko:
             title: 주소록 찾기
         title: 연락처 관리
     contact_address_tags:
-        new:
-            title: 새로운 주소 대상 만들기
+        title: 새로운 주소 대상 만들기
     contact_email_tags:
-        new:
-            title: 새로운 이메일 대상 만들기
+        title: 새로운 이메일 대상 만들기
     contact_phone_number_tags:
-        new:
-            title: 새로운 전화번호 대상 만들기
+        title: 새로운 전화번호 대상 만들기
     creditcards:
-        index:
-            title: 신용카드 목록
-        show:
-            title: 신용카드 상세 내역
-        edit:
-            title: 신용카드 정보 수정
-        new:
-            title: 새로운 신용카드 등록
         total:
             title: 신용카드 사용금액 합계표
             link: 합계표 보기
@@ -688,6 +673,7 @@ ko:
         show:
             title: 인사정보
             related_documents: 관련 문서
+            related_admin_actions: 관련 관리 작업
             changes: 변경사항
             download: 다운로드
         retire:
@@ -701,6 +687,7 @@ ko:
             title: 인사정보 수정
         error:
             juminno_invalid: "는 '111111-1111111' 형식으로 써 주세요."
+        title: 인사정보관리
     main:
         index:
             human_resources: 인사관리
@@ -722,17 +709,13 @@ ko:
         show:
             title: 명함 내용 보기
     payments:
-        index:
-            title: 연봉 관리
-        show:
-            title: 연봉 이력
-            link: 연봉 관리
         new:
             title: 새로운 특별상여금 입력
         yearly:
             title: 새로운 기본급 입력
         edit:
             title: 특별상여금 수정
+        title: 연봉관리
     payroll_categories:
         validate:
             payable_code_not_match: 지급항목에 잘못된 연결코드를 선택하였습니다.
@@ -879,6 +862,7 @@ ko:
             empty: 연차 내역이 없습니다
         show:
             link: 연차 관리
+            info: "할당 연차: %{total}일, 사용 연차: %{used}일, 잔여 연차: %{remain}일"
         new:
             title: 새로운 연차 할당하기
             link: 연차 할당

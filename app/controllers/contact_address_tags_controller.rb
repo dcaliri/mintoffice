@@ -8,6 +8,8 @@ class ContactAddressTagsController < ApplicationController
     @contact_tag = ContactAddressTag.new(params[:contact_address_tag])
     @contact_tag.save!
     redirect_to session[:return_to]
+  rescue ActiveRecord::RecordInvalid
+    render 'new'
   end
 
   private

@@ -31,8 +31,8 @@ class MigrateHrinfoTaxmenContentsToContacts < ActiveRecord::Migration
       contact.target_type = "Taxman"
       contact.target_id = taxman.id
       if taxman.fullname
-        contact.firstname = taxman.fullname[0]
-        contact.lastname = taxman.fullname[1..-1]
+        contact.firstname = taxman.fullname[1..-1]
+        contact.lastname = taxman.fullname[0]
       end
       contact.emails.build(email: taxman.email)
       contact.phone_numbers.build(number: taxman.phonenumber)

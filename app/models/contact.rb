@@ -47,7 +47,7 @@ class Contact < ActiveRecord::Base
 
   def name
     if firstname and lastname
-      firstname + lastname
+      lastname + " " + firstname
     else
       ""
     end
