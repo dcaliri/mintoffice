@@ -20,7 +20,6 @@ class ContactsController < ApplicationController
 
     if params[:parent_class]
       collections = @target.send(params[:target_class].downcase.pluralize)
-      logger.info "target = #{params[:target]}, #{params[:target].empty?}, #{params[:target].blank?}"
       unless params[:target].blank?
         @target = collections.find(params[:target])
       else
