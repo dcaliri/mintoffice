@@ -17,11 +17,8 @@
       <tr><th align="right"><%= Hrinfo.human_attribute_name('companyno') %>:</th><td><%= @hrinfo.companyno %></td></tr>
       <tr><th align="right"><%= Hrinfo.human_attribute_name('position') %>:</th><td><%= @hrinfo.position %></td></tr>
       <tr><th align="right"><%= Hrinfo.human_attribute_name('username') %>:</th><td><%= @hrinfo.user.name %></td></tr>
-      <tr><th align="right"><%= Hrinfo.human_attribute_name('mphone') %>:</th><td><%= @hrinfo.mphone %></td></tr>
-      <tr><th align="right"><%= Hrinfo.human_attribute_name('email') %>:</th><td><a href="mailto:<%= @hrinfo.email %>"><%= @hrinfo.email %><a href="mailto:"></td></tr>
 <% if @user.ingroup?("admin") || @hrinfo.user == @user %>
       <tr><th align="right"><%= Hrinfo.human_attribute_name('juminno') %>:</th><td><%= @hrinfo.juminno %></td></tr>
-      <tr><th align="right"><%= Hrinfo.human_attribute_name('address') %>:</th><td><%= @hrinfo.address %></td></tr>
 <% end %>
       <tr><th align="right"><%= Hrinfo.human_attribute_name('joined_on') %>:</th><td><%= @hrinfo.joined_on %></td></tr>
 <% if @hrinfo.retired_on %>
