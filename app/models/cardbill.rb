@@ -10,6 +10,12 @@ class Cardbill < ActiveRecord::Base
   validates_numericality_of :servicecharge
   validates_numericality_of :vat
 
+  before_save :strip_approve_no
+  def strip_approve_no
+    approveno.strip!
+  end
+
+
   def used
     collection = CardUsedSource.where(approve_no: approveno)
     return collection.first unless collection.empty?
