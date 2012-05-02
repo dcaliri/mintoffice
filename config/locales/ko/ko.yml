@@ -413,6 +413,9 @@ ko:
             title: 은행계좌 수정하기
         total:
             title: 입출금 합계표
+            date: 날짜
+            inmoney: 입금액
+            outmoney: 출금액
         title: 은행계좌 관리
     bank_transactions:
         index:
