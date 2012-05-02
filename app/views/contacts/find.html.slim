@@ -14,16 +14,15 @@ h2 ..
 - unless @contacts.empty?
   table#list-table
     tr
+      th= contact.class.human_attribute_name(:name)
       th= contact.class.human_attribute_name(:firstname)
-      th= contact.class.human_attribute_name(:lastname)
       th= contact.class.human_attribute_name(:company)
       th= contact.class.human_attribute_name(:department)
       th= contact.class.human_attribute_name(:position)
       th= t('common.menu')
     - @contacts.each do |contact|
       tr.selectable
-        td= contact.firstname
-        td= contact.lastname
+        td= contact.name
         td= contact.company
         td= contact.department
         td= contact.position
