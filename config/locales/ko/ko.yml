@@ -98,30 +98,15 @@ ko:
     activerecord:
         models:
             attachment: 첨부파일
-            cardbill: "카드 영수증"
-            creditcard: 신용카드
-            document: 문서
-            namecard: 명함정보
-            pettycash: 소액현금
-            project: 프로젝트
-            hrinfo: 인사정보
-            required_tag: 필수 태그 항목
-            business_client: 거래처
-            taxman: 담당자
-            taxbill: 세금계산서
-            taxbill_item: 항목
-            payroll_category: 급여구분
-            pay_schedule: 기본급
-            bonus: 상여금
-            payment: 연봉
-            commute: 출퇴근
-            vacation: 연차
-            used_vacation: 사용한 연차
             bank_account: 은행계좌
             bank_transaction: 입출금 내역
             bank_transfer: 이체 내역
-            card_used_source: 카드 이용내역
+            bonus: 상여금
+            business_client: 거래처
             card_approved_source: 카드 승인내역
+            card_used_source: 카드 이용내역
+            cardbill: "카드 영수증"
+            commute: 출퇴근
             contact: 주소록
             contact_email: 이메일
             contact_phone_number: 전화번호
@@ -129,6 +114,21 @@ ko:
             contact_email_tag: 이메일 대상
             contact_phone_number_tag: 전화번호 대상
             contact_address_tag: 주소 대상
+            creditcard: 신용카드
+            document: 문서
+            hrinfo: 인사정보
+            namecard: 명함정보
+            pay_schedule: 기본급
+            payroll_category: 급여구분
+            payment: 연봉
+            pettycash: 소액현금
+            project: 프로젝트
+            required_tag: 필수 태그 항목
+            taxman: 담당자
+            taxbill: 세금계산서
+            taxbill_item: 항목
+            used_vacation: 사용한 연차
+            vacation: 연차
         attributes:
             attachment:
                 comments: 주석
@@ -627,13 +627,11 @@ ko:
             title: 주소록 찾기
         title: 연락처 관리
     contact_address_tags:
-        new:
-            title: 새로운 주소 대상 만들기
+        title: 새로운 주소 대상 만들기
     contact_email_tags:
         title: 새로운 이메일 대상 만들기
     contact_phone_number_tags:
-        new:
-            title: 새로운 전화번호 대상 만들기
+        title: 새로운 전화번호 대상 만들기
     creditcards:
         total:
             title: 신용카드 사용금액 합계표
