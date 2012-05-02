@@ -94,7 +94,7 @@ class CardUsedSource < ActiveRecord::Base
     end
 
     def total_price
-      sum{|used| used.money_krw }
+      sum{|used| used.money_krw ? used.money_krw : 0 }
     end
   end
 end

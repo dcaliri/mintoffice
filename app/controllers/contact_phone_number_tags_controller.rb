@@ -8,5 +8,7 @@ class ContactPhoneNumberTagsController < ApplicationController
     @contact_tag = ContactPhoneNumberTag.new(params[:contact_phone_number_tag])
     @contact_tag.save!
     redirect_to session[:return_to]
+  rescue ActiveRecord::RecordInvalid
+    render 'new'
   end
 end

@@ -6,11 +6,11 @@ h2= t("common.title.#{action_name}")
 = form_for contact, html: {multipart: true} do |f|
   .box
     p
-      = f.label :firstname
-      = f.text_field :firstname
-    p
       = f.label :lastname
       = f.text_field :lastname
+    p
+      = f.label :firstname
+      = f.text_field :firstname
     p
       = f.label :company
       = f.text_field :company

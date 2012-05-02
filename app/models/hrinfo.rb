@@ -47,6 +47,6 @@ class Hrinfo < ActiveRecord::Base
 
   def self.search(text)
     text = "%#{text || ""}%"
-    joins(:user).where('users.name LIKE ? OR hrinfos.email LIKE ? OR users.notify_email LIKE ? OR firstname like ? OR lastname LIKE ? OR address LIKE ? OR position LIKE ? OR mphone LIKE ?', text, text, text, text, text, text, text, text)
+    joins(:user).where('users.name LIKE ? OR users.notify_email LIKE ? OR hrinfos.firstname like ? OR hrinfos.lastname LIKE ? OR hrinfos.position LIKE ?', text, text, text, text, text)
   end
 end

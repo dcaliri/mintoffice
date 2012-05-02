@@ -1,11 +1,12 @@
-<% title t(".title") %>
 <div id="show_command">
   <%= link_to t("creditcards.total.link"), [:total, :creditcards] %>
   |
   <%= link_to t("creditcards.excel.link"), [:excel, :creditcards] %>
   |
-  <%= link_to t("creditcards.new.title"), new_creditcard_path %>
+  <%= link_to t("common.title.new"), new_creditcard_path %>
 </div>
+<h2><%= t("common.title.list")%></h2>
+
 <table id="list-table">
   <tr>
     <th><%= Creditcard.human_attribute_name('cardno') %></th>
