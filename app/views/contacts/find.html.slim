@@ -19,15 +19,12 @@ h2 ..
       th= contact.class.human_attribute_name(:company)
       th= contact.class.human_attribute_name(:department)
       th= contact.class.human_attribute_name(:position)
-      th= t('common.menu')
     - @contacts.each do |contact|
-      tr.selectable
+      tr.selectable onclick="location.href='#{select_contact_path(contact, :target_class => params[:target_class], :target => params[:target], :parent_class => params[:parent_class], :parent => params[:parent])}'"
         td= contact.name
         td= contact.company
         td= contact.department
         td= contact.position
-        td
-          = link_to "선택하기", select_contact_path(contact, :target_class => params[:target_class], :target => params[:target], :parent_class => params[:parent_class], :parent => params[:parent]), :method => :put
 - else
   h4= t('.empty')
 

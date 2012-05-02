@@ -20,14 +20,12 @@ h2 ..
       th= contact.class.human_attribute_name(:position)
       th= t('common.menu')
     - @contacts.each do |address|
-      tr.selectable
+      tr.selectable onclick="location.href='#{contact_path(address)}'"
         td= address.name
         td= address.company
         td= address.department
         td= address.position
         td
-          = link_to t('common.link.show'), address
-          = " | "
           = link_to t('common.link.edit'), [:edit, address]
           = " | "
           = link_to t('common.link.destroy'), address, :method => :delete, :confirm => "Are you sure?"
