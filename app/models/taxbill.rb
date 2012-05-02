@@ -84,14 +84,12 @@ class Taxbill < ActiveRecord::Base
     end
 
     def search(params)
-      billtype(params[:billtype]) || taxmen(params[:taxman_id])
-#      text_search(params[:query]) || billtype(params[:billtype]) || taxmen(params[:taxman_id])
+      text_search(params[:query]) || billtype(params[:billtype]) || taxmen(params[:taxman_id])
     end
 
     def text_search(text)
       text = "%#{text || ""}%"
-      joins(:taxman).where('taxmen.fullname like ?', text)
-#      joins(:taxman).merge(Taxman.where("fullname like ?", text))
+      joins(:taxman => :contact).merge(Contact.search_by_name(text))#
     end
 
     def billtype(text)
