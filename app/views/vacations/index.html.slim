@@ -1,64 +1,17 @@
+- title t('.title')
+
 #show_command
-  - if @user.ingroup?("admin")
-    = link_to t('vacations.new.link'), [:new, user, :vacation]
-    = " | "
-  = link_to t('hrinfos.show.title'), hrinfo_path(user.hrinfo)
+  = link_to t('common.title.back'), :root
 
-h2 ...
+h2= t('common.title.list')
+table#list-table
+  tr
+    th= User.human_attribute_name("name")
+    - users.each do |user|
+      tr.selectable onclick="location.href='#{vacation_path(user)}'"
+        td=h user.name
 
-- unless vacations.empty?
-    - vacations.each do |vacation|
-      - if @user.ingroup?(:admin) == false and vacation.current? == false
-        - next
+br
 
-      h3= "#{vacation.from} ~ #{vacation.to}"
-
-      div align="right"
-        p= t('.info', total: vacation.period, used: vacation.used.total, remain: vacation.remain)
-        = link_to t('used_vacations.new.link'), [:new, vacation, :used_vacation]
-        - if @user.ingroup?("admin")
-          = " | "
-          = link_to t('common.link.edit'), [:edit, user, vacation]
-          = " | "
-          = link_to t('common.link.destroy'), [user, vacation], :method => :delete, :confirm => "Are you sure?"
-      - unless vacation.used.empty?
-        table#list-table
-          tr
-            th= Vacation.human_attribute_name(:from)
-            th= Vacation.human_attribute_name(:to)
-            th= Vacation.human_attribute_name(:period)
-            th= Vacation.human_attribute_name(:note)
-            th= Vacation.human_attribute_name(:approve)
-            - if @user.ingroup?("admin")
-              th= t('common.menu')
-          - vacation.used.each do |used|
-            tr
-              td
-                = used.from
-              td
-                = used.to
-              td
-                = "#{used.period} #{t('datetime.prompts.day')}"
-              td
-                = used.note
-              td
-                = used.approve ? t(".approved") : t(".not_approved")
-                - if @user.ingroup?("admin")
-                  = " ("
-                  - if used.approve
-                    = link_to t('vacations.approve.cancel'), vacation_used_vacation_approve_path(vacation, used, approve: false), :method => :put
-                  - else
-                    = link_to t('vacations.approve.approve'), vacation_used_vacation_approve_path(vacation, used, approve: true), :method => :put
-                  = ")"
-
-              - if @user.ingroup?("admin")
-                td
-                  = link_to t('common.link.edit'), [:edit, vacation, used]
-                  = " | "
-                  = link_to t('common.link.destroy'), [vacation, used], :method => :delete, :confirm => "Are you sure?"
-        br
-      - else
-        h4= t('used_vacations.show.empty')
-
-- else
-  h4= t('.empty')
+center
+  = will_paginate users

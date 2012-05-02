@@ -2,6 +2,7 @@ class VacationsController < ApplicationController
   def redirect_unless_permission
   end
 
+  expose(:users) { User(:protected).page(params[:page]) }
   expose(:user)
   expose(:vacations) { user.vacations.latest }
   expose(:vacation)

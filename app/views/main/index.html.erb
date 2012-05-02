@@ -18,6 +18,16 @@
         <% else %>
           <li><%= link_to t("commutes.index.title"), commute_path(@user) %></li>
         <% end %>
+        <% if @user.ingroup?(:admin) %>
+          <li><%= link_to t("vacations.index.title"), :vacations %></li>
+        <% else %>
+          <li><%= link_to t("vacations.index.title"), vacation_path(@user) %></li>
+        <% end %>
+        <% if @user.ingroup?(:admin) %>
+          <li><%= link_to t("payments.index.title"), :payments %></li>
+        <% else %>
+          <li><%= link_to t("payments.index.title"), payment_path(@user) %></li>
+        <% end %>
       </ul>
       <ul>
         <% if @user.permission.any? {|perm| perm.name == 'users'}  %>
