@@ -81,12 +81,22 @@ class Creditcard < ActiveRecord::Base
   end
 
   class << self
+
+    def used_source_per_period(query)
+      collection = CardUsedSource.order(query)
+      if collection.empty? || collection.first.approved_at == nil
+        Time.zone.now
+      else
+        collection.first.approved_at
+      end
+    end
+
     def newest_used_source
-        CardUsedSource.order('approved_at DESC').first.approved_at
+      used_source_per_period('approved_at DESC')
     end
 
     def oldest_used_source
-        CardUsedSource.order('approved_at ASC').first.approved_at - 1.month
+      used_source_per_period('approved_at ASC') - 1.month
     end
   end
 end
