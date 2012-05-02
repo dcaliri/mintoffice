@@ -8,24 +8,4 @@
   <%= link_to t('common.title.edit'), edit_user_path(@this_user) %> |
   <%= link_to t('common.title.back'), users_path %>
 </div>
-<h2><%=h @this_user.name %></h2>
-<div class="box">
-	<div id="descr">
-	<table>
-		<tr>
-			<th>Gmail Account<th>
-			<td><%= @this_user.gmail_account %></td>
-		</th>
-		<tr>
-			<th>Email<th>
-			<td><%= @this_user.notify_email %></td>
-		</th>
-		<tr>
-			<th>Boxcar Account<th>
-			<td><%= @this_user.boxcar_account %></td>
-		</th>
-		
-	</table>
-	</div>
-	<div style="clear: both;"></div>
-</div>
+<%= render 'detail', :user => @this_user %>

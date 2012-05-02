@@ -1,8 +1,10 @@
 <% title t(".title") %>
 <div id="show_command">
-  <%= link_to t('common.title.show'), @user %> |
+  <% if @user.ingroup? "admin" %>
+    <%= link_to t('common.title.show'), @user %> |
+  <% end %>
   <%= link_to t('users.changepw.title'), :action => "changepw", :id => @user %> |
-  <%= link_to t('common.title.back'), users_path %>
+  <%= link_to t('common.title.back'), :back %>
 </div>
 <h2><%= t('common.title.edit') %></h2>
 
