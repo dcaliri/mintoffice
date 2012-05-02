@@ -24,7 +24,7 @@
         <td><%= period.strftime("%Y.%m.%d") %></td>
           <% Creditcard.all.each do |card| %>
             <% used_sources = card.card_used_sources.where(approved_at: period.all_month) %>
-              <td><%= number_to_currency used_sources.total_price %></td>
+            <td><%= number_to_currency used_sources.total_price %></td>
           <% end %>
       </tr>
       <% period -= 1.month %>
