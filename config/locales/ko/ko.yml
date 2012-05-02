@@ -675,6 +675,7 @@ ko:
         show:
             title: 인사정보
             related_documents: 관련 문서
+            related_admin_actions: 관련 관리 작업
             changes: 변경사항
             download: 다운로드
         retire:
@@ -688,6 +689,7 @@ ko:
             title: 인사정보 수정
         error:
             juminno_invalid: "는 '111111-1111111' 형식으로 써 주세요."
+        title: 인사정보관리
     main:
         index:
             human_resources: 인사관리
@@ -709,17 +711,13 @@ ko:
         show:
             title: 명함 내용 보기
     payments:
-        index:
-            title: 연봉 관리
-        show:
-            title: 연봉 이력
-            link: 연봉 관리
         new:
             title: 새로운 특별상여금 입력
         yearly:
             title: 새로운 기본급 입력
         edit:
             title: 특별상여금 수정
+        title: 연봉관리
     payroll_categories:
         validate:
             payable_code_not_match: 지급항목에 잘못된 연결코드를 선택하였습니다.
@@ -866,6 +864,7 @@ ko:
             empty: 연차 내역이 없습니다
         show:
             link: 연차 관리
+            info: "할당 연차: %{total}일, 사용 연차: %{used}일, 잔여 연차: %{remain}일"
         new:
             title: 새로운 연차 할당하기
             link: 연차 할당
