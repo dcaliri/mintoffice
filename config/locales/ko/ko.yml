@@ -842,6 +842,8 @@ ko:
             password: 비밀번호
             login: 로그인
             loginfail: 아이디 혹은 비밀번호가 잘못되었습니다.
+            not_registered: 등록되지 않은 계정입니다.
+            successfully_signed_in: 로그인에 성공하였습니다.
         changepw:
             title: 비밀번호 변경
             subtitle: 변경
