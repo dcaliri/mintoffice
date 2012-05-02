@@ -1,8 +1,14 @@
 class CardApprovedSource < ActiveRecord::Base
   belongs_to :creditcard
-  include StylesheetParseable
 
   self.per_page = 20
+
+  before_save :strip_approve_no
+  def strip_approve_no
+    approve_no.strip!
+  end
+
+  include StylesheetParseable
 
   DEFAULT = {
     :name => :default,
