@@ -4,10 +4,10 @@ class HrinfosController < ApplicationController
   def index
     retired = params[:retired]
     if retired == "on"
-      @hrinfos = Hrinfo.search(params[:q]).find(:all, :conditions => "retired_on IS NOT NULL")
+      @hrinfos = Hrinfo.search(params[:q])#.find(:all, :conditions => "retired_on IS NOT NULL")
       @hrinfos_count = Hrinfo.count(:all, :conditions => "retired_on IS NOT NULL")
     else
-      @hrinfos = Hrinfo.search(params[:q]).find(:all, :conditions => "retired_on IS NULL")
+      @hrinfos = Hrinfo.search(params[:q])#.find(:all, :conditions => "retired_on IS NULL")
       @hrinfos_count = Hrinfo.count(:all, :conditions => "retired_on IS NULL")
     end
 

@@ -33,7 +33,11 @@ end
     <td align="right"><%=h hrinfo.companyno %></td>
     <td><%=h hrinfo.fullname %></td>
     <td><%=h hrinfo.position %></td>
-    <td><%=h hrinfo.user.name %></td>
+    <% if hrinfo.user %>
+      <td><%=h hrinfo.user.name %></td>
+    <% else %>
+      <td></td>
+    <% end %>
     <td><a href="mailto:<%= hrinfo.email %>"><%=h hrinfo.email %></a></td>
     <td><%=h hrinfo.joined_on %></td>
     <!-- <td><%= link_to 'Show', hrinfo %></td>
