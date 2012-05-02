@@ -418,11 +418,10 @@ ko:
             outmoney: 출금액
         title: 은행계좌 관리
     bank_transactions:
+        title: 입출금 내역
         index:
-            title: 입출금 내역
             empty: 입출금 내역이 없습니다
         show:
-            title: 입출금 내역
             to_bank_transfer: 이체 내역
         excel:
             title: 엑셀로 올리기
@@ -443,10 +442,7 @@ ko:
             file: 엑셀 파일
             submit: 엑셀 파일 올리기
         new:
-            title: 입출금 내역 올리기
             link: 입출금 내역 올리기
-        edit:
-            title: 입출금 내역 수정하기
         total:
             title: 입출금 합계표
             link: 합계표 보기
@@ -455,8 +451,8 @@ ko:
             list: 분기 목록
             quarter: "%{year}년도 %{quarter} 분기"
     bank_transfers:
+        title: 이체 내역
         index:
-            title: 이체 내역
             empty: 이체 내역이 없습니다
         excel:
             title: 엑셀로 올리기
@@ -477,13 +473,9 @@ ko:
             file: 엑셀 파일
             submit: 엑셀 파일 올리기
         new:
-            title: 이체 내역 올리기
             link: 이체 내역 올리기
         show:
-            title: 이체 내역
             to_bank_transaction: 입출금 내역
-        edit:
-            title: 이체 내역 수정하기
     bonuses:
         new:
             title: 새로운 특별 상여금 입력
@@ -638,8 +630,7 @@ ko:
         new:
             title: 새로운 주소 대상 만들기
     contact_email_tags:
-        new:
-            title: 새로운 이메일 대상 만들기
+        title: 새로운 이메일 대상 만들기
     contact_phone_number_tags:
         new:
             title: 새로운 전화번호 대상 만들기
