@@ -23,45 +23,40 @@ class Creditcard < ActiveRecord::Base
   include Excels::CardApprovedSourcesInfo
 
   def self.preview_stylesheet(type, upload)
-    @parser_type = type.to_sym
     path = file_path(upload['file'].original_filename)
     create_file(path, upload['file'])
-    excel_parser.preview(parser_class_name, path)
+    excel_parser(type.to_sym).preview(parser_class_name(type.to_sym), path)
   end
 
   def self.create_with_stylesheet(type, name)
-    @parser_type = type.to_sym
     path = file_path(name)
-    parse_stylesheet(path, type.to_sym)
+    parse_stylesheet(type.to_sym, path)
     File.delete(path)
   end
 
-  def self.parser_class_name
-    if @parser_type == :card_used_sources
+  def self.parser_class_name(type)
+    if type == :card_used_sources
       CardUsedSource
     else
       CardApprovedSource
     end
   end
 
-  def self.excel_parser
-    unless @parser
-      @parser = if @parser_type == :card_used_sources
-                  used_sources_parser
-                else
-                  approved_sources_parser
-                end
+  def self.excel_parser(type)
+    if type == :card_used_sources
+      used_sources_parser
+    else
+      approved_sources_parser
     end
-    @parser
   end
 
-  def self.parse_stylesheet(file, type, opts = {})
-    excel_parser.parse(file) do |query, params|
+  def self.parse_stylesheet(type, file, opts = {})
+    excel_parser(type).parse(file) do |query, params|
       creditcards = Creditcard.where(:short_name => params[:card_no])
 
       unless creditcards.empty?
         creditcard = creditcards.first
-        collections = creditcard.send(@parser_type).where(query)
+        collections = creditcard.send(type).where(query)
         if collections.empty?
           collections.create!(params)
         else
