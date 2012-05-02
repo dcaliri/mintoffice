@@ -107,7 +107,7 @@ class UsersController < ApplicationController
       if @user.update_attributes(params[:user])
         flash[:notice] = I18n.t("common.messages.updated", :model => User.model_name.human)
 #        format.html { redirect_to :back }
-        format.html {redirect_to session[:return_to] }
+        format.html { redirect_to session[:return_to] }
         format.html { redirect_to(:action => 'index') }
         format.xml  { head :ok }
       else

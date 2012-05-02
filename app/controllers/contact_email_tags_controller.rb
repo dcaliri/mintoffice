@@ -1,4 +1,5 @@
 class ContactEmailTagsController < ApplicationController
+
   def new
     session[:return_to] = request.referer
     @contact_tag = ContactEmailTag.new
