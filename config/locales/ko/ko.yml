@@ -350,8 +350,8 @@ ko:
                 status: 매입상태
                 will_be_paied_at: 결제예정일
             contact:
-                firstname: 성
-                lastname: 이름
+                firstname: 이름
+                lastname: 성
                 company: 회사
                 department: 부서
                 position: 직위
