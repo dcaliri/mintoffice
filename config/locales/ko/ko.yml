@@ -675,6 +675,7 @@ ko:
         show:
             title: 인사정보
             related_documents: 관련 문서
+            related_admin_actions: 관련 관리 작업
             changes: 변경사항
             download: 다운로드
         retire:

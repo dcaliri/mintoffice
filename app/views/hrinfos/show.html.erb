@@ -3,11 +3,6 @@
   <% if @user.ingroup?("admin") && ! @hrinfo.retired_on %>
     <%= link_to t('hrinfos.retire.title'), :action => :retire, :id => @hrinfo %> |
   <% end %>
-  <% if @user.ingroup?("admin") || @hrinfo.user == @user %>
-    <%= link_to t('payments.title'), payment_path(@hrinfo.user) %> |
-    <%= link_to t('vacations.show.link'), [@hrinfo.user, :vacations] %> |
-    <%= link_to t('common.title.edit'), edit_hrinfo_path(@hrinfo) %> |
-  <% end %>
   <%= link_to t('common.title.back'), hrinfos_path %>
 </div>
 <h2><%= @hrinfo.fullname %></h2>
@@ -25,6 +20,16 @@
       <tr><th align="right"><%= Hrinfo.human_attribute_name('retired_on') %>:</th><td><%= @hrinfo.retired_on %></td></tr>
 <% end %>
     </table>
+    <div id="show_command">
+      <%= link_to "주소록 찾기", find_contacts_path(target_class: @hrinfo.class, target: @hrinfo, query: @hrinfo.fullname), :class => 'popup' %>
+    </div>
+    
+    <h3><%= t("contacts.show.title")%></h3>
+    <ul>
+      <% if @hrinfo.contact %>
+        <%= render 'contacts/item', contact: @hrinfo.contact, menu: false %>
+      <% end %>
+    </ul>
 <% if @user.ingroup?("admin") || @hrinfo.user == @user %>
 <% if @user.ingroup? "admin" %>
     <div id="show_command">
@@ -50,19 +55,13 @@
         <% end %>
       <% end %>
     </ul>
-    <h3>관련 직업</h3>
+    <h3><%= t(".related_admin_actions")%></h3>
     <ul>
       <% if @user.ingroup?("admin") || @hrinfo.user == @user %>
-        <li><%= link_to "연봉 관리", payment_path(@user) %></li>
-      <% end %>
-    </ul>
-    <div id="show_command">
-      <%= link_to "주소록 찾기", find_contacts_path(target_class: @hrinfo.class, target: @hrinfo, query: @hrinfo.fullname), :class => 'popup' %>
-    </div>
-    <h3>주소록</h3>
-    <ul>
-      <% if @hrinfo.contact %>
-        <%= render 'contacts/item', contact: @hrinfo.contact, menu: false %>
+        <li><%= link_to t('payments.title'), payment_path(@hrinfo.user) %></li>
+        <li><%= link_to t('vacations.show.link'), [@hrinfo.user, :vacations] %></li>
+        <li><%= link_to t('common.title.edit'), edit_hrinfo_path(@hrinfo) %></li>
+        
       <% end %>
     </ul>
 <% end %>
