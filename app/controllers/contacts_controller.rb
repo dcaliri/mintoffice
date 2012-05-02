@@ -20,7 +20,7 @@ class ContactsController < ApplicationController
 
     if params[:parent_class]
       collections = @target.send(params[:target_class].downcase.pluralize)
-      if params[:target]
+      unless params[:target].blank?
         @target = collections.find(params[:target])
       else
         @target = collections.build

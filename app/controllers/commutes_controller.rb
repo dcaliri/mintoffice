@@ -2,12 +2,16 @@ class CommutesController < ApplicationController
   def redirect_unless_permission
   end
 
-  expose(:users) { User(:protected).page(params[:page]) }
+  expose(:users) { User(:protected)}
   expose(:user)
   expose(:commutes) { user.commutes.latest }
   expose(:commute)
 
   before_filter :redirect_unless_admin, :only => :index
+
+  def index
+    @users = User(:protected).enabled.page(params[:page])
+  end
 
   def detail
     @attachments = Attachment.for_me(commute)

@@ -1,5 +1,8 @@
 files/
-db/production.sqlite3
 log/
 public/assets/
 tmp/
+/.bundle
+/db/*.sqlite3
+/log/*.log
+.DS_Store

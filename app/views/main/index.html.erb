@@ -18,6 +18,16 @@
         <% else %>
           <li><%= link_to t("commutes.index.title"), commute_path(@user) %></li>
         <% end %>
+        <% if @user.ingroup?(:admin) %>
+          <li><%= link_to t("vacations.index.title"), :vacations %></li>
+        <% else %>
+          <li><%= link_to t("vacations.index.title"), vacation_path(@user) %></li>
+        <% end %>
+        <% if @user.ingroup?(:admin) %>
+          <li><%= link_to t("payments.title"), :payments %></li>
+        <% else %>
+          <li><%= link_to t("payments.title"), payment_path(@user) %></li>
+        <% end %>
       </ul>
       <ul>
         <% if @user.permission.any? {|perm| perm.name == 'users'}  %>
@@ -38,7 +48,7 @@
       </ul>
       <ul>
         <% if @user.ingroup?(:admin) %>
-          <li><%= link_to t("creditcards.index.title"), :creditcards %></li>
+          <li><%= link_to t("creditcards.title"), :creditcards %></li>
         <% end %>
         <% if @user.permission.any? {|perm| perm.name == 'cardbills'}  %>
           <li><%= link_to t("cardbills.index.title"), :controller => "cardbills" %></li>

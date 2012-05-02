@@ -7,11 +7,11 @@ h2= t('common.title.list')
 table#list-table
   tr
     th= User.human_attribute_name("name")
-    - users.each do |user|
+    - @users.each do |user|
       tr.selectable onclick="location.href='#{commute_path(user)}'"
         td=h user.name
 
 br
 
 center
-  = will_paginate users
+  = will_paginate @users

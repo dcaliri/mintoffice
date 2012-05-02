@@ -1,14 +1,16 @@
 <% title t(".title") %>
 <div id="show_command">
-  <%= link_to t('common.title.show'), @user %> |
+  <% if @user.ingroup? "admin" %>
+    <%= link_to t('common.title.show'), @user %> |
+  <% end %>
   <%= link_to t('users.changepw.title'), :action => "changepw", :id => @user %> |
-  <%= link_to t('common.title.back'), users_path %>
+  <%= link_to t('common.title.back'), :back %>
 </div>
 <h2><%= t('common.title.edit') %></h2>
 
 <%= form_for(@user,
     :url => {:action => :update},
-    :html => {:multipart => true, :class => "tabular"}) do |f| %>
+    :html => {:multipart => true}) do |f| %>
   <%= f.error_messages %>
 <div class="box">
   <p>
@@ -27,7 +29,6 @@
     <%= f.label :boxcar_account, User.human_attribute_name('boxcar_account') %>
     <%= f.text_field :boxcar_account %>
   </p>
-
 </div>
 <%= f.submit t('common.button.update') %>
 <% end %>

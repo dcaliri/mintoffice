@@ -73,6 +73,7 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+    session[:return_to] = request.referer
     @user = User.find(params[:id])
     @attachments = Attachment.for_me(@user.hrinfo) if @user.hrinfo
   end
@@ -87,7 +88,7 @@ class UsersController < ApplicationController
 #        @user.hrinfo = @hrinfo
         @attachment = Attachment.new(params[:attachment])
         @attachment.save_for(@hrinfo,@user)
-        flash[:notice] = "User #{@user.name}was successfully created."
+        flash[:notice] = I18n.t("common.messages.created", :model => User.model_name.human)
         format.html { redirect_to(:action => 'index') }
         format.xml  { render :xml => @user, :status => :created, :location => @user }
       else
@@ -104,7 +105,9 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        flash[:notice] = "User #{@user.name}was successfully updated."
+        flash[:notice] = I18n.t("common.messages.updated", :model => User.model_name.human)
+#        format.html { redirect_to :back }
+        format.html { redirect_to session[:return_to] }
         format.html { redirect_to(:action => 'index') }
         format.xml  { head :ok }
       else
