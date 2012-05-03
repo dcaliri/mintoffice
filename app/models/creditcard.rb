@@ -23,26 +23,6 @@ class Creditcard < ActiveRecord::Base
   include Excels::CardApprovedSourcesInfo
   include Excels::CardApprovedSourcesOverseaInfo
 
-  def self.preview_stylesheet(type, upload)
-    path = file_path(upload['file'].original_filename)
-    create_file(path, upload['file'])
-    excel_parser(type.to_sym).preview(parser_class_name(type.to_sym), path)
-  end
-
-  def self.create_with_stylesheet(type, name)
-    path = file_path(name)
-    parse_stylesheet(type.to_sym, path)
-    File.delete(path)
-  end
-
-  def self.parser_class_name(type)
-    if type == :card_used_sources
-      CardUsedSource
-    else
-      CardApprovedSource
-    end
-  end
-
   def self.excel_parser(type)
     if type == :card_used_sources
       used_sources_parser
@@ -53,13 +33,24 @@ class Creditcard < ActiveRecord::Base
     end
   end
 
-  def self.parse_stylesheet(type, file, opts = {})
-    excel_parser(type).parse(file) do |query, params|
+  def self.preview_stylesheet(type, upload)
+    path = file_path(upload['file'].original_filename)
+    parser = excel_parser(type.to_sym)
+
+    create_file(path, upload['file'])
+    parser.preview(path)
+  end
+
+  def self.create_with_stylesheet(type, name)
+    path = file_path(name)
+    parser = excel_parser(type.to_sym)
+
+    parser.parse(path) do |class_name, query, params|
       creditcards = Creditcard.where(:short_name => params[:card_no])
 
       unless creditcards.empty?
         creditcard = creditcards.first
-        collections = creditcard.send(parser_class_name(type).to_s.tableize).where(query)
+        collections = creditcard.send(class_name.to_s.tableize).where(query)
         if collections.empty?
           collections.create!(params)
         else
@@ -68,6 +59,7 @@ class Creditcard < ActiveRecord::Base
         end
       end
     end
+    File.delete(path)
   end
 
   def cardno_long
