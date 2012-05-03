@@ -38,15 +38,15 @@
                   <td><%= card.cardno %></td>
                   <td><%= card.nickname %></td>
                   <% used_sources = card.card_used_sources.where(approved_at: period.all_month) %>
-                  <td><%= number_to_currency used_sources.total_price %></td>
+                  <td class="numrow"><%= number_to_currency used_sources.total_price %></td>
                 </tr>
               <% end %>
-              <tr>
+              <tr style="background-color: yellow;">
                 <td><%= CardUsedSource.human_attribute_name(:total) %></td>
                 <td></td>
                 <td></td>
                 <% used_sources = CardUsedSource.where(approved_at: period.all_month) %>
-                <td><%= number_to_currency used_sources.total_price %></td>
+                <td class="numrow"><%= number_to_currency used_sources.total_price %></td>
               </tr>
             <tbody>
             </tbody>
