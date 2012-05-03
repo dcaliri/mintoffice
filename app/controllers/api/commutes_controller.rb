@@ -23,13 +23,12 @@ module Api
 
     private
     def find_user
-      key = request.env['HTTP_API_KEY'][0..-2]
-      @users = User.where(:api_key => key)
+      @users = User.where(:api_key => request.env['HTTP_API_KEY'])
       @user = @users.first if @users
     end
   end
 end
 
 # curl "http://mintoffice.dev/api/login.json?user=admin&password=1234"
-# curl -F "file=@waldo.jpg;" -H "api-key: c389b8fd0716c0db8c8f8b7da0c1255c21cdb47f", "http://mintoffice.dev/api/commutes/checkin"
-# curl -F "file=@waldo.jpg;" -H "api-key: c389b8fd0716c0db8c8f8b7da0c1255c21cdb47f", "http://mintoffice.dev/api/commutes/checkout"
+# curl -F "file=@waldo.jpg;" -H "api-key: c389b8fd0716c0db8c8f8b7da0c1255c21cdb47f" "http://mintoffice.dev/api/commutes/checkin"
+# curl -F "file=@waldo.jpg;" -H "api-key: c389b8fd0716c0db8c8f8b7da0c1255c21cdb47f" "http://mintoffice.dev/api/commutes/checkout"

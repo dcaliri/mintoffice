@@ -21,9 +21,12 @@
         <td>
           <table>
             <tr>
-              <th>은행명</th>
-              <th>계정</th>
-              <th>설명</th>
+              <th><%= BankAccount.human_attribute_name(:name) %></th>
+              <th><%= BankAccount.human_attribute_name(:number) %></th>
+              <th><%= BankAccount.human_attribute_name(:note) %></th>
+              <th><%= BankAccount.human_attribute_name(:total_in) %></th>
+              <th><%= BankAccount.human_attribute_name(:total_out) %></th>
+              <th><%= BankAccount.human_attribute_name(:margin) %></th>
               <th>입금 총액</th>
               <th>출금 총액</th>
               <th>입출금 차액</th>
