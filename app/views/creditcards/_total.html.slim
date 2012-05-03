@@ -1,0 +1,34 @@
+<div id="show_command">
+    <%= link_to t('common.title.back'), :creditcards %>
+</div>
+
+<% newest = Time.zone.now %>
+<% oldest = Time.zone.now - 1.year %>
+
+<% newest = Creditcard.newest_used_source %>
+<% oldest = Creditcard.oldest_used_source %>
+
+<% period = Time.zone.parse("#{newest.year}-#{newest.month}-01 00:00:00") %>
+<table id="list-table">
+  <thead>
+    <tr>
+      <th>날짜</th>
+      <% Creditcard.all.each do |card| %>
+        <th><%= card.cardno %></th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+
+    <% while period > oldest %>
+      <tr>
+        <td><%= period.strftime("%Y.%m") %></td>
+          <% Creditcard.all.each do |card| %>
+            <% used_sources = card.card_used_sources.where(approved_at: period.all_month) %>
+            <td><%= number_to_currency used_sources.total_price %></td>
+          <% end %>
+      </tr>
+      <% period -= 1.month %>
+    <% end %>
+  <tbody>
+</table>

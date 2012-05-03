@@ -4,6 +4,23 @@
 
   <%= form_tag :taxbills, :method => :get do %>
     <%= t("common.title.search") %> : <%= text_field_tag 'query', params[:query] %>
+
+
+    <% current = Time.zone.now.year %>
+    <% oldest = Taxbill.oldest_at.year %>
+
+    <% period = {"전체" => nil}%>
+    <% current.downto(oldest) do |year| %>
+      <% 4.downto(1) do |quarter| %>
+        <% time = Time.zone.parse("#{year}-#{quarter * 3 - 2}-01 00:00:00") %>
+        <% if Taxbill.exists?(transacted_at: time.all_quarter)%>
+          <% period["#{year}년도 #{quarter}분기"] = time %>
+        <% end %>
+      <% end %>
+    <% end %>
+
+    <%= select_tag :transacted_at, options_for_select(period, params[:transacted_at]), "onchange" => "this.form.submit()" %>
+
     <%= select_tag :billtype, options_for_select(
             { t('taxbills.purchase_sales_bill') => "all",
               t('taxbills.purchase_bill') => Taxbill::BILL_TYPE[0],

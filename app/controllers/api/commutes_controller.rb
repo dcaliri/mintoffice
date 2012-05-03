@@ -1,33 +1,34 @@
 module Api
   class CommutesController < Api::ApplicationController
-    respond_to :json
     before_filter :find_user
 
-    def go
+    def checkin
       @commute = @user.commutes.build
       @commute.go!
       Attachment.save_for(@commute, @user, uploaded_file: params[:file])
-      respond_with @commute
+      render :json => {:status => :ok, :commute => @commute}
     end
 
-    def leave
+    def checkout
       @commutes = @user.commutes.where(leave: nil)
-      if @commutes
+      unless @commutes.empty?
         @commute = @commutes.last
         @commute.leave!
         Attachment.save_for(@commute, @user, uploaded_file: params[:file])
+        render :json => {:status => :ok, :commute => @commute}
       else
-        @commute = Commute.new
+        render :json => {:status => :not_found}
       end
-      respond_with @commute
     end
 
     private
     def find_user
-      @user = User.authenticate(params[:user], params[:password])
+      @users = User.where(:api_key => request.env['HTTP_API_KEY'])
+      @user = @users.first if @users
     end
   end
 end
 
-# curl -F "file=@waldo.jpg;" "http://mintoffice.dev/api/commutes/go?user=admin&password=1234"
-# curl -F "file=@waldo.jpg;" "http://mintoffice.dev/api/commutes/leave?user=admin&password=1234"
+# curl "http://mintoffice.dev/api/login.json?user=admin&password=1234"
+# curl -F "file=@waldo.jpg;" -H "api-key: c389b8fd0716c0db8c8f8b7da0c1255c21cdb47f" "http://mintoffice.dev/api/commutes/checkin"
+# curl -F "file=@waldo.jpg;" -H "api-key: c389b8fd0716c0db8c8f8b7da0c1255c21cdb47f" "http://mintoffice.dev/api/commutes/checkout"

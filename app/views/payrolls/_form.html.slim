@@ -1,0 +1,16 @@
+#show_command
+  = link_to t('common.title.back'), [:payrolls]
+
+h2= t("common.title.#{action_name}")
+
+= form_for [payroll], html: {class: "tabular"} do |f|
+  = f.error_messages
+  .box
+    p
+      = f.label :payday
+      = f.date_select :payday, :order => [:year, :month, :day], :default => Time.zone.now
+    p
+      = f.label :user_id
+      = f.select :user_id, options_from_collection_for_select(users, 'id', 'name')
+    p
+      = f.submit

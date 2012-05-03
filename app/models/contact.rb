@@ -21,10 +21,19 @@ class Contact < ActiveRecord::Base
     end
 
     def search_by_name(query)
+      # if ActiveRecord::Base.connection.class == ActiveRecord::ConnectionAdapters::SQLite3Adapter
+      #   where("firstname || lastname like ?", query)
+      # else
+      #   where("CONCAT(firstname, lastname) like ?", query)
+      # end
+      where(search_by_name_query, query)
+    end
+
+    def search_by_name_query
       if ActiveRecord::Base.connection.class == ActiveRecord::ConnectionAdapters::SQLite3Adapter
-        where("firstname || lastname like ?", query)
+        "firstname || lastname like ?"
       else
-        where("CONCAT(firstname, lastname) like ?", query)
+        "CONCAT(firstname, lastname) like ?"
       end
     end
 
