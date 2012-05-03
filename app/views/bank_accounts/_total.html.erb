@@ -1,0 +1,39 @@
+<div id="show_command">
+    <%= link_to t('common.title.back'), :bank_accounts %>
+</div>
+<h2><%= t(".title")%></h2>
+
+<% newest = BankAccount.newest_transaction %>
+<% oldest = BankAccount.oldest_transaction %>
+
+<% period = Time.zone.parse("#{newest.year}-#{newest.month}-01 00:00:00") %>
+<table id="list-table">
+  <thead>
+    <tr>
+      <td></td>
+      <% BankAccount.all.each do |account| %>
+        <td colspan="2"><h3><%= account.number %><br />(<%= account.note %>)</h3></td>
+      <% end %>
+    </tr>
+    <tr>
+      <th><%= t(".date")%></th>
+      <% BankAccount.all.each do |account| %>
+        <th><%= t(".inmoney")%></th>
+        <th><%= t(".outmoney")%></th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <% while period > oldest %>
+      <tr>
+        <td><%= period.strftime("%Y.%m.%d") %></td>
+          <% BankAccount.all.each do |account| %>
+            <% transactions = account.bank_transactions.where(transacted_at: period.all_month) %>
+              <td><%= number_to_currency transactions.total_in %></td>
+              <td><%= number_to_currency transactions.total_out %></td>
+          <% end %>
+      </tr>
+      <% period -= 1.month %>
+    <% end %>
+  <tbody>
+</table>
