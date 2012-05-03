@@ -348,6 +348,10 @@ ko:
                 card_holder_name: 이용자명
                 store_name: 가맹점
                 money: 이용금액
+                money_foreign: 현지금액
+                money_type: 현지통화
+                money_type_info: 현지통화명
+                money_dollar: 미화금액
                 used_type: 이용구분
                 monthly_duration: 할부개월수
                 card_type: 카드구분

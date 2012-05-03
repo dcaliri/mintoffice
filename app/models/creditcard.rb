@@ -21,6 +21,7 @@ class Creditcard < ActiveRecord::Base
   include NewStylesheetParsable
   include Excels::CardUsedSourcesInfo
   include Excels::CardApprovedSourcesInfo
+  include Excels::CardApprovedSourcesOverseaInfo
 
   def self.preview_stylesheet(type, upload)
     path = file_path(upload['file'].original_filename)
@@ -45,8 +46,10 @@ class Creditcard < ActiveRecord::Base
   def self.excel_parser(type)
     if type == :card_used_sources
       used_sources_parser
-    else
+    elsif type == :card_approved_sources
       approved_sources_parser
+    else
+      approved_sources_oversea_parser
     end
   end
 
@@ -56,7 +59,7 @@ class Creditcard < ActiveRecord::Base
 
       unless creditcards.empty?
         creditcard = creditcards.first
-        collections = creditcard.send(type).where(query)
+        collections = creditcard.send(parser_class_name(type).to_s.tableize).where(query)
         if collections.empty?
           collections.create!(params)
         else
