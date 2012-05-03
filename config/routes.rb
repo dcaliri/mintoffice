@@ -42,6 +42,7 @@ Mintoffice::Application.routes.draw do
   resources :permissions
   resources :cardbills
   resources :payroll_categories
+  resources :payrolls
 
   match '/hrinfos/retire/:id', :controller => "hrinfos", :action => "retire", :conditions => {:method => :get}
   match '/hrinfos/retire/:id', :controller => "hrinfos", :action => "retire_save", :conditions => {:method => :post}

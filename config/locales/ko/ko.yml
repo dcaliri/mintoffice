@@ -728,6 +728,8 @@ ko:
         edit:
             title: 특별상여금 수정
         title: 연봉관리
+    payrolls:
+        title: 급여대장
     payroll_categories:
         validate:
             payable_code_not_match: 지급항목에 잘못된 연결코드를 선택하였습니다.

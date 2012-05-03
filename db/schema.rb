@@ -341,6 +341,13 @@ ActiveRecord::Schema.define(:version => 20120503054815) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "payrolls", :force => true do |t|
+    t.date     "payday"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "permissions", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
