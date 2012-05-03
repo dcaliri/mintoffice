@@ -1,0 +1,12 @@
+
+#show_command
+  = link_to t('common.title.new'), new_payroll_path
+
+h2 ...
+
+- unless payrolls.empty?
+  ul
+    - payrolls.each do |payroll|
+        li= link_to "#{payroll.payday} (#{payroll.user.name})", payroll_path(payroll)
+- else
+  = "empty"
