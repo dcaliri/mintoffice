@@ -1,9 +1,12 @@
 Mintoffice::Application.routes.draw do
   namespace :api do
+    match 'login', controller: :users, action: :login
+#    post 'commutes', controller: :commutes, action: :create
+
     resources :commutes do
       collection do
-        post 'go'
-        post 'leave'
+        post 'checkin'
+        post 'checkout'
       end
     end
   end
@@ -39,6 +42,7 @@ Mintoffice::Application.routes.draw do
   resources :permissions
   resources :cardbills
   resources :payroll_categories
+  resources :payrolls
 
   match '/hrinfos/retire/:id', :controller => "hrinfos", :action => "retire", :conditions => {:method => :get}
   match '/hrinfos/retire/:id', :controller => "hrinfos", :action => "retire_save", :conditions => {:method => :post}

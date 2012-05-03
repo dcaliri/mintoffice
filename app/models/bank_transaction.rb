@@ -88,6 +88,10 @@ class BankTransaction < ActiveRecord::Base
     sum {|transaction| transaction.out }
   end
 
+  def self.margin
+    total_in - total_out
+  end
+
   def self.oldest_at
     resource = order('transacted_at DESC').last
     if resource && resource.transacted_at

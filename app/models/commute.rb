@@ -7,20 +7,18 @@ class Commute < ActiveRecord::Base
   end
 
   def go!
-    unless read_attribute(:go)
-      write_attribute(:go, Time.zone.now)
-      save!
-    else
-      raise ActiveRecord::RecordInvalid
-    end
+    write_attribute(:go, Time.zone.now)
+    save!
   end
 
   def leave!
-    unless read_attribute(:leave)
-      write_attribute(:leave, Time.zone.now)
-      save!
-    else
-      raise ActiveRecord::RecordInvalid
-    end
+    write_attribute(:leave, Time.zone.now)
+    save!
   end
+
+
+  def as_json(options={})
+    super(options.merge(:only => [:go, :leave]))
+  end
+
 end

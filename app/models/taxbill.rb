@@ -79,17 +79,21 @@ class Taxbill < ActiveRecord::Base
           "기타"
         end
       end.map do |name, purchases|
-        {name: name, tax: purchases.sum{|p| p.tax}, price: purchases.sum{|p| p.price}}
+        {
+          name: name,
+          tax: purchases.sum{|p| p.tax},
+          price: purchases.sum{|p| p.price}
+        }
       end
     end
 
     def search(params)
-      text_search(params[:query]).search_billtype(params[:billtype]).search_taxmen(params[:taxman_id])
+      search_billtype(params[:billtype]).search_taxmen(params[:taxman_id]).search_by_transacted(params[:transacted_at]).text_search(params[:query])
     end
 
     def text_search(text)
       text = "%#{text || ""}%"
-      joins(:taxman => :contact).merge(Contact.search_by_name(text))
+      joins(:taxman => [:contact, :business_client]).merge(where("#{Contact.search_by_name_query} OR name like ?", text, text))
     end
 
     def search_billtype(text)
@@ -105,6 +109,15 @@ class Taxbill < ActiveRecord::Base
         where("")
       else
         where(taxman_id: text)
+      end
+    end
+
+    def search_by_transacted(text)
+      if text == "0" or text == nil or text.blank?
+        where("")
+      else
+        time = Time.zone.parse(text)
+        where(transacted_at: (time..(time + 3.month)))
       end
     end
 

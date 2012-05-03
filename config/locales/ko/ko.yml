@@ -168,6 +168,7 @@ ko:
                 nickname: 별칭
                 issuer: 발급사
                 cardholder: 소유자이름
+                total: 총 사용금액
             document:
                 title: 문서제목
                 project: 프로젝트
@@ -278,6 +279,9 @@ ko:
                 name: 은행
                 number: 계정
                 note: 설명
+                total_in: 입금 총액
+                total_out: 출금 총액
+                margin: 입출금 차액
             bank_transaction:
                 transacted_at: 거래일자
                 transaction_type: 적요
@@ -325,6 +329,7 @@ ko:
                 price: 공금가액(원화)
                 tax: 부가세
                 tip: 봉사료
+                total: 총합
                 monthly_duration: 할부기간
                 exchange_krw: 외화거래일환률
                 foreign_country_code: 외화거래국가코드
@@ -343,6 +348,10 @@ ko:
                 card_holder_name: 이용자명
                 store_name: 가맹점
                 money: 이용금액
+                money_foreign: 현지금액
+                money_type: 현지통화
+                money_type_info: 현지통화명
+                money_dollar: 미화금액
                 used_type: 이용구분
                 monthly_duration: 할부개월수
                 card_type: 카드구분
@@ -403,14 +412,17 @@ ko:
             update: 첨부파일 내용이 성공적으로 업데이트 되었습니다.
         new:
             title: 첨부파일 신규 작성
+        title: 첨부파일 관리
     bank_accounts:
         index:
             title: 은행계좌 목록
             empty: 은행계좌가 없습니다
         new:
             title: 새로운 은행계좌 만들기
+            picture: 통장사본
         edit:
             title: 은행계좌 수정하기
+            picture: 통장사본
         total:
             title: 입출금 합계표
             date: 날짜
@@ -493,6 +505,7 @@ ko:
         edit:
             title: 거래처 수정
             picture: 사업자등록증
+        title: 거래처 관리
     card_approved_sources:
         index:
             title: 카드별 승인내역
@@ -717,6 +730,8 @@ ko:
         edit:
             title: 특별상여금 수정
         title: 연봉관리
+    payrolls:
+        title: 급여대장
     payroll_categories:
         validate:
             payable_code_not_match: 지급항목에 잘못된 연결코드를 선택하였습니다.
@@ -745,6 +760,7 @@ ko:
             title: 기본급 수정
     permissions:
         permission_denied: 접근이 제한되었습니다.
+        title: 권한 관리
     pettycashes:
         balance: 잔액
         index:

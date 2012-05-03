@@ -8,68 +8,7 @@ class CardUsedSource < ActiveRecord::Base
     approve_no.strip!
   end
 
-  include StylesheetParseable
-
-  DEFAULT = {
-    :name => :default,
-    :keys => {
-      :approved_at => :time,
-      :approved_time => :time,
-      :money_krw => :integer
-    },
-    :columns => [
-      :card_no,
-      :bank_account,
-      :bank_name,
-      :card_holder_name,
-      :used_area,
-      :approve_no,
-      :approved_at,
-      :approved_time,
-      :sales_type,
-      :money_krw,
-      :money_foreign,
-      :price,
-      :tax,
-      :tip,
-      :monthly_duration,
-      :exchange_krw,
-      :foreign_country_code,
-      :foreign_country_name,
-      :store_business_no,
-      :store_name,
-      :store_type,
-      :store_zipcode,
-      :store_addr1,
-      :store_addr2,
-      :store_tel
-    ],
-    :position => {
-      :start => {
-        x: 2,
-        y: 1
-      },
-      :end => 0
-    }
-  }
-
-  set_parser_options DEFAULT
-
   class << self
-    def preview_stylesheet(card, upload)
-      @card = card
-      super(upload)
-    end
-
-    def create_with_stylesheet(card, upload)
-      @card = card
-      super(upload)
-    end
-
-    def before_parser_filter(params)
-      @card.short_name == params[:card_no]
-    end
-
     def group_by_name_anx_tax
       all.group_by{|cards| cards.bank_name }.map do |name, cards|
         {name: name, tax: cards.sum{|card| card.tax}}

@@ -15,48 +15,42 @@ class Creditcard < ActiveRecord::Base
 
   include Historiable
 
-  CARD_LIST = [:card_used_sources, :card_approved_sources]
-  CARD_LIST_FOR_SELECT = [["이용내역", CARD_LIST[0]],["승인내역", CARD_LIST[1]]]
+  CARD_LIST = [:card_used_sources, :card_approved_sources, :card_approved_sources_oversea]
+  CARD_LIST_FOR_SELECT = [["이용내역", CARD_LIST[0]],["승인내역", CARD_LIST[1]], ["해외승인내역", CARD_LIST[2]]]
 
   include NewStylesheetParsable
   include Excels::CardUsedSourcesInfo
   include Excels::CardApprovedSourcesInfo
-
-  def self.preview_stylesheet(type, upload)
-    path = file_path(upload['file'].original_filename)
-    create_file(path, upload['file'])
-    excel_parser(type.to_sym).preview(parser_class_name(type.to_sym), path)
-  end
-
-  def self.create_with_stylesheet(type, name)
-    path = file_path(name)
-    parse_stylesheet(type.to_sym, path)
-    File.delete(path)
-  end
-
-  def self.parser_class_name(type)
-    if type == :card_used_sources
-      CardUsedSource
-    else
-      CardApprovedSource
-    end
-  end
+  include Excels::CardApprovedSourcesOverseaInfo
 
   def self.excel_parser(type)
     if type == :card_used_sources
       used_sources_parser
-    else
+    elsif type == :card_approved_sources
       approved_sources_parser
+    else
+      approved_sources_oversea_parser
     end
   end
 
-  def self.parse_stylesheet(type, file, opts = {})
-    excel_parser(type).parse(file) do |query, params|
+  def self.preview_stylesheet(type, upload)
+    path = file_path(upload['file'].original_filename)
+    parser = excel_parser(type.to_sym)
+
+    create_file(path, upload['file'])
+    parser.preview(path)
+  end
+
+  def self.create_with_stylesheet(type, name)
+    path = file_path(name)
+    parser = excel_parser(type.to_sym)
+
+    parser.parse(path) do |class_name, query, params|
       creditcards = Creditcard.where(:short_name => params[:card_no])
 
       unless creditcards.empty?
         creditcard = creditcards.first
-        collections = creditcard.send(type).where(query)
+        collections = creditcard.send(class_name.to_s.tableize).where(query)
         if collections.empty?
           collections.create!(params)
         else
@@ -65,6 +59,7 @@ class Creditcard < ActiveRecord::Base
         end
       end
     end
+    File.delete(path)
   end
 
   def cardno_long

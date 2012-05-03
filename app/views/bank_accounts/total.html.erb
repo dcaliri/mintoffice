@@ -10,30 +10,49 @@
 <table id="list-table">
   <thead>
     <tr>
-      <td></td>
-      <% BankAccount.all.each do |account| %>
-        <td colspan="2"><h3><%= account.number %><br />(<%= account.note %>)</h3></td>
-      <% end %>
-    </tr>
-    <tr>
-      <th><%= t(".date")%></th>
-      <% BankAccount.all.each do |account| %>
-        <th><%= t(".inmoney")%></th>
-        <th><%= t(".outmoney")%></th>
-      <% end %>
+      <th>날짜</th>
+      <th>카드내역</th>
     </tr>
   </thead>
   <tbody>
     <% while period > oldest %>
       <tr>
-        <td><%= period.strftime("%Y.%m.%d") %></td>
-          <% BankAccount.all.each do |account| %>
-            <% transactions = account.bank_transactions.where(transacted_at: period.all_month) %>
-              <td><%= number_to_currency transactions.total_in %></td>
-              <td><%= number_to_currency transactions.total_out %></td>
-          <% end %>
+        <td><%= period.strftime("%Y.%m") %></td>
+        <td>
+          <table>
+            <tr>
+              <th><%= BankAccount.human_attribute_name(:name) %></th>
+              <th><%= BankAccount.human_attribute_name(:number) %></th>
+              <th><%= BankAccount.human_attribute_name(:note) %></th>
+              <th><%= BankAccount.human_attribute_name(:total_in) %></th>
+              <th><%= BankAccount.human_attribute_name(:total_out) %></th>
+              <th><%= BankAccount.human_attribute_name(:margin) %></th>
+            </tr>
+
+            <% BankAccount.all.each do |account| %>
+              <tr>
+                <td><%= account.name %></td>
+                <td><%= account.number %></td>
+                <td><%= account.note %></td>
+                <% transactions = account.bank_transactions.where(transacted_at: period.all_month) %>
+                <td class="numrow"><%= number_to_currency transactions.total_in %></td>
+                <td class="numrow"><%= number_to_currency transactions.total_out %></td>
+                <td class="numrow"><%= number_to_currency transactions.margin %></td>
+              </tr>
+            <% end %>
+            <tr style="background-color:yellow;">
+              <td>합계</td>
+              <td></td>
+              <td></td>
+              <% transactions = BankTransaction.where(transacted_at: period.all_month) %>
+              <td class="numrow"><%= number_to_currency transactions.total_in %></td>
+              <td class="numrow"><%= number_to_currency transactions.total_out %></td>
+              <td class="numrow"><%= number_to_currency transactions.margin %></td>
+            </tr>
+          </table>
+        </td>
       </tr>
       <% period -= 1.month %>
     <% end %>
-  <tbody>
+  </tbody>
 </table>

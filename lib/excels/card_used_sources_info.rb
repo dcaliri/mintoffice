@@ -51,7 +51,8 @@ module Excels
 
     module ClassMethods
       def used_sources_parser
-        parser = ExcelParser.new
+        parser = NewExcelParser.new
+        parser.class_name CardUsedSource
         parser.column EXCEL_COLUMNS[:card_used_sources]
         parser.key EXCEL_KEYS[:card_used_sources]
         parser.option EXCEL_OPTIONS[:card_used_sources]

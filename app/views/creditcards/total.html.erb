@@ -13,21 +13,47 @@
   <thead>
     <tr>
       <th>날짜</th>
-      <% Creditcard.all.each do |card| %>
-        <th><%= card.cardno %></th>
-      <% end %>
+      <th>카드내역</th>
     </tr>
   </thead>
   <tbody>
     <% while period > oldest %>
       <tr>
-        <td><%= period.strftime("%Y.%m") %></td>
-          <% Creditcard.all.each do |card| %>
-            <% used_sources = card.card_used_sources.where(approved_at: period.all_month) %>
-            <td><%= number_to_currency used_sources.total_price %></td>
-          <% end %>
+        <td>
+          <%= period.strftime("%Y.%m") %>
+        </td>
+        <td>
+          <table>
+            <thead>
+              <tr>
+                <th><%= Creditcard.human_attribute_name(:cardholder) %></th>
+                <th><%= Creditcard.human_attribute_name(:cardno) %></th>
+                <th><%= Creditcard.human_attribute_name(:nickname) %></th>
+                <th><%= Creditcard.human_attribute_name(:total) %></th>
+              </tr>
+            </thead>
+              <% Creditcard.all.each do |card| %>
+                <tr>
+                  <td><%= card.cardholder %></td>
+                  <td><%= card.cardno %></td>
+                  <td><%= card.nickname %></td>
+                  <% used_sources = card.card_used_sources.where(approved_at: period.all_month) %>
+                  <td class="numrow"><%= number_to_currency used_sources.total_price %></td>
+                </tr>
+              <% end %>
+              <tr style="background-color: yellow;">
+                <td><%= CardUsedSource.human_attribute_name(:total) %></td>
+                <td></td>
+                <td></td>
+                <% used_sources = CardUsedSource.where(approved_at: period.all_month) %>
+                <td class="numrow"><%= number_to_currency used_sources.total_price %></td>
+              </tr>
+            <tbody>
+            </tbody>
+          </table>
+        </td>
       </tr>
       <% period -= 1.month %>
     <% end %>
-  <tbody>
+  </tbody>
 </table>

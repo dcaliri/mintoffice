@@ -33,6 +33,18 @@ h2= "#{creditcard.nickname}: #{creditcard.cardno}"
       th= CardApprovedSource.human_attribute_name(:money)
       td= card_approved_source.money
     tr
+      th= CardApprovedSource.human_attribute_name(:money_foreign)
+      td= card_approved_source.money_foreign
+    tr
+      th= CardApprovedSource.human_attribute_name(:money_type)
+      td= card_approved_source.money_type
+    tr
+      th= CardApprovedSource.human_attribute_name(:money_type_info)
+      td= card_approved_source.money_type_info
+    tr
+      th= CardApprovedSource.human_attribute_name(:money_dollar)
+      td= card_approved_source.money_dollar
+    tr
       th= CardApprovedSource.human_attribute_name(:used_type)
       td= card_approved_source.used_type
     tr
