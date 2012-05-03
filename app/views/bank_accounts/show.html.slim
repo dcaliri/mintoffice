@@ -1,4 +1,12 @@
 #show_command
+  = link_to t('bank_transactions.title'), [bank_account, :bank_transactions]
+  = " | "
+  = link_to t('bank_transfers.title'), [bank_account, :bank_transfers]
+  = " | "
+  = link_to t('common.link.edit'), [:edit, bank_account]
+  = " | "
+  = link_to t('common.link.destroy'), bank_account, :method => :delete, :confirm => "Are you sure?"
+  = " | "
   = link_to t('common.title.list'), :bank_accounts
 
 h2 ...
@@ -18,4 +26,5 @@ h2 ...
         td= bank_account.note
 
   = render :partial => "shared/show_attachment", :object => bank_account
+
   .clear

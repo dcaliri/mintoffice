@@ -13,19 +13,10 @@ h2 ..
       th= BankAccount.human_attribute_name(:name)
       th= BankAccount.human_attribute_name(:number)
       th= BankAccount.human_attribute_name(:note)
-      th= t('common.menu')
     - bank_accounts.each do |account|
       tr.selectable onclick="location.href='#{bank_account_path(account)}'"
         td= account.name
         td= account.number
         td= account.note
-        td
-          = link_to t('bank_transactions.title'), [account, :bank_transactions]
-          = " | "
-          = link_to t('bank_transfers.title'), [account, :bank_transfers]
-          = " | "
-          = link_to t('common.link.edit'), [:edit, account]
-          = " | "
-          = link_to t('common.link.destroy'), account, :method => :delete, :confirm => "Are you sure?"
 - else
   h4= t('.empty')
