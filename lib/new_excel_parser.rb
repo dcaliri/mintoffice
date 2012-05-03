@@ -1,4 +1,7 @@
-class ExcelParser
+class NewExcelParser
+  def class_name(class_name)
+    @class_name = class_name
+  end
   def column(columns)
     @columns = columns
   end
@@ -11,9 +14,9 @@ class ExcelParser
     @options = {position: {:start => {x: 2, y: 1}, :end => 0}}.merge(opts)
   end
 
-  def preview(class_name, file)
+  def preview(file)
     previews = []
-    parse(file) {|query, params| previews << class_name.new(params)}
+    parse(file) {|class_name, query, params| previews << class_name.new(params)}
     previews
   end
 
@@ -39,7 +42,7 @@ class ExcelParser
         end
       end
 
-      yield query, params
+      yield @class_name, query, params
     end
   end
 end

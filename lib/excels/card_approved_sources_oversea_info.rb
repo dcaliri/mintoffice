@@ -1,17 +1,22 @@
 module Excels
-  module CardApprovedSourcesInfo
+  module CardApprovedSourcesOverseaInfo
     extend ActiveSupport::Concern
 
     EXCEL_COLUMNS ||= {}
-    EXCEL_COLUMNS[:card_approved_sources] = [
+    EXCEL_COLUMNS[:card_approved_sources_oversea] = [
       :used_at,
       :approve_no,
       :card_no,
       :card_holder_name,
       :store_name,
       :money,
+
+      :money_foreign,
+      :money_type,
+      :money_type_info,
+      :money_dollar,
+
       :used_type,
-      :monthly_duration,
       :card_type,
       :canceled_at,
       :status,
@@ -19,12 +24,12 @@ module Excels
     ]
 
     EXCEL_KEYS ||= {}
-    EXCEL_KEYS[:card_approved_sources] = {
+    EXCEL_KEYS[:card_approved_sources_oversea] = {
       :approve_no => :integer
     }
 
     EXCEL_OPTIONS ||= {}
-    EXCEL_OPTIONS[:card_approved_sources] = {
+    EXCEL_OPTIONS[:card_approved_sources_oversea] = {
       :position => {
         :start => {
           x: 2,
@@ -35,12 +40,12 @@ module Excels
     }
 
     module ClassMethods
-      def approved_sources_parser
+      def approved_sources_oversea_parser
         parser = NewExcelParser.new
         parser.class_name CardApprovedSource
-        parser.column EXCEL_COLUMNS[:card_approved_sources]
-        parser.key EXCEL_KEYS[:card_approved_sources]
-        parser.option EXCEL_OPTIONS[:card_approved_sources]
+        parser.column EXCEL_COLUMNS[:card_approved_sources_oversea]
+        parser.key EXCEL_KEYS[:card_approved_sources_oversea]
+        parser.option EXCEL_OPTIONS[:card_approved_sources_oversea]
         parser
       end
     end
