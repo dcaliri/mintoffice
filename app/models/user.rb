@@ -98,6 +98,30 @@ class User < ActiveRecord::Base
     where("name NOT LIKE '[X] %'")
   end
 
+  def as_json(options={})
+    super(options.merge(:only => [:name, :gmail_account, :boxcar_account, :notify_email, :api_key]))
+  end
+
+  def create_api_key(name, password)
+    unless api_key
+      self.api_key = Digest::SHA1.hexdigest(name + "--api--" + password)
+      save
+    end
+  end
+
+  def commute
+    collection = commutes.where(leave: nil)
+    if collection.empty?
+      commute = collection.create
+      commute.go!
+      commute
+    else
+      commute = collection.last
+      commute.leave!
+      commute
+    end
+  end
+
 private
   def password_non_blank
     if hashed_password.blank?
