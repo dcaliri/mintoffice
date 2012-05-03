@@ -30,7 +30,7 @@
           <tr>
             <% if sale %>
               <td>
-                  <%= link_to sale[:name], taxbills_path(query: sale[:name], transacted_at: start) %> :
+                  <%= link_to sale[:name], taxbills_path(query: sale[:name], transacted_at: start, :clear_session => true) %> :
               </td>
               <td class="numrow">
                 <%= number_to_currency sale[:tax] %>
@@ -43,7 +43,7 @@
             <% end %>
             <% if purchase %>
               <td>
-                <%= link_to purchase[:name], taxbills_path(query: purchase[:name], transacted_at: start) %> :
+                <%= link_to purchase[:name], taxbills_path(query: purchase[:name], transacted_at: start, :clear_session => true) %> :
               </td>
               <td class="numrow">
                 <%= number_to_currency purchase[:tax] %>
