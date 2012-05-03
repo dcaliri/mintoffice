@@ -3,7 +3,9 @@
 </div>
 
 <% 3.downto(0).each do |quarter|%>
-  <% between = (current_year + (3*(quarter)).month..current_year + (3*(quarter+1)).month) %>
+  <% start = current_year + (3*(quarter)).month %>
+  <% finish = current_year + (3*(quarter+1)).month %>
+  <% between = (start..finish) %>
 
   <% purchase_list = @purchases.where(transacted_at: between).group_by_name_anx_tax %>
   <% sales_list = @sales.where(transacted_at: between).group_by_name_anx_tax %>
@@ -13,7 +15,7 @@
 
   <% unless header.empty? %>
     <h3><%= t('.quarter', year: current_year.year, quarter: quarter+1)%> :
-				<%= number_to_currency sales_list.sum{|sales| sales[:tax]} - (purchase_list.sum{|purchase| purchase[:tax]} + card_list.sum{|card| card[:tax]}) %>
+        <%= number_to_currency sales_list.sum{|sales| sales[:tax]} - (purchase_list.sum{|purchase| purchase[:tax]} + card_list.sum{|card| card[:tax]}) %>
         </h3>
     <table id="list-table">
       <thead>
@@ -27,21 +29,21 @@
         <% header.zip(purchase_list, sales_list, card_list).each do |_, purchase, sale, card| %>
           <tr>
             <% if sale %>
-	            <td>
-	                <%= sale[:name] %> :
-	            </td>
-	            <td class="numrow">
-	              <%= number_to_currency sale[:tax] %>
-	            </td>
-	            <td class="numrow">
-	              <%= number_to_currency sale[:price] %>
-	            </td>
-						<% else %>
-							<td colspan="3"></td>
-						<% end %>	
+              <td>
+                  <%= link_to sale[:name], taxbills_path(query: sale[:name], transacted_at: start) %> :
+              </td>
+              <td class="numrow">
+                <%= number_to_currency sale[:tax] %>
+              </td>
+              <td class="numrow">
+                <%= number_to_currency sale[:price] %>
+              </td>
+            <% else %>
+              <td colspan="3"></td>
+            <% end %>
             <% if purchase %>
               <td>
-                <%= purchase[:name] %> :
+                <%= link_to purchase[:name], taxbills_path(query: purchase[:name], transacted_at: start) %> :
               </td>
               <td class="numrow">
                 <%= number_to_currency purchase[:tax] %>
@@ -53,19 +55,19 @@
               <td colspan="3"></td>
             <% end %>
             <% if card %>
-	            <td>
-	              <%= card[:name] %> :
-	            </td>
-	            <td class="numrow">
-	              <%= number_to_currency card[:tax] %>
-	            </td>
-						<% else %>
-							<td colspan="2"></td>
-						<% end %>
+              <td>
+                <%= card[:name] %> :
+              </td>
+              <td class="numrow">
+                <%= number_to_currency card[:tax] %>
+              </td>
+            <% else %>
+              <td colspan="2"></td>
+            <% end %>
           </tr>
         <% end %>
         <tr style="background-color: yellow;">
-          
+
           <td>
             <%= t('common.total') %>
           </td>
@@ -75,8 +77,8 @@
           <td class="numrow">
             <%= number_to_currency sales_list.sum{|sales| sales[:price]} %>
           </td>
-          
-					<td>
+
+          <td>
             <%= t('common.total') %>
           </td>
           <td class="numrow">
@@ -85,7 +87,7 @@
           <td class="numrow">
             <%= number_to_currency purchase_list.sum{|purchase| purchase[:price]} %>
           </td>
-          
+
           <td>
             <%= t('common.total') %>
           </td>
@@ -96,7 +98,7 @@
       </tbody>
     </table>
   <% end %>
-	<p />
+  <p />
 <% end %>
 
 <h4><%= t('.list')%></h4>
