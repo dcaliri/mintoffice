@@ -412,6 +412,7 @@ ko:
             update: 첨부파일 내용이 성공적으로 업데이트 되었습니다.
         new:
             title: 첨부파일 신규 작성
+        title: 첨부파일 관리
     bank_accounts:
         index:
             title: 은행계좌 목록
@@ -758,6 +759,7 @@ ko:
             title: 기본급 수정
     permissions:
         permission_denied: 접근이 제한되었습니다.
+        title: 권한 관리
     pettycashes:
         balance: 잔액
         index:
