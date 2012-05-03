@@ -35,19 +35,19 @@
                 <td><%= account.number %></td>
                 <td><%= account.note %></td>
                 <% transactions = account.bank_transactions.where(transacted_at: period.all_month) %>
-                <td><%= number_to_currency transactions.total_in %></td>
-                <td><%= number_to_currency transactions.total_out %></td>
-                <td><%= number_to_currency transactions.margin %></td>
+                <td class="numrow"><%= number_to_currency transactions.total_in %></td>
+                <td class="numrow"><%= number_to_currency transactions.total_out %></td>
+                <td class="numrow"><%= number_to_currency transactions.margin %></td>
               </tr>
             <% end %>
-            <tr>
+            <tr style="background-color:yellow;">
               <td>합계</td>
               <td></td>
               <td></td>
               <% transactions = BankTransaction.where(transacted_at: period.all_month) %>
-              <td><%= number_to_currency transactions.total_in %></td>
-              <td><%= number_to_currency transactions.total_out %></td>
-              <td><%= number_to_currency transactions.margin %></td>
+              <td class="numrow"><%= number_to_currency transactions.total_in %></td>
+              <td class="numrow"><%= number_to_currency transactions.total_out %></td>
+              <td class="numrow"><%= number_to_currency transactions.margin %></td>
             </tr>
           </table>
         </td>
