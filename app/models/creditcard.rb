@@ -15,8 +15,8 @@ class Creditcard < ActiveRecord::Base
 
   include Historiable
 
-  CARD_LIST = [:card_used_sources, :card_approved_sources]
-  CARD_LIST_FOR_SELECT = [["이용내역", CARD_LIST[0]],["승인내역", CARD_LIST[1]]]
+  CARD_LIST = [:card_used_sources, :card_approved_sources, :card_approved_sources_oversea]
+  CARD_LIST_FOR_SELECT = [["이용내역", CARD_LIST[0]],["승인내역", CARD_LIST[1]], ["해외승인내역", CARD_LIST[2]]]
 
   include NewStylesheetParsable
   include Excels::CardUsedSourcesInfo
