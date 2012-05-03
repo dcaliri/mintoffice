@@ -1,9 +1,12 @@
 Mintoffice::Application.routes.draw do
   namespace :api do
+    match 'login', controller: :users, action: :login
+#    post 'commutes', controller: :commutes, action: :create
+
     resources :commutes do
       collection do
-        post 'go'
-        post 'leave'
+        post 'checkin'
+        post 'checkout'
       end
     end
   end

@@ -20,7 +20,8 @@ class UsedVacationsController < ApplicationController
 
   def approve
     used_vacation.approve = params[:approve]
-    used_vacation.save!
+    used_vacation.save
+    
     redirect_to [user, :vacations]
   end
 
