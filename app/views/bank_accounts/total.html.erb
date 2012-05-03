@@ -27,9 +27,6 @@
               <th><%= BankAccount.human_attribute_name(:total_in) %></th>
               <th><%= BankAccount.human_attribute_name(:total_out) %></th>
               <th><%= BankAccount.human_attribute_name(:margin) %></th>
-              <th>입금 총액</th>
-              <th>출금 총액</th>
-              <th>입출금 차액</th>
             </tr>
 
             <% BankAccount.all.each do |account| %>

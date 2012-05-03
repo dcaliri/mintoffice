@@ -279,6 +279,9 @@ ko:
                 name: 은행
                 number: 계정
                 note: 설명
+                total_in: 입금 총액
+                total_out: 출금 총액
+                margin: 입출금 차액
             bank_transaction:
                 transacted_at: 거래일자
                 transaction_type: 적요
