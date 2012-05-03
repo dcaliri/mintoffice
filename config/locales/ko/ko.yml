@@ -168,6 +168,7 @@ ko:
                 nickname: 별칭
                 issuer: 발급사
                 cardholder: 소유자이름
+                total: 총 사용금액
             document:
                 title: 문서제목
                 project: 프로젝트
@@ -325,6 +326,7 @@ ko:
                 price: 공금가액(원화)
                 tax: 부가세
                 tip: 봉사료
+                total: 총합
                 monthly_duration: 할부기간
                 exchange_krw: 외화거래일환률
                 foreign_country_code: 외화거래국가코드
