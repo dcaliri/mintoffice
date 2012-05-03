@@ -1,5 +1,5 @@
 class TaxbillsController < ApplicationController
-  before_filter :save_search_option, :only => :index
+  before_filter :manage_search_option, :only => :index
 
   expose(:taxbills) { Taxbill.all }
   expose(:taxbills_pagination) { Taxbill.search(params).latest.page(params[:page]) }
@@ -58,15 +58,20 @@ class TaxbillsController < ApplicationController
     end
     helper_method :oldest_year
 
-    def save_search_option
-      [:billtype, :taxman_id].each do |option|
-        option_for_params = option
+    def manage_search_option
+      options = [:billtype, :taxman_id]
+      options.each do |option|
         option_for_session = "taxbills_#{option}".to_sym
-
-        if params[option_for_params]
-          session[option_for_session] = params[option_for_params]
+        if params[:clear_session]
+          session[option_for_session] = nil
         else
-          params[option_for_params] = session[option_for_session]
+          option_for_params = option
+
+          if params[option_for_params]
+            session[option_for_session] = params[option_for_params]
+          else
+            params[option_for_params] = session[option_for_session]
+          end
         end
       end
     end
