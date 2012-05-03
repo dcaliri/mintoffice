@@ -15,7 +15,7 @@ h2 ..
       th= BankAccount.human_attribute_name(:note)
       th= t('common.menu')
     - bank_accounts.each do |account|
-      tr.selectable
+      tr.selectable onclick="location.href='#{bank_account_path(account)}'"
         td= account.name
         td= account.number
         td= account.note

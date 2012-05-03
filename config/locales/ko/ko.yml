@@ -409,8 +409,10 @@ ko:
             empty: 은행계좌가 없습니다
         new:
             title: 새로운 은행계좌 만들기
+            picture: 통장사본
         edit:
             title: 은행계좌 수정하기
+            picture: 통장사본
         total:
             title: 입출금 합계표
             date: 날짜

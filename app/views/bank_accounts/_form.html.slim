@@ -3,7 +3,7 @@
 
 h2= t("common.title.#{action_name}")
 
-= form_for bank_account do |f|
+= form_for bank_account, html: {multipart: true} do |f|
   .box
     p
       = f.label :name
@@ -14,5 +14,7 @@ h2= t("common.title.#{action_name}")
     p
       = f.label :note
       = f.text_area :note
+    p
+      = render 'shared/attachments/form', label: t("bank_accounts.#{action_name}.picture")
     p
       = f.submit

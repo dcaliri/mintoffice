@@ -6,6 +6,7 @@ class Attachment < ActiveRecord::Base
   has_one :business_client
   has_one :taxbill
   has_one :commute
+  has_one :bank_account
 
   validates_presence_of :filepath, :on => :create, :message => "can't be blank"
   @@storage_path = "#{Rails.root}/files"
