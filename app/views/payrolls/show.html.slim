@@ -6,3 +6,10 @@ h2 ...
 ul
   li= payroll.payday
   li= payroll.user.name
+  
+ul
+  - payroll.payroll_items.each do |pyi|
+    li= "#{pyi.payroll_category.title} : #{number_to_currency pyi.amount}"
+    = link_to "edit", edit_payroll_payroll_item_path(payroll,pyi)
+    
+= link_to "new", new_payroll_payroll_item_path(payroll)

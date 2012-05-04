@@ -14,6 +14,7 @@ end
 
 class PayrollCategory < ActiveRecord::Base
   
+  has_many :payroll_items
   validates_with PayrollCategoryUniqueness
   
   PAYROLL_TYPE = [
