@@ -565,6 +565,7 @@ ko:
             create: "성공적으로 생성되었습니다."
         title: 카드영수증 관리
     common:
+        changes: 변경사항
         button:
             create: 만들기
             update: 갱신하기
@@ -687,7 +688,6 @@ ko:
             title: 인사정보
             related_documents: 관련 문서
             related_admin_actions: 관련 관리 작업
-            changes: 변경사항
             download: 다운로드
         retire:
             title: 퇴직 처리
