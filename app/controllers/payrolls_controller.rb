@@ -10,4 +10,10 @@ class PayrollsController < ApplicationController
     payroll.save!
     redirect_to [:payrolls]
   end
+  
+  def update
+    payroll.save!
+    redirect_to [:payroll]
+  end
+  
 end

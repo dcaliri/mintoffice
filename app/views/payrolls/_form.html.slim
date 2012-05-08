@@ -3,7 +3,7 @@
 
 h2= t("common.title.#{action_name}")
 
-= form_for [payroll], html: {class: "tabular"} do |f|
+= form_for payroll, html: {class: "tabular"} do |f|
   = f.error_messages
   .box
     p
@@ -11,6 +11,18 @@ h2= t("common.title.#{action_name}")
       = f.date_select :payday, :order => [:year, :month, :day], :default => Time.zone.now
     p
       = f.label :user_id
-      = f.select :user_id, options_from_collection_for_select(users, 'id', 'name')
+      = f.select :user_id, options_from_collection_for_select(users, 'id', 'name', payroll.user_id)
+    /!- PayrollCategory.all.each { |c| payroll.items << PayrollItem.new(:payroll_category_id => c.id ) }
+    - PayrollCategory.order(:id).each { |c| payroll.items.build(:payroll_category_id => c.id) unless payroll.items.any?{|i| i.payroll_category_id == c.id }}
+    = f.fields_for :items do |item|
+      = item.hidden_field :payroll_category_id
+      p
+        = item.label item.object.payroll_category.title
+        = item.text_field :amount
     p
       = f.submit
+      
+      
+pre
+  = debug(payroll)
+  = debug(payroll.items)
