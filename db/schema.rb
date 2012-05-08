@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120508060123) do
+ActiveRecord::Schema.define(:version => 20120508042243) do
 
   create_table "attachments", :force => true do |t|
     t.string   "title"
@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(:version => 20120508060123) do
     t.datetime "updated_at",                        :null => false
     t.integer  "user_id",           :default => 0,  :null => false
     t.string   "contenttype",       :default => "", :null => false
-    t.string   "owner_type"
+    t.string   "owner_table_name"
     t.integer  "owner_id"
     t.string   "original_filename"
     t.integer  "seq"
