@@ -106,6 +106,7 @@ ko:
             card_approved_source: 카드 승인내역
             card_used_source: 카드 이용내역
             cardbill: "카드 영수증"
+            change_history: 변경사항
             commute: 출퇴근
             contact: 주소록
             contact_email: 이메일
@@ -161,6 +162,14 @@ ko:
                 storename: "가맹점"
                 storeaddr: "가맹점 주소"
                 approveno: "승인번호"
+            change_history:
+                fieldname: 필드명
+                before_value: 이전 값
+                after_value: 이후 값
+                user_id: 사용자 아이디
+                changable_id: 관계된 테이블 아이디
+                changable_type: 관계된 테이블 명
+                created_at: 생성 일자
             creditcard:
                 cardno: 카드번호
                 short_name: 카드명칭
@@ -565,6 +574,10 @@ ko:
         messages:
             create: "성공적으로 생성되었습니다."
         title: 카드영수증 관리
+    change_histories:
+        title: 변경사항 관리
+        new:
+            title: 새로운 변경사항 만들기
     common:
         changes: 변경사항
         button:

@@ -1,0 +1,20 @@
+#show_command
+  = link_to t('change_histories.new.title'), [:new, :change_history]
+
+h2= t("common.title.show")
+table#list-table
+  tr
+    th= ChangeHistory.human_attribute_name('fieldname')
+    th= ChangeHistory.human_attribute_name('before_value')
+    th= ChangeHistory.human_attribute_name('after_value')
+    th= ChangeHistory.human_attribute_name('created_at')
+  - @histories.each do |history|
+    tr.selectable onclick="location.href='#{history_path(history)}'"
+      td=h history.fieldname
+      td=h history.before_value
+      td=h history.after_value
+      td=h history.created_at
+
+br
+center
+  = will_paginate @histories
