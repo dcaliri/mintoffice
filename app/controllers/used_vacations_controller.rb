@@ -11,19 +11,19 @@ class UsedVacationsController < ApplicationController
   def create
     used_vacation.save!
     Boxcar.send_to_boxcar_group("admin",used_vacation.vacation.user.name, "Used Vacation")
-    redirect_to [user, :vacations]
+    redirect_to [user, vacation]
   end
 
   def update
     used_vacation.save!
     Boxcar.send_to_boxcar_group("admin",used_vacation.vacation.user.name, "Used Vacation")
-    redirect_to [user, :vacations]
+    redirect_to [user, vacation]
   end
 
   def approve
     used_vacation.approve = params[:approve]
     used_vacation.save
-    redirect_to [user, :vacations]
+    redirect_to [user, vacation]
   end
 
   def destroy

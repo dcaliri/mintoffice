@@ -11,7 +11,6 @@
 
 h2 ...
 
-
 .box
   #descr
     table
@@ -24,6 +23,7 @@ h2 ...
       tr
         th= bank_account.class.human_attribute_name(:note)
         td= bank_account.note
+    = render 'changelog', target: bank_account
 
   = render :partial => "shared/show_attachment", :object => bank_account
 

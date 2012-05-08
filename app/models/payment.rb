@@ -3,6 +3,13 @@
 class Payment < ActiveRecord::Base
   belongs_to :user
 
+  include Historiable
+  def history_info
+    Hash[attributes.keys.collect do |key|
+      {key.to_sym => proc { |payment, v| "[#{payment.pay_at}]#{v}" }}
+    end.flatten]
+  end
+
   def self.total_bonus(bonuses)
     bonuses.sum {|after| after[1].to_i }
   end
