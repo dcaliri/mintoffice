@@ -8,6 +8,8 @@ class Taxbill < ActiveRecord::Base
 
   BILL_TYPE = [:purchase, :sale]
 
+  include Historiable
+
   def self.taxmen_list
     Taxman.all.map do |taxman|
       ["#{taxman.fullname} / #{taxman.business_client.name}", taxman.id]

@@ -3,6 +3,11 @@ class TaxbillItem < ActiveRecord::Base
 
   validates :quantity, :numericality => { greater_than: 0 }
 
+  include Historiable
+  def parent
+    taxbill
+  end
+
   def quantity
     amount = read_attribute(:quantity)
     unless amount.nil?

@@ -57,7 +57,7 @@
     <td><%=h @cardbill.approveno %></td>
   </tr>
 </table>
-
+<%= render 'changelog', target: @cardbill %>
 </div>
 <%= render :partial => "shared/show_attachment", :object => @cardbill %>
 <div style="clear: both;"></div>

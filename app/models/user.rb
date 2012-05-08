@@ -25,6 +25,8 @@ class User < ActiveRecord::Base
 
   cattr_accessor :current_user
 
+  include Historiable
+
   def self.find_or_create_with_omniauth!(auth)
 #    users = where(:provider => auth['provider'], :uid => auth['uid'])
     users = where(:gmail_account => auth['info']['email'])
