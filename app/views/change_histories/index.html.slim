@@ -1,5 +1,5 @@
 #show_command
-  = link_to t('change_histories.new.title'), [:new, :change_history]
+  = link_to t('common.title.list'), :root
 
 h2= t("common.title.show")
 table#list-table
@@ -9,7 +9,7 @@ table#list-table
     th= ChangeHistory.human_attribute_name('after_value')
     th= ChangeHistory.human_attribute_name('created_at')
   - @histories.each do |history|
-    tr.selectable onclick="location.href='#{history_path(history)}'"
+    tr.selectable onclick="location.href='#{change_history_path(history)}'"
       td=h history.fieldname
       td=h history.before_value
       td=h history.after_value
