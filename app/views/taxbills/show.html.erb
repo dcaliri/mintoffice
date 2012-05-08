@@ -42,7 +42,6 @@
         <td align="right"><%= taxbill.taxman.phonenumber %></td>
       </tr>
     </table>
-    <%= render 'changelog', target: taxbill %>
   </div>
 
     <%= render :partial => "shared/show_attachment", :object => taxbill %>
@@ -99,6 +98,7 @@
         </tr>
       </table>
       </div>
+      <%= render 'changelog', target: taxbill %>
     </div>
   </div>
 </div>
