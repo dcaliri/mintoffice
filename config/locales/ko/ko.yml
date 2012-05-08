@@ -752,6 +752,8 @@ ko:
         incometax: 소득세
         local_incometax: 지방소득세
         healthcare_adjustment: 건강보험 연말정산분
+    payroll_items:
+        title: 급여명세 항목
     pay_schedules:
         new:
             title: 새로운 기본급 입력
