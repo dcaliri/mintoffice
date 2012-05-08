@@ -1,15 +1,19 @@
 module Historiable
   extend ActiveSupport::Concern
 
+  def parent
+    self
+  end
+
   def make_histories
     changes.each do |k,v|
-      change_histories.build(
+      parent.change_histories.create(
         :fieldname => k,
         :before_value => v[0].to_s,
         :after_value => v[1].to_s,
         :user => User.current_user
       )
-    end
+    end unless parent.new_record?
   end
 
   included do
