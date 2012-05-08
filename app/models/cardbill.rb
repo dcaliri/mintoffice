@@ -4,6 +4,12 @@ class Cardbill < ActiveRecord::Base
 
   include Historiable
 
+  def history_info
+    {
+      :creditcard_id => proc { |cardbill, v| Creditcard.find(v).cardno }
+    }
+  end
+
   # validates_presence_of :cardno
   validates_presence_of :totalamount
   validates_presence_of :approveno

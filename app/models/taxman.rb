@@ -5,7 +5,7 @@ class Taxman < ActiveRecord::Base
   accepts_nested_attributes_for :contact, :allow_destroy => :true, :reject_if => proc { |attrs| attrs.all? { |k, v| v.blank? } }
 
   include Historiable
-  def parent
+  def history_parent
     business_client
   end
 

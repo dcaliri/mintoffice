@@ -2,7 +2,7 @@ class UsedVacation < ActiveRecord::Base
   belongs_to :vacation
 
   include Historiable
-  def parent
+  def history_parent
     vacation
   end
 

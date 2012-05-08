@@ -7,7 +7,7 @@
           ="["
           = history.updated_at.strftime("%Y.%m.%d %H:%M:%S %p")
           ="] "
-          = target.class.human_attribute_name(history.fieldname)
+          = history.target.constantize.human_attribute_name(history.fieldname)
           = ": "
           = history.before_value
           == " &rarr; "

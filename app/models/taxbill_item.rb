@@ -4,7 +4,7 @@ class TaxbillItem < ActiveRecord::Base
   validates :quantity, :numericality => { greater_than: 0 }
 
   include Historiable
-  def parent
+  def history_parent
     taxbill
   end
 
