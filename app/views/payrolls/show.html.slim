@@ -1,15 +1,20 @@
 
 #show_command
-    = link_to t('common.title.list'), [:payrolls]
-h2 ...
+  = link_to t("common.title.new"), new_payroll_payroll_item_path(payroll)
+  = " | "
+  = link_to t('common.title.edit'), edit_payroll_path(payroll)
+  = " | "
+  = link_to t('common.title.list'), [:payrolls]
+h2= "#{payroll.payday} : #{payroll.user.hrinfo.fullname}"
 
-ul
-  li= payroll.payday
-  li= payroll.user.name
-  
-ul
-  - payroll.payroll_items.each do |pyi|
-    li= "#{pyi.payroll_category.title} : #{number_to_currency pyi.amount}"
-    = link_to "edit", edit_payroll_payroll_item_path(payroll,pyi)
+table#list-table
+  tr
+    th= PayrollCategory.human_attribute_name("title")
+    th= PayrollItem.human_attribute_name("amount")
+    th= t("common.menu")
+  - payroll.items.each do |item|
+    tr
+      td= item.payroll_category.title
+      td.numrow= number_to_currency item.amount
+      td= link_to t("common.title.edit"), edit_payroll_payroll_item_path(payroll,item)
     
-= link_to "new", new_payroll_payroll_item_path(payroll)

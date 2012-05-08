@@ -44,6 +44,10 @@ class Hrinfo < ActiveRecord::Base
       address
     end
   end
+  
+  def self.not_retired
+    where("retired_on IS NULL")
+  end
 
   def self.search(text)
     text = "%#{text || ""}%"
