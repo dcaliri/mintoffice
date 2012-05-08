@@ -1,0 +1,16 @@
+#show_command
+  = link_to t('common.title.back'), payroll_path(payroll)
+
+h2= t("common.title.#{action_name}")
+
+= form_for [payroll, payroll_item], html: {class: "tabular"} do |f|
+  = f.error_messages
+  .box
+    p
+      = f.label :payroll_category
+      = f.select :payroll_category_id, options_from_collection_for_select(payroll_category, 'id', 'title',payroll_item.payroll_category_id)
+    p
+      = f.label :amount
+      = f.text_field :amount
+    p
+      = f.submit

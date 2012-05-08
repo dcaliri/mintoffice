@@ -14,6 +14,7 @@
       <b><%= Pettycash.human_attribute_name('description') %></b><br />
       <%=simple_format @pettycash.description %>
     </p>
+    <%= render 'changelog', target: @pettycash %>
   </div>
   <%= render :partial => "shared/show_attachment", :object => @pettycash  %>
   <div style="clear: both;"></div>

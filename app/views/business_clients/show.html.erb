@@ -42,6 +42,7 @@
             <%#= link_to "담당자 추가하기", find_contacts_path(:target_class => @business_client.class, target: @business_client), :class => 'popup' %></td>
         </tr>
       </table>
+      <%= render 'changelog', target: @business_client %>
     </div>
     <%= render :partial => "shared/show_attachment", :object => @business_client %>
     <div style="clear: both;"></div>
