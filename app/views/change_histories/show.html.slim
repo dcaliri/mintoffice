@@ -1,0 +1,31 @@
+
+#show_command
+  = link_to t('common.title.edit'), [:edit, change_history]
+  = " | "
+  = link_to t('common.title.destroy'), change_history, :method => :delete, :confirm => "Are you sure?"
+  = " | "
+  = link_to t('common.title.list'), :change_histories
+
+h2= t("common.title.show")
+.box
+  #descr
+    table border="0" cellspacing="5" cellpadding="5"
+      tr
+        th= ChangeHistory.human_attribute_name('fieldname')
+        td=h change_history.fieldname
+      tr
+        th= ChangeHistory.human_attribute_name('before_value')
+        td=h change_history.before_value
+      tr
+        th= ChangeHistory.human_attribute_name('after_value')
+        td=h change_history.after_value
+      tr
+        th= ChangeHistory.human_attribute_name('user_id')
+        td=h change_history.user_id
+      tr
+        th= ChangeHistory.human_attribute_name('changable_type')
+        td=h change_history.changable_type
+      tr
+        th= ChangeHistory.human_attribute_name('changable_id')
+        td=h change_history.changable_id
+  .clear

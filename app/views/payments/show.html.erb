@@ -48,3 +48,10 @@
     <% end %>
   <% end %>
 </table>
+
+<% if @user.ingroup? "admin" %>
+  <h3><%= t("common.changes")%></h3>
+  <% payments.each do |payment| %>
+    <%= render 'changelog_item', target: payment %>
+  <% end %>
+<% end %>

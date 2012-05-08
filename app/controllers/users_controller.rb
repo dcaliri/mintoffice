@@ -150,7 +150,7 @@ class UsersController < ApplicationController
          if @user.ingroup? "admin"
            redirect_to(:action => "index")
          else
-           redirect_to(:action => "my")
+           redirect_to users_my_path()
          end
        end
      end

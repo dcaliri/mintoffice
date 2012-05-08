@@ -1,0 +1,16 @@
+- if !target.change_histories.blank?
+  ul
+    - for history in target.change_histories.all(:order => "updated_at DESC")
+      li
+        ="["
+        = history.updated_at.strftime("%Y.%m.%d %H:%M:%S %p")
+        ="] "
+        - _model = history.target ? history.target.constantize : target.class
+        = _model.human_attribute_name(history.fieldname)
+        = ": "
+        = history.before_value
+        == " &rarr; "
+        = history.after_value
+        = "("
+        = history.user.name
+        = ")"

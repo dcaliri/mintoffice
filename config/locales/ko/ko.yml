@@ -106,6 +106,7 @@ ko:
             card_approved_source: 카드 승인내역
             card_used_source: 카드 이용내역
             cardbill: "카드 영수증"
+            change_history: 변경사항
             commute: 출퇴근
             contact: 주소록
             contact_email: 이메일
@@ -119,6 +120,7 @@ ko:
             hrinfo: 인사정보
             namecard: 명함정보
             pay_schedule: 기본급
+            payroll_item: 급여 항목
             payroll_category: 급여구분
             payment: 연봉
             pettycash: 소액현금
@@ -139,6 +141,45 @@ ko:
                 owner_table_name: 관계된 테이블명
                 owner_id : 관계된 테이블 ID
                 title: 제목
+            bank_account:
+                name: 은행
+                number: 계정
+                note: 설명
+                total_in: 입금 총액
+                total_out: 출금 총액
+                margin: 입출금 차액
+            bank_transaction:
+                transacted_at: 거래일자
+                transaction_type: 적요
+                in: 입금액
+                out: 출금액
+                note: 내용
+                remain: 잔액
+                branchname: 거래점명
+                file: 엑셀 파일
+                out_bank_account: 상대 계좌번호
+                out_bank_name: 상대 은행
+                promissory_check_amount: 수표 어음금액
+                cms_code: CMS 코드
+            bank_transfer:
+                transfer_type: 이체구분
+                transfered_at: 거래일시
+                result: 처리결과
+                out_bank_account: 출금계좌
+                in_bank_name: 입금은행
+                in_bank_account: 입금계좌
+                money: 처리금액
+                transfer_fee: 수수료
+                error_money: 오류금액
+                registered_at: 등록일자
+                error_code: 오류코드
+                transfer_note: 거래메모
+                incode: 입금인코드
+                out_account_note: 출금통장표시내용
+                in_account_note: 입금통장표시내용
+                in_person_name: 입금인성명
+                cms_code: CMS코드
+                currency_code: 통화 코드
             bonus:
                 gave_at: 지급일
                 amount: 금액
@@ -150,8 +191,53 @@ ko:
                 condition: 업태
                 address: 주소
                 owner: 대표자
+            card_approved_source:
+                used_at: 이용일시
+                approve_no: 승인번호
+                card_no: 이용카드
+                card_holder_name: 이용자명
+                store_name: 가맹점
+                money: 이용금액
+                money_foreign: 현지금액
+                money_type: 현지통화
+                money_type_info: 현지통화명
+                money_dollar: 미화금액
+                used_type: 이용구분
+                monthly_duration: 할부개월수
+                card_type: 카드구분
+                canceled_at: 취소일자
+                status: 매입상태
+                will_be_paied_at: 결제예정일
+            card_used_source:
+                card_no: 카드번호
+                bank_account: 결제계좌번호
+                bank_name: 결제은행명
+                card_holder_name: 카드소유자명
+                used_area: 사용구분
+                approve_no: 승인번호
+                approved_at: 승인일자
+                approved_time: 승인시간
+                sales_type: 매출종류코드
+                money_krw: 승인금액(원화)
+                money_foreign: 승인금액(외화)
+                price: 공금가액(원화)
+                tax: 부가세
+                tip: 봉사료
+                total: 총합
+                monthly_duration: 할부기간
+                exchange_krw: 외화거래일환률
+                foreign_country_code: 외화거래국가코드
+                foreign_country_name: 외화거래국가명
+                store_business_no: 가맹점사업자번호
+                store_name: 가맹점명
+                store_type: 가맹점업종명
+                store_zipcode: 가맹점우편번호
+                store_addr1: 가맹점주소1
+                store_addr2: 가맹점주소2
+                store_tel: 가맹점전화번호
             cardbill:
                 cardno: "카드 번호"
+                creditcard_id: 카드
                 transdate: "사용일자"
                 amount: "금액"
                 vat: "부가가치세"
@@ -160,6 +246,44 @@ ko:
                 storename: "가맹점"
                 storeaddr: "가맹점 주소"
                 approveno: "승인번호"
+            change_history:
+                fieldname: 필드명
+                before_value: 이전 값
+                after_value: 이후 값
+                user_id: 사용자 아이디
+                changable_id: 관계된 테이블 아이디
+                changable_type: 관계된 테이블 명
+                created_at: 생성 일자
+            commute:
+                go: 출근
+                leave: 퇴근
+            contact:
+                name: 이름
+                firstname: 이름
+                lastname: 성
+                company: 회사
+                department: 부서
+                position: 직위
+            contact_address:
+                target: 대상
+                country: 국가
+                province: 주
+                city: 도시
+                other1: 군/구
+                other2: 나머지
+                postal_code: 우편번호
+            contact_address_tag:
+                name: 대상
+            contact_email:
+                target: 대상
+                email: 이메일
+            contact_email_tag:
+                name: 대상
+            contact_phone_number:
+                target: 대상
+                number: 전화번호
+            contact_phone_number_tag:
+                name: 대상
             creditcard:
                 cardno: 카드번호
                 short_name: 카드명칭
@@ -195,10 +319,15 @@ ko:
                 phone: "전화번호"
                 homepage: "홈페이지"
                 email: "이메일주소"
+            payroll:
+                payday: 지급일
             payroll_category:
                 prtype: 지급/차감 구분
                 code: 연결코드
                 title: 항목이름
+            payroll_item:
+                amount: 금액
+                payroll_category: 급여항목 구분
             pay_schedule:
                 started_at: 시작일
                 income: 총 연봉 금액
@@ -275,116 +404,6 @@ ko:
                 to: 종료
                 period: 기간
                 note: 사유
-            bank_account:
-                name: 은행
-                number: 계정
-                note: 설명
-                total_in: 입금 총액
-                total_out: 출금 총액
-                margin: 입출금 차액
-            bank_transaction:
-                transacted_at: 거래일자
-                transaction_type: 적요
-                in: 입금액
-                out: 출금액
-                note: 내용
-                remain: 잔액
-                branchname: 거래점명
-                file: 엑셀 파일
-                out_bank_account: 상대 계좌번호
-                out_bank_name: 상대 은행
-                promissory_check_amount: 수표 어음금액
-                cms_code: CMS 코드
-            bank_transfer:
-                transfer_type: 이체구분
-                transfered_at: 거래일시
-                result: 처리결과
-                out_bank_account: 출금계좌
-                in_bank_name: 입금은행
-                in_bank_account: 입금계좌
-                money: 처리금액
-                transfer_fee: 수수료
-                error_money: 오류금액
-                registered_at: 등록일자
-                error_code: 오류코드
-                transfer_note: 거래메모
-                incode: 입금인코드
-                out_account_note: 출금통장표시내용
-                in_account_note: 입금통장표시내용
-                in_person_name: 입금인성명
-                cms_code: CMS코드
-                currency_code: 통화 코드
-            card_used_source:
-                card_no: 카드번호
-                bank_account: 결제계좌번호
-                bank_name: 결제은행명
-                card_holder_name: 카드소유자명
-                used_area: 사용구분
-                approve_no: 승인번호
-                approved_at: 승인일자
-                approved_time: 승인시간
-                sales_type: 매출종류코드
-                money_krw: 승인금액(원화)
-                money_foreign: 승인금액(외화)
-                price: 공금가액(원화)
-                tax: 부가세
-                tip: 봉사료
-                total: 총합
-                monthly_duration: 할부기간
-                exchange_krw: 외화거래일환률
-                foreign_country_code: 외화거래국가코드
-                foreign_country_name: 외화거래국가명
-                store_business_no: 가맹점사업자번호
-                store_name: 가맹점명
-                store_type: 가맹점업종명
-                store_zipcode: 가맹점우편번호
-                store_addr1: 가맹점주소1
-                store_addr2: 가맹점주소2
-                store_tel: 가맹점전화번호
-            card_approved_source:
-                used_at: 이용일시
-                approve_no: 승인번호
-                card_no: 이용카드
-                card_holder_name: 이용자명
-                store_name: 가맹점
-                money: 이용금액
-                money_foreign: 현지금액
-                money_type: 현지통화
-                money_type_info: 현지통화명
-                money_dollar: 미화금액
-                used_type: 이용구분
-                monthly_duration: 할부개월수
-                card_type: 카드구분
-                canceled_at: 취소일자
-                status: 매입상태
-                will_be_paied_at: 결제예정일
-            contact:
-                name: 이름
-                firstname: 이름
-                lastname: 성
-                company: 회사
-                department: 부서
-                position: 직위
-            contact_email:
-                target: 대상
-                email: 이메일
-            contact_phone_number:
-                target: 대상
-                number: 전화번호
-            contact_address:
-                target: 대상
-                country: 국가
-                province: 주
-                city: 도시
-                other1: 군/구
-                other2: 나머지
-                postal_code: 우편번호
-            contact_address_tag:
-                name: 대상
-            contact_email_tag:
-                name: 대상
-            contact_phone_number_tag:
-                name: 대상
         errors:
             template:
                 header: 오류가 발생했습니다.
@@ -564,7 +583,12 @@ ko:
         messages:
             create: "성공적으로 생성되었습니다."
         title: 카드영수증 관리
+    change_histories:
+        title: 변경사항 관리
+        new:
+            title: 새로운 변경사항 만들기
     common:
+        changes: 변경사항
         button:
             create: 만들기
             update: 갱신하기
@@ -687,7 +711,6 @@ ko:
             title: 인사정보
             related_documents: 관련 문서
             related_admin_actions: 관련 관리 작업
-            changes: 변경사항
             download: 다운로드
         retire:
             title: 퇴직 처리
@@ -752,6 +775,8 @@ ko:
         incometax: 소득세
         local_incometax: 지방소득세
         healthcare_adjustment: 건강보험 연말정산분
+    payroll_items:
+        title: 급여명세 항목
     pay_schedules:
         new:
             title: 새로운 기본급 입력
