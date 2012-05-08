@@ -119,6 +119,7 @@ ko:
             hrinfo: 인사정보
             namecard: 명함정보
             pay_schedule: 기본급
+            payroll_item: 급여 항목
             payroll_category: 급여구분
             payment: 연봉
             pettycash: 소액현금
@@ -196,10 +197,15 @@ ko:
                 phone: "전화번호"
                 homepage: "홈페이지"
                 email: "이메일주소"
+            payroll:
+                payday: 지급일
             payroll_category:
                 prtype: 지급/차감 구분
                 code: 연결코드
                 title: 항목이름
+            payroll_item:
+                amount: 금액
+                payroll_category: 급여항목 구분
             pay_schedule:
                 started_at: 시작일
                 income: 총 연봉 금액
