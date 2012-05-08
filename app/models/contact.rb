@@ -14,6 +14,8 @@ class Contact < ActiveRecord::Base
   has_many :phone_numbers, class_name: 'ContactPhoneNumber', :dependent => :destroy
   accepts_nested_attributes_for :phone_numbers, :allow_destroy => :true, :reject_if => REJECT_IF_EMPTY
 
+  include Historiable
+
   class << self
     def search(query)
       query = "%#{query || ""}%"
@@ -21,11 +23,6 @@ class Contact < ActiveRecord::Base
     end
 
     def search_by_name(query)
-      # if ActiveRecord::Base.connection.class == ActiveRecord::ConnectionAdapters::SQLite3Adapter
-      #   where("firstname || lastname like ?", query)
-      # else
-      #   where("CONCAT(firstname, lastname) like ?", query)
-      # end
       where(search_by_name_query, query)
     end
 

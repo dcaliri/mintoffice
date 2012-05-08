@@ -1,5 +1,5 @@
 - if @user.ingroup? "admin"
-  h3= t(".changes")
+  h3= t("common.changes")
   - if !target.change_histories.blank?
     ul
       - for history in target.change_histories.all(:order => "updated_at DESC")
