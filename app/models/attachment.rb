@@ -1,5 +1,12 @@
 class Attachment < ActiveRecord::Base
+  default_scope :order => 'seq ASC'
   belongs_to  :user
+
+  belongs_to :owner, :polymorphic => true
+  # before_save :save_user_info
+  # def save_user_info
+  #   self.user = User.current_user
+  # end
 
   has_one :cardbill
   has_one :pettycash
@@ -13,18 +20,18 @@ class Attachment < ActiveRecord::Base
 
   def self.for_me(obj,order = "")
     if order.blank?
-      Attachment.all(:conditions=>{:owner_table_name => obj.class.table_name,
+      Attachment.all(:conditions=>{:owner_type => obj.class.to_s,
                                     :owner_id => obj.id},
                                     :order => "seq ASC")
     else
-      Attachment.all(:conditions=>{:owner_table_name => obj.class.table_name,
+      Attachment.all(:conditions=>{:owner_type => obj.class.to_s,
                                   :owner_id => obj.id},
                                   :order => order)
     end
   end
 
   def self.maximum_seq_for_me(obj)
-      Attachment.maximum(:seq, :conditions=>{:owner_table_name => obj.class.table_name,
+      Attachment.maximum(:seq, :conditions=>{:owner_type => obj.class.to_s,
                                     :owner_id => obj.id})
   end
 
@@ -34,7 +41,7 @@ class Attachment < ActiveRecord::Base
   end
 
   def save_for(obj, user)
-    self.owner_table_name = obj.class.table_name
+    self.owner_type = obj.class.to_s
     self.owner_id = obj.id
     unless user
       user = User.find(1)
@@ -52,6 +59,7 @@ class Attachment < ActiveRecord::Base
   end
 
   def uploaded_file=(upload_file)
+    Rails.logger.info "uploaded = #{uploaded_file}"
     filename = base_part_of(upload_file.original_filename)
     self.original_filename = filename
     filename = Attachment.disk_filename(filename)

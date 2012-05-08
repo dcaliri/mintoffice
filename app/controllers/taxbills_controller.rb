@@ -12,9 +12,8 @@ class TaxbillsController < ApplicationController
   end
 
   def show
-    @attachments = Attachment.for_me(taxbill)
     session[:attachments] = [] if session[:attachments].nil?
-    @attachments.each { |at| session[:attachments] << at.id }
+    taxbill.attachments.each { |at| session[:attachments] << at.id }
   end
 
   def create
@@ -26,7 +25,8 @@ class TaxbillsController < ApplicationController
   end
 
   def edit
-    @attachments = Attachment.for_me(taxbill)
+#    @attachments = Attachment.for_me(taxbill)
+#    @attachments = taxbill.attachments
   end
 
   def update

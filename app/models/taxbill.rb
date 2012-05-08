@@ -8,6 +8,8 @@ class Taxbill < ActiveRecord::Base
 
   BILL_TYPE = [:purchase, :sale]
 
+  has_many :attachments, :as => :owner
+
   include Historiable
 
   def self.taxmen_list
