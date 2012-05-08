@@ -152,6 +152,7 @@ ko:
                 owner: 대표자
             cardbill:
                 cardno: "카드 번호"
+                creditcard_id: 카드
                 transdate: "사용일자"
                 amount: "금액"
                 vat: "부가가치세"

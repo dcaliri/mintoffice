@@ -11,7 +11,7 @@ class BankAccountsController < ApplicationController
   def create
     bank_account.save!
     Attachment.save_for(bank_account, @user, params[:attachment])
-    redirect_to :bank_accounts
+    redirect_to bank_account
   end
 
   def edit
@@ -21,7 +21,7 @@ class BankAccountsController < ApplicationController
   def update
     bank_account.save!
     Attachment.save_for(bank_account, @user, params[:attachment])
-    redirect_to :bank_accounts
+    redirect_to bank_account
   end
 
   def destroy
