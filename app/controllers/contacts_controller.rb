@@ -15,12 +15,12 @@ class ContactsController < ApplicationController
   def select
     @contact = Contact.find(params[:id])
 
-    target_class = params[:parent_class] || params[:target_class]
-    target_id = params[:parent] || params[:target]
+    target_class = params[:parent_class].blank? ? params[:target_class] : params[:parent_class]
+    target_id = params[:parent].blank? ? params[:target] : params[:parent]
 
     @target = target_class.constantize.find(target_id)
 
-    if params[:parent_class]
+    unless params[:parent_class].blank?
       collections = @target.send(params[:target_class].downcase.pluralize)
       unless params[:target].blank?
         @target = collections.find(params[:target])
