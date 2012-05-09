@@ -16,6 +16,7 @@ class Contact < ActiveRecord::Base
 
   include Historiable
   include Attachmentable
+  include Taggable
 
   class << self
     def search(query)

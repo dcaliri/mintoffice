@@ -2,13 +2,13 @@ class Document < ActiveRecord::Base
   belongs_to :project
   has_many :document_owners
   has_many :users, :through => :document_owners, :source => :user
-  has_and_belongs_to_many :tags
 
   validates_presence_of :title
 
   include Attachmentable
+  include Taggable
 
-  def user_for_tag (tag_name)
+  def user_for_tag(tag_name)
     tag_names = self.tags.index_by {|t1| t1.name }
     all_user = User.all.index_by {|u| u.name}
     target_user = tag_names.keys & all_user.keys

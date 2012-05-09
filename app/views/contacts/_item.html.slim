@@ -36,3 +36,7 @@ table
           = link_to t('common.link.edit'), [:edit, contact]
           = " | "
           = link_to "제거", [contact, address], :method => :delete, :confirm => "Are you sure?"
+
+    tr
+      th= Document.human_attribute_name("tags")
+      td= contact.tag_list
