@@ -59,7 +59,6 @@ class Attachment < ActiveRecord::Base
   end
 
   def uploaded_file=(upload_file)
-    Rails.logger.info "uploaded = #{uploaded_file}"
     filename = base_part_of(upload_file.original_filename)
     self.original_filename = filename
     filename = Attachment.disk_filename(filename)
