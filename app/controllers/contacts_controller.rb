@@ -2,6 +2,8 @@ class ContactsController < ApplicationController
   expose(:contacts) { Contact.all }
   expose(:contact)
 
+  before_filter :only => [:show] { |c| c.save_attachment_id contact }
+
   def index
     @contacts = Contact.search(params[:query])
   end

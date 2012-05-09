@@ -1,5 +1,7 @@
 class Cardbill < ActiveRecord::Base
-  belongs_to :attachment
+  has_many :attachments, :as => :owner
+  accepts_nested_attributes_for :attachments
+#  belongs_to :attachment
   belongs_to :creditcard
 
   include Historiable

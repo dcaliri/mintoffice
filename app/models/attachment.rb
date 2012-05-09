@@ -3,17 +3,10 @@ class Attachment < ActiveRecord::Base
   belongs_to  :user
 
   belongs_to :owner, :polymorphic => true
-  # before_save :save_user_info
-  # def save_user_info
-  #   self.user = User.current_user
-  # end
-
-  has_one :cardbill
-  has_one :pettycash
-  has_one :business_client
-  has_one :taxbill
-  has_one :commute
-  has_one :bank_account
+  before_save :save_user_info
+  def save_user_info
+    self.user = User.current_user unless self.user
+  end
 
   validates_presence_of :filepath, :on => :create, :message => "can't be blank"
   @@storage_path = "#{Rails.root}/files"

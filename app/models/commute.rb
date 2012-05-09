@@ -1,6 +1,7 @@
 class Commute < ActiveRecord::Base
   belongs_to :user
-  belongs_to :attachment
+  has_many :attachments, :as => :owner
+  accepts_nested_attributes_for :attachments
 
   def self.latest
     order("go DESC")

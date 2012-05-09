@@ -37,7 +37,7 @@
   </tr>
 </table>
 </div>
-<%= render :partial => "shared/show_attachment", :object => @attachment  %>
+<%= render "shared/attachments/detail", :target => OpenStruct.new(:attachments => [@attachment]) %>
 <div style="clear:both;"></div>
 </div>
 

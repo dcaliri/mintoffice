@@ -19,7 +19,9 @@
     <%= f.collection_select(:project_id, @projects, :id, :name)%>
   </p>
 
-  <%= render :partial => "shared/edit_attachment", :object => @document %>
+  <p>
+    <%= render 'shared/attachments/form', form: f %>
+  </p>
 
   <p>
     <%= f.label :owners, Document.human_attribute_name('owner') %>

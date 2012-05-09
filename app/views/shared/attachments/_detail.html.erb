@@ -10,7 +10,7 @@
   <% end %>
       <center>
   <% if attachments && at < attachments.count %>
-        <%= link_to t(".download"), :controller => "attachments", :action => "download", :id => attachment.id %> ...
+        <%= link_to t("common.link.download"), :controller => "attachments", :action => "download", :id => attachment.id %> ...
   <% end %>
         <% if attachments %>
           <% 0.upto(attachments.count - 1) do |i| %>

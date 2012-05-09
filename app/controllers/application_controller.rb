@@ -10,6 +10,8 @@ class ApplicationController < ActionController::Base
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
 
+  include Attachmentable
+
   before_filter do |controller|
     User.current_user = User.find(controller.session[:user_id]) unless controller.session[:user_id].nil?
   end

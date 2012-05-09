@@ -44,7 +44,7 @@
       </table>
       <%= render 'changelog', target: @business_client %>
     </div>
-    <%= render :partial => "shared/show_attachment", :object => @business_client %>
+    <%= render "shared/attachments/detail", :target => @business_client %>
     <div style="clear: both;"></div>
   </div>
 </div>

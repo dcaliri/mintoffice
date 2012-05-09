@@ -1,5 +1,7 @@
 class Pettycash < ActiveRecord::Base
-  belongs_to :attachment
+  has_many :attachments, :as => :owner
+  accepts_nested_attributes_for :attachments
+
   validates_numericality_of :inmoney
   validates_numericality_of :outmoney
 

@@ -1,5 +1,6 @@
 class TaxbillsController < ApplicationController
   before_filter :manage_search_option, :only => :index
+  before_filter :only => [:show] { |c| c.save_attachment_id taxbill }
 
   expose(:taxbills) { Taxbill.all }
   expose(:taxbills_pagination) { Taxbill.search(params).latest.page(params[:page]) }
@@ -9,11 +10,6 @@ class TaxbillsController < ApplicationController
     @purchases = Taxbill.purchases
     @sales = Taxbill.sales
     @cards = CardUsedSource
-  end
-
-  def show
-    session[:attachments] = [] if session[:attachments].nil?
-    taxbill.attachments.each { |at| session[:attachments] << at.id }
   end
 
   def create

@@ -614,6 +614,7 @@ ko:
             logout: "로그아웃"
             edit: "수정"
             destroy: "삭제"
+            download: "다운로드"
         menu: 메뉴
         total: 합계
     commutes:

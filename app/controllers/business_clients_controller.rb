@@ -1,4 +1,9 @@
 class BusinessClientsController < ApplicationController
+  before_filter :only => [:show] do |c|
+    @business_client = BusinessClient.find(params[:id])
+    c.save_attachment_id @business_client
+  end
+
   def index
     @business_clients = BusinessClient.search(params[:query]).page(params[:page])
   end
@@ -9,15 +14,11 @@ class BusinessClientsController < ApplicationController
 
   def show
     @business_client = BusinessClient.find(params[:id])
-    @attachments = Attachment.for_me(@business_client)
-    session[:attachments] = [] if session[:attachments].nil?
-    @attachments.each { |at| session[:attachments] << at.id }
   end
 
   def create
     @business_client = BusinessClient.new(params[:business_client])
     @business_client.save!
-    Attachment.save_for(@business_client, @user, params[:attachment])
     redirect_to @business_client, notice: I18n.t("common.messages.created", :model => BusinessClient.model_name.human)
   rescue ActiveRecord::RecordInvalid
     render 'new'
@@ -25,13 +26,11 @@ class BusinessClientsController < ApplicationController
 
   def edit
     @business_client = BusinessClient.find(params[:id])
-    @attachments = Attachment.for_me(@business_client)
   end
 
   def update
     @business_client = BusinessClient.find(params[:id])
     @business_client.update_attributes!(params[:business_client])
-    Attachment.save_for(@business_client, @user, params[:attachment])
     redirect_to @business_client, notice: I18n.t("common.messages.updated", :model => BusinessClient.model_name.human)
   rescue ActiveRecord::RecordInvalid
     render 'edit'

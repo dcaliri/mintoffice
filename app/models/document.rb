@@ -4,12 +4,15 @@ class Document < ActiveRecord::Base
   has_many :users, :through => :document_owners, :source => :user
   has_and_belongs_to_many :tags
 
+  has_many :attachments, :as => :owner
+  accepts_nested_attributes_for :attachments
+
   validates_presence_of :title
 
   def user_for_tag (tag_name)
     tag_names = self.tags.index_by {|t1| t1.name }
-		all_user = User.all.index_by {|u| u.name}
-		target_user = tag_names.keys & all_user.keys
+    all_user = User.all.index_by {|u| u.name}
+    target_user = tag_names.keys & all_user.keys
 
     if (tag_names.keys.include? (tag_name)) && target_user.size == 1
       User.find_by_name(target_user[0])
