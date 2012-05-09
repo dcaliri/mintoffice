@@ -15,6 +15,6 @@ h2= t("common.title.#{action_name}")
       = f.label :note
       = f.text_area :note
     p
-      = render 'shared/attachments/form', label: t("bank_accounts.#{action_name}.picture")
+      = render 'shared/attachments/form', form: f
     p
       = f.submit

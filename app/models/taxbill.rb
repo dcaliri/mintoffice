@@ -3,12 +3,12 @@
 class Taxbill < ActiveRecord::Base
   belongs_to :taxman
   belongs_to :business_client
-  belongs_to :attachment
   has_many :items, :class_name => 'TaxbillItem', :dependent => :destroy
 
   BILL_TYPE = [:purchase, :sale]
 
   include Historiable
+  include Attachmentable
 
   def self.taxmen_list
     Taxman.all.map do |taxman|

@@ -12,5 +12,5 @@ h2= t("commutes.#{form_type}.title")
       = f.label type
       = DateTime.now.strftime("%Y-%m-%d %H:%M")
     p
-      = render 'shared/attachments/form', label: t("commutes.#{form_type}.picture")
+      = render 'shared/attachments/form', form: f
   = f.submit t("commutes.#{form_type}.submit")

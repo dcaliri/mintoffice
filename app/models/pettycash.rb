@@ -1,9 +1,9 @@
 class Pettycash < ActiveRecord::Base
-  belongs_to :attachment
   validates_numericality_of :inmoney
   validates_numericality_of :outmoney
 
   include Historiable
+  include Attachmentable
 
   def self.search(text)
     text = "%#{text || ""}%"

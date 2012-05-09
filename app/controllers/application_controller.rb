@@ -64,4 +64,9 @@ class ApplicationController < ActionController::Base
       @title || t("#{controller_name}.title")
     end
   end
+
+  def save_attachment_id(resource)
+    session[:attachments] = [] if session[:attachments].nil?
+    resource.attachments.each { |at| session[:attachments] << at.id }
+  end
 end

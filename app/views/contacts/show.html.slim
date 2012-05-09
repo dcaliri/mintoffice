@@ -14,5 +14,5 @@ h2 #{contact.name}
     = render 'item', menu: true
     = render 'changelog', target: contact
 
-  = render :partial => "shared/show_attachment", :object => contact
+  = render "shared/attachments/detail", :target => contact
   .clear

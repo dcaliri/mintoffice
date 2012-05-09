@@ -138,7 +138,7 @@ ko:
                 file: 파일
                 filepath: 저장된 파일명
                 original_filename: 원 파일명
-                owner_table_name: 관계된 테이블명
+                owner_type: 관계된 테이블명
                 owner_id : 관계된 테이블 ID
                 title: 제목
             bank_account:
@@ -623,6 +623,7 @@ ko:
             logout: "로그아웃"
             edit: "수정"
             destroy: "삭제"
+            download: "다운로드"
         menu: 메뉴
         total: 합계
     commutes:

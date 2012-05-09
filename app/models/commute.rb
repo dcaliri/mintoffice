@@ -1,6 +1,7 @@
 class Commute < ActiveRecord::Base
   belongs_to :user
-  belongs_to :attachment
+
+  include Attachmentable
 
   def self.latest
     order("go DESC")

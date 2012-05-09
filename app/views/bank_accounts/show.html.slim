@@ -25,6 +25,6 @@ h2 ...
         td= bank_account.note
     = render 'changelog', target: bank_account
 
-  = render :partial => "shared/show_attachment", :object => bank_account
+  = render "shared/attachments/detail", :target => bank_account
 
   .clear
