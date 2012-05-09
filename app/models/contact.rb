@@ -27,11 +27,11 @@ class Contact < ActiveRecord::Base
     end
 
     def search_by_name_query
-      if ActiveRecord::Base.connection.class == ActiveRecord::ConnectionAdapters::SQLite3Adapter
-        "firstname || lastname like ?"
-      else
+      #if ActiveRecord::Base.connection.class == ActiveRecord::ConnectionAdapters::SQLite3Adapter
+      #  "firstname || lastname like ?"
+      #else
         "CONCAT(firstname, lastname) like ?"
-      end
+      #end
     end
 
     def search_by_company(query)
