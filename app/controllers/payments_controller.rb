@@ -7,6 +7,7 @@ class PaymentsController < ApplicationController
   def redirect_unless_permission
   end
 
+  before_filter :redirect_unless_admin, :only => :index
   before_filter {|controller| controller.redirect_unless_me(user)}
 
   def index
