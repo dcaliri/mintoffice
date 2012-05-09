@@ -21,7 +21,6 @@ h2= t("common.title.#{action_name}")
       = f.label :position
       = f.text_field :position
 
-
     - contact.addresses.new
     h3 주소
     = f.fields_for :addresses do |address_field|
@@ -77,3 +76,5 @@ h2= t("common.title.#{action_name}")
     = render 'shared/attachments/form', form: f
     p
       = f.submit
+
+= render 'tags/form', target: contact

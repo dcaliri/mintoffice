@@ -126,6 +126,7 @@ ko:
             pettycash: 소액현금
             project: 프로젝트
             required_tag: 필수 태그 항목
+            tag: 태그
             taxman: 담당자
             taxbill: 세금계산서
             taxbill_item: 항목
@@ -360,6 +361,8 @@ ko:
                 fullname: 이름
                 email: 이메일
                 phonenumber: 전화번호
+            tag:
+                name: 태그명
             taxbill:
                 billtype: 거래구분
                 price: 총합 금액

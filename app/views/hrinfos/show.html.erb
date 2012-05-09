@@ -37,6 +37,7 @@
       <%= link_to t('required_tags.new.title'), :controller => "required_tags",  :action => "new", :modelname => Hrinfo.name, :returnurl => request.url %>
     </div>
 <% end %>
+
     <h3><%= t('.related_documents') %></h3>
     <ul>
       <% if !@required_tagnames.blank? %>
@@ -56,6 +57,7 @@
         <% end %>
       <% end %>
     </ul>
+
     <h3><%= t(".related_admin_actions")%></h3>
     <ul>
       <% if @user.ingroup?("admin") || @hrinfo.user == @user %>
