@@ -5,7 +5,7 @@ class AttachmentsController < ApplicationController
   # GET /attachments.xml
   protect_from_forgery :except => [:save]
   def index
-    @attachments = Attachment.paginate(:page => params[:page], :per_page => 20)
+    @attachments = Attachment.paginate(:page => params[:page], :per_page => 20).order('created_at DESC')
 
     respond_to do |format|
       format.html # index.html.erb

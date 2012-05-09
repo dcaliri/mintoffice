@@ -1,6 +1,4 @@
 class PaymentsController < ApplicationController
-  before_filter :redirect_unless_me, :only => :show
-
   expose(:users) { User(:protected) }
   expose(:user)
   expose(:payments) { user.payments }
@@ -9,13 +7,8 @@ class PaymentsController < ApplicationController
   def redirect_unless_permission
   end
 
-  before_filter :redirect_unless_me, :only => :show
-
-  def redirect_unless_me
-    unless @user.ingroup?(:admin)
-      force_redirect if @user.id != params[:id].to_i
-    end
-  end
+  before_filter :redirect_unless_admin, :only => :index
+  before_filter {|controller| controller.redirect_unless_me(user)}
 
   def index
     @users = User(:protected).enabled.page(params[:page])

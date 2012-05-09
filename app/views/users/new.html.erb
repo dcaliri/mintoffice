@@ -34,13 +34,9 @@
     <%= f.label :boxcar_account, User.human_attribute_name("boxcar_account")  %>
     <%= f.text_field :boxcar_account, :size => 40 %>
   </p>
-
-<%= fields_for :attachment, @attachment do |attachment| -%>
   <p>
-    <%= attachment.label :uploaded_file, t("common.title.attachment") %>
-    <%= attachment.file_field :uploaded_file %>
+    <%= render 'shared/attachments/form', form: f %>
   </p>
-<% end -%>
 </div>
   <p>
     <%= f.submit t("common.button.create") %>

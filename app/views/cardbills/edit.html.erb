@@ -47,7 +47,8 @@
     <%= f.text_field :approveno %>
   </p>
   <p>
-  <%= render :partial => "shared/edit_attachment", :object => @cardbill %>
+    <%= render 'shared/attachments/form', form: f %>
+  </p>
 
 </div>
 <%= f.submit t('common.button.update') %>

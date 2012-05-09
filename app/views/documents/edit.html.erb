@@ -19,7 +19,9 @@
     <%= f.collection_select(:project_id, @projects, :id, :name)%>
   </p>
 
-  <%= render :partial => "shared/edit_attachment", :object => @document %>
+  <p>
+    <%= render 'shared/attachments/form', form: f %>
+  </p>
 
   <p>
     <%= f.label :owners, Document.human_attribute_name('owner') %>
@@ -31,20 +33,9 @@
     <% else %>
     <% end %>
   </p>
-  <p>
-    <%= f.label :tags, Document.human_attribute_name('tags') %>
-    <% if !@document.tags.blank? %>
-      <% for tag in @document.tags %>
-        <%= tag.name %> [<%= link_to t('common.title.destroy'), :action => :remove_tag, :id => @document, :tid => tag.id %>]
-                        <% unless tag == @document.tags.last %><br /><% end %>
-      <% end %>
-    <% else %>
-    <% end %>
-  </p>
 </div>
 <%= f.submit t('common.button.update') %>
 <% end %>
-
 <%= form_tag({:action => :add_owner, :id => @document},{:class => 'tabular'}) do %>
 <div class="box">
   <p>
@@ -55,12 +46,4 @@
 <%= submit_tag t("common.button.add"), :id => "submit" %>
 <% end -%>
 
-<%= form_tag({:action => :add_tag, :id => @document},{:class => "tabular"}) do %>
-<div class="box">
-  <p>
-    <%= label_tag :tagname, t(".addtag") %>
-    <%= text_field_tag :tagname %>
-  </p>
-</div>
-<%= submit_tag t("common.button.add"), :id => "submit" %>
-<% end -%>
+<%= render 'tags/form', target: @document %>

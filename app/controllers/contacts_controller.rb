@@ -2,6 +2,8 @@ class ContactsController < ApplicationController
   expose(:contacts) { Contact.all }
   expose(:contact)
 
+  before_filter :only => [:show] { |c| c.save_attachment_id contact }
+
   def index
     @contacts = Contact.search(params[:query])
   end
@@ -13,12 +15,12 @@ class ContactsController < ApplicationController
   def select
     @contact = Contact.find(params[:id])
 
-    target_class = params[:parent_class] || params[:target_class]
-    target_id = params[:parent] || params[:target]
+    target_class = params[:parent_class].blank? ? params[:target_class] : params[:parent_class]
+    target_id = params[:parent].blank? ? params[:target] : params[:parent]
 
     @target = target_class.constantize.find(target_id)
 
-    if params[:parent_class]
+    unless params[:parent_class].blank?
       collections = @target.send(params[:target_class].downcase.pluralize)
       unless params[:target].blank?
         @target = collections.find(params[:target])
@@ -31,25 +33,13 @@ class ContactsController < ApplicationController
     @target.save!
   end
 
-  def show
-    @attachments = Attachment.for_me(contact, "seq ASC")
-    session[:attachments] = [] if session[:attachments].nil?
-    @attachments.each { |at| session[:attachments] << at.id }
-  end
-
-  def edit
-    @attachments = Attachment.for_me(contact, "seq ASC")
-  end
-
   def create
     contact.save!
-    Attachment.save_for(contact, @user, params[:attachment])
     redirect_to contact
   end
 
   def update
     contact.save!
-    Attachment.save_for(contact, @user, params[:attachment])
     redirect_to contact
   end
 

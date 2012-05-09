@@ -1,4 +1,9 @@
 class DocumentsController < ApplicationController
+  before_filter :only => [:show] do |c|
+    @document = Document.find(params[:id])
+    c.save_attachment_id @document
+  end
+
   # GET /documents
   # GET /documents.xml
   def index
@@ -27,16 +32,13 @@ class DocumentsController < ApplicationController
       redirect_to :controller => "main", :action => "index"
       return
     end
-    @attachments = Attachment.for_me(@document)
-    session[:attachments] = [] if session[:attachments].nil?      
-    @attachments.each { |at| session[:attachments] << at.id }
-    
+
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @document }
     end
   end
-  
+
   def add_owner
     owner = User.find_by_name(params[:username]);
     document = Document.find(params[:id])
@@ -49,18 +51,18 @@ class DocumentsController < ApplicationController
     else
       flash[:notice] = 'No such user'
     end
-    
+
     redirect_to :action => "edit", :id => document
   end
-  
+
   def remove_owner
     owner = User.find(params[:uid])
     document = Document.find(params[:id])
     document.users.delete(owner)
-    
+
     redirect_to :action => "edit", :id => document
   end
-  
+
   def add_tag
     tag = Tag.find_or_create_by_name(params[:tagname])
     document = Document.find(params[:id])
@@ -69,22 +71,21 @@ class DocumentsController < ApplicationController
     else
       document.tags << tag
     end
-    
+
     redirect_to :action => "edit", :id => document
   end
-  
+
   def remove_tag
     tag = Tag.find(params[:tid])
     document = Document.find(params[:id])
     document.tags.delete(tag)
-    
-    redirect_to :action => "edit", :id => document    
+
+    redirect_to :action => "edit", :id => document
   end
   # GET /documents/new
   # GET /documents/new.xml
   def new
     @document = Document.new
-    @attachment = Attachment.new
     @projects = Project.find(:all, :order => "name ASC")
 
     respond_to do |format|
@@ -96,7 +97,6 @@ class DocumentsController < ApplicationController
   # GET /documents/1/edit
   def edit
     @document = Document.find(params[:id])
-    @attachments = Attachment.for_me(@document)
     @projects = Project.find(:all, :order => "name ASC")
   end
 
@@ -112,10 +112,9 @@ class DocumentsController < ApplicationController
         @document.tags << t
       end
     end
-    
+
     respond_to do |format|
       if @document.save
-        Attachment.save_for(@document,@user,params[:attachment])
         flash[:notice] = t('common.messages.created', :model => Document.model_name.human)
         format.html { redirect_to(@document) }
         format.xml  { render :xml => @document, :status => :created, :location => @document }
@@ -134,7 +133,6 @@ class DocumentsController < ApplicationController
 
     respond_to do |format|
       if @document.update_attributes(params[:document])
-        Attachment.save_for(@document,@user,params[:attachment])
         flash[:notice] = t('common.messages.updated', :model => Document.model_name.human)
         format.html { redirect_to(@document) }
         format.xml  { head :ok }
@@ -150,8 +148,6 @@ class DocumentsController < ApplicationController
   # DELETE /documents/1.xml
   def destroy
     @document = Document.find(params[:id])
-    @attachments = Attachment.for_me(@document)
-    @attachments.each do |attach| attach.destroy end
     @document.destroy
 
     respond_to do |format|

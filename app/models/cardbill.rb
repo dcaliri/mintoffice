@@ -1,8 +1,8 @@
 class Cardbill < ActiveRecord::Base
-  belongs_to :attachment
   belongs_to :creditcard
 
   include Historiable
+  include Attachmentable
 
   def history_info
     {
@@ -58,7 +58,7 @@ class Cardbill < ActiveRecord::Base
       when :totalamount
         approved &&  totalamount != approved.money
       when :transdate
-        approved && transdate.between?(approved.used_at - 1.minute, approved.used_at + 1.minute) == false
+        approved && transdate.between?(approved.used_at - 1.hour, approved.used_at + 1.hour) == false
       when :amount
         used && amount != used.price
       when :vat

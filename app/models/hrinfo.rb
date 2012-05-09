@@ -4,6 +4,7 @@ class Hrinfo < ActiveRecord::Base
 
 #  has_many :hrinfo_histories, :class_name => "HrinfoHistory", :foreign_key => "hrinfo_id"
   include Historiable
+  include Attachmentable
 
   validates_format_of :juminno, :with => /^\d{6}-\d{7}$/, :message => I18n.t('hrinfos.error.juminno_invalid')
   validates_uniqueness_of :juminno
@@ -44,7 +45,7 @@ class Hrinfo < ActiveRecord::Base
       address
     end
   end
-  
+
   def self.not_retired
     where("retired_on IS NULL")
   end

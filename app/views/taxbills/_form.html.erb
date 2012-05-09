@@ -19,9 +19,9 @@
       <%= f.label :taxman_id %>
       <%= f.select :taxman_id, options_for_select(Taxbill.taxmen_list, taxbill.taxman_id) %>
     </p>
-		<p>
-    	<%= render 'shared/attachments/form', label: t("taxbills.#{action_name}.picture") %>
-		</p>
+    <p>
+      <%= render 'shared/attachments/form', form: f %>
+    </p>
   </div>
   <p>
     <%= f.submit %>

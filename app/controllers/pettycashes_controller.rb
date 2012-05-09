@@ -1,4 +1,9 @@
 class PettycashesController < ApplicationController
+  before_filter :only => [:show] do |c|
+    @pettycash = Pettycash.find(params[:id])
+    c.save_attachment_id @pettycash
+  end
+
   # GET /pettycashes
   # GET /pettycashes.xml
   def index
@@ -16,9 +21,6 @@ class PettycashesController < ApplicationController
   # GET /pettycashes/1.xml
   def show
     @pettycash = Pettycash.find(params[:id])
-    @attachments = Attachment.for_me(@pettycash, "seq ASC")
-    session[:attachments] = [] if session[:attachments].nil?
-    @attachments.each { |at| session[:attachments] << at.id }
 
     respond_to do |format|
       format.html # show.html.erb
@@ -40,14 +42,13 @@ class PettycashesController < ApplicationController
   # GET /pettycashes/1/edit
   def edit
     @pettycash = Pettycash.find(params[:id])
-    @attachments = Attachment.for_me(@pettycash, "seq ASC")
   end
 
   # # POST /pettycashes
   # # POST /pettycashes.xml
   # def create
   #   @pettycash = Pettycash.new(params[:pettycash])
-  # 
+  #
   #   respond_to do |format|
   #     if @pettycash.save
   #       flash[:notice] = 'Pettycash was successfully created.'
@@ -66,9 +67,6 @@ class PettycashesController < ApplicationController
 
     respond_to do |format|
       if @pettycash.save
-        @attachment = Attachment.new(params[:attachment])
-        @attachment.seq = 1
-        @attachment.save_for(@pettycash,@user)
         flash[:notice] = 'Pettycash was successfully created.'
         format.html { redirect_to(@pettycash) }
         format.xml  { render :xml => @pettycash, :status => :created, :location => @pettycash }
@@ -86,9 +84,6 @@ class PettycashesController < ApplicationController
     respond_to do |format|
       if @pettycash.update_attributes(params[:pettycash])
         seq = Attachment.maximum_seq_for_me(@pettycash) || 0
-        @attachment = Attachment.new(params[:attachment])
-        @attachment.seq = seq+1
-        @attachment.save_for(@pettycash,@user)
 
         flash[:notice] = I18n.t("common.messages.updated", :model => Pettycash.model_name.human)
         format.html { redirect_to(@pettycash) }
