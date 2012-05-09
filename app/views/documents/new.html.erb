@@ -17,7 +17,9 @@
     <%= f.label Project.model_name.human %>
     <%= f.collection_select(:project_id, @projects, :id, :name)%>
   </p>
-  <%= render 'shared/attachments/form', form: f %>
+  <p>
+    <%= render 'shared/attachments/form', form: f %>
+  </p>
 
 <% unless params[:tag].blank? %>
   <p>
