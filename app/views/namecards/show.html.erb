@@ -17,7 +17,7 @@
       <tr><th><%= Namecard.human_attribute_name("email") %>:</th><td><%= @namecard.email %></td></tr>
     </table>
   </div>
-  <%= render :partial => "shared/show_attachment", :object => @namecard %>
+  <%= render "shared/attachments/detail", :target => @namecard %>
   <div style="clear:both;"></div>
 </div>
 

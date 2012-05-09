@@ -29,6 +29,9 @@
     <%= f.label :boxcar_account, User.human_attribute_name('boxcar_account') %>
     <%= f.text_field :boxcar_account %>
   </p>
+  <p>
+    <%= render 'shared/attachments/form', form: f %>
+  </p>
 </div>
 <%= f.submit t('common.button.update') %>
 <% end %>

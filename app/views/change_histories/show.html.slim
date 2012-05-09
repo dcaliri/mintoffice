@@ -21,7 +21,7 @@ h2= t("common.title.show")
         td=h change_history.after_value
       tr
         th= ChangeHistory.human_attribute_name('user_id')
-        td=h change_history.user_id
+        td=h change_history.user.name
       tr
         th= ChangeHistory.human_attribute_name('changable_type')
         td=h change_history.changable_type

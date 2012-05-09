@@ -138,6 +138,8 @@ Mintoffice::Application.routes.draw do
 
   resources :change_histories, path: 'histories'
 
+  resources :tags, only: [:create, :destroy]
+
   root to: 'main#index'
 
   match ':controller/:action/:id'

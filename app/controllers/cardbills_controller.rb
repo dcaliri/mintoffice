@@ -1,4 +1,8 @@
 class CardbillsController < ApplicationController
+  before_filter :only => [:show] do |c|
+    @cardbill = Cardbill.find(params[:id])
+    c.save_attachment_id @cardbill
+  end
 
   # GET /cardbills
   # GET /cardbills.xml
@@ -6,7 +10,7 @@ class CardbillsController < ApplicationController
 #    @cardbills = Cardbill.paginate(:order => 'transdate desc', :page => params[:page], :per_page => 20)
     @cardbills = Cardbill.search(params[:q]).searchbycreditcard(params[:creditcard_id]).paginate(:order => 'transdate desc', :page => params[:page], :per_page => 20)
     @cardbills_count = Cardbill.count(:all)
-    
+
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @cardbills }
@@ -17,10 +21,6 @@ class CardbillsController < ApplicationController
   # GET /cardbills/1.xml
   def show
     @cardbill = Cardbill.find(params[:id])
-    @attachments = Attachment.for_me(@cardbill)
-
-    session[:attachments] = [] if session[:attachments].nil?
-    @attachments.each { |at| session[:attachments] << at.id }
 
     respond_to do |format|
       format.html # show.html.erb
@@ -33,7 +33,7 @@ class CardbillsController < ApplicationController
   def new
     @cardbill = Cardbill.new
     @creditcards = Creditcard.all
-    
+
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @cardbill }
@@ -44,7 +44,6 @@ class CardbillsController < ApplicationController
   def edit
     @cardbill = Cardbill.find(params[:id])
     @creditcards = Creditcard.all
-    @attachments = Attachment.for_me(@cardbill)
   end
 
   # POST /cardbills
@@ -55,7 +54,6 @@ class CardbillsController < ApplicationController
 
     respond_to do |format|
       if @cardbill.save
-        Attachment.save_for(@cardbill,@user,params[:attachment])
         flash[:notice] = I18n.t "common.messages.created", :model => Cardbill.model_name.human
         format.html { redirect_to(@cardbill) }
         format.xml  { render :xml => @cardbill, :status => :created, :location => @cardbill }
@@ -65,7 +63,7 @@ class CardbillsController < ApplicationController
       end
     end
   end
-  
+
   # PUT /cardbills/1
   # PUT /cardbills/1.xml
   def update
@@ -74,7 +72,6 @@ class CardbillsController < ApplicationController
 
     respond_to do |format|
       if @cardbill.update_attributes(params[:cardbill])
-        Attachment.save_for(@cardbill,@user,params[:attachment])
         flash[:notice] = I18n.t("common.messages.updated", :model => Cardbill.model_name.human)
         format.html { redirect_to(@cardbill) }
         format.xml  { head :ok }

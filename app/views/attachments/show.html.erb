@@ -28,8 +28,8 @@
     <td><%=h @attachment.filepath %></td>
   </tr>
   <tr>
-    <th><%= Attachment.human_attribute_name('owner_table_name') %></th>
-    <td><%=h @attachment.owner_table_name %></td>
+    <th><%= Attachment.human_attribute_name('owner_type') %></th>
+    <td><%=h @attachment.owner_type %></td>
   </tr>
   <tr>
     <th><%= Attachment.human_attribute_name('owner_id') %></th>
@@ -37,7 +37,7 @@
   </tr>
 </table>
 </div>
-<%= render :partial => "shared/show_attachment", :object => @attachment  %>
+<%= render "shared/attachments/detail", :target => OpenStruct.new(:attachments => [@attachment]) %>
 <div style="clear:both;"></div>
 </div>
 

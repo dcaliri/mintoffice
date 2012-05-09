@@ -16,13 +16,10 @@
         <% else %>
         <% end %>
       </td></tr>
-      <tr><th><%= Document.human_attribute_name("tags") %></th><td>
-        <% if !@document.tags.blank? %>
-        <% tag_names = @document.tags.index_by {|t| t.name } %>
-        <%= tag_names.keys.sort.join ", " %>
-        <% else %>
-        <% end %>
-      </td></tr>
+      <tr>
+        <th><%= Document.human_attribute_name("tags") %></th>
+        <td><%= @document.tag_list %></td>
+      </tr>
     </table>
     <h3><%= t(".backlink") %></h3>
     <ul>
@@ -33,7 +30,7 @@
     <% end %>
     </ul>
   </div>
-  <%= render :partial => "shared/show_attachment", :object => @document %>
+  <%= render "shared/attachments/detail", :target => @document %>
   <div style="clear:both;"></div>
 </div>
 
