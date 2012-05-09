@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class Cardbill < ActiveRecord::Base
   belongs_to :creditcard
 
@@ -17,6 +19,13 @@ class Cardbill < ActiveRecord::Base
   validates_numericality_of :amount
   validates_numericality_of :servicecharge
   validates_numericality_of :vat
+
+  validate :check_amount_of_money
+  def check_amount_of_money
+    unless amount + vat + servicecharge == totalamount
+      errors.add(:totalamount, "의 합계가 맞지 않습니다")
+    end
+  end
 
   before_save :strip_approve_no
   def strip_approve_no
@@ -48,7 +57,7 @@ class Cardbill < ActiveRecord::Base
 
   def mismatch?(type=nil)
     if type == nil
-      types = [:totalamount, :transdate, :amount, :vat, :servicecharge]
+      types = [:totalamount, :transdate]
     else
       types = [type]
     end
@@ -59,12 +68,6 @@ class Cardbill < ActiveRecord::Base
         approved &&  totalamount != approved.money
       when :transdate
         approved && transdate.between?(approved.used_at - 1.minute, approved.used_at + 1.minute) == false
-      when :amount
-        used && amount != used.price
-      when :vat
-        used && vat != used.tax
-      when :servicecharge
-        used && servicecharge != used.tip
       else
         false
       end
