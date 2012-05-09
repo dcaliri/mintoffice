@@ -22,9 +22,9 @@
 <% end %>
     </table>
     <div id="show_command">
-      <%= link_to "주소록 찾기", find_contacts_path(target_class: @hrinfo.class, target: @hrinfo, query: @hrinfo.fullname), :class => 'popup' %>
+      <%= link_to "주소록 찾기", find_contacts_path(target_class: @hrinfo.class, target: @hrinfo, query: @hrinfo.fullname.gsub(/\s+/, "")), :class => 'popup' %>
     </div>
-    
+
     <h3><%= t("contacts.show.title")%></h3>
     <ul>
       <% if @hrinfo.contact %>
@@ -66,25 +66,7 @@
 <% end %>
   </div>
   <div id="attach">
-<%
-  at = params[:at].to_i || 0
-  if  at < @attachments.count
-    attachment = @attachments[at]
-%>
-    <img src="<%= url_for(:controller => "attachments", :action => 'picture', :id => attachment.id, :w => "600", :h => "800") %>" />
-<% end %>
-    <center>
-<% if at < @attachments.count %>
-      <%= link_to t(".download"), :controller => "attachments", :action => "download", :id => attachment.id %> ...
-<% end %>
-      <% 0.upto(@attachments.count - 1) do |i| %>
-        <% if i == params[:at].to_i %>
-          <u><%= (i+1) %></u>
-        <% else %>
-          <%= link_to (i+1).to_s, :controller => "hrinfos", :action => "show", :id => @hrinfo, :at => i %>
-        <% end %>
-      <% end %>
-    </center>
+    <%= render "shared/attachments/detail", :target => @hrinfo %>
   </div>
   <div style="clear: both;">
 <% if @user.ingroup? "admin" %>

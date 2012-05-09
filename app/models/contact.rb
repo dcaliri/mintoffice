@@ -15,6 +15,7 @@ class Contact < ActiveRecord::Base
   accepts_nested_attributes_for :phone_numbers, :allow_destroy => :true, :reject_if => REJECT_IF_EMPTY
 
   include Historiable
+  include Attachmentable
 
   class << self
     def search(query)

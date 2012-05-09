@@ -37,7 +37,7 @@
   </p>
 <% if @user.ingroup?("admin") %>
   <p>
-    <%= render 'shared/attachments/form', label: t('hrinfos.edit.picture') %>
+    <%= render 'shared/attachments/form', form: f %>
   </p>
 <% end %>
 </div>

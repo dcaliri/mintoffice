@@ -1,8 +1,8 @@
 class Cardbill < ActiveRecord::Base
-  belongs_to :attachment
   belongs_to :creditcard
 
   include Historiable
+  include Attachmentable
 
   def history_info
     {

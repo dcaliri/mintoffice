@@ -138,7 +138,7 @@ ko:
                 file: 파일
                 filepath: 저장된 파일명
                 original_filename: 원 파일명
-                owner_table_name: 관계된 테이블명
+                owner_type: 관계된 테이블명
                 owner_id : 관계된 테이블 ID
                 title: 제목
             bank_account:
@@ -247,13 +247,13 @@ ko:
                 storeaddr: "가맹점 주소"
                 approveno: "승인번호"
             change_history:
-                fieldname: 필드명
-                before_value: 이전 값
                 after_value: 이후 값
-                user_id: 사용자 아이디
+                before_value: 이전 값
                 changable_id: 관계된 테이블 아이디
                 changable_type: 관계된 테이블 명
                 created_at: 생성 일자
+                fieldname: 필드명
+                user_id: 사용자 아이디
             commute:
                 go: 출근
                 leave: 퇴근
@@ -623,6 +623,7 @@ ko:
             logout: "로그아웃"
             edit: "수정"
             destroy: "삭제"
+            download: "다운로드"
         menu: 메뉴
         total: 합계
     commutes:

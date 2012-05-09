@@ -41,7 +41,7 @@
     </tr>
   </table>
   </div>
-  <%= render :partial => "shared/show_attachment", :object => @creditcard  %>
+  <%= render "shared/attachments/detail", :target => @creditcard %>
   <div style="clear:both;">
 
     <% if @user.ingroup? "admin" %>

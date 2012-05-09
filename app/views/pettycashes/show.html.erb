@@ -16,6 +16,6 @@
     </p>
     <%= render 'changelog', target: @pettycash %>
   </div>
-  <%= render :partial => "shared/show_attachment", :object => @pettycash  %>
+  <%= render "shared/attachments/detail", :target => @pettycash %>
   <div style="clear: both;"></div>
 </div>

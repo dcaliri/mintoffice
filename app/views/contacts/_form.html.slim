@@ -74,6 +74,6 @@ h2= t("common.title.#{action_name}")
         = phone_number_field.text_field :number
     br
     h3 첨부파일
-    = render 'shared/attachments/form', label: t("taxbills.#{action_name}.picture")
+    = render 'shared/attachments/form', form: f
     p
       = f.submit
