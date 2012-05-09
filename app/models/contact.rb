@@ -14,10 +14,8 @@ class Contact < ActiveRecord::Base
   has_many :phone_numbers, class_name: 'ContactPhoneNumber', :dependent => :destroy
   accepts_nested_attributes_for :phone_numbers, :allow_destroy => :true, :reject_if => REJECT_IF_EMPTY
 
-  has_many :attachments, :as => :owner
-  accepts_nested_attributes_for :attachments
-
   include Historiable
+  include Attachmentable
 
   class << self
     def search(query)

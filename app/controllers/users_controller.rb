@@ -1,5 +1,9 @@
 class UsersController < ApplicationController
   layout "application", :except => ["login"]
+  before_filter :only => [:show] do |c|
+    @this_user = User.find(params[:id])
+    c.save_attachment_id @this_user
+  end
 
   def logout
     session[:user_id] = nil
@@ -51,7 +55,6 @@ class UsersController < ApplicationController
   # GET /users/1.xml
   def show
     @this_user = User.find(params[:id])
-    @attachments = Attachment.for_me(@this_user.hrinfo) if @this_user.hrinfo
 
     respond_to do |format|
       format.html # show.html.erb
@@ -75,7 +78,6 @@ class UsersController < ApplicationController
   def edit
     session[:return_to] = request.referer
     @user = User.find(params[:id])
-    @attachments = Attachment.for_me(@user.hrinfo) if @user.hrinfo
   end
 
   # POST /users
@@ -85,9 +87,6 @@ class UsersController < ApplicationController
     @hrinfo = Hrinfo.new(params[:hrinfo])
     respond_to do |format|
       if @user.save
-#        @user.hrinfo = @hrinfo
-        @attachment = Attachment.new(params[:attachment])
-        @attachment.save_for(@hrinfo,@user)
         flash[:notice] = I18n.t("common.messages.created", :model => User.model_name.human)
         format.html { redirect_to(:action => 'index') }
         format.xml  { render :xml => @user, :status => :created, :location => @user }

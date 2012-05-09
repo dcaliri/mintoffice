@@ -5,9 +5,6 @@ class Creditcard < ActiveRecord::Base
   has_many :card_used_sources
   has_many :card_approved_sources
 
-  has_many :attachments, :as => :owner
-  accepts_nested_attributes_for :attachments
-
   validates_presence_of :cardno
   validates_presence_of :expireyear
   validates_presence_of :expiremonth
@@ -17,6 +14,7 @@ class Creditcard < ActiveRecord::Base
   validates_uniqueness_of :cardno
 
   include Historiable
+  include Attachmentable
 
   CARD_LIST = [:card_used_sources, :card_approved_sources, :card_approved_sources_oversea]
   CARD_LIST_FOR_SELECT = [["이용내역", CARD_LIST[0]],["승인내역", CARD_LIST[1]], ["해외승인내역", CARD_LIST[2]]]

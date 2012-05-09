@@ -2,10 +2,8 @@ class BankAccount < ActiveRecord::Base
   has_many :bank_transactions, :dependent => :destroy
   has_many :bank_transfers, :dependent => :destroy
 
-  has_many :attachments, :as => :owner
-  accepts_nested_attributes_for :attachments
-
   include Historiable
+  include Attachmentable
 
   class << self
     def transaction_per_period(query)

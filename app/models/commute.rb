@@ -1,7 +1,7 @@
 class Commute < ActiveRecord::Base
   belongs_to :user
-  has_many :attachments, :as => :owner
-  accepts_nested_attributes_for :attachments
+
+  include Attachmentable
 
   def self.latest
     order("go DESC")

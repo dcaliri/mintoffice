@@ -40,15 +40,6 @@ class HrinfosController < ApplicationController
   # GET /hrinfos/1.xml
   def show
     @hrinfo = Hrinfo.find(params[:id])
-    @attachments = Attachment.for_me(@hrinfo, "seq ASC")
-    at = params[:at] || "0"
-   unless @attachments.empty?
-      if session[:attachments].nil?
-        session[:attachments] = [@attachments[at.to_i].id]
-      else
-        session[:attachments] << @attachments[at.to_i].id
-      end
-   end
     @related_documents = Tag.related_documents(@hrinfo.user.name, Hrinfo.model_name.human)
     @required_tagnames = RequiredTag.find_all_by_modelname(Hrinfo.name).collect do |rt| rt.tag.name end
     @required_tagnames = @required_tagnames.uniq.sort
@@ -92,7 +83,6 @@ class HrinfosController < ApplicationController
   # GET /hrinfos/1/edit
   def edit
     @hrinfo = Hrinfo.find(params[:id])
-    @attachments = Attachment.for_me(@hrinfo, "seq ASC")
   end
 
   # POST /hrinfos
@@ -103,8 +93,6 @@ class HrinfosController < ApplicationController
 
     respond_to do |format|
       if @hrinfo.save
-        @attachment = Attachment.new(params[:attachment])
-        @attachment.save_for(@hrinfo,@user)
         flash[:notice] = I18n.t("common.messages.created", :model => Hrinfo.model_name.human)
         format.html { redirect_to(@hrinfo) }
         format.xml  { render :xml => @hrinfo, :status => :created, :location => @hrinfo }
@@ -124,10 +112,6 @@ class HrinfosController < ApplicationController
       if @hrinfo.valid?
         @hrinfo.save
 
-        seq = Attachment.maximum_seq_for_me(@hrinfo) || 0
-        @attachment = Attachment.new(params[:attachment])
-        @attachment.seq = seq+1
-        @attachment.save_for(@hrinfo,@user)
         flash[:notice] = I18n.t("common.messages.updated", :model => Hrinfo.model_name.human)
         format.html { redirect_to(@hrinfo) }
         format.xml  { head :ok }

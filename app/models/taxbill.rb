@@ -7,10 +7,8 @@ class Taxbill < ActiveRecord::Base
 
   BILL_TYPE = [:purchase, :sale]
 
-  has_many :attachments, :as => :owner
-  accepts_nested_attributes_for :attachments
-
   include Historiable
+  include Attachmentable
 
   def self.taxmen_list
     Taxman.all.map do |taxman|

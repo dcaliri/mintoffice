@@ -2,12 +2,10 @@ class BusinessClient < ActiveRecord::Base
   has_many :taxmen
   accepts_nested_attributes_for :taxmen, :allow_destroy => :true, :reject_if => proc { |attrs| attrs.all? { |k, v| v.blank? } }
 
-  has_many :attachments, :as => :owner
-  accepts_nested_attributes_for :attachments
-
   validates_presence_of :name
 
   include Historiable
+  include Attachmentable
 
   self.per_page = 20
 

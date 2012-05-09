@@ -1,6 +1,8 @@
 module Attachmentable
-  def save_attachment_id(resource)
-    session[:attachments] = [] if session[:attachments].nil?
-    resource.attachments.each { |at| session[:attachments] << at.id }
+  extend ActiveSupport::Concern
+
+  included do
+    has_many :attachments, :as => :owner
+    accepts_nested_attributes_for :attachments
   end
 end

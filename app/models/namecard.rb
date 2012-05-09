@@ -1,6 +1,5 @@
 class Namecard < ActiveRecord::Base
-  has_many :attachments, :as => :owner
-  accepts_nested_attributes_for :attachments
+  include Attachmentable
 
   def self.search(query)
     query = "%#{query || ""}%"

@@ -10,8 +10,6 @@ class ApplicationController < ActionController::Base
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
 
-  include Attachmentable
-
   before_filter do |controller|
     User.current_user = User.find(controller.session[:user_id]) unless controller.session[:user_id].nil?
   end
@@ -65,5 +63,10 @@ class ApplicationController < ActionController::Base
     else
       @title || t("#{controller_name}.title")
     end
+  end
+
+  def save_attachment_id(resource)
+    session[:attachments] = [] if session[:attachments].nil?
+    resource.attachments.each { |at| session[:attachments] << at.id }
   end
 end

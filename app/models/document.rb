@@ -4,10 +4,9 @@ class Document < ActiveRecord::Base
   has_many :users, :through => :document_owners, :source => :user
   has_and_belongs_to_many :tags
 
-  has_many :attachments, :as => :owner
-  accepts_nested_attributes_for :attachments
-
   validates_presence_of :title
+
+  include Attachmentable
 
   def user_for_tag (tag_name)
     tag_names = self.tags.index_by {|t1| t1.name }

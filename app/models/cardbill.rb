@@ -1,10 +1,8 @@
 class Cardbill < ActiveRecord::Base
-  has_many :attachments, :as => :owner
-  accepts_nested_attributes_for :attachments
-#  belongs_to :attachment
   belongs_to :creditcard
 
   include Historiable
+  include Attachmentable
 
   def history_info
     {
