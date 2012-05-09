@@ -22,7 +22,7 @@ class Tag < ActiveRecord::Base
       t = Tag.find_by_name(a)
       d = []
       if ! t.nil?
-        d = t.documents
+        d = t.taggings.map{|tagging| tagging.target}
       end
       if ds.nil?
         ds = d
