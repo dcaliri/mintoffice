@@ -18,6 +18,9 @@ h2 ..
       th= contact.class.human_attribute_name(:company)
       th= contact.class.human_attribute_name(:department)
       th= contact.class.human_attribute_name(:position)
+      th= ContactEmail.human_attribute_name(:email)
+      th= ContactPhoneNumber.human_attribute_name(:number)
+      
       th= t('common.menu')
     - @contacts.each do |address|
       tr.selectable onclick="location.href='#{contact_path(address)}'"
@@ -25,6 +28,9 @@ h2 ..
         td= address.company
         td= address.department
         td= address.position
+        td= address.emails.nil? ? "" : "(#{address.emails.first.target}) #{address.emails.first.email} "
+        td= address.phone_numbers.nil? ? "" : "(#{address.phone_numbers.first.target}) #{address.phone_numbers.first.number}"
+        
         td
           = link_to t('common.link.edit'), [:edit, address]
           = " | "
