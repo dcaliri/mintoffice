@@ -27,8 +27,9 @@
     $('.move-attachment').click(function(e){
       e.preventDefault();
 
-      var imageUrl = "/attachments/picture/" + e.target.id + "?h=800&amp;w=600";
-      $('#attach img').attr('src', imageUrl);
+      var imageUrl = "/attachments/picture/" + e.target.id;
+      $('#attach img').attr('src', imageUrl + "?h=800&amp;w=600");
+      $('#attach a').attr('href', imageUrl);
     });
 
   });

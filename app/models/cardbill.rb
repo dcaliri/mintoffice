@@ -22,7 +22,7 @@ class Cardbill < ActiveRecord::Base
 
   validate :check_amount_of_money, :check_unique_approve_no
   def check_amount_of_money
-    unless amount + vat + servicecharge == totalamount
+    unless amount.to_i + vat.to_i + servicecharge.to_i == totalamount.to_i
       errors.add(:totalamount, "의 합계가 맞지 않습니다")
     end
   end
