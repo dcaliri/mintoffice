@@ -1,4 +1,9 @@
 class HrinfosController < ApplicationController
+  before_filter :only => [:show] do |c|
+    @hrinfo = Hrinfo.find(params[:id])
+    c.save_attachment_id @hrinfo
+  end
+
   # GET /hrinfos
   # GET /hrinfos.xml
   def index
