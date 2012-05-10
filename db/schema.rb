@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120509050941) do
+ActiveRecord::Schema.define(:version => 20120510074100) do
 
   create_table "attachments", :force => true do |t|
     t.string   "title"
@@ -76,7 +76,7 @@ ActiveRecord::Schema.define(:version => 20120509050941) do
     t.string   "name"
     t.string   "registration_number"
     t.string   "category"
-    t.string   "condition"
+    t.string   "business_status"
     t.string   "address"
     t.string   "owner"
     t.datetime "created_at",          :null => false
