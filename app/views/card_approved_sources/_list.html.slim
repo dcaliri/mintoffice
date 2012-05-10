@@ -32,6 +32,6 @@ table#list-table
         td align="right"
           = link_to t('common.link.show'), source
           = " | "
-          = link_to t('common.link.edit'), [:edit, source]
+          = link_to t('common.link.edit'), edit_card_approved_source_path(source, creditcard_id: source.creditcard)
           = " | "
           = link_to t('common.link.destroy'), source, :method => :delete, :confirm => "Are you sure?"
