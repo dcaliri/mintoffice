@@ -1,5 +1,5 @@
 <%
-if params[:retired] == 'on'
+if @retired == 'on'
   title t('.title') + " (" + t(".retired") + ")"
 else
   title t('.title') + " (" + t(".current") + ")"
@@ -7,7 +7,7 @@ end
 %>
 <% content_for :search do -%>
   <%= form_tag({:action => "index"}, :method => :get ) do %>
-    <%= hidden_field_tag 'retired', params[:retired] %>
+    <%= hidden_field_tag 'retired', @retired %>
     <%= t("common.title.search") %> : <%= text_field_tag 'q', params[:q] %>
   <% end %>
 <% end -%>
@@ -44,10 +44,12 @@ end
   </tr>
 <% end %>
 </table>
-<div id="show_command">
-<% if params[:retired] == 'on' %>
-  <%= link_to t('.list_current'), :action => "index"%>
-<% else %>
-  <%= link_to t('.list_retired'), :action => "index", :retired=>"on" %>
+<% if @user.ingroup?("admin")%>
+  <div id="show_command">
+  <% if @retired == 'on' %>
+    <%= link_to t('.list_current'), :action => "index"%>
+  <% else %>
+    <%= link_to t('.list_retired'), :action => "index", :retired=>"on" %>
+  <% end %>
+  </div>
 <% end %>
-</div>
