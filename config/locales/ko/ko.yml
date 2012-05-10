@@ -863,7 +863,7 @@ ko:
             empty: 사용한 연차 내역이 없습니다
         new:
             title: 연차 사용하기
-            link: 연차 사용하기
+            link: 연차 사용 신청
         edit:
             title: 연차 수정하기
         title: 연차 신청
