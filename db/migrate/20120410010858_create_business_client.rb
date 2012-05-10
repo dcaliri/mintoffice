@@ -4,7 +4,7 @@ class CreateBusinessClient < ActiveRecord::Migration
       t.string :name
       t.string :registration_number
       t.string :category
-      t.string :condition
+      t.string :business_status
       t.string :address
       t.string :owner
       t.timestamps

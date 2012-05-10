@@ -16,14 +16,14 @@
       <tr>
         <th><%= BusinessClient.human_attribute_name('name') %></th>
         <th><%= BusinessClient.human_attribute_name('category') %></th>
-        <th><%= BusinessClient.human_attribute_name('condition') %></th>
+        <th><%= BusinessClient.human_attribute_name('business_status') %></th>
         <th><%= BusinessClient.human_attribute_name('owner') %></th>
       </tr>
     <% @business_clients.each do |client| %>
       <tr class="selectable" onclick="location.href='<%= business_client_path(client) %>'">
         <td><span><%=h client.name %></span></td>
         <td><%=h client.category %></td>
-        <td><%=h client.condition %></td>
+        <td><%=h client.business_status %></td>
         <td><%=h client.owner %></td>
       </tr>
     <% end %>
