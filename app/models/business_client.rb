@@ -10,7 +10,7 @@ class BusinessClient < ActiveRecord::Base
   self.per_page = 20
 
   def self.search(text)
-    text = "%#{text || ""}%"
+    text = "%#{text}%"
     where('name like ? OR registration_number like ? OR category like ? OR condition like ? OR address like ? or owner like ?', text, text, text, text, text, text)
   end
 end
