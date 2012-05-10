@@ -20,11 +20,29 @@ class Cardbill < ActiveRecord::Base
   validates_numericality_of :servicecharge
   validates_numericality_of :vat
 
-  validate :check_amount_of_money
+  validate :check_amount_of_money, :check_unique_approve_no
   def check_amount_of_money
     unless amount + vat + servicecharge == totalamount
       errors.add(:totalamount, "의 합계가 맞지 않습니다")
     end
+  end
+
+  def check_unique_approve_no
+    if creditcard.cardbills.except_me(self).unique?(self)
+      errors.add(:approveno, "가 최근 한 달 사이에 이미 존재합니다.")
+    end
+  end
+
+  def self.except_me(cardbill)
+    if cardbill.id
+      where('id != ?', cardbill.id)
+    else
+      where('')
+    end
+  end
+
+  def self.unique?(cardbill)
+    exists?(approveno: cardbill.approveno, transdate: cardbill.transdate.all_month)
   end
 
   before_save :strip_approve_no
