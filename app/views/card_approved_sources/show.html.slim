@@ -3,14 +3,14 @@
   - if card_approved_source.cardbill
     = link_to t('.to_cardbill'), card_approved_source.cardbill
     = " | "
-  = link_to t('common.link.edit'), [:edit, creditcard, card_approved_source]
+  = link_to t('common.link.edit'), edit_card_approved_source_path(card_approved_source, creditcard_id: card_approved_source.creditcard)
   = " | "
-  = link_to t('common.link.destroy'), [creditcard, card_approved_source], :method => :delete, :confirm => "Are you sure?"
+  = link_to t('common.link.destroy'), card_approved_source, :method => :delete, :confirm => "Are you sure?"
   = " | "
-  = link_to t('common.title.back'), [creditcard, :card_approved_sources]
+  = link_to t('common.title.back'), :card_approved_sources
 
 
-h2= "#{creditcard.nickname}: #{creditcard.cardno}"
+h2= "#{card_approved_source.creditcard.nickname}: #{card_approved_source.creditcard.cardno}"
 
 .box
   table

@@ -1,13 +1,13 @@
 
 #show_command
-  = link_to t('common.link.edit'), [:edit, creditcard, card_used_source]
+  = link_to t('common.link.edit'), edit_card_used_source_path(card_used_source, creditcard_id: card_used_source.creditcard)
   = " | "
-  = link_to t('common.link.destroy'), [creditcard, card_used_source], :method => :delete, :confirm => "Are you sure?"
+  = link_to t('common.link.destroy'), card_used_source, :method => :delete, :confirm => "Are you sure?"
   = " | "
-  = link_to t('common.title.back'), [creditcard, :card_used_sources]
+  = link_to t('common.title.back'), :card_used_sources
 
 
-h2= "#{creditcard.nickname}: #{creditcard.cardno}"
+h2= "#{card_used_source.creditcard.nickname}: #{card_used_source.creditcard.cardno}"
 
 .box
   table

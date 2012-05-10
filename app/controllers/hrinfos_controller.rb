@@ -1,9 +1,17 @@
 class HrinfosController < ApplicationController
+  before_filter :only => [:show] do |c|
+    @hrinfo = Hrinfo.find(params[:id])
+    c.save_attachment_id @hrinfo
+  end
+
   # GET /hrinfos
   # GET /hrinfos.xml
   def index
-    retired = params[:retired]
-    if retired == "on"
+    @retired = params[:retired]
+    unless @user.ingroup?("admin")
+      @retired = ""
+    end
+    if @retired == "on"
       @hrinfos = Hrinfo.search(params[:q]).find(:all, :conditions => "retired_on IS NOT NULL")
       @hrinfos_count = Hrinfo.count(:all, :conditions => "retired_on IS NOT NULL")
     else

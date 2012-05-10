@@ -6,7 +6,7 @@
     attachment = attachments[at]
 %>
 <div id="attach">
-      <img src="<%= url_for(:controller => "attachments", :action => 'picture', :id => attachment.id, :w => "600", :h => "800") %>" />
+      <%= link_to image_tag(url_for(:controller => "attachments", :action => 'picture', :id => attachment.id, :w => "600", :h => "800")), url_for(:controller => "attachments", :action => 'picture', :id => attachment.id), target: :blank %>
   <% end %>
       <center>
   <% if attachments && at < attachments.count %>
@@ -27,8 +27,9 @@
     $('.move-attachment').click(function(e){
       e.preventDefault();
 
-      var imageUrl = "/attachments/picture/" + e.target.id + "?h=800&amp;w=600";
-      $('#attach img').attr('src', imageUrl);
+      var imageUrl = "/attachments/picture/" + e.target.id;
+      $('#attach img').attr('src', imageUrl + "?h=800&amp;w=600");
+      $('#attach a').attr('href', imageUrl);
     });
 
   });

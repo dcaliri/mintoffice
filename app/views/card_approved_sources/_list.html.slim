@@ -30,8 +30,8 @@ table#list-table
       td= source.will_be_paied_at_to_s
       - if menu
         td align="right"
-          = link_to t('common.link.show'), [creditcard, source]
+          = link_to t('common.link.show'), source
           = " | "
-          = link_to t('common.link.edit'), [:edit, creditcard, source]
+          = link_to t('common.link.edit'), edit_card_approved_source_path(source, creditcard_id: source.creditcard)
           = " | "
-          = link_to t('common.link.destroy'), [creditcard, source], :method => :delete, :confirm => "Are you sure?"
+          = link_to t('common.link.destroy'), source, :method => :delete, :confirm => "Are you sure?"
