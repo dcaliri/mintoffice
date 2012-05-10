@@ -25,6 +25,12 @@ class UsedVacationsController < ApplicationController
   def approve
     used_vacation.approve = params[:approve]
     used_vacation.save
+    if params[:approve] == "true"
+      approve_txt = I18n.t("used_vacations.approval_completed")
+    else
+      approve_txt = I18n.t("used_vacations.approval_waiting")
+    end
+    Boxcar.send_to_boxcar_user(used_vacation.vacation.user,  "mintoffice", "#{I18n.t("used_vacations.title")} - #{approve_txt}")    
     redirect_to vacation_path(user)
   end
 
