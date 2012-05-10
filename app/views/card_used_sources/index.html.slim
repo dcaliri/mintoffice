@@ -10,8 +10,8 @@
   = link_to t('common.title.back'), :root
 
 h2
-  - if @creditcard
-    = "#{@creditcard.nickname}: #{@creditcard.cardno}"
+  - if creditcard
+    = "#{creditcard.nickname}: #{creditcard.cardno}"
   - else
     = "카드 이용내역"
 

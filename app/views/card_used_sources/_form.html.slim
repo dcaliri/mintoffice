@@ -3,11 +3,11 @@
 
 h2= t("common.title.#{action_name}")
 
-= form_for @card_used_source do |f|
+= form_for card_used_source do |f|
   .box
     p
       = f.label :creditcard_id, Cardbill.human_attribute_name('cardno')
-      = select_tag(:creditcard_id, options_for_select(Creditcard.all.map{|card| [card.cardno_long, card.id]}, @card_used_source.creditcard ? @card_used_source.creditcard.id : ""))
+      = select_tag(:creditcard_id, options_for_select(Creditcard.all.map{|card| [card.cardno_long, card.id]}, params[:creditcard_id]))
     p
       = f.label :card_no
       = f.text_field :card_no
