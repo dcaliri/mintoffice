@@ -46,6 +46,6 @@ table#list-table
             = " | "
           = link_to t('common.link.show'), transfer
           = " | "
-          = link_to t('common.link.edit'), [:edit, transfer]
+          = link_to t('common.link.edit'), edit_bank_transfer_path(transfer, bank_account_id: transfer.bank_account)
           = " | "
           = link_to t('common.link.destroy'), transfer, :method => :delete, :confirm => "Are you sure?"
