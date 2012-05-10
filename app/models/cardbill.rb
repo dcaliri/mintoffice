@@ -29,7 +29,7 @@ class Cardbill < ActiveRecord::Base
 
   def check_unique_approve_no
     if creditcard.cardbills.except_me(self).unique?(self)
-      errors.add(:approveno, "가 최근 한 달 사이에 이미 존재합니다.")
+      errors.add(:approveno, "가 올해에 이미 존재합니다.")
     end
   end
 
@@ -42,7 +42,7 @@ class Cardbill < ActiveRecord::Base
   end
 
   def self.unique?(cardbill)
-    exists?(approveno: cardbill.approveno, transdate: cardbill.transdate.all_month)
+    exists?(approveno: cardbill.approveno, transdate: cardbill.transdate.all_year)
   end
 
   before_save :strip_approve_no
