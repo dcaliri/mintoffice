@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class Cardbill < ActiveRecord::Base
   belongs_to :creditcard
 
@@ -17,6 +19,14 @@ class Cardbill < ActiveRecord::Base
   validates_numericality_of :amount
   validates_numericality_of :servicecharge
   validates_numericality_of :vat
+
+  validate :check_unique_approve_no
+  def check_unique_approve_no
+    Rails.logger.info "exists? = #{creditcard.cardbills.exists?(approveno: approveno, transdate: Time.zone.now.all_month)}"
+    if creditcard.cardbills.exists?(approveno: approveno, transdate: Time.zone.now.all_month)
+      errors.add(:approveno, "가 최근 한 달 사이에 이미 존재합니다.")
+    end
+  end
 
   before_save :strip_approve_no
   def strip_approve_no
