@@ -1,18 +1,27 @@
+- content_for :search do
+  = form_tag :bank_transactions, :method => :get do
+    = select_tag :bank_account_id,
+      options_from_collection_for_select([BankAccount.new(:name => "all")]+BankAccount.all, :id, :name, params[:bank_account_id]),
+      "onchange" => "this.form.submit()"
 
 #show_command
-  = link_to t('bank_transactions.new.link'), [:new, bank_account, :bank_transaction]
+  = link_to t('bank_transactions.new.link'), [:new, :bank_transaction]
   = " | "
-  = link_to t('bank_transactions.excel.link'), [:excel, bank_account, :bank_transactions]
+  = link_to t('bank_transactions.excel.link'), [:excel, :bank_transactions]
   = " | "
   = link_to t('common.title.back'), :bank_accounts
 
-h2 #{bank_account.name}: #{bank_account.number}
+h2
+  - if @bank_account
+    = "#{@bank_account.name}: #{@bank_account.number}"
+  - else
+    = "은행 거래내역"
 
-- unless bank_transactions.empty?
-  = render 'list', menu: true
+- unless @bank_transactions.empty?
+  = render 'list', menu: true, bank_transactions: @bank_transactions
 
   br
   center
-    = will_paginate bank_transactions
+    = will_paginate @bank_transactions
 - else
   h4= t('.empty')

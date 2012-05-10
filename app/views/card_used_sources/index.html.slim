@@ -1,15 +1,25 @@
+- content_for :search do
+  = form_tag :card_used_sources, :method => :get do
+    = select_tag :creditcard_id,
+      options_from_collection_for_select([Creditcard.new(:cardno => "all")]+Creditcard.all, :id, :cardno_long, params[:creditcard_id]),
+      "onchange" => "this.form.submit()"
+
 #show_command
-  = link_to t('card_used_sources.new.link'), [:new, creditcard, :card_used_source]
+  = link_to t('card_used_sources.new.link'), [:new, :card_used_source]
   = " | "
-  = link_to t('common.title.back'), creditcard
+  = link_to t('common.title.back'), :root
 
-h2= "#{creditcard.nickname}: #{creditcard.cardno}"
+h2
+  - if creditcard
+    = "#{creditcard.nickname}: #{creditcard.cardno}"
+  - else
+    = "카드 이용내역"
 
-- unless card_used_sources.empty?
-  = render 'list', card_used_sources: card_used_sources, menu: true
+- unless @card_used_sources.empty?
+  = render 'list', card_used_sources: @card_used_sources, menu: true
 
   br
   center
-    = will_paginate card_used_sources
+    = will_paginate @card_used_sources
 - else
   h4= t('.empty')

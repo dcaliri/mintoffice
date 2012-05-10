@@ -13,6 +13,12 @@ class ApplicationController < ActionController::Base
   before_filter do |controller|
     User.current_user = User.find(controller.session[:user_id]) unless controller.session[:user_id].nil?
   end
+  before_filter :modify_query_parameter
+  def modify_query_parameter
+    [:q, :query].each do |query|
+      params[query] = "#{params[query] ? params[query].strip : ""}" unless params[query].blank?
+    end
+  end
 
   protected
   def authorize
