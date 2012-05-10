@@ -667,6 +667,7 @@ ko:
         find:
             title: 주소록 찾기
         title: 연락처 관리
+        name: 이름
     contact_address_tags:
         title: 새로운 주소 대상 만들기
     contact_email_tags:
