@@ -25,6 +25,10 @@
           <td align="right"><%= @business_client.condition %></td>
         </tr>
         <tr>
+          <th align="right"><%= BusinessClient.human_attribute_name('address') %>:</th>
+          <td align="right"><%= @business_client.address %></td>
+        </tr>
+        <tr>
           <td align="right"><p><%= Taxman.model_name.human %>:</p></td>
           <% unless @business_client.taxmen.empty? %>
             <td align="right">
