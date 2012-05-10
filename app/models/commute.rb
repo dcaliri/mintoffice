@@ -16,7 +16,7 @@ class Commute < ActiveRecord::Base
   def leave!
     write_attribute(:leave, Time.zone.now)
     save!
-    Boxcar.send_to_boxcar_group("admin",self.user.hrinfo.fullname, "#{Commute.human_attribute_name('leave')} : #{self.go.strftime("%Y-%m-%d %H:%M")}")
+    Boxcar.send_to_boxcar_group("admin",self.user.hrinfo.fullname, "#{Commute.human_attribute_name('leave')} : #{self.leave.strftime("%Y-%m-%d %H:%M")}")
   end
 
 
