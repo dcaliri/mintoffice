@@ -1,9 +1,9 @@
 #show_command
-  = link_to t('common.title.back'), [creditcard, :card_used_sources]
+  = link_to t('common.title.back'), :card_used_sources
 
 h2= t("common.title.#{action_name}")
 
-= form_for [creditcard, card_used_source] do |f|
+= form_for @card_used_source do |f|
   .box
     p
       = f.label :card_no

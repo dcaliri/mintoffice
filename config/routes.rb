@@ -35,6 +35,8 @@ Mintoffice::Application.routes.draw do
     end
   end
 
+  resources :card_used_sources
+
   resources :documents
   resources :projects
   resources :pettycashes

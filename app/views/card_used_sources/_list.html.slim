@@ -32,8 +32,8 @@ table#list-table
       td= source.store_tel
       - if menu
         td align="right"
-          = link_to t('common.link.show'), [creditcard, source]
+          = link_to t('common.link.show'), source
           = " | "
-          = link_to t('common.link.edit'), [:edit, creditcard, source]
+          = link_to t('common.link.edit'), [:edit, source]
           = " | "
-          = link_to t('common.link.destroy'), [creditcard, source], :method => :delete, :confirm => "Are you sure?"
+          = link_to t('common.link.destroy'), source, :method => :delete, :confirm => "Are you sure?"
