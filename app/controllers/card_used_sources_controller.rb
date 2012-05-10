@@ -1,6 +1,4 @@
 class CardUsedSourcesController < ApplicationController
-
-
   def index
     unless params[:creditcard_id].blank?
       @card_used_sources = Creditcard.find(params[:creditcard_id]).card_used_sources
