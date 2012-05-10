@@ -867,6 +867,7 @@ ko:
             link: 연차 사용 신청
         edit:
             title: 연차 수정하기
+            link: 연차 사용 수정
         title: 연차 신청
         period_help: "* 반차의 경우 0.5 단위로 입력 합니다."
         approval_completed: 승인 완료

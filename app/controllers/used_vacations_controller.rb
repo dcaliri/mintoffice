@@ -12,13 +12,13 @@ class UsedVacationsController < ApplicationController
 
   def create
     used_vacation.save!
-    Boxcar.send_to_boxcar_group("admin",used_vacation.vacation.user.name, "Used Vacation")
+    Boxcar.send_to_boxcar_group("admin",used_vacation.vacation.user.hrinfo.fullname, I18n.t("used_vacations.new.link"))
     redirect_to vacation_path(user)
   end
 
   def update
     used_vacation.save!
-    Boxcar.send_to_boxcar_group("admin",used_vacation.vacation.user.name, "Used Vacation")
+    Boxcar.send_to_boxcar_group("admin",used_vacation.vacation.user.hrinfo.fullname,  I18n.t("used_vacations.edit.link"))
     redirect_to vacation_path(user)
   end
 
