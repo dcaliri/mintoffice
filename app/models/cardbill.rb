@@ -48,7 +48,7 @@ class Cardbill < ActiveRecord::Base
 
   def mismatch?(type=nil)
     if type == nil
-      types = [:totalamount, :transdate, :amount, :vat, :servicecharge]
+      types = [:totalamount, :transdate]
     else
       types = [type]
     end
@@ -59,12 +59,6 @@ class Cardbill < ActiveRecord::Base
         approved &&  totalamount != approved.money
       when :transdate
         approved && transdate.between?(approved.used_at - 1.hour, approved.used_at + 1.hour) == false
-      when :amount
-        used && amount != used.price
-      when :vat
-        used && vat != used.tax
-      when :servicecharge
-        used && servicecharge != used.tip
       else
         false
       end
