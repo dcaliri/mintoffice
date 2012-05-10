@@ -21,7 +21,7 @@ class Contact < ActiveRecord::Base
   class << self
     def search(query)
       query = "%#{query}%"
-      search_by_name(nil) | search_by_company(query) | search_by_email(query) | search_by_address(query) | search_by_phone_number(query)
+      search_by_name(query) | search_by_company(query) | search_by_email(query) | search_by_address(query) | search_by_phone_number(query)
     end
 
     def search_by_name(query)
@@ -29,7 +29,7 @@ class Contact < ActiveRecord::Base
     end
 
     def search_by_name_query
-      if ActiveRecord::Base.connection.class == ActiveRecord::ConnectionAdapters::SQLite3Adapter
+      if ActiveRecord::Base.connection.adapter_name == 'SQLite'
         "lastname || firstname like ?"
       else
         "CONCAT(lastname, firstname) like ?"
