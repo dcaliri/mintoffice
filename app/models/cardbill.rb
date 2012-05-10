@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class Cardbill < ActiveRecord::Base
   belongs_to :creditcard
 
@@ -17,6 +19,13 @@ class Cardbill < ActiveRecord::Base
   validates_numericality_of :amount
   validates_numericality_of :servicecharge
   validates_numericality_of :vat
+
+  validate :check_amount_of_money
+  def check_amount_of_money
+    unless amount + vat + servicecharge == totalamount
+      errors.add(:totalamount, "의 합계가 맞지 않습니다")
+    end
+  end
 
   before_save :strip_approve_no
   def strip_approve_no
