@@ -6,7 +6,7 @@ class Pettycash < ActiveRecord::Base
   include Attachmentable
 
   def self.search(text)
-    text = "%#{text ? text.strip  : ""}%"
+    text = "%#{text}%"
     where('description like ?', text)
   end
 end

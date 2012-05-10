@@ -78,7 +78,7 @@ class Cardbill < ActiveRecord::Base
   end
 
   def self.search(query)
-    query = "%#{query ? query.strip : ""}%"
+    query = "%#{query}%"
     where('storename like ? OR storeaddr like ?', query, query)
   end
 

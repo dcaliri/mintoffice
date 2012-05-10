@@ -20,8 +20,8 @@ class Contact < ActiveRecord::Base
 
   class << self
     def search(query)
-      query = "%#{query ? query.strip : ""}%"
-      search_by_name(query) | search_by_company(query) | search_by_email(query) | search_by_address(query) | search_by_phone_number(query)
+      query = "%#{query}%"
+      search_by_name(nil) | search_by_company(query) | search_by_email(query) | search_by_address(query) | search_by_phone_number(query)
     end
 
     def search_by_name(query)
