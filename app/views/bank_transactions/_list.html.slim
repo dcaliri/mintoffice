@@ -29,8 +29,8 @@ table#list-table
           - if transaction.transfer
             = link_to t('bank_transactions.show.to_bank_transfer'), [bank_account, transaction.transfer]
             = " | "
-          = link_to t('common.link.show'), [bank_account, transaction]
+          = link_to t('common.link.show'), transaction
           = " | "
-          = link_to t('common.link.edit'), [:edit, bank_account, transaction]
+          = link_to t('common.link.edit'), [:edit, transaction]
           = " | "
-          = link_to t('common.link.destroy'), [bank_account, transaction], :method => :delete, :confirm => "Are you sure?"
+          = link_to t('common.link.destroy'), transaction, :method => :delete, :confirm => "Are you sure?"

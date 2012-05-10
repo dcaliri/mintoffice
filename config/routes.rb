@@ -17,25 +17,10 @@ Mintoffice::Application.routes.draw do
       post 'preview'
       post 'excel', :action => 'upload'
     end
-
-    resources :card_used_sources, path: 'used' do
-      collection do
-        get 'excel'
-        post 'preview'
-        post 'excel', :action => 'upload'
-      end
-    end
-
-    resources :card_approved_sources, path: 'approved' do
-      collection do
-        get 'excel'
-        post 'preview'
-        post 'excel', :action => 'upload'
-      end
-    end
   end
 
   resources :card_used_sources
+  resources :card_approved_sources
 
   resources :documents
   resources :projects
@@ -109,20 +94,21 @@ Mintoffice::Application.routes.draw do
 
   resources :bank_accounts, path: 'banks' do
     get 'total', :on => :collection
-    resources :bank_transactions, path: "transactions" do
-      collection do
-        get 'excel'
-        post 'preview'
-        post 'excel', :action => 'upload'
-      end
-    end
+  end
 
-    resources :bank_transfers, path: "transfers" do
-      collection do
-        get 'excel'
-        post 'preview'
-        post 'excel', :action => 'upload'
-      end
+  resources :bank_transactions do
+    collection do
+      get 'excel'
+      post 'preview'
+      post 'excel', :action => 'upload'
+    end
+  end
+
+  resources :bank_transfers do
+    collection do
+      get 'excel'
+      post 'preview'
+      post 'excel', :action => 'upload'
     end
   end
 

@@ -1,37 +1,68 @@
 class BankTransactionsController < ApplicationController
-  expose(:bank_account)
-  expose(:bank_transactions) { bank_account.bank_transactions.latest.page(params[:page]) }
-  expose(:bank_transaction)
+  before_filter :find_bank_account
+  def find_bank_account
+    @bank_account = BankAccount.find(params[:bank_account_id]) unless params[:bank_account_id].blank?
+  end
 
   expose(:bank_transfer) { BankTransfer.find(params[:from]) if params[:from] }
+
+  def index
+    unless params[:bank_account_id].blank?
+      transactions = BankAccount.find(params[:bank_account_id]).bank_transactions
+    else
+      transactions = BankTransaction
+    end
+    @bank_transactions = transactions.latest.page(params[:page])
+  end
+
+  def show
+    @bank_transaction = BankTransaction.find(params[:id])
+  end
 
   def total
     @in = BankTransaction.in
     @out = BankTransaction.out
   end
 
+  def excel
+    @bank_transaction = BankTransaction.new
+  end
+
   def preview
+    @bank_transaction = BankTransaction.new
     @transactions = BankTransaction.preview_stylesheet(params[:upload], params[:bank_type])
   end
 
   def upload
-    bank_transactions.create_with_stylesheet(params[:upload], params[:bank_type])
-    redirect_to [bank_account, :bank_transactions]
+    BankTransaction.create_with_stylesheet(params[:upload], params[:bank_type])
+    redirect_to :bank_transactions
+  end
+
+  def new
+    @bank_transaction = BankTransaction.new
   end
 
   def create
-    bank_transaction.save!
-    redirect_to [bank_account, :bank_transactions]
+    @bank_transaction = @bank_account.bank_transactions.build(params[:bank_transaction])
+    @bank_transaction.save!
+    redirect_to @bank_transaction
+  end
+
+  def edit
+    @bank_transaction = BankTransaction.find(params[:id])
   end
 
   def update
-    bank_transaction.save!
-    redirect_to [bank_account, :bank_transactions]
+    @bank_transaction = BankTransaction.find(params[:id])
+    @bank_transaction.bank_account = @bank_account
+    @bank_transaction.save!
+    redirect_to @bank_transaction
   end
 
   def destroy
-    bank_transaction.destroy
-    redirect_to [bank_account, :bank_transactions]
+    @bank_transaction = BankTransaction.find(params[:id])
+    @bank_transaction.destroy
+    redirect_to :bank_transactions
   end
 
   private

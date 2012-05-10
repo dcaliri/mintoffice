@@ -1,11 +1,12 @@
 class CardUsedSourcesController < ApplicationController
+  before_filter :find_creditcard
+  def find_creditcard
+    @creditcard = Creditcard.find(params[:creditcard_id]) unless params[:creditcard_id].blank?
+  end
+
   def index
-    unless params[:creditcard_id].blank?
-      @card_used_sources = Creditcard.find(params[:creditcard_id]).card_used_sources
-    else
-      @card_used_sources = CardUsedSource
-    end
-    @card_used_sources = @card_used_sources.latest.page(params[:page])
+    source = @creditcard.nil? ? CardUsedSource : @creditcard.card_used_sources
+    @card_used_sources = source.latest.page(params[:page])
   end
 
   def show
@@ -26,7 +27,7 @@ class CardUsedSourcesController < ApplicationController
   end
 
   def create
-    @card_used_source = CardUsedSource.new(params[:card_used_source])
+    @card_used_source = @creditcard.card_used_sources.build(params[:card_used_source])
     @card_used_source.save!
     redirect_to @card_used_source
   end
@@ -37,6 +38,7 @@ class CardUsedSourcesController < ApplicationController
 
   def update
     @card_used_source = CardUsedSource.find(params[:id])
+    @card_used_source.creditcard = Creditcard.find(params[:creditcard_id])
     @card_used_source.save!
     redirect_to @card_used_source
   end

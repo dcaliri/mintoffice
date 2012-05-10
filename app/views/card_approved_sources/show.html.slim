@@ -1,64 +1,64 @@
 
 #show_command
-  - if card_approved_source.cardbill
-    = link_to t('.to_cardbill'), card_approved_source.cardbill
+  - if @card_approved_source.cardbill
+    = link_to t('.to_cardbill'), @card_approved_source.cardbill
     = " | "
-  = link_to t('common.link.edit'), [:edit, creditcard, card_approved_source]
+  = link_to t('common.link.edit'), [:edit, @card_approved_source]
   = " | "
-  = link_to t('common.link.destroy'), [creditcard, card_approved_source], :method => :delete, :confirm => "Are you sure?"
+  = link_to t('common.link.destroy'), @card_approved_source, :method => :delete, :confirm => "Are you sure?"
   = " | "
-  = link_to t('common.title.back'), [creditcard, :card_approved_sources]
+  = link_to t('common.title.back'), :card_approved_sources
 
 
-h2= "#{creditcard.nickname}: #{creditcard.cardno}"
+h2= "#{@card_approved_source.creditcard.nickname}: #{@card_approved_source.creditcard.cardno}"
 
 .box
   table
     tr
       th= CardApprovedSource.human_attribute_name(:used_at)
-      td= card_approved_source.used_at_to_s
+      td= @card_approved_source.used_at_to_s
     tr
       th= CardApprovedSource.human_attribute_name(:approve_no)
-      td= card_approved_source.approve_no
+      td= @card_approved_source.approve_no
     tr
       th= CardApprovedSource.human_attribute_name(:card_no)
-      td= card_approved_source.card_no
+      td= @card_approved_source.card_no
     tr
       th= CardApprovedSource.human_attribute_name(:card_holder_name)
-      td= card_approved_source.card_holder_name
+      td= @card_approved_source.card_holder_name
     tr
       th= CardApprovedSource.human_attribute_name(:store_name)
-      td= card_approved_source.store_name
+      td= @card_approved_source.store_name
     tr
       th= CardApprovedSource.human_attribute_name(:money)
-      td= card_approved_source.money
+      td= @card_approved_source.money
     tr
       th= CardApprovedSource.human_attribute_name(:money_foreign)
-      td= card_approved_source.money_foreign
+      td= @card_approved_source.money_foreign
     tr
       th= CardApprovedSource.human_attribute_name(:money_type)
-      td= card_approved_source.money_type
+      td= @card_approved_source.money_type
     tr
       th= CardApprovedSource.human_attribute_name(:money_type_info)
-      td= card_approved_source.money_type_info
+      td= @card_approved_source.money_type_info
     tr
       th= CardApprovedSource.human_attribute_name(:money_dollar)
-      td= card_approved_source.money_dollar
+      td= @card_approved_source.money_dollar
     tr
       th= CardApprovedSource.human_attribute_name(:used_type)
-      td= card_approved_source.used_type
+      td= @card_approved_source.used_type
     tr
       th= CardApprovedSource.human_attribute_name(:monthly_duration)
-      td= card_approved_source.monthly_duration
+      td= @card_approved_source.monthly_duration
     tr
       th= CardApprovedSource.human_attribute_name(:card_type)
-      td= card_approved_source.card_type
+      td= @card_approved_source.card_type
     tr
       th= CardApprovedSource.human_attribute_name(:canceled_at)
-      td= card_approved_source.canceled_at_to_s
+      td= @card_approved_source.canceled_at_to_s
     tr
       th= CardApprovedSource.human_attribute_name(:status)
-      td= card_approved_source.status
+      td= @card_approved_source.status
     tr
       th= CardApprovedSource.human_attribute_name(:will_be_paied_at)
-      td= card_approved_source.will_be_paied_at_to_s
+      td= @card_approved_source.will_be_paied_at_to_s

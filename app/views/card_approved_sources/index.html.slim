@@ -1,15 +1,26 @@
+- content_for :search do
+  = form_tag :card_approved_sources, :method => :get do
+    = select_tag :creditcard_id,
+      options_from_collection_for_select([Creditcard.new(:cardno => "all")]+Creditcard.all, :id, :cardno_long, params[:creditcard_id]),
+      "onchange" => "this.form.submit()"
+
+
 #show_command
-  = link_to t('card_approved_sources.new.link'), [:new, creditcard, :card_approved_source]
+  = link_to t('card_approved_sources.new.link'), [:new, :card_approved_source]
   = " | "
-  = link_to t('common.title.back'), creditcard
+  = link_to t('common.title.back'), :root
 
-h2= "#{creditcard.nickname}: #{creditcard.cardno}"
+h2
+  - if @creditcard
+    = "#{@creditcard.nickname}: #{@creditcard.cardno}"
+  - else
+    = "카드 승인내역"
 
-- unless card_approved_sources.empty?
-  = render 'list', card_approved_sources: card_approved_sources, menu: true
+- unless @card_approved_sources.empty?
+  = render 'list', card_approved_sources: @card_approved_sources, menu: true
 
   br
   center
-    = will_paginate card_approved_sources
+    = will_paginate @card_approved_sources
 - else
   h4= t('.empty')

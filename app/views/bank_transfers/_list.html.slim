@@ -42,10 +42,10 @@ table#list-table
       - if menu
         td align="right"
           - if transfer.transaction
-            = link_to t('bank_transfers.show.to_bank_transaction'), [bank_account, transfer.transaction]
+            = link_to t('bank_transfers.show.to_bank_transaction'), transfer.transaction
             = " | "
-          = link_to t('common.link.show'), [bank_account, transfer]
+          = link_to t('common.link.show'), transfer
           = " | "
-          = link_to t('common.link.edit'), [:edit, bank_account, transfer]
+          = link_to t('common.link.edit'), [:edit, transfer]
           = " | "
-          = link_to t('common.link.destroy'), [bank_account, transfer], :method => :delete, :confirm => "Are you sure?"
+          = link_to t('common.link.destroy'), transfer, :method => :delete, :confirm => "Are you sure?"
