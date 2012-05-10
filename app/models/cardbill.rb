@@ -22,10 +22,21 @@ class Cardbill < ActiveRecord::Base
 
   validate :check_unique_approve_no
   def check_unique_approve_no
-    Rails.logger.info "exists? = #{creditcard.cardbills.exists?(approveno: approveno, transdate: Time.zone.now.all_month)}"
-    if creditcard.cardbills.exists?(approveno: approveno, transdate: Time.zone.now.all_month)
+    if creditcard.cardbills.except_me(self).unique?(self)
       errors.add(:approveno, "가 최근 한 달 사이에 이미 존재합니다.")
     end
+  end
+
+  def self.except_me(cardbill)
+    if cardbill.id
+      where('id != ?', cardbill.id)
+    else
+      where('')
+    end
+  end
+
+  def self.unique?(cardbill)
+    exists?(approveno: cardbill.approveno, transdate: cardbill.transdate.all_month)
   end
 
   before_save :strip_approve_no
