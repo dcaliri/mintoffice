@@ -1,31 +1,41 @@
 class BankTransfersController < ApplicationController
-  expose(:bank_account)
-  expose(:bank_transfers) { bank_account.bank_transfers.latest.page(params[:page]) }
+  expose(:bank_account) { BankAccount.find(params[:bank_account_id]) unless params[:bank_account_id].blank? }
   expose(:bank_transfer)
-
   expose(:bank_transaction) { BankTransaction.find(params[:from]) if params[:from] }
 
+  def index
+    transfers = bank_account ? bank_account.bank_transfers : BankTransfer
+    @bank_transfers = transfers.latest.page(params[:page])
+  end
+
+  def total
+    @in = BankTransfer.in
+    @out = BankTransfer.out
+  end
+
   def preview
-    @transfers = BankTransfer.preview_stylesheet(bank_account, params[:upload], params[:bank_type])
+    @bank_transfers = BankTransfer.preview_stylesheet(params[:bank_type], params[:upload])
   end
 
   def upload
-    bank_transfers.create_with_stylesheet(bank_account, params[:upload], params[:bank_type])
-    redirect_to [bank_account, :bank_transfers]
+    BankTransfer.create_with_stylesheet(params[:bank_type], params[:upload])
+    redirect_to :bank_transfers
   end
 
   def create
+    bank_transfer = bank_account.bank_transfers.build(params[:bank_transfer])
     bank_transfer.save!
-    redirect_to [bank_account, :bank_transfers]
+    redirect_to bank_transfer
   end
 
   def update
+    bank_transfer.bank_account = bank_account
     bank_transfer.save!
-    redirect_to [bank_account, :bank_transfers]
+    redirect_to bank_transfer
   end
 
   def destroy
     bank_transfer.destroy
-    redirect_to [bank_account, :bank_transfers]
+    redirect_to :bank_transfers
   end
 end
