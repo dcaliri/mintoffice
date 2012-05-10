@@ -31,6 +31,6 @@ table#list-table
             = " | "
           = link_to t('common.link.show'), transaction
           = " | "
-          = link_to t('common.link.edit'), [:edit, transaction]
+          = link_to t('common.link.edit'), edit_bank_transaction_path(transaction, bank_account_id: transaction.bank_account)
           = " | "
           = link_to t('common.link.destroy'), transaction, :method => :delete, :confirm => "Are you sure?"
