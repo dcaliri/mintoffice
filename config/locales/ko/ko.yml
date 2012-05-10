@@ -189,7 +189,7 @@ ko:
                 name: 거래처명
                 registration_number: 사업자 등록번호
                 category: 업종
-                condition: 업태
+                business_status: 업태
                 address: 주소
                 owner: 대표자
             card_approved_source:
