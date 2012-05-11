@@ -3,11 +3,11 @@
 <div id="show_command">
   <% if @cardbill.used %>
     <%#= link_to t('.to_used'), [@cardbill.used.creditcard, @cardbill.used] %>
-    <%= link_to "사용 내역", [@cardbill.used.creditcard, @cardbill.used] %>
+    <%= link_to "사용 내역", @cardbill.used %>
     |
   <% end %>
   <% if @cardbill.approved %>
-    <%= link_to t('.to_approved'), [@cardbill.approved.creditcard, @cardbill.approved] %> |
+    <%= link_to t('.to_approved'), @cardbill.approved %> |
   <% end %>
   <%= link_to t('common.title.edit'), edit_cardbill_path(@cardbill) %> |
   <%= link_to t('common.title.list'), cardbills_path %>
