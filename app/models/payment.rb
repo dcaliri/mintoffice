@@ -14,6 +14,10 @@ class Payment < ActiveRecord::Base
     bonuses.sum {|after| after[1].to_i }
   end
 
+  def self.total
+    sum{|payment| payment.amount}
+  end
+
   def self.basic_payment(payments)
     total = payments["total"].to_i
     after = payments["after"]
