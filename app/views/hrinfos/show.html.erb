@@ -28,7 +28,7 @@
     <h3><%= t("contacts.show.title")%></h3>
     <ul>
       <% if @hrinfo.contact %>
-        <%= render 'contacts/item', contact: @hrinfo.contact, menu: false %>
+        <%= render 'contacts/item_for_hrinfo', contact: @hrinfo.contact, menu: false %>
       <% end %>
     </ul>
 <% if @user.ingroup?("admin") || @hrinfo.user == @user %>
