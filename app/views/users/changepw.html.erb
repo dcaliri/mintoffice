@@ -14,12 +14,6 @@
 <%= form_tag :html => { :class => 'tabular' } do %>
 <%= hidden_field_tag :user_id, params[:id] %>
 <div class="box">
-<% unless @user.ingroup? "admin" %>
-<p>
-  <%= label_tag :oldpassword, t('.oldpassword') %>
-  <%= password_field_tag :oldpassword, params[:oldpassword] %>
-</p>
-<% end %>
 <p>
   <%= label_tag :password, t('.password') %>
   <%= password_field_tag :password, params[:password] %>
