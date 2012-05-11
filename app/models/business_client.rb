@@ -11,6 +11,6 @@ class BusinessClient < ActiveRecord::Base
 
   def self.search(text)
     text = "%#{text}%"
-    where('name like ? OR registration_number like ? OR category like ? OR condition like ? OR address like ? or owner like ?', text, text, text, text, text, text)
+    where('name like ? OR registration_number like ? OR category like ? OR business_status like ? OR address like ? or owner like ?', text, text, text, text, text, text)
   end
 end
