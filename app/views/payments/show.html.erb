@@ -3,6 +3,8 @@
   <% if @user.ingroup?(:admin) %>
     <%= link_to t('pay_schedules.new.link'), [:yearly, user, :payments] %>
     |
+    <%= link_to "새로운 기본급 작성", [:new_yearly, user, :payments] %>
+    |
     <%= link_to t('bonuses.new.link'), [:new, user, :payment] %>
     |
   <% end %>

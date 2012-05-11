@@ -36,6 +36,17 @@ class Payment < ActiveRecord::Base
     end
   end
 
+  def self.create_new_yearly!(payments)
+    pay_start = DateTime.new(payments["pay_start(1i)"].to_i, payments["pay_start(2i)"].to_i, payments["pay_start(3i)"].to_i)
+    total = payments["total"].to_i
+
+    payments["after"].each do |after|
+      pay_at = pay_start + after[0].to_i.month
+      amount = after[1].to_i
+      create!(:note => "기본급", :pay_at => pay_at, :amount => amount)
+    end
+  end
+
   def self.latest
     order('pay_at DESC')
   end
