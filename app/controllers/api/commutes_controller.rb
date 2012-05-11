@@ -12,7 +12,7 @@ module Api
     end
 
     def checkout
-      @commutes = @user.commutes.where(leave: nil)
+      @commutes = @user.commutes.where(go: Time.zone.now.all_day, leave: nil)
       unless @commutes.empty?
         @commute = @commutes.last
         @commute.leave!
