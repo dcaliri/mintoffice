@@ -125,6 +125,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def has_payment_info
+    not payments.empty?
+  end
+
 private
   def password_non_blank
     if hashed_password.blank?

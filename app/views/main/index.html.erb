@@ -35,10 +35,12 @@ table tr td ul {
         <% else %>
           <li><%= link_to t("vacations.index.title"), vacation_path(@user) %></li>
         <% end %>
-        <% if @user.ingroup?(:admin) %>
-          <li><%= link_to t("payments.title"), :payments %></li>
-        <% else %>
-          <li><%= link_to t("payments.title"), payment_path(@user) %></li>
+        <% if @user.has_payment_info %>
+          <% if @user.ingroup?(:admin) %>
+            <li><%= link_to t("payments.title"), :payments %></li>
+          <% else %>
+            <li><%= link_to t("payments.title"), payment_path(@user) %></li>
+          <% end %>
         <% end %>
       </ul>
 
