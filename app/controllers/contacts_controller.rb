@@ -6,6 +6,7 @@ class ContactsController < ApplicationController
 
   def index
     @contacts = Contact.search(params[:query])
+    @paginated = @contacts.paginate(:page => params[:page], :per_page => 20)
   end
 
   def find
