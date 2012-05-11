@@ -312,6 +312,7 @@ ko:
                 mphone: 핸드폰번호
                 joined_on: 입사일
                 email: 이메일
+                listed: 목록 출력 여부
             namecard:
                 name: "이름"
                 company: "회사명"
