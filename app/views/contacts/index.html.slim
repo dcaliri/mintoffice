@@ -9,10 +9,9 @@
   = " | "
   = link_to t('common.title.back'), :root
 
-h2 목록
+h2 Total : #{@contacts.count}
 
 - unless @contacts.empty?
-  p#contact-description 총 #{@contacts.count}개의 연락처가 있습니다.
   table#list-table
     tr
       th= contact.class.human_attribute_name(:name)
