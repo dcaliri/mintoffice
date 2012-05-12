@@ -1,4 +1,9 @@
 class CreditcardsController < ApplicationController
+  before_filter :only => [:show] do |c|
+    @creditcard = Creditcard.find(params[:id])
+    c.save_attachment_id @creditcard
+  end
+
   # GET /creditcards
   # GET /creditcards.xml
   def preview
@@ -23,16 +28,6 @@ class CreditcardsController < ApplicationController
   # GET /creditcards/1.xml
   def show
     @creditcard = Creditcard.find(params[:id])
-    @attachments = Attachment.for_me(@creditcard, "seq ASC")
-    at = params[:at] || "0"
-
-    unless @attachments.empty?
-       if session[:attachments].nil?
-         session[:attachments] = [@attachments[at.to_i].id]
-       else
-         session[:attachments] << @attachments[at.to_i].id
-       end
-    end
 
     respond_to do |format|
       format.html # show.html.erb
@@ -54,17 +49,6 @@ class CreditcardsController < ApplicationController
   # GET /creditcards/1/edit
   def edit
     @creditcard = Creditcard.find(params[:id])
-    @attachments = Attachment.for_me(@creditcard, "seq ASC")
-    at = params[:at] || "0"
-
-    unless @attachments.empty?
-       if session[:attachments].nil?
-         session[:attachments] = [@attachments[at.to_i].id]
-       else
-         session[:attachments] << @attachments[at.to_i].id
-       end
-    end
-
   end
 
   # POST /creditcards
@@ -74,7 +58,6 @@ class CreditcardsController < ApplicationController
 
     respond_to do |format|
       if @creditcard.save
-        Attachment.save_for(@creditcard,@user,params[:attachment])
         flash[:notice] = 'Creditcard was successfully created.'
         format.html { redirect_to(@creditcard) }
         format.xml  { render :xml => @creditcard, :status => :created, :location => @creditcard }
@@ -93,8 +76,6 @@ class CreditcardsController < ApplicationController
       @creditcard.attributes = params[:creditcard]
       if @creditcard.valid?
         @creditcard.save!
-
-        Attachment.save_for(@creditcard,@user,params[:attachment])
         flash[:notice] = t("common.messages.updated", :model => Creditcard.model_name.human)
         format.html { redirect_to(@creditcard) }
         format.xml  { head :ok }

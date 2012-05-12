@@ -1,12 +1,16 @@
-
 #show_command
   = link_to t('common.title.new'), new_payroll_path
 
 h2 ...
 
 - unless payrolls.empty?
-  ul
+  table#list-table
+    tr
+      th= Payroll.human_attribute_name("payday")
+      th= Hrinfo.human_attribute_name("fullname")
     - payrolls.each do |payroll|
-        li= link_to "#{payroll.payday} (#{payroll.user.name})", payroll_path(payroll)
+      tr.selectable onclick="location.href='#{payroll_path(payroll)}'"
+        td= payroll.payday
+        td= payroll.user.hrinfo.fullname
 - else
   = "empty"

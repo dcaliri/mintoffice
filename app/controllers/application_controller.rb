@@ -13,6 +13,12 @@ class ApplicationController < ActionController::Base
   before_filter do |controller|
     User.current_user = User.find(controller.session[:user_id]) unless controller.session[:user_id].nil?
   end
+  before_filter :modify_query_parameter
+  def modify_query_parameter
+    [:q, :query].each do |query|
+      params[query] = "#{params[query] ? params[query].strip : ""}" unless params[query].blank?
+    end
+  end
 
   protected
   def authorize
@@ -38,9 +44,9 @@ class ApplicationController < ActionController::Base
     force_redirect unless @user.ingroup? "admin"
   end
 
-  def redirect_unless_me
-    unless @user.ingroup?(:admin)
-      force_redirect if @user.id != params[:id].to_i
+  def redirect_unless_me(user)
+    unless @user.ingroup? "admin"
+      force_redirect unless @user == user
     end
   end
 
@@ -63,5 +69,10 @@ class ApplicationController < ActionController::Base
     else
       @title || t("#{controller_name}.title")
     end
+  end
+
+  def save_attachment_id(resource)
+    session[:attachments] = [] if session[:attachments].nil?
+    resource.attachments.each { |at| session[:attachments] << at.id }
   end
 end

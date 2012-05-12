@@ -2,14 +2,16 @@ class Document < ActiveRecord::Base
   belongs_to :project
   has_many :document_owners
   has_many :users, :through => :document_owners, :source => :user
-  has_and_belongs_to_many :tags
 
   validates_presence_of :title
 
-  def user_for_tag (tag_name)
+  include Attachmentable
+  include Taggable
+
+  def user_for_tag(tag_name)
     tag_names = self.tags.index_by {|t1| t1.name }
-		all_user = User.all.index_by {|u| u.name}
-		target_user = tag_names.keys & all_user.keys
+    all_user = User.all.index_by {|u| u.name}
+    target_user = tag_names.keys & all_user.keys
 
     if (tag_names.keys.include? (tag_name)) && target_user.size == 1
       User.find_by_name(target_user[0])
@@ -23,7 +25,7 @@ class Document < ActiveRecord::Base
   end
 
   def self.search(query)
-    query = "%#{query || ""}%"
+    query = "%#{query}%"
     includes(:project).includes(:tags).where('title like ? OR projects.name like ? OR tags.name LIKE ?', query, query, query)
   end
 end

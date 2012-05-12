@@ -1,7 +1,7 @@
 #show_command
-  = link_to t('bank_transactions.title'), [bank_account, :bank_transactions]
+  = link_to t('bank_transactions.title'), bank_transactions_path(bank_account_id: bank_account.id)
   = " | "
-  = link_to t('bank_transfers.title'), [bank_account, :bank_transfers]
+  = link_to t('bank_transfers.title'), bank_transfers_path(bank_account_id: bank_account.id)
   = " | "
   = link_to t('common.link.edit'), [:edit, bank_account]
   = " | "
@@ -10,7 +10,6 @@
   = link_to t('common.title.list'), :bank_accounts
 
 h2 ...
-
 
 .box
   #descr
@@ -24,7 +23,8 @@ h2 ...
       tr
         th= bank_account.class.human_attribute_name(:note)
         td= bank_account.note
+    = render 'changelog', target: bank_account
 
-  = render :partial => "shared/show_attachment", :object => bank_account
+  = render "shared/attachments/detail", :target => bank_account
 
   .clear

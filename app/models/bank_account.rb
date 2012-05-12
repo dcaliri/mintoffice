@@ -2,6 +2,9 @@ class BankAccount < ActiveRecord::Base
   has_many :bank_transactions, :dependent => :destroy
   has_many :bank_transfers, :dependent => :destroy
 
+  include Historiable
+  include Attachmentable
+
   class << self
     def transaction_per_period(query)
       collection = BankTransaction.where('transacted_at IS NOT NULL').order(query)

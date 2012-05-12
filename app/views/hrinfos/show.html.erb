@@ -22,13 +22,13 @@
 <% end %>
     </table>
     <div id="show_command">
-      <%= link_to "주소록 찾기", find_contacts_path(target_class: @hrinfo.class, target: @hrinfo, query: @hrinfo.fullname), :class => 'popup' %>
+      <%= link_to "주소록 찾기", find_contacts_path(target_class: @hrinfo.class, target: @hrinfo, query: @hrinfo.fullname.gsub(/\s+/, "")), :class => 'popup' %>
     </div>
-    
+
     <h3><%= t("contacts.show.title")%></h3>
     <ul>
       <% if @hrinfo.contact %>
-        <%= render 'contacts/item', contact: @hrinfo.contact, menu: false %>
+        <%= render 'contacts/item_for_hrinfo', contact: @hrinfo.contact, menu: false %>
       <% end %>
     </ul>
 <% if @user.ingroup?("admin") || @hrinfo.user == @user %>
@@ -37,6 +37,7 @@
       <%= link_to t('required_tags.new.title'), :controller => "required_tags",  :action => "new", :modelname => Hrinfo.name, :returnurl => request.url %>
     </div>
 <% end %>
+
     <h3><%= t('.related_documents') %></h3>
     <ul>
       <% if !@required_tagnames.blank? %>
@@ -56,6 +57,7 @@
         <% end %>
       <% end %>
     </ul>
+
     <h3><%= t(".related_admin_actions")%></h3>
     <ul>
       <% if @user.ingroup?("admin") || @hrinfo.user == @user %>
@@ -66,25 +68,7 @@
 <% end %>
   </div>
   <div id="attach">
-<%
-  at = params[:at].to_i || 0
-  if  at < @attachments.count
-    attachment = @attachments[at]
-%>
-    <img src="<%= url_for(:controller => "attachments", :action => 'picture', :id => attachment.id, :w => "600", :h => "800") %>" />
-<% end %>
-    <center>
-<% if at < @attachments.count %>
-      <%= link_to t(".download"), :controller => "attachments", :action => "download", :id => attachment.id %> ...
-<% end %>
-      <% 0.upto(@attachments.count - 1) do |i| %>
-        <% if i == params[:at].to_i %>
-          <u><%= (i+1) %></u>
-        <% else %>
-          <%= link_to (i+1).to_s, :controller => "hrinfos", :action => "show", :id => @hrinfo, :at => i %>
-        <% end %>
-      <% end %>
-    </center>
+    <%= render "shared/attachments/detail", :target => @hrinfo %>
   </div>
   <div style="clear: both;">
 <% if @user.ingroup? "admin" %>

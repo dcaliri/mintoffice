@@ -25,6 +25,9 @@ class User < ActiveRecord::Base
 
   cattr_accessor :current_user
 
+  include Historiable
+  include Attachmentable
+
   def self.find_or_create_with_omniauth!(auth)
 #    users = where(:provider => auth['provider'], :uid => auth['uid'])
     users = where(:gmail_account => auth['info']['email'])
@@ -90,7 +93,7 @@ class User < ActiveRecord::Base
 
 
   def self.search(query)
-    query = "%#{query || ""}%"
+    query = "%#{query}%"
     where('name like ?', query)
   end
 
@@ -120,6 +123,10 @@ class User < ActiveRecord::Base
       commute.leave!
       commute
     end
+  end
+
+  def has_payment_info
+    not payments.empty?
   end
 
 private

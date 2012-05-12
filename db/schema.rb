@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120503054815) do
+ActiveRecord::Schema.define(:version => 20120511025102) do
 
   create_table "attachments", :force => true do |t|
     t.string   "title"
@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(:version => 20120503054815) do
     t.datetime "updated_at"
     t.integer  "user_id",           :default => 0,  :null => false
     t.string   "contenttype",       :default => "", :null => false
-    t.string   "owner_table_name"
+    t.string   "owner_type"
     t.integer  "owner_id"
     t.string   "original_filename"
     t.integer  "seq"
@@ -76,7 +76,7 @@ ActiveRecord::Schema.define(:version => 20120503054815) do
     t.string   "name"
     t.string   "registration_number"
     t.string   "category"
-    t.string   "condition"
+    t.string   "business_status"
     t.string   "address"
     t.string   "owner"
     t.datetime "created_at",          :null => false
@@ -160,6 +160,7 @@ ActiveRecord::Schema.define(:version => 20120503054815) do
     t.string   "changable_type"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+    t.string   "target"
   end
 
   create_table "commutes", :force => true do |t|
@@ -304,6 +305,7 @@ ActiveRecord::Schema.define(:version => 20120503054815) do
     t.string   "position"
     t.integer  "companyno"
     t.string   "juminno"
+    t.boolean  "listed"
   end
 
   add_index "hrinfos", ["companyno"], :name => "index_hrinfos_on_companyno", :unique => true
@@ -335,6 +337,14 @@ ActiveRecord::Schema.define(:version => 20120503054815) do
     t.string   "title"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "payroll_items", :force => true do |t|
+    t.integer  "payroll_id"
+    t.integer  "payroll_category_id"
+    t.decimal  "amount",              :precision => 10, :scale => 2
+    t.datetime "created_at",                                         :null => false
+    t.datetime "updated_at",                                         :null => false
   end
 
   create_table "payrolls", :force => true do |t|
@@ -387,6 +397,15 @@ ActiveRecord::Schema.define(:version => 20120503054815) do
     t.integer  "tag_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "taggings", :force => true do |t|
+    t.string   "name"
+    t.integer  "target_id"
+    t.string   "target_type"
+    t.integer  "tag_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "tags", :force => true do |t|

@@ -2,6 +2,8 @@ class Vacation < ActiveRecord::Base
   belongs_to :user
   has_many :used, class_name: 'UsedVacation'
 
+  include Historiable
+
   def remain
     (period - used.total)
   end

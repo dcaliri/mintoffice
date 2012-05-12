@@ -1,6 +1,16 @@
+# encoding: UTF-8
+
 class Cardbill < ActiveRecord::Base
-  belongs_to :attachment
   belongs_to :creditcard
+
+  include Historiable
+  include Attachmentable
+
+  def history_info
+    {
+      :creditcard_id => proc { |cardbill, v| Creditcard.find(v).cardno }
+    }
+  end
 
   # validates_presence_of :cardno
   validates_presence_of :totalamount
@@ -9,6 +19,31 @@ class Cardbill < ActiveRecord::Base
   validates_numericality_of :amount
   validates_numericality_of :servicecharge
   validates_numericality_of :vat
+
+  validate :check_amount_of_money, :check_unique_approve_no
+  def check_amount_of_money
+    unless amount.to_i + vat.to_i + servicecharge.to_i == totalamount.to_i
+      errors.add(:totalamount, "의 합계가 맞지 않습니다")
+    end
+  end
+
+  def check_unique_approve_no
+    if creditcard.cardbills.except_me(self).unique?(self)
+      errors.add(:approveno, "가 올해에 이미 존재합니다.")
+    end
+  end
+
+  def self.except_me(cardbill)
+    if cardbill.id
+      where('id != ?', cardbill.id)
+    else
+      where('')
+    end
+  end
+
+  def self.unique?(cardbill)
+    exists?(approveno: cardbill.approveno, transdate: cardbill.transdate.all_year)
+  end
 
   before_save :strip_approve_no
   def strip_approve_no
@@ -40,7 +75,7 @@ class Cardbill < ActiveRecord::Base
 
   def mismatch?(type=nil)
     if type == nil
-      types = [:totalamount, :transdate, :amount, :vat, :servicecharge]
+      types = [:totalamount, :transdate]
     else
       types = [type]
     end
@@ -50,13 +85,7 @@ class Cardbill < ActiveRecord::Base
       when :totalamount
         approved &&  totalamount != approved.money
       when :transdate
-        approved && transdate.between?(approved.used_at - 1.minute, approved.used_at + 1.minute) == false
-      when :amount
-        used && amount != used.price
-      when :vat
-        used && vat != used.tax
-      when :servicecharge
-        used && servicecharge != used.tip
+        approved && transdate.between?(approved.used_at - 1.hour, approved.used_at + 1.hour) == false
       else
         false
       end
@@ -76,7 +105,7 @@ class Cardbill < ActiveRecord::Base
   end
 
   def self.search(query)
-    query = "%#{query || ""}%"
+    query = "%#{query}%"
     where('storename like ? OR storeaddr like ?', query, query)
   end
 

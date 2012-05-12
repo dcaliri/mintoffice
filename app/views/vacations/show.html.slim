@@ -15,7 +15,7 @@ h2 ...
         = " | "
         = link_to t('common.link.destroy'), [user, vacation], :method => :delete, :confirm => "Are you sure?"
     h3= "#{vacation.from} ~ #{vacation.to} : #{t('vacations.show.info', total: vacation.period, used: vacation.used.total, remain: vacation.remain)}"
-      
+
     - unless vacation.used.empty?
       table#list-table
         tr
@@ -37,14 +37,14 @@ h2 ...
             td
               = used.note
             td
-              = used.approve ? "yes" : "no"
+              = used.approve ? t("used_vacations.approval_completed") : t("used_vacations.approval_waiting")
               - if @user.ingroup?("admin")
-                = " ("
+                = " ["
                 - if used.approve
                   = link_to t('vacations.approve.cancel'), vacation_used_vacation_approve_path(vacation, used, approve: false), :method => :put
                 - else
                   = link_to t('vacations.approve.approve'), vacation_used_vacation_approve_path(vacation, used, approve: true), :method => :put
-                = ")"
+                = "]"
 
             - if @user.ingroup?("admin")
               td width="150" align="center"
@@ -54,10 +54,10 @@ h2 ...
       br
     - else
       h4= t('used_vacations.show.empty')
+    = render 'changelog', target: vacation
 
 - else
   h4= t('.empty')
-  
-  
+
+
   p=
-  

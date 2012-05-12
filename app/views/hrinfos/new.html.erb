@@ -35,12 +35,13 @@
     <%= f.label :joined_on, Hrinfo.human_attribute_name('joined_on')%>
     <%= f.date_select :joined_on, :order => [:year, :month, :day] %>
   </p>
-<%= fields_for :attachment, @attachment do |attachment| -%>
   <p>
-    <%= attachment.label t('hrinfos.edit.picture') %>
-    <%= attachment.file_field :uploaded_file %>
+    <%= f.label :listed, Hrinfo.human_attribute_name('listed') %>
+    <%= f.check_box :listed %>
   </p>
-<% end -%>
+  <p>
+    <%= render 'shared/attachments/form', form: f %>
+  </p>
   <p>
   </p>
 </div>

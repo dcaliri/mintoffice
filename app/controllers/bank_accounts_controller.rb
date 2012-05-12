@@ -2,26 +2,16 @@ class BankAccountsController < ApplicationController
   expose(:bank_accounts) { BankAccount.all }
   expose(:bank_account)
 
-  def show
-    @attachments = Attachment.for_me(bank_account)
-    session[:attachments] = [] if session[:attachments].nil?
-    @attachments.each { |at| session[:attachments] << at.id }
-  end
+  before_filter :only => [:show] { |c| c.save_attachment_id bank_account }
 
   def create
     bank_account.save!
-    Attachment.save_for(bank_account, @user, params[:attachment])
-    redirect_to :bank_accounts
-  end
-
-  def edit
-    @attachments = Attachment.for_me(bank_account)
+    redirect_to bank_account
   end
 
   def update
     bank_account.save!
-    Attachment.save_for(bank_account, @user, params[:attachment])
-    redirect_to :bank_accounts
+    redirect_to bank_account
   end
 
   def destroy

@@ -7,27 +7,23 @@ class CommutesController < ApplicationController
   expose(:commutes) { user.commutes.latest }
   expose(:commute)
 
+  before_filter :only => [:detail] { |c| c.save_attachment_id commute }
+
   before_filter :redirect_unless_admin, :only => :index
 
   def index
     @users = User(:protected).enabled.page(params[:page])
   end
 
-  def detail
-    @attachments = Attachment.for_me(commute)
-    session[:attachments] = [] if session[:attachments].nil?
-    @attachments.each { |at| session[:attachments] << at.id }
-  end
-
   def go!
     commute.go!
-    Attachment.save_for(commute, @user, params[:attachment])
     redirect_to commute_path(user)
+  rescue ActiveRecord::RecordInvalid
+    render 'go'
   end
 
   def leave!
     commute.leave!
-    Attachment.save_for(commute, @user, params[:attachment])
     redirect_to commute_path(user)
   end
 end

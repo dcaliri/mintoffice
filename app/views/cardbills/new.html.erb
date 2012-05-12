@@ -6,7 +6,7 @@
 <%= form_for(@cardbill,
     :url => { :action => 'create' },
     :html => { :class => "tabular", :multipart => true } ) do |f| %>
-  <%= f.error_messages %>
+    <%= f.error_messages %>
 <div class="box">
   <p>
     <%= f.label :creditcard_id, Cardbill.human_attribute_name('cardno') %>
@@ -44,7 +44,9 @@
     <%= f.label :approveno, Cardbill.human_attribute_name('approveno') %>
     <%= f.text_field :approveno %>
   </p>
-  <%= render :partial => "shared/new_attachment" %>
+  <p>
+    <%= render 'shared/attachments/form', form: f %>
+  </p>
 </div>
 <%= f.submit t('common.button.create') %>
 <% end %>

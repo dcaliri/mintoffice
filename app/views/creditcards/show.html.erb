@@ -1,7 +1,7 @@
 <div id="show_command">
-  <%= link_to t('card_used_sources.index.title'), [@creditcard, :card_used_sources] %>
+  <%= link_to t('card_used_sources.index.title'), card_used_sources_path(creditcard_id: @creditcard.id) %>
   |
-  <%= link_to t('card_approved_sources.index.title'), [@creditcard, :card_approved_sources] %>
+  <%= link_to t('card_approved_sources.index.title'), card_approved_sources_path(creditcard_id: @creditcard.id)  %>
   |
   <%= link_to t("common.title.edit"), edit_creditcard_path(@creditcard) %>
   |
@@ -41,7 +41,7 @@
     </tr>
   </table>
   </div>
-  <%= render :partial => "shared/show_attachment", :object => @creditcard  %>
+  <%= render "shared/attachments/detail", :target => @creditcard %>
   <div style="clear:both;">
 
     <% if @user.ingroup? "admin" %>

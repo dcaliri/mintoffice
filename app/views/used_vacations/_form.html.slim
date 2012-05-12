@@ -1,5 +1,5 @@
 #show_command
-  = link_to t('common.title.back'), [user, :vacations]
+  = link_to t('common.title.back'), [user, vacation]
 
 h2= t("common.title.#{action_name}")
 
@@ -15,8 +15,10 @@ h2= t("common.title.#{action_name}")
     p
       = f.label :period
       = f.text_field :period
+      br
+      = t("used_vacations.period_help")
     p
       = f.label :note
       = f.text_area :note
   p
-    = f.submit
+    = f.submit t("used_vacations.new.link")

@@ -1,7 +1,6 @@
 Mintoffice::Application.routes.draw do
   namespace :api do
     match 'login', controller: :users, action: :login
-#    post 'commutes', controller: :commutes, action: :create
 
     resources :commutes do
       collection do
@@ -18,23 +17,10 @@ Mintoffice::Application.routes.draw do
       post 'preview'
       post 'excel', :action => 'upload'
     end
-
-    resources :card_used_sources, path: 'used' do
-      collection do
-        get 'excel'
-        post 'preview'
-        post 'excel', :action => 'upload'
-      end
-    end
-
-    resources :card_approved_sources, path: 'approved' do
-      collection do
-        get 'excel'
-        post 'preview'
-        post 'excel', :action => 'upload'
-      end
-    end
   end
+
+  resources :card_used_sources
+  resources :card_approved_sources
 
   resources :documents
   resources :projects
@@ -42,7 +28,10 @@ Mintoffice::Application.routes.draw do
   resources :permissions
   resources :cardbills
   resources :payroll_categories
-  resources :payrolls
+  resources :payrolls do
+    resources :payroll_items, path: "items"
+  end
+  resources :payroll_items
 
   match '/hrinfos/retire/:id', :controller => "hrinfos", :action => "retire", :conditions => {:method => :get}
   match '/hrinfos/retire/:id', :controller => "hrinfos", :action => "retire_save", :conditions => {:method => :post}
@@ -105,20 +94,21 @@ Mintoffice::Application.routes.draw do
 
   resources :bank_accounts, path: 'banks' do
     get 'total', :on => :collection
-    resources :bank_transactions, path: "transactions" do
-      collection do
-        get 'excel'
-        post 'preview'
-        post 'excel', :action => 'upload'
-      end
-    end
+  end
 
-    resources :bank_transfers, path: "transfers" do
-      collection do
-        get 'excel'
-        post 'preview'
-        post 'excel', :action => 'upload'
-      end
+  resources :bank_transactions do
+    collection do
+      get 'excel'
+      post 'preview'
+      post 'excel', :action => 'upload'
+    end
+  end
+
+  resources :bank_transfers do
+    collection do
+      get 'excel'
+      post 'preview'
+      post 'excel', :action => 'upload'
     end
   end
 
@@ -133,6 +123,10 @@ Mintoffice::Application.routes.draw do
 
     resources :taxbill_items, :path => "items"
   end
+
+  resources :change_histories, path: 'histories'
+
+  resources :tags, only: [:create, :destroy]
 
   root to: 'main#index'
 

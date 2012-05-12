@@ -15,8 +15,9 @@
       <th>Boxcar Account<th>
       <td><%= user.boxcar_account %></td>
     </th>
-
   </table>
+  <%= render 'changelog', target: user %>
   </div>
+  <%= render "shared/attachments/detail", :target => user %>
   <div style="clear: both;"></div>
 </div>

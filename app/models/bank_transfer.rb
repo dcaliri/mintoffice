@@ -5,8 +5,6 @@ class BankTransfer < ActiveRecord::Base
 
   self.per_page = 20
 
-  include StylesheetParseable
-
   BANK_LIST = [
     ["신한 은행", :shinhan],
     ["기업 은행", :ibk]
@@ -77,26 +75,50 @@ class BankTransfer < ActiveRecord::Base
     }
   }
 
-  set_parser_options SHINHAN
-  set_parser_options IBK
+  include NewStylesheetParsable
 
-  def self.open_and_parse_stylesheet(account, upload, type)
-    @account = account
-    super(upload, type)
+  def self.excel_parser(type)
+    parser = NewExcelParser.new
+    parser.class_name BankTransfer
+    if type == :shinhan
+      parser.column SHINHAN[:columns]
+      parser.key SHINHAN[:keys]
+      parser.option :position => SHINHAN[:position]
+    else
+      parser.column IBK[:columns]
+      parser.key IBK[:keys]
+      parser.option :position => IBK[:position]
+    end
+    parser
   end
 
-  def self.preview_stylesheet(account, upload, type)
-    @account = account
-    super(upload, type)
+  def self.preview_stylesheet(type, upload)
+    path = file_path(upload['file'].original_filename)
+    parser = excel_parser(type.to_sym)
+
+    create_file(path, upload['file'])
+    parser.preview(path)
   end
 
-  def self.create_with_stylesheet(account, upload, type)
-    @account = account
-    super(upload, type)
-  end
+  def self.create_with_stylesheet(type, name)
+    path = file_path(name)
+    parser = excel_parser(type.to_sym)
 
-  def self.before_parser_filter(params)
-    @account.number == params[:out_bank_account]
+    parser.parse(path) do |class_name, query, params|
+      accounts = BankAccount.where(:number => params[:out_bank_account])
+
+      unless accounts.empty?
+        account = accounts.first
+        collections = account.send(class_name.to_s.tableize).where(query)
+        if collections.empty?
+          collections.create!(params)
+        else
+          resource = collections.first
+          resource.update_attributes!(params)
+        end
+      end
+    end
+    File.delete(path)
   end
 
   def self.latest
