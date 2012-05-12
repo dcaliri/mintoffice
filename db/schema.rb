@@ -17,8 +17,8 @@ ActiveRecord::Schema.define(:version => 20120503054815) do
     t.string   "title"
     t.string   "comments"
     t.string   "filepath"
-    t.datetime "created_at",                        :null => false
-    t.datetime "updated_at",                        :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "user_id",           :default => 0,  :null => false
     t.string   "contenttype",       :default => "", :null => false
     t.string   "owner_table_name"
@@ -145,8 +145,8 @@ ActiveRecord::Schema.define(:version => 20120503054815) do
     t.string   "storename"
     t.string   "storeaddr"
     t.string   "approveno"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "attachment_id"
     t.integer  "creditcard_id"
   end
@@ -247,27 +247,23 @@ ActiveRecord::Schema.define(:version => 20120503054815) do
     t.string   "nickname"
     t.string   "issuer"
     t.string   "cardholder"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "short_name"
-    t.string   "money_foreign"
-    t.string   "money_type"
-    t.string   "money_type_info"
-    t.string   "money_dollar"
   end
 
   create_table "document_owners", :force => true do |t|
     t.integer  "document_id"
     t.integer  "user_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "documents", :force => true do |t|
     t.string   "title"
     t.integer  "project_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "documents_tags", :id => false, :force => true do |t|
@@ -279,8 +275,8 @@ ActiveRecord::Schema.define(:version => 20120503054815) do
 
   create_table "groups", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "groups_users", :id => false, :force => true do |t|
@@ -292,16 +288,16 @@ ActiveRecord::Schema.define(:version => 20120503054815) do
     t.integer  "hrinfo_id"
     t.string   "change"
     t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "hrinfos", :force => true do |t|
     t.string   "firstname"
     t.string   "lastname"
     t.integer  "picture_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.date     "joined_on"
     t.date     "retired_on"
     t.integer  "user_id"
@@ -320,8 +316,8 @@ ActiveRecord::Schema.define(:version => 20120503054815) do
     t.string   "phone"
     t.string   "homepage"
     t.string   "email"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "payments", :force => true do |t|
@@ -350,8 +346,8 @@ ActiveRecord::Schema.define(:version => 20120503054815) do
 
   create_table "permissions", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "permissions_users", :id => false, :force => true do |t|
@@ -367,8 +363,8 @@ ActiveRecord::Schema.define(:version => 20120503054815) do
     t.decimal  "outmoney",      :default => 0.0, :null => false
     t.text     "description"
     t.integer  "attachment_id"
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "projects", :force => true do |t|
@@ -377,8 +373,8 @@ ActiveRecord::Schema.define(:version => 20120503054815) do
     t.date     "ending_on"
     t.date     "ended_on"
     t.decimal  "revenue",    :precision => 20, :scale => 0
-    t.datetime "created_at",                                :null => false
-    t.datetime "updated_at",                                :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "projects_users", :id => false, :force => true do |t|
@@ -389,14 +385,14 @@ ActiveRecord::Schema.define(:version => 20120503054815) do
   create_table "required_tags", :force => true do |t|
     t.string   "modelname"
     t.integer  "tag_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "tags", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "taxbill_items", :force => true do |t|
@@ -421,11 +417,11 @@ ActiveRecord::Schema.define(:version => 20120503054815) do
 
   create_table "taxmen", :force => true do |t|
     t.integer  "business_client_id"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
     t.string   "fullname"
     t.string   "email"
     t.string   "phonenumber"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
   end
 
   create_table "used_vacations", :force => true do |t|
@@ -443,8 +439,8 @@ ActiveRecord::Schema.define(:version => 20120503054815) do
     t.string   "name"
     t.string   "hashed_password"
     t.string   "salt"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "provider"
     t.string   "uid"
     t.string   "gmail_account"
