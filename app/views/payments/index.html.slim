@@ -8,7 +8,7 @@ h2= t('common.title.list')
 
 table#list-table.payment-table
   tr
-    th= User.human_attribute_name("name")
+    th= Hrinfo.human_attribute_name("fullname")
     - period = Time.zone.parse("#{to.year}-#{to.month}-01 00:00:00")
     - while from < period
     - th_class = (period.month == Time.zone.now.month ? :today : '')
@@ -18,11 +18,11 @@ table#list-table.payment-table
 
     - @users.each do |user|
       tr.selectable onclick="location.href='#{payment_path(user)}'"
-        td=h user.name
+        td=h user.hrinfo.nil? ? user.name : user.hrinfo.fullname
         - period = Time.zone.parse("#{to.year}-#{to.month}-01 00:00:00")
         - while from < period
           - td_class = (period.month == Time.zone.now.month ? :today : '')
-          td[class=td_class]
+          td.numrow[class=td_class]
             = number_to_currency user.payments.where("date(pay_at) = ?", period.to_date).total
           - period -= 1.month
 
