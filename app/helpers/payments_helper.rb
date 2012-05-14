@@ -4,13 +4,13 @@ module PaymentsHelper
   end
 
   def payment_step
-    pay_start = DateTime.parse_by_params(params[:payments], :pay_start).to_time
+    join_at = DateTime.parse_by_params(params[:payments], :join_at).to_time
     pay_end = DateTime.parse_by_params(params[:payments], :pay_end).to_time
     pay_at = params[:payments][:pay_at].to_i
     amount = params[:payments][:amount].to_i
 
-    before = pay_start.dup
-    after = pay_start.dup
+    before = join_at.dup
+    after = join_at.dup
     while after < pay_end
       after = if pay_at == after.day
                 after + 1.month

@@ -24,11 +24,6 @@ class PaymentsController < ApplicationController
     redirect_to payment_path(user)
   end
 
-  def create_new_yearly
-    payments.create_new_yearly!(params[:payments])
-    redirect_to payment_path(user)
-  end
-
   def update
     payment.save!
     redirect_to payment_path(user)
