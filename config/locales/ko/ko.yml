@@ -754,7 +754,7 @@ ko:
             title: 새로운 기본급 입력
         edit:
             title: 특별상여금 수정
-        title: 연봉관리
+        title: 연봉 관리
     payrolls:
         title: 급여대장
     payroll_categories:
