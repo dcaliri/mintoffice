@@ -23,7 +23,7 @@ class Contact < ActiveRecord::Base
 
   class << self
     def isprivate(current_user)
-      where("isprivate == ? OR user_id == ?", false, current_user.id)
+      where("isprivate = ? OR user_id = ?", false, current_user.id)
     end
 
     def search(query)
