@@ -5,34 +5,13 @@
 
 h2= t("common.title.new")
 
-- pay_at = params[:payments][:pay_at]
-
 = form_tag [:new_yearly, user, payment] do
   #box
-    p
-      = label_tag :pay_start, t('activerecord.attributes.payment.pay_start')
-      = date_select :payments, :pay_start, :order => [:year, :month, :day], default: @pay_start
-
-    - p = @pay_start.dup
-    - while @pay_end > p
-      p= p
-      - if p.day == pay_at.to_i
-        - p += 1.month
-      - else
-        - p = p.change(day: pay_at)
-
-
-
-    / - while @pay_end > p
-    /   - if p.day == pay_at
-    /     - p += 1.month
-    /   - else
-    /     - p.change(day: pay_at)
-
-      p= p
-    - 0.upto(@period).each do |month|
+    - payment_step do |before, after, amount|
+      - before = before.strftime("%Y.%m.%d")
+      - after = after.strftime("%Y.%m.%d")
       p
-        = label_tag "payments[after][#{month}]", t('activerecord.attributes.payment.after', :month => month + 1)
-        = text_field_tag "payments[after][#{month}]", params[:payments][:amount].to_i
+        = label_tag "payments[after][#{after}]", "#{before} ~ #{after}"
+        = text_field_tag "payments[after][#{after}]", amount
     p
       = submit_tag t("common.button.add"), :id => "submit"
