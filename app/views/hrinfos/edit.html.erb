@@ -30,6 +30,10 @@
     <%= f.label :joined_on, Hrinfo.human_attribute_name('joined_on') %>
     <%= f.date_select :joined_on, :order => [:year, :month, :day] %>
   </p>
+  <p>
+    <%= f.label :listed, Hrinfo.human_attribute_name('listed') %>
+    <%= f.check_box :listed %>
+  </p>
 <% end %>
   <p>
     <%= f.label :juminno, Hrinfo.human_attribute_name('juminno') %>

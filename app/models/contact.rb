@@ -2,6 +2,7 @@
 
 class Contact < ActiveRecord::Base
   belongs_to :target, :polymorphic => true
+  belongs_to :owner, class_name: 'User'
 
   REJECT_IF_EMPTY = proc { |attrs| attrs.all? { |k, v| k != "target" ? v.blank? : true  } }
 
@@ -14,11 +15,17 @@ class Contact < ActiveRecord::Base
   has_many :phone_numbers, class_name: 'ContactPhoneNumber', :dependent => :destroy
   accepts_nested_attributes_for :phone_numbers, :allow_destroy => :true, :reject_if => REJECT_IF_EMPTY
 
+  self.per_page = 20
+
   include Historiable
   include Attachmentable
   include Taggable
 
   class << self
+    def private(current_user)
+      where("private == ? OR user_id == ?", false, current_user.id)
+    end
+
     def search(query)
       query = "%#{query}%"
       search_by_name(query) | search_by_company(query) | search_by_email(query) | search_by_address(query) | search_by_phone_number(query)

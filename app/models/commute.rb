@@ -1,5 +1,12 @@
+# encoding: UTF-8
+
 class Commute < ActiveRecord::Base
   belongs_to :user
+
+  validate :check_unique_date, on: :create
+  def check_unique_date
+    errors.add(:go, "이 이미 생성되었습니다.") if user.commutes.exists?(go: Time.zone.now.all_day)
+  end
 
   include Attachmentable
 
@@ -23,5 +30,4 @@ class Commute < ActiveRecord::Base
   def as_json(options={})
     super(options.merge(:only => [:go, :leave]))
   end
-
 end

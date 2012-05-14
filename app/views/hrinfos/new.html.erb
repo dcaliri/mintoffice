@@ -36,6 +36,10 @@
     <%= f.date_select :joined_on, :order => [:year, :month, :day] %>
   </p>
   <p>
+    <%= f.label :listed, Hrinfo.human_attribute_name('listed') %>
+    <%= f.check_box :listed %>
+  </p>
+  <p>
     <%= render 'shared/attachments/form', form: f %>
   </p>
   <p>

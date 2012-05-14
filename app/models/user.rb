@@ -9,6 +9,8 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :projects
   has_one :hrinfo
 
+  has_many :contacts
+
   has_many :payments
   has_many :commutes
   has_many :vacations
@@ -123,6 +125,10 @@ class User < ActiveRecord::Base
       commute.leave!
       commute
     end
+  end
+
+  def has_payment_info
+    not payments.empty?
   end
 
 private

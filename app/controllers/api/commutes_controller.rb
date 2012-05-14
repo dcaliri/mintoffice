@@ -7,12 +7,13 @@ module Api
       @commute.go!
       Attachment.save_for(@commute, @user, uploaded_file: params[:file])
       render :json => {:status => :ok, :commute => @commute}
+    rescue ActiveRecord::RecordInvalid
+      render :json => {:status => :already_exists, :errors => @commute.errors}
     end
 
     def checkout
-      @commutes = @user.commutes.where(leave: nil)
-      unless @commutes.empty?
-        @commute = @commutes.last
+      @commute = @user.commutes.latest.first
+      if @commute && @commute.leave == nil
         @commute.leave!
         Attachment.save_for(@commute, @user, uploaded_file: params[:file])
         render :json => {:status => :ok, :commute => @commute}

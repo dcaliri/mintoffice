@@ -49,6 +49,10 @@ Mintoffice::Application.routes.draw do
       collection do
         get 'yearly'
         post 'yearly', :action => 'create_yearly'
+
+        get 'new_yearly'
+        post 'calculate'
+        post 'new_yearly', :action => 'create_new_yearly'
       end
     end
 
