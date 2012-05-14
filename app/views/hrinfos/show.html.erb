@@ -64,7 +64,7 @@
     <ul>
       <% if @user.ingroup?("admin") || @hrinfo.user == @user %>
         <li><%= link_to t('payments.title'), payment_path(@hrinfo.user) %></li>
-        <li><%= link_to t('vacations.show.link'), [@hrinfo.user, :vacations] %></li>
+        <li><%= link_to t('vacations.show.link'), vacation_path(@hrinfo.user) %></li>
       <% end %>
     </ul>
 <% end %>
