@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120514024303) do
+ActiveRecord::Schema.define(:version => 20120514124303) do
 
   create_table "attachments", :force => true do |t|
     t.string   "title"
@@ -240,7 +240,7 @@ ActiveRecord::Schema.define(:version => 20120514024303) do
     t.string  "target_type"
     t.boolean "migrated_data", :default => false
     t.integer "user_id"
-    t.boolean "private",       :default => false
+    t.boolean "isprivate",     :default => false
   end
 
   create_table "creditcards", :force => true do |t|
