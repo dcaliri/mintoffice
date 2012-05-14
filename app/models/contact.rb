@@ -22,8 +22,8 @@ class Contact < ActiveRecord::Base
   include Taggable
 
   class << self
-    def private(current_user)
-      where("private == ? OR user_id == ?", false, current_user.id)
+    def isprivate(current_user)
+      where("isprivate == ? OR user_id == ?", false, current_user.id)
     end
 
     def search(query)
