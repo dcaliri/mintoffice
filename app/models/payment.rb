@@ -39,8 +39,14 @@ class Payment < ActiveRecord::Base
   def self.create_new_yearly!(payments)
     payments["after"].each do |after|
       pay_at = DateTime.parse(after[0])
-      amount = after[1].to_i
-      create!(:note => "기본급", :pay_at => pay_at, :amount => amount)
+
+      ["default", "bonus"].each do |type|
+        pay_info = after[1][type]
+        title = pay_info["title"]
+        amount = pay_info["amount"].to_i
+
+        create!(:note => title, :pay_at => pay_at, :amount => amount) if amount > 0
+      end
     end
   end
 

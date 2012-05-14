@@ -12,6 +12,9 @@ h2= t("common.title.new")
       - after = after.strftime("%Y.%m.%d")
       p
         = label_tag "payments[after][#{after}]", "#{before} ~ #{after}"
-        = text_field_tag "payments[after][#{after}]", amount
+        = text_field_tag "payments[after][#{after}][default][title]", "기본급"
+        = text_field_tag "payments[after][#{after}][default][amount]", amount
+        = text_field_tag "payments[after][#{after}][bonus][title]", "상여금"
+        = text_field_tag "payments[after][#{after}][bonus][amount]", 0
     p
       = submit_tag t("common.button.add"), :id => "submit"
