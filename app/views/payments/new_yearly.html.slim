@@ -7,12 +7,12 @@ h2= t("common.title.new")
 
 = form_tag [:calculate, user, payment] do
   #box
-    / p
-    /   = label_tag :join_at, t('activerecord.attributes.payment.join_at')
-    /   = date_select :payments, :join_at, :order => [:year, :month, :day]
     p
       = label_tag :pay_start, t('activerecord.attributes.payment.pay_start')
       = date_select :payments, :pay_start, :order => [:year, :month, :day]
+    p
+      = label_tag :pay_at, t('activerecord.attributes.payment.pay_at')
+      = select_tag "payments[pay_at]", options_for_select(1..30)
     p
       = label_tag :pay_end, t('activerecord.attributes.payment.pay_end')
       = date_select :payments, :pay_end, :order => [:year, :month, :day], default: Date.today + 1.year
