@@ -5,6 +5,15 @@ class ProjectsController < ApplicationController
     @projects = @this_user.projects.inprogress
   end
 
+  def assign_projects
+    @this_user = User.find(params[:user_id])
+    if Project.assign_projects(@this_user, params[:projects])
+      redirect_to [:assign, @this_user, :projects]
+    else
+      redirect_to [:assign, @this_user, :projects], notice: t('projects.assign.not_hundred')
+    end
+  end
+
   # GET /projects
   # GET /projects.xml
   def index

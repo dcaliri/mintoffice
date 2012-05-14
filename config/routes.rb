@@ -72,7 +72,10 @@ Mintoffice::Application.routes.draw do
     resources :vacations
 
     resources :projects do
-      get 'assign', on: :collection
+      collection do
+        get 'assign'
+        post 'assign', action: 'assign_projects'
+      end
     end
   end
 

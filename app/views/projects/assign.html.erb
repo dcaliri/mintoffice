@@ -1,30 +1,38 @@
+<% year = (params[:year] || Time.zone.now.year).to_i %>
+<% month = (params[:month] || Time.zone.now.month).to_i %>
+
 <div id="show_command">
-  <%= link_to t("common.title.back"), projects_path %> |
+  <%= link_to "이전", assign_user_projects_path(@this_user, year: year, month: month - 1) %>
+  |
+  <%= link_to "다음", assign_user_projects_path(@this_user, year: year, month: month + 1) %>
+  |
+  <%= link_to t("common.title.back"), projects_path %>
 </div>
 
 <h2><%= t("projects.assign.title") %></h2>
 
-<table>
-  <thead>
-    <tr>
-      <th>프로젝트명</th>
-      <% @projects.in_progress_period do |period| %>
-        <th><%= period.month %>월</th>
+<% @projects.progress_period(year, month) do |projects, start, finish| %>
+  <h3><%= start.strftime("%Y.%m.%d") %> ~ <%= finish.strftime("%Y.%m.%d") %></h3>
+  <% if projects.count == 1 %>
+    <%= projects.first.name %>
+    100
+  <% else %>
+    <%= form_tag [:assign, @this_user, :projects] do %>
+      <%= hidden_field_tag "projects[start]", start %>
+      <%= hidden_field_tag "projects[finish]", finish %>
+      <% projects.each do |project| %>
+        <p>
+          <%= project.name %>
+          <%= select_tag "projects[assign][#{project.id}]", options_for_select((0..100), project.assign_rate(@this_user, start, finish)) %>
+        </p>
       <% end %>
-    </tr>
-  </thread>
-  <tbody>
-    <% @projects.each do |project| %>
-    <tr>
-      <td><%= project.name %></td>
-      <% @projects.in_progress_period do |period| %>
-        <% if project.now_processing(period)%>
-          <td><%= select_tag options_for_select(0..100, project.assign_rate(@this_user, period)) %></td>
-        <% else %>
-          <td></td>
-        <% end %>
-      <% end %>
-    </tr>
+      <p>
+        <%= submit_tag %>
+      </p>
     <% end %>
-  </tbody>
-</table>
+  <% end %>
+<% end %>
+
+
+
+
