@@ -265,7 +265,7 @@ ko:
                 company: 회사
                 department: 부서
                 position: 직위
-                private: 비공개
+                isprivate: 비공개
             contact_address:
                 target: 대상
                 country: 국가
