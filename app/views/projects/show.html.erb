@@ -30,7 +30,9 @@
     <th>Users</th>
     <td>
       <% for user in @project.users %>
-        <%= user.name %><br />
+        <%= user.name %>
+        <%= link_to "할당비율 조정", [:assign, user, :projects] %>
+        <br />
       <% end %>
     </td>
   </tr>

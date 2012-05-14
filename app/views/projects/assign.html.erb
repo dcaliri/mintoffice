@@ -1,0 +1,30 @@
+<div id="show_command">
+  <%= link_to t("common.title.back"), projects_path %> |
+</div>
+
+<h2><%= t("projects.assign.title") %></h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>프로젝트명</th>
+      <% @projects.in_progress_period do |period| %>
+        <th><%= period.month %>월</th>
+      <% end %>
+    </tr>
+  </thread>
+  <tbody>
+    <% @projects.each do |project| %>
+    <tr>
+      <td><%= project.name %></td>
+      <% @projects.in_progress_period do |period| %>
+        <% if project.now_processing(period)%>
+          <td><%= select_tag options_for_select(0..100, project.assign_rate(@this_user, period)) %></td>
+        <% else %>
+          <td></td>
+        <% end %>
+      <% end %>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

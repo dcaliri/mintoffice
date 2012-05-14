@@ -799,6 +799,7 @@ ko:
         show:
             title: 소액현금 내역
     projects:
+        title: 프로젝트 관리
         index:
             title: 프로젝트 관리
             in_progress: 진행중
@@ -811,6 +812,8 @@ ko:
             title: 프로젝트 수정
             completed: 프로젝트 완료
             confirm_complete: 프로젝트를 종료하시겠습니까?
+        assign:
+            title: 할당 비율 조정
     required_tags:
         index:
             title: 필수 태그 목록

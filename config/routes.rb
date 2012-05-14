@@ -70,6 +70,10 @@ Mintoffice::Application.routes.draw do
     end
 
     resources :vacations
+
+    resources :projects do
+      get 'assign', on: :collection
+    end
   end
 
   match "/auth/:provider/callback" => "providers#create"
