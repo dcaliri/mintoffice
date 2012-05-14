@@ -335,10 +335,12 @@ ko:
                 income: 총 연봉 금액
                 basic_pay: 기본급
             payment:
+                join_at: 입사일
                 pay_at: 지급월
                 note: 내역
                 amount: 금액
                 pay_start: 지급 시작일
+                pay_end: 지금 종료일
                 total: 총액
                 after: "%{month}개월 후"
             pettycash:
@@ -387,13 +389,6 @@ ko:
                 gave_at: 지급일
                 amount: 금액
                 note: 내역
-            payment:
-                pay_at: 지급월
-                note: 내역
-                amount: 금액
-                pay_start: 지급 시작일
-                total: 총액
-                after: "%{month}개월 후"
             commute:
                 go: 출근 시간
                 leave: 퇴근 시간
