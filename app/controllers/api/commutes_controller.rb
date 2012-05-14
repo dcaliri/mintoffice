@@ -12,9 +12,8 @@ module Api
     end
 
     def checkout
-      @commutes = @user.commutes.where(go: Time.zone.now.all_day, leave: nil)
-      unless @commutes.empty?
-        @commute = @commutes.last
+      @commute = @user.commutes.latest.first
+      if @commute && @commute.leave == nil
         @commute.leave!
         Attachment.save_for(@commute, @user, uploaded_file: params[:file])
         render :json => {:status => :ok, :commute => @commute}
