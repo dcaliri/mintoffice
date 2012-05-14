@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120510074100) do
+ActiveRecord::Schema.define(:version => 20120514024303) do
 
   create_table "attachments", :force => true do |t|
     t.string   "title"
@@ -239,6 +239,8 @@ ActiveRecord::Schema.define(:version => 20120510074100) do
     t.integer "target_id"
     t.string  "target_type"
     t.boolean "migrated_data", :default => false
+    t.integer "user_id"
+    t.boolean "private",       :default => false
   end
 
   create_table "creditcards", :force => true do |t|
@@ -305,6 +307,7 @@ ActiveRecord::Schema.define(:version => 20120510074100) do
     t.string   "position"
     t.integer  "companyno"
     t.string   "juminno"
+    t.boolean  "listed"
   end
 
   add_index "hrinfos", ["companyno"], :name => "index_hrinfos_on_companyno", :unique => true

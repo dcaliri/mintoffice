@@ -18,6 +18,8 @@ class CommutesController < ApplicationController
   def go!
     commute.go!
     redirect_to commute_path(user)
+  rescue ActiveRecord::RecordInvalid
+    render 'go'
   end
 
   def leave!

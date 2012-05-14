@@ -135,12 +135,6 @@ class UsersController < ApplicationController
       this_user = User.find(params[:user_id])
       if  params[:password] != params[:password_confirmation]
          flash.now[:notice] = I18n.t("users.changepw.password_confirm_wrong")
-       else
-         unless @user.ingroup? "admin"
-           unless User.authenticate(this_user.name, params[:oldpassword])
-             flash.now[:notice] = I18n.t("users.changepw.oldpassword_wrong")
-           end
-          end
        end
        unless flash.now[:notice]
          this_user.password = params[:password]

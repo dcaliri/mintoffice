@@ -9,9 +9,9 @@
   = " | "
   = link_to t('common.title.back'), :root
 
-h2 ..
+h2 Total : #{@contacts.count}
 
-- unless @contacts.empty?
+- unless @paginated.empty?
   table#list-table
     tr
       th= contact.class.human_attribute_name(:name)
@@ -20,7 +20,7 @@ h2 ..
       th= contact.class.human_attribute_name(:position)
       th= ContactEmail.human_attribute_name(:email)
       th= ContactPhoneNumber.human_attribute_name(:number)
-    - @contacts.each do |address|
+    - @paginated.each do |address|
       tr.selectable onclick="location.href='#{contact_path(address)}'"
         td= address.name
         td= address.company
@@ -28,5 +28,7 @@ h2 ..
         td= address.position
         td= address.emails.empty? ? "" : "(#{address.emails.first.target}) #{address.emails.first.email} "
         td= address.phone_numbers.empty? ? "" : "(#{address.phone_numbers.first.target}) #{address.phone_numbers.first.number}"
+  center
+    = will_paginate @paginated
 - else
   h4= t('.empty')

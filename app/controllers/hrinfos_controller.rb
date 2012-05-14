@@ -15,8 +15,13 @@ class HrinfosController < ApplicationController
       @hrinfos = Hrinfo.search(params[:q]).find(:all, :conditions => "retired_on IS NOT NULL")
       @hrinfos_count = Hrinfo.count(:all, :conditions => "retired_on IS NOT NULL")
     else
-      @hrinfos = Hrinfo.search(params[:q]).find(:all, :conditions => "retired_on IS NULL")
-      @hrinfos_count = Hrinfo.count(:all, :conditions => "retired_on IS NULL")
+      if @user.ingroup?("admin")
+        @hrinfos = Hrinfo.search(params[:q]).find(:all, :conditions => "retired_on IS NULL")
+        @hrinfos_count = Hrinfo.count(:all, :conditions => "retired_on IS NULL")
+      else
+        @hrinfos = Hrinfo.search(params[:q]).where(:listed => true).where(:retired_on => nil)
+        @hrinfos_count = Hrinfo.count(:all, :conditions => ["retired_on IS NULL AND listed = ?", true])
+      end
     end
 
     respond_to do |format|

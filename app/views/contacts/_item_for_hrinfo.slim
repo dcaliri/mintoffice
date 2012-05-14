@@ -1,20 +1,5 @@
 table
   tr
-    th= t("contacts.name")
-    td= contact.name
-  tr
-    th= contact.class.human_attribute_name(:company)
-    td= contact.company
-  tr
-    th= contact.class.human_attribute_name(:department)
-    td= contact.department
-  tr
-    th= contact.class.human_attribute_name(:position)
-    td= contact.position
-  tr
-    th= contact.class.human_attribute_name(:private)
-    td= contact.private
-  tr
     td
   - contact.emails.each do |email|
     tr

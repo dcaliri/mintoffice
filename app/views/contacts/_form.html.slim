@@ -20,6 +20,9 @@ h2= t("common.title.#{action_name}")
     p
       = f.label :position
       = f.text_field :position
+    p
+      = f.label :private
+      = f.check_box :private
 
     - contact.addresses.new
     h3 주소

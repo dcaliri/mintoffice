@@ -33,9 +33,8 @@ module Excels
 
     EXCEL_KEYS ||= {}
     EXCEL_KEYS[:card_used_sources] = {
+      :approve_no => :integer,
       :approved_at => :time,
-      :approved_time => :time,
-      :money_krw => :integer
     }
 
     EXCEL_OPTIONS ||= {}
