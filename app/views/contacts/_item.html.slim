@@ -46,6 +46,16 @@ table
           = " | "
           = link_to "제거", [contact, address], :method => :delete, :confirm => "Are you sure?"
 
+  - contact.others.each do |other|
     tr
-      th= Document.human_attribute_name("tags")
-      td= contact.tag_list
+      th= "#{other.target}"
+      td= other.description
+      - if menu
+        td
+          = link_to t('common.link.edit'), [:edit, contact]
+          = " | "
+          = link_to "제거", [contact, other], :method => :delete, :confirm => "Are you sure?"
+  tr
+    th= Document.human_attribute_name("tags")
+    td= contact.tag_list
+

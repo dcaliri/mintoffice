@@ -115,6 +115,8 @@ ko:
             contact_email_tag: 이메일 대상
             contact_phone_number_tag: 전화번호 대상
             contact_address_tag: 주소 대상
+            contact_other: 기타
+            contact_other_tag: 기타 대상
             creditcard: 신용카드
             document: 문서
             hrinfo: 인사정보
@@ -285,6 +287,11 @@ ko:
                 target: 대상
                 number: 전화번호
             contact_phone_number_tag:
+                name: 대상
+            contact_other:
+                target: 대상
+                description: 내용
+            contact_other_tag:
                 name: 대상
             creditcard:
                 cardno: 카드번호
@@ -673,6 +680,8 @@ ko:
         title: 새로운 이메일 대상 만들기
     contact_phone_number_tags:
         title: 새로운 전화번호 대상 만들기
+    contact_other_tags:
+        title: 새로운 기타 대상 만들기
     creditcards:
         total:
             title: 신용카드 사용금액 합계표

@@ -74,7 +74,19 @@ h2= t("common.title.#{action_name}")
       p
         = phone_number_field.label :number
         = phone_number_field.text_field :number
+
+    - contact.others.new
+    h3 기타
+    = f.fields_for :others do |others_field|
+      p
+        = others_field.label :target
+        = others_field.select :target, options_for_select(ContactOtherTag.all.map{|tag| tag.name}, others_field.object.target)
+        = link_to "새로운 대상 만들기", [:new, :contact_other_tag]
+      p
+        = others_field.label :description
+        = others_field.text_field :description
     br
+
     h3 첨부파일
     = render 'shared/attachments/form', form: f
     p

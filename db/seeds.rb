@@ -40,3 +40,10 @@ if ContactPhoneNumberTag.all.empty?
   ContactPhoneNumberTag.create!(name: "회사")
   ContactPhoneNumberTag.create!(name: "핸드폰")
 end
+
+
+if ContactOtherTag.all.empty?
+  ContactOtherTag.create!(name: "홈페이지")
+  ContactOtherTag.create!(name: "트위터")
+  ContactOtherTag.create!(name: "페이스북")
+end
