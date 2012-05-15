@@ -23,7 +23,7 @@ Mintoffice::Application.routes.draw do
   resources :card_approved_sources
 
   resources :documents
-  resources :projects
+  resources :projects, except: [:destroy]
   resources :pettycashes
   resources :permissions
   resources :cardbills

@@ -1,4 +1,6 @@
 class Document < ActiveRecord::Base
+  belongs_to :company
+
   belongs_to :project
   has_many :document_owners
   has_many :users, :through => :document_owners, :source => :user
@@ -7,6 +9,26 @@ class Document < ActiveRecord::Base
 
   include Attachmentable
   include Taggable
+
+  self.per_page = 20
+
+  class << self
+    def access(user)
+      joins(:document_owners).where('document_owners.user_id = ?', user.id)
+    end
+  end
+
+  def access?(user)
+    document_owners.exists?(user_id: user.id)
+  end
+
+  def add_tags(tag_list)
+    unless tag_list.blank?
+      tag_list.split(',').each do |tag|
+        tags << Tag.find_or_create_by_name(tag)
+      end
+    end
+  end
 
   def user_for_tag(tag_name)
     tag_names = self.tags.index_by {|t1| t1.name }
