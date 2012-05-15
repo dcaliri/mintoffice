@@ -30,6 +30,9 @@ class User < ActiveRecord::Base
 
   include Historiable
   include Attachmentable
+  def history_except
+    [:name, :hashed_password, :salt]
+  end
 
   def self.find_or_create_with_omniauth!(auth)
 #    users = where(:provider => auth['provider'], :uid => auth['uid'])
@@ -48,7 +51,7 @@ class User < ActiveRecord::Base
 #    user.save!
     user
   end
-  
+
   def fullname
     hrinfo.nil? ? name : hrinfo.fullname
   end
