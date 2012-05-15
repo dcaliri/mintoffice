@@ -27,7 +27,7 @@ table#list-table
       - if menu
         td align="right"
           - if transaction.transfer
-            = link_to t('bank_transactions.show.to_bank_transfer'), [bank_account, transaction.transfer]
+            = link_to t('bank_transactions.show.to_bank_transfer'), transaction.transfer
             = " | "
           = link_to t('common.link.show'), transaction
           = " | "
