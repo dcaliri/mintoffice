@@ -6,7 +6,8 @@ class User < ActiveRecord::Base
   has_many :documents, :through => :document_owners, :source => :document
   has_and_belongs_to_many :groups
   has_and_belongs_to_many :permission
-  has_and_belongs_to_many :projects
+  has_many :project_infos, class_name: "ProjectAssignInfo"
+  has_many :projects, through: :project_infos
   has_one :hrinfo
 
   has_many :contacts
@@ -29,6 +30,9 @@ class User < ActiveRecord::Base
 
   include Historiable
   include Attachmentable
+  def history_except
+    [:name, :hashed_password, :salt]
+  end
 
   def self.find_or_create_with_omniauth!(auth)
 #    users = where(:provider => auth['provider'], :uid => auth['uid'])
@@ -47,7 +51,7 @@ class User < ActiveRecord::Base
 #    user.save!
     user
   end
-  
+
   def fullname
     hrinfo.nil? ? name : hrinfo.fullname
   end
