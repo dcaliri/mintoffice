@@ -109,9 +109,10 @@ ko:
             change_history: 변경사항
             commute: 출퇴근
             contact: 주소록
-            contact_email: 이메일
             contact_phone_number: 전화번호
             contact_address: 주소
+            contact_address_tag: 주소 대상
+            contact_email: 이메일
             contact_email_tag: 이메일 대상
             contact_phone_number_tag: 전화번호 대상
             contact_address_tag: 주소 대상
@@ -421,6 +422,14 @@ ko:
                 not_a_number: "은(는) 반드시 숫자여야 합니다."
                 taken: 은(는) 이미 사용중입니다.
             models:
+                contact_email:
+                    attributes:
+                        email:
+                            invalid: 이메일 형식이 잘못되었습니다.
+                contact_phone_number:
+                    attributes:
+                        number:
+                            invalid: 전화번호 형식이 잘못되었습니다.
                 required_tag:
                     attributes:
                         modelname:

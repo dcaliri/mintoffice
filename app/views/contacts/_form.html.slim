@@ -5,6 +5,7 @@ h2= t("common.title.#{action_name}")
 
 = form_for contact, html: {multipart: true} do |f|
   .box
+    = f.error_messages
     p
       = f.label :lastname
       = f.text_field :lastname
