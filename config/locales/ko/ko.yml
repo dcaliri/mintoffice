@@ -417,7 +417,11 @@ ko:
                 contact_email:
                     attributes:
                         email:
-                            invalid: 이메일 포맷 형식이 잘못되었습니다.
+                            invalid: 이메일 형식이 잘못되었습니다.
+                contact_phone_number:
+                    attributes:
+                        number:
+                            invalid: 전화번호 형식이 잘못되었습니다.
                 required_tag:
                     attributes:
                         modelname:
