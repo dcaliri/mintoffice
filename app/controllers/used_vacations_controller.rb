@@ -17,9 +17,13 @@ class UsedVacationsController < ApplicationController
   end
 
   def update
-    used_vacation.save!
-    Boxcar.send_to_boxcar_group("admin",used_vacation.vacation.user.hrinfo.fullname,  I18n.t("used_vacations.edit.link"))
-    redirect_to vacation_path(user)
+    if used_vacation.valid?
+      used_vacation.save!
+      Boxcar.send_to_boxcar_group("admin",used_vacation.vacation.user.hrinfo.fullname,  I18n.t("used_vacations.edit.link"))
+      redirect_to vacation_path(user)
+    else
+      render :action => :edit
+    end
   end
 
   def approve

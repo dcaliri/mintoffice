@@ -70,6 +70,13 @@ Mintoffice::Application.routes.draw do
     end
 
     resources :vacations
+
+    resources :projects do
+      collection do
+        get 'assign'
+        post 'assign', action: 'assign_projects'
+      end
+    end
   end
 
   match "/auth/:provider/callback" => "providers#create"
@@ -81,12 +88,14 @@ Mintoffice::Application.routes.draw do
 
     resources :contact_emails, :path => 'emails', :only => :destroy
     resources :contact_phone_numbers, :path => 'phones', :only => :destroy
-    resources :contact_addresses, :path => 'addresses', :only => :destroy
+    resources :contact_addresses, :path => 'addresses', :only => [:new, :destroy]
+    resources :contact_others, :path => 'others', :only => :destroy
   end
 
   resources :contact_address_tags, :only => [:new, :create]
   resources :contact_email_tags, :only => [:new, :create]
   resources :contact_phone_number_tags, :only => [:new, :create]
+  resources :contact_other_tags, :only => [:new, :create]
 
   resources :payments, :only => [:index, :show]
   resources :commutes

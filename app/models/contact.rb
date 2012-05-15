@@ -15,15 +15,22 @@ class Contact < ActiveRecord::Base
   has_many :phone_numbers, class_name: 'ContactPhoneNumber', :dependent => :destroy
   accepts_nested_attributes_for :phone_numbers, :allow_destroy => :true, :reject_if => REJECT_IF_EMPTY
 
+  has_many :others, class_name: 'ContactOther', :dependent => :destroy
+  accepts_nested_attributes_for :others, :allow_destroy => :true, :reject_if => REJECT_IF_EMPTY
+
   self.per_page = 20
 
   include Historiable
   include Attachmentable
   include Taggable
 
+  def access?(user)
+    isprivate == false || owner == user
+  end
+
   class << self
     def isprivate(current_user)
-      where("isprivate = ? OR user_id = ?", false, current_user.id)
+      where("isprivate = ? OR owner_id = ?", false, current_user.id)
     end
 
     def search(query)

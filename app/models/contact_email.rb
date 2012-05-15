@@ -1,6 +1,7 @@
 class ContactEmail < ActiveRecord::Base
   belongs_to :contact
   has_and_belongs_to_many :tags, :class_name => 'ContactEmailTag'
+  validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
 
   include Historiable
   def history_parent

@@ -109,12 +109,15 @@ ko:
             change_history: 변경사항
             commute: 출퇴근
             contact: 주소록
-            contact_email: 이메일
             contact_phone_number: 전화번호
             contact_address: 주소
+            contact_address_tag: 주소 대상
+            contact_email: 이메일
             contact_email_tag: 이메일 대상
             contact_phone_number_tag: 전화번호 대상
             contact_address_tag: 주소 대상
+            contact_other: 기타
+            contact_other_tag: 기타 대상
             creditcard: 신용카드
             document: 문서
             hrinfo: 인사정보
@@ -286,6 +289,11 @@ ko:
                 number: 전화번호
             contact_phone_number_tag:
                 name: 대상
+            contact_other:
+                target: 대상
+                description: 내용
+            contact_other_tag:
+                name: 대상
             creditcard:
                 cardno: 카드번호
                 short_name: 카드명칭
@@ -414,6 +422,14 @@ ko:
                 not_a_number: "은(는) 반드시 숫자여야 합니다."
                 taken: 은(는) 이미 사용중입니다.
             models:
+                contact_email:
+                    attributes:
+                        email:
+                            invalid: 이메일 형식이 잘못되었습니다.
+                contact_phone_number:
+                    attributes:
+                        number:
+                            invalid: 전화번호 형식이 잘못되었습니다.
                 required_tag:
                     attributes:
                         modelname:
@@ -594,6 +610,8 @@ ko:
             update: 갱신하기
             change: 변경하기
             add: 추가하기
+            prev: 이전
+            next: 다음
         messages:
             created: "%{model}이(가) 성공적으로 생성되었습니다."
             not_allowed: 접근할 수 없습니다.
@@ -671,6 +689,8 @@ ko:
         title: 새로운 이메일 대상 만들기
     contact_phone_number_tags:
         title: 새로운 전화번호 대상 만들기
+    contact_other_tags:
+        title: 새로운 기타 대상 만들기
     creditcards:
         total:
             title: 신용카드 사용금액 합계표
@@ -799,6 +819,7 @@ ko:
         show:
             title: 소액현금 내역
     projects:
+        title: 프로젝트 관리
         index:
             title: 프로젝트 관리
             in_progress: 진행중
@@ -811,6 +832,9 @@ ko:
             title: 프로젝트 수정
             completed: 프로젝트 완료
             confirm_complete: 프로젝트를 종료하시겠습니까?
+        assign:
+            title: 할당 비율 조정
+            not_hundred: 할당 비율이 100%가 아닙니다
     required_tags:
         index:
             title: 필수 태그 목록

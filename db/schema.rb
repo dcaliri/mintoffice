@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120514124303) do
+ActiveRecord::Schema.define(:version => 20120515020130) do
 
   create_table "attachments", :force => true do |t|
     t.string   "title"
@@ -212,6 +212,25 @@ ActiveRecord::Schema.define(:version => 20120514124303) do
     t.string  "email"
   end
 
+  create_table "contact_other_tags", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "contact_other_tags_contact_others", :id => false, :force => true do |t|
+    t.integer "contact_other_tag_id"
+    t.integer "contact_other_id"
+  end
+
+  create_table "contact_others", :force => true do |t|
+    t.integer  "contact_id"
+    t.string   "target"
+    t.string   "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "contact_phone_number_tags", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
@@ -239,7 +258,7 @@ ActiveRecord::Schema.define(:version => 20120514124303) do
     t.integer "target_id"
     t.string  "target_type"
     t.boolean "migrated_data", :default => false
-    t.integer "user_id"
+    t.integer "owner_id"
     t.boolean "isprivate",     :default => false
   end
 
@@ -377,6 +396,20 @@ ActiveRecord::Schema.define(:version => 20120514124303) do
     t.integer  "attachment_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "project_assign_infos", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "project_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "project_assign_rates", :force => true do |t|
+    t.integer "project_assign_info_id"
+    t.date    "start"
+    t.date    "finish"
+    t.integer "percentage"
   end
 
   create_table "projects", :force => true do |t|
