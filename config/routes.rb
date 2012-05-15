@@ -141,6 +141,10 @@ Mintoffice::Application.routes.draw do
 
   resources :tags, only: [:create, :destroy]
 
+  resources :company do
+    post :switch, on: :collection
+  end
+
   root to: 'main#index'
 
   match ':controller/:action/:id'
