@@ -12,6 +12,7 @@ class CommutesController < ApplicationController
   before_filter :redirect_unless_admin, :only => :index
 
   def index
+    @hrinfos = Hrinfo.where(:retired_on => nil).page(params[:page])
     @users = User(:protected).enabled.page(params[:page])
   end
 
