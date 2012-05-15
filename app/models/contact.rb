@@ -21,9 +21,14 @@ class Contact < ActiveRecord::Base
   include Attachmentable
   include Taggable
 
+  def access?(user)
+    Rails.logger.info "owner = #{owner}, user = #{user}"
+    isprivate == false || owner == user
+  end
+
   class << self
     def isprivate(current_user)
-      where("isprivate = ? OR user_id = ?", false, current_user.id)
+      where("isprivate = ? OR owner_id = ?", false, current_user.id)
     end
 
     def search(query)
