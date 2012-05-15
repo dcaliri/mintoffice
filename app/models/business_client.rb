@@ -1,4 +1,6 @@
 class BusinessClient < ActiveRecord::Base
+  belongs_to :company
+
   has_many :taxmen
   accepts_nested_attributes_for :taxmen, :allow_destroy => :true, :reject_if => proc { |attrs| attrs.all? { |k, v| v.blank? } }
 

@@ -3,13 +3,13 @@
 </div>
 
 <h2><%= t("common.title.#{action_name}") %></h2>
-<%= form_for @business_client, html: {multipart: true} do |f| %>
-    <%= f.error_messages %>
-    <div class="box">
-        <p>
-            <%= f.label :name %>
-            <%= f.text_field :name%>
-        </p>
+<%= form_for business_client, html: {multipart: true} do |f| %>
+  <%= f.error_messages %>
+  <div class="box">
+    <p>
+        <%= f.label :name %>
+        <%= f.text_field :name%>
+    </p>
     <p>
       <%= f.label :registration_number %>
       <%= f.text_field :registration_number %>
@@ -31,8 +31,8 @@
       <%= f.text_field :owner %>
     </p>
     <%= render 'shared/attachments/form', form: f %>
-      <p>
-          <%= f.submit %>
-      </p>
+    <p>
+        <%= f.submit %>
+    </p>
   </div>
 <% end %>
