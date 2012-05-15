@@ -11,6 +11,9 @@ module PaymentsHelper
 
     before = join_at.dup
     after = join_at.dup
+
+    periods = []
+
     while after < pay_end
       after = if pay_at == after.day
                 after + 1.month
@@ -23,15 +26,21 @@ module PaymentsHelper
       after = pay_end.dup if after > pay_end
 
       percentage = ((after - before) / 1.day)
-      percentage = if percentage < 28
-                    percentage / 30.0
+      percentage = if percentage < 27
+                    percentage
                    else
-                     1.0
+                    30.0
                    end
 
-      yield before, after, percentage * amount
+      periods << [before, after, percentage]
 
       before = after + 1.day
     end
+
+    total_percentage = periods.sum {|before, after, percentage| percentage}
+    periods.each do |before, after, percentage|
+      yield before, after, (amount * (percentage / total_percentage)).to_i
+    end
+
   end
 end
