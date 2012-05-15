@@ -3,6 +3,7 @@ class ContactsController < ApplicationController
   expose(:contact)
 
   before_filter :only => [:show] { |c| c.save_attachment_id contact }
+  before_filter :redirect_if_private, :only => [:show, :edit, :update]
 
   def index
     @contacts = Contact.isprivate(@user).search(params[:query])
@@ -48,5 +49,11 @@ class ContactsController < ApplicationController
   def destroy
     contact.destroy
     redirect_to contact
+  end
+
+  private
+  def redirect_if_private
+    @contact = Contact.find(params[:id])
+    force_redirect unless @contact.access?(@user)
   end
 end
