@@ -42,8 +42,12 @@ class ContactsController < ApplicationController
   end
 
   def update
-    contact.save!
-    redirect_to contact
+    if contact.valid?
+      contact.save!
+      redirect_to contact
+    else
+      render :action => "edit"
+    end
   end
 
   def destroy
