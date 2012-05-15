@@ -16,17 +16,18 @@ table#list-table.payment-table
         = period.month.to_s + " " + t('datetime.prompts.month')
       - period -= 1.month
 
-    - @users.each do |user|
+    - @hrinfos.each do |hrinfo|
+      - user = hrinfo.user
       tr.selectable onclick="location.href='#{payment_path(user)}'"
-        td=h user.hrinfo.nil? ? user.name : user.hrinfo.fullname
+        td=h hrinfo.fullname
         - period = Time.zone.parse("#{to.year}-#{to.month}-01 00:00:00")
         - while from < period
           - td_class = (period.month == Time.zone.now.month ? :today : '')
-          td.numrow[class=td_class]
-            = number_to_currency user.payments.where("date(pay_at) = ?", period.to_date).total
+          td[class=td_class]
+            = number_to_currency user.payments.where("pay_at BETWEEN ? AND ?", period, period + 1.month - 1.day).total
           - period -= 1.month
 
 br
 
 center
-  = will_paginate @users
+  = will_paginate @hrinfos
