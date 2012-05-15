@@ -25,7 +25,6 @@ class Contact < ActiveRecord::Base
   include Taggable
 
   def access?(user)
-    Rails.logger.info "owner = #{owner}, user = #{user}"
     isprivate == false || owner == user
   end
 

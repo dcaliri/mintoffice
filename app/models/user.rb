@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   has_many :projects, through: :project_infos
   has_one :hrinfo
 
-  has_many :contacts
+  has_many :contacts, foreign_key: 'owner_id'
 
   has_many :payments
   has_many :commutes
