@@ -379,6 +379,20 @@ ActiveRecord::Schema.define(:version => 20120515011639) do
     t.datetime "updated_at"
   end
 
+  create_table "project_assign_infos", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "project_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "project_assign_rates", :force => true do |t|
+    t.integer "project_assign_info_id"
+    t.date    "start"
+    t.date    "finish"
+    t.integer "percentage"
+  end
+
   create_table "projects", :force => true do |t|
     t.text     "name"
     t.date     "started_on"
