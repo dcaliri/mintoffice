@@ -47,6 +47,10 @@ class User < ActiveRecord::Base
 #    user.save!
     user
   end
+  
+  def fullname
+    hrinfo.nil? ? name : hrinfo.fullname
+  end
 
   def password
     @password
