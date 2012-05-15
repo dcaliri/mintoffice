@@ -265,7 +265,7 @@ ko:
                 company: 회사
                 department: 부서
                 position: 직위
-                private: 비공개
+                isprivate: 비공개
             contact_address:
                 target: 대상
                 country: 국가
@@ -754,7 +754,7 @@ ko:
             title: 새로운 기본급 입력
         edit:
             title: 특별상여금 수정
-        title: 연봉관리
+        title: 연봉 관리
     payrolls:
         title: 급여대장
     payroll_categories:

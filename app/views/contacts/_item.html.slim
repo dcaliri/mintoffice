@@ -12,8 +12,8 @@ table
     th= contact.class.human_attribute_name(:position)
     td= contact.position
   tr
-    th= contact.class.human_attribute_name(:private)
-    td= contact.private
+    th= contact.class.human_attribute_name(:isprivate)
+    td= contact.isprivate
   tr
     td
   - contact.emails.each do |email|

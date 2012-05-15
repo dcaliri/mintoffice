@@ -5,7 +5,7 @@ class ContactsController < ApplicationController
   before_filter :only => [:show] { |c| c.save_attachment_id contact }
 
   def index
-    @contacts = Contact.private(@user).search(params[:query])
+    @contacts = Contact.isprivate(@user).search(params[:query])
     @paginated = @contacts.paginate(:page => params[:page], :per_page => 20)
   end
 
