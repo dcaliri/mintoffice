@@ -2,10 +2,6 @@
 <% month = (params[:month] || Time.zone.now.month).to_i %>
 
 <div id="show_command">
-  <%= link_to "이전", assign_user_projects_path(@this_user, year: year, month: month - 1) %>
-  |
-  <%= link_to "다음", assign_user_projects_path(@this_user, year: year, month: month + 1) %>
-  |
   <%= link_to t("common.title.back"), projects_path %>
 </div>
 
@@ -27,12 +23,14 @@
         </p>
       <% end %>
       <p>
-        <%= submit_tag %>
+        <%= submit_tag t('common.button.change') %>
       </p>
     <% end %>
   <% end %>
 <% end %>
 
-
-
-
+<center>
+  <%= link_to t('common.button.prev'), assign_user_projects_path(@this_user, year: year, month: month - 1) %>
+  |
+  <%= link_to t('common.button.next'), assign_user_projects_path(@this_user, year: year, month: month + 1) %>
+</center>

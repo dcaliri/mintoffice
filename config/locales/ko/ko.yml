@@ -594,6 +594,8 @@ ko:
             update: 갱신하기
             change: 변경하기
             add: 추가하기
+            prev: 이전
+            next: 다음
         messages:
             created: "%{model}이(가) 성공적으로 생성되었습니다."
             not_allowed: 접근할 수 없습니다.
