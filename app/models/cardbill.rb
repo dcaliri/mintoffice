@@ -2,6 +2,7 @@
 
 class Cardbill < ActiveRecord::Base
   belongs_to :creditcard
+  has_one :report, as: :target
 
   include Historiable
   include Attachmentable
@@ -115,5 +116,18 @@ class Cardbill < ActiveRecord::Base
     else
       where("creditcard_id = ?", query)
     end
+  end
+
+  def report!(hrinfo)
+    build_report unless report
+    report.reportee = report.reporter
+    report.reporter = hrinfo
+    report.status = :reporting
+    report.save!
+  end
+
+  def approve!
+    report.status = :reported
+    report.save!
   end
 end

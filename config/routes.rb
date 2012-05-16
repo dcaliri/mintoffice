@@ -145,6 +145,9 @@ Mintoffice::Application.routes.draw do
     post :switch, on: :collection
   end
 
+#  resources :reports, only: [:create, :update]
+  match 'report' => 'reports#report', as: :report
+
   root to: 'main#index'
 
   match ':controller/:action/:id'
