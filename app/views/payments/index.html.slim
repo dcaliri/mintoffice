@@ -23,7 +23,7 @@ table#list-table.payment-table
         - period = Time.zone.parse("#{to.year}-#{to.month}-01 00:00:00")
         - while from < period
           - td_class = (period.month == Time.zone.now.month ? :today : '')
-          td[class=td_class]
+          td.numrow[class=td_class]
             = number_to_currency user.payments.where("pay_at BETWEEN ? AND ?", period, period + 1.month - 1.day).total
           - period -= 1.month
 
