@@ -8,11 +8,13 @@ class ReportsController < ApplicationController
     when "상신"
       hrinfo = Hrinfo.find(params[:reporter]) if params[:reporter]
       report.report!(hrinfo, params[:comment])
+      redirect_to :cardbills
     when "승인"
       report.approve!(params[:comment])
+      redirect_to cardbill
     when "반려"
       report.rollback!(params[:comment])
+      redirect_to :cardbills
     end
-    redirect_to cardbill
   end
 end

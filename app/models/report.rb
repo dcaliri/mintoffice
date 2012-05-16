@@ -3,6 +3,7 @@
 class Report < ActiveRecord::Base
   belongs_to :target, polymorphic: true
   has_one :reporter, class_name: "ReportPerson"
+  has_many :other_reporters, class_name: "ReportPerson"
   has_many :comments, class_name: 'ReportComment'
 
   def status
