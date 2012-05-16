@@ -28,6 +28,10 @@ class Contact < ActiveRecord::Base
     isprivate == false || owner == user
   end
 
+  def owner?(user)
+    owner == user
+  end
+
   class << self
     def isprivate(current_user)
       where("isprivate = ? OR owner_id = ?", false, current_user.id)
