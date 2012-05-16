@@ -57,7 +57,10 @@
     <td><%=h @cardbill.approveno %></td>
   </tr>
 </table>
+
+<%= render 'reports/info', target: @cardbill %>
 <%= render 'changelog', target: @cardbill %>
+
 </div>
 <%= render "shared/attachments/detail", :target => @cardbill %>
 <div style="clear: both;"></div>
