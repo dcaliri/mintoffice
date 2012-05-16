@@ -120,6 +120,7 @@ ko:
             contact_other_tag: 기타 대상
             creditcard: 신용카드
             document: 문서
+            holiday: 휴일관리
             hrinfo: 인사정보
             namecard: 명함정보
             pay_schedule: 기본급
@@ -308,6 +309,9 @@ ko:
                 project: 프로젝트
                 owner: 소유자
                 tags: 태그목록
+            holiday:
+                theday: 휴일날짜
+                dayname: 휴일명목
             hrinfo:
                 juminno: 주민등록번호
                 retired_on: 퇴직일
@@ -394,6 +398,12 @@ ko:
                 started_at: 시작일
                 income: 총 연봉 금액
                 basic_pay: 기본급
+            report:
+                status: 상태
+                localized_status:
+                    not_reported: 결제 대기 중
+                    reporting: 결제 진행 중
+                    reported: 결제 완료
             bonus:
                 gave_at: 지급일
                 amount: 금액
@@ -746,6 +756,9 @@ ko:
         error:
             juminno_invalid: "는 '111111-1111111' 형식으로 써 주세요."
         title: 인사정보관리
+    holidays:
+        title: 휴일 관리
+        
     main:
         index:
             human_resources: 인사관리

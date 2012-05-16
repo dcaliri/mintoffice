@@ -23,6 +23,7 @@
     <th><%= Cardbill.human_attribute_name('storename') %></th>
     <th><%= Cardbill.human_attribute_name('storeaddr') %></th>
     <th><%= Cardbill.human_attribute_name('approveno') %></th>
+    <th><%= Report.human_attribute_name('status') %></th>
   </tr>
 
 <% @cardbills.each do |cardbill| %>
@@ -33,6 +34,7 @@
     <td><%=h cardbill.storename %></td>
     <td><%=h cardbill.storeaddr %></td>
     <td><%=h cardbill.approveno %></td>
+    <td><%=h cardbill.report.localize_status %></td>
   </tr>
 <% end %>
 </table>

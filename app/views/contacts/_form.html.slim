@@ -21,9 +21,10 @@ h2= t("common.title.#{action_name}")
     p
       = f.label :position
       = f.text_field :position
-    p
-      = f.label :isprivate
-      = f.check_box :isprivate
+    - if contact.owner?(current_user)
+      p
+        = f.label :isprivate
+        = f.check_box :isprivate
 
     = render 'contacts/form/address', contact_form: f
     = render 'contacts/form/email', contact_form: f

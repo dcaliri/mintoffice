@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120515020130) do
+ActiveRecord::Schema.define(:version => 20120516061455) do
 
   create_table "attachments", :force => true do |t|
     t.string   "title"
@@ -82,6 +82,7 @@ ActiveRecord::Schema.define(:version => 20120515020130) do
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
     t.integer  "attachment_id"
+    t.integer  "company_id"
   end
 
   create_table "card_approved_sources", :force => true do |t|
@@ -149,6 +150,7 @@ ActiveRecord::Schema.define(:version => 20120515020130) do
     t.datetime "updated_at"
     t.integer  "attachment_id"
     t.integer  "creditcard_id"
+    t.boolean  "before_report"
   end
 
   create_table "change_histories", :force => true do |t|
@@ -167,6 +169,12 @@ ActiveRecord::Schema.define(:version => 20120515020130) do
     t.datetime "go"
     t.datetime "leave"
     t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "companies", :force => true do |t|
+    t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -286,6 +294,7 @@ ActiveRecord::Schema.define(:version => 20120515020130) do
     t.integer  "project_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "company_id"
   end
 
   create_table "documents_tags", :id => false, :force => true do |t|
@@ -304,6 +313,13 @@ ActiveRecord::Schema.define(:version => 20120515020130) do
   create_table "groups_users", :id => false, :force => true do |t|
     t.integer "group_id"
     t.integer "user_id"
+  end
+
+  create_table "holidays", :force => true do |t|
+    t.date     "theday"
+    t.string   "dayname"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "hrinfo_histories", :force => true do |t|
@@ -420,11 +436,34 @@ ActiveRecord::Schema.define(:version => 20120515020130) do
     t.decimal  "revenue",    :precision => 20, :scale => 0
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "company_id"
   end
 
   create_table "projects_users", :id => false, :force => true do |t|
     t.integer "project_id"
     t.integer "user_id"
+  end
+
+  create_table "report_comments", :force => true do |t|
+    t.integer  "report_id"
+    t.integer  "owner_id"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "report_people", :force => true do |t|
+    t.integer  "hrinfo_id"
+    t.integer  "report_id"
+    t.integer  "prev_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "reports", :force => true do |t|
+    t.integer "target_id"
+    t.string  "target_type"
+    t.string  "status"
   end
 
   create_table "required_tags", :force => true do |t|

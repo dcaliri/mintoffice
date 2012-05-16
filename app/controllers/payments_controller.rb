@@ -12,6 +12,7 @@ class PaymentsController < ApplicationController
 
   def index
     @hrinfos = Hrinfo.where(:retired_on => nil).page(params[:page])
+    @payments = Payment
   end
 
   def create

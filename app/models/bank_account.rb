@@ -5,6 +5,14 @@ class BankAccount < ActiveRecord::Base
   include Historiable
   include Attachmentable
 
+  def description
+    if number.nil? || note.nil?
+      name
+    else
+      "#{name}-#{number}-#{note}"
+    end
+  end
+  
   class << self
     def transaction_per_period(query)
       collection = BankTransaction.where('transacted_at IS NOT NULL').order(query)

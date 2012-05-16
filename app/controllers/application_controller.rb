@@ -13,6 +13,22 @@ class ApplicationController < ActionController::Base
   before_filter do |controller|
     User.current_user = User.find(controller.session[:user_id]) unless controller.session[:user_id].nil?
   end
+
+  def current_company
+    if session[:company_id].nil?
+      session[:company_id] = Company.first
+    end
+
+    Company.find(session[:company_id]) unless session[:company_id].nil?
+  end
+  helper_method :current_company
+
+  def current_user
+    User.find(session[:user_id]) unless session[:user_id].nil?
+  end
+  helper_method :current_user
+
+
   before_filter :modify_query_parameter
   def modify_query_parameter
     [:q, :query].each do |query|

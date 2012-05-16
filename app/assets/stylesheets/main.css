@@ -48,6 +48,10 @@ body {
   float: right;
 }
 
+#company {
+  float: right;
+}
+
 #header h1 a.ancestor { font-size: 80%; }
 #header {
   padding: 12px 16px 0px 6px;

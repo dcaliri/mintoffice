@@ -1,13 +1,13 @@
 <%   title t('.title') %>
 <% content_for :search do -%>
   <%= form_tag({:action => "index"}, :method => :get ) do %>
-    <%= t("common.title.search") %> : <%= text_field_tag 'q', params[:q] %>
+    <%= t("common.title.search") %> : <%= text_field_tag 'query', params[:query] %>
   <% end -%>
 <% end -%>
 <div id="show_command">
   <%= link_to t('documents.new.title'), new_document_path %>
 </div>
-<h2><%= t("common.title.total") %>: <%= @documents_count %></h2>
+<h2><%= t("common.title.total") %>: <%= @documents.count %></h2>
 <table id="list-table">
   <tr>
     <th><%= Document.human_attribute_name("title") %></th>
