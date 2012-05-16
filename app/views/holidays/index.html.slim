@@ -1,0 +1,16 @@
+- title t('holidays.title')
+
+#show_command
+  = link_to t('common.title.new'), new_holiday_path()
+  = " | "
+  = link_to t('common.title.back'), :root
+
+h2= t('common.title.list')
+table#list-table
+  tr
+    th= Holiday.human_attribute_name("theday")
+    th= Holiday.human_attribute_name("dayname")
+    - holidays.each do |holiday|
+      tr.selectable onclick="location.href='#{holiday_path(holiday)}'"
+        td=h holiday.theday
+        td=h holiday.dayname

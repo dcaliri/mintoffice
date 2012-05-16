@@ -32,6 +32,7 @@ Mintoffice::Application.routes.draw do
     resources :payroll_items, path: "items"
   end
   resources :payroll_items
+  resources :holidays
 
   match '/hrinfos/retire/:id', :controller => "hrinfos", :action => "retire", :conditions => {:method => :get}
   match '/hrinfos/retire/:id', :controller => "hrinfos", :action => "retire_save", :conditions => {:method => :post}

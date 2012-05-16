@@ -1,0 +1,16 @@
+#show_command
+  = link_to t('common.title.back'), holidays_path
+
+h2= t("common.title.#{action_name}")
+
+= form_for holiday, html: {class: "tabular"} do |f|
+  = f.error_messages
+  .box
+    p
+      = f.label :theday
+      = f.date_select :theday, :order => [:year, :month, :day], :default => Time.zone.now
+    p
+      = f.label :dayname
+      = f.text_field :dayname
+  p
+    = f.submit
