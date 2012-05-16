@@ -39,7 +39,5 @@ p= "상태 - #{report.localize_status}"
       = comment.description
 h3 권한
 p= "읽기,쓰기: #{report.reporter.fullname}"
-- report.other_reporters.each do |reporter|
-  p= "읽기: #{reporter.fullname}"
 
 br
