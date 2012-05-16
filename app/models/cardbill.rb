@@ -118,16 +118,13 @@ class Cardbill < ActiveRecord::Base
     end
   end
 
-  def report!(hrinfo)
-    build_report unless report
-    report.reportee = report.reporter
-    report.reporter = hrinfo
-    report.status = :reporting
-    report.save!
+  before_create :create_report
+  def create_report
+    report = build_report
+    report.reporter = User.current_user.hrinfo.reporters.build(report_id: report)
   end
 
-  def approve!
-    report.status = :reported
-    report.save!
+  def access?(user)
+    report.reporter.hrinfo.user == user
   end
 end

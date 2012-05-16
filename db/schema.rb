@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120516014840) do
+ActiveRecord::Schema.define(:version => 20120516061455) do
 
   create_table "attachments", :force => true do |t|
     t.string   "title"
@@ -150,6 +150,7 @@ ActiveRecord::Schema.define(:version => 20120516014840) do
     t.datetime "updated_at",    :null => false
     t.integer  "attachment_id"
     t.integer  "creditcard_id"
+    t.boolean  "before_report"
   end
 
   create_table "change_histories", :force => true do |t|
@@ -440,11 +441,25 @@ ActiveRecord::Schema.define(:version => 20120516014840) do
     t.integer "user_id"
   end
 
+  create_table "report_comments", :force => true do |t|
+    t.integer  "report_id"
+    t.integer  "owner_id"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "report_people", :force => true do |t|
+    t.integer  "hrinfo_id"
+    t.integer  "report_id"
+    t.integer  "prev_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "reports", :force => true do |t|
     t.integer "target_id"
     t.string  "target_type"
-    t.integer "reportee_id"
-    t.integer "reporter_id"
     t.string  "status"
   end
 

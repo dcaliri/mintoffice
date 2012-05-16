@@ -1,18 +1,18 @@
-class ReportsController < ApplicationController
-  before_filter :report_access
+#encoding: UTF-8
 
+class ReportsController < ApplicationController
   def report
     cardbill = Cardbill.find(params[:cardbill_id])
-    hrinfo = Hrinfo.find(params[:report][:reporter]) if params[:report]
-    unless current_user.ingroup?(:admin)
-      cardbill.report!(hrinfo)
-    else
-      cardbill.approve!
+    report = cardbill.report
+    case params[:commit]
+    when "상신"
+      hrinfo = Hrinfo.find(params[:reporter]) if params[:reporter]
+      report.report!(hrinfo, params[:comment])
+    when "승인"
+      report.approve!(params[:comment])
+    when "반려"
+      report.rollback!(params[:comment])
     end
     redirect_to cardbill
-  end
-
-  def report_access
-    cardbill = Cardbill.find(params[:cardbill_id])
   end
 end
