@@ -9,6 +9,9 @@ class MakeReportsOfCardbills < ActiveRecord::Migration
   class User < ActiveRecord::Base
     has_one :hrinfo
   end
+  class Group < ActiveRecord::Base
+    has_and_belongs_to_many :users
+  end
   class Hrinfo < ActiveRecord::Base
     belongs_to :user
     has_many :reporters, class_name: 'ReportPerson'
@@ -20,7 +23,8 @@ class MakeReportsOfCardbills < ActiveRecord::Migration
 
   def change
     add_column :cardbills, :before_report, :boolean
-    user = User.where(name: "admin").first
+    user = Group.where(name: "admin").first.users.first
+#    user = User.where(name: "admin").first
 
     Cardbill.all.each do |cardbill|
       cardbill.before_report = true
