@@ -23,7 +23,7 @@ Mintoffice::Application.routes.draw do
   resources :card_approved_sources
 
   resources :documents
-  resources :projects
+  resources :projects, except: [:destroy]
   resources :pettycashes
   resources :permissions
   resources :cardbills
@@ -32,6 +32,7 @@ Mintoffice::Application.routes.draw do
     resources :payroll_items, path: "items"
   end
   resources :payroll_items
+  resources :holidays
 
   match '/hrinfos/retire/:id', :controller => "hrinfos", :action => "retire", :conditions => {:method => :get}
   match '/hrinfos/retire/:id', :controller => "hrinfos", :action => "retire_save", :conditions => {:method => :post}
@@ -140,6 +141,13 @@ Mintoffice::Application.routes.draw do
   resources :change_histories, path: 'histories'
 
   resources :tags, only: [:create, :destroy]
+
+  resources :company do
+    post :switch, on: :collection
+  end
+
+#  resources :reports, only: [:create, :update]
+  match 'report' => 'reports#report', as: :report
 
   root to: 'main#index'
 

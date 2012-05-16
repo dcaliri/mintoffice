@@ -3,7 +3,7 @@
   <%= link_to t('common.title.back'), documents_path %>
 </div>
 <h2><%= t("common.title.new") %></h2>
-<%= form_for(@document,
+<%= form_for(document,
     :url => {:action => 'create'},
     :html => {:class => "tabular", :multipart => true}) do |f| %>
 <div id="box">
@@ -15,7 +15,7 @@
   </p>
   <p>
     <%= f.label Project.model_name.human %>
-    <%= f.collection_select(:project_id, @projects, :id, :name)%>
+    <%= f.collection_select(:project_id, project_list, :id, :name)%>
   </p>
   <p>
     <%= render 'shared/attachments/form', form: f %>

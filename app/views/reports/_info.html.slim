@@ -1,0 +1,43 @@
+- report = target.report || target.build_report
+
+h3 결제
+p= "상태 - #{report.localize_status}"
+
+- if report.status != :reported and report.reporter.hrinfo == current_user.hrinfo
+  - unless current_user.ingroup?(:admin)
+    = form_tag :report do
+      = hidden_field_tag :cardbill_id, target.id
+      p
+        = label_tag :reporter
+        = select_tag :reporter, options_for_select(Hrinfo.all.delete_if{|hrinfo| hrinfo == current_user.hrinfo}.map{|hrinfo| [hrinfo.fullname, hrinfo.id]}, (report.reporter.id if report.reporter))
+      p
+        = label_tag :comment
+        = text_field_tag :comment
+      p
+        - if report.rollback?
+          = submit_tag "반려"
+        = submit_tag "상신"
+  - else
+    = form_tag :report do
+      = hidden_field_tag :cardbill_id, target.id
+      p
+        = label_tag :comment
+        = text_field_tag :comment
+      p
+        - if report.rollback?
+          = submit_tag "반려"
+        = submit_tag "승인"
+
+.box
+  - report.comments.lastest.each do |comment|
+    p
+      = "["
+      = comment.created_at.strftime("%Y.%m.%d %H:%M:%S")
+      = "]"
+      = comment.owner.hrinfo.fullname
+      = ": "
+      = comment.description
+h3 권한
+p= "읽기,쓰기: #{report.reporter.fullname}"
+
+br

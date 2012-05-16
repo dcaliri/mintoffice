@@ -1,49 +1,41 @@
 class DocumentsController < ApplicationController
-  before_filter :only => [:show] do |c|
-    @document = Document.find(params[:id])
-    c.save_attachment_id @document
-  end
+  expose(:documents) { current_company.documents }
+  expose(:document)
 
-  # GET /documents
-  # GET /documents.xml
+  expose(:projects) { current_company.projects }
+
+  before_filter :only => [:show] {|c| c.save_attachment_id document}
+  before_filter :check_access
+
   def index
-    #@documents = @user.documents.find(:all, :order => "created_at DESC")
-    # @documents = Document.all
-    q = params[:q]
-    if q.nil?
-      q = ""
-    end
-    # @documents = @user.documents.find(:all,:conditions => ["title like ?", "%"+q+"%"],:order => 'id desc').paginate(:page => params[:page], :per_page => 20)
-    @documents = @user.documents.search(q).paginate(:page => params[:page], :per_page => 20)
-    @documents_count = @user.documents.count(:all,:conditions => ["title like ?", "%"+q+"%"])
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @documents }
-    end
+    @documents = documents.access(current_user).search(params[:query]).page(params[:page])
   end
 
-  # GET /documents/1
-  # GET /documents/1.xml
-  def show
-    @document = Document.find(params[:id])
-    unless @document.users.include? @user
-      flash[:notice] = I18n.t ("permissions.permission_denied")
-      redirect_to :controller => "main", :action => "index"
-      return
-    end
+  def create
+    document.users << current_user
+    document.add_tags(params[:tag])
+    document.save!
+    redirect_to document, notice: t('common.messages.created', :model => Document.model_name.human)
+  rescue ActiveRecord::RecordInvalid
+    render :action => "new"
+  end
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @document }
-    end
+  def update
+    document.update_attributes!(params[:document])
+    redirect_to document, notice: t('common.messages.updated', :model => Document.model_name.human)
+  rescue ActiveRecord::RecordInvalid
+    render :action => "edit"
+  end
+
+  def destroy
+    document.destroy
+    redirect_to :documents
   end
 
   def add_owner
-    owner = User.find_by_name(params[:username]);
-    document = Document.find(params[:id])
+    owner = User.find_by_name(params[:username])
     if owner
-      if document.users.include? (owner)
+      if document.users.exists?(owner)
         flash[:notice] = 'Already exists'
       else
         document.users << owner
@@ -52,107 +44,26 @@ class DocumentsController < ApplicationController
       flash[:notice] = 'No such user'
     end
 
-    redirect_to :action => "edit", :id => document
+    redirect_to [:edit, document]
   end
 
   def remove_owner
     owner = User.find(params[:uid])
-    document = Document.find(params[:id])
     document.users.delete(owner)
-
-    redirect_to :action => "edit", :id => document
+    redirect_to [:edit, document]
   end
 
-  def add_tag
-    tag = Tag.find_or_create_by_name(params[:tagname])
-    document = Document.find(params[:id])
-    if document.tags.include?(tag)
-      flash[:notice] = 'Already exists'
-    else
-      document.tags << tag
-    end
-
-    redirect_to :action => "edit", :id => document
-  end
-
-  def remove_tag
-    tag = Tag.find(params[:tid])
-    document = Document.find(params[:id])
-    document.tags.delete(tag)
-
-    redirect_to :action => "edit", :id => document
-  end
-  # GET /documents/new
-  # GET /documents/new.xml
-  def new
-    @document = Document.new
-    @projects = Project.find(:all, :order => "name ASC")
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @document }
+  private
+  def check_access
+    if document.new_record? == false && document.access?(current_user) == false
+      flash[:notice] = I18n.t ("permissions.permission_denied")
+      redirect_to :controller => "main", :action => "index"
     end
   end
 
-  # GET /documents/1/edit
-  def edit
-    @document = Document.find(params[:id])
-    @projects = Project.find(:all, :order => "name ASC")
+  def project_list
+    @projects ||= projects.find(:all, :order => "name ASC")
   end
 
-  # POST /documents
-  # POST /documents.xml
-  def create
-    @document = Document.new(params[:document])
-    @document.users << @user
-    unless params[:tag].blank?
-      tags = params[:tag].split(',')
-      tags.each do |tag|
-        t = Tag.find_or_create_by_name(tag)
-        @document.tags << t
-      end
-    end
-
-    respond_to do |format|
-      if @document.save
-        flash[:notice] = t('common.messages.created', :model => Document.model_name.human)
-        format.html { redirect_to(@document) }
-        format.xml  { render :xml => @document, :status => :created, :location => @document }
-      else
-        @projects = Project.find(:all, :order => "name ASC")
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @document.errors, :status => :unprocessable_entity }
-      end
-    end
-  end
-
-  # PUT /documents/1
-  # PUT /documents/1.xml
-  def update
-    @document = Document.find(params[:id])
-
-    respond_to do |format|
-      if @document.update_attributes(params[:document])
-        flash[:notice] = t('common.messages.updated', :model => Document.model_name.human)
-        format.html { redirect_to(@document) }
-        format.xml  { head :ok }
-      else
-        @projects = Project.find(:all, :order => "name ASC")
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @document.errors, :status => :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /documents/1
-  # DELETE /documents/1.xml
-  def destroy
-    @document = Document.find(params[:id])
-    @document.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(documents_url) }
-      format.xml  { head :ok }
-    end
-  end
+  helper_method :project_list
 end

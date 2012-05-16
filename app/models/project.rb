@@ -1,10 +1,9 @@
 class Project < ActiveRecord::Base
+  belongs_to :company
+
   has_many :documents
   has_many :assign_infos, class_name: "ProjectAssignInfo"
   has_many :users, through: :assign_infos
-
-  # named_scope :completed, :conditions =>['ended_on is not null'], :order => "started_on ASC"
-  # named_scope :inprogress, :conditions =>['ended_on is null'], :order => "started_on ASC"
 
   scope :completed, :conditions =>['ended_on is not null'], :order => "started_on ASC"
   scope :inprogress, :conditions =>['ended_on is null'], :order => "started_on ASC"

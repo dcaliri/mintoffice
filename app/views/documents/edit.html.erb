@@ -1,10 +1,10 @@
 <% title t('.title')%>
 <div id="show_command">
-  <%= link_to t('common.title.show'), document_path(@document) %> |
+  <%= link_to t('common.title.show'), document_path(document) %> |
   <%= link_to t('common.title.list'),  documents_path %>
 </div>
 <h2><%= t 'common.title.edit' %></h2>
-<%= form_for(@document,
+<%= form_for(document,
     :url => { :action => "update" },
     :html => { :class=>"tabular", :multipart => true }) do |f| %>
 <div class="box">
@@ -16,7 +16,7 @@
   </p>
   <p>
     <%= f.label :project, Project.model_name.human %>
-    <%= f.collection_select(:project_id, @projects, :id, :name)%>
+    <%= f.collection_select(:project_id, project_list, :id, :name)%>
   </p>
 
   <p>
@@ -25,10 +25,10 @@
 
   <p>
     <%= f.label :owners, Document.human_attribute_name('owner') %>
-    <% if !@document.users.blank? %>
-      <% for user in @document.users %>
-      <%=h user.name %> [<%= link_to t('common.title.destroy'), :action => :remove_owner, :id => @document, :uid => user.id %>]
-                        <% unless user == @document.users.last %><br /><% end %>
+    <% if !document.users.blank? %>
+      <% for user in document.users %>
+      <%=h user.name %> [<%= link_to t('common.title.destroy'), :action => :remove_owner, :id => document, :uid => user.id %>]
+                        <% unless user == document.users.last %><br /><% end %>
       <% end %>
     <% else %>
     <% end %>
@@ -36,7 +36,7 @@
 </div>
 <%= f.submit t('common.button.update') %>
 <% end %>
-<%= form_tag({:action => :add_owner, :id => @document},{:class => 'tabular'}) do %>
+<%= form_tag({:action => :add_owner, :id => document},{:class => 'tabular'}) do %>
 <div class="box">
   <p>
     <%= label_tag :username, t(".adduser") %>
@@ -46,4 +46,4 @@
 <%= submit_tag t("common.button.add"), :id => "submit" %>
 <% end -%>
 
-<%= render 'tags/form', target: @document %>
+<%= render 'tags/form', target: document %>

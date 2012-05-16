@@ -1,12 +1,12 @@
 <% title t(".title") %>
 <div id="show_command">
-  <%= link_to t("common.title.show"), @project %> |
+  <%= link_to t("common.title.show"), project %> |
   <%= link_to t("common.title.back"), projects_path %> |
-  <%= link_to t(".completed"), {:action => "completed", :id => @project}, {:confirm => t(".confirm_complete")} %>
+  <%= link_to t(".completed"), {:action => "completed", :id => project}, {:confirm => t(".confirm_complete")} %>
 </div>
 <h2><%= t("common.title.edit") %></h2>
 
-<%= form_for(@project, :html => {:class => "tabular"}) do |f| %>
+<%= form_for(project, :html => {:class => "tabular"}) do |f| %>
 <%= f.error_messages %>
 <div class="box">
   <p>
@@ -28,12 +28,12 @@
 </div>
 <%= f.submit t('common.button.update') %>
 <% end %>
-<%= form_tag({:action => "add_user", :id => @project, }, {:class => "tabular"}) do %>
+<%= form_tag({:action => "add_user", :id => project, }, {:class => "tabular"}) do %>
   <div class="box">
     <p>
       <%= label_tag :username, User.human_attribute_name("name") %>
-<% for user in @project.users %>
-<%= user.name %> [<%= link_to t("common.title.destroy"), :action => "del_user", :id => @project, :uid => user.id %>]<br />
+<% for user in project.users %>
+<%= user.name %> [<%= link_to t("common.title.destroy"), :action => "del_user", :id => project, :uid => user.id %>]<br />
 <% end %>
       <%= text_field_tag :username %><%= submit_tag t("common.button.add") %>
     </p>
