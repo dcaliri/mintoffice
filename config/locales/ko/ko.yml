@@ -154,6 +154,7 @@ ko:
                 total_out: 출금 총액
                 margin: 입출금 차액
             bank_transaction:
+                account: 은행계좌
                 transacted_at: 거래일자
                 transaction_type: 적요
                 in: 입금액
