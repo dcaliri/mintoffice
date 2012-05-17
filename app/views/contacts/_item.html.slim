@@ -3,14 +3,17 @@ table
     th= t("contacts.name")
     td= contact.name
   tr
-    th= contact.class.human_attribute_name(:company)
-    td= contact.company
+    th= contact.class.human_attribute_name(:company_name)
+    td= contact.company_name
   tr
     th= contact.class.human_attribute_name(:department)
     td= contact.department
   tr
     th= contact.class.human_attribute_name(:position)
     td= contact.position
+  tr
+    th= contact.class.human_attribute_name(:owner)
+    td = contact.owner_name
   tr
     th= contact.class.human_attribute_name(:isprivate)
     td= contact.isprivate

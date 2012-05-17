@@ -10,17 +10,14 @@ class Taxman < ActiveRecord::Base
   end
 
   def fullname
-    contact.name
-    # contact ? contact.name : read_attribute(:fullname)
+    contact.name rescue ""
   end
 
   def email
-    contact.emails.first.email
-    # contact ? contact.emails.first.email : read_attribute(:email)
+    contact.emails.first.email rescue ""
   end
 
   def phonenumber
-    contact.phone_numbers.first.number
-    # contact ? contact.phone_numbers.first.number : read_attribute(:phonenumber)
+    contact.phone_numbers.first.number rescue ""
   end
 end

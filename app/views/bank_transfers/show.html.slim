@@ -3,6 +3,11 @@
   - if bank_transfer.transaction
     = link_to t('bank_transfers.show.to_bank_transaction'), bank_transfer.transaction
     = " | "
+  - if bank_transfer.expense_report
+    = link_to "지출내역서 보기", bank_transfer.expense_report
+  - else
+    = link_to "지출내역서 만들기", new_expense_report_path(target_type: bank_transfer.class, target_id: bank_transfer.id)
+  = " | "
   = link_to t('common.link.edit'), edit_bank_transfer_path(bank_transfer, bank_account_id: bank_transfer.bank_account)
   = " | "
   = link_to t('common.link.destroy'), bank_transfer, :method => :delete, :confirm => "Are you sure?"

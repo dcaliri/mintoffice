@@ -29,6 +29,7 @@
       <li><%= link_to Hrinfo.model_name.human, :controller => "hrinfos", :action => "show", :id => u.hrinfo %></li>
     <% end %>
     </ul>
+    <%= render 'reports/info', target: document %>
   </div>
   <%= render "shared/attachments/detail", :target => document %>
   <div style="clear:both;"></div>

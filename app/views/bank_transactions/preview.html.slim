@@ -6,6 +6,9 @@ h2= t(".title")
 = form_tag [:excel, bank_transaction], multipart: true, class: "tabular" do
   .box
     p
+      = label_tag :bank_account, t('.account')
+      = select_tag :bank_account, options_from_collection_for_select(BankAccount.all, :id, :description, params[:bank_account])
+    p
       = label_tag :bank_type, t('.type')
       = select_tag :bank_type, options_for_select(BankTransaction::BANK_LIST, params[:bank_type])
     p

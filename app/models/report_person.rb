@@ -7,6 +7,10 @@ class ReportPerson < ActiveRecord::Base
 
   has_many :comments, class_name: "ReportComment"
 
+  def self.access_list(user)
+    where(hrinfo_id: user.hrinfo.id)
+  end
+
   def fullname
     hrinfo.fullname
   end

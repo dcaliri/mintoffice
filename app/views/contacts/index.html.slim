@@ -15,7 +15,7 @@ h2 Total : #{@contacts.count}
   table#list-table
     tr
       th= contact.class.human_attribute_name(:name)
-      th= contact.class.human_attribute_name(:company)
+      th= contact.class.human_attribute_name(:company_name)
       th= contact.class.human_attribute_name(:department)
       th= contact.class.human_attribute_name(:position)
       th= ContactEmail.human_attribute_name(:email)
@@ -23,7 +23,7 @@ h2 Total : #{@contacts.count}
     - @paginated.each do |address|
       tr.selectable onclick="location.href='#{contact_path(address)}'"
         td= address.name
-        td= address.company
+        td= address.company_name
         td= address.department
         td= address.position
         td= address.emails.empty? ? "" : "(#{address.emails.first.target}) #{address.emails.first.email} "

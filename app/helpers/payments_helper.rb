@@ -27,20 +27,14 @@ module PaymentsHelper
 
       percentage = ((after - before) / 1.day)
       percentage = if percentage < 27
-                    percentage
+                    Holiday.working_days(before.to_date, after.to_date) / 30.0
                    else
-                    30.0
+                    1.0
                    end
 
-      periods << [before, after, percentage]
+      yield before, after, amount * percentage
 
       before = after + 1.day
     end
-
-    total_percentage = periods.sum {|before, after, percentage| percentage}
-    periods.each do |before, after, percentage|
-      yield before, after, (amount * (percentage / total_percentage)).to_i
-    end
-
   end
 end

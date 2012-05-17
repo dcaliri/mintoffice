@@ -19,7 +19,8 @@ table#list-table
     - if menu
       th= t('common.menu')
   - bank_transfers.each do |transfer|
-    tr.selectable
+    tr.selectable onclick="location.href='#{bank_transfer_path(transfer)}'"
+      td= transfer.bank_account.description
       td= transfer.transfer_type
       td= transfer.transfered_at.strftime("%Y-%m-%d %H.%M")
       /!td= transfer.result
@@ -44,8 +45,6 @@ table#list-table
           - if transfer.transaction
             = link_to t('bank_transfers.show.to_bank_transaction'), transfer.transaction
             = " | "
-          = link_to t('common.link.show'), transfer
-          = " | "
           = link_to t('common.link.edit'), edit_bank_transfer_path(transfer, bank_account_id: transfer.bank_account)
           = " | "
           = link_to t('common.link.destroy'), transfer, :method => :delete, :confirm => "Are you sure?"
