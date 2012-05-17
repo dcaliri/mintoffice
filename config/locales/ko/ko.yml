@@ -268,6 +268,7 @@ ko:
                 lastname: 성
                 company: 회사
                 department: 부서
+                owner: 작성자
                 position: 직위
                 isprivate: 비공개
             contact_address:
@@ -758,7 +759,7 @@ ko:
         title: 인사정보관리
     holidays:
         title: 휴일 관리
-        
+
     main:
         index:
             human_resources: 인사관리

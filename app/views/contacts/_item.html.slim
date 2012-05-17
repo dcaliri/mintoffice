@@ -12,6 +12,9 @@ table
     th= contact.class.human_attribute_name(:position)
     td= contact.position
   tr
+    th= contact.class.human_attribute_name(:owner)
+    td= contact.owner.hrinfo.fullname
+  tr
     th= contact.class.human_attribute_name(:isprivate)
     td= contact.isprivate
   tr
