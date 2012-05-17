@@ -13,7 +13,7 @@ table
     td= contact.position
   tr
     th= contact.class.human_attribute_name(:owner)
-    td= contact.owner.hrinfo.fullname
+    td = contact.owner_name
   tr
     th= contact.class.human_attribute_name(:isprivate)
     td= contact.isprivate
