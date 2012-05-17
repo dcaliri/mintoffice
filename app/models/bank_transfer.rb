@@ -75,10 +75,10 @@ class BankTransfer < ActiveRecord::Base
     }
   }
 
-  include NewStylesheetParsable
+  include StylesheetParsable
 
   def self.excel_parser(type)
-    parser = NewExcelParser.new
+    parser = ExcelParser.new
     parser.class_name BankTransfer
     if type == :shinhan
       parser.column SHINHAN[:columns]
