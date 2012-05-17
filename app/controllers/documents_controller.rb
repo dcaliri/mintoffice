@@ -5,7 +5,7 @@ class DocumentsController < ApplicationController
   expose(:projects) { current_company.projects }
 
   before_filter :only => [:show] {|c| c.save_attachment_id document}
-  before_filter :check_access, except: [:index, :new, :create]
+  before_filter :check_report_access, except: [:index, :new, :create]
 
   def index
     @documents = documents.access_list(current_user).search(params[:query]).latest.page(params[:page])
@@ -54,10 +54,6 @@ class DocumentsController < ApplicationController
   end
 
   private
-  def check_access
-    @cardbill = Cardbill.find(params[:id])
-    force_redirect unless @cardbill.access?(current_user)
-  end
 
   def project_list
     @projects ||= projects.find(:all, :order => "name ASC")
