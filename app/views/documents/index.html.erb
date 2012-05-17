@@ -14,6 +14,7 @@
     <th><%= Document.human_attribute_name("project") %></th>
     <th><%= Document.human_attribute_name("owner") %></th>
     <th><%= Document.human_attribute_name("tags") %></th>
+    <th><%= Report.human_attribute_name('status') %></th>
   </tr>
 <% @documents.each do |document| %>
   <tr class="selectable" onclick="location.href='<%= document_path(document) %>'">
@@ -29,6 +30,7 @@
     <td>
       <%=h document.tag_list %>
     </td>
+    <td><%=h document.report.localize_status %></td>
   </tr>
 <% end %>
 </table>
