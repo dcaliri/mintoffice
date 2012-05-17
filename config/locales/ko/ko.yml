@@ -120,6 +120,7 @@ ko:
             contact_other_tag: 기타 대상
             creditcard: 신용카드
             document: 문서
+            expense_report: 지출 내역서
             holiday: 휴일관리
             hrinfo: 인사정보
             namecard: 명함정보
@@ -154,6 +155,7 @@ ko:
                 total_out: 출금 총액
                 margin: 입출금 차액
             bank_transaction:
+                account: 은행계좌
                 transacted_at: 거래일자
                 transaction_type: 적요
                 in: 입금액
@@ -266,8 +268,9 @@ ko:
                 name: 이름
                 firstname: 이름
                 lastname: 성
-                company: 회사
+                company_name: 회사
                 department: 부서
+                owner: 작성자
                 position: 직위
                 isprivate: 비공개
             contact_address:
@@ -309,6 +312,14 @@ ko:
                 project: 프로젝트
                 owner: 소유자
                 tags: 태그목록
+            expense_report:
+                owner: 작성자
+                hrinfo_id: 작성자
+                target: 지출 대상
+                project: 프로젝트
+                project_id: 프로젝트
+                description: 내역
+                amount: 금액
             holiday:
                 theday: 휴일날짜
                 dayname: 휴일명목
@@ -399,6 +410,8 @@ ko:
                 income: 총 연봉 금액
                 basic_pay: 기본급
             report:
+                reporter: 결재 대상
+                comment: 코멘트
                 status: 상태
                 localized_status:
                     not_reported: 결제 대기 중
@@ -732,6 +745,10 @@ ko:
             title: 문서 정보 수정
             adduser: 사용자 추가
             addtag: 태그 추가
+    expense_reports:
+        title: 지출내역서
+        index:
+            title: 지출내역서 관리
     hrinfos:
         index:
             title: 인사정보관리 - 사원목록
@@ -758,7 +775,7 @@ ko:
         title: 인사정보관리
     holidays:
         title: 휴일 관리
-        
+
     main:
         index:
             human_resources: 인사관리

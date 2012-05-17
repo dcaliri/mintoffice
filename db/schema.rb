@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120516061455) do
+ActiveRecord::Schema.define(:version => 20120517051907) do
 
   create_table "attachments", :force => true do |t|
     t.string   "title"
@@ -259,7 +259,7 @@ ActiveRecord::Schema.define(:version => 20120516061455) do
   create_table "contacts", :force => true do |t|
     t.string  "firstname"
     t.string  "lastname"
-    t.string  "company"
+    t.string  "company_name"
     t.string  "department"
     t.string  "position"
     t.text    "email_list"
@@ -268,6 +268,7 @@ ActiveRecord::Schema.define(:version => 20120516061455) do
     t.boolean "migrated_data", :default => false
     t.integer "owner_id"
     t.boolean "isprivate",     :default => false
+    t.integer "company_id"
   end
 
   create_table "creditcards", :force => true do |t|
@@ -303,6 +304,17 @@ ActiveRecord::Schema.define(:version => 20120516061455) do
   end
 
   add_index "documents_tags", ["document_id", "tag_id"], :name => "index_documents_tags_on_document_id_and_tag_id", :unique => true
+
+  create_table "expense_reports", :force => true do |t|
+    t.integer  "hrinfo_id"
+    t.integer  "target_id"
+    t.string   "target_type"
+    t.integer  "project_id"
+    t.text     "description"
+    t.integer  "amount"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "groups", :force => true do |t|
     t.string   "name"

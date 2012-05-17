@@ -1,6 +1,7 @@
 # encoding: UTF-8
 
 class Contact < ActiveRecord::Base
+  belongs_to :company
   belongs_to :target, :polymorphic => true
   belongs_to :owner, class_name: 'User'
 
@@ -32,6 +33,10 @@ class Contact < ActiveRecord::Base
     owner == user
   end
 
+  def owner_name
+    owner.hrinfo.fullname rescue ""
+  end
+
   class << self
     def isprivate(current_user)
       where("isprivate = ? OR owner_id = ?", false, current_user.id)
@@ -39,7 +44,7 @@ class Contact < ActiveRecord::Base
 
     def search(query)
       query = "%#{query}%"
-      search_by_name(query) | search_by_company(query) | search_by_email(query) | search_by_address(query) | search_by_phone_number(query)
+      search_by_name(query) | search_by_company_name(query) | search_by_email(query) | search_by_address(query) | search_by_phone_number(query)
     end
 
     def search_by_name(query)
@@ -54,8 +59,8 @@ class Contact < ActiveRecord::Base
       end
     end
 
-    def search_by_company(query)
-      where("company like ? OR department like ? OR position like ?", query, query, query)
+    def search_by_company_name(query)
+      where("company_name like ? OR department like ? OR position like ?", query, query, query)
     end
 
     def search_by_email(query)

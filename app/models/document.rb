@@ -9,17 +9,14 @@ class Document < ActiveRecord::Base
 
   include Attachmentable
   include Taggable
+  include Reportable
 
   self.per_page = 20
 
   class << self
-    def access(user)
-      joins(:document_owners).where('document_owners.user_id = ?', user.id)
+    def latest
+      order('documents.created_at DESC')
     end
-  end
-
-  def access?(user)
-    document_owners.exists?(user_id: user.id)
   end
 
   def add_tags(tag_list)

@@ -4,16 +4,12 @@ class CardbillsController < ApplicationController
     c.save_attachment_id @cardbill
   end
 
-  before_filter :check_access, except: [:index, :new, :create]
-  def check_access
-    @cardbill = Cardbill.find(params[:id])
-    force_redirect unless @cardbill.access?(current_user)
-  end
+  before_filter :check_report_access, except: [:index, :new, :create]
 
   # GET /cardbills
   # GET /cardbills.xml
   def index
-    @cardbills = Cardbill.search(params[:q]).searchbycreditcard(params[:creditcard_id]).paginate(:order => 'transdate desc', :page => params[:page], :per_page => 20)
+    @cardbills = Cardbill.access_list(current_user).search(params[:q]).searchbycreditcard(params[:creditcard_id]).paginate(:order => 'transdate desc', :page => params[:page], :per_page => 20)
     @cardbills_count = Cardbill.count(:all)
 
     respond_to do |format|

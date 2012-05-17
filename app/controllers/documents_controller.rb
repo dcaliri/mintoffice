@@ -5,10 +5,10 @@ class DocumentsController < ApplicationController
   expose(:projects) { current_company.projects }
 
   before_filter :only => [:show] {|c| c.save_attachment_id document}
-  before_filter :check_access
+  before_filter :check_report_access, except: [:index, :new, :create]
 
   def index
-    @documents = documents.access(current_user).search(params[:query]).page(params[:page])
+    @documents = documents.access_list(current_user).search(params[:query]).latest.page(params[:page])
   end
 
   def create
@@ -21,6 +21,7 @@ class DocumentsController < ApplicationController
   end
 
   def update
+    document = current_company.documents.find(params[:id])
     document.update_attributes!(params[:document])
     redirect_to document, notice: t('common.messages.updated', :model => Document.model_name.human)
   rescue ActiveRecord::RecordInvalid
@@ -54,12 +55,6 @@ class DocumentsController < ApplicationController
   end
 
   private
-  def check_access
-    if document.new_record? == false && document.access?(current_user) == false
-      flash[:notice] = I18n.t ("permissions.permission_denied")
-      redirect_to :controller => "main", :action => "index"
-    end
-  end
 
   def project_list
     @projects ||= projects.find(:all, :order => "name ASC")

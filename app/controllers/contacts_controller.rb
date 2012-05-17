@@ -1,21 +1,21 @@
 class ContactsController < ApplicationController
-  expose(:contacts) { Contact.all }
+  expose(:contacts) { current_company.contacts }
   expose(:contact)
 
   before_filter :only => [:show] { |c| c.save_attachment_id contact }
   before_filter :redirect_if_private, :only => [:show, :edit, :update]
 
   def index
-    @contacts = Contact.isprivate(@user).search(params[:query])
+    @contacts = contacts.isprivate(@user).search(params[:query])
     @paginated = @contacts.paginate(:page => params[:page], :per_page => 20)
   end
 
   def find
-    @contacts = Contact.search(params[:query])
+    @contacts = contacts.search(params[:query])
   end
 
   def select
-    @contact = Contact.find(params[:id])
+    @contact = contacts.find(params[:id])
 
     target_class = params[:parent_class].blank? ? params[:target_class] : params[:parent_class]
     target_id = params[:parent].blank? ? params[:target] : params[:parent]
@@ -36,7 +36,7 @@ class ContactsController < ApplicationController
   end
 
   def create
-    contact = @user.contacts.build(params[:contact])
+    contact = contacts.where(owner_id: current_user.id).build(params[:contact])
     contact.save!
     redirect_to contact
   end
@@ -57,7 +57,7 @@ class ContactsController < ApplicationController
 
   private
   def redirect_if_private
-    @contact = Contact.find(params[:id])
-    force_redirect unless @contact.access?(@user)
+    @contact = contacts.find(params[:id])
+    force_redirect unless @contact.access?(current_user)
   end
 end

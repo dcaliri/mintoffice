@@ -2,6 +2,7 @@ class Project < ActiveRecord::Base
   belongs_to :company
 
   has_many :documents
+  has_many :expense_reports
   has_many :assign_infos, class_name: "ProjectAssignInfo"
   has_many :users, through: :assign_infos
 

@@ -1,5 +1,6 @@
 table#list-table
   tr
+    th= BankTransaction.human_attribute_name(:account)
     th= BankTransaction.human_attribute_name(:transacted_at)
     th= BankTransaction.human_attribute_name(:transaction_type)
     th= BankTransaction.human_attribute_name(:in)
@@ -10,7 +11,8 @@ table#list-table
     - if menu
       th= t('common.menu')
   - bank_transactions.each do |transaction|
-    tr.selectable
+    tr.selectable onclick="location.href='#{bank_transaction_path(transaction)}'"
+      td= transaction.bank_account.description
       - if transaction.transacted_at
         td= transaction.transacted_at.strftime("%Y-%m-%d %H.%M")
       - else
@@ -29,8 +31,6 @@ table#list-table
           - if transaction.transfer
             = link_to t('bank_transactions.show.to_bank_transfer'), transaction.transfer
             = " | "
-          = link_to t('common.link.show'), transaction
-          = " | "
           = link_to t('common.link.edit'), edit_bank_transaction_path(transaction, bank_account_id: transaction.bank_account)
           = " | "
           = link_to t('common.link.destroy'), transaction, :method => :delete, :confirm => "Are you sure?"

@@ -5,9 +5,13 @@ class Report < ActiveRecord::Base
   has_one :reporter, class_name: "ReportPerson"
   has_many :comments, class_name: 'ReportComment'
 
+  before_create :set_status
+  def set_status
+    self.status = :not_reported
+  end
+
   def status
-    status = read_attribute(:status)
-    status ? status.to_sym : :not_reported
+    read_attribute(:status).to_sym
   end
 
   def localize_status

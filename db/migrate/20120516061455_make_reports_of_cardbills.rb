@@ -21,12 +21,11 @@ class MakeReportsOfCardbills < ActiveRecord::Migration
     belongs_to :report
   end
 
-  def change
+  def up
     add_column :cardbills, :before_report, :boolean
     user = Group.where(name: "admin").first.users.first
-#    user = User.where(name: "admin").first
 
-    Cardbill.all.each do |cardbill|
+    Cardbill.find_each do |cardbill|
       cardbill.before_report = true
 
       report = Report.new
@@ -41,4 +40,14 @@ class MakeReportsOfCardbills < ActiveRecord::Migration
       cardbill.save!
     end
   end
+
+  def down
+    Report.destroy_all
+    ReportPerson.destroy_all
+
+    remove_column :cardbills, :before_report
+  end
 end
+
+
+
