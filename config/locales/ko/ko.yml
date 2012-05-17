@@ -400,6 +400,8 @@ ko:
                 income: 총 연봉 금액
                 basic_pay: 기본급
             report:
+                reporter: 결재 대상
+                comment: 코멘트
                 status: 상태
                 localized_status:
                     not_reported: 결제 대기 중
