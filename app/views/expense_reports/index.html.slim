@@ -14,7 +14,7 @@ h2 Total : #{@expenses.count}
     - @expenses.each do |report|
       tr.selectable onclick="location.href='#{expense_report_path(report)}'"
         td= report.hrinfo.fullname
-        td= t("activerecord.models.#{report.target_type.downcase}")
+        td= t("activerecord.models.#{report.target_type.tableize.singularize}")
         td= report.project.name
         td= report.description
         td= number_to_currency report.amount

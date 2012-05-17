@@ -1,5 +1,5 @@
 #show_command
-  = link_to t("activerecord.models.#{expense_report.target_type.tableize.singularize}"), expense_report.target
+  = link_to t("activerecord.models.#{expense_report.target_type.tableize.singularize}") + " 보기", expense_report.target
   = " | "
   = link_to t('common.link.edit'), [:edit, expense_report]
   = " | "
@@ -8,7 +8,7 @@
   = link_to t('common.title.back'), :expense_reports
 
 
-h2 ...
+h2 지출내역서 상세정보
 
 .box
   table

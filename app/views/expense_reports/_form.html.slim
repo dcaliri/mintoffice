@@ -1,6 +1,7 @@
 #show_command
   = link_to t('common.title.back'), :expense_reports
 
+h2= t("common.title.#{action_name}")
 
 = form_for expense_report, html: {class: "tabular"} do |f|
   = f.hidden_field :target_type, value: expense_report.target_type || params[:target_type]
