@@ -266,7 +266,7 @@ ko:
                 name: 이름
                 firstname: 이름
                 lastname: 성
-                company: 회사
+                company_name: 회사
                 department: 부서
                 owner: 작성자
                 position: 직위
