@@ -66,6 +66,11 @@ table tr td ul {
           <li><%= link_to t("taxbills.index.title"), :taxbills %></li>
         <% end %>
       </ul>
+      <ul>
+        <% if @user.permission.any? {|perm| perm.name == 'expense_reports'}  %>
+          <li><%= link_to t("expense_reports.index.title"), :expense_reports %></li>
+        <% end %>
+      </ul>
     </td>
     <td style="text-align: left;" valign="top">
       <ul>

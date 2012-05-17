@@ -1,0 +1,26 @@
+#show_command
+  = link_to t('common.title.back'), :root
+
+h2 Total : #{@expenses.count}
+
+- unless @expenses.empty?
+  table#list-table
+    tr
+      th= expense_report.class.human_attribute_name(:owner)
+      th= expense_report.class.human_attribute_name(:target)
+      th= expense_report.class.human_attribute_name(:project)
+      th= expense_report.class.human_attribute_name(:description)
+      th= expense_report.class.human_attribute_name(:amount)
+      th= Report.human_attribute_name('status')
+    - @expenses.each do |report|
+      tr.selectable onclick="location.href='#{expense_report_path(report)}'"
+        td= report.hrinfo.fullname
+        td= t("activerecord.models.#{report.target_type.tableize.singularize}")
+        td= report.project.name
+        td= report.description
+        td= number_to_currency report.amount
+        td= report.report.localize_status
+  center
+    = will_paginate @expenses
+- else
+  h4= t('.empty')

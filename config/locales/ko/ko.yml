@@ -120,6 +120,7 @@ ko:
             contact_other_tag: 기타 대상
             creditcard: 신용카드
             document: 문서
+            expense_report: 지출 내역서
             holiday: 휴일관리
             hrinfo: 인사정보
             namecard: 명함정보
@@ -311,6 +312,14 @@ ko:
                 project: 프로젝트
                 owner: 소유자
                 tags: 태그목록
+            expense_report:
+                owner: 작성자
+                hrinfo_id: 작성자
+                target: 지출 대상
+                project: 프로젝트
+                project_id: 프로젝트
+                description: 내역
+                amount: 금액
             holiday:
                 theday: 휴일날짜
                 dayname: 휴일명목
@@ -736,6 +745,10 @@ ko:
             title: 문서 정보 수정
             adduser: 사용자 추가
             addtag: 태그 추가
+    expense_reports:
+        title: 지출내역서
+        index:
+            title: 지출내역서 관리
     hrinfos:
         index:
             title: 인사정보관리 - 사원목록

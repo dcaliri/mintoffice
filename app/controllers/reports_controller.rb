@@ -4,7 +4,7 @@ class ReportsController < ApplicationController
   def report
     report_target_class = params[:target_type].constantize
     report_target = report_target_class.find(params[:target_id])
-    redirect_to_index = report_target_class.to_s.downcase.pluralize.to_sym
+    redirect_to_index = report_target_class.to_s.tableize.to_sym
 
     report = report_target.report
     case params[:commit]
