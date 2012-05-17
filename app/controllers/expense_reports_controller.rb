@@ -1,8 +1,9 @@
 class ExpenseReportsController < ApplicationController
   expose(:expense_report)
+  before_filter :check_report_access, except: [:index, :new, :create]
 
   def index
-    @expenses = ExpenseReport.page(params[:page])
+    @expenses = ExpenseReport.access_list(current_user).page(params[:page])
   end
 
   def create

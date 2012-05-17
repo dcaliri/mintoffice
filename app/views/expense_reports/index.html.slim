@@ -11,6 +11,7 @@ h2 Total : #{@expenses.count}
       th= expense_report.class.human_attribute_name(:project)
       th= expense_report.class.human_attribute_name(:description)
       th= expense_report.class.human_attribute_name(:amount)
+      th= Report.human_attribute_name('status')
     - @expenses.each do |report|
       tr.selectable onclick="location.href='#{expense_report_path(report)}'"
         td= report.hrinfo.fullname
@@ -18,6 +19,7 @@ h2 Total : #{@expenses.count}
         td= report.project.name
         td= report.description
         td= number_to_currency report.amount
+        td= report.report.localize_status
   center
     = will_paginate @expenses
 - else
