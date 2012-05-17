@@ -1,0 +1,22 @@
+#show_command
+  = link_to t('common.title.back'), :expense_reports
+
+
+= form_for expense_report, html: {class: "tabular"} do |f|
+  = f.hidden_field :target_type, value: expense_report.target_type || params[:target_type]
+  = f.hidden_field :target_id, value:  expense_report.target_id || params[:target_id]
+  .box
+    p
+      = f.label :hrinfo_id
+      = f.select :hrinfo_id, options_for_select(Hrinfo.all.map{|info| [info.fullname, info.id]})
+    p
+      = f.label :project_id
+      = f.select :project_id, options_for_select(Project.all.map{|project| [project.name, project.id]}, expense_report.project_id)
+    p
+      = f.label :description
+      = f.text_area :description
+    p
+      = f.label :amount
+      = f.text_field :amount
+    p
+      = f.submit

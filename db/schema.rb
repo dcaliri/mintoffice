@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120517025725) do
+ActiveRecord::Schema.define(:version => 20120517033907) do
 
   create_table "attachments", :force => true do |t|
     t.string   "title"
@@ -308,6 +308,17 @@ ActiveRecord::Schema.define(:version => 20120517025725) do
   end
 
   add_index "documents_tags", ["document_id", "tag_id"], :name => "index_documents_tags_on_document_id_and_tag_id", :unique => true
+
+  create_table "expense_reports", :force => true do |t|
+    t.integer  "hrinfo_id"
+    t.integer  "target_id"
+    t.string   "target_type"
+    t.integer  "project_id"
+    t.text     "description"
+    t.integer  "amount"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "groups", :force => true do |t|
     t.string   "name"
