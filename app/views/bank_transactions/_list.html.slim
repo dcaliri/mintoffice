@@ -1,5 +1,6 @@
 table#list-table
   tr
+    th= BankTransaction.human_attribute_name(:account)
     th= BankTransaction.human_attribute_name(:transacted_at)
     th= BankTransaction.human_attribute_name(:transaction_type)
     th= BankTransaction.human_attribute_name(:in)
@@ -11,6 +12,7 @@ table#list-table
       th= t('common.menu')
   - bank_transactions.each do |transaction|
     tr.selectable onclick="location.href='#{bank_transaction_path(transaction)}'"
+      td= transaction.bank_account.description
       - if transaction.transacted_at
         td= transaction.transacted_at.strftime("%Y-%m-%d %H.%M")
       - else

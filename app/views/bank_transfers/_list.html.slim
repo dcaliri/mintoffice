@@ -20,6 +20,7 @@ table#list-table
       th= t('common.menu')
   - bank_transfers.each do |transfer|
     tr.selectable onclick="location.href='#{bank_transfer_path(transfer)}'"
+      td= transfer.bank_account.description
       td= transfer.transfer_type
       td= transfer.transfered_at.strftime("%Y-%m-%d %H.%M")
       /!td= transfer.result
