@@ -775,7 +775,9 @@ ko:
         title: 인사정보관리
     holidays:
         title: 휴일 관리
-
+        index:
+            this_years_working_days: "년의 근무일수 : "
+            month_and_count: "%{m}월: %{c}일"
     main:
         index:
             human_resources: 인사관리
