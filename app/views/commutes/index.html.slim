@@ -15,8 +15,8 @@ table#list-table
       tr.selectable onclick="location.href='#{commute_path(user)}'"
         td=h user.hrinfo.companyno
         td=h user.fullname
-        td= user.commutes(:order => :go).empty? ? "" : user.commutes(:order => :go).first.go
-        td= user.commutes(:order => :go).empty? ? "" : user.commutes(:order => :go).first.leave
+        td= user.commutes(:order => :go).empty? ? "" : user.commutes(:order => :go).last.go
+        td= user.commutes(:order => :go).empty? ? "" : user.commutes(:order => :go).last.leave
 
 br
 
