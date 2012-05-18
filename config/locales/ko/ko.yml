@@ -169,6 +169,7 @@ ko:
                 promissory_check_amount: 수표 어음금액
                 cms_code: CMS 코드
             bank_transfer:
+                account: 은행계좌
                 transfer_type: 이체구분
                 transfered_at: 거래일시
                 result: 처리결과
@@ -320,6 +321,7 @@ ko:
                 project_id: 프로젝트
                 description: 내역
                 amount: 금액
+                expensed_at: 지출 날짜
             holiday:
                 theday: 휴일날짜
                 dayname: 휴일명목
@@ -520,6 +522,8 @@ ko:
             out: 출금 합계
             list: 분기 목록
             quarter: "%{year}년도 %{quarter} 분기"
+        verify:
+            link: 검증하기
     bank_transfers:
         title: 이체 내역
         index:
@@ -775,7 +779,9 @@ ko:
         title: 인사정보관리
     holidays:
         title: 휴일 관리
-
+        index:
+            this_years_working_days: "년의 근무일수 : "
+            month_and_count: "%{m}월: %{c}일"
     main:
         index:
             human_resources: 인사관리

@@ -12,10 +12,13 @@ h2= t("common.title.#{action_name}")
       = f.select :hrinfo_id, options_for_select(Hrinfo.all.map{|info| [info.fullname, info.id]})
     p
       = f.label :project_id
-      = f.select :project_id, options_for_select(Project.all.map{|project| [project.name, project.id]}, expense_report.project_id)
+      = f.select :project_id, options_for_select(Project.inprogress.assign_list(current_user).map{|project| [project.name, project.id]}, expense_report.project_id)
     p
       = f.label :description
       = f.text_area :description
+    p
+      = f.label :expensed_at
+      = f.date_select :expensed_at, order: [:year, :month, :day]
     p
       = f.label :amount
       = f.text_field :amount

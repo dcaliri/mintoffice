@@ -21,8 +21,7 @@ class DocumentsController < ApplicationController
   end
 
   def update
-    document = current_company.documents.find(params[:id])
-    document.update_attributes!(params[:document])
+    document.save!
     redirect_to document, notice: t('common.messages.updated', :model => Document.model_name.human)
   rescue ActiveRecord::RecordInvalid
     render :action => "edit"

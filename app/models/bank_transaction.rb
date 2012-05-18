@@ -80,12 +80,14 @@ class BankTransaction < ActiveRecord::Base
     parser
   end
 
-  def self.preview_stylesheet(type, upload)
+  def self.preview_stylesheet(account, type, upload)
     path = file_path(upload['file'].original_filename)
     parser = excel_parser(type.to_sym)
 
     create_file(path, upload['file'])
-    parser.preview(path)
+    previews = []
+    parser.parse(path) {|class_name, query, params| previews << account.send(class_name.to_s.tableize).build(params)}
+    previews
   end
 
   def self.create_with_stylesheet(account, type, name)
@@ -135,6 +137,10 @@ class BankTransaction < ActiveRecord::Base
     else
       Time.zone.now
     end
+  end
+
+  def self.verify
+    sum {|transaction| (transaction.in - transaction.out)} == 0
   end
 
 

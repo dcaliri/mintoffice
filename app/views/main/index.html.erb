@@ -67,9 +67,7 @@ table tr td ul {
         <% end %>
       </ul>
       <ul>
-        <% if @user.permission.any? {|perm| perm.name == 'expense_reports'}  %>
-          <li><%= link_to t("expense_reports.index.title"), :expense_reports %></li>
-        <% end %>
+        <li><%= link_to t("expense_reports.index.title"), :expense_reports %></li>
       </ul>
     </td>
     <td style="text-align: left;" valign="top">
@@ -107,6 +105,7 @@ table tr td ul {
           <li><%= link_to t("attachments.title"), :controller => "attachments" %></li>
           <li><%= link_to t("permissions.title"), :controller => "permissions" %></li>
           <li><%= link_to t("change_histories.title"), :controller => "change_histories" %></li>
+          <li><%= link_to t("holidays.title"), :controller => "holidays" %></li>
         </ul>
       </td>
     <% end %>
@@ -136,11 +135,9 @@ table tr td ul {
         <%= link_to t("pettycashes.index.title"), :controller => "pettycashes" %>
       </li>
     <% end %>
-    <% if @user.permission.any? {|perm| perm.name == 'cardbills'}  %>
-      <li>
-        <%= link_to t("cardbills.index.title"), :controller => "cardbills" %>
-      </li>
-    <% end %>
+    <li>
+      <%= link_to t("cardbills.index.title"), :controller => "cardbills" %>
+    </li>
     <% if @user.permission.any? {|perm| perm.name == 'taxbills'}  %>
       <li>
         <%= link_to t("taxbills.index.title"), :taxbills %>

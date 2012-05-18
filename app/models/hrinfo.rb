@@ -2,7 +2,6 @@ class Hrinfo < ActiveRecord::Base
   belongs_to :user
   has_one :contact, :as => :target
   has_many :report, :as => :target
-  has_many :reporters, class_name: 'ReportPerson'
   has_many :expense_reports
 
 #  has_many :hrinfo_histories, :class_name => "HrinfoHistory", :foreign_key => "hrinfo_id"

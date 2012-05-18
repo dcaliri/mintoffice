@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120517051907) do
+ActiveRecord::Schema.define(:version => 20120518064514) do
 
   create_table "attachments", :force => true do |t|
     t.string   "title"
@@ -283,6 +283,13 @@ ActiveRecord::Schema.define(:version => 20120517051907) do
     t.string   "short_name"
   end
 
+  create_table "dayworkers", :force => true do |t|
+    t.string   "juminno"
+    t.integer  "contact_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "document_owners", :force => true do |t|
     t.integer  "document_id"
     t.integer  "user_id"
@@ -314,6 +321,7 @@ ActiveRecord::Schema.define(:version => 20120517051907) do
     t.integer  "amount"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.date     "expensed_at"
   end
 
   create_table "groups", :force => true do |t|
@@ -465,7 +473,7 @@ ActiveRecord::Schema.define(:version => 20120517051907) do
   end
 
   create_table "report_people", :force => true do |t|
-    t.integer  "hrinfo_id"
+    t.integer  "user_id"
     t.integer  "report_id"
     t.integer  "prev_id"
     t.datetime "created_at", :null => false
