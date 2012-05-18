@@ -521,6 +521,8 @@ ko:
             out: 출금 합계
             list: 분기 목록
             quarter: "%{year}년도 %{quarter} 분기"
+        verify:
+            link: 검증하기
     bank_transfers:
         title: 이체 내역
         index:

@@ -5,6 +5,8 @@
       "onchange" => "this.form.submit()"
 
 #show_command
+  = link_to t('bank_transactions.verify.link'), [:verify, :bank_transactions]
+  = " | "
   = link_to t('bank_transactions.new.link'), [:new, :bank_transaction]
   = " | "
   = link_to t('bank_transactions.excel.link'), [:excel, :bank_transactions]
