@@ -8,10 +8,8 @@ table#list-table
     th= BankTransaction.human_attribute_name(:note)
     th= BankTransaction.human_attribute_name(:remain)
     th= BankTransaction.human_attribute_name(:branchname)
-    - if menu
-      th= t('common.menu')
   - bank_transactions.each do |transaction|
-    - onclick = menu ? "location.href='#{bank_transaction_path(transaction)}'" : ""
+    - onclick = transaction.new_record? ? "" : "location.href='#{bank_transaction_path(transaction)}'"
     tr.selectable onclick="#{onclick}"
       td= transaction.bank_account.description rescue ""
       - if transaction.transacted_at
@@ -27,11 +25,3 @@ table#list-table
       td class="numrow"
         = number_to_currency transaction.remain
       td= transaction.branchname
-      - if menu
-        td align="right"
-          - if transaction.transfer
-            = link_to t('bank_transactions.show.to_bank_transfer'), transaction.transfer
-            = " | "
-          = link_to t('common.link.edit'), edit_bank_transaction_path(transaction, bank_account_id: transaction.bank_account)
-          = " | "
-          = link_to t('common.link.destroy'), transaction, :method => :delete, :confirm => "Are you sure?"
