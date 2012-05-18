@@ -16,6 +16,10 @@ class Project < ActiveRecord::Base
     ! self.ended_on.nil?
   end
 
+  def self.assign_list(user)
+    joins(:assign_infos).where('project_assign_infos.user_id = ?', user.id)
+  end
+
   def self.progress_period(year, month)
     start = Time.zone.parse("#{year}-#{month}-01 00:00:00")
     finish = start + 1.month - 1.day

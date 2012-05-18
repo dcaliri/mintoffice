@@ -3,7 +3,14 @@ class ExpenseReportsController < ApplicationController
   before_filter :check_report_access, except: [:index, :new, :create]
 
   def index
-    @expenses = ExpenseReport.access_list(current_user).page(params[:page])
+    project = Project.find(params[:project_id]) unless params[:project_id].blank?
+    @expenses_by_menu = ExpenseReport.filter(user: current_user)
+    @expenses = ExpenseReport.filter(
+                                user: current_user,
+                                project: project,
+                                year: params[:year].to_i,
+                                month: params[:month].to_i
+                              ).page(params[:page])
   end
 
   def create
