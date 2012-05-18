@@ -11,7 +11,8 @@ table#list-table
     - if menu
       th= t('common.menu')
   - bank_transactions.each do |transaction|
-    tr.selectable onclick="location.href='#{bank_transaction_path(transaction)}'"
+    - onclick = menu ? "location.href='#{bank_transaction_path(transaction)}'" : ""
+    tr.selectable onclick="#{onclick}"
       td= transaction.bank_account.description
       - if transaction.transacted_at
         td= transaction.transacted_at.strftime("%Y-%m-%d %H.%M")

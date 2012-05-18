@@ -14,7 +14,8 @@ class BankTransactionsController < ApplicationController
   end
 
   def preview
-    @transactions = BankTransaction.preview_stylesheet(params[:bank_type], params[:upload])
+    bank_account = BankAccount.find(params[:bank_account])
+    @transactions = BankTransaction.preview_stylesheet(bank_account, params[:bank_type], params[:upload])
   end
 
   def upload
