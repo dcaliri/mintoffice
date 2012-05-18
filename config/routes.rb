@@ -23,7 +23,7 @@ Mintoffice::Application.routes.draw do
   resources :card_approved_sources
 
   resources :documents
-  resources :projects
+  resources :projects, except: [:destroy]
   resources :pettycashes
   resources :permissions
   resources :cardbills
@@ -32,6 +32,7 @@ Mintoffice::Application.routes.draw do
     resources :payroll_items, path: "items"
   end
   resources :payroll_items
+  resources :holidays
 
   match '/hrinfos/retire/:id', :controller => "hrinfos", :action => "retire", :conditions => {:method => :get}
   match '/hrinfos/retire/:id', :controller => "hrinfos", :action => "retire_save", :conditions => {:method => :post}
@@ -49,6 +50,10 @@ Mintoffice::Application.routes.draw do
       collection do
         get 'yearly'
         post 'yearly', :action => 'create_yearly'
+
+        get 'new_yearly'
+        post 'calculate'
+        post 'new_yearly', :action => 'create_new_yearly'
       end
     end
 
@@ -66,6 +71,13 @@ Mintoffice::Application.routes.draw do
     end
 
     resources :vacations
+
+    resources :projects do
+      collection do
+        get 'assign'
+        post 'assign', action: 'assign_projects'
+      end
+    end
   end
 
   match "/auth/:provider/callback" => "providers#create"
@@ -77,12 +89,14 @@ Mintoffice::Application.routes.draw do
 
     resources :contact_emails, :path => 'emails', :only => :destroy
     resources :contact_phone_numbers, :path => 'phones', :only => :destroy
-    resources :contact_addresses, :path => 'addresses', :only => :destroy
+    resources :contact_addresses, :path => 'addresses', :only => [:new, :destroy]
+    resources :contact_others, :path => 'others', :only => :destroy
   end
 
   resources :contact_address_tags, :only => [:new, :create]
   resources :contact_email_tags, :only => [:new, :create]
   resources :contact_phone_number_tags, :only => [:new, :create]
+  resources :contact_other_tags, :only => [:new, :create]
 
   resources :payments, :only => [:index, :show]
   resources :commutes
@@ -98,6 +112,7 @@ Mintoffice::Application.routes.draw do
 
   resources :bank_transactions do
     collection do
+      get 'verify'
       get 'excel'
       post 'preview'
       post 'excel', :action => 'upload'
@@ -127,6 +142,13 @@ Mintoffice::Application.routes.draw do
   resources :change_histories, path: 'histories'
 
   resources :tags, only: [:create, :destroy]
+
+  resources :company do
+    post :switch, on: :collection
+  end
+  resources :expense_reports, path: 'expenses'
+
+  match 'report' => 'reports#report', as: :report
 
   root to: 'main#index'
 

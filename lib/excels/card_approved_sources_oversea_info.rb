@@ -41,7 +41,7 @@ module Excels
 
     module ClassMethods
       def approved_sources_oversea_parser
-        parser = NewExcelParser.new
+        parser = ExcelParser.new
         parser.class_name CardApprovedSource
         parser.column EXCEL_COLUMNS[:card_approved_sources_oversea]
         parser.key EXCEL_KEYS[:card_approved_sources_oversea]

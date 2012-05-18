@@ -1,6 +1,6 @@
 require 'iconv'
 
-module NewStylesheetParsable
+module StylesheetParsable
   extend ActiveSupport::Concern
 
   module ClassMethods

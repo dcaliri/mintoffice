@@ -1,0 +1,41 @@
+- 3.times { contact.emails.new }
+
+h3 이메일
+= contact_form.fields_for :emails do |email_field|
+  .email-form
+    p
+      = email_field.label :target
+      = email_field.select :target, options_for_select(ContactEmailTag.all.map{|tag| tag.name}, email_field.object.target)
+      = link_to "새로운 대상 만들기", [:new, :contact_email_tag]
+
+    p
+      = email_field.label :email
+      = email_field.email_field :email
+= link_to "새로운 이메일 작성", "", {class: 'new-email-form new-form-link'}
+
+br
+br
+br
+
+javascript:
+  $(document).ready(function() {
+    $('.email-form').each(function(index){
+      if($(this).find("input[type='email']").val() == "") {
+        $(this).hide();
+      }
+    });
+
+    var newFormLink = $('.new-email-form');
+
+    newFormLink.click(function(e){
+      e.preventDefault();
+      var form = $('.email-form:hidden');
+
+      form.first().show();
+      if(form.length == 1) {
+        newFormLink.remove();
+      }
+    });
+
+    newFormLink.click();
+    });

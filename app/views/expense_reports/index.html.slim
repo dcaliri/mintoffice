@@ -1,0 +1,35 @@
+- content_for :search do
+  = form_tag :expense_reports, :method => :get do
+    - year_before = @expenses_by_menu.oldest_year
+    - year_after = @expenses_by_menu.newest_year
+
+    = select_tag :year, options_for_select([["all", nil]] + (year_before..year_after).map{|year| [year.to_s+" 년", year]}, params[:year]), "onchange" => "this.form.submit()"
+    = select_tag :month, options_for_select([["all", nil]] + (1..12).map{|month| [month.to_s+" 월", month]}, params[:month]), "onchange" => "this.form.submit()"
+    = select_tag :project_id, options_from_collection_for_select([Project.new(:name => "all")]+Project.all, :id, :name, params[:project_id]), "onchange" => "this.form.submit()"
+
+#show_command
+  = link_to t('common.title.back'), :root
+
+h2 Total : #{@expenses.count}
+
+- unless @expenses.empty?
+  table#list-table
+    tr
+      th= expense_report.class.human_attribute_name(:owner)
+      th= expense_report.class.human_attribute_name(:target)
+      th= expense_report.class.human_attribute_name(:project)
+      th= expense_report.class.human_attribute_name(:description)
+      th= expense_report.class.human_attribute_name(:amount)
+      th= Report.human_attribute_name('status')
+    - @expenses.each do |report|
+      tr.selectable onclick="location.href='#{expense_report_path(report)}'"
+        td= report.hrinfo.fullname
+        td= t("activerecord.models.#{report.target_type.tableize.singularize}")
+        td= report.project.name
+        td= report.description
+        td= number_to_currency report.amount
+        td= report.report.localize_status
+  center
+    = will_paginate @expenses
+- else
+  h4= t('.empty')

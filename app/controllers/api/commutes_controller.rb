@@ -12,9 +12,8 @@ module Api
     end
 
     def checkout
-      @commutes = @user.commutes.where(go: Time.zone.now.all_day, leave: nil)
-      unless @commutes.empty?
-        @commute = @commutes.last
+      @commute = @user.commutes.latest.first
+      if @commute && @commute.leave == nil
         @commute.leave!
         Attachment.save_for(@commute, @user, uploaded_file: params[:file])
         render :json => {:status => :ok, :commute => @commute}
@@ -27,6 +26,10 @@ module Api
     def find_user
       @users = User.where(:api_key => request.env['HTTP_API_KEY'])
       @user = @users.first if @users
+      unless @user
+        render :json => {:status => :api_key_wrong}
+        false
+      end
     end
   end
 end

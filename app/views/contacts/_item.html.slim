@@ -3,14 +3,20 @@ table
     th= t("contacts.name")
     td= contact.name
   tr
-    th= contact.class.human_attribute_name(:company)
-    td= contact.company
+    th= contact.class.human_attribute_name(:company_name)
+    td= contact.company_name
   tr
     th= contact.class.human_attribute_name(:department)
     td= contact.department
   tr
     th= contact.class.human_attribute_name(:position)
     td= contact.position
+  tr
+    th= contact.class.human_attribute_name(:owner)
+    td = contact.owner_name
+  tr
+    th= contact.class.human_attribute_name(:isprivate)
+    td= contact.isprivate
   tr
     td
   - contact.emails.each do |email|
@@ -43,6 +49,16 @@ table
           = " | "
           = link_to "제거", [contact, address], :method => :delete, :confirm => "Are you sure?"
 
+  - contact.others.each do |other|
     tr
-      th= Document.human_attribute_name("tags")
-      td= contact.tag_list
+      th= "#{other.target}"
+      td= other.description
+      - if menu
+        td
+          = link_to t('common.link.edit'), [:edit, contact]
+          = " | "
+          = link_to "제거", [contact, other], :method => :delete, :confirm => "Are you sure?"
+  tr
+    th= Document.human_attribute_name("tags")
+    td= contact.tag_list
+

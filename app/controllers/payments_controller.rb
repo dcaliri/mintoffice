@@ -11,7 +11,8 @@ class PaymentsController < ApplicationController
   before_filter {|controller| controller.redirect_unless_me(user)}
 
   def index
-    @users = User(:protected).enabled.page(params[:page])
+    @hrinfos = Hrinfo.where(:retired_on => nil).page(params[:page])
+    @payments = Payment
   end
 
   def create

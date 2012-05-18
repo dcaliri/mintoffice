@@ -1,28 +1,22 @@
 table#list-table
   tr
+    th= BankTransfer.human_attribute_name(:account)
     th= BankTransfer.human_attribute_name(:transfer_type)
     th= BankTransfer.human_attribute_name(:transfered_at)
-    /!th= BankTransfer.human_attribute_name(:result)
     th= BankTransfer.human_attribute_name(:out_bank_account)
     th= BankTransfer.human_attribute_name(:in_bank_name)
     th= BankTransfer.human_attribute_name(:in_bank_account)
     th= BankTransfer.human_attribute_name(:money)
     th= BankTransfer.human_attribute_name(:transfer_fee)
     th= BankTransfer.human_attribute_name(:error_money)
-    /!th= BankTransfer.human_attribute_name(:registered_at)
-    /!th= BankTransfer.human_attribute_name(:error_code)
-    /!th= BankTransfer.human_attribute_name(:transfer_note)
-    /!th= BankTransfer.human_attribute_name(:incode)
-    /!th= BankTransfer.human_attribute_name(:out_account_note)
-    /!th= BankTransfer.human_attribute_name(:in_account_note)
     th= BankTransfer.human_attribute_name(:in_person_name)
-    - if menu
-      th= t('common.menu')
+
   - bank_transfers.each do |transfer|
-    tr.selectable
+    - onclick = transfer.new_record? ? "" : "location.href='#{bank_transfer_path(transfer)}'"
+    tr.selectable onclick="#{onclick}"
+      td= transfer.bank_account.description rescue ""
       td= transfer.transfer_type
       td= transfer.transfered_at.strftime("%Y-%m-%d %H.%M")
-      /!td= transfer.result
       td= transfer.out_bank_account
       td= transfer.in_bank_name
       td= transfer.in_bank_account
@@ -32,20 +26,4 @@ table#list-table
         = number_to_currency transfer.transfer_fee
       td align="right"
         = number_to_currency transfer.error_money
-      /!td= transfer.registered_at.strftime("%Y-%m-%d %H.%M")
-      /!td= transfer.error_code
-      /!td= transfer.transfer_note
-      /!td= transfer.incode
-      /!td= transfer.out_account_note
-      /!td= transfer.in_account_note
       td= transfer.in_person_name
-      - if menu
-        td align="right"
-          - if transfer.transaction
-            = link_to t('bank_transfers.show.to_bank_transaction'), transfer.transaction
-            = " | "
-          = link_to t('common.link.show'), transfer
-          = " | "
-          = link_to t('common.link.edit'), edit_bank_transfer_path(transfer, bank_account_id: transfer.bank_account)
-          = " | "
-          = link_to t('common.link.destroy'), transfer, :method => :delete, :confirm => "Are you sure?"

@@ -3,8 +3,6 @@
 class BankTransaction < ActiveRecord::Base
   belongs_to :bank_account
 
-  include StylesheetParseable
-
   BANK_LIST = [
     ["신한 은행", :shinhan],
     ["기업 은행", :ibk]
@@ -65,8 +63,48 @@ class BankTransaction < ActiveRecord::Base
     }
   }
 
-  set_parser_options SHINHAN
-  set_parser_options IBK
+  include StylesheetParsable
+
+  def self.excel_parser(type)
+    parser = ExcelParser.new
+    parser.class_name BankTransaction
+    if type == :shinhan
+      parser.column SHINHAN[:columns]
+      parser.key SHINHAN[:keys]
+      parser.option :position => SHINHAN[:position]
+    else
+      parser.column IBK[:columns]
+      parser.key IBK[:keys]
+      parser.option :position => IBK[:position]
+    end
+    parser
+  end
+
+  def self.preview_stylesheet(account, type, upload)
+    path = file_path(upload['file'].original_filename)
+    parser = excel_parser(type.to_sym)
+
+    create_file(path, upload['file'])
+    previews = []
+    parser.parse(path) {|class_name, query, params| previews << account.send(class_name.to_s.tableize).build(params)}
+    previews
+  end
+
+  def self.create_with_stylesheet(account, type, name)
+    path = file_path(name)
+    parser = excel_parser(type.to_sym)
+
+    parser.parse(path) do |class_name, query, params|
+      collections = account.send(class_name.to_s.tableize).where(query)
+      if collections.empty?
+        collections.create!(params)
+      else
+        resource = collections.first
+        resource.update_attributes!(params)
+      end
+    end
+    File.delete(path)
+  end
 
   def self.latest
     order("transacted_at DESC")
@@ -99,6 +137,10 @@ class BankTransaction < ActiveRecord::Base
     else
       Time.zone.now
     end
+  end
+
+  def self.verify
+    sum {|transaction| (transaction.in - transaction.out)} == 0
   end
 
 

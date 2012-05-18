@@ -6,12 +6,20 @@
 h2= t('common.title.list')
 table#list-table
   tr
-    th= User.human_attribute_name("name")
-    - @users.each do |user|
+    th= Hrinfo.human_attribute_name("companyno") 
+    th= Hrinfo.human_attribute_name("fullname")
+    th= Commute.human_attribute_name("go")
+    th= Commute.human_attribute_name("leave")
+    - @hrinfos.each do |hrinfo|
+      - user = hrinfo.user
       tr.selectable onclick="location.href='#{commute_path(user)}'"
-        td=h user.name
+        td=h user.hrinfo.companyno
+        td=h user.fullname
+        td= user.commutes(:order => :go).empty? ? "" : user.commutes(:order => :go).last.go
+        td= user.commutes(:order => :go).empty? ? "" : user.commutes(:order => :go).last.leave
 
 br
 
 center
   = will_paginate @users
+

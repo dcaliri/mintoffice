@@ -1,0 +1,7 @@
+= form_for @contact_tag do |f|
+  = f.error_messages
+  p
+    = f.label :name
+    = f.text_field :name
+  p
+    = f.submit

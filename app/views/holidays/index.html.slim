@@ -1,0 +1,19 @@
+- title t('holidays.title')
+
+#show_command
+  = link_to t('common.title.new'), new_holiday_path()
+  = " | "
+  = link_to t('common.title.back'), :root
+
+h2= t("common.title.list")
+p
+  = Date.today.year.to_s + t(".this_years_working_days")
+  = Holiday.working_days_this_year.collect { |m,c| a = t(".month_and_count", m: m, c: c); a = "<u><b>#{a}</b></u>" if m == Date.today.month; a }.join(", ").html_safe
+table#list-table
+  tr
+    th= Holiday.human_attribute_name("theday")
+    th= Holiday.human_attribute_name("dayname")
+    - holidays.each do |holiday|
+      tr.selectable onclick="location.href='#{holiday_path(holiday)}'"
+        td=h holiday.theday
+        td=h holiday.dayname

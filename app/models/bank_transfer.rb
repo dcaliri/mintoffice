@@ -2,6 +2,7 @@
 
 class BankTransfer < ActiveRecord::Base
   belongs_to :bank_account
+  has_one :expense_report, as: :target
 
   self.per_page = 20
 
@@ -75,10 +76,10 @@ class BankTransfer < ActiveRecord::Base
     }
   }
 
-  include NewStylesheetParsable
+  include StylesheetParsable
 
   def self.excel_parser(type)
-    parser = NewExcelParser.new
+    parser = ExcelParser.new
     parser.class_name BankTransfer
     if type == :shinhan
       parser.column SHINHAN[:columns]
@@ -97,7 +98,14 @@ class BankTransfer < ActiveRecord::Base
     parser = excel_parser(type.to_sym)
 
     create_file(path, upload['file'])
-    parser.preview(path)
+    previews = []
+    parser.parse(path) do |class_name, query, params|
+      accounts = BankAccount.where(:number => params[:out_bank_account])
+      unless accounts.empty?
+        previews << accounts.first.send(class_name.to_s.tableize).build(params)
+      end
+    end
+    previews
   end
 
   def self.create_with_stylesheet(type, name)

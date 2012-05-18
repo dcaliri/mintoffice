@@ -2,9 +2,11 @@
 
 class Cardbill < ActiveRecord::Base
   belongs_to :creditcard
+  has_one :expense_report, as: :target
 
   include Historiable
   include Attachmentable
+  include Reportable
 
   def history_info
     {

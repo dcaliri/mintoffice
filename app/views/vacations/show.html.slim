@@ -3,7 +3,7 @@
     = link_to t('vacations.new.link'), [:new, user, :vacation]
     = " | "
   = link_to t('hrinfos.show.title'), hrinfo_path(user.hrinfo)
-h2 ...
+h2= user.fullname
 
 - unless vacations.empty?
   - vacations.each do |vacation|

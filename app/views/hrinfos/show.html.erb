@@ -21,9 +21,11 @@
       <tr><th align="right"><%= Hrinfo.human_attribute_name('retired_on') %>:</th><td><%= @hrinfo.retired_on %></td></tr>
 <% end %>
     </table>
-    <div id="show_command">
-      <%= link_to "주소록 찾기", find_contacts_path(target_class: @hrinfo.class, target: @hrinfo, query: @hrinfo.fullname.gsub(/\s+/, "")), :class => 'popup' %>
-    </div>
+    <% if @user.ingroup?("admin") %>
+      <div id="show_command">
+        <%= link_to "주소록 찾기", find_contacts_path(target_class: @hrinfo.class, target: @hrinfo, query: @hrinfo.fullname.gsub(/\s+/, "")), :class => 'popup' %>
+      </div>
+    <% end %>
 
     <h3><%= t("contacts.show.title")%></h3>
     <ul>
@@ -62,7 +64,7 @@
     <ul>
       <% if @user.ingroup?("admin") || @hrinfo.user == @user %>
         <li><%= link_to t('payments.title'), payment_path(@hrinfo.user) %></li>
-        <li><%= link_to t('vacations.show.link'), [@hrinfo.user, :vacations] %></li>
+        <li><%= link_to t('vacations.show.link'), vacation_path(@hrinfo.user) %></li>
       <% end %>
     </ul>
 <% end %>

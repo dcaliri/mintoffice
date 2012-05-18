@@ -48,6 +48,10 @@ body {
   float: right;
 }
 
+#company {
+  float: right;
+}
+
 #header h1 a.ancestor { font-size: 80%; }
 #header {
   padding: 12px 16px 0px 6px;
@@ -192,6 +196,14 @@ div.flash.notice {
   border-color: #9fcf9f;
   color: #005f00;
 }
+
+div.flash.alert {
+  background: url(../images/true.png) 8px 5px no-repeat;
+  background-color: red;
+  border-color: red;
+  color: white;
+}
+
 .box {
   padding: 6px;
   margin-bottom: 10px;

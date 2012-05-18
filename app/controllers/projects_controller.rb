@@ -1,130 +1,75 @@
 class ProjectsController < ApplicationController
-  # GET /projects
-  # GET /projects.xml
+  expose(:projects) { current_company.projects }
+  expose(:project)
+
   def index
-    status = params[:st] || "inprogress"
-  
-    if status == 'inprogress'
-      @projects = Project.inprogress
+    status = params[:st] || "in_progress"
+    if status == 'in_progress'
+      @projects = projects.inprogress
       @status_me = I18n.t("projects.index.in_progress")
       @status_other = I18n.t("projects.index.completed")
       @st_other = 'completed'
     else
-      @projects = Project.completed
+      @projects = projects.completed
       @status_me = I18n.t("projects.index.completed")
       @status_other = I18n.t("projects.index.in_progress")
-      @st_other = 'inprogress'
-    end
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @projects }
+      @st_other = 'in_progress'
     end
   end
 
-  # GET /projects/1
-  # GET /projects/1.xml
-  def show
-    @project = Project.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @project }
-    end
-  end
-
-  # GET /projects/new
-  # GET /projects/new.xml
-  def new
-    @project = Project.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @project }
-    end
-  end
-
-  # GET /projects/1/edit
-  def edit
-    @project = Project.find(params[:id])
-  end
-
-  # POST /projects
-  # POST /projects.xml
   def create
-    @project = Project.new(params[:project])
-
-    respond_to do |format|
-      if @project.save
-        flash[:notice] = t("common.messages.created", :model => Project.model_name.human )
-        format.html { redirect_to(@project) }
-        format.xml  { render :xml => @project, :status => :created, :location => @project }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @project.errors, :status => :unprocessable_entity }
-      end
-    end
+    project.save!
+    redirect_to project, notice: t("common.messages.created", :model => Project.model_name.human )
+  rescue ActiveRecord::RecordInvalid
+    render 'new'
   end
 
-  # PUT /projects/1
-  # PUT /projects/1.xml
   def update
-    @project = Project.find(params[:id])
-
-    respond_to do |format|
-      if @project.update_attributes(params[:project])
-        flash[:notice] = I18n.t("common.messages.updated", :model => Project.model_name.human)
-        format.html { redirect_to(@project) }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @project.errors, :status => :unprocessable_entity }
-      end
-    end
+    project.update_attributes!(params[:project])
+    redirect_to project, notice: I18n.t("common.messages.updated", :model => Project.model_name.human)
+  rescue ActiveRecord::RecordInvalid
+    render 'edit'
   end
 
-  # DELETE /projects/1
-  # DELETE /projects/1.xml
-  def destroy
-    @project = Project.find(params[:id])
-    @project.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(projects_url) }
-      format.xml  { head :ok }
-    end
-  end
-  
   def completed
-    @project = Project.find(params[:id])
-    @project.ended_on = Time.now
-    @project.save
-    
-    redirect_to :action => "index"
+    project.ended_on = Time.now
+    project.save!
+    redirect_to :projects
   end
-  
-  def del_user
-    @project = Project.find(params[:id])
-    @user = User.find(params[:uid])
-    
-    @project.users.delete(@user)
-    redirect_to :action => "edit", :id => @project
-  end
-  
-  def add_user
-    @project = Project.find(params[:id])
-    @user = User.find_by_name(params[:username])    
 
-    if @user
-      if @project.users.include? @user
+  def assign
+    @this_user = User.find(params[:user_id])
+    @projects = @this_user.projects.inprogress
+  end
+
+  def assign_projects
+    @this_user = User.find(params[:user_id])
+    if projects.assign_projects(@this_user, params[:projects])
+      redirect_to [:assign, @this_user, :projects]
+    else
+      redirect_to [:assign, @this_user, :projects], notice: t('projects.assign.not_hundred')
+    end
+  end
+
+
+  def add_user
+    user = User.find_by_name(params[:username])
+    if user
+      if project.users.include? user
         flash[:notice] = I18n.t "common.messages.already_exist"
       else
-        @project.users << @user
+        project.users << user
       end
     else
       flash[:notice] = I18n.t "common.messages.no_such_user"
     end
 
-    redirect_to :action => "edit", :id => @project
+    redirect_to [:edit, project]
+  end
+
+  def del_user
+    user = User.find(params[:uid])
+    project.users.delete(user)
+    redirect_to [:edit, project]
   end
 end

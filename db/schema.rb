@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120511025102) do
+ActiveRecord::Schema.define(:version => 20120518064514) do
 
   create_table "attachments", :force => true do |t|
     t.string   "title"
@@ -82,6 +82,7 @@ ActiveRecord::Schema.define(:version => 20120511025102) do
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
     t.integer  "attachment_id"
+    t.integer  "company_id"
   end
 
   create_table "card_approved_sources", :force => true do |t|
@@ -149,6 +150,7 @@ ActiveRecord::Schema.define(:version => 20120511025102) do
     t.datetime "updated_at"
     t.integer  "attachment_id"
     t.integer  "creditcard_id"
+    t.boolean  "before_report"
   end
 
   create_table "change_histories", :force => true do |t|
@@ -167,6 +169,12 @@ ActiveRecord::Schema.define(:version => 20120511025102) do
     t.datetime "go"
     t.datetime "leave"
     t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "companies", :force => true do |t|
+    t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -212,6 +220,25 @@ ActiveRecord::Schema.define(:version => 20120511025102) do
     t.string  "email"
   end
 
+  create_table "contact_other_tags", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "contact_other_tags_contact_others", :id => false, :force => true do |t|
+    t.integer "contact_other_tag_id"
+    t.integer "contact_other_id"
+  end
+
+  create_table "contact_others", :force => true do |t|
+    t.integer  "contact_id"
+    t.string   "target"
+    t.string   "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "contact_phone_number_tags", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
@@ -232,13 +259,16 @@ ActiveRecord::Schema.define(:version => 20120511025102) do
   create_table "contacts", :force => true do |t|
     t.string  "firstname"
     t.string  "lastname"
-    t.string  "company"
+    t.string  "company_name"
     t.string  "department"
     t.string  "position"
     t.text    "email_list"
     t.integer "target_id"
     t.string  "target_type"
     t.boolean "migrated_data", :default => false
+    t.integer "owner_id"
+    t.boolean "isprivate",     :default => false
+    t.integer "company_id"
   end
 
   create_table "creditcards", :force => true do |t|
@@ -253,6 +283,13 @@ ActiveRecord::Schema.define(:version => 20120511025102) do
     t.string   "short_name"
   end
 
+  create_table "dayworkers", :force => true do |t|
+    t.string   "juminno"
+    t.integer  "contact_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "document_owners", :force => true do |t|
     t.integer  "document_id"
     t.integer  "user_id"
@@ -265,6 +302,7 @@ ActiveRecord::Schema.define(:version => 20120511025102) do
     t.integer  "project_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "company_id"
   end
 
   create_table "documents_tags", :id => false, :force => true do |t|
@@ -273,6 +311,18 @@ ActiveRecord::Schema.define(:version => 20120511025102) do
   end
 
   add_index "documents_tags", ["document_id", "tag_id"], :name => "index_documents_tags_on_document_id_and_tag_id", :unique => true
+
+  create_table "expense_reports", :force => true do |t|
+    t.integer  "hrinfo_id"
+    t.integer  "target_id"
+    t.string   "target_type"
+    t.integer  "project_id"
+    t.text     "description"
+    t.integer  "amount"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.date     "expensed_at"
+  end
 
   create_table "groups", :force => true do |t|
     t.string   "name"
@@ -283,6 +333,13 @@ ActiveRecord::Schema.define(:version => 20120511025102) do
   create_table "groups_users", :id => false, :force => true do |t|
     t.integer "group_id"
     t.integer "user_id"
+  end
+
+  create_table "holidays", :force => true do |t|
+    t.date     "theday"
+    t.string   "dayname"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "hrinfo_histories", :force => true do |t|
@@ -377,6 +434,20 @@ ActiveRecord::Schema.define(:version => 20120511025102) do
     t.datetime "updated_at"
   end
 
+  create_table "project_assign_infos", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "project_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "project_assign_rates", :force => true do |t|
+    t.integer "project_assign_info_id"
+    t.date    "start"
+    t.date    "finish"
+    t.integer "percentage"
+  end
+
   create_table "projects", :force => true do |t|
     t.text     "name"
     t.date     "started_on"
@@ -385,11 +456,34 @@ ActiveRecord::Schema.define(:version => 20120511025102) do
     t.decimal  "revenue",    :precision => 20, :scale => 0
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "company_id"
   end
 
   create_table "projects_users", :id => false, :force => true do |t|
     t.integer "project_id"
     t.integer "user_id"
+  end
+
+  create_table "report_comments", :force => true do |t|
+    t.integer  "report_id"
+    t.integer  "owner_id"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "report_people", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "report_id"
+    t.integer  "prev_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "reports", :force => true do |t|
+    t.integer "target_id"
+    t.string  "target_type"
+    t.string  "status"
   end
 
   create_table "required_tags", :force => true do |t|

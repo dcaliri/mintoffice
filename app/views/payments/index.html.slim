@@ -8,7 +8,7 @@ h2= t('common.title.list')
 
 table#list-table.payment-table
   tr
-    th= User.human_attribute_name("name")
+    th= Hrinfo.human_attribute_name("fullname")
     - period = Time.zone.parse("#{to.year}-#{to.month}-01 00:00:00")
     - while from < period
     - th_class = (period.month == Time.zone.now.month ? :today : '')
@@ -16,17 +16,29 @@ table#list-table.payment-table
         = period.month.to_s + " " + t('datetime.prompts.month')
       - period -= 1.month
 
-    - @users.each do |user|
+    - @hrinfos.each do |hrinfo|
+      - user = hrinfo.user
       tr.selectable onclick="location.href='#{payment_path(user)}'"
-        td=h user.name
+        td=h hrinfo.fullname
         - period = Time.zone.parse("#{to.year}-#{to.month}-01 00:00:00")
         - while from < period
           - td_class = (period.month == Time.zone.now.month ? :today : '')
-          td[class=td_class]
-            = number_to_currency user.payments.where("date(pay_at) = ?", period.to_date).total
+          td.numrow[class=td_class]
+            = number_to_currency user.payments.where("pay_at BETWEEN ? AND ?", period, period + 1.month - 1.day).total
           - period -= 1.month
+  tr
+    td
+    - period = Time.zone.parse("#{to.year}-#{to.month}-01 00:00:00")
+    - while from < period
+      - td_class = (period.month == Time.zone.now.month ? :today : '')
+      td.numrow[class=td_class]
+        = "-----------------------"
+        br
+        = number_to_currency @payments.where("pay_at BETWEEN ? AND ?", period, period + 1.month - 1.day).total
+      - period -= 1.month
+  
 
 br
 
 center
-  = will_paginate @users
+  = will_paginate @hrinfos
