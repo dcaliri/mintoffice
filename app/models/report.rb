@@ -18,8 +18,8 @@ class Report < ActiveRecord::Base
     I18n.t("activerecord.attributes.report.localized_status.#{status}")
   end
 
-  def report!(hrinfo, comment)
-    next_reporter = hrinfo.reporters.build
+  def report!(user, comment)
+    next_reporter = user.reporters.build
     prev_reporter = self.reporter
     next_reporter.prev = prev_reporter
     self.reporter = next_reporter

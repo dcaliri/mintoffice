@@ -3,14 +3,14 @@
 h3 결제
 p= "상태 - #{report.localize_status}"
 
-- if report.status != :reported and report.reporter.hrinfo == current_user.hrinfo
+- if report.status != :reported and target.access?(current_user)
   - unless current_user.ingroup?(:admin)
     = form_tag :report do
       = hidden_field_tag :target_type, target.class
       = hidden_field_tag :target_id, target.id
       p
         = label_tag :reporter, t('activerecord.attributes.report.reporter')
-        = select_tag :reporter, options_for_select(Hrinfo.all.delete_if{|hrinfo| hrinfo == current_user.hrinfo}.map{|hrinfo| [hrinfo.fullname, hrinfo.id]}, (report.reporter.id if report.reporter))
+        = select_tag :reporter, options_for_select(User.all.delete_if{|user| user == current_user}.map{|user| [user.name, user.id]}, (report.reporter.id if report.reporter))
       p
         = label_tag :comment, t('activerecord.attributes.report.comment')
         = text_field_tag :comment
@@ -37,7 +37,7 @@ p= "상태 - #{report.localize_status}"
         = "["
         = comment.created_at.strftime("%Y.%m.%d %H:%M:%S")
         = "]"
-        = comment.owner.hrinfo.fullname
+        = comment.owner.user.name
         = ": "
         = comment.description
 h3 권한

@@ -3,11 +3,11 @@ module Reportable
 
   def create_report
     report = build_report
-    report.reporter = User.current_user.hrinfo.reporters.build(report_id: report)
+    report.reporter = User.current_user.reporters.build(report_id: report)
   end
 
   def access?(user)
-    report.reporter.hrinfo.user == user
+    report.reporter.user == user
   end
 
   module ClassMethods

@@ -9,8 +9,8 @@ class ReportsController < ApplicationController
     report = report_target.report
     case params[:commit]
     when "상신"
-      hrinfo = Hrinfo.find(params[:reporter]) if params[:reporter]
-      report.report!(hrinfo, params[:comment])
+      user = User.find(params[:reporter]) if params[:reporter]
+      report.report!(user, params[:comment])
       redirect_to redirect_to_index
     when "승인"
       report.approve!(params[:comment])
