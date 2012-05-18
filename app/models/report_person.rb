@@ -8,7 +8,8 @@ class ReportPerson < ActiveRecord::Base
   has_many :comments, class_name: "ReportComment"
 
   def self.access_list(user)
-    where(hrinfo_id: user.hrinfo.id)
+    hrinfo = user.hrinfo
+    where(hrinfo ? {hrinfo_id: hrinfo.id} : "0")
   end
 
   def fullname
