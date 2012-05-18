@@ -8,7 +8,8 @@ class Permission < ActiveRecord::Base
         "hrinfos.index", "hrinfos.show",
         "main.*",
         "users.my", "users.changepw", "users.edit", "users.update",
-        "reports.*"
+        "reports.*",
+        "expense_reports.*", "cardbills.*", "documents.*"
       ]
 
     perm_action = controller_name + "."+ action_name

@@ -139,6 +139,10 @@ class BankTransaction < ActiveRecord::Base
     end
   end
 
+  def self.verify
+    sum {|transaction| (transaction.in - transaction.out)} == 0
+  end
+
 
   def self.group_by_note_and_in
     all.group_by{|transaction| transaction.note }.map do |note, transaction|

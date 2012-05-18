@@ -10,7 +10,7 @@ p= "상태 - #{report.localize_status}"
       = hidden_field_tag :target_id, target.id
       p
         = label_tag :reporter, t('activerecord.attributes.report.reporter')
-        = select_tag :reporter, options_for_select(User.all.delete_if{|user| user == current_user}.map{|user| [user.name, user.id]}, (report.reporter.id if report.reporter))
+        = select_tag :reporter, options_for_select(User.all.delete_if{|user| user == current_user or user.disabled?}.map{|user| [user.fullname, user.id]}, (report.reporter.id if report.reporter))
       p
         = label_tag :comment, t('activerecord.attributes.report.comment')
         = text_field_tag :comment

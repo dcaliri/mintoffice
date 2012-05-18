@@ -112,6 +112,7 @@ Mintoffice::Application.routes.draw do
 
   resources :bank_transactions do
     collection do
+      get 'verify'
       get 'excel'
       post 'preview'
       post 'excel', :action => 'upload'
