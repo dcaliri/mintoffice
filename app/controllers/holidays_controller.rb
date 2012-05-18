@@ -1,5 +1,5 @@
 class HolidaysController < ApplicationController
-  expose(:holidays) { Holiday.all }
+  expose(:holidays) { Holiday.order("theday DESC") }
   expose(:holiday)
   # def redirect_unless_permission
   # end
