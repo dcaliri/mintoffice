@@ -321,6 +321,7 @@ ko:
                 project_id: 프로젝트
                 description: 내역
                 amount: 금액
+                expensed_at: 지출 날짜
             holiday:
                 theday: 휴일날짜
                 dayname: 휴일명목
