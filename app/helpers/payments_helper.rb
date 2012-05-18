@@ -33,7 +33,7 @@ module PaymentsHelper
                     1.0
                    end
 
-      yield before, after, amount * working_day
+      yield before, after, (amount * working_day).to_i
 
       before = after + 1.day
     end
