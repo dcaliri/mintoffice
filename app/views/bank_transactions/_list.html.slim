@@ -13,7 +13,7 @@ table#list-table
   - bank_transactions.each do |transaction|
     - onclick = menu ? "location.href='#{bank_transaction_path(transaction)}'" : ""
     tr.selectable onclick="#{onclick}"
-      td= transaction.bank_account.description
+      td= transaction.bank_account.description rescue ""
       - if transaction.transacted_at
         td= transaction.transacted_at.strftime("%Y-%m-%d %H.%M")
       - else
