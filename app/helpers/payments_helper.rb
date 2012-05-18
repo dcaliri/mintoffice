@@ -4,8 +4,8 @@ module PaymentsHelper
   end
 
   def payment_step
-    join_at = DateTime.parse_by_params(params[:payments], :join_at).to_time
-    pay_end = DateTime.parse_by_params(params[:payments], :pay_end).to_time
+    join_at = DateTime.parse_by_params(params[:payments], :join_at).to_date
+    pay_end = DateTime.parse_by_params(params[:payments], :pay_end).to_date
     pay_at = params[:payments][:pay_at].to_i
     amount = params[:payments][:amount].to_i
 
@@ -25,14 +25,15 @@ module PaymentsHelper
 
       after = pay_end.dup if after > pay_end
 
-      percentage = ((after - before) / 1.day)
-      percentage = if percentage < 27
-                    Holiday.working_days(before.to_date, after.to_date) / 30.0
+      working_day = Holiday.working_days(before, after)
+      working_month = Holiday.working_days(after - 1.month + 1.day, after)
+      working_day = if working_day < working_month
+                    working_day / working_month.to_f
                    else
                     1.0
                    end
 
-      yield before, after, amount * percentage
+      yield before, after, amount * working_day
 
       before = after + 1.day
     end
