@@ -169,6 +169,7 @@ ko:
                 promissory_check_amount: 수표 어음금액
                 cms_code: CMS 코드
             bank_transfer:
+                account: 은행계좌
                 transfer_type: 이체구분
                 transfered_at: 거래일시
                 result: 처리결과
