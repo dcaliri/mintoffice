@@ -25,6 +25,9 @@ h2 지출내역서 상세정보
       th= expense_report.class.human_attribute_name(:description)
       td= expense_report.description
     tr
+      th= expense_report.class.human_attribute_name(:expensed_at)
+      td= expense_report.expensed_at
+    tr
       th= expense_report.class.human_attribute_name(:amount)
       td= number_to_currency expense_report.amount
 

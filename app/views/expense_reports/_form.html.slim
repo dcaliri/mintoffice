@@ -17,6 +17,9 @@ h2= t("common.title.#{action_name}")
       = f.label :description
       = f.text_area :description
     p
+      = f.label :expensed_at
+      = f.date_select :expensed_at, order: [:year, :month, :day]
+    p
       = f.label :amount
       = f.text_field :amount
     p
