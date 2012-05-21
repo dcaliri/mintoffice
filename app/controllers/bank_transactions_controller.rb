@@ -11,8 +11,7 @@ class BankTransactionsController < ApplicationController
   end
 
   def verify
-    @bank_transactions = bank_account ? bank_account.bank_transactions : BankTransaction
-    @bank_transactions = @bank_transactions.latest
+    @bank_transactions = bank_account.bank_transactions.latest
   end
 
   def total
