@@ -1,0 +1,55 @@
+table
+  tr
+    th= BankTransfer.human_attribute_name(:transfer_type)
+    td= target.transfer_type
+  tr
+    th= BankTransfer.human_attribute_name(:transfered_at)
+    td= target.transfered_at.strftime("%Y.%m.%d %H:%M")
+  tr
+    th= BankTransfer.human_attribute_name(:result)
+    td= target.result
+  tr
+    th= BankTransfer.human_attribute_name(:out_bank_account)
+    td= target.out_bank_account
+  tr
+    th= BankTransfer.human_attribute_name(:in_bank_name)
+    td= target.in_bank_name
+  tr
+    th= BankTransfer.human_attribute_name(:in_bank_account)
+    td= target.in_bank_account
+  tr
+    th= BankTransfer.human_attribute_name(:money)
+    td= number_to_currency target.money
+  tr
+    th= BankTransfer.human_attribute_name(:transfer_fee)
+    td= number_to_currency target.transfer_fee
+  tr
+    th= BankTransfer.human_attribute_name(:error_money)
+    td= number_to_currency target.error_money
+  tr
+    th= BankTransfer.human_attribute_name(:registered_at)
+    td= number_to_currency target.transfer_fee
+  tr
+    th= BankTransfer.human_attribute_name(:error_code)
+    td= target.error_code
+  tr
+    th= BankTransfer.human_attribute_name(:transfer_note)
+    td= target.transfer_note
+  tr
+    th= BankTransfer.human_attribute_name(:incode)
+    td= target.incode
+  tr
+    th= BankTransfer.human_attribute_name(:out_account_note)
+    td= target.out_account_note
+  tr
+    th= BankTransfer.human_attribute_name(:in_account_note)
+    td= target.in_account_note
+  tr
+    th= BankTransfer.human_attribute_name(:in_person_name)
+    td= target.in_person_name
+  tr
+    th= BankTransfer.human_attribute_name(:cms_code)
+    td= target.cms_code
+  tr
+    th= BankTransfer.human_attribute_name(:currency_code)
+    td= target.currency_code
