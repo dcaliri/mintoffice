@@ -18,6 +18,11 @@ class Payment < ActiveRecord::Base
     sum{|payment| payment.amount}
   end
 
+  def self.by_period(period)
+#    by_month(period.month, year: period.year, field: :pay_at)
+    where(pay_at: period.all_month)
+  end
+
   def self.basic_payment(payments)
     total = payments["total"].to_i
     after = payments["after"]
@@ -26,7 +31,8 @@ class Payment < ActiveRecord::Base
 
   def self.create_yearly!(payments)
     payments.each do |after|
-      pay_at = DateTime.parse(after[0])
+#      pay_at = DateTime.parse(after[0])
+      pay_at = Time.zone.parse(after[0])
 
       ["default", "bonus"].each do |type|
         pay_info = after[1][type]
