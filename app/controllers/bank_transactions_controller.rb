@@ -11,12 +11,10 @@ class BankTransactionsController < ApplicationController
   end
 
   def verify
-    transactions = bank_account ? bank_account.bank_transactions : BankTransaction
-    if transactions.verify
-      redirect_to :bank_transactions, notice: "금액이 맞습니다"
-    else
-      redirect_to :bank_transactions, alert: "금액이 맞지 않습니다"
-    end
+    @bank_transactions = bank_account ? bank_account.bank_transactions : BankTransaction
+    @bank_transactions = @bank_transactions.latest
+#    @latest_transaction = @bank_transactions.first
+    render :stream => true
   end
 
   def total
