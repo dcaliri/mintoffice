@@ -31,7 +31,6 @@
 
 <%= render 'detail', target: @cardbill %>
 
-  <%= render 'reports/info', target: @cardbill %>
 <% if @cardbill.status == 'verified' %>
   <%= render 'reports/info', target: @cardbill %>
 <% else %>
