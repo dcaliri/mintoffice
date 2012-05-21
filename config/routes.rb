@@ -18,7 +18,8 @@ Mintoffice::Application.routes.draw do
       post 'excel', :action => 'upload'
     end
   end
-
+  resources :dayworkers
+  
   resources :card_used_sources
   resources :card_approved_sources
 
