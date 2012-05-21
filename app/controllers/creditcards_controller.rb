@@ -8,6 +8,8 @@ class CreditcardsController < ApplicationController
   # GET /creditcards.xml
   def preview
     @collection = Creditcard.preview_stylesheet(params[:card_type], params[:upload])
+  rescue => error
+    redirect_to [:excel, :creditcards], alert: error.message
   end
 
   def upload
