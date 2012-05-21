@@ -283,6 +283,13 @@ ActiveRecord::Schema.define(:version => 20120518064514) do
     t.string   "short_name"
   end
 
+  create_table "dayworkers", :force => true do |t|
+    t.string   "juminno"
+    t.integer  "contact_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "document_owners", :force => true do |t|
     t.integer  "document_id"
     t.integer  "user_id"

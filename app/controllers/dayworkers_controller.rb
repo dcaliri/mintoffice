@@ -28,6 +28,17 @@ class DayworkersController < ApplicationController
   #   redirect_to [user, vacation]
   # end
   
-  expose (:dayworkers)
+  expose (:dayworkers) { Dayworker.all }
+  expose (:dayworker)
+  # 
+  def create
+    dayworker.save!
+    redirect_to dayworker
+  end
+  
+  def update
+    dayworker.save!
+    redirect_to dayworker
+  end
   
 end
