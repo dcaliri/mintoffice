@@ -102,7 +102,7 @@ class Cardbill < ActiveRecord::Base
     elsif mismatch?
       "misnatch-sources"
     else
-      ""
+      "verified"
     end
   end
 

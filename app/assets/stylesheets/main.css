@@ -223,6 +223,11 @@ div.flash.alert {
   margin-left: 20px;
 }
 
+#reference {
+  float: left;
+  margin-left: 100px;
+}
+
 #show_command {
   float: right;
 }

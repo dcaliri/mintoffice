@@ -3,24 +3,30 @@
 
 h2= t("common.title.#{action_name}")
 
-= form_for expense_report, html: {class: "tabular"} do |f|
-  = f.hidden_field :target_type, value: expense_report.target_type || params[:target_type]
-  = f.hidden_field :target_id, value:  expense_report.target_id || params[:target_id]
-  .box
-    p
-      = f.label :hrinfo_id
-      = f.select :hrinfo_id, options_for_select(Hrinfo.all.map{|info| [info.fullname, info.id]})
-    p
-      = f.label :project_id
-      = f.select :project_id, options_for_select(Project.inprogress.assign_list(current_user).map{|project| [project.name, project.id]}, expense_report.project_id)
-    p
-      = f.label :description
-      = f.text_area :description
-    p
-      = f.label :expensed_at
-      = f.date_select :expensed_at, order: [:year, :month, :day]
-    p
-      = f.label :amount
-      = f.text_field :amount
-    p
-      = f.submit
+- target_type = expense_report.target_type || params[:target_type]
+- target_id = expense_report.target_id || params[:target_id]
+
+.box
+  #descr
+    = form_for expense_report, html: {class: "tabular"} do |f|
+      = f.hidden_field :target_type, value: target_type
+      = f.hidden_field :target_id, value: target_id
+      p
+        = f.label :project_id
+        = f.select :project_id, options_for_select(Project.inprogress.assign_list(current_user).map{|project| [project.name, project.id]}, expense_report.project_id)
+      p
+        = f.label :description
+        = f.text_area :description
+      p
+        = f.label :expensed_at
+        - expense_report.expensed_at = params[:expensed_at] if params[:expensed_at]
+        = f.date_select :expensed_at, order: [:year, :month, :day]
+      p
+        = f.label :amount
+        = f.text_field :amount, value: expense_report.amount || params[:amount].to_i
+      p
+        = f.submit
+  #reference
+    - target = target_type.constantize.find(target_id)
+    h3= "#{target.class.model_name.human} 상세정보"
+    = render "#{target_type.tableize}/detail", target: target
