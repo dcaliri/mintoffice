@@ -13,8 +13,6 @@ class BankTransactionsController < ApplicationController
   def verify
     @bank_transactions = bank_account ? bank_account.bank_transactions : BankTransaction
     @bank_transactions = @bank_transactions.latest
-#    @latest_transaction = @bank_transactions.first
-    render :stream => true
   end
 
   def total
