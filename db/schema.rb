@@ -12,7 +12,6 @@
 # It's strongly recommended to check this file into your version control system.
 
 ActiveRecord::Schema.define(:version => 20120521083212) do
-
   create_table "attachments", :force => true do |t|
     t.string   "title"
     t.string   "comments"
@@ -285,6 +284,17 @@ ActiveRecord::Schema.define(:version => 20120521083212) do
     t.string   "money_type"
     t.string   "money_type_info"
     t.string   "money_dollar"
+  end
+
+  create_table "dayworker_taxes", :force => true do |t|
+    t.integer  "dayworker_id"
+    t.date     "apply_day"
+    t.string   "reason"
+    t.decimal  "amount",       :precision => 10, :scale => 2
+    t.decimal  "tax_amount",   :precision => 10, :scale => 2
+    t.decimal  "pay_amount",   :precision => 10, :scale => 2
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
   end
 
   create_table "dayworkers", :force => true do |t|

@@ -1,4 +1,4 @@
-class DayworkersController < ApplicationController
+class DayworkerTaxesController < ApplicationController
   # 
   # before_filter :redirect_unless_admin, :only => :index
   # 
@@ -28,17 +28,16 @@ class DayworkersController < ApplicationController
   #   redirect_to [user, vacation]
   # end
   
-  expose (:dayworkers) { Dayworker.all }
-  expose (:dayworker)
+  expose (:dayworker_taxes) { DayworkerTax.all }
+  expose (:dayworker_tax)
   # 
   def create
-    dayworker.save!
-    redirect_to dayworker
+    dayworker_tax.save!
+    redirect_to dayworker_tax
   end
   
   def update
-    dayworker.save!
-    redirect_to dayworker
+    dayworker_tax.save!
+    redirect_to dayworker_tax
     end
-  
 end

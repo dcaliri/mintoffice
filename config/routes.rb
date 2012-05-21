@@ -19,7 +19,7 @@ Mintoffice::Application.routes.draw do
     end
   end
   resources :dayworkers
-
+  resources :dayworker_taxes
   resources :card_used_sources
   resources :card_approved_sources
 
