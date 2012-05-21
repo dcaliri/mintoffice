@@ -19,8 +19,7 @@ class Payment < ActiveRecord::Base
   end
 
   def self.by_period(period)
-#    by_month(period.month, year: period.year, field: :pay_at)
-    where(pay_at: period.all_month)
+    where(pay_at: (period..period.end_of_month))
   end
 
   def self.basic_payment(payments)
