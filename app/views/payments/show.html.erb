@@ -3,7 +3,7 @@
   <% if @user.ingroup?(:admin) %>
     <%= link_to t('pay_schedules.new.link'), [:yearly, user, :payments] %>
     |
-    <%= link_to t('bonuses.new.link'), [:new, user, :payment] %>
+    <%= link_to t('bonuses.new.link'), [:bonus, user, :payments] %>
     |
   <% end %>
   <%= link_to t('hrinfos.show.title'), hrinfo_path(user.hrinfo) %>

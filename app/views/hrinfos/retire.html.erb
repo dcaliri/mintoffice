@@ -3,7 +3,8 @@
   <%= link_to t('common.title.back'), :action => :show, :id => @hrinfo %>
 </div>
 <h2><%= t('.retire_date') %></h2>
-<%= form_for @hrinfo, :html => {:class => "tabular"} do |f| -%>
+
+<%= form_for @hrinfo, url: try_retired_path(@hrinfo), :html => {:class => "tabular"} do |f| -%>
   <div class="box">
     <p>
       <%= f.label :retired_on, Hrinfo.human_attribute_name("retired_on") %>

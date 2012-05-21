@@ -780,6 +780,12 @@ ko:
         retire:
             title: 퇴직 처리
             retire_date: 퇴직일자
+        try_retired:
+            title: 퇴직 처리
+            retire_date: 연봉 일할 정산
+            retired_at: 기간
+            before_retire: 이전 급여
+            after_retire: 정산 급여
         new:
             title: 새로운 인사정보 입력
             users_blank: 인사정보와 연결할 사용자 계정이 없습니다.
@@ -817,11 +823,13 @@ ko:
             title: 명함 내용 보기
     payments:
         new:
-            title: 새로운 특별상여금 입력
+            title: 연봉 입력
         yearly:
             title: 새로운 기본급 입력
         edit:
-            title: 특별상여금 수정
+            title: 연봉 수정
+        bonus:
+            title: 특별상여금 작성
         title: 연봉 관리
     payrolls:
         title: 급여대장

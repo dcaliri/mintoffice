@@ -38,15 +38,16 @@ class HrinfosController < ApplicationController
     @hrinfo = Hrinfo.find(params[:id])
   end
 
-  def retire_save
+  def try_retired
     @hrinfo = Hrinfo.find(params[:id])
+    @hrinfo.retired_on = Date.parse_by_params(params[:hrinfo], :retired_on)
+  end
 
-    if @hrinfo.save
-      flash[:notice] = 'retired.'
-      format.html { redirect_to(@hrinfo) }
-    else
-      format.html { render :action => "retire" }
-    end
+  def retired
+    @hrinfo = Hrinfo.find(params[:id])
+    @hrinfo.retired_on = params[:hrinfo][:retired_on]
+    @hrinfo.retire!
+    redirect_to @hrinfo, notice: I18n.t("common.messages.updated", :model => Hrinfo.model_name.human)
   end
 
   # GET /hrinfos/1
