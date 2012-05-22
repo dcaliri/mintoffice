@@ -22,7 +22,10 @@ Mintoffice::Application.routes.draw do
   resources :dayworker_taxes
   resources :card_used_sources
   resources :card_approved_sources do
-    post 'cardbills/generate', on: :collection, as: :generate_cardbills
+    collection do
+      post 'cardbills/generate', controller: :card_approved_sources, action: :generate_cardbills, as: :generate_cardbills
+      get 'cardbills/empty', controller: :card_approved_sources, action: :find_empty_cardbills, as: :find_empty_cardbills
+    end
   end
 
   resources :documents
@@ -30,6 +33,7 @@ Mintoffice::Application.routes.draw do
   resources :pettycashes
   resources :permissions
   resources :cardbills
+
   resources :payroll_categories
   resources :payrolls do
     resources :payroll_items, path: "items"
@@ -37,8 +41,6 @@ Mintoffice::Application.routes.draw do
   resources :payroll_items
   resources :holidays
 
-#  match '/hrinfos/retire/:id', :controller => "hrinfos", :action => "retire", :conditions => {:method => :get}
-#  match '/hrinfos/retire/:id', :controller => "hrinfos", :action => "retire_save", :conditions => {:method => :post}
   post '/hrinfos/retired/:id', :controller => "hrinfos", :action => "retired", as: :retired
   post '/hrinfos/try_retired/:id', :controller => "hrinfos", :action => "try_retired", as: :try_retired
 
