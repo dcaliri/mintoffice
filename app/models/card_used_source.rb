@@ -9,6 +9,11 @@ class CardUsedSource < ActiveRecord::Base
   end
 
   class << self
+    def search(text)
+      text = "%#{text}%"
+      where('bank_name like ? OR card_holder_name like ? OR approve_no like ? OR money_krw like ? OR store_name like ?', text, text, text, text, text)
+    end
+
     def group_by_name_anx_tax
       all.group_by{|cards| cards.bank_name }.map do |name, cards|
         {name: name, tax: cards.sum{|card| card.tax}}

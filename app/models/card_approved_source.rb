@@ -8,6 +8,13 @@ class CardApprovedSource < ActiveRecord::Base
     approve_no.strip!
   end
 
+  class << self
+    def search(text)
+      text = "%#{text}%"
+      where('approve_no like ? OR card_no like ? OR card_holder_name like ? OR store_name like ? OR money like ?', text, text, text, text, text)
+    end
+  end
+
   def cardbill
     collection = Cardbill.where(approveno: approve_no)
     collection.first unless collection.empty?
@@ -22,7 +29,6 @@ class CardApprovedSource < ActiveRecord::Base
     attribute = read_attribute(:canceled_at)
     attribute.blank? ? "" : attribute.strftime("%Y %m.%d")
   end
-
 
   def will_be_paied_at_to_s
     attribute = read_attribute(:will_be_paied_at)
