@@ -12,10 +12,9 @@ table#list-table
     th= CardApprovedSource.human_attribute_name(:canceled_at)
     th= CardApprovedSource.human_attribute_name(:status)
     th= CardApprovedSource.human_attribute_name(:will_be_paied_at)
-    - if menu
-      th= t('common.menu')
   - card_approved_sources.each do |source|
-    tr
+    - onclick = source.new_record? ? "" : "location.href='#{card_approved_source_path(source)}'"
+    tr.selectable onclick="#{onclick}"
       td= source.used_at_to_s
       td= source.approve_no
       td= source.card_no
@@ -28,10 +27,3 @@ table#list-table
       td= source.canceled_at_to_s
       td= source.status
       td= source.will_be_paied_at_to_s
-      - if menu
-        td align="right"
-          = link_to t('common.link.show'), source
-          = " | "
-          = link_to t('common.link.edit'), edit_card_approved_source_path(source, creditcard_id: source.creditcard)
-          = " | "
-          = link_to t('common.link.destroy'), source, :method => :delete, :confirm => "Are you sure?"
