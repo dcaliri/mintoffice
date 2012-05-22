@@ -13,13 +13,6 @@ class CardApprovedSourcesController < ApplicationController
     redirect_to card_approved_source
   end
 
-  def cardbills
-    CardApprovedSource.generate_cardbill
-    redirect_to :card_approved_sources, notice: "Successfully generate cardbills"
-  rescue => error
-    redirect_to :card_approved_sources, alert: error.message
-  end
-
   def update
     card_approved_source.creditcard = creditcard
     card_approved_source.save!
@@ -29,5 +22,14 @@ class CardApprovedSourcesController < ApplicationController
   def destroy
     card_approved_source.destroy
     redirect_to :card_approved_sources
+  end
+
+  def generate_cardbills
+    CardApprovedSource.generate_cardbill
+    redirect_to :card_approved_sources, notice: "Successfully generate cardbills"
+  end
+
+  def find_empty_cardbills
+    @card_approved_sources = CardApprovedSource.find_empty_cardbill.latest.page(params[:page])
   end
 end

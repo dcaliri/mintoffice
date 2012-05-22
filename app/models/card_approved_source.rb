@@ -14,6 +14,14 @@ class CardApprovedSource < ActiveRecord::Base
       where('approve_no like ? OR card_no like ? OR card_holder_name like ? OR store_name like ? OR money like ?', text, text, text, text, text)
     end
 
+    def find_empty_cardbill
+      if Cardbill.all.empty?
+        where("")
+      else
+        where('approve_no not in (?)', Cardbill.all.map{|cardbill| cardbill.approveno})
+      end
+    end
+
     def generate_cardbill
       find_each do |approved_source|
         next if Cardbill.exists?(approveno: approved_source.approve_no)
@@ -22,7 +30,7 @@ class CardApprovedSource < ActiveRecord::Base
         next if used_sources.empty?
         used_source = used_sources.first
 
-        approved_source.creditcard.cardbills.create!(
+        approved_source.creditcard.cardbills.create(
           amount: used_source.price,
           servicecharge: used_source.tax,
           vat: used_source.tip,
@@ -30,6 +38,7 @@ class CardApprovedSource < ActiveRecord::Base
           totalamount: approved_source.money,
           transdate: approved_source.used_at,
           storename: approved_source.store_name,
+          storeaddr: used_source.store_addr1 + " " + used_source.store_addr2,
         )
       end
     end
