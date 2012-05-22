@@ -52,9 +52,7 @@ table tr td ul {
         <% end %>
       </ul>
       <ul>
-        <% if @user.permission.any? {|perm| perm.name == 'cardbills'}  %>
-          <li><%= link_to t("cardbills.index.title"), :controller => "cardbills" %></li>
-        <% end %>
+        <li><%= link_to t("cardbills.index.title"), :controller => "cardbills" %></li>
       </ul>
       <ul>
         <% if @user.permission.any? {|perm| perm.name == 'bank_accounts'}  %>

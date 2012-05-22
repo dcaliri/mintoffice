@@ -14,6 +14,10 @@ class Report < ActiveRecord::Base
     read_attribute(:status).to_sym
   end
 
+  def access?(user)
+    self.reporter.user == user
+  end
+
   def localize_status
     I18n.t("activerecord.attributes.report.localized_status.#{status}")
   end
@@ -34,18 +38,24 @@ class Report < ActiveRecord::Base
     self.status = :reported
     self.comments.build(owner: self.reporter, description: "#{reporter.fullname}님이 결제를 승인하였습니다")
     self.comments.build(owner: self.reporter, description: comment) unless comment.blank?
+    self.reporter.save!
     save!
   end
 
   def rollback!(comment)
+    self.status = :reporting
     prev_reporter = self.reporter
-    self.reporter = prev_reporter.prev
+    self.reporter = prev_reporter.prev if prev_reporter.prev
     self.comments.build(owner: prev_reporter, description: "#{prev_reporter.fullname}님이 결제를 반려하였습니다")
     self.comments.build(owner: prev_reporter, description: comment) unless comment.blank?
     save!
   end
 
   def rollback?
-    self.reporter.prev.nil? == false
+    reported? || self.reporter.prev.nil? == false
+  end
+
+  def reported?
+    self.status == :reported
   end
 end

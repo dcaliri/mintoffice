@@ -1,0 +1,42 @@
+- form_type = if dayworker_tax.new_record? then 'new' else 'edit' end
+
+#show_command
+  = link_to t('common.title.back'), dayworker_taxes_path
+
+h2= t("common.title.#{form_type}")
+
+= form_for dayworker_tax, html: {multipart: true, class: "tabular"} do |f|
+  = f.error_messages
+  .box
+    p
+      = f.label :dayworker
+      = f.collection_select(:dayworker_id, Dayworker.all, :id, :juminno)
+    p
+      = f.label :apply_day
+      = f.date_select :apply_day,  :order => [:year, :month, :day], :default => Time.zone.now
+    p
+      = f.label :reason
+      = f.text_field :reason
+    p
+      = f.label :amount
+      = f.text_field :amount
+    p
+      = f.label :tax_amount
+      = f.text_field :tax_amount
+    p
+      = f.label :pay_amount
+      = f.text_field :pay_amount
+  = f.submit t("dayworkers.#{form_type}.submit")
+  
+== content_for :javascript do
+  script type="text/javascript"
+    | $(function() {
+    | var dtamount = $('#dayworker_tax_amount');
+    | var tax_amount = $('#dayworker_tax_tax_amount');
+    | var pay_amount = $('#dayworker_tax_pay_amount');
+    | var calcTax = function () {
+    |   tax_amount.val(Math.round(dtamount.val() * 0.033));
+    |   pay_amount.val(Math.round(dtamount.val() * 0.967));
+    | };
+    | dtamount.keyup(calcTax);
+    | });

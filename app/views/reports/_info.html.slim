@@ -3,7 +3,7 @@
 h3 결제
 p= "상태 - #{report.localize_status}"
 
-- if report.status != :reported and target.access?(current_user)
+- if target.access?(current_user)
   - unless current_user.ingroup?(:admin)
     = form_tag :report do
       = hidden_field_tag :target_type, target.class
@@ -28,7 +28,8 @@ p= "상태 - #{report.localize_status}"
       p
         - if report.rollback?
           = submit_tag "반려"
-        = submit_tag "승인"
+        - unless report.reported?
+          = submit_tag "승인"
 
 - unless report.comments.empty?
   .box

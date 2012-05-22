@@ -1,0 +1,24 @@
+- title t('dayworker_taxes.title')
+
+#show_command
+  = link_to t('common.title.new'), new_dayworker_taxis_path
+  = ' | '
+  = link_to t('common.title.back'), :root
+
+h2= t('common.title.list')
+table#list-table
+  tr
+    th= Dayworker.human_attribute_name('juminno')
+    th= DayworkerTax.human_attribute_name('apply_day')
+    th= DayworkerTax.human_attribute_name('reason')
+    th= DayworkerTax.human_attribute_name('amount')
+    th= DayworkerTax.human_attribute_name('tax_amount')
+    th= DayworkerTax.human_attribute_name('pay_amount')
+    - dayworker_taxes.each do |dayworker_tax|
+      tr.selectable onclick="location.href='#{dayworker_taxis_path(dayworker_tax)}'"
+        td=h dayworker_tax.dayworker.juminno
+        td=h dayworker_tax.apply_day
+        td=h dayworker_tax.reason
+        td.numrow= number_to_currency dayworker_tax.amount
+        td.numrow= number_to_currency dayworker_tax.tax_amount
+        td.numrow= number_to_currency dayworker_tax.pay_amount

@@ -2,14 +2,16 @@
   <%= link_to t('common.title.back'), payment_path(user) %>
 </div>
 
-<h2><%= t("common.title.#{action_name}") %></h2>
+<h2><%= t("payments.#{action_name}.title") %></h2>
+
 
 <%= form_for [user, payment] do |f| %>
    <%= f.error_messages %>
+   <%= f.hidden_field :payment_type %>
   <div class="box">
     <p>
       <%= f.label :pay_at %>
-      <%= f.date_select :pay_at, :order => [:year, :month] %>
+      <%= f.date_select :pay_at, :order => [:year, :month, :day] %>
     </p>
     <p>
       <%= f.label :amount %>
