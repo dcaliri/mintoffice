@@ -13,6 +13,13 @@ class CardApprovedSourcesController < ApplicationController
     redirect_to card_approved_source
   end
 
+  def cardbills
+    CardApprovedSource.generate_cardbill
+    redirect_to :card_approved_sources, notice: "Successfully generate cardbills"
+  rescue => error
+    redirect_to :card_approved_sources, alert: error.message
+  end
+
   def update
     card_approved_source.creditcard = creditcard
     card_approved_source.save!

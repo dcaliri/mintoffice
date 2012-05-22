@@ -601,6 +601,8 @@ ko:
             link: 승인내역 올리기
         edit:
             title: 승인내역 수정하기
+        generate_cardbill:
+            link: 신용카드 영수증 생성
         title: 카드승인내역
     card_used_sources:
         index:

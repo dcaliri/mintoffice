@@ -21,7 +21,9 @@ Mintoffice::Application.routes.draw do
   resources :dayworkers
   resources :dayworker_taxes
   resources :card_used_sources
-  resources :card_approved_sources
+  resources :card_approved_sources do
+    post 'cardbills/generate', on: :collection, as: :generate_cardbills
+  end
 
   resources :documents
   resources :projects, except: [:destroy]
