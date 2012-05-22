@@ -376,8 +376,8 @@ ko:
                 note: 내역
                 amount: 금액
                 pay_at: 지급일
-                pay_start: 지급 시작일
-                pay_finish: 지금 종료일
+                pay_start: 지급 기준 시작일
+                pay_finish: 지금 기준 종료일
                 total: 총액
                 after: "%{month}개월 후"
             pettycash:
