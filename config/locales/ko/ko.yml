@@ -342,6 +342,7 @@ ko:
                 firstname: 이름
                 lastname: 성
                 address: 주소
+                payment_day: 지급일
                 position: 직급
                 fullname: 이름
                 username: 계정
@@ -372,7 +373,7 @@ ko:
                 basic_pay: 기본급
             payment:
                 join_at: 입사일
-                pay_at: 지급월
+                pay_at: 지급일
                 note: 내역
                 amount: 금액
                 pay_start: 지급 시작일

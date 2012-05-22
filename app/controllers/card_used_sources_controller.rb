@@ -4,7 +4,7 @@ class CardUsedSourcesController < ApplicationController
 
   def index
     approvd_source = creditcard.nil? ? CardUsedSource : creditcard.card_used_sources
-    @card_used_sources = approvd_source.latest.page(params[:page])
+    @card_used_sources = approvd_source.latest.search(params[:query]).page(params[:page])
   end
 
   def create

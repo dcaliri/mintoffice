@@ -26,13 +26,21 @@ class Payment < ActiveRecord::Base
     where('pay_at > ?', period)
   end
 
-  def retired_amount(from)
+  def retired_amount(from, basic_payment_date=20)
     remain = (pay_at - from).day
     if payment_type != 'default' or remain > 1.month
       0
     else
-      working_day = Holiday.working_days(from, pay_at)
-      (latest_default_payment(from) / working_day.to_f).to_i
+      if pay_at.day > basic_payment_date
+        payment_from = pay_at.change(day: basic_payment_date)
+      else
+        payment_from = pay_at.change(day: basic_payment_date) - 1.month
+      end
+      payment_to = payment_from + 1.month - 1.day
+
+      working_day = Holiday.working_days(payment_from, from)
+      working_month = Holiday.working_days(payment_from, payment_to)
+      ((latest_default_payment(from) / working_month.to_f) * working_day.to_f).to_i
     end
   end
 
