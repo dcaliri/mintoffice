@@ -10,4 +10,5 @@
 # end
 ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular 'bonus', 'bonuses'
+  inflect.plural /tax/i, 'taxes'
 end

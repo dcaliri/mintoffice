@@ -119,6 +119,8 @@ ko:
             contact_other: 기타
             contact_other_tag: 기타 대상
             creditcard: 신용카드
+            dayworker: 사업소득원천징수 징수자
+            dayworker_tax: 사업소득원천징수
             document: 문서
             expense_report: 지출 내역서
             holiday: 휴일관리
@@ -308,6 +310,14 @@ ko:
                 issuer: 발급사
                 cardholder: 소유자이름
                 total: 총 사용금액
+            dayworker:
+                juminno: 주민등록번호
+            dayworker_tax:
+                reason: 사유
+                apply_day: 지급일자
+                amount: 금액
+                tax_amount: 세액
+                pay_amount: 최종지급금액
             document:
                 title: 문서제목
                 project: 프로젝트
@@ -663,12 +673,15 @@ ko:
             total: 총합
             excel: 엑셀 파일 올리기
             upload: 업로드하기
+            update: 수정
         link:
             show: 내용 보기
             logout: "로그아웃"
             edit: "수정"
             destroy: "삭제"
             download: "다운로드"
+        upload:
+            empty: 업로드한 파일이 비어있습니다.
         menu: 메뉴
         total: 합계
     commutes:
@@ -737,6 +750,14 @@ ko:
             type: 내역명
             file: 엑셀 파일
             submit: 엑셀 파일 올리기
+    dayworkers:
+        title: 사업소득원천징수 징수자 관리
+        new:
+            submit: 생성
+        edit:
+            submit: 수정
+    dayworker_taxes:
+        title: 사업소득원천징수 관리
     documents:
         index:
             title: "문서 관리"
@@ -768,6 +789,12 @@ ko:
         retire:
             title: 퇴직 처리
             retire_date: 퇴직일자
+        try_retired:
+            title: 퇴직 처리
+            retire_date: 연봉 일할 정산
+            retired_at: 기간
+            before_retire: 이전 급여
+            after_retire: 정산 급여
         new:
             title: 새로운 인사정보 입력
             users_blank: 인사정보와 연결할 사용자 계정이 없습니다.
@@ -805,11 +832,13 @@ ko:
             title: 명함 내용 보기
     payments:
         new:
-            title: 새로운 특별상여금 입력
+            title: 연봉 입력
         yearly:
             title: 새로운 기본급 입력
         edit:
-            title: 특별상여금 수정
+            title: 연봉 수정
+        bonus:
+            title: 특별상여금 작성
         title: 연봉 관리
     payrolls:
         title: 급여대장

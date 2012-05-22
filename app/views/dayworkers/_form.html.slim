@@ -1,0 +1,14 @@
+- form_type = if dayworker.new_record? then 'new' else 'edit' end
+
+#show_command
+  = link_to t('common.title.back'), dayworkers_path
+
+h2= t("common.title.#{form_type}")
+
+= form_for dayworker, html: {multipart: true, class: "tabular"} do |f|
+  = f.error_messages
+  .box
+    p
+      = f.label :juminno
+      = f.text_field :juminno
+  = f.submit t("dayworkers.#{form_type}.submit")

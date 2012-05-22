@@ -52,6 +52,13 @@ class Hrinfo < ActiveRecord::Base
     where("retired_on IS NULL")
   end
 
+  def retire!
+    user.payments.pay_from(retired_on).find_each do |payment|
+      payment.retired!(retired_on)
+    end
+    save!
+  end
+
   def self.search(text)
     text = "%#{text}%"
     joins(:user).where('users.name LIKE ? OR users.notify_email LIKE ? OR hrinfos.firstname like ? OR hrinfos.lastname LIKE ? OR hrinfos.position LIKE ?', text, text, text, text, text)

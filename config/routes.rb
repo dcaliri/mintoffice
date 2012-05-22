@@ -18,7 +18,8 @@ Mintoffice::Application.routes.draw do
       post 'excel', :action => 'upload'
     end
   end
-
+  resources :dayworkers
+  resources :dayworker_taxes
   resources :card_used_sources
   resources :card_approved_sources
 
@@ -34,8 +35,10 @@ Mintoffice::Application.routes.draw do
   resources :payroll_items
   resources :holidays
 
-  match '/hrinfos/retire/:id', :controller => "hrinfos", :action => "retire", :conditions => {:method => :get}
-  match '/hrinfos/retire/:id', :controller => "hrinfos", :action => "retire_save", :conditions => {:method => :post}
+#  match '/hrinfos/retire/:id', :controller => "hrinfos", :action => "retire", :conditions => {:method => :get}
+#  match '/hrinfos/retire/:id', :controller => "hrinfos", :action => "retire_save", :conditions => {:method => :post}
+  post '/hrinfos/retired/:id', :controller => "hrinfos", :action => "retired", as: :retired
+  post '/hrinfos/try_retired/:id', :controller => "hrinfos", :action => "try_retired", as: :try_retired
 
   resources :hrinfos
   resources :attachments
@@ -54,6 +57,7 @@ Mintoffice::Application.routes.draw do
         get 'new_yearly'
         post 'calculate'
         post 'new_yearly', :action => 'create_new_yearly'
+        get 'bonus'
       end
     end
 

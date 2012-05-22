@@ -7,7 +7,7 @@ module Reportable
   end
 
   def access?(user)
-    report.reporter.user == user
+    report.access?(user)
   end
 
   module ClassMethods
