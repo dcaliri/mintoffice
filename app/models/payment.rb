@@ -26,13 +26,9 @@ class Payment < ActiveRecord::Base
     where('pay_at > ?', period)
   end
 
-  def payment_type
-    read_attribute(:payment_type).to_sym
-  end
-
   def retired_amount(from)
     remain = (pay_at - from).day
-    if payment_type != :default or remain > 1.month
+    if payment_type != 'default' or remain > 1.month
       0
     else
       working_day = Holiday.working_days(from, pay_at)
@@ -70,7 +66,7 @@ class Payment < ActiveRecord::Base
         title = pay_info["title"]
         amount = pay_info["amount"].to_i
 
-        create!(payment_type: type.to_sym, :note => title, :pay_at => pay_at, :amount => amount) if amount > 0
+        create!(payment_type: type, :note => title, :pay_at => pay_at, :amount => amount) if amount > 0
       end
     end
   end
