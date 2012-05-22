@@ -11,26 +11,31 @@
 h2 지출내역서 상세정보
 
 .box
-  table
-    tr
-      th= expense_report.class.human_attribute_name(:owner)
-      td= expense_report.hrinfo.fullname
-    tr
-      th= expense_report.class.human_attribute_name(:target)
-      td= t("activerecord.models.#{expense_report.target_type.tableize.singularize}")
-    tr
-      th= expense_report.class.human_attribute_name(:project)
-      td= expense_report.project.name
-    tr
-      th= expense_report.class.human_attribute_name(:description)
-      td= expense_report.description
-    tr
-      th= expense_report.class.human_attribute_name(:expensed_at)
-      td= expense_report.expensed_at
-    tr
-      th= expense_report.class.human_attribute_name(:amount)
-      td= number_to_currency expense_report.amount
-
+  #descr
+    table
+      tr
+        th= expense_report.class.human_attribute_name(:owner)
+        td= expense_report.hrinfo.fullname
+      tr
+        th= expense_report.class.human_attribute_name(:target)
+        td= t("activerecord.models.#{expense_report.target_type.tableize.singularize}")
+      tr
+        th= expense_report.class.human_attribute_name(:project)
+        td= expense_report.project.name
+      tr
+        th= expense_report.class.human_attribute_name(:description)
+        td= expense_report.description
+      tr
+        th= expense_report.class.human_attribute_name(:expensed_at)
+        td= expense_report.expensed_at
+      tr
+        th= expense_report.class.human_attribute_name(:amount)
+        td= number_to_currency expense_report.amount
+  - if expense_report.target.respond_to?(:attachments)
+    = render "shared/attachments/detail", :target => expense_report.target
+.clear
+br
+= render "#{expense_report.target_type.tableize}/detail", target: expense_report.target
 = render 'reports/info', target: expense_report
 
 
