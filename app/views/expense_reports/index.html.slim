@@ -23,7 +23,7 @@ h2 Total : #{@expenses.count}
       th= Report.human_attribute_name('status')
     - @expenses.each do |report|
       tr.selectable onclick="location.href='#{expense_report_path(report)}'"
-        td= report.hrinfo.fullname
+        td= report.hrinfo.fullname rescue ""
         td= t("activerecord.models.#{report.target_type.tableize.singularize}")
         td= report.project.name
         td= report.description

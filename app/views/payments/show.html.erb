@@ -19,7 +19,7 @@
     <th></th>
   </tr>
   <% current_bg = '#e6e6e6' %>
-  <% payments.latest.group_by{|payment| payment.pay_at.strftime("%Y-%m")}.each do |month, payments| %>
+  <% payments.latest.group_by{|payment| payment.pay_finish.strftime("%Y-%m")}.each do |month, payments| %>
     <% show_sum = true %>
     <% payments.each do |payment| %>
     <%
