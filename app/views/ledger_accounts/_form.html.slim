@@ -1,0 +1,16 @@
+#show_command
+  = link_to t('common.title.back'), :ledger_accounts
+
+h2= t("common.title.#{action_name}")
+
+= form_for ledger_account, html: {class: "tabular"} do |f|
+  = f.error_messages
+  .box
+    p
+      = f.label :title
+      = f.text_field :title
+    p
+      = f.label :category
+      = f.select :category, LedgerAccount::CATEGORY_TYPE
+  p
+    = f.submit

@@ -125,6 +125,7 @@ ko:
             expense_report: 지출 내역서
             holiday: 휴일관리
             hrinfo: 인사정보
+            ledger_account: 원장 계정
             namecard: 명함정보
             pay_schedule: 기본급
             payroll_item: 급여 항목
@@ -350,6 +351,9 @@ ko:
                 joined_on: 입사일
                 email: 이메일
                 listed: 목록 출력 여부
+            ledger_account:
+                title: 이름
+                category: 종류
             namecard:
                 name: "이름"
                 company: "회사명"
@@ -818,6 +822,12 @@ ko:
         index:
             this_years_working_days: "년의 근무일수 : "
             month_and_count: "%{m}월: %{c}일"
+    ledger_accounts:
+        title: 원장 권리
+        index:
+            empty: 계정이 없습니다
+        show:
+            title: 원장 계정 상세정보
     main:
         index:
             human_resources: 인사관리
