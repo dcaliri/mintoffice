@@ -429,6 +429,7 @@ ko:
                 localized_status:
                     not_reported: 결제 대기 중
                     reporting: 결제 진행 중
+                    rollback: 반려
                     reported: 결제 완료
             bonus:
                 gave_at: 지급일
@@ -664,6 +665,8 @@ ko:
             already_exist: 이미 존재합니다.
             destroyed: "%{model}이(가) 성공적으로 제거 되었습니다."
             no_entries: 항목이 없습니다.
+        report:
+            status: 결제 상태
         title:
             main: 메인화면
             back: "돌아가기"

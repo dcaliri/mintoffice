@@ -1,6 +1,8 @@
 <%   title t('.title') %>
 <% content_for :search do -%>
   <%= form_tag({:action => "index"}, :method => :get ) do %>
+    <%= t("common.report.status") %>
+    <%= render 'reports/search_form' %>
     <%= t("common.title.search") %> : <%= text_field_tag 'query', params[:query] %>
   <% end -%>
 <% end -%>

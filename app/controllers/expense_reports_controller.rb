@@ -10,7 +10,9 @@ class ExpenseReportsController < ApplicationController
                                 project: project,
                                 year: params[:year].to_i,
                                 month: params[:month].to_i
-                              ).page(params[:page])
+                              )
+                              .report_status(params[:report_status])
+                              .page(params[:page])
   end
 
   def create

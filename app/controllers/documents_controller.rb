@@ -8,7 +8,11 @@ class DocumentsController < ApplicationController
   before_filter :check_report_access, except: [:index, :new, :create]
 
   def index
-    @documents = documents.access_list(current_user).search(params[:query]).latest.page(params[:page])
+    @documents = documents.access_list(current_user)
+                          .report_status(params[:report_status])
+                          .search(params[:query])
+                          .latest
+                          .page(params[:page])
   end
 
   def create

@@ -14,6 +14,10 @@ module Reportable
     def access_list(user)
       joins(:report => :reporters).merge(ReportPerson.access_list(user))
     end
+
+    def report_status(status)
+      joins(:report).merge(Report.search_by_status(status))
+    end
   end
 
   included do

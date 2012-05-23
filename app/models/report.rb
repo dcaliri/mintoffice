@@ -2,7 +2,6 @@
 
 class Report < ActiveRecord::Base
   belongs_to :target, polymorphic: true
-#  has_one :reporter, class_name: "ReportPerson"
   has_many :reporters, class_name: "ReportPerson"
   has_many :comments, class_name: 'ReportComment'
 
@@ -15,9 +14,38 @@ class Report < ActiveRecord::Base
     read_attribute(:status).to_sym
   end
 
+  STATUS_SELECT = [
+    [not_reported: "결제 대기 중"],
+    [reporting: "결제 진행 중"],
+    [rollback: "반려"],
+    [reported: "결제 완료"],
+  ]
+
+  STATUS_SELECT = {
+    "전체" => :all,
+    "결재 대기 중, 반려" => :reporting_with_rollback,
+    "결제 대기 중" => :not_reported,
+    "결제 진행 중" => :reporting,
+    "반려" => :rollback,
+    "결제 완료" => :reported
+  }
+
+  class << self
+    def search_by_status(status)
+      case status
+      when 'all'
+        where("")
+      when 'reporting_with_rollback'
+        where(status: [:not_reported, :rollback])
+      else
+        where(status: status)
+      end
+
+    end
+  end
+
   def reporter
-#    self.reporters.find_by_permission_type("write")
-    self.reporters.where(permission_type: "write").first
+    self.reporters.find_by_permission_type("write")
   end
 
   def access?(user, permission_type = :read)
@@ -64,7 +92,8 @@ class Report < ActiveRecord::Base
   end
 
   def rollback!(comment)
-    self.status = :reporting
+#    self.status = :reporting
+    self.status = :rollback
     prev_reporter = self.reporter
     next_reporter = prev_reporter.prev if prev_reporter.prev
     if next_reporter
