@@ -11,4 +11,6 @@
 ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular 'bonus', 'bonuses'
   inflect.plural /tax/i, 'taxes'
+  inflect.plural 'taxbill', 'taxbills'
+  inflect.plural 'taxman', 'taxmen'
 end
