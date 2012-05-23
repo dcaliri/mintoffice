@@ -67,6 +67,12 @@ table tr td ul {
       <ul>
         <li><%= link_to t("expense_reports.index.title"), :expense_reports %></li>
       </ul>
+      <ul>
+        <li><%= link_to t("ledger_accounts.title"), :ledger_accounts %></li>
+      </ul>
+      <ul>
+        <li><%= link_to t("postings.title"), :postings %></li>
+      </ul>
     </td>
     <td style="text-align: left;" valign="top">
       <ul>
@@ -104,7 +110,6 @@ table tr td ul {
           <li><%= link_to t("permissions.title"), :controller => "permissions" %></li>
           <li><%= link_to t("change_histories.title"), :controller => "change_histories" %></li>
           <li><%= link_to t("holidays.title"), :controller => "holidays" %></li>
-          <li><%= link_to t("ledger_accounts.title"), :ledgers %></li>
         </ul>
       </td>
     <% end %>

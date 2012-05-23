@@ -159,6 +159,7 @@ Mintoffice::Application.routes.draw do
   match 'report' => 'reports#report', as: :report
 
   resources :ledger_accounts, path: 'ledgers'
+  resources :postings
 
   root to: 'main#index'
 

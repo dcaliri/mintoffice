@@ -132,6 +132,7 @@ ko:
             payroll_category: 급여구분
             payment: 연봉
             pettycash: 소액현금
+            posting: 전표
             project: 프로젝트
             required_tag: 필수 태그 항목
             tag: 태그
@@ -389,6 +390,9 @@ ko:
                 transdate: 사용일자
                 inmoney: 수입금액
                 outmoney: 지출금액
+            posting:
+                posted_at: 전표 일자
+                description: 상세정보
             project:
                 name: 프로젝트명
                 revenue: 계약금액
@@ -692,6 +696,7 @@ ko:
             edit: "수정"
             destroy: "삭제"
             download: "다운로드"
+            posting: 전표 만들기
         upload:
             empty: 업로드한 파일이 비어있습니다.
         menu: 메뉴
@@ -902,6 +907,14 @@ ko:
             title: 새로운 소액 거래 작성
         show:
             title: 소액현금 내역
+    postings:
+        title: 전표 관리
+        show:
+            title: 전표 내역
+        new:
+            title: 새로운 전표 작성
+        edit:
+            title: 전표 수정
     projects:
         title: 프로젝트 관리
         index:

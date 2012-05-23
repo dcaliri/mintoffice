@@ -1,0 +1,16 @@
+#show_command
+  = link_to t('common.title.back'), :postings
+
+h2= t("common.title.#{action_name}")
+
+= form_for posting, html: {class: "tabular"} do |f|
+  = f.error_messages
+  .box
+    p
+      = f.label :posted_at
+      = f.date_select :posted_at, order: [:year, :month, :day]
+    p
+      = f.label :description
+      = f.text_field :description
+  p
+    = f.submit

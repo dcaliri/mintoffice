@@ -2,7 +2,7 @@ class LedgerAccountsController < ApplicationController
   expose(:ledger_account)
 
   def index
-    @account = LedgerAccount.where("")
+    @accounts = LedgerAccount.where("")
   end
 
   def create
