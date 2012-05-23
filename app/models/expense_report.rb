@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class ExpenseReport < ActiveRecord::Base
   belongs_to :hrinfo
   belongs_to :target, polymorphic: true
@@ -6,6 +8,13 @@ class ExpenseReport < ActiveRecord::Base
   by_star_field :expensed_at
 
   include Reportable
+
+  def make_posting
+    posting = Posting.new(
+      posted_at: expensed_at
+    )
+    posting
+  end
 
   class << self
     def filter(params)

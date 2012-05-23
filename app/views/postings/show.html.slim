@@ -15,3 +15,21 @@ h2= t('.title')
     tr
       th= posting.class.human_attribute_name('description')
       td= posting.description
+    tr
+      th 내역
+      td
+        table
+          tr
+            th colspan=2 차변
+            th colspan=2 대변
+          - items = Array.new([posting.items.debits.count, posting.items.credits.count].max)
+          - items = items.zip(posting.items.debits, posting.items.credits)
+          - items.each do |_, debit, credit|
+            tr
+              td= debit.ledger_account.title rescue ""
+              td= number_to_currency debit.amount rescue ""
+              td= credit.ledger_account.title rescue ""
+              td= number_to_currency credit.amount rescue ""
+    tr
+      th 총액
+      td= number_to_currency posting.total_amount

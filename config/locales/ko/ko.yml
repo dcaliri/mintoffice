@@ -393,6 +393,11 @@ ko:
             posting:
                 posted_at: 전표 일자
                 description: 상세정보
+                total_amount: 총액
+            posting_item:
+                item_type: 항목 분류
+                ledger_account_id: 계정 종류
+                amount: 금액
             project:
                 name: 프로젝트명
                 revenue: 계약금액

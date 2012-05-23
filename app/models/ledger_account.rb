@@ -1,6 +1,8 @@
 # encoding: UTF-8
 
 class LedgerAccount < ActiveRecord::Base
+  has_many :posting_items
+
   CATEGORY_TYPE = ["자본", "자산", "부채", "비용", "수익"]
   def category
     CATEGORY_TYPE[read_attribute(:category) || 0]

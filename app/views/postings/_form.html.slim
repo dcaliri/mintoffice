@@ -3,7 +3,7 @@
 
 h2= t("common.title.#{action_name}")
 
-= form_for posting, html: {class: "tabular"} do |f|
+= form_for @posting, html: {class: "tabular"} do |f|
   = f.error_messages
   .box
     p
@@ -12,5 +12,12 @@ h2= t("common.title.#{action_name}")
     p
       = f.label :description
       = f.text_field :description
-  p
-    = f.submit
+
+    h3 항목
+    #posting-item-form
+      #debit-form
+        = render 'posting_items/form', form: f, posting_items: posting.items.debits, type: "차변"
+      #credit-form
+        = render 'posting_items/form', form: f, posting_items: posting.items.credits, type: "대변"
+    p
+      = f.submit

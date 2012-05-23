@@ -11,10 +11,12 @@ h2= t("common.title.list")
       tr
         th= Posting.human_attribute_name("posted_at")
         th= Posting.human_attribute_name("description")
+        th= Posting.human_attribute_name("total_amount")
     tbody
       - @postings.each do |posting|
         tr.selectable onclick="location.href='#{posting_path(posting)}'"
           td= posting.posted_at
           td= posting.description
+          td= number_to_currency posting.total_amount
 - else
   h3= t('.empty')

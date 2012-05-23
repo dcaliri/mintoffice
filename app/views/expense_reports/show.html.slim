@@ -1,6 +1,6 @@
 #show_command
   - if expense_report.report.status == :reported
-    = link_to t("common.link.posting"), new_posting_path(report: expense_report.target)
+    = link_to t("common.link.posting"), new_posting_path(report: expense_report)
     = " | "
   = link_to t("activerecord.models.#{expense_report.target_type.tableize.singularize}") + " 보기", expense_report.target
   = " | "
