@@ -32,12 +32,21 @@ class Payment < ActiveRecord::Base
 
   def retired_amount(from)
     remain = (pay_finish - from).day
-    if payment_type == 'default' or remain < 1.month
-      working_day = Holiday.working_days(pay_start, from)
-      working_month = Holiday.working_days(pay_start, pay_finish)
-      ((self.amount / working_month.to_f) * working_day.to_f).to_i
-    else
-      0
+
+    (-self.amount) + if payment_type == 'default' or remain < 1.month
+                       working_day = Holiday.working_days(pay_start, from)
+                       working_month = Holiday.working_days(pay_start, pay_finish)
+                       ((self.amount / working_month.to_f) * working_day.to_f).to_i
+                     else
+                       0
+                     end
+  end
+
+  def self.retire!(retired_on)
+    pay_from(retired_on).find_each do |payment|
+      new_payment = payment.dup
+      new_payment.amount = payment.retired_amount(retired_on)
+      new_payment.save!
     end
   end
 
@@ -47,12 +56,6 @@ class Payment < ActiveRecord::Base
       destroy
     else
       save!
-    end
-  end
-
-  def latest_default_payment(from)
-    user.payments.latest.each_cons(2) do |after, before|
-      return after.amount if after.pay_finish == before.pay_finish.next_month
     end
   end
 

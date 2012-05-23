@@ -799,7 +799,8 @@ ko:
             retire_date: 연봉 일할 정산
             retired_at: 기간
             before_retire: 이전 급여
-            after_retire: 정산 급여
+            after_retire: 차감 급여
+            retire_total: 정산 급여
         new:
             title: 새로운 인사정보 입력
             users_blank: 인사정보와 연결할 사용자 계정이 없습니다.
