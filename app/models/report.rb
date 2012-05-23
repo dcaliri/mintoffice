@@ -32,10 +32,11 @@ class Report < ActiveRecord::Base
 
   class << self
     def search_by_status(status)
+      status = status.blank? ? 'reporting_with_rollback' : status.to_sym
       case status
-      when 'all'
+      when :all
         where("")
-      when 'reporting_with_rollback'
+      when :reporting_with_rollback
         where(status: [:not_reported, :rollback])
       else
         where(status: status)
