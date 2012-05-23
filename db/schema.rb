@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120522085652) do
+ActiveRecord::Schema.define(:version => 20120523051808) do
 
   create_table "attachments", :force => true do |t|
     t.string   "title"
@@ -493,8 +493,9 @@ ActiveRecord::Schema.define(:version => 20120522085652) do
     t.integer  "user_id"
     t.integer  "report_id"
     t.integer  "prev_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
+    t.string   "permission_type", :default => "read"
   end
 
   create_table "reports", :force => true do |t|

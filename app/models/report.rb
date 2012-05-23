@@ -2,7 +2,8 @@
 
 class Report < ActiveRecord::Base
   belongs_to :target, polymorphic: true
-  has_one :reporter, class_name: "ReportPerson"
+#  has_one :reporter, class_name: "ReportPerson"
+  has_many :reporters, class_name: "ReportPerson"
   has_many :comments, class_name: 'ReportComment'
 
   before_create :set_status
@@ -14,8 +15,17 @@ class Report < ActiveRecord::Base
     read_attribute(:status).to_sym
   end
 
-  def access?(user)
-    self.reporter.user == user
+  def reporter
+#    self.reporters.find_by_permission_type("write")
+    self.reporters.where(permission_type: "write").first
+  end
+
+  def access?(user, permission_type = :read)
+    if permission_type == :write
+      self.reporter.user == user
+    else
+      self.reporters.exists?(user_id: user)
+    end
   end
 
   def localize_status
@@ -23,14 +33,25 @@ class Report < ActiveRecord::Base
   end
 
   def report!(user, comment)
-    next_reporter = user.reporters.build
     prev_reporter = self.reporter
-    next_reporter.prev = prev_reporter
-    self.reporter = next_reporter
+    prev_reporter.permission_type = "read"
+
+    collection = reporters.where(user_id: user.id)
+    if collection.empty?
+      next_reporter = user.reporters.build(permission_type: "write")
+      next_reporter.prev = prev_reporter
+      self.reporters << next_reporter
+    else
+      next_reporter = collection.first
+      next_reporter.permission_type = "write"
+    end
 
     self.status = :reporting
-    self.comments.build(owner: prev_reporter, description: "#{reporter.fullname}님에게 결제를 요청하였습니다")
+    self.comments.build(owner: prev_reporter, description: "#{next_reporter.fullname}님에게 결제를 요청하였습니다")
     self.comments.build(owner: prev_reporter, description: comment) unless comment.blank?
+
+    next_reporter.save!
+    prev_reporter.save!
     save!
   end
 
@@ -45,7 +66,13 @@ class Report < ActiveRecord::Base
   def rollback!(comment)
     self.status = :reporting
     prev_reporter = self.reporter
-    self.reporter = prev_reporter.prev if prev_reporter.prev
+    next_reporter = prev_reporter.prev if prev_reporter.prev
+    if next_reporter
+      next_reporter.permission_type = "write"
+      prev_reporter.permission_type = "read"
+      next_reporter.save!
+      prev_reporter.save!
+    end
     self.comments.build(owner: prev_reporter, description: "#{prev_reporter.fullname}님이 결제를 반려하였습니다")
     self.comments.build(owner: prev_reporter, description: comment) unless comment.blank?
     save!
