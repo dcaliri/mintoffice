@@ -1,6 +1,8 @@
 - title t('dayworker_taxes.title')
 
 #show_command
+  = link_to t("dayworkers.title"), :controller => "dayworkers"
+  = ' | '
   = link_to t('common.title.new'), new_dayworker_taxis_path
   = ' | '
   = link_to t('common.title.back'), :root
