@@ -16,7 +16,7 @@
   <div id="company">
     <ul>
       <li>
-        <%= form_tag switch_company_index_path do %>
+        <%= form_tag switch_companies_path do %>
           <%= select_tag :company_id, options_for_select(Company.all.map{|company| [company.name, company.id]}, current_company.id), "onchange" => "this.form.submit()" %>
         <% end %>
       </li>

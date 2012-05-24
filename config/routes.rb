@@ -151,7 +151,7 @@ Mintoffice::Application.routes.draw do
 
   resources :tags, only: [:create, :destroy]
 
-  resources :company do
+  resources :companies do
     post :switch, on: :collection
   end
   resources :expense_reports, path: 'expenses'

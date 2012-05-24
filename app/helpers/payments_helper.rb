@@ -6,7 +6,7 @@ module PaymentsHelper
   def payment_step
     join_at = DateTime.parse_by_params(params[:payments], :join_at).to_date
     pay_end = DateTime.parse_by_params(params[:payments], :pay_finish).to_date
-    pay_at = 20
+    pay_at = current_company.pay_basic_date
     amount = params[:payments][:amount].to_i
 
     before = join_at.dup
