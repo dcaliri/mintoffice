@@ -10,6 +10,10 @@ module Reportable
     report.access?(user, permission_type)
   end
 
+  def redirect_when_reported
+    self
+  end
+
   module ClassMethods
     def access_list(user)
       joins(:report => :reporters).merge(ReportPerson.access_list(user))

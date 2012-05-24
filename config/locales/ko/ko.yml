@@ -998,6 +998,7 @@ ko:
             title: 담당자 수정
     used_vacations:
         show:
+            title: 사용한 연차 정보
             empty: 사용한 연차 내역이 없습니다
         new:
             title: 연차 사용하기
