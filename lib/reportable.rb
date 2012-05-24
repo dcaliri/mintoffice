@@ -3,7 +3,7 @@ module Reportable
 
   def create_report
     report = build_report
-    report.reporters << User.current_user.reporters.build(report_id: report, permission_type: "write")
+    report.reporters << User.current_user.reporters.build(report_id: report, permission_type: "write", owner: true)
   end
 
   def access?(user, permission_type = :read)
@@ -16,7 +16,7 @@ module Reportable
     end
 
     def report_status(status)
-      joins(:report).merge(Report.search_by_status(status))
+      joins(:report => :reporters).merge(Report.search_by_status(status))
     end
   end
 
