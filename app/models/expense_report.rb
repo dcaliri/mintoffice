@@ -5,15 +5,21 @@ class ExpenseReport < ActiveRecord::Base
   belongs_to :target, polymorphic: true
   belongs_to :project
 
+  has_one :posting
+
   by_star_field :expensed_at
 
   include Reportable
 
   def make_posting
-    posting = Posting.new(
-      posted_at: expensed_at
-    )
-    posting
+    # Posting.new(posted_at: expensed_at).tap do |posting|
+    #   posting.items.build(item_type: "차변", amount: amount)
+    #   posting.items.build(item_type: "대변", amount: amount)
+    # end
+    build_posting(posted_at: expensed_at).tap do |posting|
+      posting.items.build(item_type: "차변", amount: amount)
+      posting.items.build(item_type: "대변", amount: amount)
+    end
   end
 
   class << self

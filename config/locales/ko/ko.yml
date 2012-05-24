@@ -394,9 +394,12 @@ ko:
                 posted_at: 전표 일자
                 description: 상세정보
                 total_amount: 총액
+            items:
+                ledger_account_id: 계정 종류
             posting_item:
                 item_type: 항목 분류
                 ledger_account_id: 계정 종류
+                ledger_account: 계정 종류
                 amount: 금액
             project:
                 name: 프로젝트명
@@ -916,8 +919,10 @@ ko:
         title: 전표 관리
         show:
             title: 전표 내역
+            link: 전표 내역 보기
         new:
             title: 새로운 전표 작성
+            link: 전표 만들기
         edit:
             title: 전표 수정
     projects:

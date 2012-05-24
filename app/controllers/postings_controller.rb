@@ -6,12 +6,19 @@ class PostingsController < ApplicationController
   end
 
   def new
-    @posting = ExpenseReport.find(params[:report]).make_posting unless params[:report].blank?
+    unless params[:report].blank?
+      @posting = ExpenseReport.find(params[:report]).make_posting
+    else
+      @posting = Posting.new
+    end
   end
 
   def create
     posting.save!
     redirect_to posting
+  rescue ActiveRecord::RecordInvalid
+    @posting = posting
+    render 'new'
   end
 
   def edit
@@ -22,6 +29,7 @@ class PostingsController < ApplicationController
     posting.save!
     redirect_to posting
   rescue ActiveRecord::RecordInvalid
+    @posting = posting
     render 'edit'
   end
 
