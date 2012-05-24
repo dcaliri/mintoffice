@@ -11,7 +11,9 @@ class PaymentsController < ApplicationController
   before_filter {|controller| controller.redirect_unless_me(user)}
 
   def index
-    @hrinfos = Hrinfo.where(:retired_on => nil).page(params[:page])
+    @from = Time.zone.now - 4.month
+    @to = Time.zone.now + 3.month
+    @hrinfos = Hrinfo.where(:retired_on => nil).payment_in?(@from.to_date, @to.to_date).page(params[:page])
     @payments = Payment
   end
 
