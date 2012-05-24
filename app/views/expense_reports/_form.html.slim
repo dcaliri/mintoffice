@@ -28,5 +28,4 @@ h2= t("common.title.#{action_name}")
         = f.submit
   #reference
     - target = target_type.constantize.find(target_id)
-    h3= "#{target.class.model_name.human} 상세정보"
     = render "#{target_type.tableize}/detail", target: target

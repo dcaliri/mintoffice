@@ -14,13 +14,16 @@
         <th><%= t('.note') %></th>
         <th><%= t('.before_retire') %></th>
         <th><%= t('.after_retire') %></th>
+        <th><%= t('.retire_total') %></th>
       </tr>
     <%= @hrinfo.user.payments.pay_from(@hrinfo.retired_on).find_each do |payment| %>
       <tr>
-        <td><%= payment.pay_at.strftime("%Y.%m") %></td>
+        <td><%= payment.pay_finish.strftime("%Y.%m") %></td>
         <td><%= payment.note %></td>
         <td><%= number_to_currency payment.amount %></td>
-        <td><%= number_to_currency payment.retired_amount(@hrinfo.retired_on) %></td>
+        <% retired_amount = payment.retired_amount(@hrinfo.retired_on) %>
+        <td><%= number_to_currency retired_amount %></td>
+        <td><%= number_to_currency payment.amount + retired_amount %></td>
       </tr>
     <% end %>
     </table>

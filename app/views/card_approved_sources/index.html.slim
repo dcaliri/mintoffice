@@ -1,14 +1,21 @@
 - content_for :search do
   = form_tag :card_approved_sources, :method => :get do
+    = t("common.title.search")
+    = " : "
+    = text_field_tag 'query', params[:query]
     = select_tag :creditcard_id,
       options_from_collection_for_select([Creditcard.new(:cardno => "all")]+Creditcard.all, :id, :cardno_long, params[:creditcard_id]),
       "onchange" => "this.form.submit()"
 
 
 #show_command
+  = link_to t('card_approved_sources.find_empty_cardbills.link'), [:find_empty_cardbills, :card_approved_sources]
+  = " | "
+  = link_to t('card_approved_sources.generate_cardbills.link'), [:generate_cardbills, :card_approved_sources], method: :post
+  = " | "
   = link_to t('card_approved_sources.new.link'), [:new, :card_approved_source]
   = " | "
-  = link_to t('common.title.back'), :root
+  = link_to t('common.title.back'), :creditcards
 
 h2
   - if creditcard
@@ -17,7 +24,7 @@ h2
     = "카드 승인내역"
 
 - unless @card_approved_sources.empty?
-  = render 'list', card_approved_sources: @card_approved_sources, menu: true
+  = render 'list', card_approved_sources: @card_approved_sources
 
   br
   center

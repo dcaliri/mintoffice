@@ -9,7 +9,11 @@ class CardbillsController < ApplicationController
   # GET /cardbills
   # GET /cardbills.xml
   def index
-    @cardbills = Cardbill.access_list(current_user).search(params[:q]).searchbycreditcard(params[:creditcard_id]).paginate(:order => 'transdate desc', :page => params[:page], :per_page => 20)
+    @cardbills = Cardbill.access_list(current_user)
+                         .report_status(params[:report_status])
+                         .search(params[:query])
+                         .searchbycreditcard(params[:creditcard_id])
+                         .paginate(:order => 'transdate desc', :page => params[:page], :per_page => 20)
 
     respond_to do |format|
       format.html # index.html.erb

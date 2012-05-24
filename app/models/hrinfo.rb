@@ -53,9 +53,7 @@ class Hrinfo < ActiveRecord::Base
   end
 
   def retire!
-    user.payments.pay_from(retired_on).find_each do |payment|
-      payment.retired!(retired_on)
-    end
+    user.payments.retire!(retired_on)
     save!
   end
 

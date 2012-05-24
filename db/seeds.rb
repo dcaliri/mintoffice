@@ -47,3 +47,8 @@ if ContactOtherTag.all.empty?
   ContactOtherTag.create!(name: "트위터")
   ContactOtherTag.create!(name: "페이스북")
 end
+
+if LedgerAccount.all.empty?
+  LedgerAccount.create!(title: "현금", category: "자본")
+  LedgerAccount.create!(title: "신용카드", category: "부채")
+end
