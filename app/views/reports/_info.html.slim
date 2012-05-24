@@ -41,8 +41,9 @@ p= "상태 - #{report.localize_status}"
         = comment.owner.user.name
         = ": "
         = comment.description
+
 h3 권한
-p= "쓰기: #{report.reporter.fullname}"
-p= "읽기: #{report.reporters.map{|reporter| reporter.fullname}.join(', ')}"
+p= "쓰기: #{report.reporters.writers.map{|reporter| reporter.fullname}.join(', ')}"
+p= "읽기: #{report.reporters.readers.map{|reporter| reporter.fullname}.join(', ')}"
 
 br

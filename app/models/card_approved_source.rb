@@ -30,7 +30,9 @@ class CardApprovedSource < ActiveRecord::Base
         next if used_sources.empty?
         used_source = used_sources.first
 
-        approved_source.creditcard.cardbills.create(
+        Rails.logger.info "approved = #{approved_source.inspect}, used = #{used_sources.inspect}"
+
+        approved_source.creditcard.cardbills.create!(
           amount: used_source.price,
           servicecharge: used_source.tax,
           vat: used_source.tip,
