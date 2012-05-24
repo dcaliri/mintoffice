@@ -12,7 +12,7 @@ table tr td ul {
 }
 </style>
 <table align="center" border="0" cellspacing="5" cellpadding="5" id="menumenu-table" style="margin-top: 80px; font-size: 16px">
-  <tr style="background-color:lightgrey;">
+  <tr style="background-color:lightgray;">
     <th style="text-align: center;"><%= t(".human_resources") %></th>
     <th style="text-align: center;"><%= t(".finance") %></th>
     <th style="text-align: center;"><%= t(".project") %></th>
@@ -110,6 +110,7 @@ table tr td ul {
           <li><%= link_to t("permissions.title"), :controller => "permissions" %></li>
           <li><%= link_to t("change_histories.title"), :controller => "change_histories" %></li>
           <li><%= link_to t("holidays.title"), :controller => "holidays" %></li>
+          <li><%= link_to t("dayworker_taxes.title"), :controller => "dayworker_taxes" %></li>
           <li><%= link_to t("companies.title"), current_company %></li>
         </ul>
       </td>
