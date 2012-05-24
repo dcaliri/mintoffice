@@ -13,16 +13,6 @@
     <%= t "common.title.loggedas" %> : <%#= @user.name %>
   </div> -->
 
-  <div id="company">
-    <ul>
-      <li>
-        <%= form_tag switch_companies_path do %>
-          <%= select_tag :company_id, options_for_select(Company.all.map{|company| [company.name, company.id]}, current_company.id), "onchange" => "this.form.submit()" %>
-        <% end %>
-      </li>
-    </ul>
-  </div>
-
   <ul>
     <li>
       <%= link_to t("common.title.main"), :controller => "main", :action => "index" %>
