@@ -22,12 +22,12 @@ class Cardbill < ActiveRecord::Base
   validates_numericality_of :servicecharge
   validates_numericality_of :vat
 
-  validate :check_amount_of_money, :check_unique_approve_no
-  def check_amount_of_money
-    unless amount.to_i + vat.to_i + servicecharge.to_i == totalamount.to_i
-      errors.add(:totalamount, "의 합계가 맞지 않습니다")
-    end
-  end
+  # validate :check_amount_of_money, :check_unique_approve_no
+  # def check_amount_of_money
+  #   unless amount.to_i + vat.to_i + servicecharge.to_i == totalamount.to_i
+  #     errors.add(:totalamount, "의 합계가 맞지 않습니다")
+  #   end
+  # end
 
   def check_unique_approve_no
     if creditcard.cardbills.except_me(self).unique?(self)
