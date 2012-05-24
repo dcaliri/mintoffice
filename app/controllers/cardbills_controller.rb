@@ -4,14 +4,10 @@ class CardbillsController < ApplicationController
     c.save_attachment_id @cardbill
   end
 
-  before_filter :check_report_access, except: [:index, :new, :create]
-
   # GET /cardbills
   # GET /cardbills.xml
   def index
-    @cardbills = Cardbill.access_list(current_user)
-                         .report_status(params[:report_status])
-                         .search(params[:query])
+    @cardbills = Cardbill.search(params[:query])
                          .searchbycreditcard(params[:creditcard_id])
                          .paginate(:order => 'transdate desc', :page => params[:page], :per_page => 20)
 

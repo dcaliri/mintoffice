@@ -33,11 +33,6 @@
 
 <%= render 'detail', target: @cardbill %>
 
-<% if @cardbill.status == 'verified' %>
-  <%= render 'reports/info', target: @cardbill %>
-<% else %>
-  <h3>결제(불가능)</h3>
-<% end %>
 <%= render 'changelog', target: @cardbill %>
 
 </div>
