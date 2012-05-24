@@ -870,6 +870,9 @@ ko:
         show:
             title: 명함 내용 보기
     payments:
+        index:
+            by_all: 전체 보기
+            by_payment: 지급이 있는 사람들만 보기
         new:
             title: 연봉 입력
         yearly:
@@ -996,6 +999,7 @@ ko:
             title: 담당자 수정
     used_vacations:
         show:
+            title: 사용한 연차 정보
             empty: 사용한 연차 내역이 없습니다
         new:
             title: 연차 사용하기

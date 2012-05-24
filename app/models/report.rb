@@ -2,7 +2,7 @@
 
 class Report < ActiveRecord::Base
   belongs_to :target, polymorphic: true
-  has_many :reporters, class_name: "ReportPerson"
+  has_many :reporters, class_name: "ReportPerson", dependent: :destroy
   has_many :comments, class_name: 'ReportComment'
 
   before_create :set_status

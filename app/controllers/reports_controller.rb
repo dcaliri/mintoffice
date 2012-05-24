@@ -16,6 +16,6 @@ class ReportsController < ApplicationController
       report.rollback!(params[:comment])
     end
 
-    redirect_to report.access?(current_user) ? report_target : report_target_class.to_s.tableize.to_sym
+    redirect_to report_target.redirect_when_reported
   end
 end
