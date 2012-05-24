@@ -13,10 +13,9 @@ table#list-table
     th= CardUsedSource.human_attribute_name(:store_name)
     th= CardUsedSource.human_attribute_name(:store_type)
     th= CardUsedSource.human_attribute_name(:store_tel)
-    - if menu
-      th= t('common.menu')
   - card_used_sources.each do |source|
-    tr
+    - onclick = source.new_record? ? "" : "location.href='#{card_used_source_path(source)}'"
+    tr.selectable onclick="#{onclick}"
       td= source.card_no
       td= source.bank_account
       td= source.bank_name
@@ -30,10 +29,3 @@ table#list-table
       td= source.store_name
       td= source.store_type
       td= source.store_tel
-      - if menu
-        td align="right"
-          = link_to t('common.link.show'), source
-          = " | "
-          = link_to t('common.link.edit'), edit_card_used_source_path(source, creditcard_id: source.creditcard)
-          = " | "
-          = link_to t('common.link.destroy'), source, :method => :delete, :confirm => "Are you sure?"

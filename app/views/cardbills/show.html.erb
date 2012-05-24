@@ -5,12 +5,14 @@
     <%= link_to "사용 내역", @cardbill.used %>
     |
   <% end %>
-  <% if @cardbill.expense_report %>
-    <%= link_to "지출내역서 보기", @cardbill.expense_report %>
-  <% else %>
-    <%= link_to "지출내역서 만들기", new_expense_report_path(target_type: @cardbill.class, target_id: @cardbill.id, expensed_at: @cardbill.transdate, amount: @cardbill.totalamount) %>
+  <% if @cardbill.status == 'verified' %>
+    <% if @cardbill.expense_report %>
+      <%= link_to "지출내역서 보기", @cardbill.expense_report %>
+    <% else %>
+      <%= link_to "지출내역서 만들기", new_expense_report_path(target_type: @cardbill.class, target_id: @cardbill.id, expensed_at: @cardbill.transdate, amount: @cardbill.totalamount) %>
+    <% end %>
+    |
   <% end %>
-  |
   <% if @cardbill.approved %>
     <%= link_to t('.to_approved'), @cardbill.approved %> |
   <% end %>

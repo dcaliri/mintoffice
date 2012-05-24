@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120521083212) do
+ActiveRecord::Schema.define(:version => 20120523074011) do
 
   create_table "attachments", :force => true do |t|
     t.string   "title"
@@ -378,6 +378,13 @@ ActiveRecord::Schema.define(:version => 20120521083212) do
 
   add_index "hrinfos", ["companyno"], :name => "index_hrinfos_on_companyno", :unique => true
 
+  create_table "ledger_accounts", :force => true do |t|
+    t.string   "title"
+    t.integer  "category"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "namecards", :force => true do |t|
     t.string   "name"
     t.string   "jobtitle"
@@ -391,13 +398,14 @@ ActiveRecord::Schema.define(:version => 20120521083212) do
   end
 
   create_table "payments", :force => true do |t|
-    t.date     "pay_at"
+    t.date     "pay_finish"
     t.decimal  "amount",       :precision => 10, :scale => 0, :default => 0
     t.text     "note"
     t.integer  "user_id"
     t.datetime "created_at",                                                 :null => false
     t.datetime "updated_at",                                                 :null => false
     t.string   "payment_type"
+    t.date     "pay_start"
   end
 
   create_table "payroll_categories", :force => true do |t|
@@ -446,6 +454,22 @@ ActiveRecord::Schema.define(:version => 20120521083212) do
     t.datetime "updated_at"
   end
 
+  create_table "posting_items", :force => true do |t|
+    t.integer  "posting_id"
+    t.integer  "ledger_account_id"
+    t.integer  "item_type"
+    t.integer  "amount"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
+  create_table "postings", :force => true do |t|
+    t.date     "posted_at"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "project_assign_infos", :force => true do |t|
     t.integer  "user_id"
     t.integer  "project_id"
@@ -488,8 +512,9 @@ ActiveRecord::Schema.define(:version => 20120521083212) do
     t.integer  "user_id"
     t.integer  "report_id"
     t.integer  "prev_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
+    t.string   "permission_type", :default => "read"
   end
 
   create_table "reports", :force => true do |t|
