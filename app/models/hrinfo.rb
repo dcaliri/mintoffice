@@ -49,7 +49,8 @@ class Hrinfo < ActiveRecord::Base
   end
 
   def self.payment_in?(from, to)
-    joins(:user => :payments).merge(Payment.payment_in?(from, to)).group(:user_id)
+    # joins(:user => :payments).merge(Payment.payment_in?(from, to)).group(:user_id)
+    select{|hrinfo| hrinfo.user.payments.payment_in?(from, to).total > 0 }
   end
 
   def self.not_retired

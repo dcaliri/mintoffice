@@ -3,9 +3,6 @@
 
 h2= t('common.title.list')
 
-/ - from = Time.zone.now - 4.month
-/ - to = Time.zone.now + 3.month
-/ - @hrinfos = @hrinfos.payment_in?(from, to)
 - from = @from
 - to = @to
 
@@ -45,3 +42,9 @@ br
 
 center
   = will_paginate @hrinfos
+
+#show_command
+  - if params[:by_payment]
+    = link_to t('.by_all'), payments_path(by_payment: false)
+  - else
+    = link_to t('.by_payment'), payments_path(by_payment: true)
