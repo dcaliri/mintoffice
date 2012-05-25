@@ -18,7 +18,7 @@
   </thead>
   <tbody>
     <% ([""] + newest.step(oldest, -1.day).to_a).each do |period| %>
-      <% total_price = CardApprovedSource.by_date(period).total_price %>
+      <% total_price = CardApprovedSource.no_canceled.by_date(period).total_price %>
       <% unless total_price == 0 %>
         <tr>
           <td>
@@ -35,7 +35,7 @@
                 </tr>
               </thead>
                 <% Creditcard.all.each do |card| %>
-                  <% total_price = card.card_approved_sources.by_date(period).total_price %>
+                  <% total_price = card.card_approved_sources.no_canceled.by_date(period).total_price %>
                   <% unless total_price == 0 %>
                   <tr class="selectable" onclick="location.href='<%= card_approved_sources_path(creditcard_id: card, will_be_paid_at: period) %>'">
                       <td><%= card.cardholder %></td>
