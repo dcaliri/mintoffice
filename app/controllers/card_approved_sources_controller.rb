@@ -27,8 +27,8 @@ class CardApprovedSourcesController < ApplicationController
   end
 
   def generate_cardbills
-    CardApprovedSource.generate_cardbill
-    redirect_to :card_approved_sources, notice: "Successfully generate cardbills"
+    total_count = CardApprovedSource.generate_cardbill
+    redirect_to :card_approved_sources, notice: "Successfully generate #{total_count} cardbills"
   end
 
   def find_empty_cardbills

@@ -46,6 +46,7 @@ class CardApprovedSource < ActiveRecord::Base
     end
 
     def generate_cardbill
+      total_count = 0
       no_canceled.find_each do |approved_source|
         next if Cardbill.exists?(approveno: approved_source.approve_no)
 
@@ -63,7 +64,9 @@ class CardApprovedSource < ActiveRecord::Base
           storename: approved_source.store_name,
           storeaddr: used_source.store_addr1 + " " + used_source.store_addr2,
         )
+        total_count += 1
       end
+      total_count
     end
   end
 
