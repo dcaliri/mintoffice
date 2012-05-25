@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120525064341) do
+ActiveRecord::Schema.define(:version => 20120525090237) do
 
   create_table "access_people", :force => true do |t|
     t.integer  "user_id"
@@ -596,7 +596,6 @@ ActiveRecord::Schema.define(:version => 20120525064341) do
     t.date     "from"
     t.date     "to"
     t.text     "note"
-    t.boolean  "approve"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.decimal  "period"
