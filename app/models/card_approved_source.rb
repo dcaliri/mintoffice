@@ -9,6 +9,10 @@ class CardApprovedSource < ActiveRecord::Base
   end
 
   class << self
+    def by_date(date)
+      where(will_be_paied_at: date.to_time)
+    end
+
     def total_price
       sum{|used| used.money }
     end

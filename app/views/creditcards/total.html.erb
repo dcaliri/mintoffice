@@ -5,10 +5,10 @@
 <% newest = Time.zone.now %>
 <% oldest = Time.zone.now - 1.year %>
 
-<% newest = Creditcard.newest_used_source %>
-<% oldest = Creditcard.oldest_used_source %>
+<% newest = Creditcard.newest_used_source.to_date %>
+<% oldest = Creditcard.oldest_used_source.to_date %>
 
-<% period = Time.zone.parse("#{newest.year}-#{newest.month}-01 00:00:00") %>
+<% period = Time.zone.parse("#{newest.year}-#{newest.month}-01 00:00:00").to_date %>
 <table id="list-table">
   <thead>
     <tr>
@@ -17,43 +17,47 @@
     </tr>
   </thead>
   <tbody>
-    <% while period > oldest %>
-      <tr>
-        <td>
-          <%= period.strftime("%Y.%m") %>
-        </td>
-        <td>
-          <table>
-            <thead>
-              <tr>
-                <th><%= Creditcard.human_attribute_name(:cardholder) %></th>
-                <th><%= Creditcard.human_attribute_name(:cardno) %></th>
-                <th><%= Creditcard.human_attribute_name(:nickname) %></th>
-                <th><%= Creditcard.human_attribute_name(:total) %></th>
-              </tr>
-            </thead>
-              <% Creditcard.all.each do |card| %>
+    <% newest.step(oldest, -1.day) do |period| %>
+      <% total_price = CardApprovedSource.by_date(period.to_time).total_price %>
+      <% unless total_price == 0 %>
+        <tr>
+          <td>
+            <%= period.strftime("%Y.%m.%d") %>
+          </td>
+          <td>
+            <table>
+              <thead>
                 <tr>
-                  <td><%= card.cardholder %></td>
-                  <td><%= card.cardno %></td>
-                  <td><%= card.nickname %></td>
-                  <% approved_sources = card.card_approved_sources.where(will_be_paied_at: period.all_month) %>
-                  <td class="numrow"><%= number_to_currency approved_sources.total_price %></td>
+                  <th><%= Creditcard.human_attribute_name(:cardholder) %></th>
+                  <th><%= Creditcard.human_attribute_name(:cardno) %></th>
+                  <th><%= Creditcard.human_attribute_name(:nickname) %></th>
+                  <th><%= Creditcard.human_attribute_name(:total) %></th>
                 </tr>
-              <% end %>
-              <tr style="background-color: yellow;">
-                <td><%= CardUsedSource.human_attribute_name(:total) %></td>
-                <td></td>
-                <td></td>
-                <% approved_sources = CardApprovedSource.where(will_be_paied_at: period.all_month) %>
-                <td class="numrow"><%= number_to_currency approved_sources.total_price %></td>
-              </tr>
-            <tbody>
-            </tbody>
-          </table>
-        </td>
-      </tr>
-      <% period -= 1.month %>
+              </thead>
+                <% Creditcard.all.each do |card| %>
+                  <% total_price = card.card_approved_sources.by_date(period).total_price %>
+                  <% unless total_price == 0 %>
+                    <tr>
+                      <td><%= card.cardholder %></td>
+                      <td><%= card.cardno %></td>
+                      <td><%= card.nickname %></td>
+                      <td class="numrow"><%= number_to_currency total_price %></td>
+                    </tr>
+                  <% end %>
+                <% end %>
+                <tr style="background-color: yellow;">
+                  <td><%= CardUsedSource.human_attribute_name(:total) %></td>
+                  <td></td>
+                  <td></td>
+                  <% approved = CardApprovedSource.by_date(period) %>
+                  <td class="numrow"><%= number_to_currency approved.total_price %></td>
+                </tr>
+              <tbody>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
