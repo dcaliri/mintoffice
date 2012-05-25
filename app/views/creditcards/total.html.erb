@@ -5,8 +5,8 @@
 <% newest = Time.zone.now %>
 <% oldest = Time.zone.now - 1.year %>
 
-<% newest = Creditcard.newest_used_source.to_date %>
-<% oldest = Creditcard.oldest_used_source.to_date %>
+<% newest = Creditcard.newest_approved_source.to_date %>
+<% oldest = Creditcard.oldest_approved_source.to_date %>
 
 <% period = Time.zone.parse("#{newest.year}-#{newest.month}-01 00:00:00").to_date %>
 <table id="list-table">
@@ -17,12 +17,12 @@
     </tr>
   </thead>
   <tbody>
-    <% newest.step(oldest, -1.day) do |period| %>
-      <% total_price = CardApprovedSource.by_date(period.to_time).total_price %>
+    <% ([""] + newest.step(oldest, -1.day).to_a).each do |period| %>
+      <% total_price = CardApprovedSource.by_date(period).total_price %>
       <% unless total_price == 0 %>
         <tr>
           <td>
-            <%= period.strftime("%Y.%m.%d") %>
+            <%= period.strftime("%Y.%m.%d") rescue "결제예정일 미정" %>
           </td>
           <td>
             <table>

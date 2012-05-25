@@ -10,12 +10,16 @@ class CardApprovedSource < ActiveRecord::Base
 
   class << self
     def by_date(date)
-      unless date.nil?
-        date = Date.parse(date) if date.class == String
-        where(will_be_paied_at: date.to_time)
-      else
+      if date == "all" or date.nil?
         where("")
+      else
+        date = Date.parse(date) if date.class == String && !date.blank?
+        where(will_be_paied_at: date.to_time)
       end
+    end
+
+    def will_be_paid_at_list
+      select(:will_be_paied_at).uniq.map{|source| source.will_be_paied_at.strftime("%Y-%m-%d") rescue ""}
     end
 
     def total_price

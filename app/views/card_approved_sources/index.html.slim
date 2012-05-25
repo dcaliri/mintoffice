@@ -3,9 +3,8 @@
     = t("common.title.search")
     = " : "
     = text_field_tag 'query', params[:query]
-    = select_tag :creditcard_id,
-      options_from_collection_for_select([Creditcard.new(:cardno => "all")]+Creditcard.all, :id, :cardno_long, params[:creditcard_id]),
-      "onchange" => "this.form.submit()"
+    = select_tag :will_be_paid_at, options_for_select(["all"] + CardApprovedSource.will_be_paid_at_list, params[:will_be_paid_at]), "onchange" => "this.form.submit()"
+    = select_tag :creditcard_id, options_from_collection_for_select([Creditcard.new(:cardno => "all")]+Creditcard.all, :id, :cardno_long, params[:creditcard_id]), "onchange" => "this.form.submit()"
 
 
 #show_command
