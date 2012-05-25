@@ -843,7 +843,7 @@ ko:
             this_years_working_days: "년의 근무일수 : "
             month_and_count: "%{m}월: %{c}일"
     ledger_accounts:
-        title: 원장 권리
+        title: 원장 관리
         index:
             empty: 계정이 없습니다
         show:
