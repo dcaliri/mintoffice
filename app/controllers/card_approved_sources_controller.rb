@@ -5,7 +5,7 @@ class CardApprovedSourcesController < ApplicationController
   def index
     approvd_source = creditcard.nil? ? CardApprovedSource : creditcard.card_approved_sources
     @card_approved_sources = approvd_source.latest.search(params[:query])
-                                           .by_date(Date.parse(params[:will_be_paid_at]))
+                                           .by_date(params[:will_be_paid_at])
                                            .page(params[:page])
   end
 

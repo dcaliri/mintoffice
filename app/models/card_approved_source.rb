@@ -10,7 +10,12 @@ class CardApprovedSource < ActiveRecord::Base
 
   class << self
     def by_date(date)
-      where(will_be_paied_at: date.to_time)
+      unless date.nil?
+        date = Date.parse(date) if date.class == String
+        where(will_be_paied_at: date.to_time)
+      else
+        where("")
+      end
     end
 
     def total_price
