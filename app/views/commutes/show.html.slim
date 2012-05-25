@@ -7,19 +7,36 @@
     = link_to t('common.title.list'), :commutes
 h2= t('.title')
 
-- unless commutes.empty?
-  table#list-table
-    tr
-      th= Commute.human_attribute_name(:go)
-      th= Commute.human_attribute_name(:leave)
-    - commutes.each do |commute|
-      tr.selectable onclick="location.href='#{detail_user_commute_path(user, commute)}'"
-        td
-          = commute.go.strftime("%Y-%m-%d %H-%M")
-        td
-          - unless commute.leave
-            = link_to t('commutes.leave.link'), [:leave, user, commute]
-          - else
-            = commute.leave.strftime("%Y-%m-%d %H-%M")
+- unless commutes_by_month.empty?
+  - commutes_by_month.each do |commutes_by_week|
+    - unless commutes_by_week.empty?
+      table#list-table
+        tr
+          - (0..6).each do |d|
+            th
+              /!= l (@start_day + d.day).to_date, format: :compact_long
+              = l (commutes_by_week[d].go + d.day).to_date, format: :compact_long unless commutes_by_week[d].nil?
+        tr
+          - commutes_by_week.each do |commute|
+            td.selectable onclick="location.href='#{detail_user_commute_path(user,commute)}'" valign="top" align="center"
+              = t("commutes.arrive_at_work") + " : " + commute.go.strftime("%H:%M")
+              br
+              br
+              - if commute.attachments.count > 0
+                 = image_tag(url_for(:controller => "attachments", :action => 'picture', :id => commute.attachments[0].id, :w => "100", :h => "100"))
+              br
+              br
+              = t("commutes.leave_work") + " : " +  commute.leave.strftime("%H:%M") unless commute.leave.nil?
+              br
+              br
+              - if commute.attachments.count > 1
+                = image_tag(url_for(:controller => "attachments", :action => 'picture', :id => commute.attachments[1].id, :w => "100", :h => "100"))
+      br
+      br
+      br
+
 - else
   h4= t('.empty')
+
+br
+
