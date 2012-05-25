@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list id="8f98244c-1a14-4d47-9bda-558e4b08ee1b" name="Default" comment="" />
-    <list default="true" id="2b254fc7-e6db-4914-b597-82d27c86f09b" name="mintoffice-8782 연봉관리 - 목록 - 오타" comment="mintoffice-8782 연봉관리 - 목록 - 오타">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="2b254fc7-e6db-4914-b597-82d27c86f09b" name="mintoffice-8782 연봉관리 - 목록 - 오타" comment="mintoffice-8782 연봉관리 - 목록 - 오타" />
     <ignored path="mintoffice.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -53,8 +51,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="699" />
-    <option name="y" value="125" />
+    <option name="x" value="388" />
+    <option name="y" value="65" />
     <option name="width" value="2110" />
     <option name="height" value="1297" />
   </component>
@@ -355,7 +353,11 @@
       <created>1337924121455</created>
       <updated>1337924121455</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="mintoffice-8782 연봉관리 - 목록 - 오타">
+      <created>1337924192649</created>
+      <updated>1337924192649</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <option name="createChangelist" value="false" />
     <servers>
       <Redmine shared="false" url="http://redmine.mintech.kr">
@@ -391,7 +393,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="699" y="125" width="2110" height="1297" extended-state="0" />
+    <frame x="388" y="65" width="2110" height="1297" extended-state="0" />
     <editor active="false" />
     <layout>
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
