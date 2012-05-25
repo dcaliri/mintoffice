@@ -12,8 +12,20 @@ class BankAccount < ActiveRecord::Base
       "#{name}-#{number}-#{note}"
     end
   end
-  
+
+  def remain
+    unless bank_transactions.empty?
+      bank_transactions.latest.last.remain
+    else
+      0
+    end
+  end
+
   class << self
+    def remain
+      sum(&:remain)
+    end
+
     def transaction_per_period(query)
       collection = BankTransaction.where('transacted_at IS NOT NULL').order(query)
       if collection.empty?

@@ -158,6 +158,7 @@ ko:
                 total_in: 입금 총액
                 total_out: 출금 총액
                 margin: 입출금 차액
+                remain: 잔고
             bank_transaction:
                 account: 은행계좌
                 transacted_at: 거래일자

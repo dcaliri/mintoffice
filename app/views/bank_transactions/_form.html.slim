@@ -7,7 +7,7 @@ h2= t("common.title.#{action_name}")
   .box
     p
       = f.label :bank_account_id, BankAccount.human_attribute_name('name')
-      = select_tag(:bank_account_id, options_for_select(BankAccount.all.map{|bank| [bank.name, bank.id]}))
+      = select_tag(:bank_account_id, options_for_select(BankAccount.all.map{|bank| [bank.name, bank.id]}, params[:bank_account_id]))
     p
       = f.label :transacted_at
       = f.datetime_select :transacted_at, :order => [:year, :month, :day, :hour, :minute]
