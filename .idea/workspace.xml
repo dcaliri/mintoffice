@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8f98244c-1a14-4d47-9bda-558e4b08ee1b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/dayworker.rb" afterPath="$PROJECT_DIR$/app/models/dayworker.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/dayworker_taxes/index.html.slim" afterPath="$PROJECT_DIR$/app/views/dayworker_taxes/index.html.slim" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/dayworkers/index.html.slim" afterPath="$PROJECT_DIR$/app/views/dayworkers/index.html.slim" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/dayworkers/show.html.slim" afterPath="$PROJECT_DIR$/app/views/dayworkers/show.html.slim" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/main/index.html.erb" afterPath="$PROJECT_DIR$/app/views/main/index.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/locales/ko/ko.yml" afterPath="$PROJECT_DIR$/config/locales/ko/ko.yml" />
+    <list id="8f98244c-1a14-4d47-9bda-558e4b08ee1b" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/mintoffice.iml" afterPath="$PROJECT_DIR$/.idea/mintoffice.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/schema.rb" afterPath="$PROJECT_DIR$/db/schema.rb" />
     </list>
+    <list default="true" id="2b254fc7-e6db-4914-b597-82d27c86f09b" name="mintoffice-8782 연봉관리 - 목록 - 오타" comment="mintoffice-8782 연봉관리 - 목록 - 오타" />
     <ignored path="mintoffice.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -33,91 +31,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="index.html.erb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/main/index.html.erb">
+      <file leaf-file-name="holiday.rb" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/models/holiday.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="107" column="67" selection-start="4248" selection-end="4248" vertical-scroll-proportion="-18.56">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="show.html.erb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/hrinfos/show.html.erb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="32" column="98" selection-start="1637" selection-end="1717" vertical-scroll-proportion="-10.16">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="_form.html.slim" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/dayworkers/_form.html.slim">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="48" selection-start="378" selection-end="378" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="show.html.slim" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/views/dayworkers/show.html.slim">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="9" selection-start="419" selection-end="419" vertical-scroll-proportion="0.2638398">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="schema.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/db/schema.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="300" column="22" selection-start="9531" selection-end="9559" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="contacts_controller.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/controllers/contacts_controller.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="33" column="19" selection-start="1059" selection-end="1059" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="dayworker.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/models/dayworker.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="96" selection-start="62" selection-end="62" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="find.html.slim" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/contacts/find.html.slim">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="33" selection-start="670" selection-end="703" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="_item_for_hrinfo.slim" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/contacts/_item_for_hrinfo.slim">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ko.yml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/config/locales/ko/ko.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+            <state line="17" column="8" selection-start="466" selection-end="466" vertical-scroll-proportion="0.34961438">
               <folding />
             </state>
           </provider>
@@ -142,10 +59,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="522" />
-    <option name="y" value="360" />
-    <option name="width" value="1949" />
-    <option name="height" value="995" />
+    <option name="x" value="227" />
+    <option name="y" value="76" />
+    <option name="width" value="2110" />
+    <option name="height" value="1297" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -180,7 +97,7 @@
     <option name="STATE" value="0" />
   </component>
   <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1" splitterProportion="0.5">
+    <navigator currentView="RailsProjectView" proportions="" version="1" splitterProportion="0.5">
       <flattenPackages />
       <showMembers />
       <showModules />
@@ -199,6 +116,10 @@
               <option name="myItemId" value="mintoffice" />
               <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.RailsProjectNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mintoffice" />
+              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.RailsModuleNode" />
+            </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
@@ -210,30 +131,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mintoffice" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mintoffice" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mintoffice" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mintoffice" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="db" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
@@ -242,9 +139,10 @@
   <component name="PropertiesComponent">
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="options.lastSelected" value="editor.preferences.appearance" />
+    <property name="options.lastSelected" value="com.intellij.tasks.config.TaskRepositoriesConfigurable" />
     <property name="recentsLimit" value="5" />
     <property name="FullScreen" value="false" />
+    <property name="Ruby.ViewRefParam.DefaultExtension" value="html.erb" />
     <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="dynamic.classpath" value="false" />
@@ -436,8 +334,18 @@
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <created>1337846732472</created>
-      <updated>1337846732472</updated>
+      <updated>1337919957054</updated>
     </task>
+    <task id="mintoffice-8782" summary="연봉관리 - 목록 - 오타">
+      <option name="associatedChangelistId" value="2b254fc7-e6db-4914-b597-82d27c86f09b" />
+      <changelist id="2b254fc7-e6db-4914-b597-82d27c86f09b" name="mintoffice-8782 연봉관리 - 목록 - 오타" comment="mintoffice-8782 연봉관리 - 목록 - 오타" />
+      <changelist id="2b254fc7-e6db-4914-b597-82d27c86f09b" name="mintoffice-8782 연봉관리 - 목록 - 오타" comment="mintoffice-8782 연봉관리 - 목록 - 오타" />
+      <created>1327382350000</created>
+      <option name="issue" value="true" />
+      <option name="type" value="BUG" />
+      <updated>1337919957013</updated>
+    </task>
+    <option name="createChangelist" value="false" />
     <servers>
       <Redmine shared="false" url="http://redmine.mintech.kr">
         <option name="APIKey" value="5ab1d406855e574fcb0efbc75d10d4df5d7d9d84" />
@@ -451,15 +359,35 @@
       </Redmine>
     </servers>
   </component>
+  <component name="TodoView" selected-index="0">
+    <todo-panel id="selected-file">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="false" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="false" />
+    </todo-panel>
+    <todo-panel id="default-changelist">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="false" />
+    </todo-panel>
+  </component>
   <component name="ToolWindowManager">
-    <frame x="522" y="360" width="1949" height="995" extended-state="0" />
-    <editor active="true" />
+    <frame x="227" y="76" width="2110" height="1297" extended-state="0" />
+    <editor active="false" />
     <layout>
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2514466" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293979" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32916668" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1904261" sideWeight="0.98655915" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17555772" sideWeight="0.67083335" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
@@ -529,23 +457,37 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/config/locales/ko/ko.yml">
+    <entry file="file://$PROJECT_DIR$/app/views/dayworkers/_form.html.slim">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="12" column="58" selection-start="329" selection-end="329" vertical-scroll-proportion="0.22043628">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/dayworkers/show.html.slim">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="61" selection-start="282" selection-end="282" vertical-scroll-proportion="0.2073027">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/hrinfos/show.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="32" column="98" selection-start="1637" selection-end="1717" vertical-scroll-proportion="0.3002364">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/main/index.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="107" column="67" selection-start="4248" selection-end="4248" vertical-scroll-proportion="-18.56">
+        <state line="107" column="67" selection-start="4248" selection-end="4248" vertical-scroll-proportion="0.54846334">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/dayworkers/_form.html.slim">
+    <entry file="file://$PROJECT_DIR$/app/models/dayworker.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="48" selection-start="378" selection-end="378" vertical-scroll-proportion="0.0">
+        <state line="2" column="3" selection-start="62" selection-end="62" vertical-scroll-proportion="0.03673938">
           <folding />
         </state>
       </provider>
@@ -557,44 +499,72 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/config/locales/ko/ko.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-8.26636">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/contacts/find.html.slim">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="33" selection-start="670" selection-end="703" vertical-scroll-proportion="0.0">
+        <state line="20" column="33" selection-start="670" selection-end="703" vertical-scroll-proportion="0.37296036">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/contacts/show.html.slim">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/contacts/select.html.slim">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/contacts/index.html.slim">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/user.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="6" selection-start="29" selection-end="29" vertical-scroll-proportion="0.03673938">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="model://mintoffice">
+      <provider selected="true" editor-type-id="AssociationsFileEditorProvider">
+        <state>
+          <settings isFieldsVisible="true" isMigrationFieldsVisible="true" isTypicalFieldsVisible="false" isOwnFieldsVisible="false" isHandToolMode="true" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/db/schema.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="300" column="22" selection-start="9531" selection-end="9559" vertical-scroll-proportion="0.0">
+        <state line="300" column="22" selection-start="9531" selection-end="9559" vertical-scroll-proportion="0.020565553">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/contacts_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="19" selection-start="1059" selection-end="1059" vertical-scroll-proportion="0.0">
+        <state line="7" column="0" selection-start="260" selection-end="260" vertical-scroll-proportion="0.020565553">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/dayworker.rb">
+    <entry file="file://$PROJECT_DIR$/app/models/holiday.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="96" selection-start="62" selection-end="62" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/hrinfos/show.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="98" selection-start="1637" selection-end="1717" vertical-scroll-proportion="-10.16">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/dayworkers/show.html.slim">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="9" selection-start="419" selection-end="419" vertical-scroll-proportion="0.2638398">
+        <state line="17" column="8" selection-start="466" selection-end="466" vertical-scroll-proportion="0.34961438">
           <folding />
         </state>
       </provider>
