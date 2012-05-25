@@ -19,11 +19,11 @@ module Reportable
   end
 
   def approve!(comment)
-    report.approve!(user, comment)
+    report.approve!(comment)
   end
 
   def rollback!(comment)
-    report.rollback!(user, comment)
+    report.rollback!(comment)
   end
 
   def redirect_when_reported
