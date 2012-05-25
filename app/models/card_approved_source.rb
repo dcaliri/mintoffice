@@ -9,6 +9,10 @@ class CardApprovedSource < ActiveRecord::Base
   end
 
   class << self
+    def total_price
+      sum{|used| used.money }
+    end
+
     def search(text)
       text = "%#{text}%"
       where('approve_no like ? OR card_no like ? OR card_holder_name like ? OR store_name like ? OR money like ?', text, text, text, text, text)
