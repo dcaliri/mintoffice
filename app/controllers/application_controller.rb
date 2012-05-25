@@ -92,7 +92,7 @@ class ApplicationController < ActionController::Base
     resource.attachments.each { |at| session[:attachments] << at.id }
   end
 
-  def check_report_access
+  def access_check
     model_name = (controller_name.singularize.classify).constantize
     model = model_name.find(params[:id])
     force_redirect unless model.access?(current_user)

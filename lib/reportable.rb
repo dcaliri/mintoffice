@@ -6,9 +6,12 @@ module Reportable
     report.reporters << User.current_user.reporters.build(report_id: report, permission_type: "write", owner: true)
   end
 
-  def access?(user, permission_type = :read)
-    report.access?(user, permission_type)
+  def create_accessor
+    report.permission User.current_user, :write
   end
+
+  delegate :access?, :to => :report
+  delegate :report!, :approve!, :rollback!, :to => :report
 
   def redirect_when_reported
     self
@@ -16,7 +19,7 @@ module Reportable
 
   module ClassMethods
     def access_list(user)
-      joins(:report => :reporters).merge(ReportPerson.access_list(user))
+      joins(:report => :accessors).merge(AccessPerson.access_list(user))
     end
 
     def report_status(status)
@@ -27,6 +30,7 @@ module Reportable
   included do
     has_one :report, as: :target
     before_create :create_report
+    after_create :create_accessor
 
     extend ClassMethods
   end

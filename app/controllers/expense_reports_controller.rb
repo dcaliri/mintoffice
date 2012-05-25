@@ -1,6 +1,6 @@
 class ExpenseReportsController < ApplicationController
   expose(:expense_report)
-  before_filter :check_report_access, except: [:index, :new, :create]
+  before_filter :access_check, except: [:index, :new, :create]
 
   def index
     project = Project.find(params[:project_id]) unless params[:project_id].blank?

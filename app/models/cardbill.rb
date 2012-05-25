@@ -6,6 +6,7 @@ class Cardbill < ActiveRecord::Base
 
   include Historiable
   include Attachmentable
+  include Permissionable
 
   def history_info
     {

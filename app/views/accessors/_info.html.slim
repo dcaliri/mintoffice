@@ -1,0 +1,3 @@
+h3 권한
+p= "쓰기: #{access_target.accessors.writers.map{|accessor| accessor.fullname}.join(', ')}"
+p= "읽기: #{access_target.accessors.readers.map{|accessor| accessor.fullname}.join(', ')}"
