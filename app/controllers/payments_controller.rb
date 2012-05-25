@@ -13,12 +13,12 @@ class PaymentsController < ApplicationController
   def index
     @from = Time.zone.now - 4.month
     @to = Time.zone.now + 3.month
-    params[:by_payment] = params[:by_payment].to_bool
+    params[:with_no_payment] = params[:with_no_payment].to_bool
 
-    if params[:by_payment]
-      @hrinfos = Hrinfo.payment_in?(@from.to_date, @to.to_date)
-    else
+    if params[:with_no_payment]
       @hrinfos = Hrinfo
+    else
+      @hrinfos = Hrinfo.payment_in?(@from.to_date, @to.to_date)
     end
     @hrinfos = @hrinfos.paginate(:page => params[:page], :per_page => 20)
     @payments = Payment

@@ -44,7 +44,7 @@ center
   = will_paginate @hrinfos
 
 #show_command
-  - if params[:by_payment]
-    = link_to t('.by_all'), payments_path(by_payment: false)
+  - if params[:with_no_payment]
+    = link_to t('.payment_only'), payments_path(with_no_payment: false)
   - else
-    = link_to t('.by_payment'), payments_path(by_payment: true)
+    = link_to t('.with_no_payment'), payments_path(with_no_payment: true)
