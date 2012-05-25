@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class CardApprovedSource < ActiveRecord::Base
   belongs_to :creditcard
 
@@ -9,6 +11,15 @@ class CardApprovedSource < ActiveRecord::Base
   end
 
   class << self
+    def by_date(date)
+      unless date.nil?
+        date = Date.parse(date) if date.class == String
+        where(will_be_paied_at: date.to_time)
+      else
+        where("")
+      end
+    end
+
     def total_price
       sum{|used| used.money }
     end
@@ -23,18 +34,20 @@ class CardApprovedSource < ActiveRecord::Base
         where("")
       else
         where('approve_no not in (?)', Cardbill.all.map{|cardbill| cardbill.approveno})
-      end
+      end.no_canceled
+    end
+
+    def no_canceled
+      where('status != ?', "승인취소")
     end
 
     def generate_cardbill
-      find_each do |approved_source|
+      no_canceled.find_each do |approved_source|
         next if Cardbill.exists?(approveno: approved_source.approve_no)
 
         used_sources = CardUsedSource.where(approve_no: approved_source.approve_no)
         next if used_sources.empty?
         used_source = used_sources.first
-
-        Rails.logger.info "approved = #{approved_source.inspect}, used = #{used_sources.inspect}"
 
         approved_source.creditcard.cardbills.create!(
           amount: used_source.price,
