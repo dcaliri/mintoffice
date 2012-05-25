@@ -111,10 +111,10 @@ class Report < ActiveRecord::Base
   end
 
   def rollback?
-    reported? || self.reporter.prev.nil? == false
+    self.status == :reported || self.reporter.prev.nil? == false
   end
 
-  def reported?
-    self.status == :reported
+  def approve?
+    self.status != :reported
   end
 end

@@ -10,21 +10,8 @@ module Reportable
     report.permission User.current_user, :write
   end
 
-  def access?(user, permission_type = :read)
-    report.access?(user, permission_type)
-  end
-
-  def report!(user, comment)
-    report.report!(user, comment)
-  end
-
-  def approve!(comment)
-    report.approve!(comment)
-  end
-
-  def rollback!(comment)
-    report.rollback!(comment)
-  end
+  delegate :access?, :to => :report
+  delegate :report!, :approve!, :rollback!, :to => :report
 
   def redirect_when_reported
     self

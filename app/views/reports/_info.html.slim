@@ -28,7 +28,7 @@ p= "상태 - #{report.localize_status}"
       p
         - if report.rollback?
           = submit_tag "반려"
-        - unless report.reported?
+        - if report.approve?
           = submit_tag "승인"
 
 - unless report.comments.empty?

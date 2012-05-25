@@ -25,6 +25,11 @@ class ExpenseReport < ActiveRecord::Base
     super
   end
 
+  def access?(user, access_type = :read)
+    return false if access_type == :write and posting
+    super
+  end
+
   class << self
     def filter(params)
       access_list(params[:user]).by_project(params[:project]).by_period(params[:year], params[:month])
