@@ -14,9 +14,21 @@ class Commute < ActiveRecord::Base
     order("go DESC")
   end
 
-  def self.this_week(week)
-    week = week.nil? ? 0.week : week.to_i.week
-    where(go: [(Time.zone.now.beginning_of_week-week) .. (Time.zone.now.end_of_week-week)]).order("go ASC")
+  def self.every_during(days)
+    commutes_by_user_id = {}
+    where(go: days).select("DISTINCT user_id").collect(&:user_id).each do |user_id|
+      commutes_by_user_id[user_id] = User.find(user_id).commutes.during(days)
+    end
+    commutes_by_user_id
+  end
+
+  def self.during(days)
+    commutes = where(go: days).order("go ASC")
+    commutes_hash = {}
+    days.begin.to_date.step(days.end.to_date,1.day) do |day|
+      commutes_hash[day] = commutes.to_a.select {|commute| commute.go.to_date === day }.first
+    end
+    commutes_hash
   end
 
   def go!

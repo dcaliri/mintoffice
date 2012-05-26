@@ -4,22 +4,32 @@
   = link_to t('common.title.back'), :root
 
 h2= t('common.title.list')
+
 table#list-table
   tr
-    th= Hrinfo.human_attribute_name("companyno") 
-    th= Hrinfo.human_attribute_name("fullname")
-    th= Commute.human_attribute_name("go")
-    th= Commute.human_attribute_name("leave")
-    - @hrinfos.each do |hrinfo|
-      - user = hrinfo.user
-      tr.selectable onclick="location.href='#{commute_path(user)}'"
-        td=h user.hrinfo.companyno
-        td=h user.fullname
-        td= user.commutes(:order => :go).empty? ? "" : user.commutes(:order => :go).last.go
-        td= user.commutes(:order => :go).empty? ? "" : user.commutes(:order => :go).last.leave
-
-br
-
-center
-  = will_paginate @users
-
+    th Name
+    - @beginning_day.to_date.step(@ending_day.to_date, 1.day).each do |day|
+      th= l day, format: :compact_long
+  - @commutes.keys.sort.each do |user_id|
+    - commutes_for_user = @commutes[user_id]
+    - user = User.find(user_id)
+    tr.selectable onclick="location.href='#{commute_path(user)}'"
+      td
+        nobr
+          = user.fullname
+      - commutes_for_user.keys.sort.each do |day|
+        - commute = commutes_for_user[day]
+        - unless commute.nil?
+          td valign="top"
+            = t("commutes.arrive_at_work") + " : " + (l commute.go, format: :time)
+            br
+            br
+            = image_tag(url_for(:controller => "attachments", :action => 'picture', :id => commute.attachments[0].id, :w => "100", :h => "100")) if commute.attachments.count > 0
+            br
+            br
+            = t("commutes.leave_work") + " : " +  (l commute.leave, format: :time) unless commute.leave.nil?
+            br
+            br
+            = image_tag(url_for(:controller => "attachments", :action => 'picture', :id => commute.attachments[1].id, :w => "100", :h => "100")) if commute.attachments.count > 1
+        - else
+          td

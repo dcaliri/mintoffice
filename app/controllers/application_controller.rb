@@ -88,8 +88,9 @@ class ApplicationController < ActionController::Base
   end
 
   def save_attachment_id(resource)
-    session[:attachments] = [] if session[:attachments].nil?
-    resource.attachments.each { |at| session[:attachments] << at.id }
+    @attachment_ids ||= []
+    resource.attachments.each { |at| @attachment_ids << at.id }
+    session[:attachments] = @attachment_ids
   end
 
   def access_check
