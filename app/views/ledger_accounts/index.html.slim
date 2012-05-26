@@ -1,0 +1,20 @@
+#show_command
+  = link_to t('common.title.new'), [:new, :ledger_account]
+  = " | "
+  = link_to t('common.title.back'), :root
+
+h2= t("common.title.list")
+
+- unless @accounts.empty?
+  table#list-table
+    thead
+      tr
+        th= LedgerAccount.human_attribute_name("title")
+        th= LedgerAccount.human_attribute_name("category")
+    tbody
+      - @accounts.find_each do |account|
+        tr.selectable onclick="location.href='#{ledger_account_path(account)}'"
+          td= account.title
+          td= account.category
+- else
+  h3= t('.empty')

@@ -3,8 +3,8 @@
 
 h2= t('common.title.list')
 
-- from = Time.zone.now - 4.month
-- to = Time.zone.now + 3.month
+- from = @from
+- to = @to
 
 table#list-table.payment-table
   tr
@@ -18,13 +18,13 @@ table#list-table.payment-table
 
     - @hrinfos.each do |hrinfo|
       - user = hrinfo.user
+      - period = Time.zone.parse("#{to.year}-#{to.month}-01 00:00:00")
       tr.selectable onclick="location.href='#{payment_path(user)}'"
         td=h hrinfo.fullname
-        - period = Time.zone.parse("#{to.year}-#{to.month}-01 00:00:00")
         - while from < period
           - td_class = (period.month == Time.zone.now.month ? :today : '')
           td.numrow[class=td_class]
-            = number_to_currency user.payments.where("pay_at BETWEEN ? AND ?", period, period + 1.month - 1.day).total
+            = number_to_currency user.payments.by_month(period.to_date).total
           - period -= 1.month
   tr
     td
@@ -34,11 +34,17 @@ table#list-table.payment-table
       td.numrow[class=td_class]
         = "-----------------------"
         br
-        = number_to_currency @payments.where("pay_at BETWEEN ? AND ?", period, period + 1.month - 1.day).total
+        = number_to_currency @payments.by_month(period.to_date).total
       - period -= 1.month
-  
+
 
 br
 
 center
   = will_paginate @hrinfos
+
+#show_command
+  - if params[:with_no_payment]
+    = link_to t('.payment_only'), payments_path(with_no_payment: false)
+  - else
+    = link_to t('.with_no_payment'), payments_path(with_no_payment: true)

@@ -1,0 +1,1 @@
+= select_tag :report_status, options_for_select(Report::STATUS_SELECT, params[:report_status] || :default), "onchange" => "this.form.submit()"

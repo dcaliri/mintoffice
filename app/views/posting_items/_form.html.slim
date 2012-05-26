@@ -1,0 +1,13 @@
+h3= type
+- items = posting_items.to_a.select{|item| item.item_type == type}
+- (5 - items.count).times { items << posting.items.build(item_type: type) }
+
+= form.fields_for :items, items do |item_field|
+  = item_field.hidden_field :item_type, value: item_field.object.item_type
+  p
+    = item_field.label :ledger_account_id
+    = item_field.select :ledger_account_id, LedgerAccount.all.map{|account| [account.title, account.id]}
+  p
+    = item_field.label :amount
+    = item_field.text_field :amount
+  br

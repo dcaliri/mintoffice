@@ -81,6 +81,7 @@ class BankTransaction < ActiveRecord::Base
   end
 
   def self.preview_stylesheet(account, type, upload)
+    raise ArgumentError, I18n.t('common.upload.empty') unless upload
     path = file_path(upload['file'].original_filename)
     parser = excel_parser(type.to_sym)
 
@@ -139,8 +140,13 @@ class BankTransaction < ActiveRecord::Base
     end
   end
 
-  def self.verify
-    sum {|transaction| (transaction.in - transaction.out)} == 0
+  def verify(transaction)
+    return true if self == transaction
+    self.before_remain == transaction.remain
+  end
+
+  def before_remain
+    self.remain + self.out - self.in
   end
 
 

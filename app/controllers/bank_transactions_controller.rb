@@ -11,12 +11,7 @@ class BankTransactionsController < ApplicationController
   end
 
   def verify
-    transactions = bank_account ? bank_account.bank_transactions : BankTransaction
-    if transactions.verify
-      redirect_to :bank_transactions, notice: "금액이 맞습니다"
-    else
-      redirect_to :bank_transactions, alert: "금액이 맞지 않습니다"
-    end
+    @bank_transactions = bank_account.bank_transactions.latest
   end
 
   def total
@@ -27,6 +22,8 @@ class BankTransactionsController < ApplicationController
   def preview
     bank_account = BankAccount.find(params[:bank_account])
     @transactions = BankTransaction.preview_stylesheet(bank_account, params[:bank_type], params[:upload])
+  rescue => error
+    redirect_to [:excel, :bank_transactions], alert: error.message
   end
 
   def upload

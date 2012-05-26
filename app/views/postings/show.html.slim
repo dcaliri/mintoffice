@@ -1,0 +1,35 @@
+#show_command
+  = link_to t('common.title.edit'), [:edit, posting]
+  = " | "
+  = link_to t('common.title.destroy'), posting, :method => :delete, :confirm => t("common.messages.delete_confirm")
+  = " | "
+  = link_to t('common.title.list'), :postings
+
+h2= t('.title')
+
+.box
+  table cellspacing="5" cellpadding="5"
+    tr
+      th= posting.class.human_attribute_name('posted_at')
+      td= posting.posted_at
+    tr
+      th= posting.class.human_attribute_name('description')
+      td= posting.description
+    tr
+      th 내역
+      td
+        table
+          tr
+            th colspan=2 차변
+            th colspan=2 대변
+          - items = Array.new([posting.items.debits.count, posting.items.credits.count].max)
+          - items = items.zip(posting.items.debits, posting.items.credits)
+          - items.each do |_, debit, credit|
+            tr
+              td= debit.ledger_account.title rescue ""
+              td= number_to_currency debit.amount rescue ""
+              td= credit.ledger_account.title rescue ""
+              td= number_to_currency credit.amount rescue ""
+    tr
+      th 총액
+      td= number_to_currency posting.total_amount

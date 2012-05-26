@@ -1,6 +1,10 @@
 class ContactAddress < ActiveRecord::Base
   belongs_to :contact
   has_and_belongs_to_many :tags, :class_name => 'ContactAddressTag'
+  before_save do
+    tag = ContactAddressTag.find_by_name(target)
+    tags << tag unless tags.exists?(name: tag.name)
+  end
 
   include Historiable
   def history_parent

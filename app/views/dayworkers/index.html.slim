@@ -1,0 +1,14 @@
+- title t('dayworkers.title')
+
+#show_command
+  = link_to t('common.title.new'), new_dayworker_path
+  = ' | '
+  = link_to t('dayworker_taxes.title') + ' ' + t('common.title.back'), dayworker_taxes_path
+
+h2= t('common.title.list')
+table#list-table
+  tr
+    th= Dayworker.human_attribute_name('juminno')
+    - dayworkers.each do |dayworker|
+      tr.selectable onclick="location.href='#{dayworker_path(dayworker)}'"
+        td=h dayworker.juminno

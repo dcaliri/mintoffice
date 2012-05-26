@@ -18,15 +18,22 @@ Mintoffice::Application.routes.draw do
       post 'excel', :action => 'upload'
     end
   end
-
+  resources :dayworkers
+  resources :dayworker_taxes
   resources :card_used_sources
-  resources :card_approved_sources
+  resources :card_approved_sources do
+    collection do
+      post 'cardbills/generate', controller: :card_approved_sources, action: :generate_cardbills, as: :generate_cardbills
+      get 'cardbills/empty', controller: :card_approved_sources, action: :find_empty_cardbills, as: :find_empty_cardbills
+    end
+  end
 
   resources :documents
   resources :projects, except: [:destroy]
   resources :pettycashes
   resources :permissions
   resources :cardbills
+
   resources :payroll_categories
   resources :payrolls do
     resources :payroll_items, path: "items"
@@ -34,8 +41,8 @@ Mintoffice::Application.routes.draw do
   resources :payroll_items
   resources :holidays
 
-  match '/hrinfos/retire/:id', :controller => "hrinfos", :action => "retire", :conditions => {:method => :get}
-  match '/hrinfos/retire/:id', :controller => "hrinfos", :action => "retire_save", :conditions => {:method => :post}
+  post '/hrinfos/retired/:id', :controller => "hrinfos", :action => "retired", as: :retired
+  post '/hrinfos/try_retired/:id', :controller => "hrinfos", :action => "try_retired", as: :try_retired
 
   resources :hrinfos
   resources :attachments
@@ -54,6 +61,7 @@ Mintoffice::Application.routes.draw do
         get 'new_yearly'
         post 'calculate'
         post 'new_yearly', :action => 'create_new_yearly'
+        get 'bonus'
       end
     end
 
@@ -143,12 +151,15 @@ Mintoffice::Application.routes.draw do
 
   resources :tags, only: [:create, :destroy]
 
-  resources :company do
+  resources :companies do
     post :switch, on: :collection
   end
   resources :expense_reports, path: 'expenses'
 
   match 'report' => 'reports#report', as: :report
+
+  resources :ledger_accounts, path: 'ledgers'
+  resources :postings
 
   root to: 'main#index'
 

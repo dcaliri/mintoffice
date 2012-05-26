@@ -1,0 +1,29 @@
+#show_command
+  = link_to t('common.title.edit'), [:edit, ledger_account]
+  = " | "
+  = link_to t('common.title.destroy'), ledger_account, :method => :delete, :confirm => t("common.messages.delete_confirm")
+  = " | "
+  = link_to t('common.title.list'), :ledger_accounts
+
+h2= t('.title')
+
+.box
+  #descr
+    table cellspacing="5" cellpadding="5"
+      tr
+        th= ledger_account.class.human_attribute_name('title')
+        td= ledger_account.title
+      tr
+        th= ledger_account.class.human_attribute_name('category')
+        td= ledger_account.category
+  #references
+    table cellspacing="5" cellpadding="5"
+      tr
+        th 기간
+        th 가격
+      - ledger_account.items.find_each do |item|
+        tr
+          td= item.posting.posted_at.strftime("%Y.%m.%d") rescue ""
+          td= number_to_currency item.amount
+
+  .clear

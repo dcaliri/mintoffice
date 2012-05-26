@@ -6,7 +6,7 @@
   - if bank_transfer.expense_report
     = link_to "지출내역서 보기", bank_transfer.expense_report
   - else
-    = link_to "지출내역서 만들기", new_expense_report_path(target_type: bank_transfer.class, target_id: bank_transfer.id)
+    = link_to "지출내역서 만들기", new_expense_report_path(target_type: bank_transfer.class, target_id: bank_transfer.id, expensed_at: bank_transfer.transfered_at, amount: bank_transfer.money)
   = " | "
   = link_to t('common.link.edit'), edit_bank_transfer_path(bank_transfer, bank_account_id: bank_transfer.bank_account)
   = " | "
@@ -19,57 +19,4 @@ h2 #{bank_transfer.bank_account.name}: #{bank_transfer.bank_account.number}
 
 .box
   table
-    tr
-      th= BankTransfer.human_attribute_name(:transfer_type)
-      td= bank_transfer.transfer_type
-    tr
-      th= BankTransfer.human_attribute_name(:transfered_at)
-      td= bank_transfer.transfered_at.strftime("%Y.%m.%d %H:%M")
-    tr
-      th= BankTransfer.human_attribute_name(:result)
-      td= bank_transfer.result
-    tr
-      th= BankTransfer.human_attribute_name(:out_bank_account)
-      td= bank_transfer.out_bank_account
-    tr
-      th= BankTransfer.human_attribute_name(:in_bank_name)
-      td= bank_transfer.in_bank_name
-    tr
-      th= BankTransfer.human_attribute_name(:in_bank_account)
-      td= bank_transfer.in_bank_account
-    tr
-      th= BankTransfer.human_attribute_name(:money)
-      td= number_to_currency bank_transfer.money
-    tr
-      th= BankTransfer.human_attribute_name(:transfer_fee)
-      td= number_to_currency bank_transfer.transfer_fee
-    tr
-      th= BankTransfer.human_attribute_name(:error_money)
-      td= number_to_currency bank_transfer.error_money
-    tr
-      th= BankTransfer.human_attribute_name(:registered_at)
-      td= number_to_currency bank_transfer.transfer_fee
-    tr
-      th= BankTransfer.human_attribute_name(:error_code)
-      td= bank_transfer.error_code
-    tr
-      th= BankTransfer.human_attribute_name(:transfer_note)
-      td= bank_transfer.transfer_note
-    tr
-      th= BankTransfer.human_attribute_name(:incode)
-      td= bank_transfer.incode
-    tr
-      th= BankTransfer.human_attribute_name(:out_account_note)
-      td= bank_transfer.out_account_note
-    tr
-      th= BankTransfer.human_attribute_name(:in_account_note)
-      td= bank_transfer.in_account_note
-    tr
-      th= BankTransfer.human_attribute_name(:in_person_name)
-      td= bank_transfer.in_person_name
-    tr
-      th= BankTransfer.human_attribute_name(:cms_code)
-      td= bank_transfer.cms_code
-    tr
-      th= BankTransfer.human_attribute_name(:currency_code)
-      td= bank_transfer.currency_code
+    = render 'detail', target: bank_transfer

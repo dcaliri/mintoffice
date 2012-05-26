@@ -23,11 +23,9 @@ h2= user.fullname
           th= Vacation.human_attribute_name(:to)
           th= Vacation.human_attribute_name(:period)
           th= Vacation.human_attribute_name(:note)
-          th= Vacation.human_attribute_name(:approve)
-          - if @user.ingroup?("admin")
-            th= t('common.menu')
+          th= Report.human_attribute_name('status')
         - vacation.used.each do |used|
-          tr
+          tr.selectable onclick="location.href='#{vacation_used_vacation_path(vacation, used)}'"
             td
               = used.from
             td
@@ -37,20 +35,8 @@ h2= user.fullname
             td
               = used.note
             td
-              = used.approve ? t("used_vacations.approval_completed") : t("used_vacations.approval_waiting")
-              - if @user.ingroup?("admin")
-                = " ["
-                - if used.approve
-                  = link_to t('vacations.approve.cancel'), vacation_used_vacation_approve_path(vacation, used, approve: false), :method => :put
-                - else
-                  = link_to t('vacations.approve.approve'), vacation_used_vacation_approve_path(vacation, used, approve: true), :method => :put
-                = "]"
+              = used.report.localize_status
 
-            - if @user.ingroup?("admin")
-              td width="150" align="center"
-                = link_to t('common.link.edit'), [:edit, vacation, used]
-                = " | "
-                = link_to t('common.link.destroy'), [vacation, used], :method => :delete, :confirm => "Are you sure?"
       br
     - else
       h4= t('used_vacations.show.empty')

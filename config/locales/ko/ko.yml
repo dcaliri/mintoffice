@@ -119,16 +119,20 @@ ko:
             contact_other: 기타
             contact_other_tag: 기타 대상
             creditcard: 신용카드
+            dayworker: 사업소득원천징수 징수자
+            dayworker_tax: 사업소득원천징수
             document: 문서
             expense_report: 지출 내역서
             holiday: 휴일관리
             hrinfo: 인사정보
+            ledger_account: 원장 계정
             namecard: 명함정보
             pay_schedule: 기본급
             payroll_item: 급여 항목
             payroll_category: 급여구분
             payment: 연봉
             pettycash: 소액현금
+            posting: 전표
             project: 프로젝트
             required_tag: 필수 태그 항목
             tag: 태그
@@ -154,6 +158,7 @@ ko:
                 total_in: 입금 총액
                 total_out: 출금 총액
                 margin: 입출금 차액
+                remain: 잔고
             bank_transaction:
                 account: 은행계좌
                 transacted_at: 거래일자
@@ -265,6 +270,10 @@ ko:
             commute:
                 go: 출근
                 leave: 퇴근
+            company:
+                name: 회사명
+                pay_basic_date: 급여 기준일
+                payday: 급여 지급일
             contact:
                 name: 이름
                 firstname: 이름
@@ -308,6 +317,15 @@ ko:
                 issuer: 발급사
                 cardholder: 소유자이름
                 total: 총 사용금액
+            dayworker:
+                juminno: 주민등록번호
+            dayworker_tax:
+                dayworker: 원천징수 대상자
+                reason: 사유
+                apply_day: 지급일자
+                amount: 금액
+                tax_amount: 세액
+                pay_amount: 최종지급금액
             document:
                 title: 문서제목
                 project: 프로젝트
@@ -332,6 +350,7 @@ ko:
                 firstname: 이름
                 lastname: 성
                 address: 주소
+                payment_day: 지급일
                 position: 직급
                 fullname: 이름
                 username: 계정
@@ -339,6 +358,9 @@ ko:
                 joined_on: 입사일
                 email: 이메일
                 listed: 목록 출력 여부
+            ledger_account:
+                title: 이름
+                category: 종류
             namecard:
                 name: "이름"
                 company: "회사명"
@@ -362,11 +384,11 @@ ko:
                 basic_pay: 기본급
             payment:
                 join_at: 입사일
-                pay_at: 지급월
                 note: 내역
                 amount: 금액
-                pay_start: 지급 시작일
-                pay_end: 지금 종료일
+                pay_at: 지급일
+                pay_start: 지급 기준 시작일
+                pay_finish: 지급 기준 종료일
                 total: 총액
                 after: "%{month}개월 후"
             pettycash:
@@ -374,6 +396,17 @@ ko:
                 transdate: 사용일자
                 inmoney: 수입금액
                 outmoney: 지출금액
+            posting:
+                posted_at: 전표 일자
+                description: 상세정보
+                total_amount: 총액
+            items:
+                ledger_account_id: 계정 종류
+            posting_item:
+                item_type: 항목 분류
+                ledger_account_id: 계정 종류
+                ledger_account: 계정 종류
+                amount: 금액
             project:
                 name: 프로젝트명
                 revenue: 계약금액
@@ -418,6 +451,7 @@ ko:
                 localized_status:
                     not_reported: 결제 대기 중
                     reporting: 결제 진행 중
+                    rollback: 반려
                     reported: 결제 완료
             bonus:
                 gave_at: 지급일
@@ -590,6 +624,10 @@ ko:
             link: 승인내역 올리기
         edit:
             title: 승인내역 수정하기
+        find_empty_cardbills:
+            link: 카드영수증이 없는 목록 보기
+        generate_cardbills:
+            link: 신용카드 영수증 생성
         title: 카드승인내역
     card_used_sources:
         index:
@@ -649,6 +687,8 @@ ko:
             already_exist: 이미 존재합니다.
             destroyed: "%{model}이(가) 성공적으로 제거 되었습니다."
             no_entries: 항목이 없습니다.
+        report:
+            status: 결제 상태
         title:
             main: 메인화면
             back: "돌아가기"
@@ -663,12 +703,16 @@ ko:
             total: 총합
             excel: 엑셀 파일 올리기
             upload: 업로드하기
+            update: 수정
         link:
             show: 내용 보기
             logout: "로그아웃"
             edit: "수정"
             destroy: "삭제"
             download: "다운로드"
+            posting: 전표 만들기
+        upload:
+            empty: 업로드한 파일이 비어있습니다.
         menu: 메뉴
         total: 합계
     commutes:
@@ -696,6 +740,8 @@ ko:
         leave:
             link: 퇴근기록 생성
             title: 출퇴근 기록 관리
+    companies:
+        title: 회사 관리
     contacts:
         index:
             title: 주소록 리스트
@@ -737,6 +783,14 @@ ko:
             type: 내역명
             file: 엑셀 파일
             submit: 엑셀 파일 올리기
+    dayworkers:
+        title: 사업소득원천징수 징수자 관리
+        new:
+            submit: 생성
+        edit:
+            submit: 수정
+    dayworker_taxes:
+        title: 사업소득원천징수 관리
     documents:
         index:
             title: "문서 관리"
@@ -768,6 +822,13 @@ ko:
         retire:
             title: 퇴직 처리
             retire_date: 퇴직일자
+        try_retired:
+            title: 퇴직 처리
+            retire_date: 연봉 일할 정산
+            retired_at: 기간
+            before_retire: 이전 급여
+            after_retire: 차감 급여
+            retire_total: 정산 급여
         new:
             title: 새로운 인사정보 입력
             users_blank: 인사정보와 연결할 사용자 계정이 없습니다.
@@ -782,6 +843,12 @@ ko:
         index:
             this_years_working_days: "년의 근무일수 : "
             month_and_count: "%{m}월: %{c}일"
+    ledger_accounts:
+        title: 원장 관리
+        index:
+            empty: 계정이 없습니다
+        show:
+            title: 원장 계정 상세정보
     main:
         index:
             human_resources: 인사관리
@@ -804,12 +871,17 @@ ko:
         show:
             title: 명함 내용 보기
     payments:
+        index:
+            payment_only: 지급이 있는 사람들만 보기
+            with_no_payment: 전체 보기
         new:
-            title: 새로운 특별상여금 입력
+            title: 연봉 입력
         yearly:
             title: 새로운 기본급 입력
         edit:
-            title: 특별상여금 수정
+            title: 연봉 수정
+        bonus:
+            title: 특별상여금 작성
         title: 연봉 관리
     payrolls:
         title: 급여대장
@@ -854,6 +926,16 @@ ko:
             title: 새로운 소액 거래 작성
         show:
             title: 소액현금 내역
+    postings:
+        title: 전표 관리
+        show:
+            title: 전표 내역
+            link: 전표 내역 보기
+        new:
+            title: 새로운 전표 작성
+            link: 전표 만들기
+        edit:
+            title: 전표 수정
     projects:
         title: 프로젝트 관리
         index:
@@ -918,6 +1000,7 @@ ko:
             title: 담당자 수정
     used_vacations:
         show:
+            title: 사용한 연차 정보
             empty: 사용한 연차 내역이 없습니다
         new:
             title: 연차 사용하기

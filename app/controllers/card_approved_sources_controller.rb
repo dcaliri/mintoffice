@@ -4,7 +4,9 @@ class CardApprovedSourcesController < ApplicationController
 
   def index
     approvd_source = creditcard.nil? ? CardApprovedSource : creditcard.card_approved_sources
-    @card_approved_sources = approvd_source.latest.page(params[:page])
+    @card_approved_sources = approvd_source.latest.search(params[:query])
+                                           .by_date(params[:will_be_paid_at])
+                                           .page(params[:page])
   end
 
   def create
@@ -22,5 +24,14 @@ class CardApprovedSourcesController < ApplicationController
   def destroy
     card_approved_source.destroy
     redirect_to :card_approved_sources
+  end
+
+  def generate_cardbills
+    total_count = CardApprovedSource.generate_cardbill
+    redirect_to :card_approved_sources, notice: "Successfully generate #{total_count} cardbills"
+  end
+
+  def find_empty_cardbills
+    @card_approved_sources = CardApprovedSource.find_empty_cardbill.latest.page(params[:page])
   end
 end

@@ -1,11 +1,34 @@
+# encoding: UTF-8
+
 class ExpenseReport < ActiveRecord::Base
   belongs_to :hrinfo
   belongs_to :target, polymorphic: true
   belongs_to :project
 
+  has_one :posting
+
   by_star_field :expensed_at
 
   include Reportable
+
+  def make_posting
+    build_posting(posted_at: expensed_at).tap do |posting|
+      posting.items.build(item_type: "차변", amount: amount)
+      posting.items.build(item_type: "대변", amount: amount)
+    end
+  end
+
+  def report!(user, comment)
+    if target_type == "Cardbill"
+      target.permission user, :read
+    end
+    super
+  end
+
+  def access?(user, access_type = :read)
+    return false if access_type == :write and posting
+    super
+  end
 
   class << self
     def filter(params)
