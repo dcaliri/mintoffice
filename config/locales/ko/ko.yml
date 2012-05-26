@@ -9,6 +9,7 @@ ko:
             default: "%Y/%m/%d"
             short: "%m/%d"
             long: "%Y년 %m월 %d일 (%a)"
+            compact_long: "%Y-%m-%d (%a)"
 
         day_names: [일요일, 월요일, 화요일, 수요일, 목요일, 금요일, 토요일]
         abbr_day_names: [일, 월, 화, 수, 목, 금, 토]
@@ -740,6 +741,8 @@ ko:
         leave:
             link: 퇴근기록 생성
             title: 출퇴근 기록 관리
+        error:
+          already_created: "이 이미 생성되었습니다."
     companies:
         title: 회사 관리
     contacts:

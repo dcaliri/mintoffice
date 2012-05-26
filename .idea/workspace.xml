@@ -30,7 +30,105 @@
     <favorites_list name="mintoffice" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="commutes_controller.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/controllers/commutes_controller.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="9" column="7" selection-start="261" selection-end="261" vertical-scroll-proportion="0.30769232">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="detail.html.slim" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/commutes/detail.html.slim">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="19" column="30" selection-start="532" selection-end="543" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_detail.html.erb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/shared/attachments/_detail.html.erb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="5" column="32" selection-start="143" selection-end="143" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="commute.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/models/commute.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="30" column="110" selection-start="909" selection-end="909" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="show.html.slim" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/views/commutes/show.html.slim">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="20" column="28" selection-start="681" selection-end="681" vertical-scroll-proportion="0.4118404">
+              <folding>
+                <marker date="1337939490000" expanded="true" signature="329:1467" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ko.yml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config/locales/ko/ko.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="33" column="5" selection-start="1111" selection-end="1111" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="attachments_controller.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/controllers/attachments_controller.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="2" column="6" selection-start="25" selection-end="25" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="attachmentable.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/attachmentable.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="hrinfos_controller.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/controllers/hrinfos_controller.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="5" column="0" selection-start="48" selection-end="166" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="application_controller.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/controllers/application_controller.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="89" column="6" selection-start="2256" selection-end="2256" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindManager">
+    <FindUsagesManager>
+      <setting name="OPEN_NEW_TAB" value="false" />
+    </FindUsagesManager>
   </component>
   <component name="Git.Settings">
     <option name="PREVIOUS_COMMIT_AUTHORS">
@@ -43,6 +141,12 @@
   <component name="GitLogSettings">
     <option name="myStructureFilterPaths" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///Rails console: mintoffice" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Rails console: mintoffice" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Rails console: mintoffice" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///IRB console" root0="SKIP_HIGHLIGHTING" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
@@ -50,7 +154,10 @@
         <option value="$PROJECT_DIR$/app/views/dayworkers/_form.html.slim" />
         <option value="$PROJECT_DIR$/app/models/dayworker.rb" />
         <option value="$PROJECT_DIR$/app/views/dayworkers/show.html.slim" />
+        <option value="$PROJECT_DIR$/app/models/commute.rb" />
         <option value="$PROJECT_DIR$/config/locales/ko/ko.yml" />
+        <option value="$PROJECT_DIR$/app/controllers/commutes_controller.rb" />
+        <option value="$PROJECT_DIR$/app/views/commutes/show.html.slim" />
       </list>
     </option>
   </component>
@@ -111,6 +218,10 @@
               <option name="myItemId" value="mintoffice" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mintoffice" />
+              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.RailsModuleNode" />
+            </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
@@ -140,7 +251,7 @@
     <property name="Ruby.ViewRefParam.DefaultExtension" value="html.erb" />
   </component>
   <component name="PublishConfig" persistUploadOnCheckin="false" />
-  <component name="RunManager" selected="Query Language Console.Default">
+  <component name="RunManager">
     <configuration default="false" name="Default" type="com.intellij.persistence.run.ConsoleRunConfigurationType" factoryName="Query Language Console" temporary="true">
       <option name="VM_PARAMETERS" value="" />
       <option name="USER_CFG_CLASS" />
@@ -192,6 +303,26 @@
       <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="RAILS_SERVER_TYPE" VALUE="Default" />
       <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="ENVIRONMENT_TYPE" VALUE="development" />
       <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="LAUNCH_JS" VALUE="false" />
+      <method>
+        <option name="RakeTask" enabled="false" />
+      </method>
+    </configuration>
+    <configuration default="true" type="RubyRunConfigurationType" factoryName="Ruby">
+      <module name="" />
+      <RUBY_RUN_CONFIG NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
+      <RUBY_RUN_CONFIG NAME="WORK DIR" VALUE="" />
+      <RUBY_RUN_CONFIG NAME="SHOULD_USE_SDK" VALUE="false" />
+      <RUBY_RUN_CONFIG NAME="ALTERN_SDK_NAME" VALUE="" />
+      <RUBY_RUN_CONFIG NAME="myPassParentEnvs" VALUE="true" />
+      <envs />
+      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="false" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" track_test_folders="true" runner="rcov">
+        <COVERAGE_PATTERN ENABLED="true">
+          <PATTERN REGEXPS="/.rvm/" INCLUDED="false" />
+        </COVERAGE_PATTERN>
+      </EXTENSION>
+      <RUBY_RUN_CONFIG NAME="SCRIPT_PATH" VALUE="" />
+      <RUBY_RUN_CONFIG NAME="SCRIPT_ARGS" VALUE="" />
       <method>
         <option name="RakeTask" enabled="false" />
       </method>
@@ -336,30 +467,24 @@
     <task id="Default" summary="Default task">
       <changelist id="8f98244c-1a14-4d47-9bda-558e4b08ee1b" name="Default" comment="" />
       <created>1337846732472</created>
-      <updated>1337923938614</updated>
+      <updated>1337937284735</updated>
     </task>
     <task id="mintoffice-8782" summary="연봉관리 - 목록 - 오타">
       <option name="associatedChangelistId" value="2b254fc7-e6db-4914-b597-82d27c86f09b" />
-      <changelist id="2b254fc7-e6db-4914-b597-82d27c86f09b" name="mintoffice-8782 연봉관리 - 목록 - 오타" comment="mintoffice-8782 연봉관리 - 목록 - 오타" />
-      <changelist id="2b254fc7-e6db-4914-b597-82d27c86f09b" name="mintoffice-8782 연봉관리 - 목록 - 오타" comment="mintoffice-8782 연봉관리 - 목록 - 오타" />
       <created>1327382350000</created>
       <option name="issue" value="true" />
       <option name="type" value="BUG" />
-      <updated>1337919957013</updated>
-    </task>
-    <task active="true" id="mintoffice-8821" summary="오타 - 원장권리 &gt; 원장관리">
-      <created>1327466846000</created>
-      <option name="issue" value="true" />
-      <option name="type" value="BUG" />
-      <updated>1337923938782</updated>
-    </task>
-    <task id="LOCAL-00001" summary="mintoffice-8782 연봉관리 - 목록 - 오타">
-      <created>1337924121455</created>
-      <updated>1337924121455</updated>
+      <updated>1337937286922</updated>
     </task>
     <task id="LOCAL-00002" summary="mintoffice-8782 연봉관리 - 목록 - 오타">
       <created>1337924192649</created>
-      <updated>1337924192649</updated>
+      <updated>1337926018366</updated>
+    </task>
+    <task active="true" id="mintoffice-8830" summary="출퇴근 관리 - 보여주기 변경">
+      <created>1327472706000</created>
+      <option name="issue" value="true" />
+      <option name="type" value="BUG" />
+      <updated>1337937287040</updated>
     </task>
     <option name="localTasksCounter" value="3" />
     <option name="createChangelist" value="false" />
@@ -476,84 +601,84 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/views/dayworkers/_form.html.slim">
+    <entry file="file://$PROJECT_DIR$/app/models/holiday.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="12" column="58" selection-start="329" selection-end="329" vertical-scroll-proportion="0.22043628" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/dayworkers/show.html.slim">
+    <entry file="file://$PROJECT_DIR$/app/controllers/api/commutes_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="11" column="61" selection-start="282" selection-end="282" vertical-scroll-proportion="0.2073027" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/hrinfos/show.html.erb">
+    <entry file="file://$PROJECT_DIR$/app/views/commutes/index.html.slim">
       <provider selected="true" editor-type-id="text-editor">
         <state line="32" column="98" selection-start="1637" selection-end="1717" vertical-scroll-proportion="0.3002364" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/dayworker.rb">
+    <entry file="file://$PROJECT_DIR$/app/helpers/attachments_helper.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="2" column="3" selection-start="62" selection-end="62" vertical-scroll-proportion="0.03673938" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/contacts/_item_for_hrinfo.slim">
+    <entry file="file://$PROJECT_DIR$/app/views/attachments/show.html.erb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/contacts/find.html.slim">
+    <entry file="file://$PROJECT_DIR$/app/views/attachments/new.html.erb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="20" column="33" selection-start="670" selection-end="703" vertical-scroll-proportion="0.37296036" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/contacts/show.html.slim">
+    <entry file="file://$PROJECT_DIR$/app/views/commutes/detail.html.slim">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/contacts/select.html.slim">
+    <entry file="file://$PROJECT_DIR$/app/views/shared/attachments/_detail.html.erb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/contacts/index.html.slim">
+    <entry file="file://$PROJECT_DIR$/app/models/commute.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/user.rb">
+    <entry file="file://$PROJECT_DIR$/app/controllers/attachments_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="2" column="6" selection-start="29" selection-end="29" vertical-scroll-proportion="0.03673938" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/db/schema.rb">
+    <entry file="file://$PROJECT_DIR$/lib/attachmentable.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="300" column="22" selection-start="9531" selection-end="9559" vertical-scroll-proportion="0.020565553" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/contacts_controller.rb">
+    <entry file="file://$PROJECT_DIR$/app/controllers/hrinfos_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="7" column="0" selection-start="260" selection-end="260" vertical-scroll-proportion="0.020565553" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/holiday.rb">
+    <entry file="file://$PROJECT_DIR$/app/controllers/application_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="17" column="8" selection-start="466" selection-end="466" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="model://mintoffice">
-      <provider selected="true" editor-type-id="AssociationsFileEditorProvider">
-        <state>
-          <settings isFieldsVisible="true" isMigrationFieldsVisible="true" isTypicalFieldsVisible="false" isOwnFieldsVisible="false" isHandToolMode="true" />
+    <entry file="file://$PROJECT_DIR$/config/locales/ko/ko.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="33" column="5" selection-start="1111" selection-end="1111" vertical-scroll-proportion="0.0">
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/locales/ko/ko.yml">
+    <entry file="file://$PROJECT_DIR$/app/controllers/commutes_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="848" column="81" selection-start="23871" selection-end="23871" vertical-scroll-proportion="0.3951094" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/main/index.html.erb">
+    <entry file="file://$PROJECT_DIR$/app/views/commutes/show.html.slim">
       <provider selected="true" editor-type-id="text-editor">
         <state line="70" column="42" selection-start="2581" selection-end="2602" vertical-scroll-proportion="0.5106383" />
       </provider>

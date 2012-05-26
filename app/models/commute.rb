@@ -5,13 +5,18 @@ class Commute < ActiveRecord::Base
 
   validate :check_unique_date, on: :create
   def check_unique_date
-    errors.add(:go, "이 이미 생성되었습니다.") if user.commutes.exists?(go: Time.zone.now.all_day)
+    errors.add(:go, t('commutes.error.already_created')) if user.commutes.exists?(go: Time.zone.now.all_day)
   end
 
   include Attachmentable
 
   def self.latest
     order("go DESC")
+  end
+
+  def self.this_week(week)
+    week = week.nil? ? 0.week : week.to_i.week
+    where(go: [(Time.zone.now.beginning_of_week-week) .. (Time.zone.now.end_of_week-week)]).order("go ASC")
   end
 
   def go!
@@ -25,7 +30,6 @@ class Commute < ActiveRecord::Base
     save!
     Boxcar.send_to_boxcar_group("admin",self.user.hrinfo.fullname, "#{Commute.human_attribute_name('leave')} : #{self.leave.strftime("%Y-%m-%d %H:%M")}")
   end
-
 
   def as_json(options={})
     super(options.merge(:only => [:go, :leave]))
