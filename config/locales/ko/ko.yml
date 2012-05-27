@@ -722,6 +722,8 @@ ko:
         leave_work: 퇴근
         index:
             title: 출퇴근 관리
+            nextweek: "한 주 이후로"
+            prevweek: "한 주 전으로 "
         new:
             title: 출근기록 생성
             link: 출근기록 생성
