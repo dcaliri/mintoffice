@@ -14,7 +14,7 @@ h2 =t('.title')
         th =t('commutes.leave_work')+":"
         td
           - unless commute.leave
-            = link_to t('commutes.leave.link'), [:leave, user, commute]
+            /!= link_to t('commutes.leave.link'), [:leave, user, commute]
           - else
             = commute.leave.strftime("%Y-%m-%d %H:%M")
   = render "shared/attachments/detail", :target => commute

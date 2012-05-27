@@ -3,15 +3,11 @@
   <component name="ChangeListManager">
     <list id="8f98244c-1a14-4d47-9bda-558e4b08ee1b" name="Default" comment="" />
     <list default="true" id="2b254fc7-e6db-4914-b597-82d27c86f09b" name="mintoffice-8782 연봉관리 - 목록 - 오타" comment="mintoffice-8782 연봉관리 - 목록 - 오타">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/codeStyleSettings.xml" afterPath="$PROJECT_DIR$/.idea/codeStyleSettings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/application_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/application_controller.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/commutes_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/commutes_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/commute.rb" afterPath="$PROJECT_DIR$/app/models/commute.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/commutes/index.html.slim" afterPath="$PROJECT_DIR$/app/views/commutes/index.html.slim" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/commutes/detail.html.slim" afterPath="$PROJECT_DIR$/app/views/commutes/detail.html.slim" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/commutes/show.html.slim" afterPath="$PROJECT_DIR$/app/views/commutes/show.html.slim" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/dayworker_taxes/_form.html.slim" afterPath="$PROJECT_DIR$/app/views/dayworker_taxes/_form.html.slim" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/locales/ko/ko.yml" afterPath="$PROJECT_DIR$/config/locales/ko/ko.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/schema.rb" afterPath="$PROJECT_DIR$/db/schema.rb" />
     </list>
     <ignored path="mintoffice.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -40,7 +36,16 @@
       <file leaf-file-name="show.html.slim" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/commutes/show.html.slim">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="31" column="0" selection-start="718" selection-end="1396" vertical-scroll-proportion="0.0">
+            <state line="4" column="0" selection-start="73" selection-end="73" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="detail.html.slim" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/commutes/detail.html.slim">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="16" column="14" selection-start="383" selection-end="383" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -66,19 +71,37 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="commutes_controller.rb" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="commutes_controller.rb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/controllers/commutes_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="41" column="0" selection-start="1287" selection-end="1287" vertical-scroll-proportion="-11.927273">
+            <state line="6" column="5" selection-start="255" selection-end="255" vertical-scroll-proportion="0.23021583">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html.slim" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="_form.html.slim" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/commutes/_form.html.slim">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="58" selection-start="54" selection-end="58" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="go.html.slim" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/commutes/go.html.slim">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html.slim" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/commutes/index.html.slim">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="24" selection-start="279" selection-end="279" vertical-scroll-proportion="0.28152493">
+            <state line="12" column="24" selection-start="279" selection-end="279" vertical-scroll-proportion="-3.490909">
               <folding />
             </state>
           </provider>
@@ -87,7 +110,7 @@
       <file leaf-file-name="application_controller.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/application_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="91" column="53" selection-start="2365" selection-end="2365" vertical-scroll-proportion="0.0">
+            <state line="62" column="11" selection-start="1696" selection-end="1727" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -118,13 +141,14 @@
         <option value="$PROJECT_DIR$/app/views/dayworkers/_form.html.slim" />
         <option value="$PROJECT_DIR$/app/models/dayworker.rb" />
         <option value="$PROJECT_DIR$/app/views/dayworkers/show.html.slim" />
-        <option value="$PROJECT_DIR$/app/views/commutes/show.html.slim" />
         <option value="$PROJECT_DIR$/app/views/dayworker_taxes/_form.html.slim" />
         <option value="$PROJECT_DIR$/config/locales/ko/ko.yml" />
         <option value="$PROJECT_DIR$/app/models/commute.rb" />
         <option value="$PROJECT_DIR$/app/controllers/application_controller.rb" />
-        <option value="$PROJECT_DIR$/app/controllers/commutes_controller.rb" />
         <option value="$PROJECT_DIR$/app/views/commutes/index.html.slim" />
+        <option value="$PROJECT_DIR$/app/views/commutes/show.html.slim" />
+        <option value="$PROJECT_DIR$/app/views/commutes/detail.html.slim" />
+        <option value="$PROJECT_DIR$/app/controllers/commutes_controller.rb" />
       </list>
     </option>
   </component>
@@ -563,8 +587,9 @@
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2514466" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290653" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32947233" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1815562" sideWeight="0.6709347" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1815562" sideWeight="0.6705277" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -573,7 +598,6 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3290653" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -636,16 +660,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/controllers/api/commutes_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="61" selection-start="282" selection-end="282" vertical-scroll-proportion="0.2073027" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/helpers/attachments_helper.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="3" selection-start="62" selection-end="62" vertical-scroll-proportion="0.03673938" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/attachments/show.html.erb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
@@ -654,11 +668,6 @@
     <entry file="file://$PROJECT_DIR$/app/views/attachments/new.html.erb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="20" column="33" selection-start="670" selection-end="703" vertical-scroll-proportion="0.37296036" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/commutes/detail.html.slim">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/shared/attachments/_detail.html.erb">
@@ -712,30 +721,51 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/commutes/show.html.slim">
+    <entry file="file://$PROJECT_DIR$/app/views/commutes/go.html.slim">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="0" selection-start="718" selection-end="1396" vertical-scroll-proportion="0.0">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/commutes_controller.rb">
+    <entry file="file://$PROJECT_DIR$/app/views/commutes/_form.html.slim">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="0" selection-start="1287" selection-end="1287" vertical-scroll-proportion="-11.927273">
+        <state line="0" column="58" selection-start="54" selection-end="58" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/commutes/show.html.slim">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="0" selection-start="73" selection-end="73" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/commutes/detail.html.slim">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="14" selection-start="383" selection-end="383" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/application_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="91" column="53" selection-start="2365" selection-end="2365" vertical-scroll-proportion="0.0">
+        <state line="62" column="11" selection-start="1696" selection-end="1727" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/commutes/index.html.slim">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="24" selection-start="279" selection-end="279" vertical-scroll-proportion="0.28152493">
+        <state line="12" column="24" selection-start="279" selection-end="279" vertical-scroll-proportion="-3.490909">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/commutes_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="5" selection-start="255" selection-end="255" vertical-scroll-proportion="0.23021583">
           <folding />
         </state>
       </provider>

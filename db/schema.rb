@@ -184,10 +184,8 @@ ActiveRecord::Schema.define(:version => 20120525090730) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
-    t.integer  "pay_basic_date", :default => 20
-    t.integer  "payday",         :default => 25
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "contact_address_tags", :force => true do |t|
@@ -477,9 +475,8 @@ ActiveRecord::Schema.define(:version => 20120525090730) do
   create_table "postings", :force => true do |t|
     t.date     "posted_at"
     t.text     "description"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
-    t.integer  "expense_report_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "project_assign_infos", :force => true do |t|
@@ -507,6 +504,11 @@ ActiveRecord::Schema.define(:version => 20120525090730) do
     t.integer  "company_id"
   end
 
+  create_table "projects_users", :id => false, :force => true do |t|
+    t.integer "project_id"
+    t.integer "user_id"
+  end
+
   create_table "report_comments", :force => true do |t|
     t.integer  "report_id"
     t.integer  "owner_id"
@@ -522,7 +524,6 @@ ActiveRecord::Schema.define(:version => 20120525090730) do
     t.datetime "created_at",                          :null => false
     t.datetime "updated_at",                          :null => false
     t.string   "permission_type", :default => "read"
-    t.boolean  "owner",           :default => false
   end
 
   create_table "reports", :force => true do |t|
@@ -587,6 +588,7 @@ ActiveRecord::Schema.define(:version => 20120525090730) do
     t.date     "from"
     t.date     "to"
     t.text     "note"
+    t.boolean  "approve"
     t.datetime "created_at",                                 :null => false
     t.datetime "updated_at",                                 :null => false
     t.decimal  "period",      :precision => 10, :scale => 0
