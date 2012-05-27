@@ -1,0 +1,20 @@
+table#list-table
+  tr
+    - @start_day.to_date.step(@end_day.to_date, 1.day).each do |day|
+      th= l day, format: :compact_long
+  tr
+    - @start_day.to_date.step(@end_day.to_date, 1.day).each do |day|
+      - holidays = @holidays.select { |h| h.theday.to_date == day }
+      - if ! holidays.empty? || day.saturday? || day.sunday?
+        td style="background-color: PaleVioletRed;"
+          - holidays.each do |h|
+            = h.dayname
+      - else
+        td
+          - today_v = @vacations.select {|v| v.in? day}
+          - unless today_v.empty?
+            - today_v.each do |tv|
+              = t("used_vacations.vacation") + tv.vacation.user.fullname
+br
+br
+br

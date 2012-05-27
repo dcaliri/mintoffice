@@ -20,19 +20,18 @@ h2= t('.title')
                 = t("commutes.arrive_at_work") + " : " + (l commute.go, format: :time)
                 br
                 br
-                = image_tag(url_for(:controller => "attachments", :action => 'picture', :id => commute.attachments[0].id, :w => "100", :h => "100")) if commute.attachments.count > 0
+                = image_tag tiny_picture_path(commute.attachments[0]) if commute.attachments.count > 0
                 br
                 br
                 = t("commutes.leave_work") + " : " +  (l commute.leave, format: :time) unless commute.leave.nil?
                 br
                 br
-                = image_tag(url_for(:controller => "attachments", :action => 'picture', :id => commute.attachments[1].id, :w => "100", :h => "100")) if commute.attachments.count > 1
+                = image_tag tiny_picture_path(commute.attachments[1]) if commute.attachments.count > 1
             - else
               td
       br
       br
       br
-
 - else
   h4= t('.empty')
 

@@ -3,7 +3,7 @@ module Reportable
 
   def create_report
     report = build_report
-    report.reporters << User.current_user.reporters.build(report_id: report, permission_type: "write", owner: true)
+    report.reporters << User.current_user.reporters.build(report_id: report, permission_type: "write")#, owner: true)
   end
 
   def create_accessor

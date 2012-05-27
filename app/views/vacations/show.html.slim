@@ -35,7 +35,7 @@ h2= user.fullname
             td
               = used.note
             td
-              = used.report.localize_status
+              = used.report.localize_status unless used.report.nil?
 
       br
     - else

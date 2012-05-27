@@ -1017,6 +1017,7 @@ ko:
         period_help: "* 반차의 경우 0.5 단위로 입력 합니다."
         approval_completed: 승인 완료
         approval_waiting : 승인 대기
+        vacation: "휴가 : "
     users:
         new:
             title: 새 사용자 계정 만들기
