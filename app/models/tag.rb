@@ -3,7 +3,7 @@ class Tag < ActiveRecord::Base
   has_many :taggings
   has_many :tags
 
-  validates_uniqueness_of :name
+  validates_uniqueness_of :name, scope: :company_id
 
   def self.find_or_create(params)
     find_or_create_by_name(params[:name])

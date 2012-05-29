@@ -9,7 +9,7 @@ class Project < ActiveRecord::Base
   scope :completed, :conditions =>['ended_on is not null'], :order => "started_on ASC"
   scope :inprogress, :conditions =>['ended_on is null'], :order => "started_on ASC"
 
-  validates_uniqueness_of :name
+  validates_uniqueness_of :name, scope: :company_id
   validates_numericality_of :revenue
 
   def completed?
