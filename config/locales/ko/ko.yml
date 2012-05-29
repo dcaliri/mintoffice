@@ -143,6 +143,9 @@ ko:
             used_vacation: 사용한 연차
             vacation: 연차
         attributes:
+            access_person:
+                access_type: 권한
+                accessor: 대상
             attachment:
                 comments: 주석
                 content_type: 파일형식

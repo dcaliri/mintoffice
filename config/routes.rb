@@ -162,6 +162,8 @@ Mintoffice::Application.routes.draw do
   resources :ledger_accounts, path: 'ledgers'
   resources :postings
 
+  post 'accessors', controller: :accessors, action: :create, as: :accessors
+
   root to: 'main#index'
 
   match ':controller/:action/:id'
