@@ -64,6 +64,7 @@ class BankTransaction < ActiveRecord::Base
   }
 
   include StylesheetParsable
+  include StylesheetExportable
 
   def self.excel_parser(type)
     parser = ExcelParser.new

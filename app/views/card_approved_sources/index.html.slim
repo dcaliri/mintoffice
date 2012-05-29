@@ -12,6 +12,8 @@
   = " | "
   = link_to t('card_approved_sources.generate.link'), [:generate_cardbills, :card_approved_sources]
   = " | "
+  = link_to t('card_approved_sources.export.link'), export_card_approved_sources_path(creditcard_id: params[:creditcard_id]), method: :post
+  = " | "
   = link_to t('card_approved_sources.new.link'), [:new, :card_approved_source]
   = " | "
   = link_to t('common.title.back'), :creditcards

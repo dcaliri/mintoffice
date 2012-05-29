@@ -8,6 +8,8 @@ class CardUsedSource < ActiveRecord::Base
     approve_no.strip!
   end
 
+  include StylesheetExportable
+
   class << self
     def search(text)
       text = "%#{text}%"

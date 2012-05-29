@@ -24,6 +24,11 @@ class BankTransfersController < ApplicationController
     redirect_to :bank_transfers
   end
 
+  def export
+    transfers = bank_account ? bank_account.bank_transfers : BankTransfer
+    send_file transfers.export_xls
+  end
+
   def create
     bank_transfer = bank_account.bank_transfers.build(params[:bank_transfer])
     bank_transfer.save!

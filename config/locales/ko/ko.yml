@@ -539,6 +539,7 @@ ko:
             type: 은행명
             file: 엑셀 파일
             submit: 미리보기
+            export: 엑셀 파일로 추출하기
         preview:
             title: 미리보기
             link: 엑셀 파일로 올리기
@@ -572,6 +573,7 @@ ko:
             type: 은행명
             file: 엑셀 파일
             submit: 엑셀 파일 올리기
+            export: 엑셀 파일로 추출하기
         preview:
             title: 미리보기
             link: 엑셀 파일로 올리기
@@ -628,6 +630,8 @@ ko:
             link: 승인내역 올리기
         edit:
             title: 승인내역 수정하기
+        export:
+            link: 엑셀 파일로 추출하기
         find_empty_cardbills:
             link: 카드영수증이 없는 목록 보기
         generate:
@@ -648,6 +652,8 @@ ko:
             link: 엑셀 파일로 올리기
             file: 엑셀 파일
             submit: 미리보기
+        export:
+            link: 엑셀 파일로 추출하기
         preview:
             title: 엑셀로 올리기
             link: 엑셀 파일로 올리기

@@ -10,6 +10,8 @@ class CardApprovedSource < ActiveRecord::Base
     approve_no.strip!
   end
 
+  include StylesheetExportable
+
   class << self
     def filter_by_params(params)
       collections = latest.by_date(params[:will_be_paid_at]).search(params[:query])

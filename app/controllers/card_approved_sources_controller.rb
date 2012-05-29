@@ -3,8 +3,8 @@ class CardApprovedSourcesController < ApplicationController
   expose(:card_approved_source)
 
   def index
-    approvd_source = creditcard.nil? ? CardApprovedSource : creditcard.card_approved_sources
-    @card_approved_sources = approvd_source.filter_by_params(params)
+    approved_source = creditcard.nil? ? CardApprovedSource : creditcard.card_approved_sources
+    @card_approved_sources = approved_source.filter_by_params(params)
   end
 
   def create
@@ -17,6 +17,11 @@ class CardApprovedSourcesController < ApplicationController
     card_approved_source.creditcard = creditcard
     card_approved_source.save!
     redirect_to card_approved_source
+  end
+
+  def export
+    approved_source = creditcard.nil? ? CardApprovedSource : creditcard.card_approved_sources
+    send_file approved_source.export_xls
   end
 
   def destroy
