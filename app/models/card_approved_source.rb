@@ -11,6 +11,9 @@ class CardApprovedSource < ActiveRecord::Base
   end
 
   include StylesheetExportable
+  stylesheet_exportable_configure do |config|
+    config.except_column 'creditcard_id'
+  end
 
   class << self
     def filter_by_params(params)

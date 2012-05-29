@@ -8,77 +8,21 @@ class BankTransaction < ActiveRecord::Base
     ["기업 은행", :ibk]
   ]
 
-  SHINHAN = {
-    :name => :shinhan,
-    :keys => {
-      :transacted_at => :time,
-      :in => :integer,
-      :out => :integer,
-      :remain => :integer
-    },
-    :columns => [
-      :transacted_at,
-      :transaction_type,
-      :in,
-      :out,
-      :note,
-      :remain,
-      :branchname
-    ],
-    :position => {
-      :start => {
-        x: 2,
-        y: 1
-      },
-      :end => 0
-    }
-  }
-
-  IBK = {
-    :name => :ibk,
-    :keys => {
-      :transacted_at => :time,
-      :in => :integer,
-      :out => :integer,
-      :remain => :integer
-    },
-    :columns => [
-      :transacted_at,
-      :out,
-      :in,
-      :remain,
-      :note,
-      :out_bank_account,
-      :out_bank_name,
-      :transaction_type,
-      :promissory_check_amount,
-      :cms_code
-    ],
-    :position => {
-      :start => {
-        x: 8,
-        y: 2
-      },
-      :end => -1
-    }
-  }
-
   include StylesheetParsable
+  include Excels::BankTransactions::Shinhan
+  include Excels::BankTransactions::IBK
+
   include StylesheetExportable
+  stylesheet_exportable_configure do |config|
+    config.except_column 'bank_account_id'
+  end
 
   def self.excel_parser(type)
-    parser = ExcelParser.new
-    parser.class_name BankTransaction
     if type == :shinhan
-      parser.column SHINHAN[:columns]
-      parser.key SHINHAN[:keys]
-      parser.option :position => SHINHAN[:position]
+      shinhan_bank_transaction_parser
     else
-      parser.column IBK[:columns]
-      parser.key IBK[:keys]
-      parser.option :position => IBK[:position]
+      ibk_bank_transaction_parser
     end
-    parser
   end
 
   def self.preview_stylesheet(account, type, upload)

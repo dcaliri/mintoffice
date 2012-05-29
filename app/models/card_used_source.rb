@@ -9,6 +9,9 @@ class CardUsedSource < ActiveRecord::Base
   end
 
   include StylesheetExportable
+  stylesheet_exportable_configure do |config|
+    config.except_column 'creditcard_id'
+  end
 
   class << self
     def search(text)

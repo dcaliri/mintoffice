@@ -78,6 +78,9 @@ class BankTransfer < ActiveRecord::Base
 
   include StylesheetParsable
   include StylesheetExportable
+  stylesheet_exportable_configure do |config|
+    config.except_column 'bank_account_id'
+  end
 
   def self.excel_parser(type)
     parser = ExcelParser.new
