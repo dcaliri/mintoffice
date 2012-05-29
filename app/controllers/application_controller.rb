@@ -11,7 +11,8 @@ class ApplicationController < ActionController::Base
   # filter_parameter_logging :password
 
   before_filter do |controller|
-    User.current_user = User.find(controller.session[:user_id]) unless controller.session[:user_id].nil?
+    User.current_user = current_user
+    Company.current_company = current_company
   end
 
   def current_company

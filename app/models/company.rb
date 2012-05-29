@@ -7,4 +7,7 @@ class Company < ActiveRecord::Base
   has_many :contact_email_tags
   has_many :contact_phone_number_tags
   has_many :contact_other_tags
+  has_many :tags
+
+  cattr_accessor :current_company
 end
