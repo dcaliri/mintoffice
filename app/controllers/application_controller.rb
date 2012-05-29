@@ -19,7 +19,6 @@ class ApplicationController < ActionController::Base
     if session[:company_id].nil?
       session[:company_id] = Company.first
     end
-
     Company.find(session[:company_id]) unless session[:company_id].nil?
   end
   helper_method :current_company
