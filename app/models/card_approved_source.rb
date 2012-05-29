@@ -11,6 +11,12 @@ class CardApprovedSource < ActiveRecord::Base
   end
 
   class << self
+    def filter_by_params(params)
+      collections = latest.by_date(params[:will_be_paid_at]).search(params[:query])
+      collections = collections.no_canceled if params[:no_canceled]
+      collections.page(params[:page])
+    end
+
     def by_date(date)
       if date == "all" or date.nil?
         where("")
@@ -42,7 +48,7 @@ class CardApprovedSource < ActiveRecord::Base
     end
 
     def no_canceled
-      where('status != ?', "승인취소")
+     where('status NOT LIKE ?', "%취소%")
     end
 
     def generate_cardbill(owner)
