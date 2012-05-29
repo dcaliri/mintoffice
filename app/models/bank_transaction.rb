@@ -94,7 +94,6 @@ class BankTransaction < ActiveRecord::Base
     self.remain + self.out - self.in
   end
 
-
   def self.group_by_note_and_in
     all.group_by{|transaction| transaction.note }.map do |note, transaction|
       {note: note, amount: transaction.sum{|p| p.in}}
