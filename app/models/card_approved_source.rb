@@ -45,7 +45,7 @@ class CardApprovedSource < ActiveRecord::Base
       where('status != ?', "승인취소")
     end
 
-    def generate_cardbill
+    def generate_cardbill(owner)
       total_count = 0
       no_canceled.find_each do |approved_source|
         next if Cardbill.exists?(approveno: approved_source.approve_no)
@@ -64,7 +64,7 @@ class CardApprovedSource < ActiveRecord::Base
           storename: approved_source.store_name,
           storeaddr: used_source.store_addr1 + " " + used_source.store_addr2,
         )
-        cardbill.accessors.build(user_id: User.current_user.id, access_type: "write")
+        cardbill.accessors.build(user_id: owner.id, access_type: "write")
         cardbill.save!
         total_count += 1
       end

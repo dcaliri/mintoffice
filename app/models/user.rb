@@ -82,6 +82,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def self.enabled
+    where("name NOT LIKE '[X] %'")
+  end
+
   def self.authenticate(name, password)
     user = self.find_by_name(name)
     if user

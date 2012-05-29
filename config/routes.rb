@@ -23,7 +23,8 @@ Mintoffice::Application.routes.draw do
   resources :card_used_sources
   resources :card_approved_sources do
     collection do
-      post 'cardbills/generate', controller: :card_approved_sources, action: :generate_cardbills, as: :generate_cardbills
+      get 'cardbills/generate', action: :generate, as: :generate_cardbills
+      post 'cardbills/generate', action: :generate_cardbills, as: :generate_cardbills
       get 'cardbills/empty', controller: :card_approved_sources, action: :find_empty_cardbills, as: :find_empty_cardbills
     end
   end

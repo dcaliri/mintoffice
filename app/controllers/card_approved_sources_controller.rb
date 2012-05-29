@@ -27,8 +27,10 @@ class CardApprovedSourcesController < ApplicationController
   end
 
   def generate_cardbills
-    total_count = CardApprovedSource.generate_cardbill
-    redirect_to :card_approved_sources, notice: "Successfully generate #{total_count} cardbills"
+    owner = User.find(params[:owner])
+    total_count = CardApprovedSource.generate_cardbill(owner)
+    # redirect_to :card_approved_sources, notice: "#{owner.name} is successfully generate #{total_count} cardbills"
+    redirect_to :card_approved_sources, notice: t('card_approved_sources.generate.success', owner: owner.name, amount: total_count)
   end
 
   def find_empty_cardbills
