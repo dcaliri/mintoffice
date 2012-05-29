@@ -15,7 +15,7 @@ class BankAccount < ActiveRecord::Base
 
   def remain
     unless bank_transactions.empty?
-      bank_transactions.latest.last.remain
+      bank_transactions.latest.first.remain
     else
       0
     end
