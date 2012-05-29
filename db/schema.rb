@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120525090730) do
+ActiveRecord::Schema.define(:version => 20120529051834) do
 
   create_table "access_people", :force => true do |t|
     t.integer  "user_id"
@@ -194,6 +194,7 @@ ActiveRecord::Schema.define(:version => 20120525090730) do
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "company_id"
   end
 
   create_table "contact_address_tags_contact_addresses", :id => false, :force => true do |t|
@@ -218,6 +219,7 @@ ActiveRecord::Schema.define(:version => 20120525090730) do
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "company_id"
   end
 
   create_table "contact_email_tags_contact_emails", :id => false, :force => true do |t|
@@ -235,6 +237,7 @@ ActiveRecord::Schema.define(:version => 20120525090730) do
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "company_id"
   end
 
   create_table "contact_other_tags_contact_others", :id => false, :force => true do |t|
@@ -254,6 +257,7 @@ ActiveRecord::Schema.define(:version => 20120525090730) do
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "company_id"
   end
 
   create_table "contact_phone_number_tags_contact_phone_numbers", :id => false, :force => true do |t|
