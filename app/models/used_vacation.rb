@@ -21,12 +21,12 @@ class UsedVacation < ActiveRecord::Base
   def self.total
     all.sum {|vacation| vacation.period || 0}
   end
-  
+
   def self.during(range)
     r = range.begin.to_date..range.end.to_date
-    where("`used_vacations`.from IN (?) OR `used_vacations`.to IN (?)", r, r)
+    where("`used_vacations`.'from' IN (?) OR `used_vacations`.'to' IN (?)", r, r)
   end
-  
+
   def in? (day)
     self.from <=  day && self.to >= day
   end
