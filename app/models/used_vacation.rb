@@ -24,7 +24,7 @@ class UsedVacation < ActiveRecord::Base
 
   def self.during(range)
     r = range.begin.to_date..range.end.to_date
-    where("`used_vacations`.'from' IN (?) OR `used_vacations`.'to' IN (?)", r, r)
+    where("`used_vacations`.`from` IN (?) OR `used_vacations`.`to` IN (?)", r, r)
   end
 
   def in? (day)
