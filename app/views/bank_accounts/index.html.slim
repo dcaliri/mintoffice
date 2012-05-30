@@ -24,6 +24,7 @@ h2 은행계좌 목록: 잔고 #{number_to_currency BankAccount.remain}
         td= account.name
         td= account.number
         td= account.note
-        td= number_to_currency account.remain
+        td.numrow
+          = number_to_currency account.remain
 - else
   h4= t('.empty')
