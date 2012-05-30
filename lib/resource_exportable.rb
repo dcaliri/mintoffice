@@ -9,6 +9,13 @@ module ResourceExportable
         columns << column if column
       end
     end
+
+    def include_column(column=nil)
+      @include_columns = @include_columns || []
+      @include_columns.tap do |columns|
+        columns << column if column
+      end
+    end
   end
 
   module ClassMethods
@@ -26,15 +33,13 @@ module ResourceExportable
     end
 
     def export(extension)
-      columns = column_names - configure.except_column - EXCEPT
+      columns = configure.include_column + column_names - configure.except_column - EXCEPT
+      filename = make_filename(extension)
 
       case extension
       when :xls
-        filename = make_filename(:xls)
         ExcelExporter.new(self, filename: filename, columns: columns).export
       when :pdf
-        # export_pdf
-        filename = make_filename(:pdf)
         PdfExporter.new(self, filename: filename, columns: columns).export
       end
     end

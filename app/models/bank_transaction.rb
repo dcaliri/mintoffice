@@ -14,7 +14,8 @@ class BankTransaction < ActiveRecord::Base
 
   include ResourceExportable
   resource_exportable_configure do |config|
-    config.except_column 'bank_account_id'
+   config.include_column 'bank_account_name'
+   config.except_column 'bank_account_id'
   end
 
   def self.excel_parser(type)
@@ -83,6 +84,10 @@ class BankTransaction < ActiveRecord::Base
     else
       Time.zone.now
     end
+  end
+
+  def bank_account_name
+    bank_account.name_with_number
   end
 
   def verify(transaction)
