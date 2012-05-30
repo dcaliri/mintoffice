@@ -539,7 +539,9 @@ ko:
             type: 은행명
             file: 엑셀 파일
             submit: 미리보기
-            export: 엑셀 파일로 추출하기
+        export:
+            excel: Excel
+            pdf: PDF
         preview:
             title: 미리보기
             link: 엑셀 파일로 올리기
@@ -573,7 +575,9 @@ ko:
             type: 은행명
             file: 엑셀 파일
             submit: 엑셀 파일 올리기
-            export: 엑셀 파일로 추출하기
+        export:
+            excel: Excel
+            pdf: PDF
         preview:
             title: 미리보기
             link: 엑셀 파일로 올리기
