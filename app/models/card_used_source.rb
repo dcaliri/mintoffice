@@ -8,10 +8,27 @@ class CardUsedSource < ActiveRecord::Base
     approve_no.strip!
   end
 
+  ################################################
+  # TODO: Need to refactor
   include StylesheetExportable
   stylesheet_exportable_configure do |config|
     config.except_column 'creditcard_id'
   end
+
+  include PdfExportable
+  pdf_exportable_configure do |config|
+    config.except_column 'creditcard_id'
+  end
+
+  def self.export(extension)
+    case extension
+    when :xls
+      export_xls
+    when :pdf
+      export_pdf
+    end
+  end
+  ################################################
 
   class << self
     def search(text)
