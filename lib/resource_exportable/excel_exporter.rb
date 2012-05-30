@@ -22,7 +22,6 @@ module ResourceExportable
         options.columns.each_with_index do |column, index|
           record = resource.send(column)
           record = record.strftime("%Y-%m-%d(%H:%m:%S)") if record.respond_to?(:strftime)
-
           sheet.row(current_row).insert index, record
         end
       end

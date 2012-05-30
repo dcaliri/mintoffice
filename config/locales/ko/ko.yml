@@ -165,6 +165,7 @@ ko:
                 remain: 잔고
             bank_transaction:
                 account: 은행계좌
+                bank_account_name: 은행계좌
                 transacted_at: 거래일자
                 transaction_type: 적요
                 in: 입금액
@@ -179,6 +180,7 @@ ko:
                 cms_code: CMS 코드
             bank_transfer:
                 account: 은행계좌
+                bank_account_name: 은행계좌
                 transfer_type: 이체구분
                 transfered_at: 거래일시
                 result: 처리결과
