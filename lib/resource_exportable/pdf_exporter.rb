@@ -14,8 +14,8 @@ module ResourceExportable
       localized_columns = columns.map{|column| collections.human_attribute_name(column)}
 
       ::Prawn::Document.generate(filename) do |pdf|
-        # pdf.font "#{Rails.root}/public/fonts/AppleGothic.ttf"
-        pdf.font "#{Rails.root}/public/fonts/MalgunGothic.ttf"
+        # pdf.font "#{Rails.root}/public/fonts/MalgunGothic.ttf"
+        pdf.font "#{Rails.root}/public/fonts/NanumGothic.ttf"
         pdf.text collections.model_name.human
 
         pdf.font_size 7
