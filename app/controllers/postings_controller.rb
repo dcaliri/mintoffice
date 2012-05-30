@@ -20,21 +20,4 @@ class PostingsController < ApplicationController
     @posting = posting
     render 'new'
   end
-
-  def edit
-    @posting = posting
-  end
-
-  def update
-    posting.save!
-    redirect_to posting
-  rescue ActiveRecord::RecordInvalid
-    @posting = posting
-    render 'edit'
-  end
-
-  def destroy
-    posting.destroy
-    redirect_to :postings
-  end
 end
