@@ -690,6 +690,7 @@ ko:
             title: 새로운 변경사항 만들기
     common:
         changes: 변경사항
+        export: 내보내기
         button:
             create: 만들기
             update: 갱신하기

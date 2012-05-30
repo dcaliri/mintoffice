@@ -24,6 +24,7 @@ h2
   center
     = will_paginate @bank_transfers
   #export-menu
+    = t('common.export') + " : "
     = link_to t('bank_transfers.export.excel'), export_bank_transfers_path(bank_account_id: params[:bank_account_id], to: :xls), method: :post
     = " | "
     = link_to t('bank_transfers.export.pdf'), export_bank_transfers_path(bank_account_id: params[:bank_account_id], to: :pdf), method: :post
