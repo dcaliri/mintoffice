@@ -1,8 +1,7 @@
 class TagsController < ApplicationController
   before_filter :find_owner, :only => :create
-
   def create
-    @tag = Tag.find_or_create(params[:tag])
+    @tag = current_company.tags.find_or_create(params[:tag])
     unless @owner.tags.include?(@tag)
       @owner.tags << @tag
     else
@@ -12,7 +11,7 @@ class TagsController < ApplicationController
   end
 
   def destroy
-    @tag = Tag.find(params[:id])
+    @tag = current_company.tags.find(params[:id])
     @tag.destroy
     redirect_to :back
   end

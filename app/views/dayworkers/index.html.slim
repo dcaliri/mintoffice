@@ -1,9 +1,9 @@
-- title t('.title')
+- title t('dayworkers.title')
 
 #show_command
   = link_to t('common.title.new'), new_dayworker_path
   = ' | '
-  = link_to t('common.title.back'), :root
+  = link_to t('dayworker_taxes.title') + ' ' + t('common.title.back'), dayworker_taxes_path
 
 h2= t('common.title.list')
 table#list-table

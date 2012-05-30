@@ -9,6 +9,7 @@ ko:
             default: "%Y/%m/%d"
             short: "%m/%d"
             long: "%Y년 %m월 %d일 (%a)"
+            compact_long: "%Y-%m-%d (%a)"
 
         day_names: [일요일, 월요일, 화요일, 수요일, 목요일, 금요일, 토요일]
         abbr_day_names: [일, 월, 화, 수, 목, 금, 토]
@@ -79,7 +80,7 @@ ko:
           # Delimets thousands (e.g. 1,000,000 is a million) (always in groups of three)
           delimiter: ","
           # Number of decimals, behind the separator (the number 1 with a precision of 2 gives: 1.00)
-          precision: 3
+          precision: 0
 
         # Used in number_to_currency()
         currency:
@@ -142,6 +143,9 @@ ko:
             used_vacation: 사용한 연차
             vacation: 연차
         attributes:
+            access_person:
+                access_type: 권한
+                accessor: 대상
             attachment:
                 comments: 주석
                 content_type: 파일형식
@@ -158,8 +162,10 @@ ko:
                 total_in: 입금 총액
                 total_out: 출금 총액
                 margin: 입출금 차액
+                remain: 잔고
             bank_transaction:
                 account: 은행계좌
+                bank_account_name: 은행계좌
                 transacted_at: 거래일자
                 transaction_type: 적요
                 in: 입금액
@@ -174,6 +180,7 @@ ko:
                 cms_code: CMS 코드
             bank_transfer:
                 account: 은행계좌
+                bank_account_name: 은행계좌
                 transfer_type: 이체구분
                 transfered_at: 거래일시
                 result: 처리결과
@@ -269,6 +276,10 @@ ko:
             commute:
                 go: 출근
                 leave: 퇴근
+            company:
+                name: 회사명
+                pay_basic_date: 급여 기준일
+                payday: 급여 지급일
             contact:
                 name: 이름
                 firstname: 이름
@@ -315,6 +326,7 @@ ko:
             dayworker:
                 juminno: 주민등록번호
             dayworker_tax:
+                dayworker: 원천징수 대상자
                 reason: 사유
                 apply_day: 지급일자
                 amount: 금액
@@ -382,7 +394,7 @@ ko:
                 amount: 금액
                 pay_at: 지급일
                 pay_start: 지급 기준 시작일
-                pay_finish: 지금 기준 종료일
+                pay_finish: 지급 기준 종료일
                 total: 총액
                 after: "%{month}개월 후"
             pettycash:
@@ -394,9 +406,12 @@ ko:
                 posted_at: 전표 일자
                 description: 상세정보
                 total_amount: 총액
+            items:
+                ledger_account_id: 계정 종류
             posting_item:
                 item_type: 항목 분류
                 ledger_account_id: 계정 종류
+                ledger_account: 계정 종류
                 amount: 금액
             project:
                 name: 프로젝트명
@@ -526,6 +541,9 @@ ko:
             type: 은행명
             file: 엑셀 파일
             submit: 미리보기
+        export:
+            excel: Excel
+            pdf: PDF
         preview:
             title: 미리보기
             link: 엑셀 파일로 올리기
@@ -559,6 +577,9 @@ ko:
             type: 은행명
             file: 엑셀 파일
             submit: 엑셀 파일 올리기
+        export:
+            excel: Excel
+            pdf: PDF
         preview:
             title: 미리보기
             link: 엑셀 파일로 올리기
@@ -615,10 +636,17 @@ ko:
             link: 승인내역 올리기
         edit:
             title: 승인내역 수정하기
+        export:
+            excel: Excel
+            pdf: PDF
         find_empty_cardbills:
             link: 카드영수증이 없는 목록 보기
-        generate_cardbills:
+        generate:
+            title: 신용카드 영수증 생성
             link: 신용카드 영수증 생성
+            owner: 소유자
+            submit: 카드영수증 생성
+            success: "%{owner} 이(가) 총 %{amount}개의 카드영수증을 생성했습니다."
         title: 카드승인내역
     card_used_sources:
         index:
@@ -631,6 +659,9 @@ ko:
             link: 엑셀 파일로 올리기
             file: 엑셀 파일
             submit: 미리보기
+        export:
+            excel: Excel
+            pdf: PDF
         preview:
             title: 엑셀로 올리기
             link: 엑셀 파일로 올리기
@@ -661,6 +692,7 @@ ko:
             title: 새로운 변경사항 만들기
     common:
         changes: 변경사항
+        export: 내보내기
         button:
             create: 만들기
             update: 갱신하기
@@ -712,6 +744,8 @@ ko:
         leave_work: 퇴근
         index:
             title: 출퇴근 관리
+            nextweek: "한 주 이후로"
+            prevweek: "한 주 전으로 "
         new:
             title: 출근기록 생성
             link: 출근기록 생성
@@ -731,6 +765,10 @@ ko:
         leave:
             link: 퇴근기록 생성
             title: 출퇴근 기록 관리
+        error:
+          already_created: "이 이미 생성되었습니다."
+    companies:
+        title: 회사 관리
     contacts:
         index:
             title: 주소록 리스트
@@ -833,7 +871,7 @@ ko:
             this_years_working_days: "년의 근무일수 : "
             month_and_count: "%{m}월: %{c}일"
     ledger_accounts:
-        title: 원장 권리
+        title: 원장 관리
         index:
             empty: 계정이 없습니다
         show:
@@ -860,6 +898,9 @@ ko:
         show:
             title: 명함 내용 보기
     payments:
+        index:
+            payment_only: 지급이 있는 사람들만 보기
+            with_no_payment: 전체 보기
         new:
             title: 연봉 입력
         yearly:
@@ -916,8 +957,10 @@ ko:
         title: 전표 관리
         show:
             title: 전표 내역
+            link: 전표 내역 보기
         new:
             title: 새로운 전표 작성
+            link: 전표 만들기
         edit:
             title: 전표 수정
     projects:
@@ -984,6 +1027,7 @@ ko:
             title: 담당자 수정
     used_vacations:
         show:
+            title: 사용한 연차 정보
             empty: 사용한 연차 내역이 없습니다
         new:
             title: 연차 사용하기
@@ -995,6 +1039,7 @@ ko:
         period_help: "* 반차의 경우 0.5 단위로 입력 합니다."
         approval_completed: 승인 완료
         approval_waiting : 승인 대기
+        vacation: "휴가 : "
     users:
         new:
             title: 새 사용자 계정 만들기

@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class CardApprovedSource < ActiveRecord::Base
   belongs_to :creditcard
 
@@ -8,7 +10,34 @@ class CardApprovedSource < ActiveRecord::Base
     approve_no.strip!
   end
 
+  include ResourceExportable
+  resource_exportable_configure do |config|
+    config.except_column 'creditcard_id'
+  end
   class << self
+    def filter_by_params(params)
+      collections = latest.by_date(params[:will_be_paid_at]).search(params[:query])
+      collections = collections.no_canceled if params[:no_canceled]
+      collections.page(params[:page])
+    end
+
+    def by_date(date)
+      if date == "all" or date.nil?
+        where("")
+      else
+        date = Date.parse(date) if date.class == String && !date.blank?
+        where(will_be_paied_at: date.to_time)
+      end
+    end
+
+    def will_be_paid_at_list
+      select(:will_be_paied_at).uniq.map{|source| source.will_be_paied_at.strftime("%Y-%m-%d") rescue ""}
+    end
+
+    def total_price
+      sum{|used| used.money }
+    end
+
     def search(text)
       text = "%#{text}%"
       where('approve_no like ? OR card_no like ? OR card_holder_name like ? OR store_name like ? OR money like ?', text, text, text, text, text)
@@ -19,18 +48,23 @@ class CardApprovedSource < ActiveRecord::Base
         where("")
       else
         where('approve_no not in (?)', Cardbill.all.map{|cardbill| cardbill.approveno})
-      end
+      end.no_canceled
     end
 
-    def generate_cardbill
-      find_each do |approved_source|
+    def no_canceled
+     where('status NOT LIKE ?', "%취소%")
+    end
+
+    def generate_cardbill(owner)
+      total_count = 0
+      no_canceled.find_each do |approved_source|
         next if Cardbill.exists?(approveno: approved_source.approve_no)
 
         used_sources = CardUsedSource.where(approve_no: approved_source.approve_no)
         next if used_sources.empty?
         used_source = used_sources.first
 
-        approved_source.creditcard.cardbills.create(
+        cardbill = approved_source.creditcard.cardbills.build(
           amount: used_source.price,
           servicecharge: used_source.tax,
           vat: used_source.tip,
@@ -40,7 +74,11 @@ class CardApprovedSource < ActiveRecord::Base
           storename: approved_source.store_name,
           storeaddr: used_source.store_addr1 + " " + used_source.store_addr2,
         )
+        cardbill.accessors.build(user_id: owner.id, access_type: "write")
+        cardbill.save!
+        total_count += 1
       end
+      total_count
     end
   end
 

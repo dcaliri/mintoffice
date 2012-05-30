@@ -14,6 +14,11 @@ class Payment < ActiveRecord::Base
     end.flatten]
   end
 
+  def self.payment_in?(from, to)
+#    where('pay_finish ? AND amount > ?', from..to, 0)
+#    where('sum(amount) > 0 AND pay_finish BETWEEN ? AND ?', from, to).group("date(pay_finish)")
+    where(pay_finish: from..to)
+  end
   def self.total_bonus(bonuses)
     bonuses.sum {|after| after[1].to_i }
   end

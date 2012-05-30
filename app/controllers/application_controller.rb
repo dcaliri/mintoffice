@@ -11,14 +11,14 @@ class ApplicationController < ActionController::Base
   # filter_parameter_logging :password
 
   before_filter do |controller|
-    User.current_user = User.find(controller.session[:user_id]) unless controller.session[:user_id].nil?
+    User.current_user = current_user
+    Company.current_company = current_company
   end
 
   def current_company
     if session[:company_id].nil?
       session[:company_id] = Company.first
     end
-
     Company.find(session[:company_id]) unless session[:company_id].nil?
   end
   helper_method :current_company
@@ -88,11 +88,12 @@ class ApplicationController < ActionController::Base
   end
 
   def save_attachment_id(resource)
-    session[:attachments] = [] if session[:attachments].nil?
-    resource.attachments.each { |at| session[:attachments] << at.id }
+    @attachment_ids ||= []
+    resource.attachments.each { |at| @attachment_ids << at.id }
+    session[:attachments] = @attachment_ids
   end
 
-  def check_report_access
+  def access_check
     model_name = (controller_name.singularize.classify).constantize
     model = model_name.find(params[:id])
     force_redirect unless model.access?(current_user)

@@ -2,7 +2,6 @@
 
 <% content_for :search do -%>
   <%= form_tag :cardbills, :method => :get do %>
-    <%= render 'reports/search_form' %>
     <%= t("common.title.search") %> : <%= text_field_tag 'query', params[:query] %>
     <%= select_tag :creditcard_id,
       options_from_collection_for_select([Creditcard.new(:cardno => "all")]+Creditcard.all, :id, :cardno_long, params[:creditcard_id]),
@@ -11,9 +10,9 @@
   <% end -%>
 <% end -%>
 
-<div id="show_command">
+<!-- <div id="show_command">
 <%= link_to t('common.title.new'), new_cardbill_path %>
-</div>
+</div> -->
 
 <h2>Total : <%= @cardbills.count %></h2>
 <table id="list-table">
@@ -24,7 +23,6 @@
     <th><%= Cardbill.human_attribute_name('storename') %></th>
     <th><%= Cardbill.human_attribute_name('storeaddr') %></th>
     <th><%= Cardbill.human_attribute_name('approveno') %></th>
-    <th><%= Report.human_attribute_name('status') %></th>
   </tr>
 
 <% @cardbills.each do |cardbill| %>
@@ -35,7 +33,6 @@
     <td><%=h cardbill.storename %></td>
     <td><%=h cardbill.storeaddr %></td>
     <td><%=h cardbill.approveno %></td>
-    <td><%=h cardbill.report.localize_status %></td>
   </tr>
 <% end %>
 </table>

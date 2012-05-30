@@ -8,10 +8,22 @@
 h2= t('.title')
 
 .box
-  table cellspacing="5" cellpadding="5"
-    tr
-      th= ledger_account.class.human_attribute_name('title')
-      td= ledger_account.title
-    tr
-      th= ledger_account.class.human_attribute_name('category')
-      td= ledger_account.category
+  #descr
+    table cellspacing="5" cellpadding="5"
+      tr
+        th= ledger_account.class.human_attribute_name('title')
+        td= ledger_account.title
+      tr
+        th= ledger_account.class.human_attribute_name('category')
+        td= ledger_account.category
+  #references
+    table cellspacing="5" cellpadding="5"
+      tr
+        th 기간
+        th 가격
+      - ledger_account.items.find_each do |item|
+        tr
+          td= item.posting.posted_at.strftime("%Y.%m.%d") rescue ""
+          td= number_to_currency item.amount
+
+  .clear

@@ -8,6 +8,7 @@ gem 'will_paginate', '~> 3.0'
 gem 'rmagick'
 gem 'decent_exposure'
 gem 'roo'
+gem 'prawn'
 
 gem 'omniauth'
 gem 'omniauth-openid'

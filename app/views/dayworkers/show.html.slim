@@ -9,3 +9,8 @@ h2= t('common.title.show')
 
 ul
   li= Dayworker.human_attribute_name('juminno') + " : " + dayworker.juminno
+
+div#show_command
+  = link_to "주소록 찾기", find_contacts_path(target_class: dayworker.class, target: dayworker), :class => 'popup'
+h3= '...'
+= render 'contacts/item_for_hrinfo', contact: dayworker.contact, menu: false
