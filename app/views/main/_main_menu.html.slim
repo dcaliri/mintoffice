@@ -1,0 +1,122 @@
+table align="center" border="0" cellspacing="5" cellpadding="5"  style="margin-top: 80px; font-size: 16px"
+  tr
+    th style="background-color:lightgray;"
+      = t("main.index.human_resources")
+    td
+      = link_to t("hrinfos.index.title"), :controller => "hrinfos"
+      '  /
+      = link_to t("commutes.index.title"), commute_path(@user)
+  tr
+    th style="background-color:lightgray;"
+      = t("main.index.finance")
+    
+  tr
+    th style="background-color:lightgray;"
+      = t("main.index.project")
+  tr
+    th style="background-color:lightgray;"
+      = t("main.index.document")
+      
+  - if @user.ingroup?(:admin)
+    tr
+      th style="background-color:lightgray;"
+        = t("main.index.admin")
+      td
+        = link_to t("commutes.index.title"), :commutes 
+        '  /
+
+/   <tr>
+/     <td style="text-align: left;" valign="top">
+/       <ul>
+/         <li><%= link_to t("hrinfos.index.title"), :controller => "hrinfos" %></li>
+/         <% if @user.ingroup?(:admin) %>
+/           <li><%= link_to t("commutes.index.title"), :commutes %></li>
+/         <% else %>
+/           <li><%= link_to t("commutes.index.title"), commute_path(@user) %></li>
+/         <% end %>
+/         <% if @user.ingroup?(:admin) %>
+/           <li><%= link_to t("vacations.index.title"), :vacations %></li>
+/         <% else %>
+/           <li><%= link_to t("vacations.index.title"), vacation_path(@user) %></li>
+/         <% end %>
+/         <% if @user.ingroup?(:admin) || @user.has_payment_info %>
+/           <% if @user.ingroup?(:admin) %>
+/             <li><%= link_to t("payments.title"), :payments %></li>
+/           <% else %>
+/             <li><%= link_to t("payments.title"), payment_path(@user) %></li>
+/           <% end %>
+/         <% end %>
+/       </ul>
+/ 
+/     </td>
+/     <td style="text-align: left;" valign="top">
+/       <ul>
+/         <% if @user.permission.any? {|perm| perm.name == 'pettycashes'}  %>
+/           <li><%= link_to t("pettycashes.index.title"), :controller => "pettycashes" %></li>
+/         <% end %>
+/       </ul>
+/       <ul>
+/         <li><%= link_to t("cardbills.index.title"), :controller => "cardbills" %></li>
+/       </ul>
+/       <ul>
+/         <% if @user.permission.any? {|perm| perm.name == 'bank_accounts'}  %>
+/           <li><%= link_to t("bank_accounts.index.title"), :bank_accounts %></li>
+/         <% end %>
+/       </ul>
+/       <ul>
+/         <% if @user.permission.any? {|perm| perm.name == 'taxbills'}  %>
+/           <li><%= link_to t("taxbills.index.title"), :taxbills %></li>
+/         <% end %>
+/       </ul>
+/       <ul>
+/         <li><%= link_to t("expense_reports.index.title"), :expense_reports %></li>
+/       </ul>
+/       <ul>
+/         <li><%= link_to t("ledger_accounts.title"), :ledger_accounts %></li>
+/       </ul>
+/       <ul>
+/         <li><%= link_to t("postings.title"), :postings %></li>
+/       </ul>
+/     </td>
+/     <td style="text-align: left;" valign="top">
+/       <ul>
+/         <% if @user.permission.any? {|perm| perm.name == 'projects'}  %>
+/           <li><%= link_to t("projects.index.title"), :controller => "projects" %></li>
+/         <% end %>
+/       </ul>
+/     </td>
+/     <td style="text-align: left;" valign="top">
+/       <ul>
+/         <li><%= link_to t("documents.index.title"), :controller => "documents" %></li>
+/         <!-- <% if @user.permission.any? {|perm| perm.name == 'namecards'}  %>
+/           <li><%= link_to t("namecards.index.title"), :controller => "namecards" %></li>
+/         <% end %> -->
+/         <% if @user.permission.any? {|perm| perm.name == 'business_clients'}  %>
+/           <li><%= link_to t("business_clients.index.title"), :business_clients %></li>
+/         <% end %>
+/         <% if @user.permission.any? {|perm| perm.name == 'contacts'}  %>
+/           <li>
+/             <%= link_to t("contacts.index.title"), :contacts %>
+/           </li>
+/         <% end %>
+/       </ul>
+/     </td>
+/     <% if @user.ingroup?(:admin)%>
+/       <td style="text-align: left;" valign="top">
+/         <ul>
+/           <% if @user.permission.any? {|perm| perm.name == 'users'}  %>
+/           <li><%= link_to t("users.index.title"), :controller => "users" %></li>
+/           <% end %>
+/           <li><%= link_to t("payroll_categories.title"), :controller => "payroll_categories" %></li>
+/           <li><%= link_to t("payrolls.title"), :controller => "payrolls" %></li>
+/           <li><%= link_to t("creditcards.title"), :creditcards %></li>
+/           <li><%= link_to t("attachments.title"), :controller => "attachments" %></li>
+/           <li><%= link_to t("permissions.title"), :controller => "permissions" %></li>
+/           <li><%= link_to t("change_histories.title"), :controller => "change_histories" %></li>
+/           <li><%= link_to t("holidays.title"), :controller => "holidays" %></li>
+/           <li><%= link_to t("dayworker_taxes.title"), :controller => "dayworker_taxes" %></li>
+/           <li><%= link_to t("companies.title"), current_company %></li>
+/         </ul>
+/       </td>
+/     <% end %>
+/ </table>
