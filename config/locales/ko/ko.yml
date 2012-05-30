@@ -635,7 +635,8 @@ ko:
         edit:
             title: 승인내역 수정하기
         export:
-            link: 엑셀 파일로 추출하기
+            excel: Excel
+            pdf: PDF
         find_empty_cardbills:
             link: 카드영수증이 없는 목록 보기
         generate:
@@ -657,7 +658,8 @@ ko:
             file: 엑셀 파일
             submit: 미리보기
         export:
-            link: 엑셀 파일로 추출하기
+            excel: Excel
+            pdf: PDF
         preview:
             title: 엑셀로 올리기
             link: 엑셀 파일로 올리기

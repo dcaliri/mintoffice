@@ -12,27 +12,10 @@ class BankTransaction < ActiveRecord::Base
   include Excels::BankTransactions::Shinhan
   include Excels::BankTransactions::IBK
 
-  ################################################
-  # TODO: Need to refactor
-  include StylesheetExportable
-  stylesheet_exportable_configure do |config|
+  include ResourceExportable
+  resource_exportable_configure do |config|
     config.except_column 'bank_account_id'
   end
-
-  include PdfExportable
-  pdf_exportable_configure do |config|
-    config.except_column 'bank_account_id'
-  end
-
-  def self.export(extension)
-    case extension
-    when :xls
-      export_xls
-    when :pdf
-      export_pdf
-    end
-  end
-  ################################################
 
   def self.excel_parser(type)
     if type == :shinhan
