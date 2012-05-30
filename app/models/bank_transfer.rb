@@ -15,8 +15,9 @@ class BankTransfer < ActiveRecord::Base
   include Excels::BankTransfers::Shinhan
   include Excels::BankTransfers::IBK
 
-  include StylesheetExportable
-  stylesheet_exportable_configure do |config|
+  include ResourceExportable
+  resource_exportable_configure do |config|
+   config.include_column 'bank_account_name'
     config.except_column 'bank_account_id'
   end
 
@@ -67,6 +68,10 @@ class BankTransfer < ActiveRecord::Base
 
   def self.latest
     order("transfered_at DESC")
+  end
+
+  def bank_account_name
+    bank_account.name_with_number
   end
 
   def transaction

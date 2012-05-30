@@ -5,6 +5,10 @@ class BankAccount < ActiveRecord::Base
   include Historiable
   include Attachmentable
 
+  def name_with_number
+    name + " : " + number rescue ""
+  end
+
   def description
     if number.nil? || note.nil?
       name

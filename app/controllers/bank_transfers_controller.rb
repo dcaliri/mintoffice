@@ -26,7 +26,7 @@ class BankTransfersController < ApplicationController
 
   def export
     transfers = bank_account ? bank_account.bank_transfers : BankTransfer
-    send_file transfers.export_xls
+    send_file transfers.export(params[:to].to_sym)
   end
 
   def create

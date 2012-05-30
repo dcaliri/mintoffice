@@ -165,7 +165,7 @@ Mintoffice::Application.routes.draw do
   match 'report' => 'reports#report', as: :report
 
   resources :ledger_accounts, path: 'ledgers'
-  resources :postings
+  resources :postings, except: [:edit, :update, :destroy]
 
   post 'accessors', controller: :accessors, action: :create, as: :accessors
 
