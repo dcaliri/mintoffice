@@ -9,8 +9,6 @@
   = " | "
   = link_to t('bank_transfers.excel.link'), [:excel, :bank_transfers]
   = " | "
-  = link_to t('bank_transfers.excel.export'), export_bank_transfers_path(bank_account_id: params[:bank_account_id]), method: :post
-  = " | "
   = link_to t('common.title.back'), :bank_accounts
 
 h2
@@ -25,5 +23,9 @@ h2
   br
   center
     = will_paginate @bank_transfers
+  #export-menu
+    = link_to t('bank_transfers.export.excel'), export_bank_transfers_path(bank_account_id: params[:bank_account_id], to: :xls), method: :post
+    = " | "
+    = link_to t('bank_transfers.export.pdf'), export_bank_transfers_path(bank_account_id: params[:bank_account_id], to: :pdf), method: :post
 - else
   h4= t('.empty')

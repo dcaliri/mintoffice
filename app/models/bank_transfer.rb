@@ -15,8 +15,8 @@ class BankTransfer < ActiveRecord::Base
   include Excels::BankTransfers::Shinhan
   include Excels::BankTransfers::IBK
 
-  include StylesheetExportable
-  stylesheet_exportable_configure do |config|
+  include ResourceExportable
+  resource_exportable_configure do |config|
     config.except_column 'bank_account_id'
   end
 

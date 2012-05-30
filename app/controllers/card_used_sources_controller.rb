@@ -21,7 +21,7 @@ class CardUsedSourcesController < ApplicationController
 
   def export
     used_sources = creditcard.nil? ? CardUsedSource : creditcard.card_used_sources
-    send_file used_sources.export_xls
+    send_file used_sources.export(params[:to].to_sym)
   end
 
   def destroy

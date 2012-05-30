@@ -8,8 +8,8 @@ class CardUsedSource < ActiveRecord::Base
     approve_no.strip!
   end
 
-  include StylesheetExportable
-  stylesheet_exportable_configure do |config|
+  include ResourceExportable
+  resource_exportable_configure do |config|
     config.except_column 'creditcard_id'
   end
 
