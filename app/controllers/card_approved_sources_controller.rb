@@ -3,10 +3,8 @@ class CardApprovedSourcesController < ApplicationController
   expose(:card_approved_source)
 
   def index
-    approvd_source = creditcard.nil? ? CardApprovedSource : creditcard.card_approved_sources
-    @card_approved_sources = approvd_source.latest.search(params[:query])
-                                           .by_date(params[:will_be_paid_at])
-                                           .page(params[:page])
+    approved_source = creditcard.nil? ? CardApprovedSource : creditcard.card_approved_sources
+    @card_approved_sources = approved_source.filter_by_params(params)
   end
 
   def create
@@ -21,14 +19,20 @@ class CardApprovedSourcesController < ApplicationController
     redirect_to card_approved_source
   end
 
+  def export
+    approved_source = creditcard.nil? ? CardApprovedSource : creditcard.card_approved_sources
+    send_file approved_source.export_xls
+  end
+
   def destroy
     card_approved_source.destroy
     redirect_to :card_approved_sources
   end
 
   def generate_cardbills
-    total_count = CardApprovedSource.generate_cardbill
-    redirect_to :card_approved_sources, notice: "Successfully generate #{total_count} cardbills"
+    owner = User.find(params[:owner])
+    total_count = CardApprovedSource.generate_cardbill(owner)
+    redirect_to :card_approved_sources, notice: t('card_approved_sources.generate.success', owner: owner.name, amount: total_count)
   end
 
   def find_empty_cardbills

@@ -9,6 +9,8 @@
   = " | "
   = link_to t('bank_transfers.excel.link'), [:excel, :bank_transfers]
   = " | "
+  = link_to t('bank_transfers.excel.export'), export_bank_transfers_path(bank_account_id: params[:bank_account_id]), method: :post
+  = " | "
   = link_to t('common.title.back'), :bank_accounts
 
 h2

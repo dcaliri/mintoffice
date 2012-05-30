@@ -26,10 +26,10 @@ p= "상태 - #{report.localize_status}"
         = label_tag :comment, t('activerecord.attributes.report.comment')
         = text_field_tag :comment
       p
-        / - if report.rollback?
-        /   = submit_tag "반려"
-        / - if report.approve?
-        /   = submit_tag "승인"
+        - if report.rollback?
+          = submit_tag "반려"
+        - if report.approve?
+          = submit_tag "승인"
 
 - unless report.comments.empty?
   .box

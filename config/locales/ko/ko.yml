@@ -143,6 +143,9 @@ ko:
             used_vacation: 사용한 연차
             vacation: 연차
         attributes:
+            access_person:
+                access_type: 권한
+                accessor: 대상
             attachment:
                 comments: 주석
                 content_type: 파일형식
@@ -536,6 +539,7 @@ ko:
             type: 은행명
             file: 엑셀 파일
             submit: 미리보기
+            export: 엑셀 파일로 추출하기
         preview:
             title: 미리보기
             link: 엑셀 파일로 올리기
@@ -569,6 +573,7 @@ ko:
             type: 은행명
             file: 엑셀 파일
             submit: 엑셀 파일 올리기
+            export: 엑셀 파일로 추출하기
         preview:
             title: 미리보기
             link: 엑셀 파일로 올리기
@@ -625,10 +630,16 @@ ko:
             link: 승인내역 올리기
         edit:
             title: 승인내역 수정하기
+        export:
+            link: 엑셀 파일로 추출하기
         find_empty_cardbills:
             link: 카드영수증이 없는 목록 보기
-        generate_cardbills:
+        generate:
+            title: 신용카드 영수증 생성
             link: 신용카드 영수증 생성
+            owner: 소유자
+            submit: 카드영수증 생성
+            success: "%{owner} 이(가) 총 %{amount}개의 카드영수증을 생성했습니다."
         title: 카드승인내역
     card_used_sources:
         index:
@@ -641,6 +652,8 @@ ko:
             link: 엑셀 파일로 올리기
             file: 엑셀 파일
             submit: 미리보기
+        export:
+            link: 엑셀 파일로 추출하기
         preview:
             title: 엑셀로 올리기
             link: 엑셀 파일로 올리기

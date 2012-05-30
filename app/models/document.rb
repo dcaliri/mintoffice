@@ -22,7 +22,7 @@ class Document < ActiveRecord::Base
   def add_tags(tag_list)
     unless tag_list.blank?
       tag_list.split(',').each do |tag|
-        tags << Tag.find_or_create_by_name(tag)
+        tags << Company.current_company.tags.find_or_create_by_name(tag)
       end
     end
   end

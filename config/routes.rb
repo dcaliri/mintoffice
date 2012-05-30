@@ -20,10 +20,14 @@ Mintoffice::Application.routes.draw do
   end
   resources :dayworkers
   resources :dayworker_taxes
-  resources :card_used_sources
+  resources :card_used_sources do
+    post 'export', on: :collection
+  end
   resources :card_approved_sources do
     collection do
-      post 'cardbills/generate', controller: :card_approved_sources, action: :generate_cardbills, as: :generate_cardbills
+      post 'export'
+      get 'cardbills/generate', action: :generate, as: :generate_cardbills
+      post 'cardbills/generate', action: :generate_cardbills, as: :generate_cardbills
       get 'cardbills/empty', controller: :card_approved_sources, action: :find_empty_cardbills, as: :find_empty_cardbills
     end
   end
@@ -123,6 +127,7 @@ Mintoffice::Application.routes.draw do
       get 'verify'
       get 'excel'
       post 'preview'
+      post 'export'
       post 'excel', :action => 'upload'
     end
   end
@@ -131,6 +136,7 @@ Mintoffice::Application.routes.draw do
     collection do
       get 'excel'
       post 'preview'
+      post 'export'
       post 'excel', :action => 'upload'
     end
   end
@@ -160,6 +166,8 @@ Mintoffice::Application.routes.draw do
 
   resources :ledger_accounts, path: 'ledgers'
   resources :postings
+
+  post 'accessors', controller: :accessors, action: :create, as: :accessors
 
   root to: 'main#index'
 

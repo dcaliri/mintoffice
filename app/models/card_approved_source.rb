@@ -10,7 +10,18 @@ class CardApprovedSource < ActiveRecord::Base
     approve_no.strip!
   end
 
+  include StylesheetExportable
+  stylesheet_exportable_configure do |config|
+    config.except_column 'creditcard_id'
+  end
+
   class << self
+    def filter_by_params(params)
+      collections = latest.by_date(params[:will_be_paid_at]).search(params[:query])
+      collections = collections.no_canceled if params[:no_canceled]
+      collections.page(params[:page])
+    end
+
     def by_date(date)
       if date == "all" or date.nil?
         where("")
@@ -42,10 +53,10 @@ class CardApprovedSource < ActiveRecord::Base
     end
 
     def no_canceled
-      where('status != ?', "승인취소")
+     where('status NOT LIKE ?', "%취소%")
     end
 
-    def generate_cardbill
+    def generate_cardbill(owner)
       total_count = 0
       no_canceled.find_each do |approved_source|
         next if Cardbill.exists?(approveno: approved_source.approve_no)
@@ -64,7 +75,7 @@ class CardApprovedSource < ActiveRecord::Base
           storename: approved_source.store_name,
           storeaddr: used_source.store_addr1 + " " + used_source.store_addr2,
         )
-        cardbill.accessors.build(user_id: User.current_user.id, access_type: "write")
+        cardbill.accessors.build(user_id: owner.id, access_type: "write")
         cardbill.save!
         total_count += 1
       end

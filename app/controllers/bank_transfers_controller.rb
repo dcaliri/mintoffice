@@ -16,12 +16,17 @@ class BankTransfersController < ApplicationController
   def preview
     @bank_transfers = BankTransfer.preview_stylesheet(params[:bank_type], params[:upload])
   rescue => error
-    redirect_to [:excel, :bank_transactions], alert: error.message
+    redirect_to [:excel, :bank_transfers], alert: error.message
   end
 
   def upload
     BankTransfer.create_with_stylesheet(params[:bank_type], params[:upload])
     redirect_to :bank_transfers
+  end
+
+  def export
+    transfers = bank_account ? bank_account.bank_transfers : BankTransfer
+    send_file transfers.export_xls
   end
 
   def create
