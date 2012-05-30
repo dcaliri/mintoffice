@@ -54,7 +54,7 @@ class HrinfosController < ApplicationController
   # GET /hrinfos/1.xml
   def show
     @hrinfo = Hrinfo.find(params[:id])
-    @related_documents = Tag.related_documents(@hrinfo.user.name, Hrinfo.model_name.human)
+    @related_documents = current_company.tags.related_documents(@hrinfo.user.name, Hrinfo.model_name.human)
     @required_tagnames = RequiredTag.find_all_by_modelname(Hrinfo.name).collect do |rt| rt.tag.name end
     @required_tagnames = @required_tagnames.uniq.sort
 

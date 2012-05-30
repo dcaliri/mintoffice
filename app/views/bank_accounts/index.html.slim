@@ -9,7 +9,8 @@
   = link_to "은행계좌 만들기", [:new, :bank_account]
   = " | "
   = link_to t('common.title.back'), :root
-h2 ..
+
+h2 은행계좌 목록: 잔고 #{number_to_currency BankAccount.remain}
 
 - unless bank_accounts.empty?
   table#list-table
@@ -17,10 +18,13 @@ h2 ..
       th= BankAccount.human_attribute_name(:name)
       th= BankAccount.human_attribute_name(:number)
       th= BankAccount.human_attribute_name(:note)
+      th= BankAccount.human_attribute_name(:remain)
     - bank_accounts.each do |account|
       tr.selectable onclick="location.href='#{bank_account_path(account)}'"
         td= account.name
         td= account.number
         td= account.note
+        td.numrow
+          = number_to_currency account.remain
 - else
   h4= t('.empty')

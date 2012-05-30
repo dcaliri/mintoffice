@@ -15,13 +15,13 @@ h2 ..
   table#list-table
     tr
       th= contact.class.human_attribute_name(:name)
-      th= contact.class.human_attribute_name(:company)
+      th= contact.class.human_attribute_name(:company_name)
       th= contact.class.human_attribute_name(:department)
       th= contact.class.human_attribute_name(:position)
     - @contacts.each do |contact|
       tr.selectable onclick="location.href='#{select_contact_path(contact, :target_class => params[:target_class], :target => params[:target], :parent_class => params[:parent_class], :parent => params[:parent])}'"
         td= contact.name
-        td= contact.company
+        td= contact.company_name
         td= contact.department
         td= contact.position
 - else

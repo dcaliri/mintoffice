@@ -2,7 +2,7 @@
 
 class Report < ActiveRecord::Base
   belongs_to :target, polymorphic: true
-  has_many :reporters, class_name: "ReportPerson"
+  has_many :reporters, class_name: "ReportPerson", dependent: :destroy
   has_many :comments, class_name: 'ReportComment'
 
   before_create :set_status
@@ -23,21 +23,23 @@ class Report < ActiveRecord::Base
 
   STATUS_SELECT = {
     "전체" => :all,
-    "결재 대기 중, 반려" => :reporting_with_rollback,
+    "결재전 + 나의 결재 대기중" => :default,
     "결제 대기 중" => :not_reported,
     "결제 진행 중" => :reporting,
     "반려" => :rollback,
     "결제 완료" => :reported
   }
 
+  include Permissionable
+
   class << self
     def search_by_status(status)
-      status = status.blank? ? 'reporting_with_rollback' : status.to_sym
+      status = status.blank? ? :default : status.to_sym
       case status
       when :all
         where("")
-      when :reporting_with_rollback
-        where(status: [:not_reported, :rollback])
+      when :default
+        where('reports.status != ?', :reported).merge(ReportPerson.by_me)
       else
         where(status: status)
       end
@@ -46,15 +48,7 @@ class Report < ActiveRecord::Base
   end
 
   def reporter
-    self.reporters.find_by_permission_type("write")
-  end
-
-  def access?(user, permission_type = :read)
-    if permission_type == :write
-      self.reporter.user == user
-    else
-      self.reporters.exists?(user_id: user)
-    end
+    self.reporters.find_by_owner(true)
   end
 
   def localize_status
@@ -63,16 +57,16 @@ class Report < ActiveRecord::Base
 
   def report!(user, comment)
     prev_reporter = self.reporter
-    prev_reporter.permission_type = "read"
+    prev_reporter.owner = false
 
     collection = reporters.where(user_id: user.id)
     if collection.empty?
-      next_reporter = user.reporters.build(permission_type: "write")
+      next_reporter = user.reporters.build(owner: true)
       next_reporter.prev = prev_reporter
       self.reporters << next_reporter
     else
       next_reporter = collection.first
-      next_reporter.permission_type = "write"
+      next_reporter.owner = true
     end
 
     self.status = :reporting
@@ -81,6 +75,10 @@ class Report < ActiveRecord::Base
 
     next_reporter.save!
     prev_reporter.save!
+
+    permission user, :write
+    permission prev_reporter.user, :read
+
     save!
   end
 
@@ -93,26 +91,30 @@ class Report < ActiveRecord::Base
   end
 
   def rollback!(comment)
-#    self.status = :reporting
     self.status = :rollback
     prev_reporter = self.reporter
     next_reporter = prev_reporter.prev if prev_reporter.prev
     if next_reporter
-      next_reporter.permission_type = "write"
-      prev_reporter.permission_type = "read"
+      next_reporter.owner = true
       next_reporter.save!
+
+      prev_reporter.owner = false
       prev_reporter.save!
+
+      permission next_reporter.user, :write
+      permission prev_reporter.user, :read
     end
     self.comments.build(owner: prev_reporter, description: "#{prev_reporter.fullname}님이 결제를 반려하였습니다")
     self.comments.build(owner: prev_reporter, description: comment) unless comment.blank?
+
     save!
   end
 
   def rollback?
-    reported? || self.reporter.prev.nil? == false
+    self.status == :reported || self.reporter.prev.nil? == false
   end
 
-  def reported?
-    self.status == :reported
+  def approve?
+    self.status != :reported
   end
 end

@@ -1,0 +1,18 @@
+#show_command
+  = link_to t('common.title.back'), company
+
+h2= t("common.title.#{action_name}")
+
+.box
+  = form_for company, html: {class: "tabular"} do |f|
+    p
+      = f.label :name
+      = f.text_field :name
+    p
+      = f.label :pay_basic_date
+      = f.select :pay_basic_date, (1..31)
+    p
+      = f.label :payday
+      = f.select :payday, (1..31)
+    p
+      = f.submit

@@ -3,15 +3,14 @@
     = t("common.title.search")
     = " : "
     = text_field_tag 'query', params[:query]
-    = select_tag :creditcard_id,
-      options_from_collection_for_select([Creditcard.new(:cardno => "all")]+Creditcard.all, :id, :cardno_long, params[:creditcard_id]),
-      "onchange" => "this.form.submit()"
+    = select_tag :will_be_paid_at, options_for_select(["all"] + CardApprovedSource.will_be_paid_at_list, params[:will_be_paid_at]), "onchange" => "this.form.submit()"
+    = select_tag :creditcard_id, options_from_collection_for_select([Creditcard.new(:cardno => "all")]+Creditcard.all, :id, :cardno_long, params[:creditcard_id]), "onchange" => "this.form.submit()"
 
 
 #show_command
   = link_to t('card_approved_sources.find_empty_cardbills.link'), [:find_empty_cardbills, :card_approved_sources]
   = " | "
-  = link_to t('card_approved_sources.generate_cardbills.link'), [:generate_cardbills, :card_approved_sources], method: :post
+  = link_to t('card_approved_sources.generate.link'), [:generate_cardbills, :card_approved_sources]
   = " | "
   = link_to t('card_approved_sources.new.link'), [:new, :card_approved_source]
   = " | "
@@ -29,5 +28,11 @@ h2
   br
   center
     = will_paginate @card_approved_sources
+  #export-menu
+    = t('common.export') + " : "
+    = link_to t('card_approved_sources.export.excel'), export_card_approved_sources_path(creditcard_id: params[:creditcard_id], to: :xls), method: :post
+    = " | "
+    = link_to t('card_approved_sources.export.pdf'), export_card_approved_sources_path(creditcard_id: params[:creditcard_id], to: :pdf), method: :post
+
 - else
   h4= t('.empty')

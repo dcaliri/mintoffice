@@ -11,86 +11,22 @@ class BankTransfer < ActiveRecord::Base
     ["기업 은행", :ibk]
   ]
 
-
-  SHINHAN = {
-    :name => :shinhan,
-    :keys => {
-      :transfer_type => :integer,
-      :transfered_at => :time,
-    },
-    :columns => [
-      :transfer_type,
-      :transfered_at,
-      :result,
-      :out_bank_account,
-      :in_bank_name,
-      :in_bank_account,
-      :money,
-      :transfer_fee,
-      :error_money,
-      :registered_at,
-      :error_code,
-      :transfer_note,
-      :incode,
-      :out_account_note,
-      :in_account_note,
-      :in_person_name
-    ],
-    :position => {
-      :start => {
-        x: 2,
-        y: 1
-      },
-      :end => 0
-    }
-  }
-
-  IBK = {
-    :name => :ibk,
-    :keys => {
-      :transfer_type => :integer,
-      :transfered_at => :time,
-    },
-    :columns => [
-      :transfer_type,
-      :transfered_at,
-      :transfered_at,
-      :result,
-      :out_bank_account,
-      :money,
-      :transfer_fee,
-      :in_bank_name,
-      :in_bank_account,
-      :out_account_note,
-      :in_account_note,
-      :in_person_name,
-      :cms_code,
-      :currency_code
-    ],
-    :position => {
-      :start => {
-        x: 7,
-        y: 2
-      },
-      :end => -1
-    }
-  }
-
   include StylesheetParsable
+  include Excels::BankTransfers::Shinhan
+  include Excels::BankTransfers::IBK
+
+  include ResourceExportable
+  resource_exportable_configure do |config|
+   config.include_column 'bank_account_name'
+    config.except_column 'bank_account_id'
+  end
 
   def self.excel_parser(type)
-    parser = ExcelParser.new
-    parser.class_name BankTransfer
     if type == :shinhan
-      parser.column SHINHAN[:columns]
-      parser.key SHINHAN[:keys]
-      parser.option :position => SHINHAN[:position]
+      shinhan_bank_transfer_parser
     else
-      parser.column IBK[:columns]
-      parser.key IBK[:keys]
-      parser.option :position => IBK[:position]
+      ibk_bank_transfer_parser
     end
-    parser
   end
 
   def self.preview_stylesheet(type, upload)
@@ -132,6 +68,10 @@ class BankTransfer < ActiveRecord::Base
 
   def self.latest
     order("transfered_at DESC")
+  end
+
+  def bank_account_name
+    bank_account.name_with_number
   end
 
   def transaction

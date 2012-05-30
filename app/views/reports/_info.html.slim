@@ -28,7 +28,7 @@ p= "상태 - #{report.localize_status}"
       p
         - if report.rollback?
           = submit_tag "반려"
-        - unless report.reported?
+        - if report.approve?
           = submit_tag "승인"
 
 - unless report.comments.empty?
@@ -41,8 +41,7 @@ p= "상태 - #{report.localize_status}"
         = comment.owner.user.name
         = ": "
         = comment.description
-h3 권한
-p= "쓰기: #{report.reporter.fullname}"
-p= "읽기: #{report.reporters.map{|reporter| reporter.fullname}.join(', ')}"
+
+= render 'accessors/info', access_target: report
 
 br

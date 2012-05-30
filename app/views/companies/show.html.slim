@@ -1,0 +1,19 @@
+#show_command
+  = link_to t('common.link.edit'), [:edit, company]
+  = " | "
+  = link_to t('common.title.back'), :root
+
+h2 회사 정보
+
+.box
+  table
+    tr
+      th= company.class.human_attribute_name(:name)
+      td= company.name
+    tr
+      th= company.class.human_attribute_name(:pay_basic_date)
+      td= company.pay_basic_date
+    tr
+      th= company.class.human_attribute_name(:payday)
+      td= company.payday
+br
