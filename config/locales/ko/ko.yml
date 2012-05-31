@@ -360,7 +360,7 @@ ko:
                 position: 직급
                 fullname: 이름
                 username: 계정
-                mphone: 핸드폰번호
+                phone_number: 핸드폰번호
                 joined_on: 입사일
                 email: 이메일
                 listed: 목록 출력 여부

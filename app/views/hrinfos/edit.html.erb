@@ -39,6 +39,18 @@
     <%= f.label :juminno, Hrinfo.human_attribute_name('juminno') %>
     <%= f.text_field :juminno %>
   </p>
+  <p>
+    <%= f.label :email, Hrinfo.human_attribute_name('email')%>
+    <%= f.text_field :email %>
+  </p>
+  <p>
+    <%= f.label :phone_number, Hrinfo.human_attribute_name('phone_number')%>
+    <%= f.text_field :phone_number %>
+  </p>
+  <p>
+    <%= f.label :address, Hrinfo.human_attribute_name('address')%>
+    <%= f.text_field :address %>
+  </p>
 <% if @user.ingroup?("admin") %>
   <p>
     <%= render 'shared/attachments/form', form: f %>

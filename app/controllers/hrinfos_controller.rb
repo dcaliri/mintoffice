@@ -122,10 +122,7 @@ class HrinfosController < ApplicationController
   def update
     @hrinfo = Hrinfo.find(params[:id])
     respond_to do |format|
-      @hrinfo.attributes = params[:hrinfo]
-      if @hrinfo.valid?
-        @hrinfo.save
-
+      if @hrinfo.update_attributes(params[:hrinfo])
         flash[:notice] = I18n.t("common.messages.updated", :model => Hrinfo.model_name.human)
         format.html { redirect_to(@hrinfo) }
         format.xml  { head :ok }
