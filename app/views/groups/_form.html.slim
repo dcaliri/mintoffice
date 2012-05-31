@@ -1,0 +1,19 @@
+#show_command
+  = link_to t('common.title.back'), groups_path
+
+h2= t("common.title.#{action_name}")
+
+= form_for group, html: {class: "tabular"} do |f|
+  = f.error_messages
+  .box
+    p
+      = f.label :name
+      = f.text_field :name
+    p
+      = f.label :users
+      - User.enabled.each do |u|
+          = check_box_tag "group[user_ids][]", u.id, group.users.include?(u)
+          = u.fullname
+          br
+  p
+    = f.submit
