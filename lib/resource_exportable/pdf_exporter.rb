@@ -11,29 +11,41 @@ module ResourceExportable
     def export
       filename = options.filename
       columns = options.columns
-      localized_columns = columns.map{|column| collections.human_attribute_name(column)}
+      localized_columns = divide(columns.map{|column| collections.human_attribute_name(column)})
 
       ::Prawn::Document.generate(filename) do |pdf|
-        # pdf.font "#{Rails.root}/public/fonts/MalgunGothic.ttf"
         pdf.font "#{Rails.root}/public/fonts/NanumGothic.ttf"
         pdf.text collections.model_name.human
 
         pdf.font_size 7
         records = collections.all.map do |resource|
-                    columns.map do |column|
-                      record = resource.send(column)
-                      record = record.strftime("%Y-%m-%d(%H:%m:%S)") if record.respond_to?(:strftime)
-                      record
-                    end
+                    records = columns.map do |column|
+                                record = resource.send(column)
+                                record = record.strftime("%Y-%m-%d(%H:%m:%S)") if record.respond_to?(:strftime)
+                                record
+                              end
+                    divide(records)
                   end
 
-        table_data = [localized_columns] + records
-        pdf.table table_data, header: true, row_colors: ["F0F0F0", "FFFFCC"] do |table|
-          table.row(0).style(:background_color => 'dddddd', :size => 9)
+        table_data = localized_columns + records.flatten(1)
+
+        table = pdf.table(table_data) do |table|
+          0.upto(1) do |row|
+            table.row(row).style(:background_color => 'DDDDDD', :size => 9)
+          end
+          2.upto(table.row_length-1) do |row|
+            table.row(row).style(:background_color => row.even? ? 'F0F0F0' : "FFFFCC")
+          end
         end
       end
 
       filename
     end
+
+    private
+      def divide(columns)
+        half = (columns.length.to_f / 2).round - 1
+        [columns[0..half], columns[half+1..-1]]
+      end
   end
 end
