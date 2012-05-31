@@ -133,6 +133,11 @@ class HrinfosController < ApplicationController
     end
   end
 
+  def generate_employment_proof
+    @hrinfo = Hrinfo.find(params[:id])
+    send_file @hrinfo.generate_employment_proof
+  end
+
   # DELETE /hrinfos/1
   # DELETE /hrinfos/1.xml
   def destroy
