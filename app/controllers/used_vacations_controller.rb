@@ -14,14 +14,14 @@ class UsedVacationsController < ApplicationController
 
   def create
     used_vacation.save!
-    Boxcar.send_to_boxcar_group("admin",used_vacation.vacation.user.hrinfo.fullname, I18n.t("used_vacations.new.link"))
+    # Boxcar.send_to_boxcar_group("admin",used_vacation.vacation.user.hrinfo.fullname, I18n.t("used_vacations.new.link"))
     redirect_to [vacation, used_vacation], notice: "연차를 신청하였습니다. 신청 후에는 결제를 올려주세요."
   end
 
   def update
     if used_vacation.valid?
       used_vacation.save!
-      Boxcar.send_to_boxcar_group("admin",used_vacation.vacation.user.hrinfo.fullname,  I18n.t("used_vacations.edit.link"))
+      # Boxcar.send_to_boxcar_group("admin",used_vacation.vacation.user.hrinfo.fullname,  I18n.t("used_vacations.edit.link"))
       redirect_to [vacation, used_vacation]
     else
       render :action => :edit
@@ -36,7 +36,7 @@ class UsedVacationsController < ApplicationController
     else
       approve_txt = I18n.t("used_vacations.approval_waiting")
     end
-    Boxcar.send_to_boxcar_user(used_vacation.vacation.user,  "mintoffice", "#{I18n.t("used_vacations.title")} - #{approve_txt}")
+    # Boxcar.send_to_boxcar_user(used_vacation.vacation.user,  "mintoffice", "#{I18n.t("used_vacations.title")} - #{approve_txt}")
     redirect_to vacation_path(user)
   end
 
