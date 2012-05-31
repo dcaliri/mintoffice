@@ -346,6 +346,8 @@ ko:
                 description: 내역
                 amount: 금액
                 expensed_at: 지출 날짜
+            group:
+                name: 그룹명
             holiday:
                 theday: 휴일날짜
                 dayname: 휴일명목
@@ -834,6 +836,8 @@ ko:
         title: 지출내역서
         index:
             title: 지출내역서 관리
+    groups:
+        title: 그룹관리
     hrinfos:
         index:
             title: 인사정보관리 - 사원목록
