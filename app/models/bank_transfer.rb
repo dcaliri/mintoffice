@@ -13,7 +13,7 @@ class BankTransfer < ActiveRecord::Base
 
   include StylesheetParsable
   include Excels::BankTransfers::Shinhan
-  include Excels::BankTransfers::IBK
+  include Excels::BankTransfers::Ibk
 
   include ResourceExportable
   resource_exportable_configure do |config|

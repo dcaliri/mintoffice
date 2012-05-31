@@ -10,7 +10,7 @@ class BankTransaction < ActiveRecord::Base
 
   include StylesheetParsable
   include Excels::BankTransactions::Shinhan
-  include Excels::BankTransactions::IBK
+  include Excels::BankTransactions::Ibk
 
   include ResourceExportable
   resource_exportable_configure do |config|

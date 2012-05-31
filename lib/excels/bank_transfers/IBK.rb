@@ -1,8 +1,7 @@
 module Excels
   module BankTransfers
-    module IBK
+    module Ibk
       extend ActiveSupport::Concern
-
 
       IBK = {
         :name => :ibk,
