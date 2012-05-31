@@ -13,7 +13,7 @@ module ResourceExportable
       columns = options.columns
       localized_columns = divide(columns.map{|column| collections.human_attribute_name(column)})
 
-      ::Prawn::Document.generate(filename) do |pdf|
+      ::Prawn::Document.generate(filename, page_layout: :landscape) do |pdf|
         pdf.font "#{Rails.root}/public/fonts/NanumGothic.ttf"
         pdf.text collections.model_name.human
 
@@ -34,7 +34,8 @@ module ResourceExportable
             table.row(row).style(:background_color => 'DDDDDD', :size => 9)
           end
           2.upto(table.row_length-1) do |row|
-            table.row(row).style(:background_color => row.even? ? 'F0F0F0' : "FFFFCC")
+            color = (row % 4) < 2 ? 'F0F0F0' : "FFFFCC"
+            table.row(row).style(:background_color => color)
           end
         end
       end
