@@ -25,8 +25,8 @@ h2
     = will_paginate @bank_transfers
   #export-menu
     = t('common.export') + " : "
-    = link_to t('bank_transfers.export.excel'), export_bank_transfers_path(bank_account_id: params[:bank_account_id], to: :xls), method: :post
+    = link_to t('bank_transfers.export.excel'), export_bank_transfers_path(forward_params.merge(to: :xls)), method: :post
     = " | "
-    = link_to t('bank_transfers.export.pdf'), export_bank_transfers_path(bank_account_id: params[:bank_account_id], to: :pdf), method: :post
+    = link_to t('bank_transfers.export.pdf'), export_bank_transfers_path(forward_params.merge(to: :pdf)), method: :post
 - else
   h4= t('.empty')
