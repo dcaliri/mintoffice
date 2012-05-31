@@ -1,14 +1,17 @@
 module Reportable
   extend ActiveSupport::Concern
 
-  def create_report
-    report = build_report
-    report.reporters << User.current_user.reporters.build(report_id: report, owner: true)
+  def report
+    if super == nil
+      user = Group.where(name: "admin").first.users.first
+      report = create_report
+      report.permission user, :write
+      report.reporters << user.reporters.build(report_id: report, owner: true)
+      report.save!
+    end
+    super
   end
-
-  def create_accessor
-    report.permission User.current_user, :write
-  end
+  alias_method :create_if_no_report, :report
 
   delegate :access?, :to => :report
   delegate :report!, :approve!, :rollback!, :to => :report
@@ -19,18 +22,18 @@ module Reportable
 
   module ClassMethods
     def access_list(user)
+      create_if_no_report
       joins(:report => :accessors).merge(AccessPerson.access_list(user))
     end
 
     def report_status(status)
+      create_if_no_report
       joins(:report => :reporters).merge(Report.search_by_status(status))
     end
   end
 
   included do
     has_one :report, as: :target
-    before_create :create_report
-    after_create :create_accessor
 
     extend ClassMethods
   end

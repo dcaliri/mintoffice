@@ -51,6 +51,15 @@ class Report < ActiveRecord::Base
     self.reporters.find_by_owner(true)
   end
 
+  def reporters
+    if super.empty?
+      user = Group.where(name: "admin").first.users.first
+      super.create!(report_id: id, owner: true)
+      super.reload
+    end
+    super
+  end
+
   def localize_status
     I18n.t("activerecord.attributes.report.localized_status.#{status}")
   end
