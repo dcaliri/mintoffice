@@ -12,8 +12,7 @@ class DocumentsControllerTest < ActionController::TestCase
     session[:user_id] = @user.id
     session[:company_id] = @company.id
 
-    User.current_user = @user
-    Company.current_company = @company
+    controller.set_global_current_user_and_company
 
     Document.destroy_all
     @document = @company.documents.create!(title: 'HAHA')

@@ -6,11 +6,12 @@ class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
   before_filter :authorize, :except => [:login, :logout]
+  before_filter :set_global_current_user_and_company
   helper_method :title
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
 
-  before_filter do |controller|
+  def set_global_current_user_and_company
     User.current_user = current_user
     Company.current_company = current_company
   end
