@@ -2,9 +2,9 @@ require 'test_helper'
 
 class DocumentsControllerTest < ActionController::TestCase
   test "should get index" do
+    Company.create!(name: "minttech")
     get :index
     assert_response :success
-    assert_not_nil assigns(:documents)
   end
 
   test "should get new" do
@@ -12,34 +12,12 @@ class DocumentsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should create document" do
-    assert_difference('Document.count') do
-      post :create, :document => { }
-    end
-
-    assert_redirected_to document_path(assigns(:document))
-  end
-
-  test "should show document" do
-    get :show, :id => documents(:one).to_param
-    assert_response :success
-  end
-
-  test "should get edit" do
-    get :edit, :id => documents(:one).to_param
-    assert_response :success
-  end
-
-  test "should update document" do
-    put :update, :id => documents(:one).to_param, :document => { }
-    assert_redirected_to document_path(assigns(:document))
-  end
-
-  test "should destroy document" do
-    assert_difference('Document.count', -1) do
-      delete :destroy, :id => documents(:one).to_param
-    end
-
-    assert_redirected_to documents_path
-  end
+  # test "should show user" do
+  #   get :show, :id => 37
+  # end
+  #
+  # test "should get edit" do
+  #   get :edit, :id => 37
+  #   assert_response :success
+  # end
 end
