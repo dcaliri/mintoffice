@@ -34,7 +34,7 @@ class BankTransactionsController < ApplicationController
 
   def export
     transactions = bank_account ? bank_account.bank_transactions : BankTransaction
-    send_file transactions.export(params[:to].to_sym)
+    send_file transactions.latest.export(params[:to].to_sym)
   end
 
   def create

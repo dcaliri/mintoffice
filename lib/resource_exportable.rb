@@ -17,20 +17,24 @@ module ResourceExportable
       end
     end
 
-    def pdf_page_layout(type=nil)
-      if type
-        @layout_type = type
-      else
-        @layout_type || :landscape
-      end
+    def pdf_page_layout(type)
+      opts[:layout_type] = type
     end
 
-    def row_length(length=nil)
-      if length
-        @row_length = length
-      else
-        @row_length || 2
-      end
+    def row_length(length)
+      opts[:row_length] = length
+    end
+
+    def money(to)
+      @opts[:money] = to
+    end
+
+    def opts
+      @opts ||= {
+        layout_type: :landscape,
+        row_length: 2,
+        money: []
+      }
     end
   end
 
@@ -56,7 +60,7 @@ module ResourceExportable
       when :xls
         ExcelExporter.new(self, filename: filename, columns: columns).export
       when :pdf
-        PdfExporter.new(self, filename: filename, columns: columns, page_layout: configure.pdf_page_layout, row_length: configure.row_length).export
+        PdfExporter.new(self, filename, columns, configure.opts).export
       end
     end
   end
