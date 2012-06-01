@@ -16,12 +16,32 @@ module ResourceExportable
         columns << column if column
       end
     end
+
+    def pdf_page_layout(type)
+      opts[:layout_type] = type
+    end
+
+    def row_length(length)
+      opts[:row_length] = length
+    end
+
+    def money(to)
+      @opts[:money] = to
+    end
+
+    def opts
+      @opts ||= {
+        layout_type: :landscape,
+        row_length: 2,
+        money: []
+      }
+    end
   end
 
   module ClassMethods
     def make_filename(extension)
-      # "#{Rails.root}/tmp/#{table_name}_#{Time.now.utc.strftime("%Y%m%d%H%M%S")}#{User.current_user.id}.#{extension}"
-      "#{Rails.root}/tmp/#{table_name}.#{extension}"
+      "#{Rails.root}/tmp/#{table_name}_#{Time.now.utc.strftime("%Y%m%d%H%M%S")}#{User.current_user.id}.#{extension}"
+      # "#{Rails.root}/tmp/#{table_name}.#{extension}"
     end
 
     def configure
@@ -40,7 +60,7 @@ module ResourceExportable
       when :xls
         ExcelExporter.new(self, filename: filename, columns: columns).export
       when :pdf
-        PdfExporter.new(self, filename: filename, columns: columns).export
+        PdfExporter.new(self, filename, columns, configure.opts).export
       end
     end
   end
