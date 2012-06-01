@@ -1,6 +1,13 @@
 require 'net/http'
 
 class Boxcar
+  def self.add_to_boxcar(email)
+    Rails.logger.info "Boxcar = #{email}"
+    
+    uri = URI('http://boxcar.io/devices/providers/i7pThv4s27chmnqFz2FJ/notifications/subscribe')
+    res = Net::HTTP.post_form(uri, 'email' => email)
+  end
+  
   def self.send_to_boxcar(email,from,msg)
     if Rails.env.development?
       msg = "[test] " + msg
