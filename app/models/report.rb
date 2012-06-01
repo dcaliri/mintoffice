@@ -14,13 +14,6 @@ class Report < ActiveRecord::Base
     read_attribute(:status).to_sym
   end
 
-  STATUS_SELECT = [
-    [not_reported: "결제 대기 중"],
-    [reporting: "결제 진행 중"],
-    [rollback: "반려"],
-    [reported: "결제 완료"],
-  ]
-
   STATUS_SELECT = {
     "전체" => :all,
     "결재전 + 나의 결재 대기중" => :default,
