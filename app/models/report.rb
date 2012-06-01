@@ -51,15 +51,6 @@ class Report < ActiveRecord::Base
     self.reporters.find_by_owner(true)
   end
 
-  def reporters
-    if super.empty?
-      user = Group.where(name: "admin").first.users.first
-      super.create!(report_id: id, owner: true)
-      super.reload
-    end
-    super
-  end
-
   def localize_status
     I18n.t("activerecord.attributes.report.localized_status.#{status}")
   end
@@ -84,8 +75,6 @@ class Report < ActiveRecord::Base
 
     next_reporter.save!
     prev_reporter.save!
-
-    Boxcar.send_to_boxcar_user(next_reporter.user, prev_reporter.fullname, "#{prev_reporter.fullname}님이 #{next_reporter.fullname}님에게 결제를 요청하였습니다")
 
     permission user, :write
     permission prev_reporter.user, :read
@@ -117,8 +106,6 @@ class Report < ActiveRecord::Base
     end
     self.comments.build(owner: prev_reporter, description: "#{prev_reporter.fullname}님이 결제를 반려하였습니다")
     self.comments.build(owner: prev_reporter, description: comment) unless comment.blank?
-
-    Boxcar.send_to_boxcar_user(next_reporter.user, prev_reporter.fullname, "#{prev_reporter.fullname}님이 #{next_reporter.fullname}님에게 결제를 반려하였습니다")
 
     save!
   end
