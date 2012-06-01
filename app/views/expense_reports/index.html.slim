@@ -28,7 +28,7 @@ h2 Total : #{@expenses.count}
         td= report.project.name
         td= report.description
         td= number_to_currency report.amount
-        td= report.report.localize_status
+        td= report.localize_status
   center
     = will_paginate @expenses
 - else

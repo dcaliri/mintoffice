@@ -8,7 +8,13 @@ module Permissionable
   end
 
   def access?(user, permission_type = :read)
-    accessors.access?(user, permission_type)
+    unless accessors.empty?
+      accessors.access?(user, permission_type)
+    else
+      user.ingroup?(:admin).tap do |admin|
+        accessors.permission(user, :write) if admin
+      end
+    end
   end
 
   def permission(user, access_type)
