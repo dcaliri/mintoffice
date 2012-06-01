@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class Hrinfo < ActiveRecord::Base
   belongs_to :user
   has_one :contact, :as => :target, dependent: :destroy
@@ -87,6 +89,22 @@ class Hrinfo < ActiveRecord::Base
   def retire!
     user.payments.retire!(retired_on)
     save!
+  end
+
+  def generate_employment_proof
+    filename = "#{Rails.root}/tmp/#{fullname}_employment_proof.pdf"
+    template = "#{Rails.root}/app/assets/images/employment_proof_tempate.pdf"
+
+    Prawn::Document.generate(filename, template: template) do |pdf|
+      pdf.font "#{Rails.root}/public/fonts/NanumGothic.ttf"
+      pdf.font_size 12
+      pdf.move_down 300
+      pdf.text "이름 = #{fullname}", align: :center
+      pdf.text "주민등록번호 = #{juminno}", align: :center
+      pdf.text "주소 = #{address}", align: :center
+    end
+
+    filename
   end
 
   def self.search(text)

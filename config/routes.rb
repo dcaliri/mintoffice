@@ -48,7 +48,10 @@ Mintoffice::Application.routes.draw do
   post '/hrinfos/retired/:id', :controller => "hrinfos", :action => "retired", as: :retired
   post '/hrinfos/try_retired/:id', :controller => "hrinfos", :action => "try_retired", as: :try_retired
 
-  resources :hrinfos
+  resources :hrinfos do
+    get 'generate_employment_proof', on: :member, as: :generate_employment_proof
+  end
+
   resources :attachments
 
   match '/users/changepw/:user_id', :controller => 'users', :action => 'changepw'
@@ -57,7 +60,7 @@ Mintoffice::Application.routes.draw do
   match '/users/my', :controller => "users", :action => "my", :conditions => {:method => :get}
 
   resources :groups
-  
+
   resources :users do
     resources :payments do
       collection do
