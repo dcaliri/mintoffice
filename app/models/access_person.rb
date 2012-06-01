@@ -4,7 +4,13 @@ class AccessPerson < ActiveRecord::Base
 
   class << self
     def access_list(user)
-      where(user ? {user_id: user.id} : "0")
+      if user.nil?
+        where("0")
+      elsif user.ingroup?(:admin)
+        group(:access_target_id).having('count(access_target_id) = ? OR access_people.user_id = ?', 0, user.id)
+      else
+        where(user_id: user.id)
+      end
     end
 
     def access?(user, access_type)

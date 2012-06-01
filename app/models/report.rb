@@ -77,9 +77,9 @@ class Report < ActiveRecord::Base
 
   def approve!(comment)
     self.status = :reported
+    User.current_user.reporters.create!(report_id: id, owner: true) unless self.reporter
     self.comments.build(owner: self.reporter, description: "#{reporter.fullname}님이 결제를 승인하였습니다")
     self.comments.build(owner: self.reporter, description: comment) unless comment.blank?
-    self.reporter.save!
     save!
   end
 
@@ -103,8 +103,12 @@ class Report < ActiveRecord::Base
     save!
   end
 
+  def report?
+    self.reporter.present?
+  end
+
   def rollback?
-    self.status == :reported || self.reporter.prev.nil? == false
+    self.status == :reported || (self.reporter and self.reporter.prev.nil? == false)
   end
 
   def approve?
