@@ -2,20 +2,7 @@ require 'test_helper'
 
 class DocumentsControllerTest < ActionController::TestCase
   def setup
-    User.destroy_all
-    @user = User.create!(name: "admin", password: "1234", password_confirmation: "1234")
-    @user.permission.create!(name: 'documents')
-
-    Company.destroy_all
-    @company = Company.create!(name: "minttech")
-
-    session[:user_id] = @user.id
-    session[:company_id] = @company.id
-
-    controller.set_global_current_user_and_company
-
-    Document.destroy_all
-    @document = @company.documents.create!(title: 'HAHA')
+    current_user.permission.create!(name: 'documents')
   end
 
   test "should index document list" do
@@ -29,11 +16,16 @@ class DocumentsControllerTest < ActionController::TestCase
   end
 
   test "should show document" do
-    get :show, :id => @document.id
+    get :show, :id => current_document.id
   end
 
   test "should edit document" do
-    get :edit, :id => @document.id
+    get :edit, :id => current_document.id
     assert_response :success
+  end
+
+  private
+  def current_document
+    @document ||= current_company.documents.create!(title: 'HAHA')
   end
 end
