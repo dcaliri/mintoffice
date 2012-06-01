@@ -98,6 +98,7 @@ class Hrinfo < ActiveRecord::Base
     Prawn::Document.generate(filename, template: template) do |pdf|
       pdf.font "#{Rails.root}/public/fonts/NanumGothic.ttf"
       pdf.font_size 12
+      pdf.move_down 300
       pdf.text "이름 = #{fullname}", align: :center
       pdf.text "주민등록번호 = #{juminno}", align: :center
       pdf.text "주소 = #{address}", align: :center
