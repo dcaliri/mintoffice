@@ -13,7 +13,7 @@ module ResourceExportable
       columns = options.columns
       localized_columns = divide(columns.map{|column| collections.human_attribute_name(column)})
 
-      ::Prawn::Document.generate(filename, page_layout: :landscape) do |pdf|
+      Prawn::Document.generate(filename, page_layout: options.page_layout) do |pdf|
         pdf.font "#{Rails.root}/public/fonts/NanumGothic.ttf"
         pdf.text collections.model_name.human
 
@@ -30,11 +30,11 @@ module ResourceExportable
         table_data = localized_columns + records.flatten(1)
 
         table = pdf.table(table_data) do |table|
-          0.upto(1) do |row|
+          0.upto(default_row-1) do |row|
             table.row(row).style(:background_color => 'DDDDDD', :size => 9)
           end
-          2.upto(table.row_length-1) do |row|
-            color = (row % 4) < 2 ? 'F0F0F0' : "FFFFCC"
+          (default_row).upto(table.row_length-1) do |row|
+            color = (row % (default_row*2)) < default_row ? 'F0F0F0' : "FFFFCC"
             table.row(row).style(:background_color => color)
           end
         end
@@ -44,9 +44,17 @@ module ResourceExportable
     end
 
     private
+      def default_row
+        options.row_length
+      end
+
       def divide(columns)
-        half = (columns.length.to_f / 2).round - 1
-        [columns[0..half], columns[half+1..-1]]
+        if default_row == 1
+          [columns]
+        else
+          half = (columns.length.to_f / 2).round - 1
+          [columns[0..half], columns[half+1..-1]]
+        end
       end
   end
 end
