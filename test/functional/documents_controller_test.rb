@@ -1,8 +1,12 @@
 require 'test_helper'
 
 class DocumentsControllerTest < ActionController::TestCase
+  def setup
+    User.create(id: 37, name: "admin", password: "1234")
+    session[:user_id] = 37
+  end
+
   test "should get index" do
-    Company.create!(name: "minttech")
     get :index
     assert_response :success
   end
