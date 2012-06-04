@@ -13,6 +13,13 @@ class CardApprovedSource < ActiveRecord::Base
   include ResourceExportable
   resource_exportable_configure do |config|
     config.except_column 'creditcard_id'
+    subtitle_func = lambda do |collections|
+      paid_order = collections.order('will_be_paied_at DESC')
+      first_paid = paid_order.last
+      last_paid = paid_order.first
+      "#{first_paid.will_be_paied_at.to_date} ~ #{last_paid.will_be_paied_at.to_date}"
+    end
+    config.subtitle subtitle_func
   end
   class << self
     def filter_by_params(params)
