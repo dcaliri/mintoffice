@@ -10,7 +10,7 @@
 #show_command
   = link_to t('common.title.back'), :root
 
-h2 Total : #{@expenses.count}
+h2 Total : #{@expenses.length}
 
 - unless @expenses.empty?
   table#list-table
