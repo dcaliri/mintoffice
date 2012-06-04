@@ -9,6 +9,18 @@ h2= t("common.title.#{action_name}")
       = f.label :name
       = f.text_field :name
     p
+      = f.label :registration_number
+      = f.text_field :registration_number
+    p
+      = f.label :owner_name
+      = f.text_field :owner_name
+    p
+      = f.label :address
+      = f.text_field :address
+    p
+      = f.label :phone_number
+      = f.text_field :phone_number
+    p
       = f.label :pay_basic_date
       = f.select :pay_basic_date, (1..31)
     p
