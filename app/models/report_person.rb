@@ -26,6 +26,6 @@ class ReportPerson < ActiveRecord::Base
   end
 
   def fullname
-    user.name
+    user.name rescue ""
   end
 end
