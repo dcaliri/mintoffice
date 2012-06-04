@@ -25,7 +25,7 @@ class CardApprovedSource < ActiveRecord::Base
     def filter_by_params(params)
       collections = latest.by_date(params[:will_be_paid_at]).search(params[:query])
       collections = collections.no_canceled if params[:no_canceled]
-      collections.page(params[:page])
+      collections
     end
 
     def by_date(date)
