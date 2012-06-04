@@ -21,15 +21,17 @@ module ResourceExportable
 
       Prawn::Document.generate(filename, page_layout: options.layout_type) do |pdf|
         pdf.font "#{Rails.root}/public/fonts/NanumGothic.ttf"
-        pdf.text collections.model_name.human
-        pdf.font_size 8
+        pdf.repeat :all do
+          pdf.text collections.model_name.human
+          pdf.font_size 8
 
-        subtitle = options.subtitle
-        subtitle = subtitle.call(collections) if subtitle.respond_to?(:call)
-        pdf.draw_text subtitle, :at => [pdf.bounds.right - 100, pdf.bounds.top - 10]
-        pdf.move_down 10
+          subtitle = options.subtitle
+          subtitle = subtitle.call(collections) if subtitle.respond_to?(:call)
+          pdf.draw_text subtitle, :at => [pdf.bounds.right - 100, pdf.bounds.top - 10]
 
-        pdf.font_size 7
+          pdf.font_size 7
+        end
+
         records = collections.all.map do |resource|
                     records = []
                     columns.each_with_index do |column, index|
@@ -43,10 +45,14 @@ module ResourceExportable
 
         table_data = [localized_columns] + records
 
-        table = pdf.table(table_data, header: true, :cell_style => {:background_color => "F0B9C8"}, :row_colors => ["F0F0F0", "FFFFCC"]) do |table|
-          options.money.each do |column|
-            current_column = table.row(row).column(column)
-            table.row(row).column(column).style(align: :right)
+        width = pdf.bounds.right
+        height = pdf.bounds.top - 40
+        pdf.bounding_box [0, height], :width => width, :height => height do
+          table = pdf.table(table_data, header: true, :cell_style => {:background_color => "F0B9C8"}, :row_colors => ["F0F0F0", "FFFFCC"]) do |table|
+            options.money.each do |column|
+              current_column = table.row(row).column(column)
+              table.row(row).column(column).style(align: :right)
+            end
           end
         end
 
