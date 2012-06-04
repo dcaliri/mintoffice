@@ -20,11 +20,6 @@ module ResourceExportable
     def pdf_page_layout(type)
       opts[:layout_type] = type
     end
-
-    def row_length(length)
-      opts[:row_length] = length
-    end
-
     def money(to)
       opts[:money] = to
     end
@@ -37,7 +32,6 @@ module ResourceExportable
       @opts ||= {
         subtitle: "",
         layout_type: :landscape,
-        row_length: 2,
         money: []
       }
     end
