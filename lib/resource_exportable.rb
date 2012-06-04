@@ -26,11 +26,16 @@ module ResourceExportable
     end
 
     def money(to)
-      @opts[:money] = to
+      opts[:money] = to
+    end
+
+    def subtitle(text)
+      opts[:subtitle] = text
     end
 
     def opts
       @opts ||= {
+        subtitle: "",
         layout_type: :landscape,
         row_length: 2,
         money: []
