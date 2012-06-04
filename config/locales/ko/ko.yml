@@ -277,7 +277,7 @@ ko:
                 go: 출근
                 leave: 퇴근
             company:
-                name: 회사명
+                name: 업체명
                 pay_basic_date: 급여 기준일
                 payday: 급여 지급일
             contact:
