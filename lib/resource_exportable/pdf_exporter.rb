@@ -22,6 +22,7 @@ module ResourceExportable
       Prawn::Document.generate(filename, page_layout: options.layout_type) do |pdf|
         pdf.font "#{Rails.root}/public/fonts/NanumGothic.ttf"
         pdf.text collections.model_name.human
+        pdf.move_down 10
 
         pdf.font_size 7
         records = collections.all.map do |resource|
