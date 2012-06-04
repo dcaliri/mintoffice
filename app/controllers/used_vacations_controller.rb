@@ -21,7 +21,6 @@ class UsedVacationsController < ApplicationController
   def update
     if used_vacation.valid?
       used_vacation.save!
-      # Boxcar.send_to_boxcar_group("admin",used_vacation.vacation.user.hrinfo.fullname,  I18n.t("used_vacations.edit.link"))
       redirect_to [vacation, used_vacation]
     else
       render :action => :edit
@@ -36,7 +35,6 @@ class UsedVacationsController < ApplicationController
     else
       approve_txt = I18n.t("used_vacations.approval_waiting")
     end
-    # Boxcar.send_to_boxcar_user(used_vacation.vacation.user,  "mintoffice", "#{I18n.t("used_vacations.title")} - #{approve_txt}")
     redirect_to vacation_path(user)
   end
 

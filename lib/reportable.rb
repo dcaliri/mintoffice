@@ -40,6 +40,10 @@ module Reportable
   end
 
   module ClassMethods
+    def no_permission
+      includes(:report => :accessors).merge(AccessPerson.no_permission)
+    end
+
     def access_list(user)
       includes(:report => :accessors).merge(AccessPerson.access_list(user))
     end

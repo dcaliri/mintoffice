@@ -32,7 +32,13 @@ class ExpenseReport < ActiveRecord::Base
 
   class << self
     def filter(params)
-      access_list(params[:user]).by_project(params[:project]).by_period(params[:year], params[:month])
+      result = by_project(params[:project]).by_period(params[:year], params[:month])
+      result = if params[:empty_permission] == 'true'
+                result.no_permission
+              else
+                result.access_list(params[:user])
+              end
+      result
     end
 
     def by_project(project)
@@ -56,21 +62,11 @@ class ExpenseReport < ActiveRecord::Base
     end
 
     def oldest_year
-      collection = order('expensed_at ASC')
-      unless collection.empty?
-        collection.first.expensed_at.year
-      else
-        Date.today.year
-      end
+      order('expensed_at ASC').first.expensed_at.year rescue Date.today.year
     end
 
     def newest_year
-      collection = order('expensed_at DESC')
-      unless collection.empty?
-        collection.first.expensed_at.year
-      else
-        Date.today.year
-      end
+      order('expensed_at DESC').first.expensed_at.year rescue Date.today.year
     end
 
     def total_amount
