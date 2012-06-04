@@ -51,6 +51,11 @@ module ResourceExportable
             end
           end
         end
+
+        pdf.number_pages "<page> / <total>",
+                          :at => [pdf.bounds.right - 100, 0],
+                          :align => :right,
+                          :size => 14
       end
 
       filename
