@@ -19,7 +19,7 @@ module ResourceExportable
       columns = self.columns
       localized_columns = divide(columns.map{|column| collections.human_attribute_name(column)})
 
-      Prawn::Document.generate(filename, page_layout: options.page_layout) do |pdf|
+      Prawn::Document.generate(filename, page_layout: options.layout_type) do |pdf|
         pdf.font "#{Rails.root}/public/fonts/NanumGothic.ttf"
         pdf.text collections.model_name.human
 
