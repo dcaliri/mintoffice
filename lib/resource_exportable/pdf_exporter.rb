@@ -50,8 +50,8 @@ module ResourceExportable
         pdf.bounding_box [0, height], :width => width, :height => height do
           table = pdf.table(table_data, header: true, :cell_style => {:background_color => "F0B9C8"}, :row_colors => ["F0F0F0", "FFFFCC"]) do |table|
             options.money.each do |column|
-              current_column = table.row(row).column(column)
-              table.row(row).column(column).style(align: :right)
+              current_column = table.column(column)
+              table.column(column).style(align: :right)
             end
           end
         end

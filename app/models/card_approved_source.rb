@@ -20,7 +20,9 @@ class CardApprovedSource < ActiveRecord::Base
       "#{first_paid.used_at.to_date} ~ #{last_paid.used_at.to_date}"
     end
     config.subtitle subtitle_func
+    config.money [4]
   end
+
   class << self
     def filter_by_params(params)
       collections = latest.by_date(params[:will_be_paid_at]).search(params[:query])
