@@ -19,7 +19,8 @@ module ResourceExportable
       columns = self.columns
       localized_columns = columns.map{|column| collections.human_attribute_name(column)}
 
-      Prawn::Document.generate(filename, page_layout: options.layout_type) do |pdf|
+      # Prawn::Document.generate(filename, page_layout: options.layout_type, :page_size=> "A4", margin: 0) do |pdf|
+      Prawn::Document.generate(filename, page_layout: options.layout_type, :page_size=> "A4", margin: 10) do |pdf|
         pdf.font "#{Rails.root}/public/fonts/NanumGothic.ttf"
         pdf.repeat :all do
           pdf.text collections.model_name.human
@@ -50,8 +51,8 @@ module ResourceExportable
         pdf.bounding_box [0, height], :width => width, :height => height do
           table = pdf.table(table_data, header: true, :cell_style => {:background_color => "F0B9C8"}, :row_colors => ["F0F0F0", "FFFFCC"]) do |table|
             options.money.each do |column|
-              current_column = table.row(row).column(column)
-              table.row(row).column(column).style(align: :right)
+              current_column = table.column(column)
+              table.column(column).style(align: :right)
             end
           end
         end
