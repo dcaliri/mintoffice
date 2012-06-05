@@ -103,7 +103,7 @@ class Hrinfo < ActiveRecord::Base
     retired_on || Time.zone.now
   end
 
-  def generate_employment_proof
+  def generate_employment_proof(purpose)
     filename = "#{Rails.root}/tmp/#{fullname}_employment_proof.pdf"
     template = "#{Rails.root}/app/assets/images/employment_proof_tempate.pdf"
 
@@ -133,6 +133,7 @@ class Hrinfo < ActiveRecord::Base
 
       # pdf.draw_text company.hrinfos.count, :at => [402, 494]
       pdf.draw_text Hrinfo.count, :at => [142, 460]
+      pdf.draw_text purpose, :at => [333, 460]
 
       pdf.draw_text "대표", :at => [175, 433]
       pdf.draw_text company.owner_name, :at => [385, 433]

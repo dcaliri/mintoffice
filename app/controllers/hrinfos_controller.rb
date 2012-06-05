@@ -133,9 +133,13 @@ class HrinfosController < ApplicationController
     end
   end
 
-  def generate_employment_proof
+  def new_employment_proof
     @hrinfo = Hrinfo.find(params[:id])
-    send_file @hrinfo.generate_employment_proof
+  end
+
+  def employment_proof
+    @hrinfo = Hrinfo.find(params[:id])
+    send_file @hrinfo.generate_employment_proof(params[:purpose])
   end
 
   # DELETE /hrinfos/1

@@ -365,6 +365,7 @@ ko:
                 payment_day: 지급일
                 department: 부서
                 position: 직급
+                purpose: 용도
                 fullname: 이름
                 username: 계정
                 phone_number: 핸드폰번호
