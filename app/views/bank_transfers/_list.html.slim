@@ -16,7 +16,7 @@ table#list-table
     tr.selectable onclick="#{onclick}"
       td= transfer.bank_account.description rescue ""
       td= transfer.transfer_type
-      td= transfer.transfered_at.strftime("%Y-%m-%d %H.%M")
+      td= transfer.transfered_at.strftime("%Y-%m-%d %H.%M") rescue ""
       td= transfer.out_bank_account
       td= transfer.in_bank_name
       td= transfer.in_bank_account

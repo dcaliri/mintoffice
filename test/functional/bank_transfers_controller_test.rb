@@ -13,22 +13,22 @@ class BankTransfersControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should see bank transaction page" do
+  test "should see show page" do
     get :show, id: current_bank_transfer.id
     assert_response :success
   end
 
-  test "should see new bank transaction page" do
+  test "should see new page" do
     get :new, id: current_bank_transfer.id
     assert_response :success
   end
 
-  test "should see edit bank transaction page" do
+  test "should see edit page" do
     get :edit, id: current_bank_transfer.id
     assert_response :success
   end
 
-  test "should see excel of bank transaction page" do
+  test "should see excel page" do
     get :excel
     assert_response :success
   end
