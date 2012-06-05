@@ -95,6 +95,14 @@ class Hrinfo < ActiveRecord::Base
     Company.first
   end
 
+  def work_from
+    joined_on
+  end
+
+  def work_to
+    retired_on || Time.zone.now
+  end
+
   def generate_employment_proof
     filename = "#{Rails.root}/tmp/#{fullname}_employment_proof.pdf"
     template = "#{Rails.root}/app/assets/images/employment_proof_tempate.pdf"
@@ -112,6 +120,14 @@ class Hrinfo < ActiveRecord::Base
       pdf.draw_text company.owner_name, :at => [142, 589]
       pdf.draw_text company.address, :at => [142, 558]
       pdf.draw_text company.phone_number, :at => [333, 589]
+
+      pdf.draw_text work_from.year, :at => [168, 494]
+      pdf.draw_text work_from.month, :at => [220, 494]
+      pdf.draw_text work_from.day, :at => [252, 494]
+
+      pdf.draw_text work_to.year, :at => [318, 494]
+      pdf.draw_text work_to.month, :at => [370, 494]
+      pdf.draw_text work_to.day, :at => [402, 494]
 
       today = Time.zone.now
       pdf.draw_text today.year, :at => [198, 311]
