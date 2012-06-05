@@ -129,6 +129,9 @@ class Hrinfo < ActiveRecord::Base
       pdf.draw_text work_to.month, :at => [370, 494]
       pdf.draw_text work_to.day, :at => [402, 494]
 
+      # pdf.draw_text company.hrinfos.count, :at => [402, 494]
+      pdf.draw_text Hrinfo.count, :at => [142, 526]
+
       today = Time.zone.now
       pdf.draw_text today.year, :at => [198, 311]
       pdf.draw_text today.month, :at => [262, 311]
