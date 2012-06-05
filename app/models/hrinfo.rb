@@ -114,6 +114,7 @@ class Hrinfo < ActiveRecord::Base
       pdf.draw_text fullname, :at => [142, 685]
       pdf.draw_text juminno, :at => [142, 661]
       pdf.draw_text address, :at => [142, 637]
+      pdf.draw_text department, :at => [142, 526]
       pdf.draw_text position, :at => [333, 526]
 
       pdf.draw_text company.name, :at => [142, 613]

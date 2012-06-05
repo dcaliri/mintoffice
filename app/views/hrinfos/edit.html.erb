@@ -23,6 +23,10 @@
     <%= f.text_field :firstname %>
   </p>
   <p>
+    <%= f.label :department, Hrinfo.human_attribute_name('department') %>
+    <%= f.text_field :department %>
+  </p>
+  <p>
     <%= f.label :position, Hrinfo.human_attribute_name('position') %>
     <%= f.text_field :position %>
   </p>

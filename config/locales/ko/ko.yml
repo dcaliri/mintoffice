@@ -363,6 +363,7 @@ ko:
                 lastname: 성
                 address: 주소
                 payment_day: 지급일
+                department: 부서
                 position: 직급
                 fullname: 이름
                 username: 계정

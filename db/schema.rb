@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120604084528) do
+ActiveRecord::Schema.define(:version => 20120605050447) do
 
   create_table "access_people", :force => true do |t|
     t.integer  "user_id"
@@ -397,6 +397,7 @@ ActiveRecord::Schema.define(:version => 20120604084528) do
     t.integer  "companyno"
     t.string   "juminno"
     t.boolean  "listed"
+    t.string   "department"
   end
 
   add_index "hrinfos", ["companyno"], :name => "index_hrinfos_on_companyno", :unique => true
