@@ -1,6 +1,6 @@
 <% title t('.title') %>
 <div id="show_command">
-  <%= link_to t('hrinfos.show.pdf'), new_employment_proof_hrinfo_path(@hrinfo) %> |
+  <%= link_to t('hrinfos.show.pdf'), new_employment_proof_hrinfo_path(@hrinfo), id: :employment_proof_link %> |
   <% if @user.ingroup?("admin") && ! @hrinfo.retired_on %>
     <%= link_to t('hrinfos.retire.title'), :action => :retire, :id => @hrinfo %> |
     <%= link_to t('common.title.edit'), edit_hrinfo_path(@hrinfo) %> |
@@ -85,3 +85,10 @@
   unrequired_documents:
   <%= @unrequired_documents.collect(&:title).join(',') %>
 </pre> -->
+
+<script type="text/javascript">
+  $('#employment_proof_link').click(function(e){
+    e.preventDefault();
+    $(this).before("<%=j render('new_employment_proof') %>");
+  });
+</script>
