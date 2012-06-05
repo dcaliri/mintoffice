@@ -133,6 +133,9 @@ class Hrinfo < ActiveRecord::Base
       # pdf.draw_text company.hrinfos.count, :at => [402, 494]
       pdf.draw_text Hrinfo.count, :at => [142, 460]
 
+      pdf.draw_text "대표", :at => [175, 433]
+      pdf.draw_text company.owner_name, :at => [385, 433]
+
       today = Time.zone.now
       pdf.draw_text today.year, :at => [198, 311]
       pdf.draw_text today.month, :at => [262, 311]
