@@ -1,0 +1,4 @@
+fixture:
+    id: 1
+    name: "admin"
+    hashed_password: "1234"

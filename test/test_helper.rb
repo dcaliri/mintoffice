@@ -6,7 +6,7 @@ class ActiveSupport::TestCase
   setup :global_setup
   teardown :global_teardown
 
-  fixtures :companies
+  fixtures :users, :companies
 
   def global_setup
     DatabaseCleaner.strategy = :truncation
@@ -25,7 +25,7 @@ class ActiveSupport::TestCase
 
   def current_user
     unless @user
-      @user = User.create!(name: "admin", password: "1234", password_confirmation: "1234")
+      @user = users(:fixture)
       @user.groups.create!(name: "admin")
     end
     @user
