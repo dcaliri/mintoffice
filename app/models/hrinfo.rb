@@ -116,6 +116,7 @@ class Hrinfo < ActiveRecord::Base
       pdf.draw_text address, :at => [142, 637]
       pdf.draw_text position, :at => [333, 526]
 
+      pdf.draw_text company.name, :at => [142, 613]
       pdf.draw_text company.registration_number, :at => [333, 613]
       pdf.draw_text company.owner_name, :at => [142, 589]
       pdf.draw_text company.address, :at => [142, 558]
@@ -130,7 +131,7 @@ class Hrinfo < ActiveRecord::Base
       pdf.draw_text work_to.day, :at => [402, 494]
 
       # pdf.draw_text company.hrinfos.count, :at => [402, 494]
-      pdf.draw_text Hrinfo.count, :at => [142, 526]
+      pdf.draw_text Hrinfo.count, :at => [142, 460]
 
       today = Time.zone.now
       pdf.draw_text today.year, :at => [198, 311]
