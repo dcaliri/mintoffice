@@ -108,12 +108,15 @@ class Hrinfo < ActiveRecord::Base
     template = "#{Rails.root}/app/assets/images/employment_proof_tempate.pdf"
 
     Prawn::Document.generate(filename, template: template) do |pdf|
+      pdf.image company.seal, :at => [320, 255], width: 50, height: 50
+      pdf.image company.seal, :at => [415, 463], width: 50, height: 50
+
       pdf.font "#{Rails.root}/public/fonts/NanumGothic.ttf"
       pdf.font_size 12
 
       pdf.draw_text fullname, :at => [142, 685]
       pdf.draw_text juminno, :at => [142, 661]
-      pdf.draw_text address, :at => [142, 637]
+      pdf.draw_text address.strip, :at => [142, 637]
       pdf.draw_text department, :at => [142, 526]
       pdf.draw_text position, :at => [333, 526]
 

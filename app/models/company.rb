@@ -10,4 +10,14 @@ class Company < ActiveRecord::Base
   has_many :tags
 
   cattr_accessor :current_company
+
+  include Attachmentable
+
+  def seal
+    unless attachments.empty?
+      "#{Rails.root}/files/#{attachments.first.filepath}"
+    else
+      ""
+    end
+  end
 end
