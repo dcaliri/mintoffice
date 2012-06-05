@@ -19,7 +19,6 @@ module ResourceExportable
       columns = self.columns
       localized_columns = columns.map{|column| collections.human_attribute_name(column)}
 
-      # Prawn::Document.generate(filename, page_layout: options.layout_type, :page_size=> "A4", margin: 0) do |pdf|
       Prawn::Document.generate(filename, page_layout: options.layout_type, :page_size=> "A4", margin: [10, 10, 30, 10]) do |pdf|
         pdf.font "#{Rails.root}/public/fonts/NanumGothic.ttf"
         pdf.repeat :all do
