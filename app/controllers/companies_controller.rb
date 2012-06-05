@@ -2,6 +2,8 @@ class CompaniesController < ApplicationController
   before_filter :redirect_unless_current_company
   expose(:company)
 
+  before_filter :only => [:show] {|c| c.save_attachment_id company}
+
   def switch
     company = Company.find(params[:company_id])
     session[:company_id] = company.id

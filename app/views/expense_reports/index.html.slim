@@ -6,11 +6,11 @@
     = select_tag :year, options_for_select([["all", nil]] + (year_before..year_after).map{|year| [year.to_s+" 년", year]}, params[:year]), "onchange" => "this.form.submit()"
     = select_tag :month, options_for_select([["all", nil]] + (1..12).map{|month| [month.to_s+" 월", month]}, params[:month]), "onchange" => "this.form.submit()"
     = select_tag :project_id, options_from_collection_for_select([Project.new(:name => "all")]+Project.all, :id, :name, params[:project_id]), "onchange" => "this.form.submit()"
-
+    = render 'accessors/search_form'
 #show_command
   = link_to t('common.title.back'), :root
 
-h2 Total : #{@expenses.count}
+h2 Total : #{@expenses.length}
 
 - unless @expenses.empty?
   table#list-table
@@ -24,11 +24,11 @@ h2 Total : #{@expenses.count}
     - @expenses.each do |report|
       tr.selectable onclick="location.href='#{expense_report_path(report)}'"
         td= report.hrinfo.fullname rescue ""
-        td= t("activerecord.models.#{report.target_type.tableize.singularize}")
-        td= report.project.name
+        td= t("activerecord.models.#{report.target_type.tableize.singularize}") rescue ""
+        td= report.project.name rescue ""
         td= report.description
         td= number_to_currency report.amount
-        td= report.report.localize_status
+        td= report.localize_status
   center
     = will_paginate @expenses
 - else

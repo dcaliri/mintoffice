@@ -25,6 +25,7 @@ end
 
 group :development do
   gem 'pow-client'
+  gem 'sextant'
 end
 
 group :test do

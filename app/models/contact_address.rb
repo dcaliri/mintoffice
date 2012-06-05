@@ -3,7 +3,7 @@ class ContactAddress < ActiveRecord::Base
   has_and_belongs_to_many :tags, :class_name => 'ContactAddressTag'
   before_save do
     tag = ContactAddressTag.find_by_name(target)
-    tags << tag unless tags.exists?(name: tag.name)
+    tags << tag if tag.present? and !tags.exists?(name: tag.name)
   end
 
   include Historiable

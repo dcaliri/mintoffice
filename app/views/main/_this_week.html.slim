@@ -16,5 +16,13 @@ table#list-table
             - today_v.each do |tv|
               p= t("used_vacations.vacation") + tv.vacation.user.fullname
 br
+table width="90%" align="center"
+  tr
+    td align="left"
+      '  &laquo;
+      = link_to t("main.index.prevweek"), root_path(page: @page - 1)
+    td align="right"
+      = link_to t("main.index.nextweek"), root_path(page: @page + 1)
+      '  &raquo;
 br
 br
