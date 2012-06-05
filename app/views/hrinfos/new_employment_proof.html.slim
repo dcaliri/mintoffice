@@ -1,0 +1,12 @@
+
+#show_command
+  = link_to t('common.title.back'), @hrinfo
+
+h2= t("common.title.new")
+= form_tag([:employment_proof, @hrinfo], :html => {:class => "tabular"}) do
+  .box
+    p
+      = label_tag :purpose, t('activerecord.attributes.hrinfo.purpose')
+      = text_field_tag :purpose
+    p
+      = submit_tag "출력"
