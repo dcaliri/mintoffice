@@ -5,7 +5,7 @@ table
     td= target.transfer_type
   tr
     th= BankTransfer.human_attribute_name(:transfered_at)
-    td= target.transfered_at.strftime("%Y.%m.%d %H:%M")
+    td= target.transfered_at.strftime("%Y.%m.%d %H:%M") rescue ""
   tr
     th= BankTransfer.human_attribute_name(:result)
     td= target.result
