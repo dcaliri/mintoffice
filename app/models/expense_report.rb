@@ -56,21 +56,23 @@ class ExpenseReport < ActiveRecord::Base
     end
 
     def oldest_year
-      collection = order('expensed_at ASC')
-      unless collection.empty?
-        collection.first.expensed_at.year
-      else
-        Date.today.year
-      end
+      # collection = order('expensed_at ASC')
+      # unless collection.empty?
+      #   collection.first.expensed_at.year
+      # else
+      #   Date.today.year
+      # end
+      order('expensed_at ASC').first.expensed_at.year rescue Date.today.year
     end
 
     def newest_year
-      collection = order('expensed_at DESC')
-      unless collection.empty?
-        collection.first.expensed_at.year
-      else
-        Date.today.year
-      end
+      # collection = order('expensed_at DESC')
+      # unless collection.empty?
+      #   collection.first.expensed_at.year
+      # else
+      #   Date.today.year
+      # end
+      order('expensed_at DESC').first.expensed_at.year rescue Date.today.year
     end
 
     def total_amount
