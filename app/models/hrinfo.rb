@@ -113,8 +113,10 @@ class Hrinfo < ActiveRecord::Base
       pdf.draw_text company.address, :at => [142, 558]
       pdf.draw_text company.phone_number, :at => [333, 589]
 
-      # today = Time.zone.now.strftime("%Y년 %m 월 %d 일")
-      # pdf.draw_text today.year, :at => [333, 300]
+      today = Time.zone.now
+      pdf.draw_text today.year, :at => [198, 311]
+      pdf.draw_text today.month, :at => [262, 311]
+      pdf.draw_text today.day, :at => [307, 311]
 
       pdf.draw_text company.name, :at => [250, 255]
       pdf.draw_text company.owner_name, :at => [250, 225]
