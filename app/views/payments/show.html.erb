@@ -18,7 +18,9 @@
     <th><%= Payment.human_attribute_name('note') %></th>
     <th><%= Payment.human_attribute_name('amount') %></th>
     <th><%= Payment.human_attribute_name('total') %></th>
+    <% if @user.ingroup? :admin %>
     <th></th>
+    <% end %>
   </tr>
   <% current_bg = '#e6e6e6' %>
   <% payments.latest.group_by{|payment| payment.pay_finish.strftime("%Y.%m")}.each do |month, payments| %>
@@ -42,11 +44,13 @@
       <td class="numrow">
         <%= show_sum ? (number_to_currency payments.sum{|payment| payment.amount}) : '' %>
       </td>
+      <% if @user.ingroup?(:admin) %>
       <td style="text-align:center;">
         [<%= link_to t("common.link.edit"), [:edit, user, payment] %>]
         |
         [<%= link_to t("common.link.destroy"), [user, payment], :method => :delete, :confirm => "Are you sure?" %>]
       </td>
+      <% end %>      
     </tr>
     <% show_sum = false %>
     <% end %>

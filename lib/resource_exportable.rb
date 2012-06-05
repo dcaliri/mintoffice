@@ -16,6 +16,25 @@ module ResourceExportable
         columns << column if column
       end
     end
+
+    def pdf_page_layout(type)
+      opts[:layout_type] = type
+    end
+    def money(to)
+      opts[:money] = to
+    end
+
+    def subtitle(text)
+      opts[:subtitle] = text
+    end
+
+    def opts
+      @opts ||= {
+        subtitle: "",
+        layout_type: :landscape,
+        money: []
+      }
+    end
   end
 
   module ClassMethods
@@ -40,7 +59,7 @@ module ResourceExportable
       when :xls
         ExcelExporter.new(self, filename: filename, columns: columns).export
       when :pdf
-        PdfExporter.new(self, filename: filename, columns: columns).export
+        PdfExporter.new(self, filename, columns, configure.opts).export
       end
     end
   end

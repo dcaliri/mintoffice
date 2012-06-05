@@ -13,12 +13,21 @@ class CardApprovedSource < ActiveRecord::Base
   include ResourceExportable
   resource_exportable_configure do |config|
     config.except_column 'creditcard_id'
+    subtitle_func = lambda do |collections|
+      paid_order = collections.order('used_at DESC')
+      first_paid = paid_order.last
+      last_paid = paid_order.first
+      "#{first_paid.used_at.to_date} ~ #{last_paid.used_at.to_date}"
+    end
+    config.subtitle subtitle_func
+    config.money [4]
   end
+
   class << self
     def filter_by_params(params)
       collections = latest.by_date(params[:will_be_paid_at]).search(params[:query])
       collections = collections.no_canceled if params[:no_canceled]
-      collections.page(params[:page])
+      collections
     end
 
     def by_date(date)

@@ -1,6 +1,6 @@
 module Excels
   module BankTransactions
-    module IBK
+    module Ibk
       extend ActiveSupport::Concern
 
       IBK = {

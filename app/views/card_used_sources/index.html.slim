@@ -26,8 +26,8 @@ h2
     = will_paginate @card_used_sources
   #export-menu
     = t('common.export') + " : "
-    = link_to t('card_used_sources.export.excel'), export_card_used_sources_path(creditcard_id: params[:creditcard_id], to: :xls), method: :post
+    = link_to t('card_used_sources.export.excel'), export_card_used_sources_path(forward_params.merge(to: :xls)), method: :post
     = " | "
-    = link_to t('card_used_sources.export.pdf'), export_card_used_sources_path(creditcard_id: params[:creditcard_id], to: :pdf), method: :post
+    = link_to t('card_used_sources.export.pdf'), export_card_used_sources_path(forward_params.merge(to: :pdf)), method: :post
 - else
   h4= t('.empty')

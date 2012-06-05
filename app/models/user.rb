@@ -83,7 +83,7 @@ class User < ActiveRecord::Base
   end
 
   def self.enabled
-    where("name NOT LIKE '[X] %'")
+    where("name NOT LIKE '[X] %'").order("id ASC")
   end
 
   def self.authenticate(name, password)
@@ -105,7 +105,6 @@ class User < ActiveRecord::Base
       false
     end
   end
-
 
   def self.search(query)
     query = "%#{query}%"

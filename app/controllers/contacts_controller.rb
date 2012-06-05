@@ -1,5 +1,6 @@
 class ContactsController < ApplicationController
   expose(:contacts) { current_company.contacts }
+  expose(:contacts) { Contact.where("") }
   expose(:contact)
 
   before_filter :only => [:show] { |c| c.save_attachment_id contact }

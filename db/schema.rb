@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120529053831) do
+ActiveRecord::Schema.define(:version => 20120605050447) do
 
   create_table "access_people", :force => true do |t|
     t.integer  "user_id"
@@ -26,8 +26,8 @@ ActiveRecord::Schema.define(:version => 20120529053831) do
     t.string   "title"
     t.string   "comments"
     t.string   "filepath"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
     t.integer  "user_id",           :default => 0,  :null => false
     t.string   "contenttype",       :default => "", :null => false
     t.string   "owner_type"
@@ -148,15 +148,15 @@ ActiveRecord::Schema.define(:version => 20120529053831) do
   create_table "cardbills", :force => true do |t|
     t.string   "cardno"
     t.datetime "transdate"
-    t.decimal  "amount",        :precision => 10, :scale => 0
-    t.decimal  "vat",           :precision => 10, :scale => 0
-    t.decimal  "servicecharge", :precision => 10, :scale => 0
-    t.decimal  "totalamount",   :precision => 10, :scale => 0
+    t.decimal  "amount"
+    t.decimal  "vat"
+    t.decimal  "servicecharge"
+    t.decimal  "totalamount"
     t.string   "storename"
     t.string   "storeaddr"
     t.string   "approveno"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
     t.integer  "attachment_id"
     t.integer  "creditcard_id"
     t.boolean  "before_report"
@@ -184,10 +184,14 @@ ActiveRecord::Schema.define(:version => 20120529053831) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
-    t.integer  "pay_basic_date", :default => 20
-    t.integer  "payday",         :default => 25
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
+    t.integer  "pay_basic_date",      :default => 20
+    t.integer  "payday",              :default => 25
+    t.string   "registration_number"
+    t.string   "owner_name"
+    t.string   "address"
+    t.string   "phone_number"
   end
 
   create_table "contact_address_tags", :force => true do |t|
@@ -293,9 +297,13 @@ ActiveRecord::Schema.define(:version => 20120529053831) do
     t.string   "nickname"
     t.string   "issuer"
     t.string   "cardholder"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
     t.string   "short_name"
+    t.string   "money_foreign"
+    t.string   "money_type"
+    t.string   "money_type_info"
+    t.string   "money_dollar"
   end
 
   create_table "dayworker_taxes", :force => true do |t|
@@ -319,15 +327,15 @@ ActiveRecord::Schema.define(:version => 20120529053831) do
   create_table "document_owners", :force => true do |t|
     t.integer  "document_id"
     t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "documents", :force => true do |t|
     t.string   "title"
     t.integer  "project_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.integer  "company_id"
   end
 
@@ -352,8 +360,8 @@ ActiveRecord::Schema.define(:version => 20120529053831) do
 
   create_table "groups", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "groups_users", :id => false, :force => true do |t|
@@ -372,16 +380,16 @@ ActiveRecord::Schema.define(:version => 20120529053831) do
     t.integer  "hrinfo_id"
     t.string   "change"
     t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "hrinfos", :force => true do |t|
     t.string   "firstname"
     t.string   "lastname"
     t.integer  "picture_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.date     "joined_on"
     t.date     "retired_on"
     t.integer  "user_id"
@@ -389,6 +397,7 @@ ActiveRecord::Schema.define(:version => 20120529053831) do
     t.integer  "companyno"
     t.string   "juminno"
     t.boolean  "listed"
+    t.string   "department"
   end
 
   add_index "hrinfos", ["companyno"], :name => "index_hrinfos_on_companyno", :unique => true
@@ -408,17 +417,17 @@ ActiveRecord::Schema.define(:version => 20120529053831) do
     t.string   "phone"
     t.string   "homepage"
     t.string   "email"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "payments", :force => true do |t|
     t.date     "pay_finish"
-    t.decimal  "amount",       :precision => 10, :scale => 0, :default => 0
+    t.decimal  "amount",       :default => 0.0
     t.text     "note"
     t.integer  "user_id"
-    t.datetime "created_at",                                                 :null => false
-    t.datetime "updated_at",                                                 :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
     t.string   "payment_type"
     t.date     "pay_start"
   end
@@ -448,8 +457,8 @@ ActiveRecord::Schema.define(:version => 20120529053831) do
 
   create_table "permissions", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "permissions_users", :id => false, :force => true do |t|
@@ -461,12 +470,12 @@ ActiveRecord::Schema.define(:version => 20120529053831) do
 
   create_table "pettycashes", :force => true do |t|
     t.datetime "transdate"
-    t.decimal  "inmoney",       :precision => 10, :scale => 0, :default => 0, :null => false
-    t.decimal  "outmoney",      :precision => 10, :scale => 0, :default => 0, :null => false
+    t.decimal  "inmoney",       :default => 0.0, :null => false
+    t.decimal  "outmoney",      :default => 0.0, :null => false
     t.text     "description"
     t.integer  "attachment_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
   end
 
   create_table "posting_items", :force => true do |t|
@@ -505,9 +514,9 @@ ActiveRecord::Schema.define(:version => 20120529053831) do
     t.date     "started_on"
     t.date     "ending_on"
     t.date     "ended_on"
-    t.decimal  "revenue",    :precision => 20, :scale => 0
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer  "revenue",    :limit => 20
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
     t.integer  "company_id"
   end
 
@@ -538,8 +547,8 @@ ActiveRecord::Schema.define(:version => 20120529053831) do
   create_table "required_tags", :force => true do |t|
     t.string   "modelname"
     t.integer  "tag_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "taggings", :force => true do |t|
@@ -553,21 +562,21 @@ ActiveRecord::Schema.define(:version => 20120529053831) do
 
   create_table "tags", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.integer  "company_id"
   end
 
   create_table "taxbill_items", :force => true do |t|
     t.datetime "transacted_at"
     t.text     "note"
-    t.decimal  "unitprice",     :precision => 10, :scale => 0, :default => 0, :null => false
-    t.integer  "quantity",                                     :default => 1
-    t.decimal  "total",         :precision => 10, :scale => 0, :default => 0, :null => false
-    t.decimal  "tax",           :precision => 10, :scale => 0, :default => 0, :null => false
+    t.decimal  "unitprice",     :default => 0.0, :null => false
+    t.integer  "quantity",      :default => 1
+    t.decimal  "total",         :default => 0.0, :null => false
+    t.decimal  "tax",           :default => 0.0, :null => false
     t.integer  "taxbill_id"
-    t.datetime "created_at",                                                  :null => false
-    t.datetime "updated_at",                                                  :null => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
   end
 
   create_table "taxbills", :force => true do |t|
@@ -580,11 +589,11 @@ ActiveRecord::Schema.define(:version => 20120529053831) do
 
   create_table "taxmen", :force => true do |t|
     t.integer  "business_client_id"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
     t.string   "fullname"
     t.string   "email"
     t.string   "phonenumber"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
   end
 
   create_table "used_vacations", :force => true do |t|
@@ -592,17 +601,17 @@ ActiveRecord::Schema.define(:version => 20120529053831) do
     t.date     "from"
     t.date     "to"
     t.text     "note"
-    t.datetime "created_at",                                 :null => false
-    t.datetime "updated_at",                                 :null => false
-    t.decimal  "period",      :precision => 10, :scale => 0
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.decimal  "period"
   end
 
   create_table "users", :force => true do |t|
     t.string   "name"
     t.string   "hashed_password"
     t.string   "salt"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
     t.string   "provider"
     t.string   "uid"
     t.string   "gmail_account"
@@ -615,9 +624,9 @@ ActiveRecord::Schema.define(:version => 20120529053831) do
     t.integer  "user_id"
     t.date     "from"
     t.date     "to"
-    t.decimal  "period",     :precision => 10, :scale => 0
-    t.datetime "created_at",                                :null => false
-    t.datetime "updated_at",                                :null => false
+    t.decimal  "period"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
 end

@@ -5,7 +5,7 @@ class ContactEmail < ActiveRecord::Base
   after_update {|model| model.destroy if model.email.blank?}
   before_save do
     tag = ContactEmailTag.find_by_name(target)
-    tags << tag unless tags.exists?(name: tag.name)
+    tags << tag if tag.present? and !tags.exists?(name: tag.name)
   end
 
   include Historiable
