@@ -132,7 +132,7 @@ class Hrinfo < ActiveRecord::Base
       today = Time.zone.now
       pdf.draw_text today.year, :at => [198, 311]
       pdf.draw_text today.month, :at => [262, 311]
-      pdf.draw_text today.day, :at => [307, 311]
+      pdf.draw_text today.day, :at => [306, 311]
 
       pdf.draw_text company.name, :at => [250, 255]
       pdf.draw_text company.owner_name, :at => [250, 225]
