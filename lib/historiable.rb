@@ -25,7 +25,7 @@ module Historiable
         :after_value => info ? info.call(self, v[1]) : v[1].to_s,
         :user => User.current_user
       )
-    end unless history_parent.new_record?
+    end if history_parent.present? and not history_parent.new_record?
   end
 
   included do

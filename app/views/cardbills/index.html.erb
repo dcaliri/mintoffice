@@ -7,6 +7,7 @@
       options_from_collection_for_select([Creditcard.new(:cardno => "all")]+Creditcard.all, :id, :cardno_long, params[:creditcard_id]),
       "onchange" => "this.form.submit()"
     %>
+    <%= render 'accessors/search_form' %>
   <% end -%>
 <% end -%>
 
@@ -14,7 +15,7 @@
 <%= link_to t('common.title.new'), new_cardbill_path %>
 </div> -->
 
-<h2>Total : <%= @cardbills.count %></h2>
+<h2>Total : <%= @cardbills.length %></h2>
 <table id="list-table">
   <tr>
     <th><%= Cardbill.human_attribute_name('cardno') %></th>

@@ -87,6 +87,7 @@ class UsersController < ApplicationController
     @hrinfo = Hrinfo.new(params[:hrinfo])
     respond_to do |format|
       if @user.save
+        Boxcar.add_to_boxcar(@user.boxcar_account) unless @user.boxcar_account.empty?
         flash[:notice] = I18n.t("common.messages.created", :model => User.model_name.human)
         format.html { redirect_to(:action => 'index') }
         format.xml  { render :xml => @user, :status => :created, :location => @user }
@@ -103,7 +104,11 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
 
     respond_to do |format|
+      
       if @user.update_attributes(params[:user])
+        logger.info @user.changes
+        Boxcar.add_to_boxcar(@user.boxcar_account) if ! @user.boxcar_account.empty?
+        
         flash[:notice] = I18n.t("common.messages.updated", :model => User.model_name.human)
 #        format.html { redirect_to :back }
         format.html { redirect_to session[:return_to] }

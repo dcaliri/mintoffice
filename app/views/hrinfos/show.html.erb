@@ -1,5 +1,6 @@
 <% title t('.title') %>
 <div id="show_command">
+  <%= link_to t('hrinfos.show.pdf'), new_employment_proof_hrinfo_path(@hrinfo), id: :employment_proof_link %> |
   <% if @user.ingroup?("admin") && ! @hrinfo.retired_on %>
     <%= link_to t('hrinfos.retire.title'), :action => :retire, :id => @hrinfo %> |
     <%= link_to t('common.title.edit'), edit_hrinfo_path(@hrinfo) %> |
@@ -21,18 +22,16 @@
       <tr><th align="right"><%= Hrinfo.human_attribute_name('retired_on') %>:</th><td><%= @hrinfo.retired_on %></td></tr>
 <% end %>
     </table>
-    <% if @user.ingroup?("admin") %>
+    <% if @hrinfo.contact %>
       <div id="show_command">
-        <%= link_to "주소록 찾기", find_contacts_path(target_class: @hrinfo.class, target: @hrinfo, query: @hrinfo.fullname.gsub(/\s+/, "")), :class => 'popup' %>
+        <%= link_to "주소록 찾기", @hrinfo.contact %>
       </div>
-    <% end %>
 
-    <h3><%= t("contacts.show.title")%></h3>
-    <ul>
-      <% if @hrinfo.contact %>
+      <h3><%= t("contacts.show.title")%></h3>
+      <ul>
         <%= render 'contacts/item_for_hrinfo', contact: @hrinfo.contact, menu: false %>
-      <% end %>
-    </ul>
+      </ul>
+    <% end %>
 <% if @user.ingroup?("admin") || @hrinfo.user == @user %>
 <% if @user.ingroup? "admin" %>
     <div id="show_command">
@@ -86,3 +85,10 @@
   unrequired_documents:
   <%= @unrequired_documents.collect(&:title).join(',') %>
 </pre> -->
+
+<script type="text/javascript">
+  $('#employment_proof_link').click(function(e){
+    e.preventDefault();
+    $(this).before("<%=j render('new_employment_proof') %>");
+  });
+</script>

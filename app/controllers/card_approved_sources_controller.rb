@@ -4,7 +4,7 @@ class CardApprovedSourcesController < ApplicationController
 
   def index
     approved_source = creditcard.nil? ? CardApprovedSource : creditcard.card_approved_sources
-    @card_approved_sources = approved_source.filter_by_params(params)
+    @card_approved_sources = approved_source.filter_by_params(params).page(params[:page])
   end
 
   def create
@@ -20,8 +20,8 @@ class CardApprovedSourcesController < ApplicationController
   end
 
   def export
-    approved_source = creditcard.nil? ? CardApprovedSource : creditcard.card_approved_sources
-    send_file approved_source.export(params[:to].to_sym)
+    approved_sources = creditcard.nil? ? CardApprovedSource : creditcard.card_approved_sources
+    send_file approved_sources.filter_by_params(params).export(params[:to].to_sym)
   end
 
   def destroy

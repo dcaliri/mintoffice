@@ -122,10 +122,7 @@ class HrinfosController < ApplicationController
   def update
     @hrinfo = Hrinfo.find(params[:id])
     respond_to do |format|
-      @hrinfo.attributes = params[:hrinfo]
-      if @hrinfo.valid?
-        @hrinfo.save
-
+      if @hrinfo.update_attributes(params[:hrinfo])
         flash[:notice] = I18n.t("common.messages.updated", :model => Hrinfo.model_name.human)
         format.html { redirect_to(@hrinfo) }
         format.xml  { head :ok }
@@ -134,6 +131,15 @@ class HrinfosController < ApplicationController
         format.xml  { render :xml => @hrinfo.errors, :status => :unprocessable_entity }
       end
     end
+  end
+
+  def new_employment_proof
+    @hrinfo = Hrinfo.find(params[:id])
+  end
+
+  def employment_proof
+    @hrinfo = Hrinfo.find(params[:id])
+    send_file @hrinfo.generate_employment_proof(params[:purpose])
   end
 
   # DELETE /hrinfos/1

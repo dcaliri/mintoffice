@@ -12,7 +12,7 @@
 <% end -%> -->
 
 <%= form_tag :html => { :class => 'tabular' } do %>
-<%= hidden_field_tag :user_id, params[:id] %>
+<%= hidden_field_tag :user_id, params[:user_id] %>
 <div class="box">
 <p>
   <%= label_tag :password, t('.password') %>
@@ -26,3 +26,4 @@
 <%= submit_tag t('common.button.change') %>
 <% end %>
 
+<%= debug params %>

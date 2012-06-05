@@ -109,6 +109,7 @@ ko:
             cardbill: "카드 영수증"
             change_history: 변경사항
             commute: 출퇴근
+            company: 회사
             contact: 주소록
             contact_phone_number: 전화번호
             contact_address: 주소
@@ -277,7 +278,11 @@ ko:
                 go: 출근
                 leave: 퇴근
             company:
-                name: 회사명
+                name: 업체명
+                registration_number: 사업자 등록번호
+                owner_name: 대표자 성명
+                address: 업체 주소
+                phone_number: 업체 연락처
                 pay_basic_date: 급여 기준일
                 payday: 급여 지급일
             contact:
@@ -346,6 +351,8 @@ ko:
                 description: 내역
                 amount: 금액
                 expensed_at: 지출 날짜
+            group:
+                name: 그룹명
             holiday:
                 theday: 휴일날짜
                 dayname: 휴일명목
@@ -357,10 +364,12 @@ ko:
                 lastname: 성
                 address: 주소
                 payment_day: 지급일
+                department: 부서
                 position: 직급
+                purpose: 용도
                 fullname: 이름
                 username: 계정
-                mphone: 핸드폰번호
+                phone_number: 핸드폰번호
                 joined_on: 입사일
                 email: 이메일
                 listed: 목록 출력 여부
@@ -834,6 +843,8 @@ ko:
         title: 지출내역서
         index:
             title: 지출내역서 관리
+    groups:
+        title: 그룹관리
     hrinfos:
         index:
             title: 인사정보관리 - 사원목록
@@ -846,6 +857,7 @@ ko:
             related_documents: 관련 문서
             related_admin_actions: 관련 관리 작업
             download: 다운로드
+            pdf: 재직증명서 출력
         retire:
             title: 퇴직 처리
             retire_date: 퇴직일자
@@ -884,6 +896,8 @@ ko:
             document: 문서관리
             business_client: 거래처관리
             admin: 관리자 메뉴
+            nextweek: 다음주
+            prevweek: 이전주
     namecards:
         edit:
             title: 명함 정보 수정
