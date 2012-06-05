@@ -1,6 +1,8 @@
 require 'test_helper'
 
 class DocumentsControllerTest < ActionController::TestCase
+  fixtures :documents
+
   def setup
     current_user.permission.create!(name: 'documents')
   end
@@ -17,6 +19,7 @@ class DocumentsControllerTest < ActionController::TestCase
 
   test "should show document" do
     get :show, :id => current_document.id
+    assert_response :success
   end
 
   test "should edit document" do
@@ -26,6 +29,6 @@ class DocumentsControllerTest < ActionController::TestCase
 
   private
   def current_document
-    @document ||= current_company.documents.create!(title: 'HAHA')
+    @document ||= documents(:fixture)
   end
 end

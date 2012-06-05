@@ -1,0 +1,8 @@
+fixture:
+    id: 1
+    cardno: 1
+    expireyear: 1
+    expiremonth: 1
+    nickname: 1
+    issuer: 1
+    cardholder: 1

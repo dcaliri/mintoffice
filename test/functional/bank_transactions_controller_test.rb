@@ -1,6 +1,9 @@
 require 'test_helper'
 
 class BankTransactionsControllerTest < ActionController::TestCase
+  fixtures :bank_accounts
+  fixtures :bank_transactions
+
   def setup
     current_user.permission.create!(name: 'bank_transactions')
   end
@@ -37,10 +40,10 @@ class BankTransactionsControllerTest < ActionController::TestCase
 
   private
   def current_bank_account
-    @bank_account ||= BankAccount.create!
+    @bank_account ||= bank_accounts(:fixture)
   end
 
   def current_bank_transaction
-    @bank_transaction ||= current_bank_account.bank_transactions.create!
+    @bank_transaction ||= bank_transactions(:fixture)
   end
 end

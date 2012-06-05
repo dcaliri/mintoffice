@@ -1,6 +1,9 @@
 require 'test_helper'
 
 class CardUsedSourcesControllerTest < ActionController::TestCase
+  fixtures :creditcards
+  fixtures :card_used_sources
+
   def setup
     current_user.permission.create!(name: 'card_used_sources')
   end
@@ -27,17 +30,10 @@ class CardUsedSourcesControllerTest < ActionController::TestCase
 
   private
   def current_creditcard
-    @creditcard ||= Creditcard.create!({
-      cardno: 1,
-      expireyear: 1,
-      expiremonth: 1,
-      nickname: 1,
-      issuer: 1,
-      cardholder: 1,
-    })
+    @creditcard ||= creditcards(:fixture)
   end
 
   def current_card_used_source
-    @card_used_source ||= current_creditcard.card_used_sources.create!(approve_no: "1234")
+    @card_used_source ||= card_used_sources(:fixture)
   end
 end
