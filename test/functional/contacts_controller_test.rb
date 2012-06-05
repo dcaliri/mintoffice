@@ -1,10 +1,10 @@
 require 'test_helper'
 
-class DocumentsControllerTest < ActionController::TestCase
-  fixtures :documents
+class ContactsControllerTest < ActionController::TestCase
+  fixtures :contacts
 
   def setup
-    current_user.permission.create!(name: 'documents')
+    current_user.permission.create!(name: 'contacts')
   end
 
   test "should see index page" do
@@ -18,17 +18,22 @@ class DocumentsControllerTest < ActionController::TestCase
   end
 
   test "should see show page" do
-    get :show, :id => current_document.id
+    get :show, :id => current_contact.id
     assert_response :success
   end
 
   test "should see edit page" do
-    get :edit, :id => current_document.id
+    get :edit, :id => current_contact.id
+    assert_response :success
+  end
+
+  test "should see find page" do
+    get :find
     assert_response :success
   end
 
   private
-  def current_document
-    @document ||= documents(:fixture)
+  def current_contact
+    @contact ||= contacts(:fixture)
   end
 end
