@@ -4,6 +4,7 @@
     <%= t("common.report.status") %>
     <%= render 'reports/search_form' %>
     <%= t("common.title.search") %> : <%= text_field_tag 'query', params[:query] %>
+    <%= render 'accessors/search_form' %>
   <% end -%>
 <% end -%>
 <div id="show_command">

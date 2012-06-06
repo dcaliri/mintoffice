@@ -24,9 +24,7 @@ class User < ActiveRecord::Base
   
   validates_presence_of :name
   validates_uniqueness_of :name
-#  validates_uniqueness_of :gmail_account, :if => "! gmail_account.empty?"
-  validates_uniqueness_of :gmail_account, :unless => "gmail_account.empty?"
-
+  validates_uniqueness_of :gmail_account, :if => Proc.new{ gmail_account && gmail_account.empty? == false }
   attr_accessor :password_confirmation
   validates_confirmation_of :password, :if => Proc.new{|user| user.provider.blank? and user.uid.blank?}
   validate :password_non_blank, :if => Proc.new{|user| user.provider.blank? and user.uid.blank?}

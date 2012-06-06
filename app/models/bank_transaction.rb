@@ -14,8 +14,6 @@ class BankTransaction < ActiveRecord::Base
 
   include ResourceExportable
   resource_exportable_configure do |config|
-    config.pdf_page_layout :portrait
-    config.row_length 1
     config.money [3, 4, 6]
     config.include_column 'bank_account_name'
     config.except_column 'bank_account_id'

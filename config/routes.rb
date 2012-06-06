@@ -49,7 +49,8 @@ Mintoffice::Application.routes.draw do
   post '/hrinfos/try_retired/:id', :controller => "hrinfos", :action => "try_retired", as: :try_retired
 
   resources :hrinfos do
-    get 'generate_employment_proof', on: :member, as: :generate_employment_proof
+    get 'new_employment_proof', on: :member, as: :new_employment_proof
+    post 'employment_proof', on: :member, as: :employment_proof
   end
 
   resources :attachments
@@ -165,7 +166,9 @@ Mintoffice::Application.routes.draw do
   resources :companies do
     post :switch, on: :collection
   end
-  resources :expense_reports, path: 'expenses'
+  resources :expense_reports, path: 'expenses' do
+    get 'no_permission', as: :no_permission, on: :collection
+  end
 
   match 'report' => 'reports#report', as: :report
 

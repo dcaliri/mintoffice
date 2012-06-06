@@ -17,13 +17,21 @@ module ResourceExportable
     def export
       filename = self.filename
       columns = self.columns
-      localized_columns = divide(columns.map{|column| collections.human_attribute_name(column)})
+      localized_columns = columns.map{|column| collections.human_attribute_name(column)}
 
-      Prawn::Document.generate(filename, page_layout: options.page_layout) do |pdf|
+      Prawn::Document.generate(filename, page_layout: options.layout_type, :page_size=> "A4", margin: [10, 10, 30, 10]) do |pdf|
         pdf.font "#{Rails.root}/public/fonts/NanumGothic.ttf"
-        pdf.text collections.model_name.human
+        pdf.repeat :all do
+          pdf.text collections.model_name.human
+          pdf.font_size 8
 
-        pdf.font_size 7
+          subtitle = options.subtitle
+          subtitle = subtitle.call(collections) if subtitle.respond_to?(:call)
+          pdf.draw_text subtitle, :at => [pdf.bounds.right - 100, pdf.bounds.top - 10]
+
+          pdf.font_size 7
+        end
+
         records = collections.all.map do |resource|
                     records = []
                     columns.each_with_index do |column, index|
@@ -32,42 +40,31 @@ module ResourceExportable
                       record = number_to_currency(record) if options.money.include?(index)
                       records << record
                     end
-                    divide(records)
+                    records
                   end
 
-        table_data = localized_columns + records.flatten(1)
+        table_data = [localized_columns] + records
 
-        table = pdf.table(table_data) do |table|
-          0.upto(default_row - 1) do |row|
-            table.row(row).style(:background_color => 'DDDDDD', :size => 9)
-          end
-          (default_row).upto(table.row_length-1) do |row|
-            color = (row % (default_row*2)) < default_row ? 'F0F0F0' : "FFFFCC"
-            table.row(row).style(:background_color => color)
-
+        width = pdf.bounds.right
+        height = pdf.bounds.top - 40
+        pdf.bounding_box [0, height], :width => width, :height => height do
+          table = pdf.table(table_data, header: true, :cell_style => {:background_color => "F0B9C8"}, :row_colors => ["F0F0F0", "FFFFCC"]) do |table|
             options.money.each do |column|
-              current_column = table.row(row).column(column)
-              table.row(row).column(column).style(align: :right)
+              current_column = table.column(column)
+              table.column(column).style(align: :right)
             end
           end
         end
+
+        pdf.number_pages "<page> / <total>",
+                          :at => [pdf.bounds.right - 100, 0],
+                          :align => :right,
+                          :size => 14
       end
 
       filename
     end
 
     private
-      def default_row
-        options.row_length
-      end
-
-      def divide(columns)
-        if default_row == 1
-          [columns]
-        else
-          half = (columns.length.to_f / 2).round - 1
-          [columns[0..half], columns[half+1..-1]]
-        end
-      end
   end
 end

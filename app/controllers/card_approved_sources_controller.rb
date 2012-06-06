@@ -4,7 +4,7 @@ class CardApprovedSourcesController < ApplicationController
 
   def index
     approved_source = creditcard.nil? ? CardApprovedSource : creditcard.card_approved_sources
-    @card_approved_sources = approved_source.filter_by_params(params)
+    @card_approved_sources = approved_source.filter_by_params(params).page(params[:page])
   end
 
   def create
