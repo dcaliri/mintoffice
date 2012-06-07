@@ -1,5 +1,4 @@
 # encoding: UTF-8
-require 'bcrypt'
 
 class Hrinfo < ActiveRecord::Base
   belongs_to :user
@@ -9,9 +8,10 @@ class Hrinfo < ActiveRecord::Base
   has_many :report, :as => :target
   has_many :expense_reports
 
+  serialize :employment_proof_hash, Array
+
   include Historiable
   include Attachmentable
-  include BCrypt
 
   validates_format_of :juminno, :with => /^\d{6}-\d{7}$/, :message => I18n.t('hrinfos.error.juminno_invalid')
   validates_uniqueness_of :juminno
@@ -156,6 +156,9 @@ class Hrinfo < ActiveRecord::Base
       pdf.move_cursor_to 170
       pdf.text hash_key, align: :center
     end
+
+    employment_proof_hash << hash_key
+    save!
 
     filename
   end
