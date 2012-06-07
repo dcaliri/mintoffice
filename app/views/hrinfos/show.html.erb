@@ -1,6 +1,5 @@
 <% title t('.title') %>
 <div id="show_command">
-  <%= link_to t('hrinfos.show.pdf'), new_employment_proof_hrinfo_path(@hrinfo), id: :employment_proof_link %> |
   <% if @user.ingroup?("admin") && ! @hrinfo.retired_on %>
     <%= link_to t('hrinfos.retire.title'), :action => :retire, :id => @hrinfo %> |
     <%= link_to t('common.title.edit'), edit_hrinfo_path(@hrinfo) %> |
@@ -66,6 +65,17 @@
         <li><%= link_to t('vacations.show.link'), vacation_path(@hrinfo.user) %></li>
       <% end %>
     </ul>
+    <h3><%= t('hrinfos.show.pdf') %></h3>
+    <%= form_tag([:employment_proof, @hrinfo]) do %>
+      <p>
+        <%= label_tag :purpose, t('activerecord.attributes.hrinfo.purpose') %>
+        <%= text_field_tag :purpose %>
+      </p>
+      <p>
+        <%= submit_tag "출력" %>
+      </p>
+    <% end %>
+
 <% end %>
   </div>
   <div id="attach">
@@ -85,10 +95,3 @@
   unrequired_documents:
   <%= @unrequired_documents.collect(&:title).join(',') %>
 </pre> -->
-
-<script type="text/javascript">
-  $('#employment_proof_link').click(function(e){
-    e.preventDefault();
-    $(this).before("<%=j render('new_employment_proof') %>");
-  });
-</script>
