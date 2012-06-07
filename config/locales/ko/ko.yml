@@ -180,6 +180,7 @@ ko:
                 out_bank_name: 상대 은행
                 promissory_check_amount: 수표 어음금액
                 cms_code: CMS 코드
+                transacted_at_strftime: 거래일자
             bank_transfer:
                 account: 은행계좌
                 bank_account_name: 은행계좌
@@ -201,6 +202,8 @@ ko:
                 in_person_name: 입금인성명
                 cms_code: CMS코드
                 currency_code: 통화 코드
+                transfered_at_strftime: 거래일시
+                registered_at_strftime: 등록일자
             bonus:
                 gave_at: 지급일
                 amount: 금액
@@ -228,7 +231,10 @@ ko:
                 card_type: 카드구분
                 canceled_at: 취소일자
                 status: 매입상태
+                used_at_strftime: 이용일시
                 will_be_paied_at: 결제예정일
+                canceled_at_strftime: 취소일자
+                will_be_paied_at_strftime: 결제예정일
             card_used_source:
                 card_no: 카드번호
                 bank_account: 결제계좌번호
@@ -256,6 +262,8 @@ ko:
                 store_addr1: 가맹점주소1
                 store_addr2: 가맹점주소2
                 store_tel: 가맹점전화번호
+                approved_at_strftime: 승인일자
+                approved_time_strftime: 승인시간
             cardbill:
                 cardno: "카드 번호"
                 creditcard_id: 카드
@@ -886,6 +894,8 @@ ko:
         error:
             juminno_invalid: "는 '111111-1111111' 형식으로 써 주세요."
         title: 인사정보관리
+    except_columns:
+        title: 컬럼 선택
     holidays:
         title: 휴일 관리
         index:

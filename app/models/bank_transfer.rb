@@ -11,6 +11,32 @@ class BankTransfer < ActiveRecord::Base
     ["기업 은행", :ibk]
   ]
 
+  # t.datetime "registered_at"
+
+  DEFAULT_COLUMNS = [:bank_account_name,
+                     :transfer_type,
+                     :transfered_at_strftime,
+                     :result,
+                     :out_bank_account,
+                     :in_bank_name,
+                     :in_bank_account,
+                     :money,
+                     :transfer_fee,
+                     :error_money,
+                     :registered_at_strftime,
+                     :error_code,
+                     :transfer_note,
+                     :incode,
+                     :out_account_note,
+                     :in_account_note,
+                     :in_person_name,
+                     :cms_code,
+                     :currency_code]
+
+  def self.default_columns
+    DEFAULT_COLUMNS
+  end
+
   include StylesheetParsable
   include Excels::BankTransfers::Shinhan
   include Excels::BankTransfers::Ibk
@@ -21,6 +47,15 @@ class BankTransfer < ActiveRecord::Base
     config.except_column :bank_account_id
     config.period_subtitle :transfered_at
   end
+
+  ###### DECORATOR ###############
+  def transfered_at_strftime
+    transfered_at.strftime("%Y-%m-%d %H.%M") rescue ""
+  end
+  def registered_at_strftime
+    registered_at.strftime("%Y-%m-%d %H.%M") rescue ""
+  end
+  ################################
 
   def self.excel_parser(type)
     if type == :shinhan

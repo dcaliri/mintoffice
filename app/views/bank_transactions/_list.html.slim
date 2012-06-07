@@ -1,23 +1,5 @@
+- set_columns BankTransaction.default_columns
 - set_num_rows [:in, :out, :remain]
 - set_model_name :bank_transaction
 
-table#list-table
-  tr
-    == th_column :account
-    == th_column :transacted_at
-    == th_column :transaction_type
-    == th_column :in
-    == th_column :out
-    == th_column :note
-    == th_column :remain
-    == th_column :branchname
-  - bank_transactions.each do |transaction|
-    tr.selectable onclick="#{on_click_path(transaction)}"
-      == td_column transaction, :account, (transaction.bank_account.description rescue "")
-      == td_column transaction, :transacted_at, (transaction.transacted_at.strftime("%Y-%m-%d %H.%M") rescue "")
-      == td_column transaction, :transaction_type
-      == td_column transaction, :in
-      == td_column transaction, :out
-      == td_column transaction, :note
-      == td_column transaction, :remain
-      == td_column transaction, :branchname
+== draw_table(bank_transactions)

@@ -1,4 +1,27 @@
 module ExceptColumn
+  def draw_table(collection)
+    html_code = ""
+    html_code += "<table id='list-table'>"
+    html_code += "<tr>"
+
+    columns.each do |column|
+      html_code += th_column(column)
+    end
+
+    html_code += "</tr>"
+
+    collection.each do |resource|
+      html_code += "<tr class='selectable', onclick = #{on_click_path(resource)}>"
+      columns.each do |column|
+        html_code += td_column(resource, column)
+      end
+      html_code += "</tr>"
+    end
+
+    html_code += "</table>"
+    html_code
+  end
+
   def set_model_name(name)
     @model_name = name
   end
@@ -9,6 +32,14 @@ module ExceptColumn
 
   def set_num_rows(rows)
     @num_rows = rows
+  end
+
+  def set_columns(columns)
+    @columns = columns
+  end
+
+  def columns
+    @columns
   end
 
   def numrow?(column)

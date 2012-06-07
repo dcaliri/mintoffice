@@ -1,27 +1,6 @@
+- set_columns BankTransfer.default_columns
+
 - set_num_rows [:money, :transfer_fee, :error_money]
 - set_model_name :bank_transfer
 
-table#list-table
-  tr
-    == th_column :account
-    == th_column :transfer_type
-    == th_column :transfered_at
-    == th_column :out_bank_account
-    == th_column :in_bank_name
-    == th_column :in_bank_account
-    == th_column :money
-    == th_column :transfer_fee
-    == th_column :error_money
-    == th_column :in_person_name
-  - bank_transfers.each do |transfer|
-    tr.selectable onclick="#{on_click_path(transfer)}"
-    == td_column transfer, :account, (transfer.bank_account.description rescue "")
-    == td_column transfer, :transfer_type
-    == td_column transfer, :transfered_at, (transfer.transfered_at.strftime("%Y-%m-%d %H.%M") rescue "")
-    == td_column transfer, :out_bank_account
-    == td_column transfer, :in_bank_name
-    == td_column transfer, :in_bank_account
-    == td_column transfer, :money
-    == td_column transfer, :transfer_fee
-    == td_column transfer, :error_money
-    == td_column transfer, :in_person_name
+== draw_table(bank_transfers)

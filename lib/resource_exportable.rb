@@ -56,8 +56,11 @@ module ResourceExportable
     end
 
     def export(extension, except_columns = nil)
-      columns = configure.include_column + column_names.map(&:to_sym) - configure.except_column - EXCEPT
-      columns = columns - except_columns if except_columns
+      unless except_columns
+        columns = configure.include_column + column_names.map(&:to_sym) - configure.except_column - EXCEPT
+      else
+        columns = default_columns - except_columns
+      end
 
       filename = make_filename(extension)
 

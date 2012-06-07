@@ -1,33 +1,5 @@
+- set_columns CardUsedSource.default_columns
 - set_num_rows [:money_krw]
 - set_model_name :card_used_source
 
-table#list-table
-  tr
-    == th_column :card_no
-    == th_column :bank_account
-    == th_column :bank_name
-    == th_column :card_holder_name
-    == th_column :used_area
-    == th_column :approve_no
-    == th_column :approved_at
-    == th_column :approved_time
-    == th_column :sales_type
-    == th_column :money_krw
-    == th_column :store_name
-    == th_column :store_type
-    == th_column :store_tel
-  - card_used_sources.each do |source|
-    tr.selectable onclick="#{on_click_path(source)}"
-      == td_column source, :card_no
-      == td_column source, :bank_account
-      == td_column source, :bank_name
-      == td_column source, :card_holder_name
-      == td_column source, :used_area
-      == td_column source, :approve_no
-      == td_column source, :approved_at, (source.approved_at.strftime("%Y %m.%d") rescue "")
-      == td_column source, :approved_time, (source.approved_time.strftime("%H:%M:%S") rescue "")
-      == td_column source, :sales_type
-      == td_column source, :money_krw
-      == td_column source, :store_name
-      == td_column source, :store_type
-      == td_column source, :store_tel
+== draw_table(card_used_sources)

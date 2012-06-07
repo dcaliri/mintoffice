@@ -1,32 +1,5 @@
+- set_columns CardApprovedSource.default_columns
 - set_num_rows [:money]
 - set_model_name :card_approved_source
 
-
-table#list-table
-  tr
-    == th_column :used_at
-    == th_column :approve_no
-    == th_column :card_no
-    == th_column :card_holder_name
-    == th_column :store_name
-    == th_column :money
-    == th_column :used_type
-    == th_column :monthly_duration
-    == th_column :card_type
-    == th_column :canceled_at
-    == th_column :status
-    == th_column :will_be_paied_at
-  - card_approved_sources.each do |source|
-    tr.selectable onclick="#{on_click_path(source)}"
-    == td_column source, :used_at, (source.used_at.strftime("%Y.%m.%d %H:%M") rescue "")
-    == td_column source, :approve_no
-    == td_column source, :card_no
-    == td_column source, :card_holder_name
-    == td_column source, :store_name
-    == td_column source, :money
-    == td_column source, :used_type
-    == td_column source, :monthly_duration
-    == td_column source, :card_type
-    == td_column source, :canceled_at, (source.canceled_at.strftime("%Y %m.%d") rescue "")
-    == td_column source, :status
-    == td_column source, :will_be_paied_at, (source.will_be_paied_at.strftime("%Y %m.%d") rescue "")
+== draw_table(card_approved_sources)
