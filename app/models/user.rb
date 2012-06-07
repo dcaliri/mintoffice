@@ -21,7 +21,7 @@ class User < ActiveRecord::Base
   scope :nohrinfo, :conditions =>['id not in (select user_id from hrinfos)']
   scope :enabled, :conditions =>["name NOT LIKE '[X] %%'"]
   scope :disabled, :conditions =>["name LIKE '[X] %%'"]
-  
+
   validates_presence_of :name
   validates_uniqueness_of :name
   validates_uniqueness_of :gmail_account, :if => Proc.new{ gmail_account && gmail_account.empty? == false }
@@ -83,7 +83,7 @@ class User < ActiveRecord::Base
       false
     end
   end
-  
+
   def enabled?
     ! disabled?
   end
@@ -115,7 +115,7 @@ class User < ActiveRecord::Base
   def admin?
     self.ingroup? "admin"
   end
-  
+
   def self.search(query)
     query = "%#{query}%"
     where('name like ?', query)
