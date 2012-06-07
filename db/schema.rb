@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120605050447) do
+ActiveRecord::Schema.define(:version => 20120607053901) do
 
   create_table "access_people", :force => true do |t|
     t.integer  "user_id"
@@ -384,8 +384,8 @@ ActiveRecord::Schema.define(:version => 20120605050447) do
     t.string   "firstname"
     t.string   "lastname"
     t.integer  "picture_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
     t.date     "joined_on"
     t.date     "retired_on"
     t.integer  "user_id"
@@ -394,6 +394,7 @@ ActiveRecord::Schema.define(:version => 20120605050447) do
     t.string   "juminno"
     t.boolean  "listed"
     t.string   "department"
+    t.text     "employment_proof_hash"
   end
 
   add_index "hrinfos", ["companyno"], :name => "index_hrinfos_on_companyno", :unique => true
