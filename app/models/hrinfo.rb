@@ -1,4 +1,5 @@
 # encoding: UTF-8
+require 'bcrypt'
 
 class Hrinfo < ActiveRecord::Base
   belongs_to :user
@@ -10,6 +11,7 @@ class Hrinfo < ActiveRecord::Base
 
   include Historiable
   include Attachmentable
+  include BCrypt
 
   validates_format_of :juminno, :with => /^\d{6}-\d{7}$/, :message => I18n.t('hrinfos.error.juminno_invalid')
   validates_uniqueness_of :juminno
@@ -106,6 +108,8 @@ class Hrinfo < ActiveRecord::Base
   def generate_employment_proof(purpose)
     filename = "#{Rails.root}/tmp/#{fullname}_employment_proof.pdf"
     template = "#{Rails.root}/app/assets/images/employment_proof_tempate.pdf"
+    hash_key = Time.now.utc.strftime("%Y%m%d%H%M%S") + id.to_s + Array.new(10).map { (65 + rand(58)).chr }.join
+    hash_key = Digest::SHA1.hexdigest(hash_key)
 
     Prawn::Document.generate(filename, template: template) do |pdf|
       pdf.image company.seal, :at => [320, 255], width: 50, height: 50
@@ -148,6 +152,9 @@ class Hrinfo < ActiveRecord::Base
 
       pdf.draw_text company.name, :at => [250, 255]
       pdf.draw_text company.owner_name, :at => [250, 225]
+
+      pdf.move_cursor_to 170
+      pdf.text hash_key, align: :center
     end
 
     filename
