@@ -1,30 +1,32 @@
+- set_num_rows [:money]
+- set_model_name :card_approved_source
+
+
 table#list-table
   tr
-    th= CardApprovedSource.human_attribute_name(:used_at)
-    th= CardApprovedSource.human_attribute_name(:approve_no)
-    th= CardApprovedSource.human_attribute_name(:card_no)
-    th= CardApprovedSource.human_attribute_name(:card_holder_name)
-    th= CardApprovedSource.human_attribute_name(:store_name)
-    th= CardApprovedSource.human_attribute_name(:money)
-    th= CardApprovedSource.human_attribute_name(:used_type)
-    th= CardApprovedSource.human_attribute_name(:monthly_duration)
-    th= CardApprovedSource.human_attribute_name(:card_type)
-    th= CardApprovedSource.human_attribute_name(:canceled_at)
-    th= CardApprovedSource.human_attribute_name(:status)
-    th= CardApprovedSource.human_attribute_name(:will_be_paied_at)
+    == th_column :used_at
+    == th_column :approve_no
+    == th_column :card_no
+    == th_column :card_holder_name
+    == th_column :store_name
+    == th_column :money
+    == th_column :used_type
+    == th_column :monthly_duration
+    == th_column :card_type
+    == th_column :canceled_at
+    == th_column :status
+    == th_column :will_be_paied_at
   - card_approved_sources.each do |source|
-    - onclick = source.new_record? ? "" : "location.href='#{card_approved_source_path(source)}'"
-    tr.selectable onclick="#{onclick}"
-      td= source.used_at_to_s
-      td= source.approve_no
-      td= source.card_no
-      td= source.card_holder_name
-      td= source.store_name
-      td.numrow
-        = number_to_currency source.money
-      td= source.used_type
-      td= source.monthly_duration
-      td= source.card_type
-      td= source.canceled_at_to_s
-      td= source.status
-      td= source.will_be_paied_at_to_s
+    tr.selectable onclick="#{on_click_path(source)}"
+    == td_column source, :used_at, (source.used_at.strftime("%Y.%m.%d %H:%M") rescue "")
+    == td_column source, :approve_no
+    == td_column source, :card_no
+    == td_column source, :card_holder_name
+    == td_column source, :store_name
+    == td_column source, :money
+    == td_column source, :used_type
+    == td_column source, :monthly_duration
+    == td_column source, :card_type
+    == td_column source, :canceled_at, (source.canceled_at.strftime("%Y %m.%d") rescue "")
+    == td_column source, :status
+    == td_column source, :will_be_paied_at, (source.will_be_paied_at.strftime("%Y %m.%d") rescue "")

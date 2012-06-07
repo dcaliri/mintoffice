@@ -1,32 +1,33 @@
+- set_num_rows [:money_krw]
+- set_model_name :card_used_source
+
 table#list-table
   tr
-    th= CardUsedSource.human_attribute_name(:card_no)
-    th= CardUsedSource.human_attribute_name(:bank_account)
-    th= CardUsedSource.human_attribute_name(:bank_name)
-    th= CardUsedSource.human_attribute_name(:card_holder_name)
-    th= CardUsedSource.human_attribute_name(:used_area)
-    th= CardUsedSource.human_attribute_name(:approve_no)
-    th= CardUsedSource.human_attribute_name(:approved_at)
-    th= CardUsedSource.human_attribute_name(:approved_time)
-    th= CardUsedSource.human_attribute_name(:sales_type)
-    th= CardUsedSource.human_attribute_name(:money_krw)
-    th= CardUsedSource.human_attribute_name(:store_name)
-    th= CardUsedSource.human_attribute_name(:store_type)
-    th= CardUsedSource.human_attribute_name(:store_tel)
+    == th_column :card_no
+    == th_column :bank_account
+    == th_column :bank_name
+    == th_column :card_holder_name
+    == th_column :used_area
+    == th_column :approve_no
+    == th_column :approved_at
+    == th_column :approved_time
+    == th_column :sales_type
+    == th_column :money_krw
+    == th_column :store_name
+    == th_column :store_type
+    == th_column :store_tel
   - card_used_sources.each do |source|
-    - onclick = source.new_record? ? "" : "location.href='#{card_used_source_path(source)}'"
-    tr.selectable onclick="#{onclick}"
-      td= source.card_no
-      td= source.bank_account
-      td= source.bank_name
-      td= source.card_holder_name
-      td= source.used_area
-      td= source.approve_no
-      td= source.approved_at.strftime("%Y %m.%d") rescue ""
-      td= source.approved_time.strftime("%H:%M:%S") rescue ""
-      td= source.sales_type
-      td.numrow
-        = number_to_currency source.money_krw
-      td= source.store_name
-      td= source.store_type
-      td= source.store_tel
+    tr.selectable onclick="#{on_click_path(source)}"
+      == td_column source, :card_no
+      == td_column source, :bank_account
+      == td_column source, :bank_name
+      == td_column source, :card_holder_name
+      == td_column source, :used_area
+      == td_column source, :approve_no
+      == td_column source, :approved_at, (source.approved_at.strftime("%Y %m.%d") rescue "")
+      == td_column source, :approved_time, (source.approved_time.strftime("%H:%M:%S") rescue "")
+      == td_column source, :sales_type
+      == td_column source, :money_krw
+      == td_column source, :store_name
+      == td_column source, :store_type
+      == td_column source, :store_tel

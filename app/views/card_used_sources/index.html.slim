@@ -8,6 +8,8 @@
       "onchange" => "this.form.submit()"
 
 #show_command
+  = link_to t('common.link.except_column'), except_columns_path(class_name: CardUsedSource), :class => 'popup'
+  = " | "
   = link_to t('card_used_sources.new.link'), [:new, :card_used_source]
   = " | "
   = link_to t('common.title.back'), :creditcards

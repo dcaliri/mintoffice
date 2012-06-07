@@ -11,4 +11,6 @@ module ApplicationHelper
   def forward_params
     params.delete_if{|key, value| key == :controller or key == :action}
   end
+
+  include ExceptColumn
 end
