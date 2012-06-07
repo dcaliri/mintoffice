@@ -10,7 +10,8 @@ class CardUsedSource < ActiveRecord::Base
 
   include ResourceExportable
   resource_exportable_configure do |config|
-    config.except_column 'creditcard_id'
+    config.except_column :creditcard_id
+    config.period_subtitle :approved_at
   end
 
   class << self

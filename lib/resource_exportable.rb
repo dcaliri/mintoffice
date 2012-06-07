@@ -6,14 +6,14 @@ module ResourceExportable
     def except_column(column=nil)
       @except_columns = @except_columns || []
       @except_columns.tap do |columns|
-        columns << column if column
+        columns << column.to_s if column
       end
     end
 
     def include_column(column=nil)
       @include_columns = @include_columns || []
       @include_columns.tap do |columns|
-        columns << column if column
+        columns << column.to_s if column
       end
     end
 
@@ -26,6 +26,10 @@ module ResourceExportable
 
     def subtitle(text)
       opts[:subtitle] = text
+    end
+
+    def period_subtitle(column)
+      opts[:period] = column
     end
 
     def opts
