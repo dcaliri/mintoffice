@@ -1,69 +1,4 @@
-css:
-  .menubar {
-    position: relative;
-    width: 640px;
-    margin: 0 auto;
-  }
-  .menubar_item {
-    width: 150px;
-    float: left;
-    margin-right: 10px;
-    display: block;
-    /*border: 1px solid black;*/
-  }
-  .item5 {
-    margin-right: 10px;
-  }
-  h2 {
-    display: block;
-    font-size: 16px;
-    line-height: 30px;
-    color: #A5A4A4;
-    letter-spacing: -1px;
-    word-spacing: 3px;
-    border: none;
-  }
-  
-  ul {
-    list-style: none;
-    padding: 0px;
-  }
-  
-  li {
-    border-bottom: 1px solid #C6C6C6;
-    padding-bottom: 9px;
-    margin-bottom: 6px;
-  }
-  
-  a {
-    color: #232323;
-    outline: none;
-    cursor: pointer;
-    text-decoration: none;
-  }
-  @media only screen and (max-width: 1023px){
-    .menubar {
-      width: 640px;
-    }  
-  }
-  @media only screen and (max-width: 767px){
-    .menubar {
-      width: 480px;
-    }  
-    .item4 {
-      clear:left;
-    }
-  }
-  @media only screen and (max-width: 479px){
-    .menubar {
-      width: 320px;
-    }  
-    .item4 {
-      clear: none;
-    }
-  }
-  
-.wrapper
+div class={@user.admin? ? "admin" : ""}
   .menubar
     .menubar_item.item1
       h2= t("main.index.human_resources")
@@ -104,54 +39,6 @@ css:
           li= link_to t("contacts.index.title"), :contacts 
 
     - if @user.ingroup?(:admin)
-      css:
-        .menubar {
-          width: 800px;
-        }
-        @media only screen and (max-width: 1023px){
-          .menubar {
-            width: 660px;
-          }
-          .item5 {
-            clear: left;
-          }
-          .item4 {
-            margin-right: 0px;
-          }
-        }
-        @media only screen and (max-width: 767px){
-          .menubar {
-            width: 480px;
-          } 
-          .item3 {
-            margin-right: 0px;
-          }
-          .item4 {
-            margin-right: 10px;
-            clear: left;
-          }
-          .item5 {
-            clear: none;
-          }
-        }
-        @media only screen and (max-width: 479px){
-          .menubar {
-            position: relative;
-            margin: 0 auto;          
-            width: 320px;
-          }
-          .item2 {
-            margin-right: 0px;
-          }
-          .item3 {
-            margin-right: 10px;
-          }
-          .item4 {
-            margin-right: 0px;
-            clear: none;
-          }
-        }
-        
       .menubar_item.item5
           h2= t("main.index.admin")
           ul
@@ -169,3 +56,5 @@ css:
             li= link_to t("holidays.title"), :controller => "holidays"
             li= link_to t("dayworker_taxes.title"), :controller => "dayworker_taxes"
             li= link_to t("companies.title"), current_company
+    = render partial: "this_week"
+    
