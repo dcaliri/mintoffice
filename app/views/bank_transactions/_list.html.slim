@@ -12,10 +12,7 @@ table#list-table
     - onclick = transaction.new_record? ? "" : "location.href='#{bank_transaction_path(transaction)}'"
     tr.selectable onclick="#{onclick}"
       td= transaction.bank_account.description rescue ""
-      - if transaction.transacted_at
-        td= transaction.transacted_at.strftime("%Y-%m-%d %H.%M")
-      - else
-        td= ""
+      td= transaction.transacted_at.strftime("%Y-%m-%d %H.%M") rescue ""
       td= transaction.transaction_type
       td.numrow
         = number_to_currency transaction.in
