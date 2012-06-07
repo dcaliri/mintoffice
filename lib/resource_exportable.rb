@@ -28,6 +28,10 @@ module ResourceExportable
       opts[:subtitle] = text
     end
 
+    def period(column)
+      opts[:period] = column
+    end
+
     def opts
       @opts ||= {
         subtitle: "",

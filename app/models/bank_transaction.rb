@@ -20,6 +20,7 @@ class BankTransaction < ActiveRecord::Base
     config.except_column 'out_bank_account'
     config.except_column 'out_bank_name'
     config.except_column 'promissory_check_amount'
+    config.period :transacted_at
   end
 
   def self.excel_parser(type)
