@@ -5,6 +5,44 @@ class CardApprovedSource < ActiveRecord::Base
 
   self.per_page = 20
 
+  DEFAULT_COLUMNS = [:used_at_strftime,
+                     :approve_no,
+                     :card_no,
+                     :card_holder_name,
+                     :store_name,
+                     :money,
+                     :used_type,
+                     :monthly_duration,
+                     :card_type,
+                     :canceled_at_strftime,
+                     :status,
+                     :will_be_paied_at_strftime,
+                     :card_no,
+                     :money_foreign,
+                     :money_type,
+                     :money_type_info,
+                     :money_dollar
+                     ]
+
+  def self.default_columns
+    DEFAULT_COLUMNS
+  end
+
+
+  ###### DECORATOR ###############
+  def used_at_strftime
+    used_at.strftime("%Y %m.%d") rescue ""
+  end
+
+  def canceled_at_strftime
+    canceled_at.strftime("%Y %m.%d") rescue ""
+  end
+
+  def will_be_paied_at_strftime
+    will_be_paied_at.strftime("%H:%M:%S") rescue ""
+  end
+  ################################
+
   before_save :strip_approve_no
   def strip_approve_no
     approve_no.strip!

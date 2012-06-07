@@ -8,6 +8,24 @@ class BankTransaction < ActiveRecord::Base
     ["기업 은행", :ibk]
   ]
 
+  DEFAULT_COLUMNS = [:bank_account_name,
+                     :transacted_at_strftime,
+                     :transaction_type,
+                     :in,
+                     :out,
+                     :note,
+                     :remain,
+                     :branchname,
+                     :out_bank_account,
+                     :out_bank_name,
+                     :promissory_check_amount,
+                     :cms_code
+                     ]
+
+  def self.default_columns
+    DEFAULT_COLUMNS
+  end
+
   include StylesheetParsable
   include Excels::BankTransactions::Shinhan
   include Excels::BankTransactions::Ibk
@@ -30,6 +48,13 @@ class BankTransaction < ActiveRecord::Base
       ibk_bank_transaction_parser
     end
   end
+
+  ###### DECORATOR ###############
+  def transacted_at_strftime
+    transacted_at.strftime("%Y-%m-%d %H.%M") rescue ""
+  end
+  ################################
+
 
   def self.preview_stylesheet(account, type, upload)
     raise ArgumentError, I18n.t('common.upload.empty') unless upload
