@@ -4,7 +4,7 @@ class UsersController < ApplicationController
     @this_user = User.find(params[:id])
     c.save_attachment_id @this_user
   end
-  before_filter :except => [:my, :login] do |c|
+  before_filter :except => [:my, :login, :logout] do |c|
     unless @user.admin?
       flash[:notice] = I18n.t("common.messages.not_allowed")
       redirect_to :controller => "main", :action => "index"
