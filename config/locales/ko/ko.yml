@@ -143,6 +143,7 @@ ko:
             taxbill_item: 항목
             used_vacation: 사용한 연차
             vacation: 연차
+            user: 사용자계정
         attributes:
             access_person:
                 access_type: 권한
@@ -486,6 +487,13 @@ ko:
                 to: 종료
                 period: 기간
                 note: 사유
+            user:
+                name: 계정명
+                password: 비밀번호
+                password_confirmation: 비밀번호 확인
+                gmail_account: Google 계정
+                notify_email: Email
+                boxcar_account: Boxcar 계정
         errors:
             template:
                 header: 오류가 발생했습니다.

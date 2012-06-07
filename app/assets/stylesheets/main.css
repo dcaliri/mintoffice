@@ -340,6 +340,26 @@ tr.related {
   clear: both;
 }
 
+dl { 
+  padding: 0.5em;
+}
+dt { 
+  float: left;
+  clear: left; 
+  width: 100px;
+  white-space: nowrap;
+  text-align: right; 
+  font-weight: bold; 
+  color: dimgray; 
+}
+dt:after { 
+  content: " : "; 
+}
+dd { 
+  margin: 0 0 0 110px; 
+  padding: 0 0 0.5em 0; 
+}
+
 ul#css3menu_top,ul#css3menu_top ul{
   margin:0;list-style:none;padding:0;background-color:#dedede;border-width:1px;border-style:solid;border-color:#5f5f5f;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;}
 ul#css3menu_top ul{
