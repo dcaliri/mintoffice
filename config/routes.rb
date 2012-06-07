@@ -177,6 +177,9 @@ Mintoffice::Application.routes.draw do
 
   post 'accessors', controller: :accessors, action: :create, as: :accessors
 
+  get 'except_columns' => "except_columns#new", as: :except_columns
+  post 'except_columns' => "except_columns#create", as: :except_columns
+
   root to: 'main#index'
 
   match ':controller/:action/:id'

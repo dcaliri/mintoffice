@@ -1,0 +1,25 @@
+h2= t("common.title.#{action_name}")
+
+= form_for @this_user do |f|
+  = f.error_messages
+  .box
+    p
+      = f.label :name, User.human_attribute_name("name")
+      = f.text_field :name, :size => 40
+    p
+      = f.label :password, User.human_attribute_name("password")
+      = f.password_field :password, :size => 40
+    p
+      = f.label :password_confirmation, User.human_attribute_name("password_confirmation")
+      = f.password_field :password_confirmation, :size => 40 
+    p
+      = f.label :gmail_account, User.human_attribute_name("gmail_account")
+      = f.email_field :gmail_account, :size => 40
+    p
+      = f.label :notify_email, User.human_attribute_name("notify_email")
+      = f.email_field :notify_email, :size => 40
+    p
+      = f.label :boxcar_account, User.human_attribute_name("boxcar_account")
+      = f.email_field :boxcar_account, :size => 40
+  p
+    = f.submit t("common.button.create")

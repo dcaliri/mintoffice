@@ -27,6 +27,14 @@ module ResourceExportable
 
           subtitle = options.subtitle
           subtitle = subtitle.call(collections) if subtitle.respond_to?(:call)
+
+          if options.period
+            ordered_collection = collections.order("#{options.period} DESC")
+            first_paid = ordered_collection.last
+            last_paid = ordered_collection.first
+            subtitle = "#{first_paid.send(options.period).to_date} ~ #{last_paid.send(options.period).to_date}"
+          end
+
           pdf.draw_text subtitle, :at => [pdf.bounds.right - 100, pdf.bounds.top - 10]
 
           pdf.font_size 7

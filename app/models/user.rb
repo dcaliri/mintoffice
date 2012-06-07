@@ -19,6 +19,8 @@ class User < ActiveRecord::Base
   has_many :reporters, class_name: 'ReportPerson'
 
   scope :nohrinfo, :conditions =>['id not in (select user_id from hrinfos)']
+  scope :enabled, :conditions =>["name NOT LIKE '[X] %%'"]
+  scope :disabled, :conditions =>["name LIKE '[X] %%'"]
 
   validates_presence_of :name
   validates_uniqueness_of :name
@@ -82,6 +84,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def enabled?
+    ! disabled?
+  end
+
   def self.enabled
     where("name NOT LIKE '[X] %'").order("id ASC")
   end
@@ -104,6 +110,10 @@ class User < ActiveRecord::Base
     else
       false
     end
+  end
+
+  def admin?
+    self.ingroup? "admin"
   end
 
   def self.search(query)

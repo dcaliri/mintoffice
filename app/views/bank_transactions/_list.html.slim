@@ -1,27 +1,5 @@
-table#list-table
-  tr
-    th= BankTransaction.human_attribute_name(:account)
-    th= BankTransaction.human_attribute_name(:transacted_at)
-    th= BankTransaction.human_attribute_name(:transaction_type)
-    th= BankTransaction.human_attribute_name(:in)
-    th= BankTransaction.human_attribute_name(:out)
-    th= BankTransaction.human_attribute_name(:note)
-    th= BankTransaction.human_attribute_name(:remain)
-    th= BankTransaction.human_attribute_name(:branchname)
-  - bank_transactions.each do |transaction|
-    - onclick = transaction.new_record? ? "" : "location.href='#{bank_transaction_path(transaction)}'"
-    tr.selectable onclick="#{onclick}"
-      td= transaction.bank_account.description rescue ""
-      - if transaction.transacted_at
-        td= transaction.transacted_at.strftime("%Y-%m-%d %H.%M")
-      - else
-        td= ""
-      td= transaction.transaction_type
-      td class="numrow"
-        = number_to_currency transaction.in
-      td class="numrow"
-        = number_to_currency transaction.out
-      td= transaction.note
-      td class="numrow"
-        = number_to_currency transaction.remain
-      td= transaction.branchname
+- set_columns BankTransaction.default_columns
+- set_num_rows [:in, :out, :remain]
+- set_model_name :bank_transaction
+
+== draw_table(bank_transactions)

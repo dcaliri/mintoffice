@@ -3,6 +3,47 @@ class CardUsedSource < ActiveRecord::Base
 
   self.per_page = 20
 
+  DEFAULT_COLUMNS = [:card_no,
+                     :bank_account,
+                     :bank_name,
+                     :card_holder_name,
+                     :used_area,
+                     :approve_no,
+                     :approved_at_strftime,
+                     :approved_time_strftime,
+                     :sales_type,
+                     :money_krw,
+                     :money_foreign,
+                     :price,
+                     :tax,
+                     :tip,
+                     :monthly_duration,
+                     :exchange_krw,
+                     :foreign_country_code,
+                     :foreign_country_name,
+                     :store_business_no,
+                     :store_name,
+                     :store_type,
+                     :store_zipcode,
+                     :store_addr1,
+                     :store_addr2,
+                     :store_tel
+                     ]
+
+  def self.default_columns
+    DEFAULT_COLUMNS
+  end
+
+  ###### DECORATOR ###############
+  def approved_at_strftime
+    approved_at.strftime("%Y %m.%d") rescue ""
+  end
+
+  def approved_time_strftime
+    approved_time.strftime("%H:%M:%S") rescue ""
+  end
+  ################################
+
   before_save :strip_approve_no
   def strip_approve_no
     approve_no.strip!
@@ -10,7 +51,8 @@ class CardUsedSource < ActiveRecord::Base
 
   include ResourceExportable
   resource_exportable_configure do |config|
-    config.except_column 'creditcard_id'
+    config.except_column :creditcard_id
+    config.period_subtitle :approved_at
   end
 
   class << self
