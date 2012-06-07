@@ -865,7 +865,7 @@ ko:
             related_documents: 관련 문서
             related_admin_actions: 관련 관리 작업
             download: 다운로드
-            pdf: 재직증명서 출력
+            pdf: 재직증명서
         retire:
             title: 퇴직 처리
             retire_date: 퇴직일자
