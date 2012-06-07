@@ -28,7 +28,7 @@ module ResourceExportable
       opts[:subtitle] = text
     end
 
-    def period(column)
+    def period_subtitle(column)
       opts[:period] = column
     end
 

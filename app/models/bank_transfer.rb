@@ -19,7 +19,7 @@ class BankTransfer < ActiveRecord::Base
   resource_exportable_configure do |config|
     config.include_column 'bank_account_name'
     config.except_column 'bank_account_id'
-    config.period :transfered_at
+    config.period_subtitle :transfered_at
   end
 
   def self.excel_parser(type)
