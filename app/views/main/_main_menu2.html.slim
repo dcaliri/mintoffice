@@ -1,0 +1,171 @@
+css:
+  .menubar {
+    position: relative;
+    width: 640px;
+    margin: 0 auto;
+  }
+  .menubar_item {
+    width: 150px;
+    float: left;
+    margin-right: 10px;
+    display: block;
+    /*border: 1px solid black;*/
+  }
+  .item5 {
+    margin-right: 10px;
+  }
+  h2 {
+    display: block;
+    font-size: 16px;
+    line-height: 30px;
+    color: #A5A4A4;
+    letter-spacing: -1px;
+    word-spacing: 3px;
+    border: none;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0px;
+  }
+  
+  li {
+    border-bottom: 1px solid #C6C6C6;
+    padding-bottom: 9px;
+    margin-bottom: 6px;
+  }
+  
+  a {
+    color: #232323;
+    outline: none;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  @media only screen and (max-width: 1023px){
+    .menubar {
+      width: 640px;
+    }  
+  }
+  @media only screen and (max-width: 767px){
+    .menubar {
+      width: 480px;
+    }  
+    .item4 {
+      clear:left;
+    }
+  }
+  @media only screen and (max-width: 479px){
+    .menubar {
+      width: 320px;
+    }  
+    .item4 {
+      clear: none;
+    }
+  }
+  
+.wrapper
+  .menubar
+    .menubar_item.item1
+      h2= t("main.index.human_resources")
+      ul
+        li= link_to t("hrinfos.index.title"), :controller => "hrinfos"
+        li= link_to t("commutes.index.title"), commute_path(@user)
+        li= link_to t("vacations.index.title"), vacation_path(@user)
+        - if @user.has_payment_info
+          li= link_to t("payments.title"), payment_path(@user) 
+
+    .menubar_item.item2
+      h2= t("main.index.finance")
+      ul
+        - if @user.permission.any? {|perm| perm.name == 'pettycashes'}
+          li= link_to t("pettycashes.index.title"), :controller => "pettycashes" 
+        li= link_to t("cardbills.index.title"), :controller => "cardbills" 
+        - if @user.permission.any? {|perm| perm.name == 'bank_accounts'} 
+          li= link_to t("bank_accounts.index.title"), :bank_accounts 
+        - if @user.permission.any? {|perm| perm.name == 'taxbills'}
+          li= link_to t("taxbills.index.title"), :taxbills 
+        li= link_to t("expense_reports.index.title"), :expense_reports
+        li= link_to t("ledger_accounts.title"), :ledger_accounts
+        li= link_to t("postings.title"), :postings
+
+    .menubar_item.item3
+      h2= t("main.index.project")
+      ul
+        - if @user.permission.any? {|perm| perm.name == 'projects'}
+          li= link_to t("projects.index.title"), :controller => "projects" 
+
+    .menubar_item.item4
+      h2= t("main.index.document")
+      ul
+        li= link_to t("documents.index.title"), :controller => "documents"
+        - if @user.permission.any? {|perm| perm.name == 'business_clients'}
+          li= link_to t("business_clients.index.title"), :business_clients 
+        - if @user.permission.any? {|perm| perm.name == 'contacts'}
+          li= link_to t("contacts.index.title"), :contacts 
+
+    - if @user.ingroup?(:admin)
+      css:
+        .menubar {
+          width: 800px;
+        }
+        @media only screen and (max-width: 1023px){
+          .menubar {
+            width: 660px;
+          }
+          .item5 {
+            clear: left;
+          }
+          .item4 {
+            margin-right: 0px;
+          }
+        }
+        @media only screen and (max-width: 767px){
+          .menubar {
+            width: 480px;
+          } 
+          .item3 {
+            margin-right: 0px;
+          }
+          .item4 {
+            margin-right: 10px;
+            clear: left;
+          }
+          .item5 {
+            clear: none;
+          }
+        }
+        @media only screen and (max-width: 479px){
+          .menubar {
+            position: relative;
+            margin: 0 auto;          
+            width: 320px;
+          }
+          .item2 {
+            margin-right: 0px;
+          }
+          .item3 {
+            margin-right: 10px;
+          }
+          .item4 {
+            margin-right: 0px;
+            clear: none;
+          }
+        }
+        
+      .menubar_item.item5
+          h2= t("main.index.admin")
+          ul
+            li= link_to t("commutes.index.title"), :commutes 
+            li= link_to t("vacations.index.title"), :vacations
+            li= link_to t("payments.title"), :payments
+            li= link_to t("users.index.title"), :controller => "users"
+            li= link_to t("groups.title"), :controller => "groups"
+            li= link_to t("payroll_categories.title"), :controller => "payroll_categories"
+            li= link_to t("payrolls.title"), :controller => "payrolls"
+            li= link_to t("creditcards.title"), :creditcards
+            li= link_to t("attachments.title"), :controller => "attachments"
+            li= link_to t("permissions.title"), :controller => "permissions"
+            li= link_to t("change_histories.title"), :controller => "change_histories"
+            li= link_to t("holidays.title"), :controller => "holidays"
+            li= link_to t("dayworker_taxes.title"), :controller => "dayworker_taxes"
+            li= link_to t("companies.title"), current_company
