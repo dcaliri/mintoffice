@@ -1,0 +1,13 @@
+h2= user.name
+
+dl
+  dt= User.human_attribute_name("gmail_account")
+  dd= user.gmail_account
+  dt= User.human_attribute_name("notify_email")
+  dd= user.notify_email
+  dt= User.human_attribute_name("boxcar_account")
+  dd= user.boxcar_account
+  
+=render "shared/attachments/detail", target: user
+.clear
+= render 'changelog', target: user

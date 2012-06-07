@@ -1,0 +1,27 @@
+- title t('.title')
+
+- content_for :search do
+  = form_tag :users, :method => :get do
+    = hidden_field_tag 'disabled', params[:disabled]
+    = t("common.title.search")
+    '  :
+    = search_field_tag 'q', params[:q]
+
+#show_command
+  = link_to t('.newuser'), new_user_path
+
+h2= t("common.title.list")
+
+table#list-table
+  tr
+    th= User.human_attribute_name('name')
+    th= User.human_attribute_name('gmail_account')
+    th= User.human_attribute_name('notify_email')
+    th= User.human_attribute_name('boxcar_account')
+  = render partial: "user", collection: @users
+
+#show_command
+  -if params[:disabled] == 'on'
+    = link_to "Enabled", :action => "index"
+  -else
+    = link_to "Disabled", :action => "index", :disabled => 'on'

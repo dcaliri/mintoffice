@@ -1,7 +1,7 @@
 -title t('.title')
 
-div#show_command
-  -if @user.ingroup?("admin") && ! @this_user.disabled?
+#show_command
+  -if @user.admin? && @this_user.enabled?
     =link_to t('.loginas'), :action => "loginas", :id => @this_user
     '  |
     =link_to t('.disable'), :action => "disable", :id => @this_user
@@ -10,6 +10,6 @@ div#show_command
     '  |
   =link_to t('common.title.edit'), edit_user_path(@this_user)
   '  |
-  =link_to t('common.title.back'), users_path
+  =link_to t('common.title.list'), users_path
 
 = render 'detail', :user => @this_user
