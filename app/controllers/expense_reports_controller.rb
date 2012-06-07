@@ -1,6 +1,6 @@
 class ExpenseReportsController < ApplicationController
   expose(:expense_report)
-  before_filter :check_report_access, except: [:index, :new, :create]
+  before_filter :access_check, except: [:index, :no_permission, :new, :create]
 
   def index
     project = Project.find(params[:project_id]) unless params[:project_id].blank?
@@ -9,10 +9,17 @@ class ExpenseReportsController < ApplicationController
                                 user: current_user,
                                 project: project,
                                 year: params[:year].to_i,
-                                month: params[:month].to_i
+                                month: params[:month].to_i,
+                                empty_permission: params[:empty_permission]
                               )
                               .report_status(params[:report_status])
                               .page(params[:page])
+  end
+
+  def no_permission
+    @expenses_by_menu = ExpenseReport.filter(user: current_user)
+    @expenses = ExpenseReport.no_permission.page(params[:page])
+    render 'index'
   end
 
   def create

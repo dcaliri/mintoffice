@@ -5,20 +5,40 @@ class ExpenseReport < ActiveRecord::Base
   belongs_to :target, polymorphic: true
   belongs_to :project
 
+  has_one :posting
+
   by_star_field :expensed_at
 
   include Reportable
 
   def make_posting
-    posting = Posting.new(
-      posted_at: expensed_at
-    )
-    posting
+    build_posting(posted_at: expensed_at).tap do |posting|
+      posting.items.build(item_type: "차변", amount: amount)
+      posting.items.build(item_type: "대변", amount: amount)
+    end
+  end
+
+  def report!(user, comment)
+    if target_type == "Cardbill"
+      target.permission user, :read
+    end
+    super
+  end
+
+  def access?(user, access_type = :read)
+    return false if access_type == :write and posting
+    super
   end
 
   class << self
     def filter(params)
-      access_list(params[:user]).by_project(params[:project]).by_period(params[:year], params[:month])
+      result = by_project(params[:project]).by_period(params[:year], params[:month])
+      result = if params[:empty_permission] == 'true'
+                result.no_permission
+              else
+                result.access_list(params[:user])
+              end
+      result
     end
 
     def by_project(project)
@@ -42,21 +62,11 @@ class ExpenseReport < ActiveRecord::Base
     end
 
     def oldest_year
-      collection = order('expensed_at ASC')
-      unless collection.empty?
-        collection.first.expensed_at.year
-      else
-        Date.today.year
-      end
+      order('expensed_at ASC').first.expensed_at.year rescue Date.today.year
     end
 
     def newest_year
-      collection = order('expensed_at DESC')
-      unless collection.empty?
-        collection.first.expensed_at.year
-      else
-        Date.today.year
-      end
+      order('expensed_at DESC').first.expensed_at.year rescue Date.today.year
     end
 
     def total_amount

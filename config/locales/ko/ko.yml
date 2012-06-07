@@ -9,6 +9,7 @@ ko:
             default: "%Y/%m/%d"
             short: "%m/%d"
             long: "%Y년 %m월 %d일 (%a)"
+            compact_long: "%Y-%m-%d (%a)"
 
         day_names: [일요일, 월요일, 화요일, 수요일, 목요일, 금요일, 토요일]
         abbr_day_names: [일, 월, 화, 수, 목, 금, 토]
@@ -79,7 +80,7 @@ ko:
           # Delimets thousands (e.g. 1,000,000 is a million) (always in groups of three)
           delimiter: ","
           # Number of decimals, behind the separator (the number 1 with a precision of 2 gives: 1.00)
-          precision: 3
+          precision: 0
 
         # Used in number_to_currency()
         currency:
@@ -108,6 +109,7 @@ ko:
             cardbill: "카드 영수증"
             change_history: 변경사항
             commute: 출퇴근
+            company: 회사
             contact: 주소록
             contact_phone_number: 전화번호
             contact_address: 주소
@@ -141,7 +143,11 @@ ko:
             taxbill_item: 항목
             used_vacation: 사용한 연차
             vacation: 연차
+            user: 사용자계정
         attributes:
+            access_person:
+                access_type: 권한
+                accessor: 대상
             attachment:
                 comments: 주석
                 content_type: 파일형식
@@ -158,8 +164,10 @@ ko:
                 total_in: 입금 총액
                 total_out: 출금 총액
                 margin: 입출금 차액
+                remain: 잔고
             bank_transaction:
                 account: 은행계좌
+                bank_account_name: 은행계좌
                 transacted_at: 거래일자
                 transaction_type: 적요
                 in: 입금액
@@ -172,8 +180,10 @@ ko:
                 out_bank_name: 상대 은행
                 promissory_check_amount: 수표 어음금액
                 cms_code: CMS 코드
+                transacted_at_strftime: 거래일자
             bank_transfer:
                 account: 은행계좌
+                bank_account_name: 은행계좌
                 transfer_type: 이체구분
                 transfered_at: 거래일시
                 result: 처리결과
@@ -192,6 +202,8 @@ ko:
                 in_person_name: 입금인성명
                 cms_code: CMS코드
                 currency_code: 통화 코드
+                transfered_at_strftime: 거래일시
+                registered_at_strftime: 등록일자
             bonus:
                 gave_at: 지급일
                 amount: 금액
@@ -219,7 +231,10 @@ ko:
                 card_type: 카드구분
                 canceled_at: 취소일자
                 status: 매입상태
+                used_at_strftime: 이용일시
                 will_be_paied_at: 결제예정일
+                canceled_at_strftime: 취소일자
+                will_be_paied_at_strftime: 결제예정일
             card_used_source:
                 card_no: 카드번호
                 bank_account: 결제계좌번호
@@ -247,6 +262,8 @@ ko:
                 store_addr1: 가맹점주소1
                 store_addr2: 가맹점주소2
                 store_tel: 가맹점전화번호
+                approved_at_strftime: 승인일자
+                approved_time_strftime: 승인시간
             cardbill:
                 cardno: "카드 번호"
                 creditcard_id: 카드
@@ -269,6 +286,14 @@ ko:
             commute:
                 go: 출근
                 leave: 퇴근
+            company:
+                name: 업체명
+                registration_number: 사업자 등록번호
+                owner_name: 대표자 성명
+                address: 업체 주소
+                phone_number: 업체 연락처
+                pay_basic_date: 급여 기준일
+                payday: 급여 지급일
             contact:
                 name: 이름
                 firstname: 이름
@@ -315,6 +340,7 @@ ko:
             dayworker:
                 juminno: 주민등록번호
             dayworker_tax:
+                dayworker: 원천징수 대상자
                 reason: 사유
                 apply_day: 지급일자
                 amount: 금액
@@ -334,6 +360,8 @@ ko:
                 description: 내역
                 amount: 금액
                 expensed_at: 지출 날짜
+            group:
+                name: 그룹명
             holiday:
                 theday: 휴일날짜
                 dayname: 휴일명목
@@ -345,10 +373,12 @@ ko:
                 lastname: 성
                 address: 주소
                 payment_day: 지급일
+                department: 부서
                 position: 직급
+                purpose: 용도
                 fullname: 이름
                 username: 계정
-                mphone: 핸드폰번호
+                phone_number: 핸드폰번호
                 joined_on: 입사일
                 email: 이메일
                 listed: 목록 출력 여부
@@ -382,7 +412,7 @@ ko:
                 amount: 금액
                 pay_at: 지급일
                 pay_start: 지급 기준 시작일
-                pay_finish: 지금 기준 종료일
+                pay_finish: 지급 기준 종료일
                 total: 총액
                 after: "%{month}개월 후"
             pettycash:
@@ -394,9 +424,12 @@ ko:
                 posted_at: 전표 일자
                 description: 상세정보
                 total_amount: 총액
+            items:
+                ledger_account_id: 계정 종류
             posting_item:
                 item_type: 항목 분류
                 ledger_account_id: 계정 종류
+                ledger_account: 계정 종류
                 amount: 금액
             project:
                 name: 프로젝트명
@@ -462,6 +495,13 @@ ko:
                 to: 종료
                 period: 기간
                 note: 사유
+            user:
+                name: 계정명
+                password: 비밀번호
+                password_confirmation: 비밀번호 확인
+                gmail_account: Google 계정
+                notify_email: Email
+                boxcar_account: Boxcar 계정
         errors:
             template:
                 header: 오류가 발생했습니다.
@@ -526,6 +566,9 @@ ko:
             type: 은행명
             file: 엑셀 파일
             submit: 미리보기
+        export:
+            excel: Excel
+            pdf: PDF
         preview:
             title: 미리보기
             link: 엑셀 파일로 올리기
@@ -559,6 +602,9 @@ ko:
             type: 은행명
             file: 엑셀 파일
             submit: 엑셀 파일 올리기
+        export:
+            excel: Excel
+            pdf: PDF
         preview:
             title: 미리보기
             link: 엑셀 파일로 올리기
@@ -615,10 +661,17 @@ ko:
             link: 승인내역 올리기
         edit:
             title: 승인내역 수정하기
+        export:
+            excel: Excel
+            pdf: PDF
         find_empty_cardbills:
             link: 카드영수증이 없는 목록 보기
-        generate_cardbills:
+        generate:
+            title: 신용카드 영수증 생성
             link: 신용카드 영수증 생성
+            owner: 소유자
+            submit: 카드영수증 생성
+            success: "%{owner} 이(가) 총 %{amount}개의 카드영수증을 생성했습니다."
         title: 카드승인내역
     card_used_sources:
         index:
@@ -631,6 +684,9 @@ ko:
             link: 엑셀 파일로 올리기
             file: 엑셀 파일
             submit: 미리보기
+        export:
+            excel: Excel
+            pdf: PDF
         preview:
             title: 엑셀로 올리기
             link: 엑셀 파일로 올리기
@@ -661,6 +717,7 @@ ko:
             title: 새로운 변경사항 만들기
     common:
         changes: 변경사항
+        export: 내보내기
         button:
             create: 만들기
             update: 갱신하기
@@ -702,6 +759,7 @@ ko:
             destroy: "삭제"
             download: "다운로드"
             posting: 전표 만들기
+            except_column: 컬럼 선택하기
         upload:
             empty: 업로드한 파일이 비어있습니다.
         menu: 메뉴
@@ -712,6 +770,8 @@ ko:
         leave_work: 퇴근
         index:
             title: 출퇴근 관리
+            nextweek: "한 주 이후로"
+            prevweek: "한 주 전으로 "
         new:
             title: 출근기록 생성
             link: 출근기록 생성
@@ -731,6 +791,10 @@ ko:
         leave:
             link: 퇴근기록 생성
             title: 출퇴근 기록 관리
+        error:
+          already_created: "이 이미 생성되었습니다."
+    companies:
+        title: 회사 관리
     contacts:
         index:
             title: 주소록 리스트
@@ -796,6 +860,8 @@ ko:
         title: 지출내역서
         index:
             title: 지출내역서 관리
+    groups:
+        title: 그룹관리
     hrinfos:
         index:
             title: 인사정보관리 - 사원목록
@@ -808,6 +874,7 @@ ko:
             related_documents: 관련 문서
             related_admin_actions: 관련 관리 작업
             download: 다운로드
+            pdf: 재직증명서
         retire:
             title: 퇴직 처리
             retire_date: 퇴직일자
@@ -827,13 +894,15 @@ ko:
         error:
             juminno_invalid: "는 '111111-1111111' 형식으로 써 주세요."
         title: 인사정보관리
+    except_columns:
+        title: 컬럼 선택
     holidays:
         title: 휴일 관리
         index:
             this_years_working_days: "년의 근무일수 : "
             month_and_count: "%{m}월: %{c}일"
     ledger_accounts:
-        title: 원장 권리
+        title: 원장 관리
         index:
             empty: 계정이 없습니다
         show:
@@ -846,6 +915,8 @@ ko:
             document: 문서관리
             business_client: 거래처관리
             admin: 관리자 메뉴
+            nextweek: 다음주
+            prevweek: 이전주
     namecards:
         edit:
             title: 명함 정보 수정
@@ -860,6 +931,9 @@ ko:
         show:
             title: 명함 내용 보기
     payments:
+        index:
+            payment_only: 지급이 있는 사람들만 보기
+            with_no_payment: 전체 보기
         new:
             title: 연봉 입력
         yearly:
@@ -916,8 +990,10 @@ ko:
         title: 전표 관리
         show:
             title: 전표 내역
+            link: 전표 내역 보기
         new:
             title: 새로운 전표 작성
+            link: 전표 만들기
         edit:
             title: 전표 수정
     projects:
@@ -984,6 +1060,7 @@ ko:
             title: 담당자 수정
     used_vacations:
         show:
+            title: 사용한 연차 정보
             empty: 사용한 연차 내역이 없습니다
         new:
             title: 연차 사용하기
@@ -995,6 +1072,7 @@ ko:
         period_help: "* 반차의 경우 0.5 단위로 입력 합니다."
         approval_completed: 승인 완료
         approval_waiting : 승인 대기
+        vacation: "휴가 : "
     users:
         new:
             title: 새 사용자 계정 만들기

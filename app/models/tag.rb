@@ -1,17 +1,18 @@
 class Tag < ActiveRecord::Base
+  belongs_to :company
   has_many :taggings
   has_many :tags
 
-  validates_uniqueness_of :name
+  validates_uniqueness_of :name, scope: :company_id
 
   def self.find_or_create(params)
     find_or_create_by_name(params[:name])
   end
 
   def self.find_or_create_by_name(name)
-    tag = Tag.find_by_name(name)
+    tag = find_by_name(name)
     if ! tag
-      tag = Tag.create(:name => name)
+      tag = create(:name => name)
     end
     tag
   end
@@ -19,7 +20,7 @@ class Tag < ActiveRecord::Base
   def self.related_documents(*arg)
     ds = nil
     arg.each do |a|
-      t = Tag.find_by_name(a)
+      t = find_by_name(a)
       d = []
       if ! t.nil?
         d = t.taggings.map{|tagging| tagging.target}

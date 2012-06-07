@@ -3,8 +3,8 @@ class CardUsedSourcesController < ApplicationController
   expose(:card_used_source)
 
   def index
-    approvd_source = creditcard.nil? ? CardUsedSource : creditcard.card_used_sources
-    @card_used_sources = approvd_source.latest.search(params[:query]).page(params[:page])
+    used_sources = creditcard.nil? ? CardUsedSource : creditcard.card_used_sources
+    @card_used_sources = used_sources.latest.search(params[:query]).page(params[:page])
   end
 
   def create
@@ -17,6 +17,11 @@ class CardUsedSourcesController < ApplicationController
     card_used_source.creditcard = creditcard
     card_used_source.save!
     redirect_to card_used_source
+  end
+
+  def export
+    used_sources = creditcard.nil? ? CardUsedSource : creditcard.card_used_sources
+    send_file used_sources.latest.search(params[:query]).export(params[:to].to_sym, except_column(:card_used_source))
   end
 
   def destroy

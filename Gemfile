@@ -1,6 +1,6 @@
 source :rubygems
 
-gem 'rails', '3.2.3'
+gem 'rails', '3.2.5'
 gem 'jquery-rails'
 gem 'slim'
 gem 'dynamic_form'
@@ -8,6 +8,7 @@ gem 'will_paginate', '~> 3.0'
 gem 'rmagick'
 gem 'decent_exposure'
 gem 'roo'
+gem 'prawn'
 
 gem 'omniauth'
 gem 'omniauth-openid'
@@ -24,6 +25,7 @@ end
 
 group :development do
   gem 'pow-client'
+  gem 'sextant'
 end
 
 group :test do

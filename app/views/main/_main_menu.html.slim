@@ -1,0 +1,84 @@
+table align="center" border="0" cellspacing="5" cellpadding="5"  style="margin-top: 80px; font-size: 16px"
+  tr
+    th style="background-color:lightgray;"
+      = t("main.index.human_resources")
+    td
+      = link_to t("hrinfos.index.title"), :controller => "hrinfos"
+      '  /
+      = link_to t("commutes.index.title"), commute_path(@user)
+      '  /
+      = link_to t("vacations.index.title"), vacation_path(@user)
+      -  if @user.has_payment_info
+        '  /
+        = link_to t("payments.title"), payment_path(@user)
+  tr
+    th style="background-color:lightgray;"
+      = t("main.index.finance")
+    td
+      - if @user.permission.any? {|perm| perm.name == 'pettycashes'}
+        = link_to t("pettycashes.index.title"), :controller => "pettycashes"
+        '  /
+      = link_to t("cardbills.index.title"), :controller => "cardbills" 
+      '  /
+      - if @user.permission.any? {|perm| perm.name == 'bank_accounts'} 
+        = link_to t("bank_accounts.index.title"), :bank_accounts
+        '  /
+      - if @user.permission.any? {|perm| perm.name == 'taxbills'}
+        = link_to t("taxbills.index.title"), :taxbills
+        '  /
+      = link_to t("expense_reports.index.title"), :expense_reports
+      '  /
+      = link_to t("ledger_accounts.title"), :ledger_accounts
+      '  /
+      = link_to t("postings.title"), :postings
+  tr
+    th style="background-color:lightgray;"
+      = t("main.index.project")
+    td
+      - if @user.permission.any? {|perm| perm.name == 'projects'}
+        = link_to t("projects.index.title"), :controller => "projects"
+  tr
+    th style="background-color:lightgray;"
+      = t("main.index.document")
+    td
+      = link_to t("documents.index.title"), :controller => "documents"
+      '  /
+      - if @user.permission.any? {|perm| perm.name == 'business_clients'}
+        = link_to t("business_clients.index.title"), :business_clients
+        '  /
+      - if @user.permission.any? {|perm| perm.name == 'contacts'}
+        = link_to t("contacts.index.title"), :contacts
+      
+  - if @user.ingroup?(:admin)
+    tr
+      th style="background-color:lightgray;"
+        = t("main.index.admin")
+      td
+        p
+          = link_to t("commutes.index.title"), :commutes 
+          '  /
+          = link_to t("vacations.index.title"), :vacations
+          '  /
+          = link_to t("payments.title"), :payments
+          '  /
+          = link_to t("users.index.title"), :controller => "users"
+          '  /
+          = link_to t("groups.title"), :controller => "groups"
+        p
+          = link_to t("payroll_categories.title"), :controller => "payroll_categories"
+          '  /
+          = link_to t("payrolls.title"), :controller => "payrolls"
+          '  /
+          = link_to t("creditcards.title"), :creditcards
+          '  /
+          = link_to t("attachments.title"), :controller => "attachments"
+          '  /
+          = link_to t("permissions.title"), :controller => "permissions"
+          '  /
+          = link_to t("change_histories.title"), :controller => "change_histories"
+          '  /
+          = link_to t("holidays.title"), :controller => "holidays"
+          '  /
+          = link_to t("dayworker_taxes.title"), :controller => "dayworker_taxes"
+          '  /
+          = link_to t("companies.title"), current_company

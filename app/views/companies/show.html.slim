@@ -1,0 +1,33 @@
+#show_command
+  = link_to t('common.link.edit'), [:edit, company]
+  = " | "
+  = link_to t('common.title.back'), :root
+
+h2 회사 정보
+
+.box
+  #descr
+    table
+      tr
+        th= company.class.human_attribute_name(:name)
+        td= company.name
+      tr
+        th= company.class.human_attribute_name(:registration_number)
+        td= company.registration_number
+      tr
+        th= company.class.human_attribute_name(:owner_name)
+        td= company.owner_name
+      tr
+        th= company.class.human_attribute_name(:address)
+        td= company.address
+      tr
+        th= company.class.human_attribute_name(:phone_number)
+        td= company.phone_number
+      tr
+        th= company.class.human_attribute_name(:pay_basic_date)
+        td= company.pay_basic_date
+      tr
+        th= company.class.human_attribute_name(:payday)
+        td= company.payday
+  = render "shared/attachments/detail", :target => company
+br

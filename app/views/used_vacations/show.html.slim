@@ -1,0 +1,25 @@
+#show_command
+  - if @user.ingroup?("admin")
+    = link_to t('common.title.edit'), [:edit, vacation, used_vacation]
+    = " | "
+    = link_to t('common.title.destroy'), [vacation, used_vacation], :method => :delete, :confirm => t("common.messages.delete_confirm")
+    = " | "
+  = link_to t('common.title.list'), vacation_path(vacation.user)
+
+h2= t('.title')
+
+.box
+  table cellspacing="5" cellpadding="5"
+    tr
+      th= used_vacation.class.human_attribute_name('from')
+      td= used_vacation.from
+    tr
+      th= used_vacation.class.human_attribute_name('to')
+      td= used_vacation.to
+    tr
+      th= used_vacation.class.human_attribute_name('period')
+      td= "#{used_vacation.period} #{t('datetime.prompts.day')}"
+    tr
+      th= used_vacation.class.human_attribute_name('note')
+      td= used_vacation.note
+  = render 'reports/info', target: used_vacation

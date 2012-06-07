@@ -1,4 +1,8 @@
 class Holiday < ActiveRecord::Base
+
+  def self.during(range)
+    where(theday: range).order(:theday)
+  end
   
   def self.working_days_this_year
     holiday_count = {}

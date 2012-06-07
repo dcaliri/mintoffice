@@ -5,6 +5,10 @@ class BankAccount < ActiveRecord::Base
   include Historiable
   include Attachmentable
 
+  def name_with_number
+    name + " : " + number rescue ""
+  end
+
   def description
     if number.nil? || note.nil?
       name
@@ -12,8 +16,20 @@ class BankAccount < ActiveRecord::Base
       "#{name}-#{number}-#{note}"
     end
   end
-  
+
+  def remain
+    unless bank_transactions.empty?
+      bank_transactions.latest.first.remain
+    else
+      0
+    end
+  end
+
   class << self
+    def remain
+      sum(&:remain)
+    end
+
     def transaction_per_period(query)
       collection = BankTransaction.where('transacted_at IS NOT NULL').order(query)
       if collection.empty?

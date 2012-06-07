@@ -1,5 +1,5 @@
 h3= type
-- items = posting_items.to_a
+- items = posting_items.to_a.select{|item| item.item_type == type}
 - (5 - items.count).times { items << posting.items.build(item_type: type) }
 
 = form.fields_for :items, items do |item_field|

@@ -21,18 +21,16 @@
       <tr><th align="right"><%= Hrinfo.human_attribute_name('retired_on') %>:</th><td><%= @hrinfo.retired_on %></td></tr>
 <% end %>
     </table>
-    <% if @user.ingroup?("admin") %>
+    <% if @hrinfo.contact %>
       <div id="show_command">
-        <%= link_to "주소록 찾기", find_contacts_path(target_class: @hrinfo.class, target: @hrinfo, query: @hrinfo.fullname.gsub(/\s+/, "")), :class => 'popup' %>
+        <%= link_to "주소록 찾기", @hrinfo.contact %>
       </div>
-    <% end %>
 
-    <h3><%= t("contacts.show.title")%></h3>
-    <ul>
-      <% if @hrinfo.contact %>
+      <h3><%= t("contacts.show.title")%></h3>
+      <ul>
         <%= render 'contacts/item_for_hrinfo', contact: @hrinfo.contact, menu: false %>
-      <% end %>
-    </ul>
+      </ul>
+    <% end %>
 <% if @user.ingroup?("admin") || @hrinfo.user == @user %>
 <% if @user.ingroup? "admin" %>
     <div id="show_command">
@@ -67,6 +65,17 @@
         <li><%= link_to t('vacations.show.link'), vacation_path(@hrinfo.user) %></li>
       <% end %>
     </ul>
+    <h3><%= t('hrinfos.show.pdf') %></h3>
+    <%= form_tag([:employment_proof, @hrinfo]) do %>
+      <p>
+        <%= label_tag :purpose, t('activerecord.attributes.hrinfo.purpose') %>
+        <%= text_field_tag :purpose %>
+      </p>
+      <p>
+        <%= submit_tag "출력" %>
+      </p>
+    <% end %>
+
 <% end %>
   </div>
   <div id="attach">

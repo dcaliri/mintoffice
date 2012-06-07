@@ -5,14 +5,10 @@ class DocumentsController < ApplicationController
   expose(:projects) { current_company.projects }
 
   before_filter :only => [:show] {|c| c.save_attachment_id document}
-  before_filter :check_report_access, except: [:index, :new, :create]
+  before_filter :access_check, except: [:index, :new, :create]
 
   def index
-    @documents = documents.access_list(current_user)
-                          .report_status(params[:report_status])
-                          .search(params[:query])
-                          .latest
-                          .page(params[:page])
+    @documents = documents.filter_by_params(params.merge(user: current_user)).latest.page(params[:page])
   end
 
   def create

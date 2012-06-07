@@ -5,7 +5,7 @@ class Commute < ActiveRecord::Base
 
   validate :check_unique_date, on: :create
   def check_unique_date
-    errors.add(:go, "이 이미 생성되었습니다.") if user.commutes.exists?(go: Time.zone.now.all_day)
+    errors.add(:go, I18n.t('commutes.error.already_created')) if user.commutes.exists?(go: Time.zone.now.all_day)
   end
 
   include Attachmentable
@@ -14,18 +14,34 @@ class Commute < ActiveRecord::Base
     order("go DESC")
   end
 
+  def self.every_during(days)
+    commutes_by_user_id = {}
+    where(go: days).select("DISTINCT user_id").collect(&:user_id).each do |user_id|
+      commutes_by_user_id[user_id] = User.find(user_id).commutes.during(days)
+    end
+    commutes_by_user_id
+  end
+
+  def self.during(days)
+    commutes = where(go: days).order("go ASC")
+    commutes_hash = {}
+    days.begin.to_date.step(days.end.to_date,1.day) do |day|
+      commutes_hash[day] = commutes.to_a.select {|commute| commute.go.to_date === day }.first
+    end
+    commutes_hash
+  end
+
   def go!
     write_attribute(:go, Time.zone.now)
     save!
-    Boxcar.send_to_boxcar_group("admin",self.user.hrinfo.fullname, "#{Commute.human_attribute_name('go')} : #{self.go.strftime("%Y-%m-%d %H:%M")}")
+    Boxcar.send_to_boxcar_group("admin",self.user.fullname, "#{Commute.human_attribute_name('go')} : #{self.go.strftime("%Y-%m-%d %H:%M")}")
   end
 
   def leave!
     write_attribute(:leave, Time.zone.now)
     save!
-    Boxcar.send_to_boxcar_group("admin",self.user.hrinfo.fullname, "#{Commute.human_attribute_name('leave')} : #{self.leave.strftime("%Y-%m-%d %H:%M")}")
+    Boxcar.send_to_boxcar_group("admin",self.user.fullname, "#{Commute.human_attribute_name('leave')} : #{self.leave.strftime("%Y-%m-%d %H:%M")}")
   end
-
 
   def as_json(options={})
     super(options.merge(:only => [:go, :leave]))

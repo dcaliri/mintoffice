@@ -32,6 +32,11 @@ class BankTransactionsController < ApplicationController
     redirect_to :bank_transactions
   end
 
+  def export
+    transactions = bank_account ? bank_account.bank_transactions : BankTransaction
+    send_file transactions.latest.export(params[:to].to_sym, except_column(:bank_transaction))
+  end
+
   def create
     bank_transaction = bank_account.bank_transactions.build(params[:bank_transaction])
     bank_transaction.save!

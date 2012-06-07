@@ -25,27 +25,33 @@ unless User.exists?(name: "admin")
   user.save!
 end
 
-if ContactAddressTag.all.empty?
-  ContactAddressTag.create!(name: "집")
-  ContactAddressTag.create!(name: "직장")
+unless Company.all.empty?
+  Company.create!(name: "minttech")
 end
 
-if ContactEmailTag.all.empty?
-  ContactEmailTag.create!(name: "집")
-  ContactEmailTag.create!(name: "주소")
+company = Company.find_by_name("minttech")
+
+if company.contact_address_tags.empty?
+  company.contact_address_tags.create!(name: "집")
+  company.contact_address_tags.create!(name: "직장")
 end
 
-if ContactPhoneNumberTag.all.empty?
-  ContactPhoneNumberTag.create!(name: "집")
-  ContactPhoneNumberTag.create!(name: "회사")
-  ContactPhoneNumberTag.create!(name: "핸드폰")
+if company.contact_email_tags.empty?
+  company.contact_email_tags.create!(name: "집")
+  company.contact_email_tags.create!(name: "주소")
+end
+
+if company.contact_phone_number_tags.empty?
+  company.contact_phone_number_tags.create!(name: "집")
+  company.contact_phone_number_tags.create!(name: "회사")
+  company.contact_phone_number_tags.create!(name: "핸드폰")
 end
 
 
-if ContactOtherTag.all.empty?
-  ContactOtherTag.create!(name: "홈페이지")
-  ContactOtherTag.create!(name: "트위터")
-  ContactOtherTag.create!(name: "페이스북")
+if company.contact_other_tags.empty?
+  company.contact_other_tags.create!(name: "홈페이지")
+  company.contact_other_tags.create!(name: "트위터")
+  company.contact_other_tags.create!(name: "페이스북")
 end
 
 if LedgerAccount.all.empty?

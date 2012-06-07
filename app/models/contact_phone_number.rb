@@ -3,6 +3,10 @@ class ContactPhoneNumber < ActiveRecord::Base
   has_and_belongs_to_many :tags, :class_name => 'ContactPhoneNumberTag'
   validates_format_of :number, :with => /\A[0-9\-]+\Z/i, :allow_blank => true
   after_update {|model| model.destroy if model.number.blank?}
+  before_save do
+    tag = ContactPhoneNumberTag.find_by_name(target)
+    tags << tag if tag.present? and !tags.exists?(name: tag.name)
+  end
 
   include Historiable
   def history_parent

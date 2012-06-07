@@ -27,16 +27,15 @@ h2= t("common.title.#{form_type}")
       = f.label :pay_amount
       = f.text_field :pay_amount
   = f.submit t("dayworkers.#{form_type}.submit")
-  
-== content_for :javascript do
-  script type="text/javascript"
-    | $(function() {
-    | var dtamount = $('#dayworker_tax_amount');
-    | var tax_amount = $('#dayworker_tax_tax_amount');
-    | var pay_amount = $('#dayworker_tax_pay_amount');
-    | var calcTax = function () {
-    |   tax_amount.val(Math.round(dtamount.val() * 0.033));
-    |   pay_amount.val(Math.round(dtamount.val() * 0.967));
-    | };
-    | dtamount.keyup(calcTax);
-    | });
+
+javascript:
+  $(function() {
+  var dtamount = $('#dayworker_tax_amount');
+  var tax_amount = $('#dayworker_tax_tax_amount');
+  var pay_amount = $('#dayworker_tax_pay_amount');
+  var calcTax = function () {
+    tax_amount.val(Math.round(dtamount.val() * 0.033));
+    pay_amount.val(Math.round(dtamount.val() * 0.967));
+  };
+  dtamount.keyup(calcTax);
+  });

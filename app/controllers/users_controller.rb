@@ -4,6 +4,21 @@ class UsersController < ApplicationController
     @this_user = User.find(params[:id])
     c.save_attachment_id @this_user
   end
+  before_filter :except => [:my, :login, :logout] do |c|
+    unless @user.admin?
+      flash[:notice] = I18n.t("common.messages.not_allowed")
+      redirect_to :controller => "main", :action => "index"
+      return
+    end
+  end
+
+  def index
+    if params[:disabled] == 'on'
+      @users = User.disabled.search(params[:q]).order(:id)
+    else
+      @users = User.enabled.search(params[:q]).order(:id)
+    end
+  end
 
   def logout
     session[:user_id] = nil
@@ -28,105 +43,36 @@ class UsersController < ApplicationController
     redirect_to :action => "index"
   end
 
-  def my
-  end
-  # GET /users
-  # GET /users.xml
-  def index
-    unless @user.ingroup? "admin"
-      flash[:notice] = I18n.t("common.messages.not_allowed")
-      redirect_to :controller => "main", :action => "index"
-      return
-    end
-
-    if params[:disabled] == 'on'
-      @users = User.search(params[:q]).find(:all, :order => :id, :conditions => "name LIKE '[X] %'")
-    else
-      @users = User.search(params[:q]).find(:all, :order => :id, :conditions => "name NOT LIKE '[X] %'")
-    end
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @users }
-    end
-  end
-
-  # GET /users/1
-  # GET /users/1.xml
-  def show
-    @this_user = User.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @this_user }
-    end
-  end
-
-  # GET /users/new
-  # GET /users/new.xml
   def new
-    @user = User.new
-    @hrinfo = Hrinfo.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @user }
-    end
+    @this_user = User.new
   end
 
-  # GET /users/1/edit
   def edit
-    session[:return_to] = request.referer
-    @user = User.find(params[:id])
+    @this_user = User.find(params[:id])
   end
 
-  # POST /users
-  # POST /users.xml
   def create
-    @user = User.new(params[:user])
-    @hrinfo = Hrinfo.new(params[:hrinfo])
-    respond_to do |format|
-      if @user.save
-        flash[:notice] = I18n.t("common.messages.created", :model => User.model_name.human)
-        format.html { redirect_to(:action => 'index') }
-        format.xml  { render :xml => @user, :status => :created, :location => @user }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
-      end
+    @this_user = User.new(params[:user])
+    if @this_user.save
+      Boxcar.add_to_boxcar(@this_user.boxcar_account) unless @this_user.boxcar_account.empty?
+      flash[:notice] = I18n.t("common.messages.created", :model => User.model_name.human)
+      redirect_to :action => 'index'
+    else
+      render :action => "new"
     end
   end
 
-  # PUT /users/1
-  # PUT /users/1.xml
   def update
-    @user = User.find(params[:id])
-
-    respond_to do |format|
-      if @user.update_attributes(params[:user])
-        flash[:notice] = I18n.t("common.messages.updated", :model => User.model_name.human)
-#        format.html { redirect_to :back }
-        format.html { redirect_to session[:return_to] }
-        format.html { redirect_to(:action => 'index') }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /users/1
-  # DELETE /users/1.xml
-  def destroy
-    if Integer(params[:id]) != session[:user_id]
-      @user = User.find(params[:id])
-      @user.destroy
-    end
-
-    respond_to do |format|
-      format.html { redirect_to(users_url) }
-      format.xml  { head :ok }
+    @this_user = User.find(params[:id])
+      
+    if @this_user.update_attributes(params[:user])
+      logger.info @this_user.changes
+      Boxcar.add_to_boxcar(@this_user.boxcar_account) if ! @this_user.boxcar_account.empty?
+      
+      flash[:notice] = I18n.t("common.messages.updated", :model => User.model_name.human)
+      redirect_to user_path(@this_user)
+    else
+      render :action => "edit"
     end
   end
 

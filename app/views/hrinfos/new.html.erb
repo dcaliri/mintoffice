@@ -28,6 +28,22 @@
     <%= f.text_field :juminno %>
   </p>
   <p>
+    <%= f.label :email, Hrinfo.human_attribute_name('email')%>
+    <%= f.text_field :email %>
+  </p>
+  <p>
+    <%= f.label :phone_number, Hrinfo.human_attribute_name('phone_number')%>
+    <%= f.text_field :phone_number %>
+  </p>
+  <p>
+    <%= f.label :address, Hrinfo.human_attribute_name('address')%>
+    <%= f.text_field :address %>
+  </p>
+  <p>
+    <%= f.label :department, Hrinfo.human_attribute_name('department') %>
+    <%= f.text_field :department %>
+  </p>
+  <p>
     <%= f.label :position, Hrinfo.human_attribute_name('position')%>
     <%= f.text_field :position %>
   </p>

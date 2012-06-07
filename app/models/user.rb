@@ -19,10 +19,12 @@ class User < ActiveRecord::Base
   has_many :reporters, class_name: 'ReportPerson'
 
   scope :nohrinfo, :conditions =>['id not in (select user_id from hrinfos)']
+  scope :enabled, :conditions =>["name NOT LIKE '[X] %%'"]
+  scope :disabled, :conditions =>["name LIKE '[X] %%'"]
 
   validates_presence_of :name
   validates_uniqueness_of :name
-  validates_uniqueness_of :gmail_account, :if => "! gmail_account.empty?"
+  validates_uniqueness_of :gmail_account, :if => Proc.new{ gmail_account && gmail_account.empty? == false }
   attr_accessor :password_confirmation
   validates_confirmation_of :password, :if => Proc.new{|user| user.provider.blank? and user.uid.blank?}
   validate :password_non_blank, :if => Proc.new{|user| user.provider.blank? and user.uid.blank?}
@@ -82,6 +84,14 @@ class User < ActiveRecord::Base
     end
   end
 
+  def enabled?
+    ! disabled?
+  end
+
+  def self.enabled
+    where("name NOT LIKE '[X] %'").order("id ASC")
+  end
+
   def self.authenticate(name, password)
     user = self.find_by_name(name)
     if user
@@ -102,6 +112,9 @@ class User < ActiveRecord::Base
     end
   end
 
+  def admin?
+    self.ingroup? "admin"
+  end
 
   def self.search(query)
     query = "%#{query}%"

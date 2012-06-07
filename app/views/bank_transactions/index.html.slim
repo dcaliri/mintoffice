@@ -8,6 +8,8 @@
   - unless params[:bank_account_id].blank?
     = link_to t('bank_transactions.verify.link'), verify_bank_transactions_path(bank_account_id: params[:bank_account_id])
     = " | "
+  = link_to t('common.link.except_column'), except_columns_path(class_name: BankTransaction), :class => 'popup'
+  = " | "
   = link_to t('bank_transactions.new.link'), [:new, :bank_transaction]
   = " | "
   = link_to t('bank_transactions.excel.link'), [:excel, :bank_transactions]
@@ -15,8 +17,8 @@
   = link_to t('common.title.back'), :bank_accounts
 
 h2
-  - if @bank_account
-    = "#{@bank_account.name}: #{@bank_account.number}"
+  - if bank_account
+    = "#{bank_account.name_with_number}"
   - else
     = "은행 거래내역"
 
@@ -26,5 +28,10 @@ h2
   br
   center
     = will_paginate @bank_transactions
+  #export-menu
+    = t('common.export') + " : "
+    = link_to t('bank_transactions.export.excel'), export_bank_transactions_path(forward_params.merge(to: :xls)), method: :post
+    = " | "
+    = link_to t('bank_transactions.export.pdf'), export_bank_transactions_path(forward_params.merge(to: :pdf)), method: :post
 - else
   h4= t('.empty')

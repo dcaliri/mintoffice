@@ -8,6 +8,8 @@
       "onchange" => "this.form.submit()"
 
 #show_command
+  = link_to t('common.link.except_column'), except_columns_path(class_name: CardUsedSource), :class => 'popup'
+  = " | "
   = link_to t('card_used_sources.new.link'), [:new, :card_used_source]
   = " | "
   = link_to t('common.title.back'), :creditcards
@@ -24,5 +26,10 @@ h2
   br
   center
     = will_paginate @card_used_sources
+  #export-menu
+    = t('common.export') + " : "
+    = link_to t('card_used_sources.export.excel'), export_card_used_sources_path(forward_params.merge(to: :xls)), method: :post
+    = " | "
+    = link_to t('card_used_sources.export.pdf'), export_card_used_sources_path(forward_params.merge(to: :pdf)), method: :post
 - else
   h4= t('.empty')

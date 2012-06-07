@@ -3,6 +3,11 @@ class MainController < ApplicationController
 
   def index
       @user = User.find(session[:user_id])
+      @page = params[:page].nil? ? 0 : params[:page].to_i
+      @start_day = (Time.zone.now + @page.week).beginning_of_week
+      @end_day = (Time.zone.now + @page.week).end_of_week
+      @holidays = Holiday.during(@start_day..@end_day)
+      @vacations = UsedVacation.during(@start_day..@end_day)
   end
   
   def pdf

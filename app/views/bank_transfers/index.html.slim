@@ -5,6 +5,8 @@
       "onchange" => "this.form.submit()"
 
 #show_command
+  = link_to t('common.link.except_column'), except_columns_path(class_name: BankTransfer), :class => 'popup'
+  = " | "
   = link_to t('bank_transfers.new.link'), [:new, :bank_transfer]
   = " | "
   = link_to t('bank_transfers.excel.link'), [:excel, :bank_transfers]
@@ -13,7 +15,7 @@
 
 h2
   - if bank_account
-    = "#{bank_account.name}: #{bank_account.number}"
+    = "#{bank_account.name_with_number}"
   - else
     = "은행 이체내역"
 
@@ -23,5 +25,10 @@ h2
   br
   center
     = will_paginate @bank_transfers
+  #export-menu
+    = t('common.export') + " : "
+    = link_to t('bank_transfers.export.excel'), export_bank_transfers_path(forward_params.merge(to: :xls)), method: :post
+    = " | "
+    = link_to t('bank_transfers.export.pdf'), export_bank_transfers_path(forward_params.merge(to: :pdf)), method: :post
 - else
   h4= t('.empty')

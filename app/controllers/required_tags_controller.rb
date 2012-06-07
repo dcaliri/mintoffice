@@ -11,9 +11,9 @@ class RequiredTagsController < ApplicationController
 
   def create
     @required_tag = RequiredTag.new(params[:required_tag])
-    @tag = Tag.find_or_create_by_name(params[:tag][:name])
+    @tag = current_company.tags.find_or_create_by_name(params[:tag][:name])
     @required_tag.tag = @tag
-    
+
     if @required_tag.save
       flash[:notice] = 'Required Tag was successfully created.'
       if !params[:returnurl].blank?
@@ -24,7 +24,7 @@ class RequiredTagsController < ApplicationController
     else
       render :action => "new"
     end
-    
+
   end
 
   def edit
@@ -36,12 +36,12 @@ class RequiredTagsController < ApplicationController
   def destroy
     @rt = RequiredTag.find(params[:id])
     @rt.destroy
-    
+
     redirect_to :action => "index"
   end
-  
+
   def show
-    
+
   end
 
 end

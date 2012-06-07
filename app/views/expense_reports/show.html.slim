@@ -1,13 +1,17 @@
 #show_command
   - if expense_report.report.status == :reported
-    = link_to t("common.link.posting"), new_posting_path(report: expense_report)
+    - if expense_report.posting
+      = link_to t("postings.show.link"), expense_report.posting
+    - else
+      = link_to t("postings.new.link"), new_posting_path(report: expense_report)
     = " | "
   = link_to t("activerecord.models.#{expense_report.target_type.tableize.singularize}") + " 보기", expense_report.target
   = " | "
-  = link_to t('common.link.edit'), [:edit, expense_report]
-  = " | "
-  = link_to t('common.link.destroy'), expense_report, :method => :delete, :confirm => "Are you sure?"
-  = " | "
+  - unless expense_report.posting
+    = link_to t('common.link.edit'), [:edit, expense_report]
+    = " | "
+    = link_to t('common.link.destroy'), expense_report, :method => :delete, :confirm => "Are  you sure?"
+    = " | "
   = link_to t('common.title.back'), :expense_reports
 
 h2 지출내역서 상세정보

@@ -3,6 +3,10 @@ class ContactEmail < ActiveRecord::Base
   has_and_belongs_to_many :tags, :class_name => 'ContactEmailTag'
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :allow_blank => true
   after_update {|model| model.destroy if model.email.blank?}
+  before_save do
+    tag = ContactEmailTag.find_by_name(target)
+    tags << tag if tag.present? and !tags.exists?(name: tag.name)
+  end
 
   include Historiable
   def history_parent

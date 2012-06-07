@@ -11,7 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120523074011) do
+ActiveRecord::Schema.define(:version => 20120607053901) do
+
+  create_table "access_people", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "access_target_id"
+    t.string   "access_target_type"
+    t.string   "access_type",        :default => "read"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
+  end
 
   create_table "attachments", :force => true do |t|
     t.string   "title"
@@ -175,14 +184,21 @@ ActiveRecord::Schema.define(:version => 20120523074011) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
+    t.integer  "pay_basic_date",      :default => 20
+    t.integer  "payday",              :default => 25
+    t.string   "registration_number"
+    t.string   "owner_name"
+    t.string   "address"
+    t.string   "phone_number"
   end
 
   create_table "contact_address_tags", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "company_id"
   end
 
   create_table "contact_address_tags_contact_addresses", :id => false, :force => true do |t|
@@ -207,6 +223,7 @@ ActiveRecord::Schema.define(:version => 20120523074011) do
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "company_id"
   end
 
   create_table "contact_email_tags_contact_emails", :id => false, :force => true do |t|
@@ -224,6 +241,7 @@ ActiveRecord::Schema.define(:version => 20120523074011) do
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "company_id"
   end
 
   create_table "contact_other_tags_contact_others", :id => false, :force => true do |t|
@@ -243,6 +261,7 @@ ActiveRecord::Schema.define(:version => 20120523074011) do
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "company_id"
   end
 
   create_table "contact_phone_number_tags_contact_phone_numbers", :id => false, :force => true do |t|
@@ -374,6 +393,8 @@ ActiveRecord::Schema.define(:version => 20120523074011) do
     t.integer  "companyno"
     t.string   "juminno"
     t.boolean  "listed"
+    t.string   "department"
+    t.text     "employment_proof_hash"
   end
 
   add_index "hrinfos", ["companyno"], :name => "index_hrinfos_on_companyno", :unique => true
@@ -466,8 +487,9 @@ ActiveRecord::Schema.define(:version => 20120523074011) do
   create_table "postings", :force => true do |t|
     t.date     "posted_at"
     t.text     "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.integer  "expense_report_id"
   end
 
   create_table "project_assign_infos", :force => true do |t|
@@ -515,6 +537,7 @@ ActiveRecord::Schema.define(:version => 20120523074011) do
     t.datetime "created_at",                          :null => false
     t.datetime "updated_at",                          :null => false
     t.string   "permission_type", :default => "read"
+    t.boolean  "owner",           :default => false
   end
 
   create_table "reports", :force => true do |t|
@@ -543,6 +566,7 @@ ActiveRecord::Schema.define(:version => 20120523074011) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "company_id"
   end
 
   create_table "taxbill_items", :force => true do |t|
@@ -579,7 +603,6 @@ ActiveRecord::Schema.define(:version => 20120523074011) do
     t.date     "from"
     t.date     "to"
     t.text     "note"
-    t.boolean  "approve"
     t.datetime "created_at",                                 :null => false
     t.datetime "updated_at",                                 :null => false
     t.decimal  "period",      :precision => 10, :scale => 0

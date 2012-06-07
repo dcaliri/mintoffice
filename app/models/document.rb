@@ -14,6 +14,15 @@ class Document < ActiveRecord::Base
   self.per_page = 20
 
   class << self
+    def filter_by_params(params)
+      result = report_status(params[:report_status]).search(params[:query])
+      result = if params[:empty_permission] == 'true'
+                result.no_permission
+              else
+                result.access_list(params[:user])
+              end
+      result
+    end
     def latest
       order('documents.created_at DESC')
     end
@@ -22,7 +31,7 @@ class Document < ActiveRecord::Base
   def add_tags(tag_list)
     unless tag_list.blank?
       tag_list.split(',').each do |tag|
-        tags << Tag.find_or_create_by_name(tag)
+        tags << Company.current_company.tags.find_or_create_by_name(tag)
       end
     end
   end

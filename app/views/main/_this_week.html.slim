@@ -1,0 +1,19 @@
+div.this_week
+  - @start_day.to_date.step(@end_day.to_date, 1.day).each do |day|
+    div
+      - today_v = @vacations.select {|v| v.in? day}
+      - holidays = @holidays.select { |h| h.theday.to_date == day }
+      - holiday_css = (! holidays.empty? || day.saturday? || day.sunday?) ? 'holiday' : ''
+      h2 class={holiday_css} = l day, format: :compact_long
+      ul
+        - holidays.each do |h|
+          li class={holiday_css} = h.dayname
+        - unless today_v.nil?
+          - today_v.each do |tv|
+            li= t("used_vacations.vacation") + tv.vacation.user.fullname
+  center
+    '  &laquo;
+    = link_to t("main.index.prevweek"), root_path(page: @page - 1)
+    '  | 
+    = link_to t("main.index.nextweek"), root_path(page: @page + 1)
+    '  &raquo;

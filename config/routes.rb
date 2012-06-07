@@ -20,10 +20,14 @@ Mintoffice::Application.routes.draw do
   end
   resources :dayworkers
   resources :dayworker_taxes
-  resources :card_used_sources
+  resources :card_used_sources do
+    post 'export', on: :collection
+  end
   resources :card_approved_sources do
     collection do
-      post 'cardbills/generate', controller: :card_approved_sources, action: :generate_cardbills, as: :generate_cardbills
+      post 'export'
+      get 'cardbills/generate', action: :generate, as: :generate_cardbills
+      post 'cardbills/generate', action: :generate_cardbills, as: :generate_cardbills
       get 'cardbills/empty', controller: :card_approved_sources, action: :find_empty_cardbills, as: :find_empty_cardbills
     end
   end
@@ -44,13 +48,19 @@ Mintoffice::Application.routes.draw do
   post '/hrinfos/retired/:id', :controller => "hrinfos", :action => "retired", as: :retired
   post '/hrinfos/try_retired/:id', :controller => "hrinfos", :action => "try_retired", as: :try_retired
 
-  resources :hrinfos
+  resources :hrinfos do
+    get 'new_employment_proof', on: :member, as: :new_employment_proof
+    post 'employment_proof', on: :member, as: :employment_proof
+  end
+
   resources :attachments
 
   match '/users/changepw/:user_id', :controller => 'users', :action => 'changepw'
   match '/users/login', :controller => 'users', :action => 'login', :conditions => { :method => :get}
   match '/users/logout', :controller => 'users', :action => 'logout', :conditions => { :method => :get}
   match '/users/my', :controller => "users", :action => "my", :conditions => {:method => :get}
+
+  resources :groups
 
   resources :users do
     resources :payments do
@@ -123,6 +133,7 @@ Mintoffice::Application.routes.draw do
       get 'verify'
       get 'excel'
       post 'preview'
+      post 'export'
       post 'excel', :action => 'upload'
     end
   end
@@ -131,6 +142,7 @@ Mintoffice::Application.routes.draw do
     collection do
       get 'excel'
       post 'preview'
+      post 'export'
       post 'excel', :action => 'upload'
     end
   end
@@ -151,15 +163,22 @@ Mintoffice::Application.routes.draw do
 
   resources :tags, only: [:create, :destroy]
 
-  resources :company do
+  resources :companies do
     post :switch, on: :collection
   end
-  resources :expense_reports, path: 'expenses'
+  resources :expense_reports, path: 'expenses' do
+    get 'no_permission', as: :no_permission, on: :collection
+  end
 
   match 'report' => 'reports#report', as: :report
 
   resources :ledger_accounts, path: 'ledgers'
   resources :postings
+
+  post 'accessors', controller: :accessors, action: :create, as: :accessors
+
+  get 'except_columns' => "except_columns#new", as: :except_columns
+  post 'except_columns' => "except_columns#create", as: :except_columns
 
   root to: 'main#index'
 
