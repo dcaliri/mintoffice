@@ -20,10 +20,10 @@ table#list-table
       td= transfer.out_bank_account
       td= transfer.in_bank_name
       td= transfer.in_bank_account
-      td align="right"
+      td.numrow
         = number_to_currency transfer.money
-      td align="right"
+      td.numrow
         = number_to_currency transfer.transfer_fee
-      td align="right"
+      td.numrow
         = number_to_currency transfer.error_money
       td= transfer.in_person_name

@@ -25,7 +25,8 @@ table#list-table
       td= source.approved_at ? source.approved_at.strftime("%Y %m.%d") : 0
       td= source.approved_time ? source.approved_time.strftime("%H:%M:%S") : 0
       td= source.sales_type
-      td class="numrow"= number_to_currency source.money_krw
+      td.numrow
+        = number_to_currency source.money_krw
       td= source.store_name
       td= source.store_type
       td= source.store_tel

@@ -17,11 +17,11 @@ table#list-table
       - else
         td= ""
       td= transaction.transaction_type
-      td class="numrow"
+      td.numrow
         = number_to_currency transaction.in
-      td class="numrow"
+      td.numrow
         = number_to_currency transaction.out
       td= transaction.note
-      td class="numrow"
+      td.numrow
         = number_to_currency transaction.remain
       td= transaction.branchname

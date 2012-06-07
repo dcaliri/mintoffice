@@ -20,7 +20,8 @@ table#list-table
       td= source.card_no
       td= source.card_holder_name
       td= source.store_name
-      td class="numrow"= number_to_currency source.money
+      td.numrow
+        = number_to_currency source.money
       td= source.used_type
       td= source.monthly_duration
       td= source.card_type
