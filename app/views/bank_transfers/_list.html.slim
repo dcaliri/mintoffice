@@ -1,29 +1,27 @@
+- set_num_rows [:money, :transfer_fee, :error_money]
+- set_model_name :bank_transfer
+
 table#list-table
   tr
-    th= BankTransfer.human_attribute_name(:account)
-    th= BankTransfer.human_attribute_name(:transfer_type)
-    th= BankTransfer.human_attribute_name(:transfered_at)
-    th= BankTransfer.human_attribute_name(:out_bank_account)
-    th= BankTransfer.human_attribute_name(:in_bank_name)
-    th= BankTransfer.human_attribute_name(:in_bank_account)
-    th= BankTransfer.human_attribute_name(:money)
-    th= BankTransfer.human_attribute_name(:transfer_fee)
-    th= BankTransfer.human_attribute_name(:error_money)
-    th= BankTransfer.human_attribute_name(:in_person_name)
-
+    == th_column :account
+    == th_column :transfer_type
+    == th_column :transfered_at
+    == th_column :out_bank_account
+    == th_column :in_bank_name
+    == th_column :in_bank_account
+    == th_column :money
+    == th_column :transfer_fee
+    == th_column :error_money
+    == th_column :in_person_name
   - bank_transfers.each do |transfer|
-    - onclick = transfer.new_record? ? "" : "location.href='#{bank_transfer_path(transfer)}'"
-    tr.selectable onclick="#{onclick}"
-      td= transfer.bank_account.description rescue ""
-      td= transfer.transfer_type
-      td= transfer.transfered_at.strftime("%Y-%m-%d %H.%M")
-      td= transfer.out_bank_account
-      td= transfer.in_bank_name
-      td= transfer.in_bank_account
-      td.numrow
-        = number_to_currency transfer.money
-      td.numrow
-        = number_to_currency transfer.transfer_fee
-      td.numrow
-        = number_to_currency transfer.error_money
-      td= transfer.in_person_name
+    tr.selectable onclick="#{on_click_path(transfer)}"
+    == td_column transfer, :account, (transfer.bank_account.description rescue "")
+    == td_column transfer, :transfer_type
+    == td_column transfer, :transfered_at, (transfer.transfered_at.strftime("%Y-%m-%d %H.%M") rescue "")
+    == td_column transfer, :out_bank_account
+    == td_column transfer, :in_bank_name
+    == td_column transfer, :in_bank_account
+    == td_column transfer, :money
+    == td_column transfer, :transfer_fee
+    == td_column transfer, :error_money
+    == td_column transfer, :in_person_name

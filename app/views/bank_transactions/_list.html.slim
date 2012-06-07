@@ -1,24 +1,23 @@
+- set_num_rows [:in, :out, :remain]
+- set_model_name :bank_transaction
+
 table#list-table
   tr
-    th= BankTransaction.human_attribute_name(:account)
-    th= BankTransaction.human_attribute_name(:transacted_at)
-    th= BankTransaction.human_attribute_name(:transaction_type)
-    th= BankTransaction.human_attribute_name(:in)
-    th= BankTransaction.human_attribute_name(:out)
-    th= BankTransaction.human_attribute_name(:note)
-    th= BankTransaction.human_attribute_name(:remain)
-    th= BankTransaction.human_attribute_name(:branchname)
+    == th_column :account
+    == th_column :transacted_at
+    == th_column :transaction_type
+    == th_column :in
+    == th_column :out
+    == th_column :note
+    == th_column :remain
+    == th_column :branchname
   - bank_transactions.each do |transaction|
-    - onclick = transaction.new_record? ? "" : "location.href='#{bank_transaction_path(transaction)}'"
-    tr.selectable onclick="#{onclick}"
-      td= transaction.bank_account.description rescue ""
-      td= transaction.transacted_at.strftime("%Y-%m-%d %H.%M") rescue ""
-      td= transaction.transaction_type
-      td.numrow
-        = number_to_currency transaction.in
-      td.numrow
-        = number_to_currency transaction.out
-      td= transaction.note
-      td.numrow
-        = number_to_currency transaction.remain
-      td= transaction.branchname
+    tr.selectable onclick="#{on_click_path(transaction)}"
+      == td_column transaction, :account, (transaction.bank_account.description rescue "")
+      == td_column transaction, :transacted_at, (transaction.transacted_at.strftime("%Y-%m-%d %H.%M") rescue "")
+      == td_column transaction, :transaction_type
+      == td_column transaction, :in
+      == td_column transaction, :out
+      == td_column transaction, :note
+      == td_column transaction, :remain
+      == td_column transaction, :branchname

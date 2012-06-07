@@ -751,6 +751,7 @@ ko:
             destroy: "삭제"
             download: "다운로드"
             posting: 전표 만들기
+            except_column: 컬럼 선택하기
         upload:
             empty: 업로드한 파일이 비어있습니다.
         menu: 메뉴

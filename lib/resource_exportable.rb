@@ -1,19 +1,19 @@
 module ResourceExportable
   extend ActiveSupport::Concern
-  EXCEPT = ["id", "created_at", "updated_at"]
+  EXCEPT = [:id, :created_at, :updated_at]
 
   class Configure
     def except_column(column=nil)
       @except_columns = @except_columns || []
       @except_columns.tap do |columns|
-        columns << column.to_s if column
+        columns << column if column
       end
     end
 
     def include_column(column=nil)
       @include_columns = @include_columns || []
       @include_columns.tap do |columns|
-        columns << column.to_s if column
+        columns << column if column
       end
     end
 
@@ -55,8 +55,10 @@ module ResourceExportable
       yield configure
     end
 
-    def export(extension)
-      columns = configure.include_column + column_names - configure.except_column - EXCEPT
+    def export(extension, except_columns = nil)
+      columns = configure.include_column + column_names.map(&:to_sym) - configure.except_column - EXCEPT
+      columns = columns - except_columns if except_columns
+
       filename = make_filename(extension)
 
       case extension
