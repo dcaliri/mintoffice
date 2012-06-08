@@ -6,7 +6,7 @@ h2 ..
   .box
     p
       = label_tag :bank_type, t('.type')
-      = select_tag :bank_type, options_for_select(BankTransfer::BANK_LIST, params[:bank_type])
+      = select_tag :bank_type, options_for_select(BankAccount::BANK_LIST, params[:bank_type])
     p
       = label_tag :file, t('.file')
       = text_field_tag :upload, params[:upload][:file].original_filename
