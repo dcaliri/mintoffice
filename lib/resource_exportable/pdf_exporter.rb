@@ -44,10 +44,10 @@ module ResourceExportable
 
         records = collections.all.map do |resource|
                     records = []
-                    columns.each_with_index do |column, index|
+                    columns.each do |column|
                       record = resource.send(column)
                       record = record.strftime("%Y-%m-%d(%H:%m:%S)") if record.respond_to?(:strftime)
-                      record = number_to_currency(record) if options.money.include?(index)
+                      record = number_to_currency(record) if options.money.include?(column)
                       records << record
                     end
                     records
@@ -59,9 +59,10 @@ module ResourceExportable
         height = pdf.bounds.top - 40
         pdf.bounding_box [0, height], :width => width, :height => height do
           table = pdf.table(table_data, header: true, :cell_style => {:background_color => "F0B9C8"}, :row_colors => ["F0F0F0", "FFFFCC"]) do |table|
-            options.money.each do |column|
-              current_column = table.column(column)
-              table.column(column).style(align: :right)
+            columns.each_with_index do |column, index|
+              unless options.money.include?(column)
+                table.column(index).style(align: :right)
+              end
             end
           end
         end

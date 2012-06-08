@@ -53,6 +53,12 @@ class CardUsedSource < ActiveRecord::Base
   resource_exportable_configure do |config|
     config.except_column :creditcard_id
     config.period_subtitle :approved_at
+    config.money [4]
+    # money_krw: 승인금액(원화)
+    # money_foreign: 승인금액(외화)
+    # price: 공금가액(원화)
+    # tax: 부가세
+    # tip: 봉사료
   end
 
   class << self
