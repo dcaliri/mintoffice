@@ -3,7 +3,7 @@
   <%= link_to t('common.title.edit'), edit_pettycash_path(@pettycash) %> |
   <%= link_to t('common.title.back'), pettycashes_path %>
 </div>
-<h2><%= Pettycash.human_attribute_name('transdate') %>: <%=h @pettycash.transdate.strftime("%Y.%m.%d %H:%M:%S %p") %></h2>
+<h2><%= Pettycash.human_attribute_name('transdate') %>: <%=h @pettycash.transdate.strftime("%Y.%m.%d %H:%M:%S %p") rescue "" %></h2>
 <div class="box">
   <div id="descr">
     <table border="0" cellspacing="5" cellpadding="5">
