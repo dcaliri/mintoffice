@@ -9,9 +9,6 @@ h2= t(".title")
       = label_tag :bank_account, t('.account')
       = select_tag :bank_account, options_from_collection_for_select(BankAccount.all, :id, :description, params[:bank_account])
     p
-      = label_tag :bank_type, t('.type')
-      = select_tag :bank_type, options_for_select(BankTransaction::BANK_LIST, params[:bank_type])
-    p
       = label_tag :file, t('.file')
       = text_field_tag :upload, params[:upload][:file].original_filename
     p
