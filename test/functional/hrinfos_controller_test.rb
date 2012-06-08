@@ -27,7 +27,10 @@ class HrinfosControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  # get 'employment_proof', action: :new_employment_proof, as: :employment_proof
+  test "should see employment proof page" do
+    get :new_employment_proof, :id => current_hrinfo.id
+    assert_response :success
+  end
 
   private
   def current_hrinfo
