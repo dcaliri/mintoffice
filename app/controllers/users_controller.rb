@@ -1,9 +1,11 @@
 class UsersController < ApplicationController
   layout "application", :except => ["login"]
+
   before_filter :only => [:show] do |c|
     @this_user = User.find(params[:id])
     c.save_attachment_id @this_user
   end
+
   before_filter :except => [:my, :login, :logout] do |c|
     unless @user.admin?
       flash[:notice] = I18n.t("common.messages.not_allowed")
@@ -64,11 +66,11 @@ class UsersController < ApplicationController
 
   def update
     @this_user = User.find(params[:id])
-      
+
     if @this_user.update_attributes(params[:user])
       logger.info @this_user.changes
       Boxcar.add_to_boxcar(@this_user.boxcar_account) if ! @this_user.boxcar_account.empty?
-      
+
       flash[:notice] = I18n.t("common.messages.updated", :model => User.model_name.human)
       redirect_to user_path(@this_user)
     else

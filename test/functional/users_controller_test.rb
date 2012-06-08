@@ -1,45 +1,44 @@
 require 'test_helper'
 
 class UsersControllerTest < ActionController::TestCase
-  test "should get index" do
-    get :index
-    assert_response :success
-    assert_not_nil assigns(:users)
+  fixtures :users
+
+  def setup
+    current_user.permission.create!(name: 'users')
   end
 
-  test "should get new" do
+  test "should see index page" do
+    get :index
+    assert_response :success
+  end
+
+  test "should see new page" do
     get :new
     assert_response :success
   end
 
-  test "should create user" do
-    assert_difference('User.count') do
-      post :create, :user => { }
-    end
-
-    assert_redirected_to user_path(assigns(:user))
-  end
-
-  test "should show user" do
-    get :show, :id => users(:one).to_param
+  test "should see show page" do
+    get :show, :id => current_user.id
     assert_response :success
   end
 
-  test "should get edit" do
-    get :edit, :id => users(:one).to_param
+  test "should see edit page" do
+    get :edit, :id => current_user.id
     assert_response :success
   end
 
-  test "should update user" do
-    put :update, :id => users(:one).to_param, :user => { }
-    assert_redirected_to user_path(assigns(:user))
+  test "should see changepw page" do
+    get :changepw, :user_id => current_user.id
+    assert_response :success
   end
 
-  test "should destroy user" do
-    assert_difference('User.count', -1) do
-      delete :destroy, :id => users(:one).to_param
-    end
+  test "should see login page" do
+    get :login
+    assert_response :success
+  end
 
-    assert_redirected_to users_path
+  test "should see my page" do
+    get :my
+    assert_response :success
   end
 end
