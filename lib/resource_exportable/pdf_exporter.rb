@@ -30,9 +30,11 @@ module ResourceExportable
 
           if options.period
             ordered_collection = collections.where("#{options.period} is not null").order("#{options.period} DESC")
-            first_paid = ordered_collection.last
-            last_paid = ordered_collection.first
-            subtitle = "#{first_paid.send(options.period).to_date} ~ #{last_paid.send(options.period).to_date}"
+            unless ordered_collection.empty?
+              first_paid = ordered_collection.last
+              last_paid = ordered_collection.first
+              subtitle = "#{first_paid.send(options.period).to_date} ~ #{last_paid.send(options.period).to_date}"
+            end
           end
 
           pdf.draw_text subtitle, :at => [pdf.bounds.right - 100, pdf.bounds.top - 10]

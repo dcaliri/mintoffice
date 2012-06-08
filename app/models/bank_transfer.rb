@@ -6,13 +6,6 @@ class BankTransfer < ActiveRecord::Base
 
   self.per_page = 20
 
-  BANK_LIST = [
-    ["신한 은행", :shinhan],
-    ["기업 은행", :ibk]
-  ]
-
-  # t.datetime "registered_at"
-
   DEFAULT_COLUMNS = [:bank_account_name,
                      :transfer_type,
                      :transfered_at_strftime,
