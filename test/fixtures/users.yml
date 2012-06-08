@@ -2,3 +2,8 @@ fixture:
     id: 1
     name: "admin"
     hashed_password: "1234"
+
+no_hrinfo:
+    id: 2
+    name: "no hrinfo"
+    hashed_password: "1234"
