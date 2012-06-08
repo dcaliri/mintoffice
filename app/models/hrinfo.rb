@@ -138,8 +138,8 @@ class Hrinfo < ActiveRecord::Base
       pdf.draw_text work_to.month, :at => [370, 494]
       pdf.draw_text work_to.day, :at => [402, 494]
 
-      # pdf.draw_text company.hrinfos.count, :at => [402, 494]
-      pdf.draw_text Hrinfo.count, :at => [142, 460]
+      # pdf.draw_text company.hrinfos.not_retired.count, :at => [402, 494]
+      pdf.draw_text Hrinfo.not_retired.count, :at => [142, 460]
       pdf.draw_text purpose, :at => [333, 460]
 
       pdf.draw_text "대표", :at => [175, 433]
@@ -153,8 +153,7 @@ class Hrinfo < ActiveRecord::Base
       pdf.draw_text company.name, :at => [250, 255]
       pdf.draw_text company.owner_name, :at => [250, 225]
 
-      pdf.move_cursor_to 170
-      pdf.text hash_key, align: :center
+      pdf.draw_text "*  발급확인코드: #{hash_key}", :at => [14, 45], :size => 10
     end
 
     employment_proof_hash << hash_key
