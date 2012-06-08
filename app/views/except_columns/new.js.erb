@@ -1,0 +1,11 @@
+$('#select_except_columns').after("<%=j render 'except_columns/form' %>");
+var form = $('#except_columns_form');
+
+$('#back_from_except_columns').click(function(event){
+  event.preventDefault();
+  form.remove();
+});
+
+form.submit(function(event){
+  form.remove();
+});

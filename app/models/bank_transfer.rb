@@ -111,6 +111,7 @@ class BankTransfer < ActiveRecord::Base
   end
 
   def transaction
+    return nil unless transfered_at
     time_start = transfered_at - 1.minutes
     time_end = transfered_at + 1.minutes
 
