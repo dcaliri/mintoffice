@@ -138,8 +138,8 @@ class Hrinfo < ActiveRecord::Base
       pdf.draw_text work_to.month, :at => [370, 494]
       pdf.draw_text work_to.day, :at => [402, 494]
 
-      # pdf.draw_text company.hrinfos.count, :at => [402, 494]
-      pdf.draw_text Hrinfo.count, :at => [142, 460]
+      # pdf.draw_text company.hrinfos.not_retired.count, :at => [402, 494]
+      pdf.draw_text Hrinfo.not_retired.count, :at => [142, 460]
       pdf.draw_text purpose, :at => [333, 460]
 
       pdf.draw_text "대표", :at => [175, 433]
