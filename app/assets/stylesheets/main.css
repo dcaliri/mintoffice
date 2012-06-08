@@ -492,7 +492,7 @@ ul#css3menu li.sublast>a{
 .item5 {
   margin-right: 10px;
 }
-h2 {
+.menubar h2 {
   display: block;
   font-size: 16px;
   line-height: 30px;
@@ -501,11 +501,11 @@ h2 {
   word-spacing: 3px;
   border: none;
 }
-ul {
+.menubar ul {
   list-style: none;
   padding: 0px;
 }
-li {
+.menubar li {
   border-bottom: 1px solid #C6C6C6;
   padding-bottom: 9px;
   margin-bottom: 6px;
@@ -582,6 +582,10 @@ a {
   }
 }
 
-.holiday {
+.menubar .holiday {
 	color: red;
+}
+
+.today {
+	border-left: 10px solid yellow;
 }
