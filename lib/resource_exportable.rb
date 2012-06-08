@@ -1,6 +1,6 @@
 module ResourceExportable
   extend ActiveSupport::Concern
-  EXCEPT = ["id", "created_at", "updated_at"]
+  EXCEPT = [:id, :created_at, :updated_at]
 
   class Configure
     def except_column(column=nil)
@@ -20,19 +20,22 @@ module ResourceExportable
     def pdf_page_layout(type)
       opts[:layout_type] = type
     end
-
-    def row_length(length)
-      opts[:row_length] = length
+    def money(to)
+      opts[:money] = to
     end
 
-    def money(to)
-      @opts[:money] = to
+    def subtitle(text)
+      opts[:subtitle] = text
+    end
+
+    def period_subtitle(column)
+      opts[:period] = column
     end
 
     def opts
       @opts ||= {
+        subtitle: "",
         layout_type: :landscape,
-        row_length: 2,
         money: []
       }
     end
@@ -52,8 +55,13 @@ module ResourceExportable
       yield configure
     end
 
-    def export(extension)
-      columns = configure.include_column + column_names - configure.except_column - EXCEPT
+    def export(extension, except_columns = nil)
+      unless except_columns
+        columns = configure.include_column + column_names.map(&:to_sym) - configure.except_column - EXCEPT
+      else
+        columns = default_columns - except_columns
+      end
+
       filename = make_filename(extension)
 
       case extension

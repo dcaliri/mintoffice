@@ -2,6 +2,10 @@ module Permissionable
   extend ActiveSupport::Concern
 
   module ClassMethod
+    def no_permission
+      includes(:accessors).merge(AccessPerson.no_permission)
+    end
+
     def access_list(user)
       joins(:accessors).merge(AccessPerson.access_list(user))
     end

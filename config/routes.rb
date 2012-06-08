@@ -48,7 +48,13 @@ Mintoffice::Application.routes.draw do
   post '/hrinfos/retired/:id', :controller => "hrinfos", :action => "retired", as: :retired
   post '/hrinfos/try_retired/:id', :controller => "hrinfos", :action => "try_retired", as: :try_retired
 
-  resources :hrinfos
+  resources :hrinfos do
+    member do
+    get 'employment_proof', action: :new_employment_proof, as: :employment_proof
+    post 'employment_proof', as: :employment_proof
+    end
+  end
+
   resources :attachments
 
   match '/users/changepw/:user_id', :controller => 'users', :action => 'changepw'
@@ -161,7 +167,9 @@ Mintoffice::Application.routes.draw do
   resources :companies do
     post :switch, on: :collection
   end
-  resources :expense_reports, path: 'expenses'
+  resources :expense_reports, path: 'expenses' do
+    get 'no_permission', as: :no_permission, on: :collection
+  end
 
   match 'report' => 'reports#report', as: :report
 
@@ -169,6 +177,9 @@ Mintoffice::Application.routes.draw do
   resources :postings
 
   post 'accessors', controller: :accessors, action: :create, as: :accessors
+
+  get 'except_columns' => "except_columns#new", as: :except_columns
+  post 'except_columns' => "except_columns#create", as: :except_columns
 
   root to: 'main#index'
 

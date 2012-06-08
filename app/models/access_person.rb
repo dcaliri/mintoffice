@@ -3,11 +3,13 @@ class AccessPerson < ActiveRecord::Base
   belongs_to :access_target, polymorphic: true
 
   class << self
+    def no_permission
+      group(:access_target_id).having('count(access_people.access_target_id) = 0')
+    end
+
     def access_list(user)
       if user.nil?
         where("0")
-      elsif user.ingroup?(:admin)
-        group(:access_target_id).having('count(access_target_id) = ? OR access_people.user_id = ?', 0, user.id)
       else
         where(user_id: user.id)
       end

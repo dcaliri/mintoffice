@@ -1,6 +1,6 @@
 source :rubygems
 
-gem 'rails', '3.2.3'
+gem 'rails', '3.2.5'
 gem 'jquery-rails'
 gem 'slim'
 gem 'dynamic_form'
@@ -25,6 +25,7 @@ end
 
 group :development do
   gem 'pow-client'
+  gem 'sextant'
 end
 
 group :test do

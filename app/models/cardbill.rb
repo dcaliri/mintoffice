@@ -35,6 +35,18 @@ class Cardbill < ActiveRecord::Base
     end
   end
 
+  class << self
+    def filter_by_params(params)
+      result = search(params[:query]).searchbycreditcard(params[:creditcard_id])
+      result = if params[:empty_permission] == 'true'
+                result.no_permission
+              else
+                result.access_list(params[:user])
+              end
+      result
+    end
+  end
+
   def self.except_me(cardbill)
     if cardbill.id
       where('id != ?', cardbill.id)

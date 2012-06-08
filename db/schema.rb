@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120529053831) do
+ActiveRecord::Schema.define(:version => 20120607053901) do
 
   create_table "access_people", :force => true do |t|
     t.integer  "user_id"
@@ -184,10 +184,14 @@ ActiveRecord::Schema.define(:version => 20120529053831) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
-    t.integer  "pay_basic_date", :default => 20
-    t.integer  "payday",         :default => 25
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
+    t.integer  "pay_basic_date",      :default => 20
+    t.integer  "payday",              :default => 25
+    t.string   "registration_number"
+    t.string   "owner_name"
+    t.string   "address"
+    t.string   "phone_number"
   end
 
   create_table "contact_address_tags", :force => true do |t|
@@ -389,6 +393,8 @@ ActiveRecord::Schema.define(:version => 20120529053831) do
     t.integer  "companyno"
     t.string   "juminno"
     t.boolean  "listed"
+    t.string   "department"
+    t.text     "employment_proof_hash"
   end
 
   add_index "hrinfos", ["companyno"], :name => "index_hrinfos_on_companyno", :unique => true
@@ -509,6 +515,11 @@ ActiveRecord::Schema.define(:version => 20120529053831) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+  end
+
+  create_table "projects_users", :id => false, :force => true do |t|
+    t.integer "project_id"
+    t.integer "user_id"
   end
 
   create_table "report_comments", :force => true do |t|
