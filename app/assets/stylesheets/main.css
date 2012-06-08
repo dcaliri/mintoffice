@@ -510,11 +510,15 @@ ul#css3menu li.sublast>a{
   padding-bottom: 9px;
   margin-bottom: 6px;
 }
-a {
+.menubar a {
   color: #232323;
   outline: none;
   cursor: pointer;
   text-decoration: none;
+}
+
+.this_week li {
+  border: none;
 }
 @media only screen and (max-width: 1023px){
   .admin .menubar {
@@ -587,5 +591,5 @@ a {
 }
 
 .today {
-	border-left: 10px solid yellow;
+	background-color: yellow;
 }
