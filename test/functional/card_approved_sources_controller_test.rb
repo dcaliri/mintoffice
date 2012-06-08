@@ -38,6 +38,11 @@ class CardApprovedSourcesControllerTest < ActionController::TestCase
     assert_response :redirect
   end
 
+  test "should export card approved source" do
+    post :export, id: current_card_approved_source.id, to: :pdf
+    assert_response :success
+  end
+
   private
   def current_creditcard
     @creditcard ||= creditcards(:fixture)

@@ -33,6 +33,11 @@ class BankTransfersControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "should export bank transfer" do
+    post :export, id: current_bank_transfer.id, to: :pdf
+    assert_response :success
+  end
+
   private
   def current_bank_account
     @bank_account ||= bank_accounts(:fixture)

@@ -28,6 +28,11 @@ class CardUsedSourcesControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "should export card used source" do
+    post :export, id: current_card_used_source.id, to: :pdf
+    assert_response :success
+  end
+
   private
   def current_creditcard
     @creditcard ||= creditcards(:fixture)
