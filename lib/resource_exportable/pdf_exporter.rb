@@ -29,7 +29,7 @@ module ResourceExportable
           subtitle = subtitle.call(collections) if subtitle.respond_to?(:call)
 
           if options.period
-            ordered_collection = collections.where("#{options.period} is not null").order("? DESC", options.period)
+            ordered_collection = collections.where("#{options.period} is not null").order("#{options.period} DESC")
             first_paid = ordered_collection.last
             last_paid = ordered_collection.first
             subtitle = "#{first_paid.send(options.period).to_date} ~ #{last_paid.send(options.period).to_date}"
