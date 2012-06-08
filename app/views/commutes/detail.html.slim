@@ -9,7 +9,7 @@ h2 =t('.title')
     table cellspacing="5" cellpadding="5"
       tr
         th =t('commutes.arrive_at_work')+":"
-        td= commute.go.strftime("%Y-%m-%d %H:%M")
+        td= commute.go.strftime("%Y-%m-%d %H:%M") rescue ""
       tr
         th =t('commutes.leave_work')+":"
         td
