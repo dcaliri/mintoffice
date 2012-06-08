@@ -1,3 +1,4 @@
 fixture:
     id: 1
+    company_id: 1
     name: "프로젝트"
