@@ -52,7 +52,7 @@ class CardApprovedSource < ActiveRecord::Base
   resource_exportable_configure do |config|
     config.except_column :creditcard_id
     config.period_subtitle :used_at
-    config.money [4]
+    config.money [:money]
   end
 
   class << self
