@@ -5,8 +5,8 @@ h2= t("common.title.#{action_name}")
     = hidden_field_tag :class_name, params[:class_name]
     - class_columns.each do |column|
       p
-        = label_tag "except[#{column}]", class_type.human_attribute_name(column.to_sym)
-        = check_box_tag "except[#{column}]", true, except?(column)
+        = label_tag "include_column[#{column}]", class_type.human_attribute_name(column.to_sym)
+        = check_box_tag "include_column[#{column}]", true, include_column?(column)
     p
       = submit_tag
 
