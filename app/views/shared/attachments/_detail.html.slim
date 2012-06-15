@@ -1,0 +1,27 @@
+- attachments = target.attachments
+- unless attachments.nil? && attachments.empty?
+  - attachment = attachments.first
+  #attach
+    = link_to image_tag(picture_attachment_path(attachment, :w => "600", :h => "800")), picture_attachment_path(attachment), target: :blank
+    br
+    center
+      = link_to t("common.link.download"), :controller => "attachments", :action => "download", :id => attachment.id
+      - if attachments.count > 0
+        '  ...
+        - 0.upto(attachments.count - 1) do |i|
+          /= link_to (i+1).to_s, {:at => i}, :id => attachments[i].id, :class => "move-attachment" 
+          span.move-attachment{id=attachments[i].id} :style => 'cursor: hand;' = (i+1).to_s
+          '  
+.clear
+- content_for :javascript do
+  | <script type="text/javascript">
+    $(function(){
+      $('.move-attachment').click(function(e){
+        e.preventDefault();
+
+        var imageUrl = "/attachments/" + e.target.id + '/picture';
+        $('#attach img').attr('src', imageUrl + "?h=800&amp;w=600");
+        $('#attach a').attr('href', imageUrl);
+      });
+    });
+      </script>
