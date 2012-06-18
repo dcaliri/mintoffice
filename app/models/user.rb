@@ -155,17 +155,6 @@ class User < ActiveRecord::Base
     not payments.empty?
   end
 
-  def google_apps_configure
-    OpenStruct.new(YAML.load_file("config/google_apps.yml"))
-  rescue => e
-    raise Errno::ENOENT, "no google app configure file. please create config/google_apps.yml"
-  end
-
-  def google_app_account
-    config = google_apps_configure
-    "#{name}@#{config.domain}"
-  end
-
   def create_google_app_account
     config = google_apps_configure
     transporter = GoogleApps::Transport.new config.domain
@@ -177,7 +166,20 @@ class User < ActiveRecord::Base
     transporter.new_user user
 
     doc = Nokogiri::XML(transporter.response.body)
-    !doc.xpath('//AppsForYourDomainErrors/error').first['errorCode'] rescue true
+    error_code = doc.xpath('//AppsForYourDomainErrors/error').first['errorCode'] rescue 0
+
+    if error_code == 0
+      self.google_app_account = "#{name}@#{config.domain}"
+      save
+    else
+      false
+    end
+  end
+
+  def google_apps_configure
+    OpenStruct.new(YAML.load_file("config/google_apps.yml"))
+  rescue => e
+    raise Errno::ENOENT, "no google app configure file. please create config/google_apps.yml"
   end
 
 private

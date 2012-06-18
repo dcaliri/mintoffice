@@ -503,6 +503,7 @@ ko:
                 gmail_account: Google 계정
                 notify_email: Email
                 boxcar_account: Boxcar 계정
+                google_app_account: GoogleApp 계정
         errors:
             template:
                 header: 오류가 발생했습니다.

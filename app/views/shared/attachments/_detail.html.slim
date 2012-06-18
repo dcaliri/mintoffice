@@ -9,9 +9,9 @@
       - if attachments.count > 0
         '  ...
         - 0.upto(attachments.count - 1) do |i|
-          /= link_to (i+1).to_s, {:at => i}, :id => attachments[i].id, :class => "move-attachment" 
+          /= link_to (i+1).to_s, {:at => i}, :id => attachments[i].id, :class => "move-attachment"
           span.move-attachment{id=attachments[i].id} :style => 'cursor: hand;' = (i+1).to_s
-          '  
+          '
 .clear
 - content_for :javascript do
   | <script type="text/javascript">
