@@ -1,35 +1,37 @@
+# encoding: UTF-8
+
 module Excels
   module CardUsedSourcesInfo
     extend ActiveSupport::Concern
 
     EXCEL_COLUMNS ||= {}
-    EXCEL_COLUMNS[:card_used_sources] = [
-      :card_no,
-      :bank_account,
-      :bank_name,
-      :card_holder_name,
-      :used_area,
-      :approve_no,
-      :approved_at,
-      :approved_time,
-      :sales_type,
-      :money_krw,
-      :money_foreign,
-      :price,
-      :tax,
-      :tip,
-      :monthly_duration,
-      :exchange_krw,
-      :foreign_country_code,
-      :foreign_country_name,
-      :store_business_no,
-      :store_name,
-      :store_type,
-      :store_zipcode,
-      :store_addr1,
-      :store_addr2,
-      :store_tel
-    ]
+    EXCEL_COLUMNS[:card_used_sources] = {
+      :card_no =>               "카드번호",
+      :bank_account =>          "결제계좌번호",
+      :bank_name =>             "결제은행명",
+      :card_holder_name =>      "카드소유자명",
+      :used_area =>             "사용구분",
+      :approve_no =>            "승인번호",
+      :approved_at =>           "승인일자",
+      :approved_time =>         "승인시간",
+      :sales_type =>            "매출종류코드",
+      :money_krw =>             "승인금액(원화)",
+      :money_foreign =>         "승인금액(외화)",
+      :price =>                 "공급가액(원화)",
+      :tax =>                   "부가세",
+      :tip =>                   "봉사료",
+      :monthly_duration =>      "할부기간",
+      :exchange_krw =>          "외화거래일횐율",
+      :foreign_country_code =>  "외화거래국가코드",
+      :foreign_country_name =>  "외화거래국가명",
+      :store_business_no =>     "가맹점사업자번호",
+      :store_name =>            "가맹점명",
+      :store_type =>            "가맹점업종명)",
+      :store_zipcode =>         "가맹점우편번호",
+      :store_addr1 =>           "가맹점주소1",
+      :store_addr2 =>           "가맹점주소2",
+      :store_tel =>              "가맹점전화번호"
+    }
 
     EXCEL_KEYS ||= {}
     EXCEL_KEYS[:card_used_sources] = {

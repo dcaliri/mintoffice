@@ -11,18 +11,19 @@ module Excels
           :out => :integer,
           :remain => :integer
         },
-        :columns => [
-          :transacted_at,
-          :out,
-          :in,
-          :remain,
-          :note,
-          :out_bank_account,
-          :out_bank_name,
-          :transaction_type,
-          :promissory_check_amount,
-          :cms_code
-        ],
+        # 데이터 검증을 하지 않기 대문에 필드명이 필요없다.
+        :columns => {
+          :transacted_at            => "",
+          :out                      => "",
+          :in                       => "",
+          :remain                   => "",
+          :note                     => "",
+          :out_bank_account         => "",
+          :out_bank_name            => "",
+          :transaction_type         => "",
+          :promissory_check_amount  => "",
+          :cms_code                 => "",
+        },
         :position => {
           :start => {
             x: 8,
@@ -39,7 +40,7 @@ module Excels
           parser.class_name BankTransaction
           parser.column IBK[:columns]
           parser.key IBK[:keys]
-          parser.option :position => IBK[:position]
+          parser.option :position => IBK[:position], :validate => false
           parser
         end
       end
