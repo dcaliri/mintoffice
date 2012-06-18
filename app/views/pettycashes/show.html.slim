@@ -5,18 +5,18 @@
   = link_to t('common.title.back'), pettycashes_path
 
 h2
-  = Pettycash.human_attribute_name('transdate') 
+  = Pettycash.human_attribute_name('transdate')
   '  :
-  = l @pettycash.transdate, format: :compact_short
+  = l @pettycash.transdate, format: :compact_short rescue ""
 
 .box
   #descr
     table border="0" cellspacing="5" cellpadding="5"
       tr
-        th align="right" = Pettycash.human_attribute_name('inmoney') 
+        th align="right" = Pettycash.human_attribute_name('inmoney')
         td align="right" = number_to_currency @pettycash.inmoney
       tr
-        th align="right" = Pettycash.human_attribute_name('outmoney') 
+        th align="right" = Pettycash.human_attribute_name('outmoney')
         td align="right" = number_to_currency @pettycash.outmoney
 
     p
