@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
 
   validates_presence_of :name
   validates_uniqueness_of :name
-  validates_uniqueness_of :gmail_account, :if => Proc.new{ gmail_account && gmail_account.empty? == false }
+  validates_uniqueness_of :google_account, :if => Proc.new{ google_account && google_account.empty? == false }
   attr_accessor :password_confirmation
   validates_confirmation_of :password, :if => Proc.new{|user| user.provider.blank? and user.uid.blank?}
   validate :password_non_blank, :if => Proc.new{|user| user.provider.blank? and user.uid.blank?}
@@ -41,7 +41,7 @@ class User < ActiveRecord::Base
 
   def self.find_or_create_with_omniauth!(auth)
 #    users = where(:provider => auth['provider'], :uid => auth['uid'])
-    users = where(:gmail_account => auth['info']['email'])
+    users = where(:google_account => auth['info']['email'])
     user = if not users.empty?
       users.first
     else
@@ -128,7 +128,7 @@ class User < ActiveRecord::Base
   end
 
   def as_json(options={})
-    super(options.merge(:only => [:name, :gmail_account, :boxcar_account, :notify_email, :api_key]))
+    super(options.merge(:only => [:name, :google_account, :boxcar_account, :notify_email, :api_key]))
   end
 
   def create_api_key(name, password)
@@ -169,7 +169,7 @@ class User < ActiveRecord::Base
     error_code = doc.xpath('//AppsForYourDomainErrors/error').first['errorCode'] rescue 0
 
     if error_code == 0
-      self.google_app_account = "#{name}@#{config.domain}"
+      self.google_account = "#{name}@#{config.domain}"
       save
     else
       false

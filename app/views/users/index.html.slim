@@ -15,7 +15,7 @@ h2= t("common.title.list")
 table#list-table
   tr
     th= User.human_attribute_name('name')
-    th= User.human_attribute_name('gmail_account')
+    th= User.human_attribute_name('google_account')
     th= User.human_attribute_name('notify_email')
     th= User.human_attribute_name('boxcar_account')
   = render partial: "user", collection: @users
