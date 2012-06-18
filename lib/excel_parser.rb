@@ -34,7 +34,6 @@ class ExcelParser
     position = @options[:position]
     column_keys.each_with_index do |column, i|
       column_name = sheet.cell(position[:start][:x] - 1, i + position[:start][:y])
-      # Rails.logger.info "column name == #{column_name}, #{column_names[i]}, #{column_name != column_names[i]}"
       return false if column_name != column_names[i]
     end
     true
