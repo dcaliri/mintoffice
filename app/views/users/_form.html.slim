@@ -11,10 +11,10 @@ h2= t("common.title.#{action_name}")
       = f.password_field :password, :size => 40
     p
       = f.label :password_confirmation, User.human_attribute_name("password_confirmation")
-      = f.password_field :password_confirmation, :size => 40 
+      = f.password_field :password_confirmation, :size => 40
     p
-      = f.label :gmail_account, User.human_attribute_name("gmail_account")
-      = f.email_field :gmail_account, :size => 40
+      = f.label :google_account, User.human_attribute_name("google_account")
+      = f.email_field :google_account, :size => 40
     p
       = f.label :notify_email, User.human_attribute_name("notify_email")
       = f.email_field :notify_email, :size => 40

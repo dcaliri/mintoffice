@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120618054015) do
+ActiveRecord::Schema.define(:version => 20120618060942) do
 
   create_table "access_people", :force => true do |t|
     t.integer  "user_id"
@@ -297,8 +297,8 @@ ActiveRecord::Schema.define(:version => 20120618054015) do
     t.string   "nickname"
     t.string   "issuer"
     t.string   "cardholder"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
     t.string   "short_name"
     t.string   "money_foreign"
     t.string   "money_type"
@@ -515,9 +515,9 @@ ActiveRecord::Schema.define(:version => 20120618054015) do
     t.date     "started_on"
     t.date     "ending_on"
     t.date     "ended_on"
-    t.decimal  "revenue",    :precision => 20, :scale => 0
-    t.datetime "created_at",                                :null => false
-    t.datetime "updated_at",                                :null => false
+    t.integer  "revenue",    :limit => 20
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
     t.integer  "company_id"
   end
 
@@ -611,15 +611,14 @@ ActiveRecord::Schema.define(:version => 20120618054015) do
     t.string   "name"
     t.string   "hashed_password"
     t.string   "salt"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
     t.string   "provider"
     t.string   "uid"
-    t.string   "gmail_account"
+    t.string   "google_account"
     t.string   "boxcar_account"
     t.string   "notify_email"
     t.string   "api_key"
-    t.string   "google_app_account"
   end
 
   create_table "vacations", :force => true do |t|
