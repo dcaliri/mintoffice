@@ -503,6 +503,7 @@ ko:
                 gmail_account: Google 계정
                 notify_email: Email
                 boxcar_account: Boxcar 계정
+                google_app_account: GoogleApp 계정
         errors:
             template:
                 header: 오류가 발생했습니다.
@@ -1106,6 +1107,8 @@ ko:
             oldpassword_wrong: 이전 비밀번호가 틀렸습니다.
             password_confirm_wrong: 비밀번호와 비밀번호 확인이 일치하지 않습니다.
             successfully_changed: 성공적으로 변경하였습니다.
+        google:
+            create: 구글 앱스 계정 생성
         error:
     vacations:
         index:

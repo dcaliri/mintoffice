@@ -12,6 +12,7 @@ gem 'prawn'
 
 gem 'omniauth'
 gem 'omniauth-openid'
+gem 'google_apps'
 
 gem 'by_star'
 

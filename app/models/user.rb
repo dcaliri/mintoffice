@@ -1,4 +1,6 @@
 require 'digest/sha1'
+# require 'nokogiri'
+# require 'google_apps'
 
 class User < ActiveRecord::Base
   has_many :attachment
@@ -151,6 +153,33 @@ class User < ActiveRecord::Base
 
   def has_payment_info
     not payments.empty?
+  end
+
+  def create_google_app_account
+    config = google_apps_configure
+    transporter = GoogleApps::Transport.new config.domain
+    transporter.authenticate config.username, config.password
+
+    # Creating a User
+    user = GoogleApps::Atom::User.new
+    user.new_user name, hrinfo.firstname, hrinfo.lastname, config.default_password.to_s, 2048
+    transporter.new_user user
+
+    doc = Nokogiri::XML(transporter.response.body)
+    error_code = doc.xpath('//AppsForYourDomainErrors/error').first['errorCode'] rescue 0
+
+    if error_code == 0
+      self.google_app_account = "#{name}@#{config.domain}"
+      save
+    else
+      false
+    end
+  end
+
+  def google_apps_configure
+    OpenStruct.new(YAML.load_file("config/google_apps.yml"))
+  rescue => e
+    raise Errno::ENOENT, "no google app configure file. please create config/google_apps.yml"
   end
 
 private
