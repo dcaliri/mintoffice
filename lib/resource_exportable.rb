@@ -66,7 +66,8 @@ module ResourceExportable
 
       case extension
       when :xls
-        ExcelExporter.new(self, filename: filename, columns: columns).export
+        # ExcelExporter.new(self, filename: filename, columns: columns, krw: configure.opts[:krw]).export
+        ExcelExporter.new(self, filename, columns, configure.opts).export
       when :pdf
         PdfExporter.new(self, filename, columns, configure.opts).export
       end
