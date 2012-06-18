@@ -14,8 +14,10 @@ class BankAccount < ActiveRecord::Base
 
   def name
     value = read_attribute(:name)
-    bank = BANK_LIST.find {|bank_info| bank_info[1] == value.to_sym}
-    bank.present? ? bank[0] : value
+    if value
+      bank = BANK_LIST.find {|bank_info| bank_info[1] == value.to_sym}
+      bank.present? ? bank[0] : value
+    end
   end
 
   def name_

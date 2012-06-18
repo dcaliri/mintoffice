@@ -68,6 +68,7 @@ ko:
             time: "%H:%M"
             short: "%y/%m/%d %H:%M"
             long: "%Y년 %B월 %d일, %H시 %M분 %S초 %Z"
+            compact_short: "%Y-%m-%d (%a) %H:%M"
         am: "오전"
         pm: "오후"
 

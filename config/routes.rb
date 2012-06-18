@@ -55,7 +55,11 @@ Mintoffice::Application.routes.draw do
     end
   end
 
-  resources :attachments
+  resources :attachments do
+    member do
+      get 'picture', action: :picture, as: :picture
+    end
+  end
 
   match '/users/changepw/:user_id', :controller => 'users', :action => 'changepw'
   match '/users/login', :controller => 'users', :action => 'login', :conditions => { :method => :get}
