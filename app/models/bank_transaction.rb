@@ -27,7 +27,7 @@ class BankTransaction < ActiveRecord::Base
 
   include ResourceExportable
   resource_exportable_configure do |config|
-    config.money [:in, :out, :remain]
+    config.krw [:in, :out, :remain]
     config.include_column :bank_account_name
     config.except_column :bank_account_id
     config.except_column :out_bank_account
