@@ -763,7 +763,7 @@ ko:
             except_column: 컬럼 선택하기
         upload:
             empty: 업로드한 파일이 비어있습니다.
-            invalid_xml: 잘못된 형식의 스타일시트 파일입니다.
+            invalid_xls: 잘못된 형식의 엑셀파일입니다.
         menu: 메뉴
         total: 합계
     commutes:

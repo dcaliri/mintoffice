@@ -46,7 +46,7 @@ class ExcelParser
     position = @options[:position]
 
     sheet = parser.new(file)
-    raise ArgumentError, I18n.t('common.upload.invalid_xml') unless valid?(sheet)
+    raise ArgumentError, I18n.t('common.upload.invalid_xls') unless valid?(sheet)
 
     position[:start][:x].upto(sheet.last_row + position[:end]) do |i|
       params = {}
