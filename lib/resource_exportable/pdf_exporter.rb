@@ -59,15 +59,17 @@ module ResourceExportable
         height = pdf.bounds.top - 40
         pdf.bounding_box [0, height], :width => width, :height => height do
           table = pdf.table(table_data, header: true, :cell_style => {:background_color => "F0B9C8"}, :row_colors => ["F0F0F0", "FFFFCC"]) do |table|
+            table.row(0).style(align: :center)
             columns.each_with_index do |column, index|
+              columns = table.row(1..-1).column(index)
               if options.krw.include?(column)
-                table.column(index).style(align: :right)
+                columns.style(align: :right)
               end
               if options.align[:left].include?(column)
-                table.column(index).style(align: :left)
+                columns.style(align: :left)
               end
               if options.align[:right].include?(column)
-                table.column(index).style(align: :right)
+                columns.style(align: :right)
               end
             end
           end
