@@ -11,7 +11,7 @@ module ExceptColumn
     html_code += "</tr>"
 
     collection.each do |resource|
-      html_code += "<tr class='selectable', onclick = #{on_click_path(resource)}>"
+      html_code += "<tr class='selectable', #{on_click_path(resource)}>"
       columns.each do |column|
         html_code += td_column(resource, column)
       end

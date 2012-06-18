@@ -47,7 +47,7 @@ module ResourceExportable
                     columns.each do |column|
                       record = resource.send(column)
                       record = record.strftime("%Y-%m-%d(%H:%m:%S)") if record.respond_to?(:strftime)
-                      record = number_to_currency(record) if options.money.include?(column)
+                      record = number_to_currency(record) if options.krw.include?(column)
                       records << record
                     end
                     records
@@ -60,7 +60,13 @@ module ResourceExportable
         pdf.bounding_box [0, height], :width => width, :height => height do
           table = pdf.table(table_data, header: true, :cell_style => {:background_color => "F0B9C8"}, :row_colors => ["F0F0F0", "FFFFCC"]) do |table|
             columns.each_with_index do |column, index|
-              if options.money.include?(column)
+              if options.krw.include?(column)
+                table.column(index).style(align: :right)
+              end
+              if options.align[:left].include?(column)
+                table.column(index).style(align: :left)
+              end
+              if options.align[:right].include?(column)
                 table.column(index).style(align: :right)
               end
             end
