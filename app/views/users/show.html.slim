@@ -9,8 +9,8 @@
     =link_to t('.change_password'), :action => "changepw", :id => @this_user
     '  |
 
-  - unless @user.google_account?
-    = link_to t("users.google.create"), [:google_apps, @user], method: :post
+  - unless @this_user.google_account?
+    = link_to t("users.google.create"), [:google_apps, @this_user], method: :post
     '  |
   =link_to t('common.title.edit'), edit_user_path(@this_user)
   '  |
