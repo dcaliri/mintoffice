@@ -12,7 +12,6 @@ h2 #{contact.name}
 .box
   #descr
     = render 'item', menu: true
-    = render 'changelog', target: contact
-
   = render "shared/attachments/detail", :target => contact
   .clear
+= render 'changelog', target: contact

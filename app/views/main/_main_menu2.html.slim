@@ -35,7 +35,7 @@ div class={@user.admin? ? "admin" : ""}
         li= link_to t("documents.index.title"), :controller => "documents"
         - if @user.permission.any? {|perm| perm.name == 'business_clients'}
           li= link_to t("business_clients.index.title"), :business_clients 
-        - if @user.permission.any? {|perm| perm.name == 'contacts'}
+        - if @user.admin? || @user.permission.any? {|perm| perm.name == 'contacts'}
           li= link_to t("contacts.index.title"), :contacts 
 
     - if @user.ingroup?(:admin)
