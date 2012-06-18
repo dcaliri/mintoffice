@@ -1,8 +1,10 @@
 - title t(".title")
 
 #show_command
+  = link_to t("users.google.create"), [:google_apps, @user], method: :post
+  '  |
   = link_to t("users.edit.title"), [:edit, @user]
   '  |
   = link_to t("users.changepw.title"), :action => "changepw", :id => @user
-  
+
 = render 'detail', :user => @user

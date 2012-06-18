@@ -1106,6 +1106,8 @@ ko:
             oldpassword_wrong: 이전 비밀번호가 틀렸습니다.
             password_confirm_wrong: 비밀번호와 비밀번호 확인이 일치하지 않습니다.
             successfully_changed: 성공적으로 변경하였습니다.
+        google:
+            create: 구글 앱스 계정 생성
         error:
     vacations:
         index:
