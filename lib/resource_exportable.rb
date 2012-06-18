@@ -20,8 +20,8 @@ module ResourceExportable
     def pdf_page_layout(type)
       opts[:layout_type] = type
     end
-    def money(to)
-      opts[:money] = to
+    def krw(to)
+      opts[:krw] = to
     end
 
     def subtitle(text)
@@ -36,7 +36,7 @@ module ResourceExportable
       @opts ||= {
         subtitle: "",
         layout_type: :landscape,
-        money: []
+        krw: []
       }
     end
   end
