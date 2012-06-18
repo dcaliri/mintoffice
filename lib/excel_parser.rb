@@ -20,7 +20,7 @@ class ExcelParser
   end
 
   def option(opts)
-    @options = {position: {:start => {x: 2, y: 1}, :end => 0}}.merge(opts)
+    @options = {position: {:start => {x: 2, y: 1}, :end => 0}, validate: true}.merge(opts)
   end
 
   def preview(file)
@@ -30,6 +30,7 @@ class ExcelParser
   end
 
   def valid?(sheet)
+    return true unless @options[:validate]
     position = @options[:position]
     column_keys.each_with_index do |column, i|
       column_name = sheet.cell(position[:start][:x] - 1, i + position[:start][:y])
