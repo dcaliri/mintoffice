@@ -69,6 +69,8 @@ Mintoffice::Application.routes.draw do
   resources :groups
 
   resources :users do
+    post 'google_apps', as: :google_apps, on: :member
+
     resources :payments do
       collection do
         get 'yearly'

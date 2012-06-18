@@ -7,7 +7,9 @@ dl
   dd= user.notify_email
   dt= User.human_attribute_name("boxcar_account")
   dd= user.boxcar_account
-  
+  dt= User.human_attribute_name("google_app_account")
+  dd= user.google_app_account
+
 =render "shared/attachments/detail", target: user
 .clear
 = render 'changelog', target: user

@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class UsersController < ApplicationController
   layout "application", :except => ["login"]
 
@@ -6,7 +8,7 @@ class UsersController < ApplicationController
     c.save_attachment_id @this_user
   end
 
-  before_filter :except => [:my, :login, :logout] do |c|
+  before_filter :except => [:my, :login, :logout, :google_apps] do |c|
     unless @user.admin?
       flash[:notice] = I18n.t("common.messages.not_allowed")
       redirect_to :controller => "main", :action => "index"
@@ -75,6 +77,15 @@ class UsersController < ApplicationController
       redirect_to user_path(@this_user)
     else
       render :action => "edit"
+    end
+  end
+
+  def google_apps
+    @this_user = User.find(params[:id])
+    if @this_user.create_google_app_account
+      redirect_to :back, notice: "성공적으로 구글 계정을 생성했습니다."
+    else
+      redirect_to :back, alert: "계정 생성에 실패했습니다.."
     end
   end
 
