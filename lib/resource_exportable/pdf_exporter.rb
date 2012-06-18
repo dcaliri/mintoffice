@@ -60,7 +60,7 @@ module ResourceExportable
         pdf.bounding_box [0, height], :width => width, :height => height do
           table = pdf.table(table_data, header: true, :cell_style => {:background_color => "F0B9C8"}, :row_colors => ["F0F0F0", "FFFFCC"]) do |table|
             columns.each_with_index do |column, index|
-              unless options.money.include?(column)
+              if options.money.include?(column)
                 table.column(index).style(align: :right)
               end
             end
