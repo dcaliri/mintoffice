@@ -20,8 +20,13 @@ module ResourceExportable
     def pdf_page_layout(type)
       opts[:layout_type] = type
     end
+
     def krw(to)
       opts[:krw] = to
+    end
+
+    def align(direction, key)
+      opts[:align][direction] = key
     end
 
     def subtitle(text)
@@ -36,7 +41,11 @@ module ResourceExportable
       @opts ||= {
         subtitle: "",
         layout_type: :landscape,
-        krw: []
+        krw: [],
+        align: {
+          left: [],
+          right: []
+        }
       }
     end
   end

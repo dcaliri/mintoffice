@@ -63,6 +63,12 @@ module ResourceExportable
               if options.krw.include?(column)
                 table.column(index).style(align: :right)
               end
+              if options.align[:left].include?(column)
+                table.column(index).style(align: :left)
+              end
+              if options.align[:right].include?(column)
+                table.column(index).style(align: :right)
+              end
             end
           end
         end
