@@ -1,6 +1,4 @@
 require 'digest/sha1'
-# require 'nokogiri'
-# require 'google_apps'
 
 class User < ActiveRecord::Base
   has_many :attachment
@@ -166,8 +164,9 @@ class User < ActiveRecord::Base
     transporter.new_user user
 
     doc = Nokogiri::XML(transporter.response.body)
-    error_code = doc.xpath('//AppsForYourDomainErrors/error').first['errorCode'] rescue 0
+    Rails.logger.info "#create_google_app_account - response = #{transporter.response.body}"
 
+    error_code = doc.xpath('//AppsForYourDomainErrors/error').first['errorCode'] rescue 0
     if error_code == 0
       self.google_account = "#{name}@#{config.domain}"
       save
