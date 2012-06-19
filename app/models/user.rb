@@ -167,10 +167,16 @@ class User < ActiveRecord::Base
     end
   end
 
-  def create_google_app_account
+  def google_transporter
     config = google_apps_configure
     transporter = GoogleApps::Transport.new config.domain
     transporter.authenticate config.username, config.password
+    transporter
+  end
+
+  def create_google_app_account
+    config = google_apps_configure
+    transporter = google_transporter
 
     # Creating a User
     user = GoogleApps::Atom::User.new
@@ -183,6 +189,22 @@ class User < ActiveRecord::Base
     error_code = doc.xpath('//AppsForYourDomainErrors/error').first['errorCode'] rescue 0
     if error_code == 0
       self.google_account = "#{name}@#{config.domain}"
+      save
+    else
+      false
+    end
+  end
+
+  def remove_google_app_account
+    transporter = google_transporter
+    transporter.delete_user name
+
+    Rails.logger.info "#remove_google_app_account - response = #{transporter.response.body}"
+
+    doc = Nokogiri::XML(transporter.response.body)
+    error_code = doc.xpath('//AppsForYourDomainErrors/error').first['errorCode'] rescue 0
+    if error_code == 0
+      self.google_account = nil
       save
     else
       false

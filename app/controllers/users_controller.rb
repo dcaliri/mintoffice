@@ -89,6 +89,15 @@ class UsersController < ApplicationController
     end
   end
 
+  def remove_google_apps
+    @this_user = User.find(params[:id])
+    if @this_user.remove_google_app_account
+      redirect_to :back, notice: "성공적으로 구글 계정을 제거했습니다."
+    else
+      redirect_to :back, alert: "계정 제거에 실패했습니다.."
+    end
+  end
+
   def create_redmine
     @this_user = User.find(params[:id])
     redmine = @this_user.create_redmine_account
