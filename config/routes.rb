@@ -78,6 +78,7 @@ Mintoffice::Application.routes.draw do
       post 'create_redmine', as: :redmine, path: 'redmine'
 
       delete 'remove_google_apps', as: :google_apps, path: 'google_apps'
+      delete 'remove_redmine', as: :redmine, path: 'redmine'
     end
 
     resources :payments do

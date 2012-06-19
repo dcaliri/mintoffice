@@ -16,7 +16,11 @@ dl
   dd= user.boxcar_account
   dt= User.human_attribute_name("redmine_account")
   - if user.redmine_account?
-    dd= user.redmine_account
+    dd
+      = user.redmine_account
+      = " ["
+      = link_to t("users.redmine.destroy"), [:redmine, user], method: :delete
+      = "]"
   - else
     dd= link_to t("users.redmine.create"), [:redmine, user], method: :post
 

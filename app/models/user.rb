@@ -249,6 +249,20 @@ class User < ActiveRecord::Base
     user
   end
 
+  def remove_redmine_account
+    configure = redmine_configure
+    RedmineUser.element_name = "user"
+    RedmineUser.site = configure.site
+    RedmineUser.user = configure.username
+    RedmineUser.password = configure.password
+
+    # RedmineUser.find(:all, :params => {:login => self.name})
+    user = RedmineUser.all.find {|user| user.login == self.name}
+    user.destroy
+    self.redmine_account = nil
+    save
+  end
+
 private
   def password_non_blank
     if hashed_password.blank?

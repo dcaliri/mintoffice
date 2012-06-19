@@ -109,6 +109,15 @@ class UsersController < ApplicationController
     end
   end
 
+  def remove_redmine
+    @this_user = User.find(params[:id])
+    if @this_user.remove_redmine_account
+      redirect_to :back, notice: "성공적으로 레드마인 계정을 제거했습니다."
+    else
+      redirect_to :back, alert: "계정 제거에 실패했습니다.."
+    end
+  end
+
   def changepw
     if request.post?
       this_user = User.find(params[:user_id])
