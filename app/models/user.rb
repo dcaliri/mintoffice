@@ -226,14 +226,18 @@ class User < ActiveRecord::Base
     raise Errno::ENOENT, "no redmine configure file. please create config/redmine.yml"
   end
 
-  def create_redmine_account
+  def get_remine_user
     configure = redmine_configure
     RedmineUser.element_name = "user"
     RedmineUser.site = configure.site
     RedmineUser.user = configure.username
     RedmineUser.password = configure.password
+    RedmineUser
+  end
 
-    user = RedmineUser.new(
+  def create_redmine_account
+    redmine_user = get_remine_user
+    user = redmine_user.new(
       login: self.name,
       password: configure.default_password.to_s,
       firstname: hrinfo.firstname,
@@ -250,15 +254,10 @@ class User < ActiveRecord::Base
   end
 
   def remove_redmine_account
-    configure = redmine_configure
-    RedmineUser.element_name = "user"
-    RedmineUser.site = configure.site
-    RedmineUser.user = configure.username
-    RedmineUser.password = configure.password
-
-    # RedmineUser.find(:all, :params => {:login => self.name})
-    user = RedmineUser.all.find {|user| user.login == self.name}
+    redmine_user = get_remine_user
+    user = redmine_user.all.find {|user| user.login == self.name}
     user.destroy
+
     self.redmine_account = nil
     save
   end
