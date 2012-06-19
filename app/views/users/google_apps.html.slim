@@ -1,0 +1,11 @@
+#show_command
+  = link_to t('common.title.back'), :users
+
+h2= t(".title")
+
+table#list-table
+  tr
+    th= User.human_attribute_name('name')
+  - @users.each do |user|
+    tr.selectable
+      td= user[:name]

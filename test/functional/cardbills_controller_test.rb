@@ -1,45 +1,34 @@
 require 'test_helper'
 
 class CardbillsControllerTest < ActionController::TestCase
-  test "should get index" do
-    get :index
-    assert_response :success
-    assert_not_nil assigns(:cardbills)
+  fixtures :cardbills
+
+  def setup
+    current_user.permission.create!(name: 'cardbills')
   end
 
-  test "should get new" do
+  test "should index document list" do
+    get :index
+    assert_response :success
+  end
+
+  test "should show new document form" do
     get :new
     assert_response :success
   end
 
-  test "should create cardbill" do
-    assert_difference('Cardbill.count') do
-      post :create, :cardbill => { }
-    end
-
-    assert_redirected_to cardbill_path(assigns(:cardbill))
-  end
-
-  test "should show cardbill" do
-    get :show, :id => cardbills(:one).to_param
+  test "should show document" do
+    get :show, :id => current_cardbill.id
     assert_response :success
   end
 
-  test "should get edit" do
-    get :edit, :id => cardbills(:one).to_param
+  test "should edit document" do
+    get :edit, :id => current_cardbill.id
     assert_response :success
   end
 
-  test "should update cardbill" do
-    put :update, :id => cardbills(:one).to_param, :cardbill => { }
-    assert_redirected_to cardbill_path(assigns(:cardbill))
-  end
-
-  test "should destroy cardbill" do
-    assert_difference('Cardbill.count', -1) do
-      delete :destroy, :id => cardbills(:one).to_param
-    end
-
-    assert_redirected_to cardbills_path
+  private
+  def current_cardbill
+    @cardbill ||= cardbills(:fixture)
   end
 end

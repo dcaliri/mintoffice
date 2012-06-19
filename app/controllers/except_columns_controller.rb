@@ -1,31 +1,31 @@
 class ExceptColumnsController < ApplicationController
   def create
-    params[:except] = params[:except] || {}
+    params[:include_column] = params[:include_column] || {}
 
     class_columns.each do |column|
       column = column.to_sym
-      except = params[:except][column]
+      include_column = params[:include_column][column]
 
-      if except
-        add_excepot_column column
-      else
+      if include_column
         remove_excepot_column column
+      else
+        add_excepot_column column
       end
     end
   end
 
   private
-  def except?(column)
-    except_column?(except_key, column.to_sym)
+  def include_column?(column)
+    !except_column?(except_key, column.to_sym)
   end
-  helper_method :except?
+  helper_method :include_column?
 
   def add_excepot_column(column)
-    except_column(except_key) << column unless except?(column)
+    add_except_column(except_key, column)
   end
 
   def remove_excepot_column(column)
-    except_column(except_key).delete(column)
+    remove_except_column(except_key, column)
   end
 
   def except_key

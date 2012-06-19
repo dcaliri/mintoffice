@@ -60,6 +60,8 @@ GEM
     ffi (1.0.11)
     google-spreadsheet-ruby (0.3.0)
       google_drive (>= 0.3.0)
+    google_apps (0.4.5)
+      libxml-ruby (>= 2.2.2)
     google_drive (0.3.0)
       nokogiri (>= 1.4.4, != 1.5.2, != 1.5.1)
       oauth (>= 0.3.6)
@@ -221,6 +223,7 @@ DEPENDENCIES
   database_cleaner
   decent_exposure
   dynamic_form
+  google_apps
   growl
   guard-livereload
   guard-rspec

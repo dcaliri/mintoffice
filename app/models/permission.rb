@@ -7,7 +7,7 @@ class Permission < ActiveRecord::Base
         "documents.*",
         "hrinfos.index", "hrinfos.show",
         "main.*",
-        "users.my", "users.changepw", "users.edit", "users.update",
+        "users.my", "users.changepw", "users.edit", "users.update", "users.google_apps",
         "reports.*",
         "expense_reports.*", "cardbills.*", "documents.*",
         "accessors.*"

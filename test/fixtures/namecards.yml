@@ -1,19 +1,2 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-
-one:
-  name: 
-  jobtitle: 
-  department: 
-  company: 
-  phone: 
-  homepage: 
-  email: MyString
-
-two:
-  name: 
-  jobtitle: 
-  department: 
-  company: 
-  phone: 
-  homepage: 
-  email: MyString
+fixture:
+    id: 1

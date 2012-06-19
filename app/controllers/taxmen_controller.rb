@@ -9,10 +9,6 @@ class TaxmenController < ApplicationController
     render 'new'
   end
 
-  def edit
-    @taxman = @business_client.taxmen.find(params[:id])
-  end
-
   def update
     @taxman = @business_client.taxmen.find(params[:id])
     @taxman.update_attributes(params[:taxman])

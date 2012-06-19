@@ -1,0 +1,26 @@
+- title t('.title')
+#show_command
+  = link_to t('common.title.edit'), edit_pettycash_path(@pettycash)
+  '  |
+  = link_to t('common.title.back'), pettycashes_path
+
+h2
+  = Pettycash.human_attribute_name('transdate')
+  '  :
+  = l @pettycash.transdate, format: :compact_short rescue ""
+
+.box
+  #descr
+    table border="0" cellspacing="5" cellpadding="5"
+      tr
+        th align="right" = Pettycash.human_attribute_name('inmoney')
+        td align="right" = number_to_currency @pettycash.inmoney
+      tr
+        th align="right" = Pettycash.human_attribute_name('outmoney')
+        td align="right" = number_to_currency @pettycash.outmoney
+
+    p
+      b= Pettycash.human_attribute_name('description')
+    p=simple_format @pettycash.description
+  = render "shared/attachments/detail", :target => @pettycash
+= render 'changelog', target: @pettycash

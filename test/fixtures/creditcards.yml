@@ -1,17 +1,8 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-
-one:
-  cardno: 
-  expireyear: 
-  expiremonth: 
-  nickname: 
-  issuer: 
-  cardholder: MyString
-
-two:
-  cardno: 
-  expireyear: 
-  expiremonth: 
-  nickname: 
-  issuer: 
-  cardholder: MyString
+fixture:
+    id: 1
+    cardno: 1
+    expireyear: 1
+    expiremonth: 1
+    nickname: 1
+    issuer: 1
+    cardholder: 1

@@ -1,0 +1,4 @@
+site: example.redmine.co.kr
+username: admin
+password: your-redmine-admin-password
+default_password: 1234

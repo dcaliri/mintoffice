@@ -11,7 +11,7 @@ module ExceptColumn
     html_code += "</tr>"
 
     collection.each do |resource|
-      html_code += "<tr class='selectable', onclick = #{on_click_path(resource)}>"
+      html_code += "<tr class='selectable', #{on_click_path(resource)}>"
       columns.each do |column|
         html_code += td_column(resource, column)
       end
@@ -75,7 +75,6 @@ module ExceptColumn
   end
 
   def on_click_path(resource)
-    href = send(model_name.to_s + '_path', resource)
-    resource.new_record? ? "" : "location.href='#{href}'"
+    resource.new_record? ? "" : " onclick = location.href='#{send(model_name.to_s + '_path', resource)}'"
   end
 end

@@ -1,45 +1,39 @@
 require 'test_helper'
 
 class HrinfosControllerTest < ActionController::TestCase
-  test "should get index" do
-    get :index
-    assert_response :success
-    assert_not_nil assigns(:hrinfos)
+  fixtures :hrinfos
+
+  def setup
+    current_user.permission.create!(name: 'hrinfos')
   end
 
-  test "should get new" do
+  test "should see index page" do
+    get :index
+    assert_response :success
+  end
+
+  test "should see new page" do
     get :new
     assert_response :success
   end
 
-  test "should create hrinfo" do
-    assert_difference('Hrinfo.count') do
-      post :create, :hrinfo => { }
-    end
-
-    assert_redirected_to hrinfo_path(assigns(:hrinfo))
-  end
-
-  test "should show hrinfo" do
-    get :show, :id => hrinfos(:one).to_param
+  test "should see show page" do
+    get :show, :id => current_hrinfo.id
     assert_response :success
   end
 
-  test "should get edit" do
-    get :edit, :id => hrinfos(:one).to_param
+  test "should see edit page" do
+    get :edit, :id => current_hrinfo.id
     assert_response :success
   end
 
-  test "should update hrinfo" do
-    put :update, :id => hrinfos(:one).to_param, :hrinfo => { }
-    assert_redirected_to hrinfo_path(assigns(:hrinfo))
+  test "should see employment proof page" do
+    get :new_employment_proof, :id => current_hrinfo.id
+    assert_response :success
   end
 
-  test "should destroy hrinfo" do
-    assert_difference('Hrinfo.count', -1) do
-      delete :destroy, :id => hrinfos(:one).to_param
-    end
-
-    assert_redirected_to hrinfos_path
+  private
+  def current_hrinfo
+    @hrinfo ||= hrinfos(:fixture)
   end
 end
