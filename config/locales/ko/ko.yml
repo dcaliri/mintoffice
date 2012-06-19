@@ -1077,6 +1077,7 @@ ko:
         approval_waiting : 승인 대기
         vacation: "휴가 : "
     users:
+        title: 사용자 리스트
         new:
             title: 새 사용자 계정 만들기
         my:
@@ -1113,6 +1114,8 @@ ko:
             create: 구글 앱스 계정 생성
         redmine:
             create: 레드마인 계정 생성
+        google_apps:
+            title: 구글 앱스 계정이 등록된 사용자들
         error:
     vacations:
         index:
