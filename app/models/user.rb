@@ -181,6 +181,38 @@ class User < ActiveRecord::Base
     raise Errno::ENOENT, "no google app configure file. please create config/google_apps.yml"
   end
 
+  class RedmineUser < ActiveResource::Base
+  end
+
+  def redmine_configure
+    OpenStruct.new(YAML.load_file("config/redmine.yml"))
+  rescue => e
+    raise Errno::ENOENT, "no redmine configure file. please create config/redmine.yml"
+  end
+
+  def create_redmine_account
+    configure = redmine_configure
+    RedmineUser.element_name = "user"
+    RedmineUser.site = configure.site
+    RedmineUser.user = configure.username
+    RedmineUser.password = configure.password
+
+    user = RedmineUser.new(
+      login: self.name,
+      password: configure.default_password.to_s,
+      firstname: hrinfo.firstname,
+      lastname: hrinfo.lastname,
+      mail: notify_email
+    )
+
+    if user.save
+      self.redmine_account = name
+      save
+    end
+
+    user
+  end
+
 private
   def password_non_blank
     if hashed_password.blank?

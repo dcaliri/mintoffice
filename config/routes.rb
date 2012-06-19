@@ -70,6 +70,7 @@ Mintoffice::Application.routes.draw do
 
   resources :users do
     post 'google_apps', as: :google_apps, on: :member
+    post 'redmine', as: :redmine, on: :member
 
     resources :payments do
       collection do

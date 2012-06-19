@@ -21,5 +21,8 @@ h2= t("common.title.#{action_name}")
     p
       = f.label :boxcar_account, User.human_attribute_name("boxcar_account")
       = f.email_field :boxcar_account, :size => 40
+    p
+      = f.label :redmine_account, User.human_attribute_name("redmine_account")
+      = f.text_field :redmine_account, :size => 40
   p
     = f.submit t("common.button.create")

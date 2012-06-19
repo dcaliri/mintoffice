@@ -503,6 +503,7 @@ ko:
                 google_account: Google 계정
                 notify_email: Email
                 boxcar_account: Boxcar 계정
+                redmine_account: Redmine 계정
         errors:
             template:
                 header: 오류가 발생했습니다.
@@ -763,7 +764,7 @@ ko:
             except_column: 컬럼 선택하기
         upload:
             empty: 업로드한 파일이 비어있습니다.
-            invalid_xml: 잘못된 형식의 스타일시트 파일입니다.
+            invalid_xls: 잘못된 형식의 엑셀파일입니다.
         menu: 메뉴
         total: 합계
     commutes:
@@ -1109,6 +1110,8 @@ ko:
             successfully_changed: 성공적으로 변경하였습니다.
         google:
             create: 구글 앱스 계정 생성
+        redmine:
+            create: 레드마인 계정 생성
         error:
     vacations:
         index:

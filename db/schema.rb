@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120618060942) do
+ActiveRecord::Schema.define(:version => 20120618090314) do
 
   create_table "access_people", :force => true do |t|
     t.integer  "user_id"
@@ -615,6 +615,7 @@ ActiveRecord::Schema.define(:version => 20120618060942) do
     t.string   "boxcar_account"
     t.string   "notify_email"
     t.string   "api_key"
+    t.string   "redmine_account"
   end
 
   create_table "vacations", :force => true do |t|
