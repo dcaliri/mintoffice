@@ -77,7 +77,7 @@ class UsersController < ApplicationController
   end
 
   def google_apps
-    @users = User.check_disabled(params[:disabled]).has_google_apps_account
+    @users = User.has_google_apps_account
   end
 
   def create_google_apps

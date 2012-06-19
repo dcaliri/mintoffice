@@ -6,13 +6,6 @@ h2= t(".title")
 table#list-table
   tr
     th= User.human_attribute_name('name')
-    th= User.human_attribute_name('google_account')
-    th= User.human_attribute_name('notify_email')
-    th= User.human_attribute_name('boxcar_account')
-  = render partial: "user", collection: @users
-
-#show_command
-  -if params[:disabled] == 'on'
-    = link_to "Enabled", google_apps_users_path
-  -else
-    = link_to "Disabled", google_apps_users_path(:disabled => 'on')
+  - @users.each do |user|
+    tr.selectable
+      td= user[:name]

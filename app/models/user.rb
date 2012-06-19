@@ -163,11 +163,17 @@ class User < ActiveRecord::Base
     end
 
     def has_google_apps_account
-      where('google_account IS NOT NULL')
+      transporter = google_transporter
+      transporter.get_user
+
+      doc = Nokogiri.XML(transporter.response.body, nil, 'UTF-8')
+      doc.remove_namespaces!
+
+      doc.xpath('//entry/title').map {|node| {name: node.content}}
     end
   end
 
-  def google_transporter
+  def self.google_transporter
     config = google_apps_configure
     transporter = GoogleApps::Transport.new config.domain
     transporter.authenticate config.username, config.password
@@ -211,7 +217,7 @@ class User < ActiveRecord::Base
     end
   end
 
-  def google_apps_configure
+  def self.google_apps_configure
     OpenStruct.new(YAML.load_file("config/google_apps.yml"))
   rescue => e
     raise Errno::ENOENT, "no google app configure file. please create config/google_apps.yml"
