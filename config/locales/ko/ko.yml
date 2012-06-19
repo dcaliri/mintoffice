@@ -1091,6 +1091,7 @@ ko:
         index:
             title: 사용자 계정 목록
             newuser: 새로운 사용자 등록
+            google: 구글 앱스 계정이 등록된 사용자들 보기
         login:
             title: 로그인
             name: 사용자계정

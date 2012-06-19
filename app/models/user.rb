@@ -153,6 +153,20 @@ class User < ActiveRecord::Base
     not payments.empty?
   end
 
+  class << self
+    def check_disabled(check)
+      if check == 'on'
+        disabled
+      else
+        enabled
+      end
+    end
+
+    def has_google_apps_account
+      where('google_account IS NOT NULL')
+    end
+  end
+
   def create_google_app_account
     config = google_apps_configure
     transporter = GoogleApps::Transport.new config.domain

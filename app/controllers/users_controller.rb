@@ -81,6 +81,10 @@ class UsersController < ApplicationController
   end
 
   def google_apps
+    @users = User.check_disabled(params[:disabled]).has_google_apps_account
+  end
+
+  def create_google_apps
     @this_user = User.find(params[:id])
     if @this_user.create_google_app_account
       redirect_to :back, notice: "성공적으로 구글 계정을 생성했습니다."
@@ -89,7 +93,7 @@ class UsersController < ApplicationController
     end
   end
 
-  def redmine
+  def create_redmine
     @this_user = User.find(params[:id])
     redmine = @this_user.create_redmine_account
     if redmine.valid?
