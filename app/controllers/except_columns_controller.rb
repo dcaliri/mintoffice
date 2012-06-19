@@ -21,11 +21,11 @@ class ExceptColumnsController < ApplicationController
   helper_method :include_column?
 
   def add_excepot_column(column)
-    except_column(except_key) << column unless except_column?(except_key, column.to_sym)
+    add_except_column(except_key, column)
   end
 
   def remove_excepot_column(column)
-    except_column(except_key).delete(column)
+    remove_except_column(except_key, column)
   end
 
   def except_key
