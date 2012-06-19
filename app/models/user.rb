@@ -236,6 +236,7 @@ class User < ActiveRecord::Base
   end
 
   def create_redmine_account
+    configure = redmine_configure
     redmine_user = get_remine_user
     user = redmine_user.new(
       login: self.name,
