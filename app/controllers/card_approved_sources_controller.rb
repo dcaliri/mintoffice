@@ -21,7 +21,7 @@ class CardApprovedSourcesController < ApplicationController
 
   def export
     approved_sources = creditcard.nil? ? CardApprovedSource : creditcard.card_approved_sources
-    send_file approved_sources.filter_by_params(params).export(params[:to].to_sym)
+    send_file approved_sources.filter_by_params(params).export(params[:to].to_sym, except_column(:card_approved_source))
   end
 
   def destroy

@@ -27,6 +27,16 @@ module ResourceExportable
 
           subtitle = options.subtitle
           subtitle = subtitle.call(collections) if subtitle.respond_to?(:call)
+
+          if options.period
+            ordered_collection = collections.where("#{options.period} is not null").order("#{options.period} DESC")
+            unless ordered_collection.empty?
+              first_paid = ordered_collection.last
+              last_paid = ordered_collection.first
+              subtitle = "#{first_paid.send(options.period).to_date} ~ #{last_paid.send(options.period).to_date}"
+            end
+          end
+
           pdf.draw_text subtitle, :at => [pdf.bounds.right - 100, pdf.bounds.top - 10]
 
           pdf.font_size 7
@@ -34,10 +44,10 @@ module ResourceExportable
 
         records = collections.all.map do |resource|
                     records = []
-                    columns.each_with_index do |column, index|
+                    columns.each do |column|
                       record = resource.send(column)
                       record = record.strftime("%Y-%m-%d(%H:%m:%S)") if record.respond_to?(:strftime)
-                      record = number_to_currency(record) if options.money.include?(index)
+                      record = number_to_currency(record) if options.krw.include?(column)
                       records << record
                     end
                     records
@@ -49,9 +59,18 @@ module ResourceExportable
         height = pdf.bounds.top - 40
         pdf.bounding_box [0, height], :width => width, :height => height do
           table = pdf.table(table_data, header: true, :cell_style => {:background_color => "F0B9C8"}, :row_colors => ["F0F0F0", "FFFFCC"]) do |table|
-            options.money.each do |column|
-              current_column = table.column(column)
-              table.column(column).style(align: :right)
+            table.row(0).style(align: :center)
+            columns.each_with_index do |column, index|
+              columns = table.row(1..-1).column(index)
+              if options.krw.include?(column)
+                columns.style(align: :right)
+              end
+              if options.align[:left].include?(column)
+                columns.style(align: :left)
+              end
+              if options.align[:right].include?(column)
+                columns.style(align: :right)
+              end
             end
           end
         end

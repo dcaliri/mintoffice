@@ -49,11 +49,17 @@ Mintoffice::Application.routes.draw do
   post '/hrinfos/try_retired/:id', :controller => "hrinfos", :action => "try_retired", as: :try_retired
 
   resources :hrinfos do
-    get 'new_employment_proof', on: :member, as: :new_employment_proof
-    post 'employment_proof', on: :member, as: :employment_proof
+    member do
+    get 'employment_proof', action: :new_employment_proof, as: :employment_proof
+    post 'employment_proof', as: :employment_proof
+    end
   end
 
-  resources :attachments
+  resources :attachments do
+    member do
+      get 'picture', action: :picture, as: :picture
+    end
+  end
 
   match '/users/changepw/:user_id', :controller => 'users', :action => 'changepw'
   match '/users/login', :controller => 'users', :action => 'login', :conditions => { :method => :get}
@@ -63,6 +69,18 @@ Mintoffice::Application.routes.draw do
   resources :groups
 
   resources :users do
+    collection do
+      get 'google_apps', as: :google_apps
+    end
+
+    member do
+      post 'create_google_apps', as: :google_apps, path: 'google_apps'
+      post 'create_redmine', as: :redmine, path: 'redmine'
+
+      delete 'remove_google_apps', as: :google_apps, path: 'google_apps'
+      delete 'remove_redmine', as: :redmine, path: 'redmine'
+    end
+
     resources :payments do
       collection do
         get 'yearly'
@@ -102,12 +120,11 @@ Mintoffice::Application.routes.draw do
 
   resources :contacts do
     get 'find', :action => :find, :on => :collection
-#    put 'select', :action => :select, :on => :member
     get 'select', :action => :select, :on => :member
 
     resources :contact_emails, :path => 'emails', :only => :destroy
     resources :contact_phone_numbers, :path => 'phones', :only => :destroy
-    resources :contact_addresses, :path => 'addresses', :only => [:new, :destroy]
+    resources :contact_addresses, :path => 'addresses', :only => :destroy
     resources :contact_others, :path => 'others', :only => :destroy
   end
 
@@ -176,6 +193,9 @@ Mintoffice::Application.routes.draw do
   resources :postings
 
   post 'accessors', controller: :accessors, action: :create, as: :accessors
+
+  get 'except_columns' => "except_columns#new", as: :except_columns
+  post 'except_columns' => "except_columns#create", as: :except_columns
 
   root to: 'main#index'
 

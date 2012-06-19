@@ -8,6 +8,8 @@
   - unless params[:bank_account_id].blank?
     = link_to t('bank_transactions.verify.link'), verify_bank_transactions_path(bank_account_id: params[:bank_account_id])
     = " | "
+  = link_to t('common.link.except_column'), except_columns_path(class_name: BankTransaction), id: :select_except_columns, remote: true
+  = " | "
   = link_to t('bank_transactions.new.link'), [:new, :bank_transaction]
   = " | "
   = link_to t('bank_transactions.excel.link'), [:excel, :bank_transactions]

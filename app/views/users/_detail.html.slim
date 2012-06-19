@@ -1,0 +1,29 @@
+h2= user.name
+
+dl
+  dt= User.human_attribute_name("google_account")
+  - if user.google_account?
+    dd
+      = user.google_account
+      = " ["
+      = link_to t("users.google.destroy"), [:google_apps, user], method: :delete
+      = "]"
+  - else
+    dd= link_to t("users.google.create"), [:google_apps, user], method: :post
+  dt= User.human_attribute_name("notify_email")
+  dd= user.notify_email
+  dt= User.human_attribute_name("boxcar_account")
+  dd= user.boxcar_account
+  dt= User.human_attribute_name("redmine_account")
+  - if user.redmine_account?
+    dd
+      = user.redmine_account
+      = " ["
+      = link_to t("users.redmine.destroy"), [:redmine, user], method: :delete
+      = "]"
+  - else
+    dd= link_to t("users.redmine.create"), [:redmine, user], method: :post
+
+=render "shared/attachments/detail", target: user
+.clear
+= render 'changelog', target: user

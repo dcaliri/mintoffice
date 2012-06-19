@@ -19,10 +19,12 @@ class User < ActiveRecord::Base
   has_many :reporters, class_name: 'ReportPerson'
 
   scope :nohrinfo, :conditions =>['id not in (select user_id from hrinfos)']
+  scope :enabled, :conditions =>["name NOT LIKE '[X] %%'"]
+  scope :disabled, :conditions =>["name LIKE '[X] %%'"]
 
   validates_presence_of :name
   validates_uniqueness_of :name
-  validates_uniqueness_of :gmail_account, :if => Proc.new{ gmail_account && gmail_account.empty? == false }
+  validates_uniqueness_of :google_account, :if => Proc.new{ google_account && google_account.empty? == false }
   attr_accessor :password_confirmation
   validates_confirmation_of :password, :if => Proc.new{|user| user.provider.blank? and user.uid.blank?}
   validate :password_non_blank, :if => Proc.new{|user| user.provider.blank? and user.uid.blank?}
@@ -37,7 +39,7 @@ class User < ActiveRecord::Base
 
   def self.find_or_create_with_omniauth!(auth)
 #    users = where(:provider => auth['provider'], :uid => auth['uid'])
-    users = where(:gmail_account => auth['info']['email'])
+    users = where(:google_account => auth['info']['email'])
     user = if not users.empty?
       users.first
     else
@@ -82,6 +84,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def enabled?
+    ! disabled?
+  end
+
   def self.enabled
     where("name NOT LIKE '[X] %'").order("id ASC")
   end
@@ -106,6 +112,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def admin?
+    self.ingroup? "admin"
+  end
+
   def self.search(query)
     query = "%#{query}%"
     where('name like ?', query)
@@ -116,7 +126,7 @@ class User < ActiveRecord::Base
   end
 
   def as_json(options={})
-    super(options.merge(:only => [:name, :gmail_account, :boxcar_account, :notify_email, :api_key]))
+    super(options.merge(:only => [:name, :google_account, :boxcar_account, :notify_email, :api_key]))
   end
 
   def create_api_key(name, password)
@@ -141,6 +151,122 @@ class User < ActiveRecord::Base
 
   def has_payment_info
     not payments.empty?
+  end
+
+  class << self
+    def check_disabled(check)
+      if check == 'on'
+        disabled
+      else
+        enabled
+      end
+    end
+
+    def has_google_apps_account
+      transporter = google_transporter
+      transporter.get_user
+
+      doc = Nokogiri.XML(transporter.response.body, nil, 'UTF-8')
+      doc.remove_namespaces!
+
+      doc.xpath('//entry/title').map {|node| {name: node.content}}
+    end
+  end
+
+  def self.google_transporter
+    config = google_apps_configure
+    transporter = GoogleApps::Transport.new config.domain
+    transporter.authenticate config.username, config.password
+    transporter
+  end
+
+  def create_google_app_account
+    config = google_apps_configure
+    transporter = google_transporter
+
+    # Creating a User
+    user = GoogleApps::Atom::User.new
+    user.new_user name, hrinfo.firstname, hrinfo.lastname, config.default_password.to_s, 2048
+    transporter.new_user user
+
+    doc = Nokogiri::XML(transporter.response.body)
+    Rails.logger.info "#create_google_app_account - response = #{transporter.response.body}"
+
+    error_code = doc.xpath('//AppsForYourDomainErrors/error').first['errorCode'] rescue 0
+    if error_code == 0
+      self.google_account = "#{name}@#{config.domain}"
+      save
+    else
+      false
+    end
+  end
+
+  def remove_google_app_account
+    transporter = google_transporter
+    transporter.delete_user name
+
+    Rails.logger.info "#remove_google_app_account - response = #{transporter.response.body}"
+
+    doc = Nokogiri::XML(transporter.response.body)
+    error_code = doc.xpath('//AppsForYourDomainErrors/error').first['errorCode'] rescue 0
+    if error_code == 0
+      self.google_account = nil
+      save
+    else
+      false
+    end
+  end
+
+  def self.google_apps_configure
+    OpenStruct.new(YAML.load_file("config/google_apps.yml"))
+  rescue => e
+    raise Errno::ENOENT, "no google app configure file. please create config/google_apps.yml"
+  end
+
+  class RedmineUser < ActiveResource::Base
+  end
+
+  def redmine_configure
+    OpenStruct.new(YAML.load_file("config/redmine.yml"))
+  rescue => e
+    raise Errno::ENOENT, "no redmine configure file. please create config/redmine.yml"
+  end
+
+  def get_remine_user
+    configure = redmine_configure
+    RedmineUser.element_name = "user"
+    RedmineUser.site = configure.site
+    RedmineUser.user = configure.username
+    RedmineUser.password = configure.password
+    RedmineUser
+  end
+
+  def create_redmine_account
+    configure = redmine_configure
+    redmine_user = get_remine_user
+    user = redmine_user.new(
+      login: self.name,
+      password: configure.default_password.to_s,
+      firstname: hrinfo.firstname,
+      lastname: hrinfo.lastname,
+      mail: notify_email
+    )
+
+    if user.save
+      self.redmine_account = name
+      save
+    end
+
+    user
+  end
+
+  def remove_redmine_account
+    redmine_user = get_remine_user
+    user = redmine_user.all.find {|user| user.login == self.name}
+    user.destroy
+
+    self.redmine_account = nil
+    save
   end
 
 private

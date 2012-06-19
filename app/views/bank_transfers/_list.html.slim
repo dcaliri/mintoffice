@@ -1,29 +1,5 @@
-table#list-table
-  tr
-    th= BankTransfer.human_attribute_name(:account)
-    th= BankTransfer.human_attribute_name(:transfer_type)
-    th= BankTransfer.human_attribute_name(:transfered_at)
-    th= BankTransfer.human_attribute_name(:out_bank_account)
-    th= BankTransfer.human_attribute_name(:in_bank_name)
-    th= BankTransfer.human_attribute_name(:in_bank_account)
-    th= BankTransfer.human_attribute_name(:money)
-    th= BankTransfer.human_attribute_name(:transfer_fee)
-    th= BankTransfer.human_attribute_name(:error_money)
-    th= BankTransfer.human_attribute_name(:in_person_name)
+- set_columns BankTransfer.default_columns
+- set_num_rows [:money, :transfer_fee, :error_money]
+- set_model_name :bank_transfer
 
-  - bank_transfers.each do |transfer|
-    - onclick = transfer.new_record? ? "" : "location.href='#{bank_transfer_path(transfer)}'"
-    tr.selectable onclick="#{onclick}"
-      td= transfer.bank_account.description rescue ""
-      td= transfer.transfer_type
-      td= transfer.transfered_at.strftime("%Y-%m-%d %H.%M")
-      td= transfer.out_bank_account
-      td= transfer.in_bank_name
-      td= transfer.in_bank_account
-      td align="right"
-        = number_to_currency transfer.money
-      td align="right"
-        = number_to_currency transfer.transfer_fee
-      td align="right"
-        = number_to_currency transfer.error_money
-      td= transfer.in_person_name
+== draw_table(bank_transfers)

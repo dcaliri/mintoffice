@@ -1,6 +1,8 @@
 files/
 log/
 config/database.yml
+config/google_apps.yml
+config/redmine.yml
 db/development.sqlite3.old
 db/*.sqlite3
 db/schema.rb

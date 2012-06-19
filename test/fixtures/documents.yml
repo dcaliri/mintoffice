@@ -1,7 +1,4 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-
-one:
-  title: MyString
-
-two:
-  title: MyString
+fixture:
+  id: 1
+  company_id: 1
+  title: "HAHA"

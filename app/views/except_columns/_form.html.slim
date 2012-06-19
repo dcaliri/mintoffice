@@ -1,0 +1,10 @@
+= form_tag :except_columns, id: :except_columns_form, remote: true do
+  .box
+    = hidden_field_tag :class_name, params[:class_name]
+    - class_columns.each do |column|
+      p
+        = label_tag "include_column[#{column}]", class_type.human_attribute_name(column.to_sym)
+        = check_box_tag "include_column[#{column}]", true, include_column?(column)
+    p
+      = submit_tag
+      = link_to "돌아가기", :back, id: :back_from_except_columns

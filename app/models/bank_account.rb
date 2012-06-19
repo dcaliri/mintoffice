@@ -1,9 +1,28 @@
+# encoding: UTF-8
+
 class BankAccount < ActiveRecord::Base
   has_many :bank_transactions, :dependent => :destroy
   has_many :bank_transfers, :dependent => :destroy
 
   include Historiable
   include Attachmentable
+
+  BANK_LIST = [
+    ["신한 은행", :shinhan],
+    ["기업 은행", :ibk]
+  ]
+
+  def name
+    value = read_attribute(:name)
+    if value
+      bank = BANK_LIST.find {|bank_info| bank_info[1] == value.to_sym}
+      bank.present? ? bank[0] : value
+    end
+  end
+
+  def name_
+    read_attribute(:name)
+  end
 
   def name_with_number
     name + " : " + number rescue ""

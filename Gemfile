@@ -1,6 +1,6 @@
 source :rubygems
 
-gem 'rails', '3.2.3'
+gem 'rails', '3.2.5'
 gem 'jquery-rails'
 gem 'slim'
 gem 'dynamic_form'
@@ -12,6 +12,7 @@ gem 'prawn'
 
 gem 'omniauth'
 gem 'omniauth-openid'
+gem 'google_apps'
 
 gem 'by_star'
 

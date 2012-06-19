@@ -1,0 +1,32 @@
+- title t('.title')
+
+- content_for :search do 
+  = form_tag :pettycashes, :method => :get do
+    = t("common.title.search")
+    '  :
+    = text_field_tag 'q', params[:q]
+
+#show_command
+  = link_to t('pettycashes.new.title'), new_pettycash_path
+
+h2
+  = t('pettycashes.balance')
+  '  :
+  = number_to_currency @balance
+
+table#list-table
+  tr
+    th= Pettycash.human_attribute_name('transdate')
+    th= Pettycash.human_attribute_name('inmoney')
+    th= Pettycash.human_attribute_name('outmoney')
+    th= Pettycash.human_attribute_name('description')
+  - @pettycashes.each do |pettycash|
+    tr.selectable onclick="location.href='#{pettycash_path(pettycash)}'"
+      td= pettycash.transdate.strftime("%Y.%m.%d %H:%M:%S %p")
+      td.numrow= number_to_currency pettycash.inmoney
+      td.numrow= number_to_currency pettycash.outmoney
+      td= truncate(pettycash.description, :length => 20)
+
+br
+center
+  = will_paginate @cardbills

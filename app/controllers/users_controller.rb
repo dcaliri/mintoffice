@@ -1,8 +1,23 @@
+# encoding: UTF-8
+
 class UsersController < ApplicationController
   layout "application", :except => ["login"]
+
   before_filter :only => [:show] do |c|
     @this_user = User.find(params[:id])
     c.save_attachment_id @this_user
+  end
+
+  before_filter :except => [:my, :login, :logout, :google_apps] do |c|
+    unless @user.admin?
+      flash[:notice] = I18n.t("common.messages.not_allowed")
+      redirect_to :controller => "main", :action => "index"
+      return
+    end
+  end
+
+  def index
+    @users = User.check_disabled(params[:disabled]).search(params[:q]).order(:id)
   end
 
   def logout
@@ -28,110 +43,78 @@ class UsersController < ApplicationController
     redirect_to :action => "index"
   end
 
-  def my
+  def new
+    @this_user = User.new
   end
-  # GET /users
-  # GET /users.xml
-  def index
-    unless @user.ingroup? "admin"
-      flash[:notice] = I18n.t("common.messages.not_allowed")
-      redirect_to :controller => "main", :action => "index"
-      return
-    end
 
-    if params[:disabled] == 'on'
-      @users = User.search(params[:q]).find(:all, :order => :id, :conditions => "name LIKE '[X] %'")
+  def edit
+    @this_user = User.find(params[:id])
+  end
+
+  def create
+    @this_user = User.new(params[:user])
+    if @this_user.save
+      Boxcar.add_to_boxcar(@this_user.boxcar_account) unless @this_user.boxcar_account.empty?
+      flash[:notice] = I18n.t("common.messages.created", :model => User.model_name.human)
+      redirect_to :action => 'index'
     else
-      @users = User.search(params[:q]).find(:all, :order => :id, :conditions => "name NOT LIKE '[X] %'")
-    end
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @users }
+      render :action => "new"
     end
   end
 
-  # GET /users/1
-  # GET /users/1.xml
-  def show
+  def update
     @this_user = User.find(params[:id])
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @this_user }
+    if @this_user.update_attributes(params[:user])
+      logger.info @this_user.changes
+      Boxcar.add_to_boxcar(@this_user.boxcar_account) if ! @this_user.boxcar_account.empty?
+
+      flash[:notice] = I18n.t("common.messages.updated", :model => User.model_name.human)
+      redirect_to user_path(@this_user)
+    else
+      render :action => "edit"
     end
   end
 
-  # GET /users/new
-  # GET /users/new.xml
-  def new
-    @user = User.new
-    @hrinfo = Hrinfo.new
+  def google_apps
+    @users = User.has_google_apps_account
+  end
 
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @user }
+  def create_google_apps
+    @this_user = User.find(params[:id])
+    if @this_user.create_google_app_account
+      redirect_to :back, notice: "성공적으로 구글 계정을 생성했습니다."
+    else
+      redirect_to :back, alert: "계정 생성에 실패했습니다.."
     end
   end
 
-  # GET /users/1/edit
-  def edit
-    session[:return_to] = request.referer
-    @user = User.find(params[:id])
-  end
-
-  # POST /users
-  # POST /users.xml
-  def create
-    @user = User.new(params[:user])
-    @hrinfo = Hrinfo.new(params[:hrinfo])
-    respond_to do |format|
-      if @user.save
-        Boxcar.add_to_boxcar(@user.boxcar_account) unless @user.boxcar_account.empty?
-        flash[:notice] = I18n.t("common.messages.created", :model => User.model_name.human)
-        format.html { redirect_to(:action => 'index') }
-        format.xml  { render :xml => @user, :status => :created, :location => @user }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
-      end
+  def remove_google_apps
+    @this_user = User.find(params[:id])
+    if @this_user.remove_google_app_account
+      redirect_to :back, notice: "성공적으로 구글 계정을 제거했습니다."
+    else
+      redirect_to :back, alert: "계정 제거에 실패했습니다.."
     end
   end
 
-  # PUT /users/1
-  # PUT /users/1.xml
-  def update
-    @user = User.find(params[:id])
-
-    respond_to do |format|
-      
-      if @user.update_attributes(params[:user])
-        logger.info @user.changes
-        Boxcar.add_to_boxcar(@user.boxcar_account) if ! @user.boxcar_account.empty?
-        
-        flash[:notice] = I18n.t("common.messages.updated", :model => User.model_name.human)
-#        format.html { redirect_to :back }
-        format.html { redirect_to session[:return_to] }
-        format.html { redirect_to(:action => 'index') }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
-      end
+  def create_redmine
+    @this_user = User.find(params[:id])
+    redmine = @this_user.create_redmine_account
+    if redmine.valid?
+      redirect_to :back, notice: "성공적으로 레드마인 계정을 생성했습니다."
+    else
+      logger.info "errors = #{redmine.errors.full_messages}"
+      redirect_to :back, alert: "계정 생성에 실패했습니다.."
     end
   end
 
-  # DELETE /users/1
-  # DELETE /users/1.xml
-  def destroy
-    if Integer(params[:id]) != session[:user_id]
-      @user = User.find(params[:id])
-      @user.destroy
-    end
-
-    respond_to do |format|
-      format.html { redirect_to(users_url) }
-      format.xml  { head :ok }
+  def remove_redmine
+    @this_user = User.find(params[:id])
+    if @this_user.remove_redmine_account
+      redirect_to :back, notice: "성공적으로 레드마인 계정을 제거했습니다."
+    else
+      redirect_to :back, alert: "계정 제거에 실패했습니다.."
     end
   end
 

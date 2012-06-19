@@ -78,10 +78,18 @@ class Cardbill < ActiveRecord::Base
   def cardno_long
     unless self.creditcard.nil?
       self.creditcard.cardno_long
-    else`x`
+    else
       cardno
     end
   end
+
+  # def cardno_long
+  #   unless self.creditcard.nil?
+  #     self.creditcard.cardno_long
+  #   else`x`
+  #     cardno
+  #   end
+  # end
 
   def approved_mismatch
     mismatch?(:totalamount) || mismatch?(:transdate)

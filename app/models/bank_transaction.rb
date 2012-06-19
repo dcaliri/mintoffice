@@ -3,10 +3,23 @@
 class BankTransaction < ActiveRecord::Base
   belongs_to :bank_account
 
-  BANK_LIST = [
-    ["신한 은행", :shinhan],
-    ["기업 은행", :ibk]
-  ]
+  DEFAULT_COLUMNS = [:bank_account_name,
+                     :transacted_at_strftime,
+                     :transaction_type,
+                     :in,
+                     :out,
+                     :note,
+                     :remain,
+                     :branchname,
+                     :out_bank_account,
+                     :out_bank_name,
+                     :promissory_check_amount,
+                     :cms_code
+                     ]
+
+  def self.default_columns
+    DEFAULT_COLUMNS
+  end
 
   include StylesheetParsable
   include Excels::BankTransactions::Shinhan
@@ -14,12 +27,13 @@ class BankTransaction < ActiveRecord::Base
 
   include ResourceExportable
   resource_exportable_configure do |config|
-    config.money [3, 4, 6]
-    config.include_column 'bank_account_name'
-    config.except_column 'bank_account_id'
-    config.except_column 'out_bank_account'
-    config.except_column 'out_bank_name'
-    config.except_column 'promissory_check_amount'
+    config.krw [:in, :out, :remain]
+    config.include_column :bank_account_name
+    config.except_column :bank_account_id
+    config.except_column :out_bank_account
+    config.except_column :out_bank_name
+    config.except_column :promissory_check_amount
+    config.period_subtitle :transacted_at
   end
 
   def self.excel_parser(type)
@@ -29,6 +43,13 @@ class BankTransaction < ActiveRecord::Base
       ibk_bank_transaction_parser
     end
   end
+
+  ###### DECORATOR ###############
+  def transacted_at_strftime
+    transacted_at.strftime("%Y-%m-%d %H.%M") rescue ""
+  end
+  ################################
+
 
   def self.preview_stylesheet(account, type, upload)
     raise ArgumentError, I18n.t('common.upload.empty') unless upload
@@ -116,6 +137,8 @@ class BankTransaction < ActiveRecord::Base
   end
 
   def transfer
+    return nil unless transacted_at
+
     time_start = transacted_at - 1.minutes
     time_end = transacted_at + 1.minutes
 
