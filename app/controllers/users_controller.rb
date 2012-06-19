@@ -17,11 +17,7 @@ class UsersController < ApplicationController
   end
 
   def index
-    if params[:disabled] == 'on'
-      @users = User.disabled.search(params[:q]).order(:id)
-    else
-      @users = User.enabled.search(params[:q]).order(:id)
-    end
+    @users = User.check_disabled(params[:disabled]).search(params[:q]).order(:id)
   end
 
   def logout
@@ -81,6 +77,10 @@ class UsersController < ApplicationController
   end
 
   def google_apps
+    @users = User.check_disabled(params[:disabled]).has_google_apps_account
+  end
+
+  def create_google_apps
     @this_user = User.find(params[:id])
     if @this_user.create_google_app_account
       redirect_to :back, notice: "성공적으로 구글 계정을 생성했습니다."
@@ -89,7 +89,16 @@ class UsersController < ApplicationController
     end
   end
 
-  def redmine
+  def remove_google_apps
+    @this_user = User.find(params[:id])
+    if @this_user.remove_google_app_account
+      redirect_to :back, notice: "성공적으로 구글 계정을 제거했습니다."
+    else
+      redirect_to :back, alert: "계정 제거에 실패했습니다.."
+    end
+  end
+
+  def create_redmine
     @this_user = User.find(params[:id])
     redmine = @this_user.create_redmine_account
     if redmine.valid?
@@ -97,6 +106,15 @@ class UsersController < ApplicationController
     else
       logger.info "errors = #{redmine.errors.full_messages}"
       redirect_to :back, alert: "계정 생성에 실패했습니다.."
+    end
+  end
+
+  def remove_redmine
+    @this_user = User.find(params[:id])
+    if @this_user.remove_redmine_account
+      redirect_to :back, notice: "성공적으로 레드마인 계정을 제거했습니다."
+    else
+      redirect_to :back, alert: "계정 제거에 실패했습니다.."
     end
   end
 

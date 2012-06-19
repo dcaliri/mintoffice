@@ -8,6 +8,8 @@
     = search_field_tag 'q', params[:q]
 
 #show_command
+  = link_to t('.google'), google_apps_users_path
+  = " | "
   = link_to t('.newuser'), new_user_path
 
 h2= t("common.title.list")

@@ -69,8 +69,17 @@ Mintoffice::Application.routes.draw do
   resources :groups
 
   resources :users do
-    post 'google_apps', as: :google_apps, on: :member
-    post 'redmine', as: :redmine, on: :member
+    collection do
+      get 'google_apps', as: :google_apps
+    end
+
+    member do
+      post 'create_google_apps', as: :google_apps, path: 'google_apps'
+      post 'create_redmine', as: :redmine, path: 'redmine'
+
+      delete 'remove_google_apps', as: :google_apps, path: 'google_apps'
+      delete 'remove_redmine', as: :redmine, path: 'redmine'
+    end
 
     resources :payments do
       collection do

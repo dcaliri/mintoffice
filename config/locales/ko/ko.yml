@@ -1077,6 +1077,7 @@ ko:
         approval_waiting : 승인 대기
         vacation: "휴가 : "
     users:
+        title: 사용자 리스트
         new:
             title: 새 사용자 계정 만들기
         my:
@@ -1091,6 +1092,7 @@ ko:
         index:
             title: 사용자 계정 목록
             newuser: 새로운 사용자 등록
+            google: 구글 앱스 계정이 등록된 사용자들 보기
         login:
             title: 로그인
             name: 사용자계정
@@ -1109,9 +1111,13 @@ ko:
             password_confirm_wrong: 비밀번호와 비밀번호 확인이 일치하지 않습니다.
             successfully_changed: 성공적으로 변경하였습니다.
         google:
-            create: 구글 앱스 계정 생성
+            create: 구글 앱스 계정 생성하기
+            destroy: 제거하기
         redmine:
-            create: 레드마인 계정 생성
+            create: 레드마인 계정 생성하기
+            destroy: 제거하기
+        google_apps:
+            title: 구글 앱스 계정이 등록된 사용자들
         error:
     vacations:
         index:
