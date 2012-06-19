@@ -17,11 +17,7 @@ class UsersController < ApplicationController
   end
 
   def index
-    if params[:disabled] == 'on'
-      @users = User.disabled.search(params[:q]).order(:id)
-    else
-      @users = User.enabled.search(params[:q]).order(:id)
-    end
+    @users = User.check_disabled(params[:disabled]).search(params[:q]).order(:id)
   end
 
   def logout
