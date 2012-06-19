@@ -517,11 +517,6 @@ ActiveRecord::Schema.define(:version => 20120607053901) do
     t.integer  "company_id"
   end
 
-  create_table "projects_users", :id => false, :force => true do |t|
-    t.integer "project_id"
-    t.integer "user_id"
-  end
-
   create_table "report_comments", :force => true do |t|
     t.integer  "report_id"
     t.integer  "owner_id"
