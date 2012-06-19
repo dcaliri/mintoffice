@@ -153,10 +153,30 @@ class User < ActiveRecord::Base
     not payments.empty?
   end
 
-  def create_google_app_account
+  class << self
+    def check_disabled(check)
+      if check == 'on'
+        disabled
+      else
+        enabled
+      end
+    end
+
+    def has_google_apps_account
+      where('google_account IS NOT NULL')
+    end
+  end
+
+  def google_transporter
     config = google_apps_configure
     transporter = GoogleApps::Transport.new config.domain
     transporter.authenticate config.username, config.password
+    transporter
+  end
+
+  def create_google_app_account
+    config = google_apps_configure
+    transporter = google_transporter
 
     # Creating a User
     user = GoogleApps::Atom::User.new
@@ -169,6 +189,22 @@ class User < ActiveRecord::Base
     error_code = doc.xpath('//AppsForYourDomainErrors/error').first['errorCode'] rescue 0
     if error_code == 0
       self.google_account = "#{name}@#{config.domain}"
+      save
+    else
+      false
+    end
+  end
+
+  def remove_google_app_account
+    transporter = google_transporter
+    transporter.delete_user name
+
+    Rails.logger.info "#remove_google_app_account - response = #{transporter.response.body}"
+
+    doc = Nokogiri::XML(transporter.response.body)
+    error_code = doc.xpath('//AppsForYourDomainErrors/error').first['errorCode'] rescue 0
+    if error_code == 0
+      self.google_account = nil
       save
     else
       false
@@ -190,14 +226,18 @@ class User < ActiveRecord::Base
     raise Errno::ENOENT, "no redmine configure file. please create config/redmine.yml"
   end
 
-  def create_redmine_account
+  def get_remine_user
     configure = redmine_configure
     RedmineUser.element_name = "user"
     RedmineUser.site = configure.site
     RedmineUser.user = configure.username
     RedmineUser.password = configure.password
+    RedmineUser
+  end
 
-    user = RedmineUser.new(
+  def create_redmine_account
+    redmine_user = get_remine_user
+    user = redmine_user.new(
       login: self.name,
       password: configure.default_password.to_s,
       firstname: hrinfo.firstname,
@@ -211,6 +251,15 @@ class User < ActiveRecord::Base
     end
 
     user
+  end
+
+  def remove_redmine_account
+    redmine_user = get_remine_user
+    user = redmine_user.all.find {|user| user.login == self.name}
+    user.destroy
+
+    self.redmine_account = nil
+    save
   end
 
 private
