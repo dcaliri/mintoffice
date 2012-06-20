@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
 
   def current_company
     if session[:company_id].nil?
-      session[:company_id] = Company.first
+      session[:company_id] = Company.find_by_name("mintech") || Company.first
     end
     Company.find(session[:company_id]) unless session[:company_id].nil?
   end

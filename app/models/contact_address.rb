@@ -27,4 +27,8 @@ class ContactAddress < ActiveRecord::Base
           other2 like ? OR
           postal_code like ?", query, query, query, query, query, query)
   end
+
+  def serializable_hash(options={})
+    super(options.merge(only: [:country, :province, :city, :other1, :other2, :postal_code, :target]))
+  end
 end

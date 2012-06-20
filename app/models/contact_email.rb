@@ -24,4 +24,8 @@ class ContactEmail < ActiveRecord::Base
   def self.search(query)
     where("email like ?", query)
   end
+
+  def serializable_hash(options={})
+    super(options.merge(only: [:email, :target]))
+  end
 end

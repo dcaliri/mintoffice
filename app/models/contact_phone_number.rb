@@ -24,4 +24,8 @@ class ContactPhoneNumber < ActiveRecord::Base
   def self.search(query)
     where("number like ?", query)
   end
+
+  def serializable_hash(options={})
+    super(options.merge(only: [:number, :target]))
+  end
 end
