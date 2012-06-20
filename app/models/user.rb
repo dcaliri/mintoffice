@@ -195,6 +195,8 @@ class User < ActiveRecord::Base
   end
 
   def create_google_app_account
+    return false unless hrinfo
+
     config = google_apps_configure
     transporter = google_transporter
 
@@ -252,11 +254,12 @@ class User < ActiveRecord::Base
   def create_redmine_account
     configure = redmine_configure
     redmine_user = get_remine_user
+
     user = redmine_user.new(
       login: self.name,
       password: configure.default_password.to_s,
-      firstname: hrinfo.firstname,
-      lastname: hrinfo.lastname,
+      firstname: (hrinfo.firstname rescue nil),
+      lastname: (hrinfo.lastname rescue nil),
       mail: notify_email
     )
 
