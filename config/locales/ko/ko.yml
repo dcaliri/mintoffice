@@ -295,6 +295,14 @@ ko:
                 phone_number: 업체 연락처
                 pay_basic_date: 급여 기준일
                 payday: 급여 지급일
+                google_apps_domain: 구글앱스 도메인 이름
+                google_apps_username: 구글앱스 관리자 계정
+                google_apps_password: 구글앱스 관리자 비밀번호
+                redmine_domain: 레드마인 도메인 이름
+                redmine_username: 레드마인 관리자 계정
+                redmine_password: 레드마인 관리자 비밀번호
+                default_password: 기본 비밀번호
+
             contact:
                 name: 이름
                 firstname: 이름
