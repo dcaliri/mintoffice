@@ -18,6 +18,8 @@ class User < ActiveRecord::Base
   has_many :change_histories
   has_many :reporters, class_name: 'ReportPerson'
 
+  has_many :except_columns
+
   scope :nohrinfo, :conditions =>['id not in (select user_id from hrinfos)']
   scope :enabled, :conditions =>["name NOT LIKE '[X] %%'"]
   scope :disabled, :conditions =>["name LIKE '[X] %%'"]
