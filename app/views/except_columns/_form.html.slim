@@ -15,12 +15,14 @@
       = submit_tag "변경하기"
       = link_to "돌아가기", :back, id: :back_from_except_columns
 
-
 javascript:
   var form = $('#except_columns_form'),
       name;
 
   $('#except_columns_tag').change(function(){
+    form.get(0).setAttribute('action', "#{load_except_columns_path}");
+    form.get(0).setAttribute('action', '/load_except_columns');
+
     form.find('#tag_selected').val(true);
     form.submit();
   });
@@ -30,6 +32,9 @@ javascript:
 
     name = prompt('저장할 이름을 입력하세요');
     if(name && name != 'null'){
+      form.get(0).setAttribute('action', "#{save_except_columns_path}");
+      form.get(0).setAttribute('action', '/save_except_columns');
+
       form.find('#new_tag_name').val(name);
       form.submit();
     }

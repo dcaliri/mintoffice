@@ -1,28 +1,27 @@
 # encoding: UTF-8
 
 class ExceptColumnsController < ApplicationController
+  def load
+    tag = params[:tag]
+
+    except_columns.update_all(default: false)
+    resource = except_columns.find_by_key(tag)
+    resource.default = true
+    resource.save!
+
+    render 'reload'
+  end
+
+  def save
+    tag = params[:new_tag_name]
+    except_columns.update_all(default: false)
+    except_columns.create!(key: tag, columns: params[:include_column], default: true)
+
+    render 'reload'
+  end
+
   def create
     params[:include_column] = params[:include_column] || {}
-
-    # save
-    tag = params[:new_tag_name]
-    if tag.present?
-      except_columns.update_all(default: false)
-      except_columns.create!(key: tag, columns: params[:include_column], default: true)
-
-      return
-    end
-
-    # load
-    tag = params[:tag]
-    if params[:tag_selected] == 'true'
-      except_columns.update_all(default: false)
-      resource = except_columns.find_by_key(tag)
-      resource.default = true
-      resource.save!
-
-      return
-    end
 
     if default_except_columns.empty?
       default_except_columns.create!(key: "default", columns: params[:include_column], default: true)
@@ -31,6 +30,8 @@ class ExceptColumnsController < ApplicationController
     except_column = default_except_columns.first
     except_column.columns = params[:include_column]
     except_column.save!
+
+    render 'reload'
   end
 
   private
