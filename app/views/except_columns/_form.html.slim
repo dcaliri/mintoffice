@@ -29,7 +29,7 @@ javascript:
     e.preventDefault();
 
     name = prompt('저장할 이름을 입력하세요');
-    if(name){
+    if(name && name != 'null'){
       form.find('#new_tag_name').val(name);
       form.submit();
     }
