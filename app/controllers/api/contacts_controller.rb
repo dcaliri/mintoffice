@@ -31,5 +31,5 @@ end
 
 # curl "http://mintoffice.dev/api/login.json?user=admin&password=1234"
 # curl -H "api-key: c389b8fd0716c0db8c8f8b7da0c1255c21cdb47f" "http://mintoffice.dev/api/contacts"
-# curl -H "Content-Type: application/json" -H "api-key: c389b8fd0716c0db8c8f8b7da0c1255c21cdb47f" "http://mintoffice.dev/api/contacts" -d '{"contact":{"firstname":"Sunghee", "lastname": "Kang", "emails_attributes":{"0": {"email":"contact@example.com", "target":"home"}}, "phone_numbers_attributes":{"0": {"number": "010-1234-5678", "target": "comapny"}}}}'
+# curl -X POST -H "Content-Type: application/json" -H "api-key: c389b8fd0716c0db8c8f8b7da0c1255c21cdb47f" "http://mintoffice.dev/api/contacts" -d '{"contact":{"firstname":"Sunghee", "lastname": "Kang", "emails_attributes":{"0": {"email":"contact@example.com", "target":"home"}}, "phone_numbers_attributes":{"0": {"number": "010-1234-5678", "target": "comapny"}}}}'
 # curl -X PUT -H "Content-Type: application/json" -H "api-key: c389b8fd0716c0db8c8f8b7da0c1255c21cdb47f" "http://mintoffice.dev/api/contacts/70" -d '{"contact":{"firstname":"Sunghee2", "lastname": "Kang2", "emails_attributes":{"0": {"email":"contact@example.com", "target":"home", "id":"101"}}, "phone_numbers_attributes":{"0": {"number": "010-2345-6789", "target": "comapny", "id":"83"}}}}'
