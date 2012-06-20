@@ -1,10 +1,36 @@
 = form_tag :except_columns, id: :except_columns_form, remote: true do
   .box
     = hidden_field_tag :class_name, params[:class_name]
+    = hidden_field_tag :tag_selected, false
+    = hidden_field_tag :new_tag_name, ""
+
     - class_columns.each do |column|
       p
         = label_tag "include_column[#{column}]", class_type.human_attribute_name(column.to_sym)
         = check_box_tag "include_column[#{column}]", true, include_column?(column)
     p
-      = submit_tag
+      = select_tag :tag, options_for_select(except_column_keys, current_except_column_key), id: :except_columns_tag
+      = submit_tag "태그 만들기", id: :save_except_columns
+    p
+      = submit_tag "변경하기"
       = link_to "돌아가기", :back, id: :back_from_except_columns
+
+
+javascript:
+  var form = $('#except_columns_form'),
+      name;
+
+  $('#except_columns_tag').change(function(){
+    form.find('#tag_selected').val(true);
+    form.submit();
+  });
+
+  $('#save_except_columns').click(function(e){
+    e.preventDefault();
+
+    name = prompt('저장할 이름을 입력하세요');
+    if(name){
+      form.find('#new_tag_name').val(name);
+      form.submit();
+    }
+  })
