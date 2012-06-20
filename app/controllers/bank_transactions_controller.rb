@@ -34,7 +34,9 @@ class BankTransactionsController < ApplicationController
 
   def export
     transactions = bank_account ? bank_account.bank_transactions : BankTransaction
-    send_file transactions.latest.export(params[:to].to_sym, except_column(:bank_transaction))
+    include_column = current_user.except_columns.default_columns_by_key('BankTransaction')
+
+    send_file transactions.latest.export(params[:to].to_sym, include_column)
   end
 
   def create

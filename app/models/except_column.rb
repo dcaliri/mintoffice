@@ -4,6 +4,10 @@ class ExceptColumn < ActiveRecord::Base
   serialize :columns, Hash
 
   class << self
+    def default_columns_by_key(key)
+      where(model_name: key, default: true).first.columns rescue nil
+    end
+
     def default
       where(default: true)
     end
