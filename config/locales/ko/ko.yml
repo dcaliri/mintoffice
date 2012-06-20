@@ -482,8 +482,8 @@ ko:
                 comment: 코멘트
                 status: 상태
                 localized_status:
-                    not_reported: 결제 대기 중
-                    reporting: 결제 진행 중
+                    not_reported: 결재 요청 전
+                    reporting: 결재 대기 중
                     rollback: 반려
                     reported: 결제 완료
             bonus:
