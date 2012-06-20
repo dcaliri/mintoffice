@@ -8,6 +8,8 @@ Mintoffice::Application.routes.draw do
         post 'checkout'
       end
     end
+
+    resources :contacts
   end
 
   resources :creditcards do
