@@ -28,4 +28,8 @@ class ContactEmail < ActiveRecord::Base
   def serializable_hash(options={})
     super(options.merge(only: [:id, :email, :target]))
   end
+
+  def target_view
+    target ? "(#{target})" : ""
+  end
 end

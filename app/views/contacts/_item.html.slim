@@ -21,7 +21,7 @@ table
     td
   - contact.emails.each do |email|
     tr
-      th= "이메일(#{email.target})"
+      th= "이메일#{email.target_view}"
       td= email.email
       - if menu
         td
@@ -31,7 +31,7 @@ table
 
   - contact.phone_numbers.each do |phone_number|
     tr
-      th= "전화번호(#{phone_number.target})"
+      th= "전화번호#{phone_number.target_view}"
       td= phone_number.number
       - if menu
         td
@@ -41,7 +41,7 @@ table
 
   - contact.addresses.each do |address|
     tr
-      th= "주소(#{address.target})"
+      th= "주소#{address.target_view}"
       td = "#{address.country} #{address.province} #{address.city} #{address.other1} #{address.other2} #{address.postal_code}"
       - if menu
         td
@@ -51,7 +51,7 @@ table
 
   - contact.others.each do |other|
     tr
-      th= "#{other.target}"
+      th= "#{other.target_view}"
       td= other.description
       - if menu
         td
