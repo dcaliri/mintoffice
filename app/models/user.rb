@@ -171,13 +171,27 @@ class User < ActiveRecord::Base
 
       doc.xpath('//entry/title').map {|node| {name: node.content}}
     end
+
+    def google_apps_configure
+      OpenStruct.new(YAML.load_file("config/google_apps.yml"))
+    rescue => e
+      raise Errno::ENOENT, "no google app configure file. please create config/google_apps.yml"
+    end
+
+    def google_transporter
+      config = google_apps_configure
+      transporter = GoogleApps::Transport.new config.domain
+      transporter.authenticate config.username, config.password
+      transporter
+    end
   end
 
-  def self.google_transporter
-    config = google_apps_configure
-    transporter = GoogleApps::Transport.new config.domain
-    transporter.authenticate config.username, config.password
-    transporter
+  def google_apps_configure
+    self.class.google_apps_configure
+  end
+
+  def google_transporter
+    self.class.google_transporter
   end
 
   def create_google_app_account
@@ -215,12 +229,6 @@ class User < ActiveRecord::Base
     else
       false
     end
-  end
-
-  def self.google_apps_configure
-    OpenStruct.new(YAML.load_file("config/google_apps.yml"))
-  rescue => e
-    raise Errno::ENOENT, "no google app configure file. please create config/google_apps.yml"
   end
 
   class RedmineUser < ActiveResource::Base
