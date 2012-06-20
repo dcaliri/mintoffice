@@ -250,7 +250,7 @@ class User < ActiveRecord::Base
       mail: notify_email
     )
 
-    if user.save
+    if user.save!
       self.redmine_account = name
       save!
     end
