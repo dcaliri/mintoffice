@@ -23,7 +23,7 @@ table
     tr
       th= "이메일(#{email.target})"
       td= email.email
-      - if menu
+      - if menu && contact.owner?(current_user)
         td
           = link_to t('common.link.edit'), [:edit, contact]
           = " | "
@@ -33,7 +33,7 @@ table
     tr
       th= "전화번호(#{phone_number.target})"
       td= phone_number.number
-      - if menu
+      - if menu && contact.owner?(current_user)
         td
           = link_to t('common.link.edit'), [:edit, contact]
           = " | "
@@ -43,7 +43,7 @@ table
     tr
       th= "주소(#{address.target})"
       td = "#{address.country} #{address.province} #{address.city} #{address.other1} #{address.other2} #{address.postal_code}"
-      - if menu
+      - if menu && contact.owner?(current_user)
         td
           = link_to t('common.link.edit'), [:edit, contact]
           = " | "
@@ -53,7 +53,7 @@ table
     tr
       th= "#{other.target}"
       td= other.description
-      - if menu
+      - if menu && contact.owner?(current_user)
         td
           = link_to t('common.link.edit'), [:edit, contact]
           = " | "

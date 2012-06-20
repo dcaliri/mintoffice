@@ -1,9 +1,9 @@
-
 #show_command
-  = link_to t('common.link.edit'), [:edit, contact]
-  = " | "
-  = link_to t('common.link.destroy'), contact, :method => :delete, :confirm => "Are you sure?"
-  = " | "
+  - if contact.owner?(current_user)
+    = link_to t('common.link.edit'), [:edit, contact]
+    = " | "
+    = link_to t('common.link.destroy'), contact, :method => :delete, :confirm => "Are you sure?"
+    = " | "
   = link_to t('common.title.back'), :contacts
 
 
