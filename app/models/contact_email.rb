@@ -26,6 +26,6 @@ class ContactEmail < ActiveRecord::Base
   end
 
   def serializable_hash(options={})
-    super(options.merge(only: [:email, :target]))
+    super(options.merge(only: [:id, :email, :target]))
   end
 end
