@@ -3,7 +3,7 @@
 
 h2= t(".title")
 
-= form_tag [:excel, bank_transaction], multipart: true, class: "tabular" do
+= form_tag excel_bank_transactions_path(bank_account: params[:bank_account]), multipart: true, class: "tabular" do
   .box
     p
       = label_tag :bank_account, t('.account')
