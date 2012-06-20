@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120618090314) do
+ActiveRecord::Schema.define(:version => 20120620054555) do
 
   create_table "access_people", :force => true do |t|
     t.integer  "user_id"
@@ -184,14 +184,21 @@ ActiveRecord::Schema.define(:version => 20120618090314) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at",                          :null => false
-    t.datetime "updated_at",                          :null => false
-    t.integer  "pay_basic_date",      :default => 20
-    t.integer  "payday",              :default => 25
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
+    t.integer  "pay_basic_date",       :default => 20
+    t.integer  "payday",               :default => 25
     t.string   "registration_number"
     t.string   "owner_name"
     t.string   "address"
     t.string   "phone_number"
+    t.string   "google_apps_domain"
+    t.string   "google_apps_username"
+    t.string   "google_apps_password"
+    t.string   "redmine_domain"
+    t.string   "redmine_username"
+    t.string   "redmine_password"
+    t.string   "default_password"
   end
 
   create_table "contact_address_tags", :force => true do |t|
@@ -341,6 +348,16 @@ ActiveRecord::Schema.define(:version => 20120618090314) do
   end
 
   add_index "documents_tags", ["document_id", "tag_id"], :name => "index_documents_tags_on_document_id_and_tag_id", :unique => true
+
+  create_table "except_columns", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "model_name"
+    t.string   "key"
+    t.text     "columns"
+    t.boolean  "default",    :default => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+  end
 
   create_table "expense_reports", :force => true do |t|
     t.integer  "hrinfo_id"

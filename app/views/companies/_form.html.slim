@@ -27,6 +27,27 @@ h2= t("common.title.#{action_name}")
       = f.label :payday
       = f.select :payday, (1..31)
     p
+      = f.label :google_apps_domain
+      = f.text_field :google_apps_domain
+    p
+      = f.label :google_apps_username
+      = f.text_field :google_apps_username
+    p
+      = f.label :google_apps_password
+      = f.text_field :google_apps_password
+    p
+      = f.label :redmine_domain
+      = f.text_field :redmine_domain
+    p
+      = f.label :redmine_username
+      = f.text_field :redmine_username
+    p
+      = f.label :redmine_password
+      = f.text_field :redmine_password
+    p
+      = f.label :default_password
+      = f.text_field :default_password
+    p
       = render 'shared/attachments/form', form: f
     p
       = f.submit

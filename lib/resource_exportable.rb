@@ -64,13 +64,8 @@ module ResourceExportable
       yield configure
     end
 
-    def export(extension, except_columns = nil)
-      unless except_columns
-        columns = configure.include_column + column_names.map(&:to_sym) - configure.except_column - EXCEPT
-      else
-        columns = default_columns - except_columns
-      end
-
+    def export(extension, include_columns = nil)
+      columns = include_columns ? include_columns.keys.map(&:to_sym) : default_columns
       filename = make_filename(extension)
 
       case extension

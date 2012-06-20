@@ -44,6 +44,7 @@ p= "상태 - #{report.localize_status}"
         = ": "
         = comment.description
 
-= render 'accessors/info', access_target: report
+- if current_user.admin?
+  = render 'accessors/info', access_target: report
 
 br

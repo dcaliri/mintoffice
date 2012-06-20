@@ -29,5 +29,27 @@ h2 회사 정보
       tr
         th= company.class.human_attribute_name(:payday)
         td= company.payday
+      tr
+        th= company.class.human_attribute_name(:google_apps_domain)
+        td= company.google_apps_domain
+      tr
+        th= company.class.human_attribute_name(:google_apps_username)
+        td= company.google_apps_username
+      tr
+        th= company.class.human_attribute_name(:google_apps_password)
+        td= company.google_apps_password
+      tr
+        th= company.class.human_attribute_name(:redmine_domain)
+        td= company.redmine_domain
+      tr
+        th= company.class.human_attribute_name(:redmine_username)
+        td= company.redmine_username
+      tr
+        th= company.class.human_attribute_name(:redmine_password)
+        td= company.redmine_password
+      tr
+        th= company.class.human_attribute_name(:default_password)
+        td= company.default_password
+
   = render "shared/attachments/detail", :target => company
 br

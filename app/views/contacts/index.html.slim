@@ -5,7 +5,7 @@
     = text_field_tag 'query', params[:query]
 
 #show_command
-  = link_to "새로운 주소록 만들기", [:new, :contact]
+  = link_to t('contacts.new.link'), [:new, :contact]
   = " | "
   = link_to t('common.title.back'), :root
 
@@ -21,13 +21,13 @@ h2 Total : #{@contacts.count}
       th= ContactEmail.human_attribute_name(:email)
       th= ContactPhoneNumber.human_attribute_name(:number)
     - @paginated.each do |address|
-      tr.selectable onclick="location.href='#{contact_path(address)}'"
+      tr.selectable*{'class'=> address.isprivate ? "private-contact" : "", 'onclick' => "location.href='#{contact_path(address)}'"}
         td= address.name
         td= address.company_name
         td= address.department
         td= address.position
-        td= address.emails.empty? ? "" : "(#{address.emails.first.target}) #{address.emails.first.email} "
-        td= address.phone_numbers.empty? ? "" : "(#{address.phone_numbers.first.target}) #{address.phone_numbers.first.number}"
+        td= address.emails.empty? ? "" : "#{address.emails.first.target_view} #{address.emails.first.email} "
+        td= address.phone_numbers.empty? ? "" : "#{address.phone_numbers.first.target_view} #{address.phone_numbers.first.number}"
   center
     = will_paginate @paginated
 - else

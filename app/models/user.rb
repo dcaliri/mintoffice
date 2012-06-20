@@ -18,6 +18,8 @@ class User < ActiveRecord::Base
   has_many :change_histories
   has_many :reporters, class_name: 'ReportPerson'
 
+  has_many :except_columns
+
   scope :nohrinfo, :conditions =>['id not in (select user_id from hrinfos)']
   scope :enabled, :conditions =>["name NOT LIKE '[X] %%'"]
   scope :disabled, :conditions =>["name LIKE '[X] %%'"]
@@ -172,22 +174,12 @@ class User < ActiveRecord::Base
       doc.xpath('//entry/title').map {|node| {name: node.content}}
     end
 
-    def google_apps_configure
-      OpenStruct.new(YAML.load_file("config/google_apps.yml"))
-    rescue => e
-      raise Errno::ENOENT, "no google app configure file. please create config/google_apps.yml"
-    end
-
     def google_transporter
-      config = google_apps_configure
-      transporter = GoogleApps::Transport.new config.domain
-      transporter.authenticate config.username, config.password
+      current_company = Company.current_company
+      transporter = GoogleApps::Transport.new current_company.google_apps_domain
+      transporter.authenticate current_company.google_apps_username, current_company.google_apps_password
       transporter
     end
-  end
-
-  def google_apps_configure
-    self.class.google_apps_configure
   end
 
   def google_transporter
@@ -195,12 +187,14 @@ class User < ActiveRecord::Base
   end
 
   def create_google_app_account
-    config = google_apps_configure
+    return false unless hrinfo
+
+    current_company = Company.current_company
     transporter = google_transporter
 
     # Creating a User
     user = GoogleApps::Atom::User.new
-    user.new_user name, hrinfo.firstname, hrinfo.lastname, config.default_password.to_s, 2048
+    user.new_user name, hrinfo.firstname, hrinfo.lastname, current_company.default_password, 2048
     transporter.new_user user
 
     doc = Nokogiri::XML(transporter.response.body)
@@ -208,7 +202,7 @@ class User < ActiveRecord::Base
 
     error_code = doc.xpath('//AppsForYourDomainErrors/error').first['errorCode'] rescue 0
     if error_code == 0
-      self.google_account = "#{name}@#{config.domain}"
+      self.google_account = "#{name}@#{current_company.google_apps_domain}"
       save
     else
       false
@@ -234,35 +228,31 @@ class User < ActiveRecord::Base
   class RedmineUser < ActiveResource::Base
   end
 
-  def redmine_configure
-    OpenStruct.new(YAML.load_file("config/redmine.yml"))
-  rescue => e
-    raise Errno::ENOENT, "no redmine configure file. please create config/redmine.yml"
-  end
-
   def get_remine_user
-    configure = redmine_configure
+    current_company = Company.current_company
+
     RedmineUser.element_name = "user"
-    RedmineUser.site = configure.site
-    RedmineUser.user = configure.username
-    RedmineUser.password = configure.password
+    RedmineUser.site = current_company.redmine_domain
+    RedmineUser.user = current_company.redmine_username
+    RedmineUser.password = current_company.redmine_password
     RedmineUser
   end
 
-  def create_redmine_account
-    configure = redmine_configure
+  def create_redmine_account!
+    current_company = Company.current_company
     redmine_user = get_remine_user
+
     user = redmine_user.new(
       login: self.name,
-      password: configure.default_password.to_s,
-      firstname: hrinfo.firstname,
-      lastname: hrinfo.lastname,
+      password: current_company.default_password,
+      firstname: (hrinfo.firstname rescue nil),
+      lastname: (hrinfo.lastname rescue nil),
       mail: notify_email
     )
 
-    if user.save
+    if user.save!
       self.redmine_account = name
-      save
+      save!
     end
 
     user

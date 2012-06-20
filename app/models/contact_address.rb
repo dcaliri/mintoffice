@@ -14,9 +14,12 @@ class ContactAddress < ActiveRecord::Base
     [:target, :contact_id]
   end
 
-
   def info
     [country, province, city, other1, other2, postal_code].join(" ")
+  end
+
+  def target_view
+    target ? "(#{target})" : ""
   end
 
   def self.search(query)
@@ -26,5 +29,10 @@ class ContactAddress < ActiveRecord::Base
           other1 like ? OR
           other2 like ? OR
           postal_code like ?", query, query, query, query, query, query)
+  end
+
+
+  def serializable_hash(options={})
+    super(options.merge(only: [:id, :country, :province, :city, :other1, :other2, :postal_code, :target]))
   end
 end

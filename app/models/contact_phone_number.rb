@@ -21,7 +21,15 @@ class ContactPhoneNumber < ActiveRecord::Base
     }
   end
 
+  def target_view
+    target ? "(#{target})" : ""
+  end
+
   def self.search(query)
     where("number like ?", query)
+  end
+
+  def serializable_hash(options={})
+    super(options.merge(only: [:id, :number, :target]))
   end
 end
