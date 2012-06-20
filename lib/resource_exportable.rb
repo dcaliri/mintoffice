@@ -65,8 +65,7 @@ module ResourceExportable
     end
 
     def export(extension, include_columns = nil)
-      columns = include_columns ? include_columns.keys : default_columns
-
+      columns = include_columns ? include_columns.keys.map(&:to_sym) : default_columns
       filename = make_filename(extension)
 
       case extension
