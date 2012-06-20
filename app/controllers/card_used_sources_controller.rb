@@ -21,7 +21,9 @@ class CardUsedSourcesController < ApplicationController
 
   def export
     used_sources = creditcard.nil? ? CardUsedSource : creditcard.card_used_sources
-    send_file used_sources.latest.search(params[:query]).export(params[:to].to_sym, except_column(:card_used_source))
+    include_column = current_user.except_columns.default_columns_by_key('CardUsedSource')
+
+    send_file used_sources.latest.search(params[:query]).export(params[:to].to_sym, include_column)
   end
 
   def destroy
