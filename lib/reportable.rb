@@ -28,7 +28,7 @@ module Reportable
 
   def access?(user, permission_type = :read)
     if report.present?
-      report.access?(user)
+      report.access?(user, permission_type)
     else
       user.ingroup?(:admin)
     end

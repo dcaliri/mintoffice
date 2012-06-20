@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
 
   def current_company
     if session[:company_id].nil?
-      session[:company_id] = Company.first
+      session[:company_id] = Company.find_by_name("mintech") || Company.first
     end
     Company.find(session[:company_id]) unless session[:company_id].nil?
   end
@@ -35,24 +35,6 @@ class ApplicationController < ActionController::Base
     [:q, :query].each do |query|
       params[query] = "#{params[query] ? params[query].strip : ""}" unless params[query].blank?
     end
-  end
-
-  def except_column(key)
-    session[key] ||= {}
-    session[key][:except_column] ||= []
-    session[key][:except_column]
-  end
-
-  def except_column?(key, column)
-    except_column(key).include?(column)
-  end
-
-  def add_except_column(key, column)
-    except_column(key) << column unless except_column?(key, column.to_sym)
-  end
-
-  def remove_except_column(key, column)
-    except_column(key).delete(column)
   end
 
   protected

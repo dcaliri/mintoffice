@@ -39,6 +39,7 @@ class BankTransfer < ActiveRecord::Base
     config.include_column :bank_account_name
     config.except_column :bank_account_id
     config.period_subtitle :transfered_at
+    config.krw [:money, :transfer_fee, :error_money]
   end
 
   ###### DECORATOR ###############

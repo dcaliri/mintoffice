@@ -12,5 +12,5 @@ module ApplicationHelper
     params.delete_if{|key, value| key == :controller or key == :action}
   end
 
-  include ExceptColumn
+  include ExceptColumnView
 end

@@ -1,5 +1,6 @@
 module Api
   class UsersController < Api::ApplicationController
+    skip_before_filter :find_user
     respond_to :json
 
     def login

@@ -1,4 +1,4 @@
-module ExceptColumn
+module ExceptColumnView
   def draw_table(collection)
     html_code = ""
     html_code += "<table id='list-table'>"
@@ -47,7 +47,12 @@ module ExceptColumn
   end
 
   def except?(column)
-    controller.except_column?(model_name, column.to_sym)
+    columns = current_user.except_columns.where(model_name: model_name.to_s.classify).default
+    unless columns.empty?
+      !columns.first.columns[column.to_s]
+    else
+      false
+    end
   end
 
   # TODO: html safe
