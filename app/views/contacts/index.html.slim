@@ -21,7 +21,7 @@ h2 Total : #{@contacts.count}
       th= ContactEmail.human_attribute_name(:email)
       th= ContactPhoneNumber.human_attribute_name(:number)
     - @paginated.each do |address|
-      tr.selectable onclick="location.href='#{contact_path(address)}'"
+      tr.selectable*{'class'=> address.isprivate ? "private-contact" : "", 'onclick' => "location.href='#{contact_path(address)}'"}
         td= address.name
         td= address.company_name
         td= address.department
