@@ -7,18 +7,18 @@ div class={@user.admin? ? "admin" : ""}
         li= link_to t("commutes.index.title"), commute_path(@user)
         li= link_to t("vacations.index.title"), vacation_path(@user)
         - if @user.has_payment_info
-          li= link_to t("payments.title"), payment_path(@user) 
+          li= link_to t("payments.title"), payment_path(@user)
 
     .menubar_item.item2
       h2= t("main.index.finance")
       ul
         - if @user.permission.any? {|perm| perm.name == 'pettycashes'}
-          li= link_to t("pettycashes.index.title"), :controller => "pettycashes" 
-        li= link_to t("cardbills.index.title"), :controller => "cardbills" 
-        - if @user.permission.any? {|perm| perm.name == 'bank_accounts'} 
-          li= link_to t("bank_accounts.index.title"), :bank_accounts 
+          li= link_to t("pettycashes.index.title"), :controller => "pettycashes"
+        li= link_to t("cardbills.index.title"), :controller => "cardbills"
+        - if @user.permission.any? {|perm| perm.name == 'bank_accounts'}
+          li= link_to t("bank_accounts.index.title"), :bank_accounts
         - if @user.permission.any? {|perm| perm.name == 'taxbills'}
-          li= link_to t("taxbills.index.title"), :taxbills 
+          li= link_to t("taxbills.index.title"), :taxbills
         li= link_to t("expense_reports.index.title"), :expense_reports
         li= link_to t("ledger_accounts.title"), :ledger_accounts
         li= link_to t("postings.title"), :postings
@@ -27,22 +27,21 @@ div class={@user.admin? ? "admin" : ""}
       h2= t("main.index.project")
       ul
         - if @user.permission.any? {|perm| perm.name == 'projects'}
-          li= link_to t("projects.index.title"), :controller => "projects" 
+          li= link_to t("projects.index.title"), :controller => "projects"
 
     .menubar_item.item4
       h2= t("main.index.document")
       ul
         li= link_to t("documents.index.title"), :controller => "documents"
         - if @user.permission.any? {|perm| perm.name == 'business_clients'}
-          li= link_to t("business_clients.index.title"), :business_clients 
-        - if @user.admin? || @user.permission.any? {|perm| perm.name == 'contacts'}
-          li= link_to t("contacts.index.title"), :contacts 
+          li= link_to t("business_clients.index.title"), :business_clients
+        li= link_to t("contacts.index.title"), :contacts
 
     - if @user.ingroup?(:admin)
       .menubar_item.item5
           h2= t("main.index.admin")
           ul
-            li= link_to t("commutes.index.title"), :commutes 
+            li= link_to t("commutes.index.title"), :commutes
             li= link_to t("vacations.index.title"), :vacations
             li= link_to t("payments.title"), :payments
             li= link_to t("users.index.title"), :controller => "users"
@@ -57,4 +56,3 @@ div class={@user.admin? ? "admin" : ""}
             li= link_to t("dayworker_taxes.title"), :controller => "dayworker_taxes"
             li= link_to t("companies.title"), current_company
     = render partial: "this_week"
-    
