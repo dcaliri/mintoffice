@@ -10,3 +10,4 @@ public/assets/
 tmp/
 .bundle
 .DS_Store
+Gemfile.lock
