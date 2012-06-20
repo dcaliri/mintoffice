@@ -111,7 +111,7 @@ ko:
             change_history: 변경사항
             commute: 출퇴근
             company: 회사
-            contact: 주소록
+            contact: 연락처
             contact_phone_number: 전화번호
             contact_address: 주소
             contact_address_tag: 주소 대상
@@ -808,16 +808,17 @@ ko:
         title: 회사 관리
     contacts:
         index:
-            title: 주소록 리스트
-            empty: 주소록이 없습니다
+            title: 연락처 리스트
+            empty: 연락처가 없습니다
         show:
-            title: 주소록 상세정보
+            title: 연락처 상세정보
         new:
-            title: 주소록 만들기
+            title: 연락처 만들기
+            link: 새로운 연락처 만들기
         edit:
-            title: 주소록 수정하기
+            title: 연락처 수정하기
         find:
-            title: 주소록 찾기
+            title: 연락처 찾기
         title: 연락처 관리
         name: 이름
     contact_address_tags:

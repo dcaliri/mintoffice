@@ -5,7 +5,7 @@
     = text_field_tag 'query', params[:query]
 
 #show_command
-  = link_to "새로운 주소록 만들기", [:new, :contact]
+  = link_to t('contacts.new.link'), [:new, :contact]
   = " | "
   = link_to t('common.title.back'), :root
 
