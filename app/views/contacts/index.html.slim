@@ -29,6 +29,7 @@ h2 Total : #{@contacts.count}
         td= address.emails.empty? ? "" : "#{address.emails.first.target_view} #{address.emails.first.email} "
         td= address.phone_numbers.empty? ? "" : "#{address.phone_numbers.first.target_view} #{address.phone_numbers.first.number}"
   center
+    br
     = will_paginate @paginated
 - else
   h4= t('.empty')
