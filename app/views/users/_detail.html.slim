@@ -10,6 +10,10 @@ dl
       = "]"
   - else
     dd= link_to t("users.google.create"), [:google_apps, user], method: :post
+  dt= User.human_attribute_name("daum_account")
+  dd= user.daum_account
+  dt= User.human_attribute_name("nate_account")
+  dd= user.nate_account
   dt= User.human_attribute_name("notify_email")
   dd= user.notify_email
   dt= User.human_attribute_name("boxcar_account")

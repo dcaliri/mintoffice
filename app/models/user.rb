@@ -39,21 +39,14 @@ class User < ActiveRecord::Base
     [:name, :hashed_password, :salt]
   end
 
-  def self.find_or_create_with_omniauth!(auth)
-#    users = where(:provider => auth['provider'], :uid => auth['uid'])
-    users = where(:google_account => auth['info']['email'])
+  def self.find_by_omniauth(auth)
+    key = "#{auth["provider"]}_account".to_sym
+    users = where(key => auth['info']['email'])
     user = if not users.empty?
       users.first
     else
       nil
-#      self.new(:provider => auth['provider'], :uid => auth['uid'])
     end
-
-#    user.name = auth['info']['name']
-#    user.name = auth['info']['email'].split('@').first
-
-#    user.save(:validate => false)
-#    user.save!
     user
   end
 
