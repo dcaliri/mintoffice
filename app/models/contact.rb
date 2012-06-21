@@ -33,6 +33,10 @@ class Contact < ActiveRecord::Base
     owner == user
   end
 
+  def edit?(user)
+    user.admin? || owner?(user)
+  end
+
   def owner_name
     owner.hrinfo.fullname rescue ""
   end

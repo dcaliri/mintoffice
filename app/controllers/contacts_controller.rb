@@ -5,7 +5,7 @@ class ContactsController < ApplicationController
 
   before_filter :only => [:show] { |c| c.save_attachment_id contact }
   before_filter :redirect_if_private, :only => [:show, :edit, :update, :destroy]
-  before_filter :redirect_unless_owner, :only => [:edit, :update, :destroy]
+  before_filter :redirect_cannot_edit, :only => [:edit, :update, :destroy]
 
   def index
     @contacts = contacts.isprivate(@user).search(params[:query])
@@ -63,9 +63,9 @@ class ContactsController < ApplicationController
     force_redirect unless @contact.access?(current_user)
   end
 
-  def redirect_unless_owner
+  def redirect_cannot_edit
     @contact = contacts.find(params[:id])
-    force_redirect unless @contact.owner?(current_user)
+    force_redirect unless @contact.edit?(current_user)
   end
 
 end
