@@ -21,7 +21,7 @@ h2= t("common.title.#{action_name}")
     p
       = f.label :position
       = f.text_field :position
-    - if contact.owner?(current_user)
+    - if contact.new_record? || contact.owner?(current_user)
       p
         = f.label :isprivate
         = f.check_box :isprivate
