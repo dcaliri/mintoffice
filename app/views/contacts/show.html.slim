@@ -1,5 +1,5 @@
 #show_command
-  - if contact.owner?(current_user)
+  - if contact.edit?(current_user)
     = link_to t('common.link.edit'), [:edit, contact]
     = " | "
     = link_to t('common.link.destroy'), contact, :method => :delete, :confirm => "Are you sure?"

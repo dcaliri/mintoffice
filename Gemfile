@@ -30,9 +30,6 @@ group :development do
 end
 
 group :test do
-  gem 'rspec-rails'
-  gem 'database_cleaner'
-  gem 'guard-rspec'
   gem 'guard-livereload'
   gem 'growl'
 end
@@ -43,5 +40,5 @@ group :development, :test do
 end
 
 group :production do
-  gem 'pg'
+  gem 'mysql2'
 end

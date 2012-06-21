@@ -23,7 +23,7 @@ module Reportable
   end
 
   def localize_status
-    report.localized_status rescue I18n.t("activerecord.attributes.report.localized_status.not_reported")
+    report.localize_status rescue I18n.t("activerecord.attributes.report.localized_status.not_reported")
   end
 
   def access?(user, permission_type = :read)

@@ -33,6 +33,10 @@ class Contact < ActiveRecord::Base
     owner == user
   end
 
+  def edit?(user)
+    user.admin? || owner?(user)
+  end
+
   def owner_name
     owner.hrinfo.fullname rescue ""
   end
@@ -83,7 +87,6 @@ class Contact < ActiveRecord::Base
       ""
     end
   end
-
   def serializable_hash(options={})
     super(options.merge(only: [:id, :firstname, :lastname, :company_name, :department, :position], include: [:emails, :phone_numbers, :addresses]))
   end
