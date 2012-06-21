@@ -83,7 +83,6 @@ class Contact < ActiveRecord::Base
       ""
     end
   end
-
   def serializable_hash(options={})
     super(options.merge(only: [:id, :firstname, :lastname, :company_name, :department, :position], include: [:emails, :phone_numbers, :addresses]))
   end
