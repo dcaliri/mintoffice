@@ -1,7 +1,7 @@
 Rails.application.config.middleware.use OmniAuth::Builder do
   require 'openid/store/filesystem'
 
-  config = OpenStruct.new(YAML.load_file('config/oauth_key.yaml'))
+  config = OpenStruct.new(YAML.load_file('config/oauth_key.yml'))
 
   provider :openid, :store => OpenID::Store::Filesystem.new('/tmp'), :name => 'google', :identifier => 'https://www.google.com/accounts/o8/id'
   provider :daum, config.daum['consumer_key'], config.daum['consumer_secret']
