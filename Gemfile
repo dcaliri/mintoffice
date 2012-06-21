@@ -12,6 +12,8 @@ gem 'prawn'
 
 gem 'omniauth'
 gem 'omniauth-openid'
+gem 'omniauth-daum'
+gem 'omniauth-nate'
 gem 'google_apps'
 
 gem 'by_star'

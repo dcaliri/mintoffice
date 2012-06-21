@@ -1,0 +1,7 @@
+daum:
+    consumer_key: your-daum-consumer-key
+    consumer_secret: your-daum-consumer-secret
+nate:
+    consumer_key: your-nate-consumer-key
+    consumer_secret: your-nate-consumer-secret
+    encryption_key: your-nate-encryption-key
