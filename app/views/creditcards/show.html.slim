@@ -10,28 +10,13 @@
 h2= t("common.title.show")
 .box
   #descr
-    table border="0" cellspacing="5" cellpadding="5"
-      tr
-        th= Creditcard.human_attribute_name("cardno")
-        td= @creditcard.cardno
-      tr
-        th= Creditcard.human_attribute_name("short_name")
-        td= @creditcard.short_name
-      tr
-        th= Creditcard.human_attribute_name("expireyear")
-        td= @creditcard.expireyear
-      tr
-        th= Creditcard.human_attribute_name("expiremonth")
-        td= @creditcard.expiremonth
-      tr
-        th= Creditcard.human_attribute_name("nickname")
-        td= @creditcard.nickname
-      tr
-        th= Creditcard.human_attribute_name("issuer")
-        td= @creditcard.issuer
-      tr
-        th= Creditcard.human_attribute_name("cardholder")
-        td= @creditcard.cardholder
+    = dtdd @creditcard, "cardno"
+    = dtdd @creditcard, "short_name"
+    = dtdd @creditcard, "expireyear"
+    = dtdd @creditcard, "expiremonth"
+    = dtdd @creditcard, "nickname"
+    = dtdd @creditcard, "issuer"
+    = dtdd @creditcard, "cardholder"
   = render "shared/attachments/detail", :target => @creditcard
 
 .clear
