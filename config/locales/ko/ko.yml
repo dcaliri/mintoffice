@@ -302,6 +302,7 @@ ko:
                 redmine_username: 레드마인 관리자 계정
                 redmine_password: 레드마인 관리자 비밀번호
                 default_password: 기본 비밀번호
+                apply_admin_id: 입사지원서 담당자
 
             contact:
                 name: 이름
@@ -885,6 +886,8 @@ ko:
             title: 인사정보관리 - 사원목록
             list_retired: 퇴직자 목록 조회
             list_current: 현 재직자 목록 조회
+            list_joined: 정사원 목록 조회
+            list_not_joined: 입사지원자 목록 조회
             retired: 퇴직자
             current: 재직자
         show:

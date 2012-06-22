@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120621084728) do
+ActiveRecord::Schema.define(:version => 20120622085155) do
 
   create_table "access_people", :force => true do |t|
     t.integer  "user_id"
@@ -199,6 +199,7 @@ ActiveRecord::Schema.define(:version => 20120621084728) do
     t.string   "redmine_username"
     t.string   "redmine_password"
     t.string   "default_password"
+    t.integer  "apply_admin_id"
   end
 
   create_table "contact_address_tags", :force => true do |t|

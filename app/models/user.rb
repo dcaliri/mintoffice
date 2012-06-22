@@ -1,3 +1,4 @@
+# encoding: UTF-8
 require 'digest/sha1'
 
 class User < ActiveRecord::Base
@@ -8,7 +9,7 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :permission
   has_many :project_infos, class_name: "ProjectAssignInfo"
   has_many :projects, through: :project_infos
-  has_one :hrinfo
+  has_one :hrinfo, dependent: :destroy
   accepts_nested_attributes_for :hrinfo, :allow_destroy => :true
 
   has_many :contacts, foreign_key: 'owner_id'
@@ -31,6 +32,8 @@ class User < ActiveRecord::Base
   attr_accessor :password_confirmation
   validates_confirmation_of :password, :if => Proc.new{|user| user.provider.blank?}
   validate :password_non_blank, :if => Proc.new{|user| user.provider.blank?}
+
+  has_one :company, foreign_key: :apply_admin_id
 
   cattr_accessor :current_user
 
@@ -183,6 +186,23 @@ class User < ActiveRecord::Base
         user.build_hrinfo.build_contact
       end
     end
+
+    def create_apply(params)
+      new(params).tap do |user|
+        user.hrinfo.prevent_create_report = true
+        user.save!
+
+        User.current_user = user
+        user.hrinfo.create_initial_report
+        user.hrinfo.report.save!
+        user.hrinfo.create_initial_accessor
+
+        # need to set in company info
+        # admin = User.first
+        admin = Company.current_company.apply_admin
+        user.hrinfo.report!(admin, "")
+      end
+    end
   end
 
   def google_transporter
@@ -271,7 +291,7 @@ class User < ActiveRecord::Base
   end
 
   def joined?
-    hrinfo and hrinfo.joined_on
+    hrinfo and hrinfo.joined?
   end
 
   def not_joined?
