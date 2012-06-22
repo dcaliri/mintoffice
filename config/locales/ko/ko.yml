@@ -313,6 +313,7 @@ ko:
                 position: 직위
                 isprivate: 비공개
             contact_address:
+                info: 주소
                 target: 대상
                 country: 국가
                 province: 주
@@ -552,6 +553,7 @@ ko:
         title: 첨부파일 관리
     applies:
         title: 입사지원
+        success: 이미 입사지원서가 등록되어 있습니다.
     bank_accounts:
         index:
             title: 은행계좌 목록

@@ -270,6 +270,14 @@ class User < ActiveRecord::Base
     save
   end
 
+  def joined?
+    hrinfo and hrinfo.joined_on
+  end
+
+  def not_joined?
+    not joined?
+  end
+
 private
   def password_non_blank
     if hashed_password.blank?

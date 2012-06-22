@@ -7,7 +7,11 @@ class ProvidersController < ApplicationController
 
     if user
       session[:user_id] = user.id
-      redirect_to :root, :notice => I18n.t("users.login.successfully_signed_in")
+      if user.not_joined?
+        redirect_to :apply, :notice => I18n.t("applies.success")
+      else
+        redirect_to :root, :notice => I18n.t("users.login.successfully_signed_in")
+      end
     else
       redirect_to try_apply_path(provider: auth["provider"], email: auth['info']['email'])
     end
