@@ -9,7 +9,7 @@ class ProvidersController < ApplicationController
       session[:user_id] = user.id
       redirect_to :root, :notice => I18n.t("users.login.successfully_signed_in")
     else
-      redirect_to users_login_path(), :notice => I18n.t("users.login.not_registered")
+      redirect_to try_apply_path(provider: auth["provider"], email: auth['info']['email'])
     end
   end
 end

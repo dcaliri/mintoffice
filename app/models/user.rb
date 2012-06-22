@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   has_many :project_infos, class_name: "ProjectAssignInfo"
   has_many :projects, through: :project_infos
   has_one :hrinfo
+  accepts_nested_attributes_for :hrinfo, :allow_destroy => :true
 
   has_many :contacts, foreign_key: 'owner_id'
 
@@ -28,8 +29,8 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :name
   validates_uniqueness_of :google_account, :if => Proc.new{ google_account && google_account.empty? == false }
   attr_accessor :password_confirmation
-  validates_confirmation_of :password, :if => Proc.new{|user| user.provider.blank? and user.uid.blank?}
-  validate :password_non_blank, :if => Proc.new{|user| user.provider.blank? and user.uid.blank?}
+  validates_confirmation_of :password, :if => Proc.new{|user| user.provider.blank?}
+  validate :password_non_blank, :if => Proc.new{|user| user.provider.blank?}
 
   cattr_accessor :current_user
 
@@ -172,6 +173,15 @@ class User < ActiveRecord::Base
       transporter = GoogleApps::Transport.new current_company.google_apps_domain
       transporter.authenticate current_company.google_apps_username, current_company.google_apps_password
       transporter
+    end
+
+    def prepare_apply(params)
+      new.tap do |user|
+        user.provider = params[:provider]
+        user.send(params[:provider] + "_account=", params[:email])
+        user.notify_email = params[:email]
+        user.build_hrinfo.build_contact
+      end
     end
   end
 

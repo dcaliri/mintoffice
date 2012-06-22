@@ -511,7 +511,7 @@ ko:
                 google_account: Google 계정
                 daum_account: 다음 계정
                 nate_account: 네이트 계정
-                notify_email: Email
+                notify_email: 이메일
                 boxcar_account: Boxcar 계정
                 redmine_account: Redmine 계정
         errors:
