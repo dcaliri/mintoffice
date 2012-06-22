@@ -64,9 +64,9 @@ Mintoffice::Application.routes.draw do
   end
 
   match '/users/changepw/:user_id', :controller => 'users', :action => 'changepw'
-  match '/users/login', :controller => 'users', :action => 'login', :conditions => { :method => :get}
+  match '/users/login', :controller => 'users', :action => 'login'
   match '/users/logout', :controller => 'users', :action => 'logout', :conditions => { :method => :get}
-  match '/users/my', :controller => "users", :action => "my", :conditions => {:method => :get}
+  match '/users/my', :controller => "users", :action => "my"
 
   resources :groups
 

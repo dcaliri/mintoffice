@@ -509,6 +509,8 @@ ko:
                 password: 비밀번호
                 password_confirmation: 비밀번호 확인
                 google_account: Google 계정
+                daum_account: 다음 계정
+                nate_account: 네이트 계정
                 notify_email: Email
                 boxcar_account: Boxcar 계정
                 redmine_account: Redmine 계정
@@ -1121,10 +1123,10 @@ ko:
             successfully_changed: 성공적으로 변경하였습니다.
         google:
             create: 구글 앱스 계정 생성하기
-            destroy: 제거하기
+            destroy: 구글 앱스 계정 제거하기
         redmine:
             create: 레드마인 계정 생성하기
-            destroy: 제거하기
+            destroy: 레드마인 계정 제거하기
         google_apps:
             title: 구글 앱스 계정이 등록된 사용자들
         error:
