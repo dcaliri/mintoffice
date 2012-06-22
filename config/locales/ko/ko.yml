@@ -1112,6 +1112,10 @@ ko:
             loginfail: 아이디 혹은 비밀번호가 잘못되었습니다.
             not_registered: 등록되지 않은 계정입니다.
             successfully_signed_in: 로그인에 성공하였습니다.
+            login_with_google: 구글 계정으로 로그인
+            login_with_daum: 다음 계정으로 로그인
+            login_with_daum_explain: ("요즘"서비스 활성화 필요)
+            login_with_nate: 네이트 계정으로 로그인
         changepw:
             title: 비밀번호 변경
             subtitle: 변경
