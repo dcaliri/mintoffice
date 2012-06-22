@@ -16,6 +16,12 @@ h2= t("common.title.#{action_name}")
       = f.label :google_account, User.human_attribute_name("google_account")
       = f.email_field :google_account, :size => 40
     p
+      = f.label :daum_account, User.human_attribute_name("daum_account")
+      = f.email_field :daum_account, :size => 40
+    p
+      = f.label :nate_account, User.human_attribute_name("nate_account")
+      = f.email_field :nate_account, :size => 40
+    p
       = f.label :notify_email, User.human_attribute_name("notify_email")
       = f.email_field :notify_email, :size => 40
     p

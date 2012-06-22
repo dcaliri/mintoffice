@@ -3,8 +3,8 @@
 
 h2= t("common.title.#{action_name}")
 
-.box
-  = form_for company, html: {class: "tabular"} do |f|
+= form_for company, html: {class: "tabular"} do |f|
+  .box
     p
       = f.label :name
       = f.text_field :name
@@ -49,5 +49,4 @@ h2= t("common.title.#{action_name}")
       = f.text_field :default_password
     p
       = render 'shared/attachments/form', form: f
-    p
-      = f.submit
+  = f.submit
