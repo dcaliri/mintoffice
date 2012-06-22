@@ -1,3 +1,4 @@
+# encoding: UTF-8
 require 'digest/sha1'
 
 class User < ActiveRecord::Base
@@ -31,6 +32,8 @@ class User < ActiveRecord::Base
   attr_accessor :password_confirmation
   validates_confirmation_of :password, :if => Proc.new{|user| user.provider.blank?}
   validate :password_non_blank, :if => Proc.new{|user| user.provider.blank?}
+
+  has_one :company, foreign_key: :apply_admin_id
 
   cattr_accessor :current_user
 
@@ -195,8 +198,8 @@ class User < ActiveRecord::Base
         user.hrinfo.create_initial_accessor
 
         # need to set in company info
-        admin = User.first
-
+        # admin = User.first
+        admin = Company.current_company.apply_admin
         user.hrinfo.report!(admin, "")
       end
     end
