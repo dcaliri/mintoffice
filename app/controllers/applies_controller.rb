@@ -10,8 +10,7 @@ class AppliesController < ApplicationController
   end
 
   def create
-    @this_user = User.new(params[:user])
-    @this_user.save!
+    @this_user = User.create_apply(params[:user])
     redirect_to [:complete, :apply]
   rescue ActiveRecord::RecordInvalid
     render 'new'
