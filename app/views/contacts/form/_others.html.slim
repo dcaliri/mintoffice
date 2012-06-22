@@ -6,7 +6,8 @@ h3 기타
     p
       = others_field.label :target
       = others_field.select :target, options_for_select(current_company.contact_other_tags.map{|tag| tag.name}, others_field.object.target)
-      = link_to "새로운 대상 만들기", [:new, :contact_other_tag]
+      - if current_user.present? and current_user.admin?
+        = link_to "새로운 대상 만들기", [:new, :contact_other_tag]
     p
       = others_field.label :description
       = others_field.text_field :description

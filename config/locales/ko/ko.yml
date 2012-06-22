@@ -550,6 +550,8 @@ ko:
         new:
             title: 첨부파일 신규 작성
         title: 첨부파일 관리
+    applies:
+        title: 입사지원
     bank_accounts:
         index:
             title: 은행계좌 목록
