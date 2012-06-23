@@ -6,7 +6,8 @@ h3 이메일
     p
       = email_field.label :target
       = email_field.select :target, options_for_select(current_company.contact_email_tags.map{|tag| tag.name}, email_field.object.target)
-      = link_to "새로운 대상 만들기", [:new, :contact_email_tag]
+      - if current_user.present? and current_user.admin?
+        = link_to "새로운 대상 만들기", [:new, :contact_email_tag]
 
     p
       = email_field.label :email

@@ -48,5 +48,8 @@ h2= t("common.title.#{action_name}")
       = f.label :default_password
       = f.text_field :default_password
     p
+      = f.label :apply_admin_id
+      = f.select :apply_admin_id, options_from_collection_for_select(User.enabled, 'id', 'fullname', company.apply_admin_id)
+    p
       = render 'shared/attachments/form', form: f
   = f.submit

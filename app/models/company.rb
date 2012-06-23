@@ -9,6 +9,8 @@ class Company < ActiveRecord::Base
   has_many :contact_other_tags
   has_many :tags
 
+  belongs_to :apply_admin, class_name: 'User'
+
   cattr_accessor :current_company
 
   include Attachmentable
