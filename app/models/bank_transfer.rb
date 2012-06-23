@@ -6,13 +6,6 @@ class BankTransfer < ActiveRecord::Base
 
   self.per_page = 20
 
-  BANK_LIST = [
-    ["신한 은행", :shinhan],
-    ["기업 은행", :ibk]
-  ]
-
-  # t.datetime "registered_at"
-
   DEFAULT_COLUMNS = [:bank_account_name,
                      :transfer_type,
                      :transfered_at_strftime,
@@ -46,6 +39,7 @@ class BankTransfer < ActiveRecord::Base
     config.include_column :bank_account_name
     config.except_column :bank_account_id
     config.period_subtitle :transfered_at
+    config.krw [:money, :transfer_fee, :error_money]
   end
 
   ###### DECORATOR ###############
@@ -111,6 +105,7 @@ class BankTransfer < ActiveRecord::Base
   end
 
   def transaction
+    return nil unless transfered_at
     time_start = transfered_at - 1.minutes
     time_end = transfered_at + 1.minutes
 

@@ -1,0 +1,24 @@
+#show_command
+  = link_to t('card_used_sources.index.title'), card_used_sources_path(creditcard_id: @creditcard.id)
+  '  |
+  = link_to t('card_approved_sources.index.title'), card_approved_sources_path(creditcard_id: @creditcard.id)
+  '  |
+  = link_to t("common.title.edit"), edit_creditcard_path(@creditcard)
+  '  |
+  = link_to t("common.title.list"), creditcards_path
+
+h2= t("common.title.show")
+.box
+  #descr
+    = dtdd @creditcard, "cardno"
+    = dtdd @creditcard, "short_name"
+    = dtdd @creditcard, "expireyear"
+    = dtdd @creditcard, "expiremonth"
+    = dtdd @creditcard, "nickname"
+    = dtdd @creditcard, "issuer"
+    = dtdd @creditcard, "cardholder"
+  = render "shared/attachments/detail", :target => @creditcard
+
+.clear
+  -if @user.ingroup? "admin"
+    = render 'changelog', target: @creditcard

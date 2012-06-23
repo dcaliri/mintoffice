@@ -1,0 +1,4 @@
+fixture:
+    id: 1
+    creditcard_id: 1
+    approve_no: "ABCD"

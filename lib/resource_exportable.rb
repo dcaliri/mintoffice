@@ -20,8 +20,13 @@ module ResourceExportable
     def pdf_page_layout(type)
       opts[:layout_type] = type
     end
-    def money(to)
-      opts[:money] = to
+
+    def krw(to)
+      opts[:krw] = to
+    end
+
+    def align(direction, key)
+      opts[:align][direction] = key
     end
 
     def subtitle(text)
@@ -36,7 +41,11 @@ module ResourceExportable
       @opts ||= {
         subtitle: "",
         layout_type: :landscape,
-        money: []
+        krw: [],
+        align: {
+          left: [],
+          right: []
+        }
       }
     end
   end
@@ -55,18 +64,13 @@ module ResourceExportable
       yield configure
     end
 
-    def export(extension, except_columns = nil)
-      unless except_columns
-        columns = configure.include_column + column_names.map(&:to_sym) - configure.except_column - EXCEPT
-      else
-        columns = default_columns - except_columns
-      end
-
+    def export(extension, include_columns = nil)
+      columns = include_columns ? include_columns.keys.map(&:to_sym) : default_columns
       filename = make_filename(extension)
 
       case extension
       when :xls
-        ExcelExporter.new(self, filename: filename, columns: columns).export
+        ExcelExporter.new(self, filename, columns, configure.opts).export
       when :pdf
         PdfExporter.new(self, filename, columns, configure.opts).export
       end

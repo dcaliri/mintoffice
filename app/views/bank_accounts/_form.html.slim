@@ -7,7 +7,7 @@ h2= t("common.title.#{action_name}")
   .box
     p
       = f.label :name
-      = f.text_field :name
+      = f.select :name, options_for_select(BankAccount::BANK_LIST, bank_account.name_)
     p
       = f.label :number
       = f.text_field :number

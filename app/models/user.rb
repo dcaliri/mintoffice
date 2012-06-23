@@ -18,13 +18,15 @@ class User < ActiveRecord::Base
   has_many :change_histories
   has_many :reporters, class_name: 'ReportPerson'
 
+  has_many :except_columns
+
   scope :nohrinfo, :conditions =>['id not in (select user_id from hrinfos)']
   scope :enabled, :conditions =>["name NOT LIKE '[X] %%'"]
   scope :disabled, :conditions =>["name LIKE '[X] %%'"]
 
   validates_presence_of :name
   validates_uniqueness_of :name
-  validates_uniqueness_of :gmail_account, :if => Proc.new{ gmail_account && gmail_account.empty? == false }
+  validates_uniqueness_of :google_account, :if => Proc.new{ google_account && google_account.empty? == false }
   attr_accessor :password_confirmation
   validates_confirmation_of :password, :if => Proc.new{|user| user.provider.blank? and user.uid.blank?}
   validate :password_non_blank, :if => Proc.new{|user| user.provider.blank? and user.uid.blank?}
@@ -37,21 +39,14 @@ class User < ActiveRecord::Base
     [:name, :hashed_password, :salt]
   end
 
-  def self.find_or_create_with_omniauth!(auth)
-#    users = where(:provider => auth['provider'], :uid => auth['uid'])
-    users = where(:gmail_account => auth['info']['email'])
+  def self.find_by_omniauth(auth)
+    key = "#{auth["provider"]}_account".to_sym
+    users = where(key => auth['info']['email'])
     user = if not users.empty?
       users.first
     else
       nil
-#      self.new(:provider => auth['provider'], :uid => auth['uid'])
     end
-
-#    user.name = auth['info']['name']
-#    user.name = auth['info']['email'].split('@').first
-
-#    user.save(:validate => false)
-#    user.save!
     user
   end
 
@@ -126,7 +121,7 @@ class User < ActiveRecord::Base
   end
 
   def as_json(options={})
-    super(options.merge(:only => [:name, :gmail_account, :boxcar_account, :notify_email, :api_key]))
+    super(options.merge(:only => [:name, :google_account, :boxcar_account, :notify_email, :api_key]))
   end
 
   def create_api_key(name, password)
@@ -151,6 +146,118 @@ class User < ActiveRecord::Base
 
   def has_payment_info
     not payments.empty?
+  end
+
+  class << self
+    def check_disabled(check)
+      if check == 'on'
+        disabled
+      else
+        enabled
+      end
+    end
+
+    def has_google_apps_account
+      transporter = google_transporter
+      transporter.get_user
+
+      doc = Nokogiri.XML(transporter.response.body, nil, 'UTF-8')
+      doc.remove_namespaces!
+
+      doc.xpath('//entry/title').map {|node| {name: node.content}}
+    end
+
+    def google_transporter
+      current_company = Company.current_company
+      transporter = GoogleApps::Transport.new current_company.google_apps_domain
+      transporter.authenticate current_company.google_apps_username, current_company.google_apps_password
+      transporter
+    end
+  end
+
+  def google_transporter
+    self.class.google_transporter
+  end
+
+  def create_google_app_account
+    return false unless hrinfo
+
+    current_company = Company.current_company
+    transporter = google_transporter
+
+    # Creating a User
+    user = GoogleApps::Atom::User.new
+    user.new_user name, hrinfo.firstname, hrinfo.lastname, current_company.default_password, 2048
+    transporter.new_user user
+
+    doc = Nokogiri::XML(transporter.response.body)
+    Rails.logger.info "#create_google_app_account - response = #{transporter.response.body}"
+
+    error_code = doc.xpath('//AppsForYourDomainErrors/error').first['errorCode'] rescue 0
+    if error_code == 0
+      self.google_account = "#{name}@#{current_company.google_apps_domain}"
+      save
+    else
+      false
+    end
+  end
+
+  def remove_google_app_account
+    transporter = google_transporter
+    transporter.delete_user name
+
+    Rails.logger.info "#remove_google_app_account - response = #{transporter.response.body}"
+
+    doc = Nokogiri::XML(transporter.response.body)
+    error_code = doc.xpath('//AppsForYourDomainErrors/error').first['errorCode'] rescue 0
+    if error_code == 0
+      self.google_account = nil
+      save
+    else
+      false
+    end
+  end
+
+  class RedmineUser < ActiveResource::Base
+  end
+
+  def get_remine_user
+    current_company = Company.current_company
+
+    RedmineUser.element_name = "user"
+    RedmineUser.site = current_company.redmine_domain
+    RedmineUser.user = current_company.redmine_username
+    RedmineUser.password = current_company.redmine_password
+    RedmineUser
+  end
+
+  def create_redmine_account!
+    current_company = Company.current_company
+    redmine_user = get_remine_user
+
+    user = redmine_user.new(
+      login: self.name,
+      password: current_company.default_password,
+      firstname: (hrinfo.firstname rescue nil),
+      lastname: (hrinfo.lastname rescue nil),
+      mail: notify_email
+    )
+
+    if user.save!
+      self.redmine_account = name
+      save!
+    end
+
+    user
+  end
+
+  def remove_redmine_account
+    redmine_user = get_remine_user
+    user = redmine_user.all.find {|user| user.login == self.name}
+    user.destroy
+
+    self.redmine_account = nil
+    save
   end
 
 private

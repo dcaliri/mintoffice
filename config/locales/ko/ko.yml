@@ -68,6 +68,7 @@ ko:
             time: "%H:%M"
             short: "%y/%m/%d %H:%M"
             long: "%Y년 %B월 %d일, %H시 %M분 %S초 %Z"
+            compact_short: "%Y-%m-%d (%a) %H:%M"
         am: "오전"
         pm: "오후"
 
@@ -110,7 +111,7 @@ ko:
             change_history: 변경사항
             commute: 출퇴근
             company: 회사
-            contact: 주소록
+            contact: 연락처
             contact_phone_number: 전화번호
             contact_address: 주소
             contact_address_tag: 주소 대상
@@ -294,6 +295,14 @@ ko:
                 phone_number: 업체 연락처
                 pay_basic_date: 급여 기준일
                 payday: 급여 지급일
+                google_apps_domain: 구글앱스 도메인 이름
+                google_apps_username: 구글앱스 관리자 계정
+                google_apps_password: 구글앱스 관리자 비밀번호
+                redmine_domain: 레드마인 도메인 이름
+                redmine_username: 레드마인 관리자 계정
+                redmine_password: 레드마인 관리자 비밀번호
+                default_password: 기본 비밀번호
+
             contact:
                 name: 이름
                 firstname: 이름
@@ -473,8 +482,8 @@ ko:
                 comment: 코멘트
                 status: 상태
                 localized_status:
-                    not_reported: 결제 대기 중
-                    reporting: 결제 진행 중
+                    not_reported: 결재 요청 전
+                    reporting: 결재 대기 중
                     rollback: 반려
                     reported: 결제 완료
             bonus:
@@ -499,9 +508,12 @@ ko:
                 name: 계정명
                 password: 비밀번호
                 password_confirmation: 비밀번호 확인
-                gmail_account: Google 계정
+                google_account: Google 계정
+                daum_account: 다음 계정
+                nate_account: 네이트 계정
                 notify_email: Email
                 boxcar_account: Boxcar 계정
+                redmine_account: Redmine 계정
         errors:
             template:
                 header: 오류가 발생했습니다.
@@ -762,6 +774,7 @@ ko:
             except_column: 컬럼 선택하기
         upload:
             empty: 업로드한 파일이 비어있습니다.
+            invalid_xls: 잘못된 형식의 엑셀파일입니다.
         menu: 메뉴
         total: 합계
     commutes:
@@ -797,16 +810,17 @@ ko:
         title: 회사 관리
     contacts:
         index:
-            title: 주소록 리스트
-            empty: 주소록이 없습니다
+            title: 연락처
+            empty: 연락처가 없습니다
         show:
-            title: 주소록 상세정보
+            title: 연락처 상세정보
         new:
-            title: 주소록 만들기
+            title: 연락처 만들기
+            link: 새로운 연락처 만들기
         edit:
-            title: 주소록 수정하기
+            title: 연락처 수정하기
         find:
-            title: 주소록 찾기
+            title: 연락처 찾기
         title: 연락처 관리
         name: 이름
     contact_address_tags:
@@ -1074,6 +1088,7 @@ ko:
         approval_waiting : 승인 대기
         vacation: "휴가 : "
     users:
+        title: 사용자 리스트
         new:
             title: 새 사용자 계정 만들기
         my:
@@ -1088,6 +1103,7 @@ ko:
         index:
             title: 사용자 계정 목록
             newuser: 새로운 사용자 등록
+            google: 구글 앱스 계정이 등록된 사용자들 보기
         login:
             title: 로그인
             name: 사용자계정
@@ -1105,6 +1121,14 @@ ko:
             oldpassword_wrong: 이전 비밀번호가 틀렸습니다.
             password_confirm_wrong: 비밀번호와 비밀번호 확인이 일치하지 않습니다.
             successfully_changed: 성공적으로 변경하였습니다.
+        google:
+            create: 구글 앱스 계정 생성하기
+            destroy: 구글 앱스 계정 제거하기
+        redmine:
+            create: 레드마인 계정 생성하기
+            destroy: 레드마인 계정 제거하기
+        google_apps:
+            title: 구글 앱스 계정이 등록된 사용자들
         error:
     vacations:
         index:

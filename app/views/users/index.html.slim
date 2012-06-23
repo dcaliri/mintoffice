@@ -8,6 +8,8 @@
     = search_field_tag 'q', params[:q]
 
 #show_command
+  = link_to t('.google'), google_apps_users_path
+  = " | "
   = link_to t('.newuser'), new_user_path
 
 h2= t("common.title.list")
@@ -15,7 +17,7 @@ h2= t("common.title.list")
 table#list-table
   tr
     th= User.human_attribute_name('name')
-    th= User.human_attribute_name('gmail_account')
+    th= User.human_attribute_name('google_account')
     th= User.human_attribute_name('notify_email')
     th= User.human_attribute_name('boxcar_account')
   = render partial: "user", collection: @users

@@ -1,7 +1,5 @@
 module Api
   class CommutesController < Api::ApplicationController
-    before_filter :find_user
-
     def checkin
       @commute = @user.commutes.build
       @commute.go!
@@ -19,16 +17,6 @@ module Api
         render :json => {:status => :ok, :commute => @commute}
       else
         render :json => {:status => :not_found}
-      end
-    end
-
-    private
-    def find_user
-      @users = User.where(:api_key => request.env['HTTP_API_KEY'])
-      @user = @users.first if @users
-      unless @user
-        render :json => {:status => :api_key_wrong}
-        false
       end
     end
   end

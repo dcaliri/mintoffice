@@ -19,7 +19,7 @@ h2
   table
     tr
       th= BankTransaction.human_attribute_name(:transacted_at)
-      td= bank_transaction.transacted_at.strftime("%Y.%m.%d %H:%M")
+      td= bank_transaction.transacted_at.strftime("%Y.%m.%d %H:%M") rescue ""
     tr
       th= BankTransaction.human_attribute_name(:transaction_type)
       td= bank_transaction.transaction_type

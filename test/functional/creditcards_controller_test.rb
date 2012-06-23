@@ -1,45 +1,43 @@
 require 'test_helper'
 
 class CreditcardsControllerTest < ActionController::TestCase
-  test "should get index" do
+  fixtures :creditcards
+
+  def setup
+    current_user.permission.create!(name: 'creditcards')
+  end
+
+  test "should see list page" do
     get :index
     assert_response :success
-    assert_not_nil assigns(:creditcards)
   end
 
-  test "should get new" do
-    get :new
+  test "should see credit card page" do
+    get :show, id: current_creditcard.id
     assert_response :success
   end
 
-  test "should create creditcard" do
-    assert_difference('Creditcard.count') do
-      post :create, :creditcard => { }
-    end
-
-    assert_redirected_to creditcard_path(assigns(:creditcard))
-  end
-
-  test "should show creditcard" do
-    get :show, :id => creditcards(:one).to_param
+  test "should see new credit card page" do
+    get :new, id: current_creditcard.id
     assert_response :success
   end
 
-  test "should get edit" do
-    get :edit, :id => creditcards(:one).to_param
+  test "should see edit credit card page" do
+    get :edit, id: current_creditcard.id
     assert_response :success
   end
 
-  test "should update creditcard" do
-    put :update, :id => creditcards(:one).to_param, :creditcard => { }
-    assert_redirected_to creditcard_path(assigns(:creditcard))
+  test "should see total page" do
+    get :total
+    assert_response :success
   end
 
-  test "should destroy creditcard" do
-    assert_difference('Creditcard.count', -1) do
-      delete :destroy, :id => creditcards(:one).to_param
-    end
+  test "should see excel page" do
+    get :excel
+    assert_response :success
+  end
 
-    assert_redirected_to creditcards_path
+  def current_creditcard
+    @creditcard ||= creditcards(:fixture)
   end
 end

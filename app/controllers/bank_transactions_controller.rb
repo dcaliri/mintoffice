@@ -21,20 +21,22 @@ class BankTransactionsController < ApplicationController
 
   def preview
     bank_account = BankAccount.find(params[:bank_account])
-    @transactions = BankTransaction.preview_stylesheet(bank_account, params[:bank_type], params[:upload])
+    @transactions = BankTransaction.preview_stylesheet(bank_account, bank_account.name_, params[:upload])
   rescue => error
     redirect_to [:excel, :bank_transactions], alert: error.message
   end
 
   def upload
     bank_account = BankAccount.find(params[:bank_account])
-    BankTransaction.create_with_stylesheet(bank_account, params[:bank_type], params[:upload])
-    redirect_to :bank_transactions
+    BankTransaction.create_with_stylesheet(bank_account, bank_account.name_, params[:upload])
+    redirect_to bank_transactions_path(bank_account_id: params[:bank_account])
   end
 
   def export
     transactions = bank_account ? bank_account.bank_transactions : BankTransaction
-    send_file transactions.latest.export(params[:to].to_sym, except_column(:bank_transaction))
+    include_column = current_user.except_columns.default_columns_by_key('BankTransaction')
+
+    send_file transactions.latest.export(params[:to].to_sym, include_column)
   end
 
   def create

@@ -3,11 +3,6 @@
 class BankTransaction < ActiveRecord::Base
   belongs_to :bank_account
 
-  BANK_LIST = [
-    ["신한 은행", :shinhan],
-    ["기업 은행", :ibk]
-  ]
-
   DEFAULT_COLUMNS = [:bank_account_name,
                      :transacted_at_strftime,
                      :transaction_type,
@@ -32,7 +27,7 @@ class BankTransaction < ActiveRecord::Base
 
   include ResourceExportable
   resource_exportable_configure do |config|
-    config.money [3, 4, 6]
+    config.krw [:in, :out, :remain]
     config.include_column :bank_account_name
     config.except_column :bank_account_id
     config.except_column :out_bank_account
@@ -142,6 +137,8 @@ class BankTransaction < ActiveRecord::Base
   end
 
   def transfer
+    return nil unless transacted_at
+
     time_start = transacted_at - 1.minutes
     time_end = transacted_at + 1.minutes
 

@@ -15,6 +15,10 @@ class ContactOther < ActiveRecord::Base
     }
   end
 
+  def target_view
+    target ? "(#{target})" : ""
+  end
+
   def self.search(query)
     where("description like ?", query)
   end

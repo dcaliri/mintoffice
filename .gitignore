@@ -1,6 +1,7 @@
 files/
 log/
 config/database.yml
+config/oauth_key.yml
 db/development.sqlite3.old
 db/*.sqlite3
 db/schema.rb
@@ -8,3 +9,4 @@ public/assets/
 tmp/
 .bundle
 .DS_Store
+Gemfile.lock

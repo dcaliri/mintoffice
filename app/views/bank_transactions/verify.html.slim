@@ -1,6 +1,6 @@
 
 #show_command
-  = link_to t('common.title.back'), :bank_transactions
+  = link_to t('common.title.back'), bank_transactions_path(bank_account_id: params[:bank_account_id])
 
 h2 입출금 내역 검증
 

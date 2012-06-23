@@ -2,8 +2,17 @@ class ExcelParser
   def class_name(class_name)
     @class_name = class_name
   end
+
   def column(columns)
     @columns = columns
+  end
+
+  def column_keys
+    @columns.keys
+  end
+
+  def column_names
+    @columns.values
   end
 
   def key(keys)
@@ -11,13 +20,23 @@ class ExcelParser
   end
 
   def option(opts)
-    @options = {position: {:start => {x: 2, y: 1}, :end => 0}}.merge(opts)
+    @options = {position: {:start => {x: 2, y: 1}, :end => 0}, validate: true}.merge(opts)
   end
 
   def preview(file)
     previews = []
     parse(file) {|class_name, query, params| previews << class_name.new(params)}
     previews
+  end
+
+  def valid?(sheet)
+    return true unless @options[:validate]
+    position = @options[:position]
+    column_keys.each_with_index do |column, i|
+      column_name = sheet.cell(position[:start][:x] - 1, i + position[:start][:y])
+      return false if column_name != column_names[i]
+    end
+    true
   end
 
   def parse(file)
@@ -27,9 +46,11 @@ class ExcelParser
     position = @options[:position]
 
     sheet = parser.new(file)
+    raise ArgumentError, I18n.t('common.upload.invalid_xls') unless valid?(sheet)
+
     position[:start][:x].upto(sheet.last_row + position[:end]) do |i|
       params = {}
-      @columns.each_with_index do |column, j|
+      column_keys.each_with_index do |column, j|
         params[column] = sheet.cell(i, j + position[:start][:y])
       end
 

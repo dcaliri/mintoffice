@@ -1,11 +1,9 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+fixture:
+    id: 1
+    name: "admin"
+    hashed_password: "1234"
 
-one:
-  name: MyString
-  hashed_password: MyString
-  salt: MyString
-
-two:
-  name: MyString
-  hashed_password: MyString
-  salt: MyString
+no_hrinfo:
+    id: 2
+    name: "no hrinfo"
+    hashed_password: "1234"

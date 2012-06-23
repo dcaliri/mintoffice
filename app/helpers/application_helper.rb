@@ -11,6 +11,21 @@ module ApplicationHelper
   def forward_params
     params.delete_if{|key, value| key == :controller or key == :action}
   end
+  
+  def ns str
+    return '&nbsp;' if str.nil?
+    if str.instance_of? String.class
+      str.empty? ? '&nbsp;' : str
+    else
+      str
+    end
+  end
+  
+  def dtdd obj, p_str
+    html = content_tag :dt, obj.class.human_attribute_name(p_str)
+    html += content_tag :dd, ns(obj.send(p_str.to_sym)), nil, false
+    html
+  end
 
-  include ExceptColumn
+  include ExceptColumnView
 end
