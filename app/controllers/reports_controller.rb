@@ -1,6 +1,8 @@
 #encoding: UTF-8
 
 class ReportsController < ApplicationController
+  skip_before_filter :authorize, only: [:report]
+
   def report
     report_target_class = params[:target_type].constantize
     report_target = report_target_class.find(params[:target_id])

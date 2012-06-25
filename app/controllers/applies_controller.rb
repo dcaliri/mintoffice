@@ -12,12 +12,24 @@ class AppliesController < ApplicationController
     @this_user = User.prepare_apply(params)
   end
 
+  def edit
+    @this_user = current_user
+  end
+
   def create
     @this_user = User.new(params[:user])
     @this_user.save_apply(url_for(@this_user.hrinfo.redirect_when_reported))
     redirect_to [:complete, :apply]
   rescue ActiveRecord::RecordInvalid
     render 'new'
+  end
+
+  def update
+    @this_user = current_user
+    @this_user.update_attributes!(params[:user])
+    redirect_to :apply, notice: "성공적으로 입사지원서를 수정했습니다."
+  rescue ActiveRecord::RecordInvalid
+    render 'edit'
   end
 
   def find_apply_admin
