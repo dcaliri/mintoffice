@@ -186,22 +186,23 @@ class User < ActiveRecord::Base
         user.build_hrinfo.build_contact
       end
     end
+  end
 
-    def create_apply(params)
-      new(params).tap do |user|
-        user.hrinfo.prevent_create_report = true
-        user.save!
+  # include ActionView::Helpers::UrlHelper
+  include Rails.application.routes.url_helpers
 
-        User.current_user = user
-        user.hrinfo.create_initial_report
-        user.hrinfo.report.save!
-        user.hrinfo.create_initial_accessor
+  def save_apply(report_url)
+    tap do |user|
+      user.hrinfo.prevent_create_report = true
+      user.save!
 
-        # need to set in company info
-        # admin = User.first
-        admin = Company.current_company.apply_admin
-        user.hrinfo.report!(admin, "")
-      end
+      User.current_user = user
+      user.hrinfo.create_initial_report
+      user.hrinfo.report.save!
+      user.hrinfo.create_initial_accessor
+
+      admin = Company.current_company.apply_admin
+      user.hrinfo.report!(admin, "", report_url)
     end
   end
 

@@ -14,8 +14,8 @@ class Hrinfo < ActiveRecord::Base
   include Attachmentable
   include Reportable
 
-  validates_format_of :juminno, :with => /^\d{6}-\d{7}$/, :message => I18n.t('hrinfos.error.juminno_invalid')
-  validates_uniqueness_of :juminno
+  # validates_format_of :juminno, :with => /^\d{6}-\d{7}$/, :message => I18n.t('hrinfos.error.juminno_invalid')
+  # validates_uniqueness_of :juminno
 
   attr_accessor :email, :phone_number, :address
 

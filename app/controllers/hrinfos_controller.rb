@@ -61,6 +61,7 @@ class HrinfosController < ApplicationController
     @required_documents = {}
     @unrequired_documents = []
     @related_documents.each do |rd|
+      next unless rd
       cross = rd.tags.collect(&:name) & @required_tagnames
       if cross.empty?
         @unrequired_documents << rd

@@ -16,6 +16,8 @@ gem 'omniauth-daum'
 gem 'omniauth-nate'
 gem 'google_apps'
 
+gem 'pony'
+
 gem 'by_star'
 
 group :assets do

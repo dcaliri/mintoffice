@@ -13,7 +13,8 @@ class AppliesController < ApplicationController
   end
 
   def create
-    @this_user = User.create_apply(params[:user])
+    @this_user = User.new(params[:user])
+    @this_user.save_apply(url_for(@this_user.hrinfo.redirect_when_reported))
     redirect_to [:complete, :apply]
   rescue ActiveRecord::RecordInvalid
     render 'new'
