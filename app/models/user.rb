@@ -206,6 +206,9 @@ class User < ActiveRecord::Base
       admin = Company.current_company.apply_admin
       user.hrinfo.report!(admin, "", report_url)
     end
+  rescue => e
+    destroy
+    raise e
   end
 
   def google_transporter
