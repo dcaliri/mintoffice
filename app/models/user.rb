@@ -194,6 +194,8 @@ class User < ActiveRecord::Base
   def save_apply(report_url)
     tap do |user|
       user.hrinfo.prevent_create_report = true
+      user.hrinfo.contact.firstname = user.hrinfo.firstname
+      user.hrinfo.contact.lastname = user.hrinfo.lastname
       user.save!
 
       User.current_user = user
