@@ -311,7 +311,6 @@ ko:
                 redmine_username: 레드마인 관리자 계정
                 redmine_password: 레드마인 관리자 비밀번호
                 default_password: 기본 비밀번호
-                apply_admin_id: 입사지원서 담당자
 
             contact:
                 name: 이름
@@ -323,7 +322,6 @@ ko:
                 position: 직위
                 isprivate: 비공개
             contact_address:
-                info: 주소
                 target: 대상
                 country: 국가
                 province: 주
@@ -522,7 +520,7 @@ ko:
                 google_account: Google 계정
                 daum_account: 다음 계정
                 nate_account: 네이트 계정
-                notify_email: 이메일
+                notify_email: Email
                 boxcar_account: Boxcar 계정
                 redmine_account: Redmine 계정
         errors:
@@ -561,9 +559,6 @@ ko:
         new:
             title: 첨부파일 신규 작성
         title: 첨부파일 관리
-    applies:
-        title: 입사지원
-        success: 이미 입사지원서가 등록되어 있습니다.
     bank_accounts:
         index:
             title: 은행계좌 목록
@@ -736,12 +731,18 @@ ko:
         show:
             title:  "카드 영수증 내역"
             to_approved: "승인내역"
+            usage: 사용 내역
+            view_financial_information: 지출내역서 보기
+            create_financial_information: 지출내역서 만들
         edit:
             title: "카드 영수증 내용 수정"
         index:
             title: "카드 영수증 목록"
+            total: Total
         messages:
             create: "성공적으로 생성되었습니다."
+        detail: 
+            detail_cardbills: 카드영수증 상세정보
         title: 카드영수증 관리
     change_histories:
         title: 변경사항 관리
@@ -901,8 +902,6 @@ ko:
             title: 인사정보관리 - 사원목록
             list_retired: 퇴직자 목록 조회
             list_current: 현 재직자 목록 조회
-            list_joined: 정사원 목록 조회
-            list_not_joined: 입사지원자 목록 조회
             retired: 퇴직자
             current: 재직자
         show:
@@ -1134,10 +1133,6 @@ ko:
             loginfail: 아이디 혹은 비밀번호가 잘못되었습니다.
             not_registered: 등록되지 않은 계정입니다.
             successfully_signed_in: 로그인에 성공하였습니다.
-            login_with_google: 구글 계정으로 로그인
-            login_with_daum: 다음 계정으로 로그인
-            login_with_daum_explain: ("요즘"서비스 활성화 필요)
-            login_with_nate: 네이트 계정으로 로그인
         changepw:
             title: 비밀번호 변경
             subtitle: 변경

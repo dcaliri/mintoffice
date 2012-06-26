@@ -1,0 +1,44 @@
+- title t('.title')
+#show_command
+	= link_to t('common.title.show'), @cardbill
+	'  |
+	= link_to t('common.title.list'), cardbills_path
+
+h2
+	= t("common.title.edit")
+
+= form_for(@cardbill, :url => { :action => 'update' }, :html => { :class => 'tabular', :multipart => true } ) do |f|
+	= f.error_messages
+#form.box
+	p
+		= f.label :cardno, Cardbill.human_attribute_name('cardno')
+		= f.collection_select(:creditcard_id, @creditcards, :id, :cardno_long)
+	p
+		= f.label :transdate, Cardbill.human_attribute_name('transdate')
+		= f.datetime_select :transdate, :order => [:year, :month, :day]
+	p
+		= f.label :amount, Cardbill.human_attribute_name('amount')
+		= f.text_field :amount
+	p
+		= f.label :vat, Cardbill.human_attribute_name('vat')
+		= f.text_field :vat
+	p
+		= f.label :servicecharge, Cardbill.human_attribute_name('servicecharge')
+		= f.text_field :servicecharge
+	p
+		= f.label :totalamount, Cardbill.human_attribute_name('totalamount')
+		= f.text_field :totalamount
+	p
+		= f.label :storename, Cardbill.human_attribute_name('storename')
+		= f.text_field :storename
+	p
+		= f.label :storeaddr, Cardbill.human_attribute_name('storeaddr')
+		= f.text_field :storeaddr
+	p
+		= f.label :approveno, Cardbill.human_attribute_name('approveno')
+		= f.text_field :approveno
+	p
+		= render 'shared/attachments/form', form: f
+
+= f.submit t('common.button.update')
+
