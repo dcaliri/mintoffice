@@ -21,7 +21,9 @@ h2 회사 정보
     = dtdd company, "redmine_username"
     = dtdd company, "redmine_password"
     = dtdd company, "default_password"
-    
+    dt= company.class.human_attribute_name(:apply_admin_id)
+    dd= company.apply_admin.fullname rescue ""
+
     / table
     /   tr
     /     th= company.class.human_attribute_name(:name)

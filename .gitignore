@@ -2,6 +2,7 @@ files/
 log/
 config/database.yml
 config/oauth_key.yml
+config/mailer.yml
 db/development.sqlite3.old
 db/*.sqlite3
 db/schema.rb
