@@ -7,7 +7,6 @@ class CardApprovedSource < ActiveRecord::Base
 
   DEFAULT_COLUMNS = [:used_at_strftime,
                      :approve_no,
-                     :card_no,
                      :card_holder_name,
                      :store_name,
                      :money,
