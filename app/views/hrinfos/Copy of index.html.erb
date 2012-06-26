@@ -1,0 +1,53 @@
+- if @retired == 'on'
+	= t('hrinfos.index.title') + " (" + t('hrinfos.index.retired') + ")" 
+- else
+	= t('hrinfos.index.title') + " (" + t('hrinfos.index.current') + ")" 
+	
+<% content_for :search do -%>
+  <%= form_tag({:action => "index"}, :method => :get ) do %>
+    <%= hidden_field_tag 'retired', @retired %>
+    <%= t("common.title.search") %> : <%= text_field_tag 'q', params[:q] %>
+  <% end %>
+<% end -%>
+
+<div id="show_command">
+<% if @user.ingroup?("admin") %>
+  <%= link_to t('hrinfos.new.title'), new_hrinfo_path %>
+<% end %>
+</div>
+<h2>Total : <%= @hrinfos_count %></h2>
+<table id="list-table">
+  <tr>
+    <th><%= Hrinfo.human_attribute_name('companyno') %></th>
+    <th><%= Hrinfo.human_attribute_name('fullname')%></th>
+    <th><%= Hrinfo.human_attribute_name('position')%></th>
+    <th><%= Hrinfo.human_attribute_name('username')%></th>
+    <th><%= Hrinfo.human_attribute_name('joined_on')%></th>
+  </tr>
+
+<% @hrinfos.each do |hrinfo| %>
+<tr class="selectable" onclick="location.href='<%= hrinfo_path(hrinfo) %>'">
+    <td align="right"><%=h hrinfo.companyno %></td>
+    <td><%=h hrinfo.fullname %></td>
+    <td><%=h hrinfo.position %></td>
+    <% if hrinfo.user %>
+      <td><%=h hrinfo.user.name %></td>
+    <% else %>
+      <td></td>
+    <% end %>
+    <td><%=h hrinfo.joined_on %></td>
+    <!-- <td><%= link_to 'Show', hrinfo %></td>
+    <td><%= link_to 'Edit', edit_hrinfo_path(hrinfo) %></td>
+    <td><%= link_to 'Destroy', hrinfo, :confirm => 'Are you sure?', :method => :delete %></td> -->
+  </tr>
+<% end %>
+</table>
+<% if @user.ingroup?("admin")%>
+  <div id="show_command">
+  <% if @retired == 'on' %>
+    <%= link_to t('.list_current'), :action => "index"%>
+  <% else %>
+    <%= link_to t('.list_retired'), :action => "index", :retired=>"on" %>
+  <% end %>
+  </div>
+<% end %>
