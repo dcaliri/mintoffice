@@ -78,6 +78,33 @@ class Contact < ActiveRecord::Base
     def search_by_address(query)
       joins(:addresses).merge(ContactAddress.search(query))
     end
+
+    def save_to(google_contact)
+      find_all do |resource|
+        google_contact.save(resource)
+      end
+    end
+
+    def load_from(google_contact)
+      google_contact.load.each do |information|
+        collection = where(google_id: information.id)
+        unless collection.empty?
+          resource = collection.first
+        else
+          resource = collection.new
+        end
+
+        resource.isprivate = true
+
+        resource.firstname = information.givenName
+        resource.lastname = information.familyName
+        resource.emails.build(email: information.email) if information.email
+        resource.phone_numbers.build(number: information.phoneNumber) if information.phoneNumber
+        resource.addresses.build(other1: information.address) if information.address
+
+        resource.save!
+      end
+    end
   end
 
   def name

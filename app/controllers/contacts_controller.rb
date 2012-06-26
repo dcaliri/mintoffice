@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class ContactsController < ApplicationController
   expose(:contacts) { current_company.contacts }
   expose(:contacts) { Contact.where("") }
@@ -35,6 +37,19 @@ class ContactsController < ApplicationController
 
     @target.contact = @contact
     @target.save!
+  end
+
+  def save
+    contact = OpenApi::Google::Contact.new(id: id, password: password)
+    # current_user.contacts.save_to(contact)
+    contact.save(current_user.contacts.first)
+    redirect_to :back, notice: "성공적으로 연락처를 저장했습니다."
+  end
+
+  def load
+    contact = OpenApi::Google::Contact.new(id: id, password: password)
+    current_user.contacts.load_from(contact)
+    redirect_to :back, notice: "성공적으로 연락처를 읽어왔습니다."
   end
 
   def create

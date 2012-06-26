@@ -126,7 +126,11 @@ Mintoffice::Application.routes.draw do
   match "/auth/:provider/callback" => "providers#create"
 
   resources :contacts do
-    get 'find', :action => :find, :on => :collection
+    collection do
+      get 'find'
+      get 'save'
+      get 'load'
+    end
     get 'select', :action => :select, :on => :member
 
     resources :contact_emails, :path => 'emails', :only => :destroy
