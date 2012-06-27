@@ -26,7 +26,7 @@ h2
 
 span style="float:right;" class="<%= @cardbill.mismatch?(:transdate) %>"
 	= Cardbill.human_attribute_name('transdate') %> : <%=h @cardbill.transdate.strftime("%Y.%m.%d %H:%M:%S %p") rescue ""
-
+/이부분을 어떻게 처리할 것인가?
 h3
 	= Cardbill.human_attribute_name('totalamount')
 	' :
@@ -39,4 +39,4 @@ h3
 
 = render "shared/attachments/detail", :target => @cardbill
 style="clear: both;"
-
+/이부분을 어떻게 처리할 것인가?

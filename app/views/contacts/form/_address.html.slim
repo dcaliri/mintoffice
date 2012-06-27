@@ -6,8 +6,7 @@ h3 주소
     p
       = address_field.label :target
       = address_field.select :target, options_for_select(current_company.contact_address_tags.map{|tag| tag.name}, address_field.object.target)
-      - if current_user.present? and current_user.admin?
-        = link_to "새로운 대상 만들기", [:new, :contact_address_tag]
+      = link_to "새로운 대상 만들기", [:new, :contact_address_tag]
     p
       = address_field.label :country
       = address_field.text_field :country

@@ -46,17 +46,10 @@ end
 </table>
 <% if @user.ingroup?("admin")%>
   <div id="show_command">
-    <% if @retired == 'on' %>
-      <%= link_to t('.list_current'), :action => "index"%>
-    <% else %>
-      <%= link_to t('.list_retired'), :action => "index", :retired=>"on" %>
-    <% end %>
-     |
-    <% if params[:not_joined] == 'true' %>
-      <%= link_to t('.list_joined'), :action => "index"%>
-    <% else %>
-      <%= link_to t('.list_not_joined'), :action => "index", :not_joined => true %>
-    <% end %>
-
+  <% if @retired == 'on' %>
+    <%= link_to t('.list_current'), :action => "index"%>
+  <% else %>
+    <%= link_to t('.list_retired'), :action => "index", :retired=>"on" %>
+  <% end %>
   </div>
 <% end %>

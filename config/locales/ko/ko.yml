@@ -893,6 +893,9 @@ ko:
             addtag: 태그 추가
     expense_reports:
         title: 지출내역서
+        show:  
+          view: 보기
+          detail_expense_reports: 지출내역서 상세정
         index:
             title: 지출내역서 관리
     groups:
@@ -942,6 +945,8 @@ ko:
             empty: 계정이 없습니다
         show:
             title: 원장 계정 상세정보
+            period: 기간
+            price: 가격
     main:
         index:
             human_resources: 인사관리
@@ -1022,10 +1027,17 @@ ko:
         show:
             title: 소액현금 내역
     postings:
+        form:
+            list: 항목
+            debit: "차변"
+            credit: "대변"
         title: 전표 관리
         show:
             title: 전표 내역
             link: 전표 내역 보기
+            debit: 차변
+            credit: 대변
+            total_amount: 총액
         new:
             title: 새로운 전표 작성
             link: 전표 만들기
@@ -1033,12 +1045,20 @@ ko:
             title: 전표 수정
     projects:
         title: 프로젝트 관리
+        expense:
+            expenditures: 지출 내역
+            history: 내역
+            amount: 금액
+            monthly_sum: 월별 총합
+            overall_total: 전체 총합
         index:
             title: 프로젝트 관리
             in_progress: 진행중
             completed: 완료
         show:
             title: 프로젝트 상세 내역
+            users: Users
+            adjust_the_allocation_ratio: 할당비율 조정
         new:
             title: 새 프로젝트 작성
         edit:
@@ -1062,8 +1082,10 @@ ko:
         index:
             title: 세금계산서 관리
             empty: 세금계산서가 없습니다.
+            total: Total
         show:
             title: 세금계산서 내역
+            dot: ...
         new:
             title: 새로운 세금계산서 입력
             picture: 첨부파일

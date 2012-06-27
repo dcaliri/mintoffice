@@ -12,30 +12,13 @@ class Hrinfo < ActiveRecord::Base
 
   include Historiable
   include Attachmentable
-  include Reportable
 
   validates_format_of :juminno, :with => /^\d{6}-\d{7}$/, :message => I18n.t('hrinfos.error.juminno_invalid')
   validates_uniqueness_of :juminno
+  validates_numericality_of :companyno
+  validates_uniqueness_of :companyno
 
   attr_accessor :email, :phone_number, :address
-
-  class << self
-    def not_joined(not_joined)
-      if not_joined
-        where('joined_on IS NULL')
-      else
-        where('joined_on IS NOT NULL')
-      end
-    end
-  end
-
-  def joined?
-    joined_on
-  end
-
-  def not_joined?
-    not joined?
-  end
 
   def contact_or_build
     self.contact || build_contact
