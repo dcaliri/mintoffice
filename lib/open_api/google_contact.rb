@@ -121,6 +121,32 @@ module OpenApi
       end
     end
 
+    def add_organization_to_xml(resource, doc, opts={})
+      options = {namespace: true}.merge(opts)
+      node = Nokogiri::XML::Node.new('gd:organization', doc)
+      node['rel'] = "http://schemas.google.com/g/2005#other"
+
+      org_name = Nokogiri::XML::Node.new('gd:orgName',node)
+      if resource.company_name
+        org_name.content = resource.company_name
+        node.add_child(org_name)
+      end
+
+      org_title = Nokogiri::XML::Node.new('gd:orgTitle',node)
+      if resource.position
+        org_title.content = resource.position
+        node.add_child(org_title)
+      end
+
+      doc.xpath('//*').first.add_child(node)
+
+      unless options[:namespace]
+        node.namespace = nil
+        org_name.namespace = nil
+        org_title.namespace = nil
+      end
+    end
+
     def add_addresses_to_xml(address_list, doc, opts={})
       options = {namespace: true}.merge(opts)
       address_list.each do |address|
@@ -181,6 +207,7 @@ module OpenApi
       entry_doc = Nokogiri::XML(entry_xml, nil, 'UTF-8')
 
       add_name_to_xml(resource, entry_doc, namespace: false)
+      add_organization_to_xml(resource, entry_doc, namespace: false)
       add_emails_to_xml(resource.emails, entry_doc, namespace: false)
       add_phone_numbers_to_xml(resource.phone_numbers, entry_doc, namespace: false)
       add_addresses_to_xml(resource.addresses, entry_doc, namespace: false)
@@ -212,6 +239,7 @@ module OpenApi
       entry_doc = Nokogiri::XML(entry_xml, nil, 'UTF-8')
 
       add_name_to_xml(resource, entry_doc)
+      add_organization_to_xml(resource, entry_doc)
       add_emails_to_xml(resource.emails, entry_doc)
       add_phone_numbers_to_xml(resource.phone_numbers, entry_doc)
       add_addresses_to_xml(resource.addresses, entry_doc)
@@ -248,6 +276,8 @@ module OpenApi
             title: (node.xpath('./title').first.content rescue ""),
             givenName: (node.xpath('./name/givenName').first.content rescue ""),
             familyName: (node.xpath('./name/familyName').first.content rescue ""),
+            company: (node.xpath('./organization/orgName').first.content rescue ""),
+            position: (node.xpath('./organization/orgTitle').first.content rescue ""),
             emails: (node.xpath('./email').map{|email| email['address']} rescue []),
             phone_numbers: (node.xpath('./phoneNumber').map{|phone_number| phone_number.content} rescue []),
             addresses: (node.xpath('./structuredPostalAddress').map do |address|

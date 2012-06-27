@@ -102,6 +102,9 @@ class Contact < ActiveRecord::Base
         resource.firstname = information.givenName
         resource.lastname = information.familyName
 
+        resource.company_name = information.company
+        resource.position = information.position
+
         information.emails.each do |email|
           resource.emails.build(email: email) unless resource.emails.exists?(email: email)
         end
