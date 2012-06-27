@@ -80,7 +80,7 @@ class Contact < ActiveRecord::Base
     end
 
     def save_to(google_contact)
-      find_all do |resource|
+      all.each do |resource|
         google_contact.save(resource)
       end
     end
@@ -96,10 +96,30 @@ class Contact < ActiveRecord::Base
 
         resource.isprivate = true
 
+        resource.google_id = information.id
+        resource.google_etag = information.etag
+
         resource.firstname = information.givenName
         resource.lastname = information.familyName
-        resource.emails.build(email: information.email) if information.email
-        resource.phone_numbers.build(number: information.phoneNumber) if information.phoneNumber
+
+        information.emails.each do |email|
+          resource.emails.build(email: email) unless resource.emails.exists?(email: email)
+        end
+
+        information.phone_numbers.each do |number|
+          resource.phone_numbers.build(number: number) unless resource.phone_numbers.exists?(number: number)
+        end
+
+        resource.addresses.clear
+        information.addresses.each do |address|
+          resource.addresses.build({
+            country: address[:country],
+            city: address[:city],
+            province: address[:region],
+            postal_code: address[:postcode],
+          })
+        end
+
         resource.addresses.build(other1: information.address) if information.address
 
         resource.save!
