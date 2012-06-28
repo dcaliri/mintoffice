@@ -97,15 +97,6 @@ ko:
         submit:
             create: "%{model} 만들기"
             update: "%{model} 수정하기"
-    accessors:
-        info:
-            permissions: 권한
-            read: 읽기
-            write: 쓰기
-            change_permissions: 권한 변경
-        serch:
-            all_view: 전체 보기
-            view_detail_unknown_permission: 권한을 알 수 없는 내역 보기
     activerecord:
         models:
             attachment: 첨부파일
@@ -568,12 +559,6 @@ ko:
         index:
             title: 은행계좌 목록
             empty: 은행계좌가 없습니다
-            total_table_view: 합계표 보기
-            cashier_view_details: 입출금내역 보기
-            view_transfer_history: 이체내역 보기
-            create_bank_account: 은행계좌 만들기
-            list_of_bank_accounts: 은행계좌 목록
-            balance: 잔
         new:
             title: 새로운 은행계좌 만들기
             picture: 통장사본

@@ -1,5 +1,5 @@
 div.this_week
-  - @start_day.to_date.step(@end_day.to_date, 1).each do |day|
+  - @start_day.to_date.step(@end_day.to_date, 1.day).each do |day|
     div class={today_css day}
       - today_v = @vacations.select {|v| v.in? day}
       - holidays = @holidays.select { |h| h.theday.to_date == day }
