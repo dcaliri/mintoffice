@@ -40,15 +40,15 @@ class ContactsController < ApplicationController
   end
 
   def save
-    contact = OpenApi::GoogleContact.new(id: id, password: password)
+    contact = OpenApi::GoogleContact.new(id: params[:id], password: params[:password])
     current_user.contacts.save_to(contact)
-    redirect_to :back, notice: "성공적으로 연락처를 저장했습니다."
+    redirect_to :contacts, notice: "성공적으로 연락처를 저장했습니다."
   end
 
   def load
-    contact = OpenApi::GoogleContact.new(id: id, password: password)
+    contact = OpenApi::GoogleContact.new(id: params[:id], password: params[:password])
     current_user.contacts.load_from(contact)
-    redirect_to :back, notice: "성공적으로 연락처를 읽어왔습니다."
+    redirect_to :contacts, notice: "성공적으로 연락처를 읽어왔습니다."
   end
 
   def create

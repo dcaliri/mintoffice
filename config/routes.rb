@@ -128,8 +128,10 @@ Mintoffice::Application.routes.draw do
   resources :contacts do
     collection do
       get 'find'
-      get 'save'
-      get 'load'
+      get 'save', action: :save_form
+      get 'load', action: :load_form
+      post 'save'
+      post 'load'
     end
     get 'select', :action => :select, :on => :member
 
