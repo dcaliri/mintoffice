@@ -13,6 +13,7 @@ module OpenApi
       make_authorization_token(params[:id], params[:password])
 
       response = request(:get, "https://www.google.com/m8/feeds/contacts/default/full")
+      raise ArgumentError, response.body unless response.is_a? Net::HTTPSuccess
       @doc = Nokogiri::XML(response.body, nil, 'UTF-8')
       @doc.remove_namespaces!
     end
@@ -228,6 +229,7 @@ module OpenApi
 
       # raise entry_doc.to_xml.inspect
       response = request(:post, url, {'Content-Type' => 'application/atom+xml'}, entry_doc.to_xml)
+      raise ArgumentError, response.body unless response.is_a? Net::HTTPSuccess
       Rails.logger.info "create result = #{response.body.inspect}"
 
       doc = Nokogiri::XML(response.body, nil, 'UTF-8')
@@ -260,7 +262,7 @@ module OpenApi
       add_websites_to_xml(resource.others, entry_doc)
 
       response = request(:put, url, {'Content-Type' => 'application/atom+xml', 'If-Match' => etag}, entry_doc.to_xml)
-
+      raise ArgumentError, response.body unless response.is_a? Net::HTTPSuccess
       Rails.logger.info "result = #{response.body.inspect}"
 
       doc = Nokogiri::XML(response.body, nil, 'UTF-8')
