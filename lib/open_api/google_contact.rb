@@ -1,5 +1,4 @@
 # encoding: UTF-8
-
 module OpenApi
   GOOGLE_LOGIN_URL="https://www.google.com/accounts/ClientLogin"
   ACCOUNT_TYPE="HOSTED_OR_GOOGLE"
@@ -11,11 +10,6 @@ module OpenApi
 
     def initialize(params)
       make_authorization_token(params[:id], params[:password])
-
-      response = request(:get, "https://www.google.com/m8/feeds/contacts/default/full")
-      raise ArgumentError, response.body unless response.is_a? Net::HTTPSuccess
-      @doc = Nokogiri::XML(response.body, nil, 'UTF-8')
-      @doc.remove_namespaces!
     end
 
     def make_authorization_token(id, password)
@@ -24,37 +18,45 @@ module OpenApi
       http.use_ssl = true if url.scheme == "https"
       http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 
-      data = { "accountType" => ACCOUNT_TYPE,
-          "Email" => ERB::Util.url_encode(id),
-          "Passwd" => ERB::Util.url_encode(password),
-          "service" => SERVICE,
-          "source" => SOURCE }
-
-      form_data = data.map {|key,value| "#{key.to_s}=#{value.to_s}" }.join('&')
-      response = http.post(url.path, form_data)
-      @authorization_token = ""
-      response.body.each_line { |line|
-        if line =~ /Auth=/
-          @authorization_token = line.sub(/Auth=/,'').strip!
-        end
+      data = {
+        "accountType" => ACCOUNT_TYPE,
+        "Email" => ERB::Util.url_encode(id),
+        "Passwd" => ERB::Util.url_encode(password),
+        "service" => SERVICE,
+        "source" => SOURCE
       }
+      form_data = data.map {|key,value| "#{key.to_s}=#{value.to_s}" }.join('&')
+
+      response = http.post(url.path, form_data)
+      response.body.each_line do |line|
+        @authorization_token = line.sub(/Auth=/,'').strip! if line =~ /Auth=/
+      end
       @authorization_token
     end
 
     def request(method, url, header={}, body=nil)
-      header = {"Authorization" => "GoogleLogin auth = #{authorization_token}", "GData-Version" => "3.0", 'Content-Type' => 'application/json'}.merge(header)
+      header = {
+        "Authorization" => "GoogleLogin auth = #{authorization_token}",
+        "GData-Version" => "3.0",
+        'Content-Type' => 'application/json'
+      }.merge(header)
 
       url = URI.parse(url)
       http = Net::HTTP.new(url.host, url.port)
-      http.use_ssl = true
-      case method
-      when :get
-        http.send(method, url.request_uri, header)
-      when :post
-        http.send(method, url.request_uri, body, header)
-      when :put
-        http.send(method, url.request_uri, body, header)
-      end
+      http.use_ssl = true if url.scheme == "https"
+      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+      response = case method
+                 when :get
+                   http.send(method, url.request_uri, header)
+                 when :post
+                   http.send(method, url.request_uri, body, header)
+                 when :put
+                   http.send(method, url.request_uri, body, header)
+                 end
+
+      raise ArgumentError, response.body unless response.is_a? Net::HTTPSuccess
+      response
     end
 
     class Base < OpenStruct
@@ -227,9 +229,7 @@ module OpenApi
       add_addresses_to_xml(resource.addresses, entry_doc, namespace: false)
       add_websites_to_xml(resource.others, entry_doc, namespace: false)
 
-      # raise entry_doc.to_xml.inspect
       response = request(:post, url, {'Content-Type' => 'application/atom+xml'}, entry_doc.to_xml)
-      raise ArgumentError, response.body unless response.is_a? Net::HTTPSuccess
       Rails.logger.info "create result = #{response.body.inspect}"
 
       doc = Nokogiri::XML(response.body, nil, 'UTF-8')
@@ -262,7 +262,6 @@ module OpenApi
       add_websites_to_xml(resource.others, entry_doc)
 
       response = request(:put, url, {'Content-Type' => 'application/atom+xml', 'If-Match' => etag}, entry_doc.to_xml)
-      raise ArgumentError, response.body unless response.is_a? Net::HTTPSuccess
       Rails.logger.info "result = #{response.body.inspect}"
 
       doc = Nokogiri::XML(response.body, nil, 'UTF-8')
@@ -284,14 +283,18 @@ module OpenApi
     def load
       @contacts ||= []
       if @contacts.empty?
-        @doc.xpath('//feed/entry').each do |node|
+        response = request(:get, "https://www.google.com/m8/feeds/contacts/default/full")
+
+        doc = Nokogiri::XML(response.body, nil, 'UTF-8')
+        doc.remove_namespaces!
+        doc.xpath('//feed/entry').each do |node|
           attributes = {
             id: (node.xpath('./id').first.content.split('/').last rescue ""),
             etag: (node['etag'] rescue ""),
             updated: (node.xpath('./updated').first.content rescue ""),
             title: (node.xpath('./title').first.content rescue ""),
-            givenName: (node.xpath('./name/givenName').first.content rescue ""),
-            familyName: (node.xpath('./name/familyName').first.content rescue ""),
+            given_name: (node.xpath('./name/givenName').first.content rescue ""),
+            family_name: (node.xpath('./name/familyName').first.content rescue ""),
             company: (node.xpath('./organization/orgName').first.content rescue ""),
             position: (node.xpath('./organization/orgTitle').first.content rescue ""),
             emails: (node.xpath('./email').map do |email|
@@ -322,8 +325,6 @@ module OpenApi
               }
             end rescue []),
           }
-
-          # raise attributes.inspect
 
           @contacts << Base.new(attributes)
         end

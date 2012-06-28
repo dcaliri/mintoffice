@@ -85,62 +85,66 @@ class Contact < ActiveRecord::Base
       end
     end
 
+    def save_from_google_contact(resource, contact)
+      resource.isprivate = true
+
+      resource.google_id = contact.id
+      resource.google_etag = contact.etag
+
+      resource.firstname = contact.given_name
+      resource.lastname = contact.family_name
+
+      resource.company_name = contact.company
+      resource.position = contact.position
+
+      resource.emails.clear
+      contact.emails.each do |email|
+        resource.emails.build({
+          target: email[:label],
+          email: email[:email]
+        })
+      end
+
+      resource.phone_numbers.clear
+      contact.phone_numbers.each do |number|
+        resource.phone_numbers.build({
+          target: number[:label],
+          number: number[:phone_number]
+        })
+      end
+
+      resource.addresses.clear
+      contact.addresses.each do |address|
+        resource.addresses.build({
+          target: address[:label],
+          country: address[:country],
+          city: address[:city],
+          province: address[:region],
+          postal_code: address[:postcode],
+        })
+      end
+
+      resource.others.clear
+      contact.websites.each do |website|
+        resource.others.build({
+          target: website[:label],
+          description: website[:url],
+        })
+      end
+
+      resource.save!
+    end
+
     def load_from(google_contact)
       google_contact.load.each do |information|
         collection = where(google_id: information.id)
-        unless collection.empty?
-          resource = collection.first
-        else
+        if collection.empty?
           resource = collection.new
+        else
+          resource = collection.first
         end
 
-        resource.isprivate = true
-
-        resource.google_id = information.id
-        resource.google_etag = information.etag
-
-        resource.firstname = information.givenName
-        resource.lastname = information.familyName
-
-        resource.company_name = information.company
-        resource.position = information.position
-
-        resource.emails.clear
-        information.emails.each do |email|
-          resource.emails.build({
-            target: email[:label],
-            email: email[:email]
-          })
-        end
-
-        resource.phone_numbers.clear
-        information.phone_numbers.each do |number|
-          resource.phone_numbers.build({
-            target: number[:label],
-            number: number[:phone_number]
-          })
-        end
-
-        resource.addresses.clear
-        information.addresses.each do |address|
-          resource.addresses.build({
-            target: address[:label],
-            country: address[:country],
-            city: address[:city],
-            province: address[:region],
-            postal_code: address[:postcode],
-          })
-        end
-
-        resource.others.clear
-        information.websites.each do |website|
-          resource.others.build({
-            target: website[:label],
-            description: website[:url],
-          })
-        end
-
-        resource.save!
+        save_from_google_contact(resource, information)
       end
     end
   end
