@@ -46,12 +46,30 @@
       var tax = $('#taxbill_item_tax');
       var total = $('#taxbill_item_total');
 
+
+      var formatCurrency = function(){
+        $(this).formatCurrency({
+          symbol: '￦',
+          roundToDecimalPlace: 0
+        });
+      };
+
+      var unformattedCurrency = function(value) {
+        return 10
+      }
+
       var calculateTax = function(){
-        return Math.round(unitprice.val() * quantity.val() * 0.1);
+        return Math.round(
+          unformattedCurrency(unitprice.val()) *
+          unformattedCurrency(quantity.val()) *
+          0.1);
       }
 
       var calculateTotal = function(){
-        return unitprice.val() * quantity.val() + calculateTax();
+        return
+          unformattedCurrency(unitprice.val()) *
+          unformattedCurrency(quantity.val()) +
+          unformattedCurrency(calculateTax());
       }
 
       var applyTotal = function(){
@@ -61,14 +79,15 @@
       var applyTax = function(){
         tax.val(calculateTax());
       }
-
       unitprice.keyup(applyTotal);
       unitprice.keyup(applyTax);
 
       quantity.keyup(applyTotal);
       quantity.keyup(applyTax);
 
-      $('#taxbill_item_unitprice').maskMoney();
+      unitprice.keyup(formatCurrency);
+      tax.keyup(formatCurrency);
+      total.keyup(formatCurrency);
     });
   </script>
 <% end -%>
