@@ -1,4 +1,3 @@
-# encoding: UTF-8
 require 'digest/sha1'
 
 class User < ActiveRecord::Base
@@ -9,8 +8,7 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :permission
   has_many :project_infos, class_name: "ProjectAssignInfo"
   has_many :projects, through: :project_infos
-  has_one :hrinfo, dependent: :destroy
-  accepts_nested_attributes_for :hrinfo, :allow_destroy => :true
+  has_one :hrinfo
 
   has_many :contacts, foreign_key: 'owner_id'
 
@@ -21,7 +19,6 @@ class User < ActiveRecord::Base
   has_many :reporters, class_name: 'ReportPerson'
 
   has_many :except_columns
-  has_and_belongs_to_many :companies
 
   scope :nohrinfo, :conditions =>['id not in (select user_id from hrinfos)']
   scope :enabled, :conditions =>["name NOT LIKE '[X] %%'"]
@@ -31,10 +28,8 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :name
   validates_uniqueness_of :google_account, :if => Proc.new{ google_account && google_account.empty? == false }
   attr_accessor :password_confirmation
-  validates_confirmation_of :password, :if => Proc.new{|user| user.provider.blank?}
-  validate :password_non_blank, :if => Proc.new{|user| user.provider.blank?}
-
-  has_one :company, foreign_key: :apply_admin_id
+  validates_confirmation_of :password, :if => Proc.new{|user| user.provider.blank? and user.uid.blank?}
+  validate :password_non_blank, :if => Proc.new{|user| user.provider.blank? and user.uid.blank?}
 
   cattr_accessor :current_user
 
@@ -178,38 +173,6 @@ class User < ActiveRecord::Base
       transporter.authenticate current_company.google_apps_username, current_company.google_apps_password
       transporter
     end
-
-    def prepare_apply(params)
-      new.tap do |user|
-        user.provider = params[:provider]
-        user.send(params[:provider] + "_account=", params[:email])
-        user.notify_email = params[:email]
-        user.build_hrinfo.build_contact
-      end
-    end
-  end
-
-  # include ActionView::Helpers::UrlHelper
-  include Rails.application.routes.url_helpers
-
-  def save_apply(report_url)
-    tap do |user|
-      user.hrinfo.prevent_create_report = true
-      user.hrinfo.contact.firstname = user.hrinfo.firstname
-      user.hrinfo.contact.lastname = user.hrinfo.lastname
-      user.save!
-
-      User.current_user = user
-      user.hrinfo.create_initial_report
-      user.hrinfo.report.save!
-      user.hrinfo.create_initial_accessor
-
-      admin = Company.current_company.apply_admin
-      user.hrinfo.report!(admin, "", report_url)
-    end
-  rescue => e
-    destroy
-    raise e
   end
 
   def google_transporter
@@ -295,14 +258,6 @@ class User < ActiveRecord::Base
 
     self.redmine_account = nil
     save
-  end
-
-  def joined?
-    companies.exists?
-  end
-
-  def not_joined?
-    not joined?
   end
 
 private

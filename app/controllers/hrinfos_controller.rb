@@ -12,15 +12,15 @@ class HrinfosController < ApplicationController
       @retired = ""
     end
     if @retired == "on"
-      @hrinfos = Hrinfo.search(params[:q]).not_joined(params[:not_joined]).find(:all, :conditions => "retired_on IS NOT NULL")
-      @hrinfos_count = Hrinfo.not_joined(params[:not_joined]).count(:all, :conditions => "retired_on IS NOT NULL")
+      @hrinfos = Hrinfo.search(params[:q]).find(:all, :conditions => "retired_on IS NOT NULL")
+      @hrinfos_count = Hrinfo.count(:all, :conditions => "retired_on IS NOT NULL")
     else
       if @user.ingroup?("admin")
-        @hrinfos = Hrinfo.search(params[:q]).not_joined(params[:not_joined]).find(:all, :conditions => "retired_on IS NULL")
-        @hrinfos_count = Hrinfo.not_joined(params[:not_joined]).count(:all, :conditions => "retired_on IS NULL")
+        @hrinfos = Hrinfo.search(params[:q]).find(:all, :conditions => "retired_on IS NULL")
+        @hrinfos_count = Hrinfo.count(:all, :conditions => "retired_on IS NULL")
       else
-        @hrinfos = Hrinfo.search(params[:q]).not_joined(params[:not_joined]).where(:listed => true).where(:retired_on => nil)
-        @hrinfos_count = Hrinfo.not_joined(params[:not_joined]).count(:all, :conditions => ["retired_on IS NULL AND listed = ?", true])
+        @hrinfos = Hrinfo.search(params[:q]).where(:listed => true).where(:retired_on => nil)
+        @hrinfos_count = Hrinfo.count(:all, :conditions => ["retired_on IS NULL AND listed = ?", true])
       end
     end
 
@@ -61,7 +61,6 @@ class HrinfosController < ApplicationController
     @required_documents = {}
     @unrequired_documents = []
     @related_documents.each do |rd|
-      next unless rd
       cross = rd.tags.collect(&:name) & @required_tagnames
       if cross.empty?
         @unrequired_documents << rd

@@ -1,6 +1,0 @@
-h1 등록되지 않은 사용자입니다. 입사지원시스템으로 이동하시겠습니까?
-= form_tag [:new, :apply], method: :get do
-  = hidden_field_tag :provider, params[:provider]
-  = hidden_field_tag :email, params[:email]
-  p
-    = submit_tag "예"

@@ -6,8 +6,7 @@ h3 전화번호
     p
       = phone_number_field.label :target
       = phone_number_field.select :target, options_for_select(current_company.contact_phone_number_tags.map{|tag| tag.name}, phone_number_field.object.target)
-      - if current_user.present? and current_user.admin?
-        = link_to "새로운 대상 만들기", [:new, :contact_phone_number_tag]
+      = link_to "새로운 대상 만들기", [:new, :contact_phone_number_tag]
     p
       = phone_number_field.label :number
       = phone_number_field.telephone_field :number
@@ -20,7 +19,7 @@ br
 javascript:
   (function(){
     $('.phone-number-form').each(function(index){
-      if($(this).find("input[type='tel']").val() == "") {
+      if($(this).find("input[type='text']").val() == "") {
         $(this).hide();
       }
     });

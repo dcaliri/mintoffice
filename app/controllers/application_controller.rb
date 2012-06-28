@@ -40,7 +40,7 @@ class ApplicationController < ActionController::Base
   protected
   def authorize
     @user = User.find(session[:user_id]) if session[:user_id]
-    if @user.nil? or @user.not_joined?
+    unless @user
       redirect_to users_login_path
       return
     end

@@ -48,7 +48,7 @@ class Report < ActiveRecord::Base
     I18n.t("activerecord.attributes.report.localized_status.#{status}")
   end
 
-  def report!(user, comment, report_url)
+  def report!(user, comment)
     prev_reporter = self.reporter
     prev_reporter.owner = false
 
@@ -69,9 +69,7 @@ class Report < ActiveRecord::Base
     next_reporter.save!
     prev_reporter.save!
 
-    message = "#{prev_reporter.fullname}님이 #{next_reporter.fullname}님에게 결제를 요청하였습니다"
-    body = message + "\n" +  report_url
-    ReportMailer.report(target, prev_reporter.user, next_reporter.user, message, body)
+    Boxcar.send_to_boxcar_user(next_reporter.user, prev_reporter.fullname, "#{prev_reporter.fullname}님이 #{next_reporter.fullname}님에게 결제를 요청하였습니다")
 
     permission user, :write
     permission prev_reporter.user, :read
@@ -87,7 +85,7 @@ class Report < ActiveRecord::Base
     save!
   end
 
-  def rollback!(comment, report_url)
+  def rollback!(comment)
     self.status = :rollback
     prev_reporter = self.reporter
     next_reporter = prev_reporter.prev if prev_reporter.prev
@@ -104,12 +102,7 @@ class Report < ActiveRecord::Base
     self.comments.build(owner: prev_reporter, description: "#{prev_reporter.fullname}님이 결제를 반려하였습니다")
     self.comments.build(owner: prev_reporter, description: comment) unless comment.blank?
 
-    message = "#{prev_reporter.fullname}님이 #{next_reporter.fullname}님에게 결제를 반려하였습니다"
-    body = message + "\n" +  report_url
-
-    Boxcar.send_to_boxcar_user(next_reporter.user, prev_reporter.fullname, message)
-    ReportMailer.report(target, prev_reporter.user, next_reporter.user, message, body)
-
+    Boxcar.send_to_boxcar_user(next_reporter.user, prev_reporter.fullname, "#{prev_reporter.fullname}님이 #{next_reporter.fullname}님에게 결제를 반려하였습니다")
     save!
   end
 

@@ -1,0 +1,22 @@
+#show_command
+	= link_to t('common.title.back'), taxbill
+
+h2
+	= t("common.title.#{action_name}")
+
+= form_for taxbill, html: {multipart: true, class: "tabular"} do |f|
+  	= f.error_messages
+  	.box
+		p
+      		= f.label :billtype
+      		= f.select :billtype, options_for_select([t('taxbills.purchase_bill'),t('taxbills.sales_bill')].zip(Taxbill::BILL_TYPE))
+		p
+      		= f.label :transacted_at
+      		= f.date_select :transacted_at, :order => [:year, :month, :day]
+		p
+      		= f.label :taxman_id
+      		= f.select :taxman_id, options_for_select(Taxbill.taxmen_list, taxbill.taxman_id)
+		p
+      		= render 'shared/attachments/form', form: f
+		p
+			= f.submit

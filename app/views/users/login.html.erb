@@ -1,0 +1,26 @@
+<%#= stylesheet_link_tag 'main', :cache => true %>
+<% title t("users.login.title") %>
+<div id="login-form">
+  <%= form_tag do %>
+    <div class="box">
+      <p>
+        <%= label_tag :name, t(".name") %>
+        <%= text_field_tag :name, params[:name] %>
+      </p>
+      <p>
+        <%= label_tag :password, t(".password") %>
+        <%= password_field_tag :password, params[:password] %>
+      </p>
+      <%= submit_tag t('.login') %>
+    </div>
+  <% end %>
+</div>
+
+<div class='login-link' style="text-align: center;">
+  <h4>
+    or login with
+    <%= link_to "Google", '/auth/google' %>,
+    <%= link_to "Daum", '/auth/daum' %>,
+    <%= link_to "Nate", '/auth/nate' %>
+  </h4>
+</div>

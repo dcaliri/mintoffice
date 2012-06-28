@@ -3,8 +3,8 @@
     - year_before = @expenses_by_menu.oldest_year
     - year_after = @expenses_by_menu.newest_year
     = render 'reports/search_form'
-    = select_tag :year, options_for_select([["all", nil]] + (year_before..year_after).map{|year| [year.to_s+" 년", year]}, params[:year]), "onchange" => "this.form.submit()"
-    = select_tag :month, options_for_select([["all", nil]] + (1..12).map{|month| [month.to_s+" 월", month]}, params[:month]), "onchange" => "this.form.submit()"
+    = select_tag :year, options_for_select([["all", nil]] + (year_before..year_after).map{|year| [year.to_s+t('datetime.prompts.year'), year]}, params[:year]), "onchange" => "this.form.submit()"
+    = select_tag :month, options_for_select([["all", nil]] + (1..12).map{|month| [month.to_s+t('datetime.prompts.month'), month]}, params[:month]), "onchange" => "this.form.submit()"
     = select_tag :project_id, options_from_collection_for_select([Project.new(:name => "all")]+Project.all, :id, :name, params[:project_id]), "onchange" => "this.form.submit()"
     = render 'accessors/search_form'
 #show_command

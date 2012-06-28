@@ -54,11 +54,10 @@ module Reportable
   end
 
   included do
-    has_one :report, as: :target, dependent: :destroy
-    before_create :create_initial_report, unless: :prevent_create_report
-    after_create :create_initial_accessor, unless: :prevent_create_report
+    has_one :report, as: :target
+    before_create :create_initial_report
+    after_create :create_initial_accessor
 
-    attr_accessor :prevent_create_report
     extend ClassMethods
   end
 end
