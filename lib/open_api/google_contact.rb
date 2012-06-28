@@ -64,7 +64,7 @@ module OpenApi
       email_list.each do |email|
         if email.email?
           node = Nokogiri::XML::Node.new('gd:email',doc)
-          node['rel'] = "http://schemas.google.com/g/2005#work"
+          node['label'] = email.target
           node['address'] = email.email
           node['displayName'] = email.email
 
@@ -80,7 +80,7 @@ module OpenApi
       phone_number_list.each do |phone_number|
         if phone_number.number?
           node = Nokogiri::XML::Node.new('gd:phoneNumber', doc)
-          node['rel'] = 'http://schemas.google.com/g/2005#work'
+          node['label'] = phone_number.target
           node.content = phone_number.number
 
           doc.xpath('//*').first.add_child(node)
@@ -151,7 +151,7 @@ module OpenApi
       options = {namespace: true}.merge(opts)
       address_list.each do |address|
         node = Nokogiri::XML::Node.new('gd:structuredPostalAddress', doc)
-        node['rel'] = 'http://schemas.google.com/g/2005#work'
+        node['label'] = address.target
 
         city = Nokogiri::XML::Node.new('gd:city',node)
         if address.city?
@@ -247,7 +247,6 @@ module OpenApi
       response = request(:put, url, {'Content-Type' => 'application/atom+xml', 'If-Match' => etag}, entry_doc.to_xml)
 
       Rails.logger.info "result = #{response.body.inspect}"
-      # response = request(:get, url)
 
       doc = Nokogiri::XML(response.body, nil, 'UTF-8')
       doc.remove_namespaces!
@@ -269,7 +268,6 @@ module OpenApi
       @contacts ||= []
       if @contacts.empty?
         @doc.xpath('//feed/entry').each do |node|
-          # raise node.to_xml.inspect
           attributes = {
             id: (node.xpath('./id').first.content.split('/').last rescue ""),
             etag: (node['etag'] rescue ""),
@@ -302,8 +300,6 @@ module OpenApi
             end rescue []),
             website: (node.xpath('./website').first['href'] rescue "")
           }
-
-          # raise attributes.inspect
 
           @contacts << Base.new(attributes)
         end
