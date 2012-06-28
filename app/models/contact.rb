@@ -132,6 +132,14 @@ class Contact < ActiveRecord::Base
           })
         end
 
+        resource.others.clear
+        information.websites.each do |website|
+          resource.others.build({
+            target: website[:label],
+            description: website[:url],
+          })
+        end
+
         resource.save!
       end
     end

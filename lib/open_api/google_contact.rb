@@ -196,6 +196,19 @@ module OpenApi
       end
     end
 
+    def add_websites_to_xml(website_list, doc, opts={})
+      options = {namespace: true}.merge(opts)
+      website_list.each do |website|
+        node = Nokogiri::XML::Node.new('gContact:website', doc)
+        node['label'] = website.target
+        node['href'] = website.description
+
+        doc.xpath('//*').first.add_child(node)
+
+        node.namespace = nil unless options[:namespace]
+      end
+    end
+
     def create(resource)
       url = "https://www.google.com/m8/feeds/contacts/default/full"
       entry_xml = <<-EOF
@@ -211,6 +224,7 @@ module OpenApi
       add_emails_to_xml(resource.emails, entry_doc, namespace: false)
       add_phone_numbers_to_xml(resource.phone_numbers, entry_doc, namespace: false)
       add_addresses_to_xml(resource.addresses, entry_doc, namespace: false)
+      add_websites_to_xml(resource.others, entry_doc, namespace: false)
 
       # raise entry_doc.to_xml.inspect
       response = request(:post, url, {'Content-Type' => 'application/atom+xml'}, entry_doc.to_xml)
@@ -243,6 +257,7 @@ module OpenApi
       add_emails_to_xml(resource.emails, entry_doc)
       add_phone_numbers_to_xml(resource.phone_numbers, entry_doc)
       add_addresses_to_xml(resource.addresses, entry_doc)
+      add_websites_to_xml(resource.others, entry_doc)
 
       response = request(:put, url, {'Content-Type' => 'application/atom+xml', 'If-Match' => etag}, entry_doc.to_xml)
 
@@ -298,8 +313,15 @@ module OpenApi
                 postcode: (address.xpath('./postcode').first.content rescue ""),
               }
             end rescue []),
-            website: (node.xpath('./website').first['href'] rescue "")
+            websites: (node.xpath('./website').map do |website|
+              {
+                label: website['rel'] || website['label'],
+                url: website['href']
+              }
+            end rescue []),
           }
+
+          # raise attributes.inspect
 
           @contacts << Base.new(attributes)
         end
