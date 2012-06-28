@@ -20,8 +20,8 @@ h2= t('.title')
       td
         table
           tr
-            th colspan=2 =t('postings.show.debit')
-            th colspan=2 =t('postings.show.credit')
+            th colspan=2 차변
+            th colspan=2 대변
           - items = Array.new([posting.items.debits.count, posting.items.credits.count].max)
           - items = items.zip(posting.items.debits, posting.items.credits)
           - items.each do |_, debit, credit|
@@ -31,5 +31,5 @@ h2= t('.title')
               td= credit.ledger_account.title rescue ""
               td= number_to_currency credit.amount rescue ""
     tr
-      th =t('postings.show.total_amount')
+      th 총액
       td= number_to_currency posting.total_amount

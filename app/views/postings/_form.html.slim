@@ -14,11 +14,11 @@ h2= t("common.title.#{action_name}")
       = f.label :description
       = f.text_field :description
 
-    h3= t('postings.form.list')
+    h3 항목
     #posting-item-form
       #debit-form
-        = render 'posting_items/form', form: f, posting_items: @posting.items, type: t('postings.form.debit')
+        = render 'posting_items/form', form: f, posting_items: @posting.items, type: "차변"
       #credit-form
-        = render 'posting_items/form', form: f, posting_items: @posting.items, type: t('postings.form.credit')
+        = render 'posting_items/form', form: f, posting_items: @posting.items, type: "대변"
     p
       = f.submit

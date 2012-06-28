@@ -58,18 +58,18 @@ class ContactsController < ApplicationController
   end
 
   def create
-    contact = contacts.where(owner_id: current_user.id).build(params[:contact])
-    contact.save!
-    redirect_to contact
+    @contact = contacts.where(owner_id: current_user.id).build(params[:contact])
+    @contact.save!
+    redirect_to @contact
+  rescue ActiveRecord::RecordInvalid
+    render 'new'
   end
 
   def update
-    if contact.valid?
-      contact.save!
-      redirect_to contact
-    else
-      render :action => "edit"
-    end
+    contact.save!
+    redirect_to contact
+  rescue ActiveRecord::RecordInvalid
+    render "edit"
   end
 
   def destroy

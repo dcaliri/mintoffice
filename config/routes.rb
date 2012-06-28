@@ -12,6 +12,11 @@ Mintoffice::Application.routes.draw do
     resources :contacts
   end
 
+  resource :apply do
+    get :try
+    get :complete
+  end
+
   resources :creditcards do
     collection do
       get 'total'

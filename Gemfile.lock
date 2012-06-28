@@ -123,6 +123,8 @@ GEM
       Ascii85 (~> 1.0.0)
       ruby-rc4
     polyglot (0.3.3)
+    pony (1.4)
+      mail (> 2.0)
     pow-client (0.1.2)
     prawn (0.12.0)
       pdf-reader (>= 0.9.0)
@@ -224,6 +226,7 @@ DEPENDENCIES
   omniauth-daum
   omniauth-nate
   omniauth-openid
+  pony
   pow-client
   prawn
   rails (= 3.2.5)
