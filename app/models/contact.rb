@@ -105,17 +105,34 @@ class Contact < ActiveRecord::Base
         resource.company_name = information.company
         resource.position = information.position
 
+        # information.emails.each do |email|
+        #   resource.emails.build(email: email) unless resource.emails.exists?(email: email)
+        # end
+        #
+        # information.phone_numbers.each do |number|
+        #   resource.phone_numbers.build(number: number) unless resource.phone_numbers.exists?(number: number)
+        # end
+
+        resource.emails.clear
         information.emails.each do |email|
-          resource.emails.build(email: email) unless resource.emails.exists?(email: email)
+          resource.emails.build({
+            target: email[:label],
+            email: email[:email]
+          })
         end
 
+        resource.phone_numbers.clear
         information.phone_numbers.each do |number|
-          resource.phone_numbers.build(number: number) unless resource.phone_numbers.exists?(number: number)
+          resource.phone_numbers.build({
+            target: number[:label],
+            number: number[:phone_number]
+          })
         end
 
         resource.addresses.clear
         information.addresses.each do |address|
           resource.addresses.build({
+            target: address[:label],
             country: address[:country],
             city: address[:city],
             province: address[:region],

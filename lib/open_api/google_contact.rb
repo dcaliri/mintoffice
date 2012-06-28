@@ -269,6 +269,7 @@ module OpenApi
       @contacts ||= []
       if @contacts.empty?
         @doc.xpath('//feed/entry').each do |node|
+          # raise node.to_xml.inspect
           attributes = {
             id: (node.xpath('./id').first.content.split('/').last rescue ""),
             etag: (node['etag'] rescue ""),
@@ -278,10 +279,21 @@ module OpenApi
             familyName: (node.xpath('./name/familyName').first.content rescue ""),
             company: (node.xpath('./organization/orgName').first.content rescue ""),
             position: (node.xpath('./organization/orgTitle').first.content rescue ""),
-            emails: (node.xpath('./email').map{|email| email['address']} rescue []),
-            phone_numbers: (node.xpath('./phoneNumber').map{|phone_number| phone_number.content} rescue []),
+            emails: (node.xpath('./email').map do |email|
+              {
+                label: (email['label'] || email['rel'].split('#').last rescue nil),
+                email: email['address']
+              }
+            end rescue []),
+            phone_numbers: (node.xpath('./phoneNumber').map do |phone_number|
+              {
+                label: (phone_number['label'] || phone_number['rel'].split('#').last rescue nil),
+                phone_number: phone_number.content
+              }
+            end rescue []),
             addresses: (node.xpath('./structuredPostalAddress').map do |address|
               {
+                label: (address['label'] || address['rel'].split('#').last rescue nil),
                 city: (address.xpath('./city').first.content rescue ""),
                 region: (address.xpath('./region').first.content rescue ""),
                 country: (address.xpath('./country').first.content rescue ""),
@@ -290,6 +302,8 @@ module OpenApi
             end rescue []),
             website: (node.xpath('./website').first['href'] rescue "")
           }
+
+          # raise attributes.inspect
 
           @contacts << Base.new(attributes)
         end
