@@ -1,0 +1,12 @@
+Mintoffice::Application.config.mailer = {
+  :via                    => :smtp,
+  :via_options => {
+    :address              => "smtp.gmail.com",
+    :port                 => 587,
+    :enable_starttls_auto => true,
+    :user_name            => "your-mailer-username",
+    :password             => "your-mailer-password",
+    :authentication       => :plain,
+    :domain               => "your-mailer-domain",
+  }
+}
