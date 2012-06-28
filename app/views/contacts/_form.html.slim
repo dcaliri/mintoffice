@@ -23,7 +23,7 @@ h2= t("common.title.#{action_name}")
       = f.text_field :position
     - if !@contact.new_record? && current_user.admin?
       p
-        = f.label :owner_id
+        = f.label :owner
         = f.select :owner_id, options_from_collection_for_select(User.enabled, 'id', 'fullname', @contact.owner_id)
     - if @contact.new_record? || @contact.owner?(current_user)
       p
