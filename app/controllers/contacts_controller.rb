@@ -57,6 +57,14 @@ class ContactsController < ApplicationController
     redirect_to :contacts, alert: "연락처를 읽어올 수 없었습니다."
   end
 
+  def new
+    @contact = contacts.where(owner_id: current_user.id).build
+  end
+
+  def edit
+    @contact = contacts.find(params[:id])
+  end
+
   def create
     @contact = contacts.where(owner_id: current_user.id).build(params[:contact])
     @contact.save!
