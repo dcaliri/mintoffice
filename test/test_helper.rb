@@ -6,7 +6,7 @@ class ActiveSupport::TestCase
   setup :global_setup
   teardown :global_teardown
 
-  fixtures :users, :companies
+  fixtures :users, :companies, :companies_users
 
   def global_setup
     DatabaseCleaner.strategy = :truncation
