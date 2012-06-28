@@ -1,1 +1,3 @@
-require 'RMagick'
+if Rails.env == 'production'
+  require 'RMagick'
+end

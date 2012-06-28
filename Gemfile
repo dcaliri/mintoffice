@@ -36,6 +36,7 @@ end
 group :test do
   gem 'guard-livereload'
   gem 'growl'
+  gem 'database_cleaner'
 end
 
 group :development, :test do
