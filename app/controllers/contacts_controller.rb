@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class ContactsController < ApplicationController
   expose(:contacts) { current_company.contacts }
   expose(:contacts) { Contact.where("") }
@@ -35,6 +37,24 @@ class ContactsController < ApplicationController
 
     @target.contact = @contact
     @target.save!
+  end
+
+  def save
+    contact = OpenApi::GoogleContact.new(id: params[:id], password: params[:password])
+    current_user.contacts.save_to(contact)
+    redirect_to :contacts, notice: "성공적으로 연락처를 저장했습니다."
+  rescue ArgumentError => e
+    logger.info "failed to save google contact - #{e.message}"
+    redirect_to :contacts, alert: "연락처를 저장할 수 없었습니다."
+  end
+
+  def load
+    contact = OpenApi::GoogleContact.new(id: params[:id], password: params[:password])
+    current_user.contacts.load_from(contact)
+    redirect_to :contacts, notice: "성공적으로 연락처를 읽어왔습니다."
+  rescue ArgumentError => e
+    logger.info "failed to load google contact - #{e.message}"
+    redirect_to :contacts, alert: "연락처를 읽어올 수 없었습니다."
   end
 
   def create

@@ -841,6 +841,16 @@ ko:
             title: 연락처 수정하기
         find:
             title: 연락처 찾기
+        save:
+            link: 구글 연락처에 저장하기
+        save_form:
+            title: 구글 연락처에 저장하기
+            submit: 저장하기
+        load:
+            link: 구글 연락처에서 읽어오기
+        load_form:
+            title: 구글 연락처에서 읽어오기
+            submit: 읽어오기
         title: 연락처 관리
         name: 이름
     contact_address_tags:
