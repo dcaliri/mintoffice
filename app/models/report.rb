@@ -48,7 +48,7 @@ class Report < ActiveRecord::Base
     I18n.t("activerecord.attributes.report.localized_status.#{status}")
   end
 
-  def report!(user, comment)
+  def report!(user, comment, report_url)
     prev_reporter = self.reporter
     prev_reporter.owner = false
 
@@ -69,7 +69,22 @@ class Report < ActiveRecord::Base
     next_reporter.save!
     prev_reporter.save!
 
-    Boxcar.send_to_boxcar_user(next_reporter.user, prev_reporter.fullname, "#{prev_reporter.fullname}님이 #{next_reporter.fullname}님에게 결제를 요청하였습니다")
+    target_name = target.class.to_s.downcase
+    title = I18n.t("reports.report.title.#{target_name}", {
+      default: I18n.t("reports.report.title.default"),
+      prev: prev_reporter.fullname,
+      next: next_reporter.fullname
+    })
+
+    body = I18n.t("reports.report.body.#{target_name}", {
+      default: I18n.t("reports.report.body.default"),
+      prev: prev_reporter.fullname,
+      next: next_reporter.fullname,
+      url: report_url,
+    })
+
+    Boxcar.send_to_boxcar_user(next_reporter.user, prev_reporter.fullname, title)
+    ReportMailer.report(target, prev_reporter.user, next_reporter.user, title, body)
 
     permission user, :write
     permission prev_reporter.user, :read
@@ -85,7 +100,7 @@ class Report < ActiveRecord::Base
     save!
   end
 
-  def rollback!(comment)
+  def rollback!(comment, report_url)
     self.status = :rollback
     prev_reporter = self.reporter
     next_reporter = prev_reporter.prev if prev_reporter.prev
@@ -102,7 +117,23 @@ class Report < ActiveRecord::Base
     self.comments.build(owner: prev_reporter, description: "#{prev_reporter.fullname}님이 결제를 반려하였습니다")
     self.comments.build(owner: prev_reporter, description: comment) unless comment.blank?
 
-    Boxcar.send_to_boxcar_user(next_reporter.user, prev_reporter.fullname, "#{prev_reporter.fullname}님이 #{next_reporter.fullname}님에게 결제를 반려하였습니다")
+    target_name = target.class.to_s.downcase
+    title = I18n.t("reports.rollback.title.#{target_name}", {
+      default: I18n.t("reports.rollback.title.default"),
+      prev: prev_reporter.fullname,
+      next: next_reporter.fullname
+    })
+
+    body = I18n.t("reports.rollback.body.#{target_name}", {
+      default: I18n.t("reports.rollback.body.default"),
+      prev: prev_reporter.fullname,
+      next: next_reporter.fullname,
+      url: report_url,
+    })
+
+    Boxcar.send_to_boxcar_user(next_reporter.user, prev_reporter.fullname, title)
+    ReportMailer.report(target, prev_reporter.user, next_reporter.user, title, body)
+
     save!
   end
 

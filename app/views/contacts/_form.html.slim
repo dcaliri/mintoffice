@@ -1,9 +1,9 @@
 #show_command
-  = link_to t('common.title.back'), contact
+  = link_to t('common.title.back'), @contact
 
 h2= t("common.title.#{action_name}")
 
-= form_for contact, html: {multipart: true} do |f|
+= form_for @contact, html: {multipart: true} do |f|
   .box
     = f.error_messages
     p
@@ -21,23 +21,23 @@ h2= t("common.title.#{action_name}")
     p
       = f.label :position
       = f.text_field :position
-    - if !contact.new_record? && current_user.admin?
+    - if !@contact.new_record? && current_user.admin?
       p
-        = f.label :owner_id
-        = f.select :owner_id, options_from_collection_for_select(User.enabled, 'id', 'fullname', contact.owner_id)
-    - if contact.new_record? || contact.owner?(current_user)
+        = f.label :owner
+        = f.select :owner_id, options_from_collection_for_select(User.enabled, 'id', 'fullname', @contact.owner_id)
+    - if @contact.new_record? || @contact.owner?(current_user)
       p
         = f.label :isprivate
         = f.check_box :isprivate
 
-    = render 'contacts/form/address', contact_form: f
-    = render 'contacts/form/email', contact_form: f
-    = render 'contacts/form/phone_number', contact_form: f
-    = render 'contacts/form/others', contact_form: f
+    = render 'contacts/form/address', contact_form: f, contact: @contact
+    = render 'contacts/form/email', contact_form: f, contact: @contact
+    = render 'contacts/form/phone_number', contact_form: f, contact: @contact
+    = render 'contacts/form/others', contact_form: f, contact: @contact
 
     h3 첨부파일
     = render 'shared/attachments/form', form: f
     p
       = f.submit
 
-= render 'tags/form', target: contact
+= render 'tags/form', target: @contact

@@ -302,7 +302,7 @@ ko:
                 redmine_username: 레드마인 관리자 계정
                 redmine_password: 레드마인 관리자 비밀번호
                 default_password: 기본 비밀번호
-
+                apply_admin_id: 입사지원서 담당자
             contact:
                 name: 이름
                 firstname: 이름
@@ -313,6 +313,7 @@ ko:
                 position: 직위
                 isprivate: 비공개
             contact_address:
+                info: 주소
                 target: 대상
                 country: 국가
                 province: 주
@@ -511,7 +512,7 @@ ko:
                 google_account: Google 계정
                 daum_account: 다음 계정
                 nate_account: 네이트 계정
-                notify_email: Email
+                notify_email: 이메일
                 boxcar_account: Boxcar 계정
                 redmine_account: Redmine 계정
         errors:
@@ -550,6 +551,9 @@ ko:
         new:
             title: 첨부파일 신규 작성
         title: 첨부파일 관리
+    applies:
+        title: 입사지원
+        success: 이미 입사지원서가 등록되어 있습니다.
     bank_accounts:
         index:
             title: 은행계좌 목록
@@ -814,6 +818,8 @@ ko:
             empty: 연락처가 없습니다
         show:
             title: 연락처 상세정보
+            private: "비공개 : "
+            public: "전체 공개 : "
         new:
             title: 연락처 만들기
             link: 새로운 연락처 만들기
@@ -821,6 +827,16 @@ ko:
             title: 연락처 수정하기
         find:
             title: 연락처 찾기
+        save:
+            link: 구글 연락처에 저장하기
+        save_form:
+            title: 구글 연락처에 저장하기
+            submit: 저장하기
+        load:
+            link: 구글 연락처에서 읽어오기
+        load_form:
+            title: 구글 연락처에서 읽어오기
+            submit: 읽어오기
         title: 연락처 관리
         name: 이름
     contact_address_tags:
@@ -881,6 +897,8 @@ ko:
             title: 인사정보관리 - 사원목록
             list_retired: 퇴직자 목록 조회
             list_current: 현 재직자 목록 조회
+            list_joined: 정사원 목록 조회
+            list_not_joined: 입사지원자 목록 조회
             retired: 퇴직자
             current: 재직자
         show:
@@ -1027,6 +1045,23 @@ ko:
         assign:
             title: 할당 비율 조정
             not_hundred: 할당 비율이 100%가 아닙니다
+    reports:
+      report:
+        title:
+          default: "%{prev}님이 %{next}님에게 결제를 요청하였습니다"
+          hrinfo: "%{next}님에게 새로운 입사지원이 들어왔습니다."
+        body:
+          default: "%{prev}님이 %{next}님에게 결제를 요청하였습니다. \n %{url}"
+          hrinfo: "아래 링크를 통해서 확인 가능합니다. \n %{url}"
+
+      rollback:
+        title:
+          default: "%{prev}님이 %{next}님에게 결제를 반려하였습니다"
+          hrinfo: "%{next}님에게 입사지원 수정요청이 들어왔습니다"
+        body:
+          default: "%{prev}님이 %{next}님에게 결제를 반려하였습니다. \n %{url}"
+          hrinfo: "아래 링크를 통해서 확인 가능합니다. \n %{url}"
+
     required_tags:
         index:
             title: 필수 태그 목록
@@ -1062,10 +1097,7 @@ ko:
         purchase_sales_bill: 매입/매출 세금계산서
         title: 세금계산서 관리
     taxbill_items:
-        new:
-            title: 새로운 내역 추가
-        edit:
-            title: 세금계산서 내역 수정
+        title: 세금계산서 내역
     taxmen:
         empty: 담당자가 없습니다.
         new:
@@ -1112,6 +1144,10 @@ ko:
             loginfail: 아이디 혹은 비밀번호가 잘못되었습니다.
             not_registered: 등록되지 않은 계정입니다.
             successfully_signed_in: 로그인에 성공하였습니다.
+            login_with_google: 구글 계정으로 로그인
+            login_with_daum: 다음 계정으로 로그인
+            login_with_daum_explain: ("요즘"서비스 활성화 필요)
+            login_with_nate: 네이트 계정으로 로그인
         changepw:
             title: 비밀번호 변경
             subtitle: 변경

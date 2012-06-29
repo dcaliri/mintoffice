@@ -78,6 +78,122 @@ class Contact < ActiveRecord::Base
     def search_by_address(query)
       joins(:addresses).merge(ContactAddress.search(query))
     end
+
+    def save_to(google_contact)
+      all.each do |resource|
+        contact = convert_to_google_contact(google_contact, resource)
+        google_contact.save(contact)
+        save_from_google_contact(resource, contact)
+      end
+    end
+
+    def convert_to_google_contact(google_contact, resource)
+      attributes = {
+        id: resource.google_id,
+        etag: resource.google_etag,
+        # updated: (node.xpath('./updated').first.content rescue ""),
+        # title: (node.xpath('./title').first.content rescue ""),
+        given_name: resource.firstname,
+        family_name: resource.lastname,
+        full_name: resource.name,
+        company: resource.company_name,
+        position: resource.position,
+        emails: resource.emails.all.map do |email|
+          {
+            label: email.target,
+            email: email.email
+          }
+        end,
+        phone_numbers: resource.phone_numbers.all.map do |phone_number|
+          {
+            label: phone_number.target,
+            phone_number: phone_number.number
+          }
+        end,
+
+        addresses: resource.addresses.all.map do |address|
+          {
+            label: address.target,
+            country: address.country,
+            city: address.city,
+            region: address.province,
+            postcode: address.postal_code,
+            formatted: address.info
+          }
+        end,
+        websites: resource.others.all.map do |other|
+          {
+            label: other.target,
+            url: other.description
+          }
+        end
+      }
+
+      OpenApi::GoogleContact::Base.new(attributes)
+    end
+
+    def save_from_google_contact(resource, contact)
+      resource.isprivate = true
+
+      resource.google_id = contact.id
+      resource.google_etag = contact.etag
+
+      resource.firstname = contact.given_name
+      resource.lastname = contact.family_name
+
+      resource.company_name = contact.company
+      resource.position = contact.position
+
+      resource.emails.clear
+      contact.emails.each do |email|
+        resource.emails.build({
+          target: email[:label],
+          email: email[:email]
+        })
+      end
+
+      resource.phone_numbers.clear
+      contact.phone_numbers.each do |number|
+        resource.phone_numbers.build({
+          target: number[:label],
+          number: number[:phone_number]
+        })
+      end
+
+      resource.addresses.clear
+      contact.addresses.each do |address|
+        resource.addresses.build({
+          target: address[:label],
+          country: address[:country],
+          city: address[:city],
+          province: address[:region],
+          postal_code: address[:postcode],
+        })
+      end
+
+      resource.others.clear
+      contact.websites.each do |website|
+        resource.others.build({
+          target: website[:label],
+          description: website[:url],
+        })
+      end
+
+      resource.save!
+    end
+
+    def load_from(google_contact)
+      google_contact.load.each do |information|
+        collection = where(google_id: information.id)
+        if collection.empty?
+          resource = collection.new
+        else
+          resource = collection.first
+        end
+
+        save_from_google_contact(resource, information)
+      end
+    end
   end
 
   def name

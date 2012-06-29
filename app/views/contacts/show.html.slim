@@ -7,7 +7,9 @@
   = link_to t('common.title.back'), :contacts
 
 
-h2 #{contact.name}
+h2
+  = contact.isprivate? ? t('.private') : t('.public')
+  = contact.name
 
 .box
   #descr
