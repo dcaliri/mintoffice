@@ -36,6 +36,24 @@ class BankTransaction < ActiveRecord::Base
     config.period_subtitle :transacted_at
   end
 
+  before_save :verify_with_prev_transaction
+  def verify_with_prev_transaction
+    parent = bank_account.bank_transactions
+    if id
+      prev = parent.where("transacted_at < ?", transacted_at).order(:transacted_at).last
+    else
+      prev = parent.order(:transacted_at).last
+    end
+
+    # raise prev.inspect
+    if verify(prev)
+      true
+    else
+      errors.add(:verify, '에 실패했습니다. 입력 값을 다시 확인해주세요')
+      false
+    end
+  end
+
   def self.excel_parser(type)
     if type == :shinhan
       shinhan_bank_transaction_parser
