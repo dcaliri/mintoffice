@@ -769,6 +769,7 @@ ko:
             title: "카드 영수증 내용 수정"
         index:
             title: "카드 영수증 목록"
+            total: Total
         messages:
             create: "성공적으로 생성되었습니다."
         title: 카드영수증 관리
