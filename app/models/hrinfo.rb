@@ -5,7 +5,6 @@ class Hrinfo < ActiveRecord::Base
   has_one :contact, :as => :target, dependent: :destroy
   accepts_nested_attributes_for :contact, :allow_destroy => :true
 
-  has_many :report, :as => :target
   has_many :expense_reports
 
   serialize :employment_proof_hash, Array
