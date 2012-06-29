@@ -347,6 +347,7 @@ ko:
                 issuer: 발급사
                 cardholder: 소유자이름
                 total: 총 사용금액
+                bank_account_id: 결제은행
             dayworker:
                 juminno: 주민등록번호
             dayworker_tax:
