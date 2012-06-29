@@ -182,6 +182,7 @@ ko:
                 promissory_check_amount: 수표 어음금액
                 cms_code: CMS 코드
                 transacted_at_strftime: 거래일자
+                verify: 검증
             bank_transfer:
                 account: 은행계좌
                 bank_account_name: 은행계좌
