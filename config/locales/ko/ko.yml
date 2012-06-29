@@ -394,6 +394,10 @@ ko:
                 joined_on: 입사일
                 email: 이메일
                 listed: 목록 출력 여부
+                contact:
+                  address: 주소
+                  email: 이메일
+                  number: 전화번호
             ledger_account:
                 title: 이름
                 category: 종류
