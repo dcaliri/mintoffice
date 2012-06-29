@@ -303,7 +303,6 @@ ko:
                 redmine_password: 레드마인 관리자 비밀번호
                 default_password: 기본 비밀번호
                 apply_admin_id: 입사지원서 담당자
-
             contact:
                 name: 이름
                 firstname: 이름
@@ -819,6 +818,8 @@ ko:
             empty: 연락처가 없습니다
         show:
             title: 연락처 상세정보
+            private: "비공개 : "
+            public: "전체 공개 : "
         new:
             title: 연락처 만들기
             link: 새로운 연락처 만들기
