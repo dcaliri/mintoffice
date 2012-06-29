@@ -1,0 +1,42 @@
+- title = t('.title')
+
+- content_for :search do
+  = form_tag :cardbills, :method => :get do
+    = t("common.title.search")
+    ' : 
+    = text_field_tag 'query', params[:query]
+    = select_tag :creditcard_id, options_from_collection_for_select([Creditcard.new(:cardno => "all")]+Creditcard.all, :id, :cardno_long, params[:creditcard_id]), "onchange" => "this.form.submit()"
+    = render 'accessors/search_form'
+
+h2
+  = t('cardbills.index.total')
+  ' : 
+  = @cardbills.length
+
+table#list-table
+  tr
+    th= Cardbill.human_attribute_name('cardno')
+    th= Cardbill.human_attribute_name('transdate')
+    th= Cardbill.human_attribute_name('totalamount')
+    th= Cardbill.human_attribute_name('storename')
+    th= Cardbill.human_attribute_name('storeaddr')
+    th= Cardbill.human_attribute_name('approveno')
+
+  - @cardbills.each do |cardbill|
+      tr.selectable onclick="location.href='#{cardbill_path(cardbill)}'"
+        td 
+          span
+            =h cardbill.cardno_long
+        td
+          = cardbill.transdate.strftime("%Y.%m.%d %H:%M:%S %p")
+        td.numrow
+          = number_to_currency cardbill.totalamount
+        td
+          =h cardbill.storename
+        td
+          =h cardbill.storeaddr
+        td
+          =h cardbill.approveno
+br
+center
+  = will_paginate @cardbills
