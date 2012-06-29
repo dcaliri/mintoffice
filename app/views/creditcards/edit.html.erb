@@ -36,6 +36,10 @@
     <%= f.text_field :cardholder %>
   </p>
   <p>
+    <%= f.label :bank_account_id %>
+    <%= f.select(:bank_account_id, bank_account_select_list(@creditcard.bank_account.id)) %>
+  </p>
+  <p>
     <%= render 'shared/attachments/form', form: f %>
   </p>
 </div>
