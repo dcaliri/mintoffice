@@ -1,0 +1,31 @@
+#show_command
+  = link_to t('common.link.edit'), [:edit, :apply]
+
+h3 입사지원서
+
+- hrinfo = @this_user.hrinfo
+- contact = @this_user.hrinfo.contact
+
+dl
+  = dtdd @this_user, :name
+  = dtdd @this_user, :notify_email
+  = dtdd hrinfo, :juminno
+  = dtdd contact, :name
+
+  - contact.addresses.each do |address|
+    dt= address.class.human_attribute_name(:info)
+    dd= address.target_view + " " + address.info
+
+  - contact.emails.each do |email|
+    dt= email.class.human_attribute_name(:email)
+    dd= email.target_view + " " + email.email
+
+  - contact.phone_numbers.each do |phone_number|
+    dt= phone_number.class.human_attribute_name(:number)
+    dd= phone_number.target_view + " " + phone_number.number
+
+  - contact.others.each do |other|
+    dt= other.class.human_attribute_name(:description)
+    dd= other.target_view + " " + other.description
+
+= render 'reports/info', target: @this_user.hrinfo, reporter_list: [Company.current_company.apply_admin]

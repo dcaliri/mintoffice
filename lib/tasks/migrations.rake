@@ -13,6 +13,20 @@ namespace :db do
         report.reporter.save!
       end
     end
+
+    namespace :owner do
+      task :reset => :environment do
+        Report.find_each do |report|
+          reporters = report.reporters
+          next if reporters.exists?(owner: true) or !reporters.exists?
+
+          reporter = reporters.first
+          puts "reset owner: report = #{report.id}, reporter = #{reporter.id}"
+          reporter.owner = true
+          reporter.save!
+        end
+      end
+    end
   end
 
   namespace :cardbill do

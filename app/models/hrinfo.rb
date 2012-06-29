@@ -5,20 +5,36 @@ class Hrinfo < ActiveRecord::Base
   has_one :contact, :as => :target, dependent: :destroy
   accepts_nested_attributes_for :contact, :allow_destroy => :true
 
-  has_many :report, :as => :target
   has_many :expense_reports
 
   serialize :employment_proof_hash, Array
 
   include Historiable
   include Attachmentable
+  include Reportable
 
   validates_format_of :juminno, :with => /^\d{6}-\d{7}$/, :message => I18n.t('hrinfos.error.juminno_invalid')
   validates_uniqueness_of :juminno
-  validates_numericality_of :companyno
-  validates_uniqueness_of :companyno
 
   attr_accessor :email, :phone_number, :address
+
+  class << self
+    def not_joined(not_joined)
+      if not_joined
+        where('joined_on IS NULL')
+      else
+        where('joined_on IS NOT NULL')
+      end
+    end
+  end
+
+  def joined?
+    joined_on
+  end
+
+  def not_joined?
+    not joined?
+  end
 
   def contact_or_build
     self.contact || build_contact

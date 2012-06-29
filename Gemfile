@@ -16,6 +16,8 @@ gem 'omniauth-daum'
 gem 'omniauth-nate'
 gem 'google_apps'
 
+gem 'pony'
+
 gem 'by_star'
 
 group :assets do
@@ -34,6 +36,7 @@ end
 group :test do
   gem 'guard-livereload'
   gem 'growl'
+  gem 'database_cleaner'
 end
 
 group :development, :test do

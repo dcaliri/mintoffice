@@ -15,9 +15,6 @@ table
     th= contact.class.human_attribute_name(:owner)
     td = contact.owner_name
   tr
-    th= contact.class.human_attribute_name(:isprivate)
-    td= contact.isprivate
-  tr
     td
   - contact.emails.each do |email|
     tr
