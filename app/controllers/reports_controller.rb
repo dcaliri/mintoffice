@@ -10,6 +10,7 @@ class ReportsController < ApplicationController
 
     case params[:commit]
     when "상신"
+    when "수정후 재승인 요청"
       user = User.find(params[:reporter]) if params[:reporter]
       report_target.report!(user, params[:comment], report_url)
     when "승인"

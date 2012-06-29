@@ -127,6 +127,15 @@ class Hrinfo < ActiveRecord::Base
     retired_on || Time.zone.now
   end
 
+  def apply_status
+    case report.status
+    when :rollback
+      "수정 요청"
+    else
+      "승인 심사중"
+    end
+  end
+
   def generate_employment_proof(purpose)
     filename = "#{Rails.root}/tmp/#{fullname}_employment_proof.pdf"
     template = "#{Rails.root}/app/assets/images/employment_proof_tempate.pdf"

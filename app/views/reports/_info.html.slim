@@ -1,6 +1,5 @@
 - target.create_if_no_report
 - report = target.report
-/ - reporters = respond_to?(:reporters) || User.all.delete_if{|user| user == current_user or user.disabled?}
 - reporter_list ||= User.all.delete_if{|user| user == current_user or user.disabled?}
 
 h3 결제
