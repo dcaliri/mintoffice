@@ -1,0 +1,35 @@
+- unless @bank_transactions.empty?
+  table#list-table.bank-transaction-table
+    tr
+      th= BankTransaction.human_attribute_name(:account)
+      th= BankTransaction.human_attribute_name(:transacted_at)
+      th= BankTransaction.human_attribute_name(:in)
+      th= BankTransaction.human_attribute_name(:out)
+      th= BankTransaction.human_attribute_name(:note)
+      th= BankTransaction.human_attribute_name(:remain)
+      th 검증
+    - (@bank_transactions + [@bank_transactions.last]).each do |transaction|
+      - unless @latest_transaction
+        - @latest_transaction = transaction
+        - next
+
+      - onclick = @latest_transaction.new_record? ? "" : "location.href='#{bank_transaction_path(@latest_transaction)}'"
+      - valid = @latest_transaction.verify(transaction)
+      - @invalid = true if !valid
+      - valid_class = valid ? "valid" : "invalid"
+      tr.selectable onclick="#{onclick}" class=valid_class
+        td= @latest_transaction.bank_account.description rescue ""
+        td= @latest_transaction.transacted_at.strftime("%Y-%m-%d %H.%M") rescue ""
+        td class="numrow"
+          = number_to_currency @latest_transaction.in
+        td class="numrow"
+          = number_to_currency @latest_transaction.out
+        td= @latest_transaction.note
+        td class="numrow"
+          = number_to_currency @latest_transaction.remain
+        td= valid
+
+      - @latest_transaction = transaction
+
+- else
+  h4= t('.empty')
