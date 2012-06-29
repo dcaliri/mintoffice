@@ -6,6 +6,7 @@ class BankTransactionsController < ApplicationController
   expose(:bank_transfer) { BankTransfer.find(params[:from]) if params[:from] }
 
   def index
+    params[:bank_account_id] ||= BankAccount.first.id
     transactions = bank_account ? bank_account.bank_transactions : BankTransaction
     @bank_transactions = transactions.latest.page(params[:page])
   end
