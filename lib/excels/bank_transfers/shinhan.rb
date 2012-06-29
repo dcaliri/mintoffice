@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 module Excels
   module BankTransfers
     module Shinhan
@@ -9,24 +11,23 @@ module Excels
           :transfer_type => :integer,
           :transfered_at => :time,
         },
-        # 데이터 검증을 하지 않기 대문에 필드명이 필요없다.
         :columns => {
-          :transfer_type      => "",
-          :transfered_at      => "",
-          :result             => "",
-          :out_bank_account   => "",
-          :in_bank_name       => "",
-          :in_bank_account    => "",
-          :money              => "",
-          :transfer_fee       => "",
-          :error_money        => "",
-          :registered_at      => "",
-          :error_code         => "",
-          :transfer_note      => "",
-          :incode             => "",
-          :out_account_note   => "",
-          :in_account_note    => "",
-          :in_person_name     => "",
+          :transfer_type      => "이체구분",
+          :transfered_at      => "거래일시",
+          :result             => "처리결과",
+          :out_bank_account   => "출금계좌",
+          :in_bank_name       => "입금은행",
+          :in_bank_account    => "입금계좌",
+          :money              => "처리금액",
+          :transfer_fee       => "수수료",
+          :error_money        => "오류금액",
+          :registered_at      => "등록일자",
+          :error_code         => "오류코드",
+          :transfer_note      => "거래메모",
+          :incode             => "입금인코드",
+          :out_account_note   => "출금통장표시내용",
+          :in_account_note    => "입금통장표시내용",
+          :in_person_name     => "입금인성명",
         },
         :position => {
           :start => {
@@ -43,7 +44,7 @@ module Excels
           parser.class_name BankTransfer
           parser.column SHINHAN[:columns]
           parser.key SHINHAN[:keys]
-          parser.option :position => SHINHAN[:position], :validate => false
+          parser.option :position => SHINHAN[:position]
           parser
         end
       end

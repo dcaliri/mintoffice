@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 module Excels
   module BankTransfers
     module Ibk
@@ -9,7 +11,6 @@ module Excels
           :transfer_type => :integer,
           :transfered_at => :time,
         },
-        # 데이터 검증을 하지 않기 대문에 필드명이 필요없다.
         :columns => {
           :transfer_type      => "",
           :transfered_at      => "",
@@ -41,7 +42,7 @@ module Excels
           parser.class_name BankTransfer
           parser.column IBK[:columns]
           parser.key IBK[:keys]
-          parser.option :position => IBK[:position], :validate => false
+          parser.option :position => IBK[:position]
           parser
         end
       end
