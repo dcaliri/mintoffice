@@ -34,7 +34,7 @@
             <td align="right">
               <% business_client.taxmen.map do |taxman| %>
                 <%= taxman.fullname %>
-                <%= link_to "[수정]", find_contacts_path(:target_class => Taxman, target: taxman, parent_class: business_client.class, parent: business_client), :class => 'popup' %>
+                <%= link_to t('business_clients.show.modify'), find_contacts_path(:target_class => Taxman, target: taxman, parent_class: business_client.class, parent: business_client), :class => 'popup' %>
                 <br>
               <% end %>
             </td>
@@ -42,7 +42,7 @@
             <td><p><%= t('taxmen.empty') %></p></td>
           <% end %>
           <td>
-            <%= link_to "담당자 추가하기", find_contacts_path(:target_class => Taxman, parent_class: business_client.class, parent: business_client), :class => 'popup' %>
+            <%= link_to t('business_clients.show.add_contact'), find_contacts_path(:target_class => Taxman, parent_class: business_client.class, parent: business_client), :class => 'popup' %>
           </td>
         </tr>
       </table>

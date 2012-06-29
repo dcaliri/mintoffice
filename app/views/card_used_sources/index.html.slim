@@ -18,7 +18,7 @@ h2
   - if creditcard
     = "#{creditcard.nickname}: #{creditcard.cardno}"
   - else
-    = "카드 이용내역"
+    = t('card_used_sources.index.title')
 
 - unless @card_used_sources.empty?
   = render 'list', card_used_sources: @card_used_sources

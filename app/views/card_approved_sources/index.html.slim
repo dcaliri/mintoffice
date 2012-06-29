@@ -22,7 +22,7 @@ h2
   - if creditcard
     = "#{creditcard.nickname}: #{creditcard.cardno}"
   - else
-    = "카드 승인내역"
+    = t('card_approved_sources.index.title')
 
 - unless @card_approved_sources.empty?
   = render 'list', card_approved_sources: @card_approved_sources

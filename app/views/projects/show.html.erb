@@ -31,7 +31,7 @@
     <td>
       <% for user in project.users %>
         <%= user.name %>
-        <%= link_to "할당비율 조정", [:assign, user, :projects] %>
+        <%= link_to t('projects.show.allocation_ratio'), [:assign, user, :projects] %>
         <br />
       <% end %>
     </td>

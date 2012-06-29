@@ -12,8 +12,8 @@
 <table id="list-table">
   <thead>
     <tr>
-      <th>결제예정일</th>
-      <th>카드내역</th>
+      <th><%= t('creditcards.total.payment_date')%></th>
+      <th><%= t('creditcards.total.card_detail')%></th>
     </tr>
   </thead>
   <tbody>
@@ -22,7 +22,7 @@
       <% unless total_price == 0 %>
         <tr>
           <td>
-            <%= period.strftime("%Y.%m.%d") rescue "결제예정일 미정" %>
+            <%= period.strftime("%Y.%m.%d") rescue t('creditcards.total.pending_payment') %>
           </td>
           <td>
             <table>

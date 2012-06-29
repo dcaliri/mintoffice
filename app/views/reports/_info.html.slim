@@ -3,8 +3,11 @@
 / - reporters = respond_to?(:reporters) || User.all.delete_if{|user| user == current_user or user.disabled?}
 - reporter_list ||= User.all.delete_if{|user| user == current_user or user.disabled?}
 
-h3 결제
-p= "상태 - #{report.localize_status}"
+h3
+  = t('reports.info.payments')
+p
+  = t('reports.info.status')
+  = " - #{report.localize_status}"
 
 - if target.access?(current_user, :write)
   - unless current_user.ingroup?(:admin)
@@ -19,9 +22,9 @@ p= "상태 - #{report.localize_status}"
         = text_field_tag :comment
       p
         - if report.rollback?
-          = submit_tag "반려"
+          = submit_tag t('reports.info.rollback')
         - if report.report?
-          = submit_tag "상신"
+          = submit_tag t('reports.info.report')
   - else
     = form_tag :report do
       = hidden_field_tag :target_type, target.class
@@ -31,9 +34,9 @@ p= "상태 - #{report.localize_status}"
         = text_field_tag :comment
       p
         - if report.rollback?
-          = submit_tag "반려"
+          = submit_tag t('reports.info.rollback')
         - if report.approve?
-          = submit_tag "승인"
+          = submit_tag t('reports.info.approve')
 
 - unless report.comments.empty?
   .box

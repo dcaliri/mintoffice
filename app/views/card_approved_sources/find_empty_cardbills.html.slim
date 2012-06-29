@@ -1,7 +1,8 @@
 #show_command
   = link_to t('common.title.back'), :card_approved_sources
 
-h2 카드영수증이 없는 승인내역 리스트
+h2
+  = t('card_approved_sources.find_empty_cardbills.title')
 
 - unless @card_approved_sources.empty?
   = render 'list', card_approved_sources: @card_approved_sources
