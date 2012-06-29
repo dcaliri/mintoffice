@@ -9,7 +9,8 @@ class BankAccount < ActiveRecord::Base
 
   BANK_LIST = [
     ["신한 은행", :shinhan],
-    ["기업 은행", :ibk]
+    ["기업 은행", :ibk],
+    ["HSBC", :hsbc]
   ]
 
   def name
