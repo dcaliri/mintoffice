@@ -1,8 +1,12 @@
 <% title t('.title') %>
 <div id="show_command">
-  <%= link_to t('hrinfos.show.pdf'), [:employment_proof, @hrinfo] %> |
+  <% if @hrinfo.joined? %>
+    <%= link_to t('hrinfos.show.pdf'), [:employment_proof, @hrinfo] %> |
+  <% end %>
   <% if @user.ingroup?("admin") && ! @hrinfo.retired_on %>
-    <%= link_to t('hrinfos.retire.title'), :action => :retire, :id => @hrinfo %> |
+    <% if @hrinfo.joined? %>
+      <%= link_to t('hrinfos.retire.title'), :action => :retire, :id => @hrinfo %> |
+    <% end %>
     <%= link_to t('common.title.edit'), edit_hrinfo_path(@hrinfo) %> |
   <% end %>
   <%= link_to t('common.title.back'), hrinfos_path %>
@@ -59,13 +63,15 @@
       <% end %>
     </ul>
 
-    <h3><%= t(".related_admin_actions")%></h3>
-    <ul>
-      <% if @user.ingroup?("admin") || @hrinfo.user == @user %>
-        <li><%= link_to t('payments.title'), payment_path(@hrinfo.user) %></li>
-        <li><%= link_to t('vacations.show.link'), vacation_path(@hrinfo.user) %></li>
-      <% end %>
-    </ul>
+    <% if @hrinfo.joined? %>
+      <h3><%= t(".related_admin_actions")%></h3>
+      <ul>
+        <% if @user.ingroup?("admin") || @hrinfo.user == @user %>
+          <li><%= link_to t('payments.title'), payment_path(@hrinfo.user) %></li>
+          <li><%= link_to t('vacations.show.link'), vacation_path(@hrinfo.user) %></li>
+        <% end %>
+      </ul>
+    <% end %>
 
 <% end %>
   </div>
