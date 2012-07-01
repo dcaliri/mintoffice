@@ -182,6 +182,7 @@ ko:
                 promissory_check_amount: 수표 어음금액
                 cms_code: CMS 코드
                 transacted_at_strftime: 거래일자
+                verify: 검증
             bank_transfer:
                 account: 은행계좌
                 bank_account_name: 은행계좌
@@ -347,6 +348,7 @@ ko:
                 issuer: 발급사
                 cardholder: 소유자이름
                 total: 총 사용금액
+                bank_account_id: 결제은행
             dayworker:
                 juminno: 주민등록번호
             dayworker_tax:
@@ -1140,6 +1142,7 @@ ko:
             confirm_complete: 프로젝트를 종료하시겠습니까?
         assign:
             title: 할당 비율 조정
+<<<<<<< HEAD
             not_hundred: 할당 비율이 100%가 아닙니다.
     reports:
         info:
@@ -1148,6 +1151,26 @@ ko:
             rollback: 반려
             report: 상신
             approve: 승인
+=======
+            not_hundred: 할당 비율이 100%가 아닙니다
+    reports:
+      report:
+        title:
+          default: "%{prev}님이 %{next}님에게 결제를 요청하였습니다"
+          hrinfo: "%{next}님에게 새로운 입사지원이 들어왔습니다."
+        body:
+          default: "%{prev}님이 %{next}님에게 결제를 요청하였습니다. \n %{url}"
+          hrinfo: "아래 링크를 통해서 확인 가능합니다. \n %{url}"
+
+      rollback:
+        title:
+          default: "%{prev}님이 %{next}님에게 결제를 반려하였습니다"
+          hrinfo: "%{next}님에게 입사지원 수정요청이 들어왔습니다"
+        body:
+          default: "%{prev}님이 %{next}님에게 결제를 반려하였습니다. \n %{url}"
+          hrinfo: "아래 링크를 통해서 확인 가능합니다. \n %{url}"
+
+>>>>>>> aea3622324c7948ca632f7587f1de59e5bae9989
     required_tags:
         index:
             title: 필수 태그 목록

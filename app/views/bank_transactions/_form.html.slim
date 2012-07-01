@@ -3,11 +3,14 @@
 
 h2= t("common.title.#{action_name}")
 
-= form_for bank_transaction, html: {:class => "tabular"} do |f|
+- @bank_transaction ||= bank_transaction
+
+= form_for @bank_transaction, html: {:class => "tabular"} do |f|
   .box
+    = f.error_messages
     p
       = f.label :bank_account_id, BankAccount.human_attribute_name('name')
-      = select_tag(:bank_account_id, options_for_select(BankAccount.all.map{|bank| [bank.name, bank.id]}, params[:bank_account_id]))
+      = select_tag(:bank_account_id, options_for_select(BankAccount.all.map{|bank| [bank.name_with_number, bank.id]}, params[:bank_account_id]))
     p
       = f.label :transacted_at
       = f.datetime_select :transacted_at, :order => [:year, :month, :day, :hour, :minute]

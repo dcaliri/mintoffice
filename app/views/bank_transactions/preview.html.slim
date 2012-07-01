@@ -3,6 +3,11 @@
 
 h2= t(".title")
 
+h3 프리뷰
+= render 'verify_list'
+
+br
+
 = form_tag excel_bank_transactions_path(bank_account: params[:bank_account]), multipart: true, class: "tabular" do
   .box
     p
@@ -11,11 +16,14 @@ h2= t(".title")
     p
       = label_tag :file, t('.file')
       = text_field_tag :upload, params[:upload][:file].original_filename
-    p
-      = submit_tag t('.submit')
+    - unless @invalid
+      p
+        = submit_tag t('.submit')
 
-  br
-
+<<<<<<< HEAD
 h3
   = t('bank_transactions.preview.preview')
 = render 'list', bank_transactions: @transactions
+=======
+  br
+>>>>>>> aea3622324c7948ca632f7587f1de59e5bae9989

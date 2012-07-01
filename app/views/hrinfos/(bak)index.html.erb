@@ -1,14 +1,8 @@
-<%
-if @retired == 'on'
-  title t('.title') + " (" + t(".retired") + ")"
-else
-  title t('.title') + " (" + t(".current") + ")"
-end
-%>
 <% content_for :search do -%>
   <%= form_tag({:action => "index"}, :method => :get ) do %>
     <%= hidden_field_tag 'retired', @retired %>
     <%= t("common.title.search") %> : <%= text_field_tag 'q', params[:q] %>
+    <%= select_tag :search_type, options_for_select(Hrinfo::SEARCH_TYPE, params[:search_type]), "onchange" => "this.form.submit()" %>
   <% end %>
 <% end -%>
 
@@ -17,7 +11,7 @@ end
   <%= link_to t('hrinfos.new.title'), new_hrinfo_path %>
 <% end %>
 </div>
-<h2>Total : <%= @hrinfos_count %></h2>
+<h2>Total : <%= @hrinfos.count %></h2>
 <table id="list-table">
   <tr>
     <th><%= Hrinfo.human_attribute_name('companyno') %></th>
@@ -43,6 +37,7 @@ end
     <td><%= link_to 'Destroy', hrinfo, :confirm => 'Are you sure?', :method => :delete %></td> -->
   </tr>
 <% end %>
+<<<<<<< HEAD
 </table>
 <% if @user.ingroup?("admin")%>
   <div id="show_command">
@@ -53,3 +48,6 @@ end
   <% end %>
   </div>
 <% end %>
+=======
+</table>
+>>>>>>> aea3622324c7948ca632f7587f1de59e5bae9989

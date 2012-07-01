@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 module Excels
   module BankTransactions
     module Shinhan
@@ -11,15 +13,14 @@ module Excels
           :out => :integer,
           :remain => :integer
         },
-        # 데이터 검증을 하지 않기 대문에 필드명이 필요없다.
         :columns => {
-          :transacted_at      => "",
-          :transaction_type   => "",
-          :in                 => "",
-          :out                => "",
-          :note               => "",
-          :remain             => "",
-          :branchname         => "",
+          :transacted_at      => "거래일자",
+          :transaction_type   => "적요",
+          :in                 => "입금액",
+          :out                => "출금액",
+          :note               => "내용",
+          :remain             => "잔액",
+          :branchname         => "거래점명",
         },
         :position => {
           :start => {
@@ -36,7 +37,7 @@ module Excels
           parser.class_name BankTransaction
           parser.column SHINHAN[:columns]
           parser.key SHINHAN[:keys]
-          parser.option :position => SHINHAN[:position], :validate => false
+          parser.option :position => SHINHAN[:position]
           parser
         end
       end
