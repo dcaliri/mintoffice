@@ -1,0 +1,42 @@
+- title t('.title')
+
+#show_command
+  = link_to t('common.title.edit'), edit_document_path(document)
+  ' |
+  = link_to t('common.title.destroy'), document, :confirm => "Are you sure?", :method => :delete
+  ' |
+  = link_to t('common.title.list'), documents_path
+h2
+  =h document.title
+.box
+  #descr
+    table
+      tr
+        th
+          = Project.model_name.human
+          ' :
+        td
+          = document.project_name
+      tr
+        th
+          = Document.human_attribute_name("owner")
+          ' :
+        td
+          - if !document.users.blank?
+            - user_names = document.users.index_by {|u| u.name }
+              = user_names.keys.sort.join ", "
+          - else
+      tr
+        th
+          = Document.human_attribute_name("tags")
+        td
+          = document.tag_list
+    h3
+      = t(".backlink")
+    ul
+      - u = document.user_for_tag(Hrinfo.model_name.human)
+      - if u
+        li= link_to Hrinfo.model_name.human, :controller => "hrinfos", :action => "show", :id => u.hrinfo
+    = render 'reports/info', target: document
+  = render "shared/attachments/detail", :target => document
+  div style="clear:both;"

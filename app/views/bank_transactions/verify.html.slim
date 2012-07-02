@@ -2,7 +2,6 @@
 #show_command
   = link_to t('common.title.back'), bank_transactions_path(bank_account_id: params[:bank_account_id])
 
-<<<<<<< HEAD
 h2
   = t('bank_transactions.verify.verify_transfer')
 
@@ -40,7 +39,7 @@ h2
 
 - else
   h4= t('.empty')
-=======
-h2 입출금 내역 검증
+
+h2 
+  = t('bank_transactions.verify.verify_transfer')
 = render 'verify_list'
->>>>>>> aea3622324c7948ca632f7587f1de59e5bae9989

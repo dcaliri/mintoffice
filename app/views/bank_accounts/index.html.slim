@@ -14,7 +14,7 @@ h2
   = t('bank_accounts.index.bank_accounts_list')
   ' :
   = t('bank_accounts.index.balance') 
-  = #{number_to_currency BankAccount.remain}
+  = number_to_currency BankAccount.remain
 
 - unless bank_accounts.empty?
   table#list-table

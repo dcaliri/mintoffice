@@ -47,7 +47,7 @@ p
         = comment.owner.user.name
         = ": "
         = comment.description
-
+        
 - if current_user.admin?
   = render 'accessors/info', access_target: report
 
