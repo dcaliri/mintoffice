@@ -36,7 +36,7 @@
   </p>
   <p>
     <%= f.label :bank_account_id %>
-    <%= f.select(:bank_account_id, bank_account_select_list(@creditcard.bank_account.id)) %>
+    <%= f.select(:bank_account_id, bank_account_select_list((@creditcard.bank_account.id rescue nil))) %>
   </p>
   <p>
     <%= render 'shared/attachments/form', form: f %>
