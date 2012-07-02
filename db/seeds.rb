@@ -26,10 +26,13 @@ unless User.exists?(name: "admin")
 end
 
 unless Company.all.empty?
-  Company.create!(name: "minttech")
+  company = Company.create!(name: "mintech")
+  user = User.find_by_name("admin")
+  company.users << user
+  company.save!
 end
 
-company = Company.find_by_name("minttech")
+company = Company.find_by_name("mintech")
 
 if company.contact_address_tags.empty?
   company.contact_address_tags.create!(name: "집")
