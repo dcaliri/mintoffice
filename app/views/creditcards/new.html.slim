@@ -1,0 +1,34 @@
+#show_command
+  = link_to t("common.title.back"), creditcards_path
+h2
+  = t("common.title.new")
+= form_for(@creditcard, :html => {:class => "tabular", :multipart => true}) do |f|
+  = f.error_messages
+  .box
+    p
+      = f.label :cardno, Creditcard.human_attribute_name('cardno')
+      = f.text_field :cardno
+    p
+      = f.label :short_name, Creditcard.human_attribute_name("short_name")
+      = f.text_field :short_name
+    p
+      = f.label :expireyear, Creditcard.human_attribute_name('expireyear')
+      = f.text_field :expireyear
+    p
+      = f.label :expiremonth, Creditcard.human_attribute_name('expiremonth')
+      = f.text_field :expiremonth
+    p
+      = f.label :nickname, Creditcard.human_attribute_name('nickname')
+      = f.text_field :nickname
+    p
+      = f.label :issuer, Creditcard.human_attribute_name('issuer')
+      = f.text_field :issuer
+    p
+      = f.label :cardholder, Creditcard.human_attribute_name('cardholder')
+      = f.text_field :cardholder
+    p
+      = f.label :bank_account_id
+      = f.select(:bank_account_id, bank_account_select_list((@creditcard.bank_account.id rescue nil)))
+    p
+      = render 'shared/attachments/form', form: f
+  = f.submit t("common.button.create")

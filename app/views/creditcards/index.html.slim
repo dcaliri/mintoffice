@@ -1,0 +1,47 @@
+#show_command
+  = link_to t("creditcards.total.link"), [:total, :creditcards]
+  ' |
+  = link_to t('card_used_sources.index.title'), card_used_sources_path
+  ' |
+  = link_to t('card_approved_sources.index.title'), card_approved_sources_path
+  ' |
+  = link_to t("creditcards.excel.link"), [:excel, :creditcards]
+  ' |
+  = link_to t("common.title.new"), new_creditcard_path
+
+h2
+  = t("common.title.list")
+
+table#list-table
+  tr
+    th
+      = Creditcard.human_attribute_name('cardno')
+    th
+      = Creditcard.human_attribute_name('short_name')
+    th
+      = Creditcard.human_attribute_name('expireyear')
+    th
+      = Creditcard.human_attribute_name('expiremonth')
+    th
+      = Creditcard.human_attribute_name('nickname')
+    th
+      = Creditcard.human_attribute_name('issuer')
+    th
+      = Creditcard.human_attribute_name('cardholder')
+
+  - @creditcards.each do |creditcard|
+    tr.selectable onclick="location.href='#{creditcard_path(creditcard)}'"
+      td
+        =h creditcard.cardno
+      td
+        =h creditcard.short_name
+      td
+        =h creditcard.expireyear
+      td
+        =h creditcard.expiremonth
+      td
+        =h creditcard.nickname
+      td
+        =h creditcard.issuer
+      td
+        =h creditcard.cardholder
