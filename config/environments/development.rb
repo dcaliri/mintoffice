@@ -48,5 +48,9 @@ Mintoffice::Application.configure do
     :password => 'radar05'
   }
 
+  config.mailer = {
+    :via                    => :test
+}
+
   Slim::Engine.set_default_options :pretty => true
 end
