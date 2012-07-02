@@ -686,6 +686,7 @@ ko:
         index:
             title: 거래처 관리
             empty: 거래처가 없습니다.
+            total: Total
         show:
             title: 거래처 내역
             modify: [수정]
@@ -1230,6 +1231,15 @@ ko:
         title: 사용자 리스트
         new:
             title: 새 사용자 계정 만들기
+        add:
+            add_pay_schedule: add pay schedule
+            yearly: Yearly Payment
+            start_date: Start Date
+            monthly_pay: Monthly Pay
+            bonus1: Bonus 1
+            bonus2: Bonus 2
+            bonus3: Bonus 3
+            bonus4: Bonus 4
         my:
             title: 내 계정
         show:
