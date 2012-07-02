@@ -1205,6 +1205,8 @@ ko:
         purchase_sales_bill: 매입/매출 세금계산서
         title: 세금계산서 관리
     taxbill_items:
+        new:
+            title: 새로운 내역
         title: 세금계산서 내역
     taxmen:
         empty: 담당자가 없습니다.
