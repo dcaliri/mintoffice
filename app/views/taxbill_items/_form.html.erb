@@ -4,7 +4,7 @@
 
 <h2><%= t("common.title.#{action_name}") %></h2>
 
-<%= form_for [taxbill, taxbill_item] do |f| %>
+<%= form_for [taxbill, taxbill_item], html:{id: 'taxbill-form'} do |f| %>
    <%= f.error_messages %>
   <div class="box">
     <p>
@@ -99,6 +99,12 @@
       unitprice.blur(formatCurrency);
       tax.blur(formatCurrency);
       total.blur(formatCurrency);
+
+      $('#taxbill-form').submit(function(){
+        unitprice.val(unformattedCurrency(unitprice.val()));
+        tax.val(unformattedCurrency(tax.val()));
+        total.val(unformattedCurrency(total.val()));
+      });
 
       init();
     });
