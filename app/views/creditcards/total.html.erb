@@ -17,7 +17,7 @@
     </tr>
   </thead>
   <tbody>
-    <% ([""] + newest.step(oldest, -1.day).to_a).each do |period| %>
+    <% ([""] + newest.step(oldest, -1).to_a).each do |period| %>
       <% total_price = CardApprovedSource.no_canceled.by_date(period).total_price %>
       <% unless total_price == 0 %>
         <tr>
