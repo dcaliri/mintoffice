@@ -55,30 +55,35 @@
       };
 
       var unformattedCurrency = function(value) {
-        return 10
+        result = (value+"").replace(/\D/g,'');
+        return parseInt(result, 10);
       }
 
       var calculateTax = function(){
         return Math.round(
-          unformattedCurrency(unitprice.val()) *
-          unformattedCurrency(quantity.val()) *
-          0.1);
+          unformattedCurrency(unitprice.val()) * quantity.val() * 0.1);
       }
 
       var calculateTotal = function(){
-        return
-          unformattedCurrency(unitprice.val()) *
-          unformattedCurrency(quantity.val()) +
-          unformattedCurrency(calculateTax());
+        return unformattedCurrency(unitprice.val()) * quantity.val() + unformattedCurrency(calculateTax());
       }
 
       var applyTotal = function(){
         total.val(calculateTotal());
+        total.formatCurrency({
+          symbol: '￦',
+          roundToDecimalPlace: 0
+        });
       };
 
       var applyTax = function(){
         tax.val(calculateTax());
+        tax.formatCurrency({
+          symbol: '￦',
+          roundToDecimalPlace: 0
+        });
       }
+
       unitprice.keyup(applyTotal);
       unitprice.keyup(applyTax);
 
@@ -88,6 +93,10 @@
       unitprice.keyup(formatCurrency);
       tax.keyup(formatCurrency);
       total.keyup(formatCurrency);
+
+      unitprice.trigger('keyup');
+      tax.trigger('keyup');
+      total.trigger('keyup');
     });
   </script>
 <% end -%>
