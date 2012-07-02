@@ -13,9 +13,9 @@ h2= t("common.title.new")
       - field = "#{before} ~ #{after}"
       p
         = label_tag "payments[#{field}]", field
-        = text_field_tag "payments[#{field}][default][title]", "기본급"
+        = text_field_tag "payments[#{field}][default][title]", t('payments.calculate.payments')
         = text_field_tag "payments[#{field}][default][amount]", amount
-        = text_field_tag "payments[#{field}][bonus][title]", "상여금"
+        = text_field_tag "payments[#{field}][bonus][title]", t('payments.calculate.bonus')
         = text_field_tag "payments[#{field}][bonus][amount]", 0
     p
       = submit_tag t("common.button.add"), :id => "submit"

@@ -1,0 +1,60 @@
+#show_command
+  = link_to t('common.title.back'), taxbill
+
+h2
+  = t("common.title.#{action_name}")
+
+= form_for [taxbill, taxbill_item] do |f|
+  = f.error_messages
+  .box
+    p
+      = f.label :unitprice
+      = f.text_field :unitprice
+    p
+      = f.label :quantity
+      = f.text_field :quantity
+    p
+      = f.label :tax
+      = f.text_field :tax
+    p
+      = f.label :total
+      = f.text_field :total
+    p
+      = f.label :transacted_at
+      = f.date_select :transacted_at, :order => [:year, :month, :day]
+    p
+      = f.label :note
+      = f.text_area :note
+    p
+      = f.submit
+
+- content_for :javascript do
+  - script type="text/javascript"
+    $(function(){
+      var unitprice = $('#taxbill_item_unitprice');
+      var quantity = $('#taxbill_item_quantity');
+      var tax = $('#taxbill_item_tax');
+      var total = $('#taxbill_item_total');
+
+      var calculateTax = function(){
+        return Math.round(unitprice.val() * quantity.val() * 0.1);
+      }
+
+      var calculateTotal = function(){
+        return unitprice.val() * quantity.val() + calculateTax();
+      }
+
+      var applyTotal = function(){
+        total.val(calculateTotal());
+      };
+
+      var applyTax = function(){
+        tax.val(calculateTax());
+      }
+
+      unitprice.keyup(applyTotal);
+      unitprice.keyup(applyTax);
+
+      quantity.keyup(applyTotal);
+      quantity.keyup(applyTax);
+    });

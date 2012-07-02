@@ -12,17 +12,17 @@
 <table id="list-table">
   <thead>
     <tr>
-      <th>결제예정일</th>
-      <th>카드내역</th>
+      <th><%= t('creditcards.total.payment_date')%></th>
+      <th><%= t('creditcards.total.card_detail')%></th>
     </tr>
   </thead>
   <tbody>
-    <% ([""] + newest.step(oldest, -1.day).to_a).each do |period| %>
+    <% ([""] + newest.step(oldest, -1).to_a).each do |period| %>
       <% total_price = CardApprovedSource.no_canceled.by_date(period).total_price %>
       <% unless total_price == 0 %>
         <tr>
           <td>
-            <%= period.strftime("%Y.%m.%d") rescue "결제예정일 미정" %>
+            <%= period.strftime("%Y.%m.%d") rescue t('creditcards.total.pending_payment') %>
           </td>
           <td>
             <table>

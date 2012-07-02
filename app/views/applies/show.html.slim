@@ -5,7 +5,8 @@
   - if hrinfo.report.status == :rollback
     = link_to t('common.link.edit'), [:edit, :apply]
 
-h3 입사지원서
+h3
+  = t('applies.show.application_form')
 
 dl
   = dtdd @this_user, :name

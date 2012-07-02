@@ -1,0 +1,52 @@
+- if @retired == 'on'
+  - title t('.title') + " (" + t(".retired") + ")"
+- else
+  - title t('.title') + " (" + t(".current") + ")"
+-  content_for :search do
+  = form_tag({:action => "index"}, :method => :get ) do
+    = hidden_field_tag 'retired', @retired
+    = t("common.title.search")
+    ' : 
+    = text_field_tag 'q', params[:q]
+
+#show_command
+  - if @user.ingroup?("admin")
+    = link_to t('hrinfos.new.title'), new_hrinfo_path
+h2
+	= t('hrinfos.index.total')
+	' : 
+	= @hrinfos_count
+table#list-table
+  tr
+    th
+      = Hrinfo.human_attribute_name('companyno')
+    th
+      = Hrinfo.human_attribute_name('fullname')
+    th
+      = Hrinfo.human_attribute_name('position')
+    th
+      = Hrinfo.human_attribute_name('username')
+    th
+      = Hrinfo.human_attribute_name('joined_on')
+      
+  - @hrinfos.each do |hrinfo|
+    tr.selectable onclick="location.href='#{hrinfo_path(hrinfo)}'"
+      td align="right"
+        =h hrinfo.companyno
+      td
+        =h hrinfo.fullname
+      td
+        =h hrinfo.position
+      - if hrinfo.user
+        td
+          =h hrinfo.user.name
+      - else
+        td
+      td
+        =h hrinfo.joined_on
+- if @user.ingroup?("admin")
+  #show_command
+    - if @retired == 'on'
+      = link_to t('.list_current'), :action => "index"
+    - else
+      = link_to t('.list_retired'), :action => "index", :retired=>"on"
