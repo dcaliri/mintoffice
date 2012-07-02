@@ -45,58 +45,62 @@
       var quantity = $('#taxbill_item_quantity');
       var tax = $('#taxbill_item_tax');
       var total = $('#taxbill_item_total');
-
+      var option = {
+        symbol: '￦',
+        roundToDecimalPlace: 0
+      };
 
       var formatCurrency = function(){
-        $(this).formatCurrency({
-          symbol: '￦',
-          roundToDecimalPlace: 0
-        });
+        $(this).formatCurrency(option);
       };
 
       var unformattedCurrency = function(value) {
         result = (value+"").replace(/\D/g,'');
+        if(result == '' || result == undefined) {
+          result = 0;
+        }
         return parseInt(result, 10);
       }
 
       var calculateTax = function(){
-        return Math.round(
-          unformattedCurrency(unitprice.val()) * quantity.val() * 0.1);
+        var unformatted = unformattedCurrency(unitprice.val());
+        return Math.round(unformatted * quantity.val() * 0.1);
       }
 
       var calculateTotal = function(){
-        return unformattedCurrency(unitprice.val()) * quantity.val() + unformattedCurrency(calculateTax());
+        var unformattedPrice = unformattedCurrency(unitprice.val());
+        var unformattedTax = unformattedCurrency(calculateTax());
+
+        return unformattedPrice * quantity.val() + unformattedTax;
       }
 
       var applyTotal = function(){
         total.val(calculateTotal());
-        total.formatCurrency({
-          symbol: '￦',
-          roundToDecimalPlace: 0
-        });
+        total.formatCurrency(option);
       };
 
       var applyTax = function(){
         tax.val(calculateTax());
-        tax.formatCurrency({
-          symbol: '￦',
-          roundToDecimalPlace: 0
-        });
+        tax.formatCurrency(option);
       }
 
-      unitprice.keyup(applyTotal);
-      unitprice.keyup(applyTax);
+      var init = function() {
+        unitprice.trigger('blur');
+        tax.trigger('blur');
+        total.trigger('blur');
+      }
 
-      quantity.keyup(applyTotal);
-      quantity.keyup(applyTax);
+      unitprice.blur(applyTotal);
+      unitprice.blur(applyTax);
 
-      unitprice.keyup(formatCurrency);
-      tax.keyup(formatCurrency);
-      total.keyup(formatCurrency);
+      quantity.blur(applyTotal);
+      quantity.blur(applyTax);
 
-      unitprice.trigger('keyup');
-      tax.trigger('keyup');
-      total.trigger('keyup');
+      unitprice.blur(formatCurrency);
+      tax.blur(formatCurrency);
+      total.blur(formatCurrency);
+
+      init();
     });
   </script>
 <% end -%>
