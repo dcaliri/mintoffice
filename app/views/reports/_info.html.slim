@@ -3,7 +3,7 @@
 - reporter_list ||= User.all.delete_if{|user| user == current_user or user.disabled?}
 
 h3 결제
-p= "상태 - #{report.localize_status}"
+p= "상태 - #{target.localize_status}"
 
 - if target.access?(current_user, :write)
   - unless current_user.ingroup?(:admin)
