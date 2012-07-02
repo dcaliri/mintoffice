@@ -1,0 +1,116 @@
+- title t('.title')
+
+#show_command
+  = link_to t('common.title.edit'), [:edit, taxbill]
+  ' |
+  = link_to t('common.title.destroy'), taxbill, :confirm => "Are you sure?", :method => :delete
+  ' |
+  = link_to t('common.title.list'), :taxbills
+
+h2
+  = t('taxbills.show.dot')
+.box
+  #descr
+    h3
+      = link_to "#{BusinessClient.human_attribute_name('name')} : #{taxbill.taxman.business_client.name} ( #{taxbill.taxman.business_client.registration_number} )", :controller => "business_clients", :action => "show", :id => taxbill.taxman.business_client
+      = " - #{taxbill.taxman.business_client.owner}"
+    table border="0" cellspacing="5" cellpadding="5"
+      tr
+        th align="right"
+          = BusinessClient.human_attribute_name('category')
+          ' /
+          = BusinessClient.human_attribute_name('business_status')
+        td align="right"
+          = taxbill.taxman.business_client.category
+          ' /
+          = taxbill.taxman.business_client.business_status
+      tr
+        th align="right"
+          = BusinessClient.human_attribute_name('address')
+        td align="right"
+          = taxbill.taxman.business_client.address
+      tr
+        th align="right"
+          = Taxbill.human_attribute_name('taxman_id')
+        td align="right"
+          = taxbill.taxman.fullname
+      tr
+        th align="right"
+          = Taxman.human_attribute_name('email')
+        td align="right"
+          = taxbill.taxman.email
+      tr
+        th align="right"
+          = Taxman.human_attribute_name('phonenumber')
+        td align="right"
+          = taxbill.taxman.phonenumber
+  = render "shared/attachments/detail", :target => taxbill
+  div style="clear: both;"
+
+  div
+    h3
+      = taxbill.billtype == 'purchase' ? t('taxbills.purchase_bill') : t('taxbills.sales_bill') 
+      = taxbill.transacted_at.strftime("%Y-%m-%d") rescue ""
+    div
+      = taxbill.billtype == 'purchase' ? "style='padding: 6px; border: 1px solid royalblue; background-color: lavender;'" : "style='padding: 6px; border: 1px solid purple; background-color: pink;'"
+      table border="0" cellspacing="0" cellpadding="5" width="100%"
+        tr
+          td align="right"[= link_to t("taxbill_items.new.title"), [:new, taxbill, :taxbill_item]]
+      table border="1" cellspacing="0" cellpadding="5" width="100%"
+      - unless taxbill.items.empty?
+        tr
+          th style="text-align: center"
+            = TaxbillItem.human_attribute_name(:transacted_at)
+          th style="text-align: center"
+            = TaxbillItem.human_attribute_name(:note)
+          th style="text-align: center"
+            = TaxbillItem.human_attribute_name(:unitprice)
+          th style="text-align: center"
+            = TaxbillItem.human_attribute_name(:quantity)
+          th style="text-align: center"
+            = TaxbillItem.human_attribute_name(:price)
+          th style="text-align: center"
+            = TaxbillItem.human_attribute_name(:tax)
+          th style="text-align: center"
+            = TaxbillItem.human_attribute_name(:total)
+          th
+
+        - taxbill.items.each do |item|
+          tr
+            td
+              = item.transacted_at.strftime("%Y-%m-%d") rescue ""
+            td
+              = item.note
+            td.numrow
+              = number_to_currency item.unitprice
+            td.numrow
+              = item.quantity
+            td.numrow
+              = number_to_currency item.price
+            td.numrow
+              = number_to_currency item.tax
+            td.numrow
+              = number_to_currency item.total
+            td style="text-align: center
+              = link_to t("common.link.edit"), [:edit, taxbill, item]
+              ' |
+              = link_to t("common.link.destroy"), [taxbill, item], :method => :delete, :confirm => "Are you sure?"
+      - else
+        tr
+          td style="text-align: center; font-weight: bold; color: red;"
+            = t('common.messages.no_entries')
+      table border="1" cellspacing="0" cellpadding="5" width="100%"
+        tr
+          td.numrow
+            = Taxbill.human_attribute_name('price')
+          td.numrow
+            = number_to_currency taxbill.price
+          td.numrow
+            = Taxbill.human_attribute_name('tax')
+          td.numrow
+            = number_to_currency taxbill.tax
+          td.numrow
+            = Taxbill.human_attribute_name('total')
+          td.numrow
+            = number_to_currency taxbill.total
+    = render 'changelog', target: taxbill 
