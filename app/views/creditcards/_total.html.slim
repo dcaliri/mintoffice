@@ -12,7 +12,7 @@
 <table id="list-table">
   <thead>
     <tr>
-      <th>날짜</th>
+      <th><%= t('creditcards.total.date') %></th>
       <% Creditcard.all.each do |card| %>
         <th><%= card.cardno %></th>
       <% end %>

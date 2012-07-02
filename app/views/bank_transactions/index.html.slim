@@ -20,7 +20,7 @@ h2
   - if bank_account
     = "#{bank_account.name_with_number}"
   - else
-    = "은행 거래내역"
+    = t('bank_transactions.index.bank_transfer')
 
 - unless @bank_transactions.empty?
   = render 'list', bank_transactions: @bank_transactions

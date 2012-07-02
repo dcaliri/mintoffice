@@ -1,0 +1,30 @@
+#show_command
+  = link_to t('common.title.back'), payment_path(user)
+
+h2
+  = t("payments.#{action_name}.title")
+
+
+= form_for [user, payment] do |f|
+  = f.error_messages
+  = f.hidden_field :payment_type
+  .box
+    - if payment.payment_type == 'default'
+      p
+        = f.label :pay_start
+        = f.date_select :pay_start, :order => [:year, :month, :day]
+      p
+        = f.label :pay_finish
+        = f.date_select :pay_finish, :order => [:year, :month, :day]
+    - else
+      p
+        = f.label :pay_finish, t('activerecord.attributes.payment.pay_at')
+        = f.date_select :pay_finish, :order => [:year, :month, :day]
+    p
+      = f.label :amount
+      = f.text_field :amount
+    p
+      = f.label :note
+      = f.text_field :note
+    p
+      = f.submit

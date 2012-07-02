@@ -1,16 +1,20 @@
 
 #show_command
-  = link_to "합계표 보기", [:total, :bank_accounts]
+  = link_to t('bank_accounts.index.total_view'), [:total, :bank_accounts]
   = " | "
-  = link_to "입출금내역 보기", :bank_transactions
+  = link_to t('bank_accounts.index.view_cashier'), :bank_transactions
   = " | "
-  = link_to "이체내역 보기", :bank_transfers
+  = link_to t('bank_accounts.index.view_transfer'), :bank_transfers
   = " | "
-  = link_to "은행계좌 만들기", [:new, :bank_account]
+  = link_to t('bank_accounts.index.create_bank_accounts'), [:new, :bank_account]
   = " | "
   = link_to t('common.title.back'), :root
 
-h2 은행계좌 목록: 잔고 #{number_to_currency BankAccount.remain}
+h2
+  = t('bank_accounts.index.bank_accounts_list')
+  ' :
+  = t('bank_accounts.index.balance') 
+  = number_to_currency BankAccount.remain
 
 - unless bank_accounts.empty?
   table#list-table

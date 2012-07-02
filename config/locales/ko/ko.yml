@@ -547,6 +547,15 @@ ko:
                     attributes:
                         modelname:
                             taken: 이미 사용중입니다.
+    accessors:
+        info:
+            permissions: 권한
+            write: 쓰기
+            read: 읽기
+            change_permissions: 권한 변경
+        search:
+            all_view: 전체 보기
+            view__unknown_permissions: 권한을 알 수 없는 내역 보기
     attachments:
         index:
             new: 새로운 첨부 올리기
@@ -564,10 +573,24 @@ ko:
     applies:
         title: 입사지원
         success: 이미 입사지원서가 등록되어 있습니다.
+        form:
+            apply_the_incident: 입사 신청하기
+        complete:
+            complete_incident: 입사 지원이 완료되었습니다.
+        show:
+            application_form: 입사지원서
+        try:
+            unknown_user: 등록되지 않은 사용자입니다. 입사지원시스템으로 이동하시겠습니까?
     bank_accounts:
         index:
             title: 은행계좌 목록
             empty: 은행계좌가 없습니다
+            total_view: 합계표 보기
+            view_cashier: 입출금내역 보기
+            view_transfer: 이체내역 보기
+            create_bank_accounts: 은행계좌 만들기
+            bank_accounts_list: 은행계좌 목록
+            balance: 잔고
         new:
             title: 새로운 은행계좌 만들기
             picture: 통장사본
@@ -577,15 +600,19 @@ ko:
         total:
             title: 입출금 합계표
             date: 날짜
+            card_history: 카드내역
             inmoney: 입금액
-            outmoney: 출금액
+            outmoney: 출금액역
+            total: 합계
         title: 은행계좌 관리
     bank_transactions:
         title: 입출금 내역
         index:
             empty: 입출금 내역이 없습니다
+            bank_transfer: 은행 거래내역
         show:
             to_bank_transfer: 이체 내역
+            detail_transfer: 입출금 상세정보
         excel:
             title: 엑셀로 올리기
             link: 엑셀 파일로 올리기
@@ -600,7 +627,8 @@ ko:
             link: 엑셀 파일로 올리기
             type: 은행명
             file: 엑셀 파일
-            submit: 엑셀 파일 올리기
+            submit: 엑셀 파일 
+            preview: 프리뷰
         upload:
             title: 엑셀로 올리기
             link: 엑셀 파일로 올리기
@@ -618,16 +646,22 @@ ko:
             quarter: "%{year}년도 %{quarter} 분기"
         verify:
             link: 검증하기
+            verify_transfer: 입출금 내역 검증
+            verify: 검증
     bank_transfers:
+        detail:
+            detail_card_transfer: 신용카드 이체내역 상세정보
         title: 이체 내역
         index:
             empty: 이체 내역이 없습니다
+            detail_transfer: 입출금내역 상세보기 
         excel:
             title: 엑셀로 올리기
             link: 엑셀 파일로 올리기
             type: 은행명
             file: 엑셀 파일
             submit: 엑셀 파일 올리기
+            preview: 미리보기
         export:
             excel: Excel
             pdf: PDF
@@ -637,6 +671,7 @@ ko:
             type: 은행명
             file: 엑셀 파일
             submit: 엑셀 파일 올리기
+            preview: 프리뷰
         upload:
             title: 엑셀로 올리기
             link: 엑셀 파일로 올리기
@@ -647,6 +682,8 @@ ko:
             link: 이체 내역 올리기
         show:
             to_bank_transaction: 입출금 내역
+            view_expense: 지출내역서 보기
+            create_expense: 지출내역서 만들기
     bonuses:
         new:
             title: 새로운 특별 상여금 입력
@@ -657,8 +694,11 @@ ko:
         index:
             title: 거래처 관리
             empty: 거래처가 없습니다.
+            total: Total
         show:
             title: 거래처 내역
+            modify: [수정]
+            add_contact: 담당자 추가하기
         new:
             title: 새로운 거래처 입력
         edit:
@@ -692,6 +732,7 @@ ko:
             pdf: PDF
         find_empty_cardbills:
             link: 카드영수증이 없는 목록 보기
+            title: 카드영수증이 없는 승인내역 리스트
         generate:
             title: 신용카드 영수증 생성
             link: 신용카드 영수증 생성
@@ -725,15 +766,21 @@ ko:
             title: 이용내역 수정하기
         title: 신용카드 이용내역
     cardbills:
+        detail:
+            title: 카드영수증 상세정보
         new:
             title: 새로운 카드 영수증 입력
         show:
             title:  "카드 영수증 내역"
             to_approved: "승인내역"
+            to_use: 사용 내역
+            view_expense: 지출내역서 보기
+            create_expense: 지출내역서 만들기
         edit:
             title: "카드 영수증 내용 수정"
         index:
             title: "카드 영수증 목록"
+            total: Total
         messages:
             create: "성공적으로 생성되었습니다."
         title: 카드영수증 관리
@@ -821,8 +868,16 @@ ko:
         error:
           already_created: "이 이미 생성되었습니다."
     companies:
+        show:
+            title: 회사 정보
         title: 회사 관리
     contacts:
+        item:
+            email: 이메일
+            remove: 제거
+            phonenumber: 전화번호
+            address: 주소
+            attachments: 첨부파일
         index:
             title: 연락처
             empty: 연락처가 없습니다
@@ -849,6 +904,20 @@ ko:
             submit: 읽어오기
         title: 연락처 관리
         name: 이름
+    contacts_form:
+        email:
+            title: 이메일
+            new: 새로운 이메일 작성
+        other:
+            title: 기타
+            new: 새로운 기타정보 작성
+        phonenumber:
+            title: 전화번호
+            new: 새로운 전화번호 작성
+        address:
+            title: 주소
+            new: 새로운 연락처 작성
+        make_new_one: 새로운 대상 만들기
     contact_address_tags:
         title: 새로운 주소 대상 만들기
     contact_email_tags:
@@ -863,6 +932,10 @@ ko:
             link: 합계표 보기
             purchase: 매입처별 합계
             money: 합계
+            payment_date: 결제예정일
+            card_detail: 카드내역
+            pending_payment: 결제예정일 미정
+            date: 날짜
         title: 신용카드 관리
         excel:
             title: 엑셀로 올리기
@@ -876,12 +949,14 @@ ko:
             type: 내역명
             file: 엑셀 파일
             submit: 엑셀 파일 올리기
+            preview: 프리뷰
     dayworkers:
         title: 사업소득원천징수 징수자 관리
         new:
             submit: 생성
         edit:
             submit: 수정
+        find_address: 주소록 찾기
     dayworker_taxes:
         title: 사업소득원천징수 관리
     documents:
@@ -900,6 +975,9 @@ ko:
         title: 지출내역서
         index:
             title: 지출내역서 관리
+        show:
+            view: 보기
+            detail_expense: 지출내역서 상세정보
     groups:
         title: 그룹관리
     hrinfos:
@@ -917,6 +995,7 @@ ko:
             related_admin_actions: 관련 관리 작업
             download: 다운로드
             pdf: 재직증명서
+            find_address: 주소록 찾기
         retire:
             title: 퇴직 처리
             retire_date: 퇴직일자
@@ -927,6 +1006,7 @@ ko:
             before_retire: 이전 급여
             after_retire: 차감 급여
             retire_total: 정산 급여
+            calculation_remain_salary: 잔여 연봉 계산
         new:
             title: 새로운 인사정보 입력
             users_blank: 인사정보와 연결할 사용자 계정이 없습니다.
@@ -938,6 +1018,9 @@ ko:
         title: 인사정보관리
     except_columns:
         title: 컬럼 선택
+        create_tag: 태그 만들기
+        modify: 변경하기
+        back: 돌아가기
     holidays:
         title: 휴일 관리
         index:
@@ -949,6 +1032,8 @@ ko:
             empty: 계정이 없습니다
         show:
             title: 원장 계정 상세정보
+            period: 기간
+            price: 가격
     main:
         index:
             human_resources: 인사관리
@@ -973,6 +1058,9 @@ ko:
         show:
             title: 명함 내용 보기
     payments:
+        calculate:
+            payments: 기본금
+            bonus: 상여금
         index:
             payment_only: 지급이 있는 사람들만 보기
             with_no_payment: 전체 보기
@@ -1030,6 +1118,8 @@ ko:
             title: 소액현금 내역
     postings:
         title: 전표 관리
+        debits: 차변
+        credit: 대변
         show:
             title: 전표 내역
             link: 전표 내역 보기
@@ -1039,6 +1129,12 @@ ko:
         edit:
             title: 전표 수정
     projects:
+        expense:
+            title: 지출내역
+            detail: 내역
+            price: 금액
+            monthly: 월별 총합
+            total: 전체 총합
         title: 프로젝트 관리
         index:
             title: 프로젝트 관리
@@ -1046,6 +1142,8 @@ ko:
             completed: 완료
         show:
             title: 프로젝트 상세 내역
+            allocation_ratio: 할당비율 조정
+            users: Users
         new:
             title: 새 프로젝트 작성
         edit:
@@ -1054,24 +1152,29 @@ ko:
             confirm_complete: 프로젝트를 종료하시겠습니까?
         assign:
             title: 할당 비율 조정
-            not_hundred: 할당 비율이 100%가 아닙니다
+            not_hundred: 할당 비율이 100%가 아닙니다.
     reports:
-      report:
-        title:
-          default: "%{prev}님이 %{next}님에게 결제를 요청하였습니다"
-          hrinfo: "%{next}님에게 새로운 입사지원이 들어왔습니다."
+        info:
+            payments: 결제
+            status: 상태
+            rollback: 반려
+            report: 상신
+            approve: 승인
+            not_hundred: 할당 비율이 100%가 아닙니다
+        report:
+            title:
+            default: "%{prev}님이 %{next}님에게 결제를 요청하였습니다"
+            hrinfo: "%{next}님에게 새로운 입사지원이 들어왔습니다."
         body:
-          default: "%{prev}님이 %{next}님에게 결제를 요청하였습니다. \n %{url}"
-          hrinfo: "아래 링크를 통해서 확인 가능합니다. \n %{url}"
-
-      rollback:
-        title:
-          default: "%{prev}님이 %{next}님에게 결제를 반려하였습니다"
-          hrinfo: "%{next}님에게 입사지원 수정요청이 들어왔습니다"
+            default: "%{prev}님이 %{next}님에게 결제를 요청하였습니다. \n %{url}"
+            hrinfo: "아래 링크를 통해서 확인 가능합니다. \n %{url}"
+        rollback:
+            title:
+            default: "%{prev}님이 %{next}님에게 결제를 반려하였습니다"
+            hrinfo: "%{next}님에게 입사지원 수정요청이 들어왔습니다"
         body:
-          default: "%{prev}님이 %{next}님에게 결제를 반려하였습니다. \n %{url}"
-          hrinfo: "아래 링크를 통해서 확인 가능합니다. \n %{url}"
-
+            default: "%{prev}님이 %{next}님에게 결제를 반려하였습니다. \n %{url}"
+            hrinfo: "아래 링크를 통해서 확인 가능합니다. \n %{url}"
     required_tags:
         index:
             title: 필수 태그 목록
@@ -1086,8 +1189,11 @@ ko:
         index:
             title: 세금계산서 관리
             empty: 세금계산서가 없습니다.
+            total: 전체
+            total_eng: Total
         show:
             title: 세금계산서 내역
+            dot: ...
         new:
             title: 새로운 세금계산서 입력
             picture: 첨부파일
@@ -1107,6 +1213,8 @@ ko:
         purchase_sales_bill: 매입/매출 세금계산서
         title: 세금계산서 관리
     taxbill_items:
+        new:
+            title: 새로운 내역
         title: 세금계산서 내역
     taxmen:
         empty: 담당자가 없습니다.
@@ -1133,6 +1241,15 @@ ko:
         title: 사용자 리스트
         new:
             title: 새 사용자 계정 만들기
+        add:
+            add_pay_schedule: add pay schedule
+            yearly: Yearly Payment
+            start_date: Start Date
+            monthly_pay: Monthly Pay
+            bonus1: Bonus 1
+            bonus2: Bonus 2
+            bonus3: Bonus 3
+            bonus4: Bonus 4
         my:
             title: 내 계정
         show:

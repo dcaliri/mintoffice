@@ -17,8 +17,8 @@ h2= t("common.title.#{action_name}")
     h3 항목
     #posting-item-form
       #debit-form
-        = render 'posting_items/form', form: f, posting_items: @posting.items, type: "차변"
+        = render 'posting_items/form', form: f, posting_items: @posting.items, type: t('postings.debits')
       #credit-form
-        = render 'posting_items/form', form: f, posting_items: @posting.items, type: "대변"
+        = render 'posting_items/form', form: f, posting_items: @posting.items, type: t('postings.credit')
     p
       = f.submit
