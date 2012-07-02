@@ -23,7 +23,11 @@ module Reportable
   end
 
   def localize_status
-    report.localize_status rescue I18n.t("activerecord.attributes.report.localized_status.not_reported")
+    if self.class == Hrinfo
+      I18n.t("activerecord.attributes.hrinfo.localized_status.#{report.status}")
+    else
+      report.localize_status rescue I18n.t("activerecord.attributes.report.localized_status.not_reported")
+    end
   end
 
   def access?(user, permission_type = :read)

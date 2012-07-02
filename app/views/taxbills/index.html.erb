@@ -9,7 +9,7 @@
     <% current = Time.zone.now.year %>
     <% oldest = Taxbill.oldest_at.year %>
 
-    <% period = {"전체" => nil}%>
+    <% period = { t('taxbills.index.total') => nil}%>
     <% current.downto(oldest) do |year| %>
       <% 4.downto(1) do |quarter| %>
         <% time = Time.zone.parse("#{year}-#{quarter * 3 - 2}-01 00:00:00") %>

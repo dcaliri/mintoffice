@@ -1,0 +1,30 @@
+- year = (params[:year] || Time.zone.now.year).to_i
+- month = (params[:month] || Time.zone.now.month).to_i
+
+#show_command
+  = link_to t("common.title.back"), projects_path
+
+h2
+  = t("projects.assign.title")
+
+- @projects.progress_period(year, month) do |projects, start, finish|
+  h3
+    = start.strftime("%Y.%m.%d") %> ~ <%= finish.strftime("%Y.%m.%d")
+  - if projects.count == 1
+    = projects.first.name
+    ' 100
+  - else
+    = form_tag [:assign, @this_user, :projects] do
+      = hidden_field_tag "projects[start]", start
+      = hidden_field_tag "projects[finish]", finish
+      - projects.each do |project|
+        p
+          = project.name
+          = select_tag "projects[assign][#{project.id}]", options_for_select((0..100), project.assign_rate(@this_user, start, finish))
+      p
+        = submit_tag t('common.button.change')
+
+center
+  = link_to t('common.button.prev'), assign_user_projects_path(@this_user, year: year, month: month - 1)
+  ' |
+  = link_to t('common.button.next'), assign_user_projects_path(@this_user, year: year, month: month + 1)

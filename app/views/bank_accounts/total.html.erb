@@ -10,8 +10,8 @@
 <table id="list-table">
   <thead>
     <tr>
-      <th>날짜</th>
-      <th>카드내역</th>
+      <th><%= t('bank_accounts.total.date') %></th>
+      <th><%= t('bank_accounts.total.card_history') %></th>
     </tr>
   </thead>
   <tbody>
@@ -41,7 +41,7 @@
               </tr>
             <% end %>
             <tr style="background-color:yellow;">
-              <td>합계</td>
+              <td><%= t('bank_accounts.total.total') %></td>
               <td></td>
               <td></td>
               <% transactions = BankTransaction.where(transacted_at: period.all_month) %>

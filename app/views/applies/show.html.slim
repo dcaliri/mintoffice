@@ -1,10 +1,12 @@
-#show_command
-  = link_to t('common.link.edit'), [:edit, :apply]
-
-h3 입사지원서
-
 - hrinfo = @this_user.hrinfo
 - contact = @this_user.hrinfo.contact
+
+#show_command
+  - if hrinfo.report.status == :rollback
+    = link_to t('common.link.edit'), [:edit, :apply]
+
+h3
+  = t('applies.show.application_form')
 
 dl
   = dtdd @this_user, :name
@@ -28,4 +30,18 @@ dl
     dt= other.class.human_attribute_name(:description)
     dd= other.target_view + " " + other.description
 
-= render 'reports/info', target: @this_user.hrinfo, reporter_list: [Company.current_company.apply_admin]
+h3 검토 상태
+p= "상태 - #{hrinfo.apply_status}"
+
+- target = @this_user.hrinfo
+- report = target.report
+
+- if target.access?(current_user, :write)
+  = form_tag :report do
+    = hidden_field_tag :target_type, target.class
+    = hidden_field_tag :target_id, target.id
+    = hidden_field_tag :reporter, Company.current_company.apply_admin.id
+    p
+      - if report.report?
+        = submit_tag "수정후 재승인 요청"
+br

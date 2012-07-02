@@ -1,22 +1,27 @@
-h3 지출내역
+h3
+  = t('projects.expense.title')
 table
   - if project.started_on
-    - project.started_on.step(project.ending_on, 1.month) do |date|
+    - project.started_on.step(project.ending_on, 1) do |date|
       - reports = project.expense_reports.where(expensed_at: date.to_time.all_month)
       tr
         th= date.strftime("%Y.%_m")
-        th 내역
-        th 금액
+        th
+          = t('projects.expense.detail')
+        th
+          = t('projects.expense.price')
         - reports.each_with_index do |report|
           tr
             td= report.expensed_at.strftime("%_m.%d")
             td= report.description
             td= number_to_currency report.amount
         tr
-          td 월별 총합
+          td
+            = t('projects.expense.monthly')
           td
           td = number_to_currency reports.total_amount
     tr
-      td 전체 총합
+      td
+        = t('projects.expense.total')
       td
       td = number_to_currency project.expense_reports.total_amount

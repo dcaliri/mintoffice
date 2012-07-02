@@ -1,0 +1,56 @@
+- title t('.title')
+
+- content_for :search do
+  = form_tag({:action => "index"}, :method => :get ) do
+    = t("common.report.status")
+    = render 'reports/search_form'
+    = t("common.title.search")
+    ' :
+    = text_field_tag 'query', params[:query]
+    = render 'accessors/search_form'
+
+#show_command
+  = link_to t('documents.new.title'), new_document_path
+
+h2
+  = t("common.title.total")
+  ' :
+  = @documents.length
+
+table#list-table
+
+  tr
+    th
+      = Document.human_attribute_name("id")
+    th
+      = Document.human_attribute_name("title")
+    th
+      = Document.human_attribute_name("project")
+    th
+      = Document.human_attribute_name("owner")
+    th
+      = Document.human_attribute_name("tags")
+    th
+      = Report.human_attribute_name('status')
+
+  - @documents.each do |document|
+    tr.selectable onclick="location.href='#{document_path(document)}'"
+      td
+        =h document.id
+      td
+        =h document.title
+      td
+        =h document.project_name
+      td
+        - if !document.users.blank?
+          - user_names = document.users.index_by {|u| u.name }
+            = user_names.keys.sort.join(", ")
+        - else
+      td
+        =h document.tag_list
+      td
+        =h document.localize_status
+
+br
+center
+  = will_paginate @cardbills

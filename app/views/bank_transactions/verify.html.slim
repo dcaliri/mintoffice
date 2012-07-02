@@ -2,7 +2,8 @@
 #show_command
   = link_to t('common.title.back'), bank_transactions_path(bank_account_id: params[:bank_account_id])
 
-h2 입출금 내역 검증
+h2
+  = t('bank_transactions.verify.verify_transfer')
 
 - unless @bank_transactions.empty?
   table#list-table.bank-transaction-table
@@ -13,7 +14,7 @@ h2 입출금 내역 검증
       th= BankTransaction.human_attribute_name(:out)
       th= BankTransaction.human_attribute_name(:note)
       th= BankTransaction.human_attribute_name(:remain)
-      th 검증
+      th= t('bank_transactions.verify.verify')
     - (@bank_transactions.all + [@bank_transactions.last]).each do |transaction|
       - unless @latest_transaction
         - @latest_transaction = transaction
@@ -38,3 +39,7 @@ h2 입출금 내역 검증
 
 - else
   h4= t('.empty')
+
+h2 
+  = t('bank_transactions.verify.verify_transfer')
+= render 'verify_list'

@@ -16,7 +16,16 @@ class Hrinfo < ActiveRecord::Base
   validates_format_of :juminno, :with => /^\d{6}-\d{7}$/, :message => I18n.t('hrinfos.error.juminno_invalid')
   validates_uniqueness_of :juminno
 
+  validates_presence_of :firstname
+  validates_presence_of :lastname
+
   attr_accessor :email, :phone_number, :address
+
+  SEARCH_TYPE = {
+    "재직자" => :join,
+    "퇴직자" => :retire,
+    "입사지원자" => :apply
+  }
 
   class << self
     def not_joined(not_joined)
@@ -121,6 +130,15 @@ class Hrinfo < ActiveRecord::Base
     retired_on || Time.zone.now
   end
 
+  def apply_status
+    case report.status
+    when :rollback
+      "수정 요청"
+    else
+      "승인 심사중"
+    end
+  end
+
   def generate_employment_proof(purpose)
     filename = "#{Rails.root}/tmp/#{fullname}_employment_proof.pdf"
     template = "#{Rails.root}/app/assets/images/employment_proof_tempate.pdf"
@@ -178,8 +196,25 @@ class Hrinfo < ActiveRecord::Base
     filename
   end
 
-  def self.search(text)
-    text = "%#{text}%"
-    joins(:user).where('users.name LIKE ? OR users.notify_email LIKE ? OR hrinfos.firstname like ? OR hrinfos.lastname LIKE ? OR hrinfos.position LIKE ?', text, text, text, text, text)
+  class << self
+    def search(type, text)
+      search_by_type(type).search_by_text(text)
+    end
+
+    def search_by_type(type)
+      case type.to_sym
+      when :join
+        where('joined_on IS NOT NULL')
+      when :retire
+        where('retired_on IS NOT NULL')
+      when :apply
+        where('joined_on IS NULL')
+      end
+    end
+
+    def search_by_text(text)
+      text = "%#{text}%"
+      joins(:user).where('users.name LIKE ? OR users.notify_email LIKE ? OR hrinfos.firstname like ? OR hrinfos.lastname LIKE ? OR hrinfos.position LIKE ?', text, text, text, text, text)
+    end
   end
 end

@@ -3,33 +3,39 @@ table
     td
   - contact.emails.each do |email|
     tr
-      th= "이메일(#{email.target})"
+      th
+        = t('contacts.item.email')
+        = "(#{email.target})"
       td= email.email
       - if menu
         td
           = link_to t('common.link.edit'), [:edit, contact]
           = " | "
-          = link_to "제거", [contact, email], :method => :delete, :confirm => "Are you sure?"
+          = link_to t('contacts.item_for_hrinfo.remove'), [contact, email], :method => :delete, :confirm => "Are you sure?"
 
   - contact.phone_numbers.each do |phone_number|
     tr
-      th= "전화번호(#{phone_number.target})"
+      th
+        = t('contacts.item.phonenumber')
+        = "(#{phone_number.target})"
       td= phone_number.number
       - if menu
         td
           = link_to t('common.link.edit'), [:edit, contact]
           = " | "
-          = link_to "제거", [contact, phone_number], :method => :delete, :confirm => "Are you sure?"
+          = link_to t('contacts.item.remove'), [contact, phone_number], :method => :delete, :confirm => "Are you sure?"
 
   - contact.addresses.each do |address|
     tr
-      th= "주소(#{address.target})"
+      th
+        = t('contacts.item.address')
+        ="(#{address.target})"
       td = "#{address.country} #{address.province} #{address.city} #{address.other1} #{address.other2} #{address.postal_code}"
       - if menu
         td
           = link_to t('common.link.edit'), [:edit, contact]
           = " | "
-          = link_to "제거", [contact, address], :method => :delete, :confirm => "Are you sure?"
+          = link_to t('contacts.item.remove'), [contact, address], :method => :delete, :confirm => "Are you sure?"
 
     tr
       th= Document.human_attribute_name("tags")

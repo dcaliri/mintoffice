@@ -19,8 +19,10 @@ h2= t('.title')
   #references
     table cellspacing="5" cellpadding="5"
       tr
-        th 기간
-        th 가격
+        th 
+          = t('ledger_accounts.show.period')
+        th
+          = t('ledger_accounts.show.price')
       - ledger_account.items.find_each do |item|
         tr
           td= item.posting.posted_at.strftime("%Y.%m.%d") rescue ""
