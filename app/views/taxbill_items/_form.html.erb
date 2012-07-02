@@ -4,7 +4,7 @@
 
 <h2><%= t("common.title.#{action_name}") %></h2>
 
-<%= form_for [taxbill, taxbill_item] do |f| %>
+<%= form_for [taxbill, taxbill_item], html:{id: 'taxbill-form'} do |f| %>
    <%= f.error_messages %>
   <div class="box">
     <p>
@@ -45,28 +45,68 @@
       var quantity = $('#taxbill_item_quantity');
       var tax = $('#taxbill_item_tax');
       var total = $('#taxbill_item_total');
+      var option = {
+        symbol: '￦',
+        roundToDecimalPlace: 0
+      };
+
+      var formatCurrency = function(){
+        $(this).formatCurrency(option);
+      };
+
+      var unformattedCurrency = function(value) {
+        result = (value+"").replace(/\D/g,'');
+        if(result == '' || result == undefined) {
+          result = 0;
+        }
+        return parseInt(result, 10);
+      }
 
       var calculateTax = function(){
-        return Math.round(unitprice.val() * quantity.val() * 0.1);
+        var unformatted = unformattedCurrency(unitprice.val());
+        return Math.round(unformatted * quantity.val() * 0.1);
       }
 
       var calculateTotal = function(){
-        return unitprice.val() * quantity.val() + calculateTax();
+        var unformattedPrice = unformattedCurrency(unitprice.val());
+        var unformattedTax = unformattedCurrency(calculateTax());
+
+        return unformattedPrice * quantity.val() + unformattedTax;
       }
 
       var applyTotal = function(){
         total.val(calculateTotal());
+        total.formatCurrency(option);
       };
 
       var applyTax = function(){
         tax.val(calculateTax());
+        tax.formatCurrency(option);
       }
 
-      unitprice.keyup(applyTotal);
-      unitprice.keyup(applyTax);
+      var init = function() {
+        unitprice.trigger('blur');
+        tax.trigger('blur');
+        total.trigger('blur');
+      }
 
-      quantity.keyup(applyTotal);
-      quantity.keyup(applyTax);
+      unitprice.blur(applyTotal);
+      unitprice.blur(applyTax);
+
+      quantity.blur(applyTotal);
+      quantity.blur(applyTax);
+
+      unitprice.blur(formatCurrency);
+      tax.blur(formatCurrency);
+      total.blur(formatCurrency);
+
+      $('#taxbill-form').submit(function(){
+        unitprice.val(unformattedCurrency(unitprice.val()));
+        tax.val(unformattedCurrency(tax.val()));
+        total.val(unformattedCurrency(total.val()));
+      });
+
+      init();
     });
   </script>
 <% end -%>
