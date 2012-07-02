@@ -38,24 +38,25 @@
         th= BusinessClient.human_attribute_name('name')
         th= BusinessClient.human_attribute_name('owner')
         th= Taxbill.human_attribute_name('total')
-    - taxbills_pagination.each do |taxbill|
-      tr.selectable onclick="location.href='= taxbill_path(taxbill)'"
-        td=h taxbill.billtype == 'purchase' ? t('taxbills.purchase_bill') : t('taxbills.sales_bill')
-        - if taxbill.transacted_at
-          td=h taxbill.transacted_at.strftime("%Y-%m-%d")
-        - else
-          td
-        - if taxbill.taxman
-          td
-            span
-              =h taxbill.taxman.business_client.name
-          td
-            span
-              =h taxbill.taxman.business_client.owner
-        - else
+      - taxbills_pagination.each do |taxbill|
+        tr.selectable onclick="location.href='#{taxbill_path(taxbill)}'"
+          td=h taxbill.billtype == 'purchase' ? t('taxbills.purchase_bill') : t('taxbills.sales_bill')
+          - if taxbill.transacted_at
+            td=h taxbill.transacted_at.strftime("%Y-%m-%d")
+          - else
             td
+          - if taxbill.taxman
             td
-        td class="numrow"><%=h number_to_currency taxbill.total
+              span
+                =h taxbill.taxman.business_client.name
+            td
+              span
+                =h taxbill.taxman.business_client.owner
+          - else
+              td
+              td
+          td class="numrow"
+            =h number_to_currency taxbill.total
     br
     center
       = will_paginate taxbills_pagination
