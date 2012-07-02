@@ -78,12 +78,12 @@
   <div id="attach">
     <%= render "shared/attachments/detail", :target => @hrinfo %>
   </div>
-  <div style="clear: both;">
+  <div style="clear: both;"></div>
+</div>
+
 <% if @user.ingroup? "admin" %>
   <%= render 'changelog', target: @hrinfo %>
 <% end %>
-    </div>
-  <% if @hrinfo.not_joined? %>
-    <%= render 'reports/info', target: @hrinfo %>
-  <% end %>
-</div>
+<% if @hrinfo.not_joined? %>
+  <%= render 'reports/info', target: @hrinfo %>
+<% end %>

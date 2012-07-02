@@ -1,22 +1,26 @@
 h2= user.name
 
-dl
-  = dtdd user, "google_account"
-  = dtdd user, "notify_email"
-  = dtdd user, "boxcar_account"
-  = dtdd user, "redmine_account"
+.box
+  #desc
+    dl
+      = dtdd user, "google_account"
+      = dtdd user, "daum_account"
+      = dtdd user, "nate_account"
+      = dtdd user, "notify_email"
+      = dtdd user, "boxcar_account"
+      = dtdd user, "redmine_account"
 
-=render "shared/attachments/detail", target: user
+    =render "shared/attachments/detail", target: user
 
-- if user.google_account?
-  = button_to t("users.google.destroy"), [:google_apps, user], method: :delete
-- else
-  = button_to t("users.google.create"), [:google_apps, user], method: :post
+    - if user.google_account?
+      = button_to t("users.google.destroy"), [:google_apps, user], method: :delete
+    - else
+      = button_to t("users.google.create"), [:google_apps, user], method: :post
 
-- if user.redmine_account?
-    = button_to t("users.redmine.destroy"), [:redmine, user], method: :delete
-- else
-  = button_to t("users.redmine.create"), [:redmine, user], method: :post
+    - if user.redmine_account?
+        = button_to t("users.redmine.destroy"), [:redmine, user], method: :delete
+    - else
+      = button_to t("users.redmine.create"), [:redmine, user], method: :post
 
-.clear
+  .clear
 = render 'changelog', target: user
