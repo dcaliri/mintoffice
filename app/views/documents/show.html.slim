@@ -24,8 +24,7 @@ h2
         td
           - if !document.users.blank?
             - user_names = document.users.index_by {|u| u.name }
-              = user_names.keys.sort.join ", "
-          - else
+            = user_names.keys.sort.join ", "
       tr
         th
           = Document.human_attribute_name("tags")
@@ -39,4 +38,4 @@ h2
         li= link_to Hrinfo.model_name.human, :controller => "hrinfos", :action => "show", :id => u.hrinfo
     = render 'reports/info', target: document
   = render "shared/attachments/detail", :target => document
-  div style="clear:both;"
+  .clear
