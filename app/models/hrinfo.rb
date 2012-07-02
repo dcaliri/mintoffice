@@ -16,6 +16,9 @@ class Hrinfo < ActiveRecord::Base
   validates_format_of :juminno, :with => /^\d{6}-\d{7}$/, :message => I18n.t('hrinfos.error.juminno_invalid')
   validates_uniqueness_of :juminno
 
+  validates_presence_of :firstname
+  validates_presence_of :lastname
+
   attr_accessor :email, :phone_number, :address
 
   SEARCH_TYPE = {
