@@ -6,7 +6,7 @@ h3
   = t('reports.info.payments')
 p
   = t('reports.info.status')
-  = " - #{report.localize_status}"
+  = " - #{target.localize_status}"
 
 - if target.access?(current_user, :write)
   - unless current_user.ingroup?(:admin)
@@ -47,7 +47,7 @@ p
         = comment.owner.user.name
         = ": "
         = comment.description
-        
+
 - if current_user.admin?
   = render 'accessors/info', access_target: report
 
