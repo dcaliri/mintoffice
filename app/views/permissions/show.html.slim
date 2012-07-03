@@ -1,0 +1,27 @@
+p
+  b
+    = t('permissions.show.name')
+    ' :
+  =h @permission.name
+hr
+h2
+  = t('permissions.show.user')
+- if !@permission.user.blank?
+  ul
+    - for user in @permission.user
+      li
+  		  = user.name
+  		  = link_to " [X]", :action => 'removeuser', :id => @permission,:user_id => user
+- else
+  = t('permissions.show.none')
+
+= form_tag(:action => "adduser") do
+  = t('permissions.show.add')
+  ' :
+  = text_field_tag :username, params[:username]
+  = hidden_field_tag :id, @permission.id
+
+hr
+= link_to 'Edit', edit_permission_path(@permission)
+' |
+= link_to 'Back', permissions_path

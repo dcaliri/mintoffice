@@ -6,7 +6,7 @@
 
 h2= t("common.title.edit")
 
-= form_for(@pettycash,:url => { :action => 'update' }, :html => { :class => "tabular", :multipart => true } ) do |f|
+= form_for(@pettycash, :url => { :action => 'update' }, :html => { :class => "tabular", :multipart => true } ) do |f|
   = f.error_messages
   .box
     p
@@ -23,5 +23,5 @@ h2= t("common.title.edit")
       = f.text_area :description
     p
       = render 'shared/attachments/form', form: f
-    p
-      = f.submit t("common.button.update")
+  p
+    = f.submit t("common.button.update")

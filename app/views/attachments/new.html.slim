@@ -1,0 +1,18 @@
+- title t(".title")
+#show_command
+  = link_to t("common.title.back"), attachments_path
+h2
+  = t("common.title.new")
+= form_for(:attachment, :url => {:action => 'save'}, :html => { :class => "tabular", :multipart => true } ) do |f|
+  = f.error_messages
+  .box
+    p
+      = f.label :title, Attachment.human_attribute_name('title')
+      = f.text_field :title
+    p
+      = f.label :comments, Attachment.human_attribute_name('comments')
+      = f.text_field :comments
+    p
+      = f.label :file, Attachment.human_attribute_name('file')
+      = f.file_field :uploaded_file
+  = f.submit t("common.button.create")

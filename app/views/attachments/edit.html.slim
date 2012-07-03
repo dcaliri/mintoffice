@@ -1,0 +1,22 @@
+- title t(".title")
+#show_command
+  = link_to t('common.title.show'), @attachment
+  ' |
+  = link_to t('common.title.list'), attachments_path
+
+h2
+  = t("common.title.edit")
+
+= form_for(@attachment, :html => {:class => "tabular"}) do |f|
+  = f.error_messages
+  .box
+    p
+      = f.label :title, Attachment.human_attribute_name('title')
+      = f.text_field :title
+    p
+      = f.label :comments, Attachment.human_attribute_name('comments')
+      = f.text_field :comments
+    p
+      = f.label :original_filename, Attachment.human_attribute_name('original_filename')
+      = f.text_field :original_filename
+  = f.submit t("common.button.update")

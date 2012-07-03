@@ -1,0 +1,18 @@
+h1
+	= t('permissions.index.title')
+table
+  tr
+    th
+    	= t('permissions.index.name')
+	- @permissions.each do |permission|
+	  tr
+	    td
+	    	=h permission.name
+	    td
+	    	= link_to 'Show', permission
+	    td
+	    	= link_to 'Edit', edit_permission_path(permission)
+	    td
+	    	= link_to 'Destroy', permission, :confirm => 'Are you sure?', :method => :delete
+br
+= link_to 'New permission', new_permission_path

@@ -1,0 +1,10 @@
+#top-menu
+  #account
+    ul
+      li
+        = link_to t("users.my.title")+(@user != nil ? "(#{@user.name})" : ""), users_my_path
+      li
+        = link_to t("common.link.logout"), users_logout_path
+  ul
+    li
+      = link_to t("common.title.main"), :controller => "main", :action => "index"

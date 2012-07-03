@@ -4,7 +4,7 @@
   = form_tag :pettycashes, :method => :get do
     = t("common.title.search")
     '  :
-    = text_field_tag 'q', params[:q]
+    = search_field_tag 'q', params[:q]
 
 #show_command
   = link_to t('pettycashes.new.title'), new_pettycash_path
