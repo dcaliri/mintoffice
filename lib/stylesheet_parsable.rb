@@ -1,5 +1,3 @@
-require 'iconv'
-
 module StylesheetParsable
   extend ActiveSupport::Concern
 
