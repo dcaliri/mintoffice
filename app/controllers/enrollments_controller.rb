@@ -10,6 +10,17 @@ class EnrollmentsController < ApplicationController
   def new
     @this_user = current_user
     @enrollment = current_user.enrollments.build
+    @child_contact = @enrollment.build_contact
+  end
+
+  def create
+    @enrollment = current_user.enrollments.build params[:enrollment]
+    if @enrollment.save
+      redirect_to [:complete, @enrollment], notice: '입사지원서가 저장되었습니다.'
+    else
+      @child_contact = @enrollment.contact
+      render "new"
+    end
   end
 
 

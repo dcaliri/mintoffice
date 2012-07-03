@@ -1,19 +1,23 @@
 = form_for @enrollment do |f|
   .box
     = f.error_messages
+
+    h3 기본정보
     = f.label :juminno
     = f.text_field :juminno
 
-    - contact = @enrollment.build_contact
-    = f.fields_for contact do |contact_field|
-      = render 'contacts/form/address', contact_form: contact_field, contact: contact
-      = render 'contacts/form/email', contact_form: contact_field, contact: contact
-      = render 'contacts/form/phone_number', contact_form: contact_field, contact: contact
-      = render 'contacts/form/others', contact_form: contact_field, contact: contact      
+    = f.fields_for :contact, @child_contact do |contact_field|
+      p
+        = contact_field.label :lastname
+        = contact_field.text_field :lastname
+      p
+        = contact_field.label :firstname
+        = contact_field.text_field :firstname
 
-
+      = render 'contacts/form/address', contact_form: contact_field, contact: @child_contact
+      = render 'contacts/form/email', contact_form: contact_field, contact: @child_contact
+      = render 'contacts/form/phone_number', contact_form: contact_field, contact: @child_contact
+      = render 'contacts/form/others', contact_form: contact_field, contact: @child_contact 
 
   p
     = f.submit '입사 지원 신청'
-
-
