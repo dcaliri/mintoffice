@@ -31,6 +31,8 @@ class BankTransactionsController < ApplicationController
     bank_account = BankAccount.find(params[:bank_account])
     BankTransaction.create_with_stylesheet(bank_account, bank_account.name_, params[:upload])
     redirect_to bank_transactions_path(bank_account_id: params[:bank_account])
+  rescue  => e
+    raise e.methods.inspect
   end
 
   def export
