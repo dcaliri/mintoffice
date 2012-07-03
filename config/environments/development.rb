@@ -40,5 +40,6 @@ Mintoffice::Application.configure do
   config.mailer = {
     :via                    => :test
   }
+
   Slim::Engine.set_default_options :pretty => true
 end

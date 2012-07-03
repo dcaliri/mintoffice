@@ -3,7 +3,7 @@
 - reporter_list ||= User.all.delete_if{|user| user == current_user or user.disabled?}
 
 h3
-  = t('reports.info.payments')
+  = t('reports.info.approval')
 p
   = t('reports.info.status')
   = " - #{target.localize_status}"

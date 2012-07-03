@@ -496,7 +496,7 @@ ko:
                     not_reported: 결재 요청 전
                     reporting: 결재 대기 중
                     rollback: 반려
-                    reported: 결제 완료
+                    reported: 결재 완료
             bonus:
                 gave_at: 지급일
                 amount: 금액
@@ -809,7 +809,7 @@ ko:
             destroyed: "%{model}이(가) 성공적으로 제거 되었습니다."
             no_entries: 항목이 없습니다.
         report:
-            status: 결제 상태
+            status: 결재 상태
         title:
             main: 메인화면
             back: "돌아가기"
@@ -1155,7 +1155,7 @@ ko:
             not_hundred: 할당 비율이 100%가 아닙니다.
     reports:
         info:
-            payments: 결제
+            approval: 결재
             status: 상태
             rollback: 반려
             report: 상신
@@ -1163,17 +1163,17 @@ ko:
             not_hundred: 할당 비율이 100%가 아닙니다
         report:
             title:
-            default: "%{prev}님이 %{next}님에게 결제를 요청하였습니다"
-            hrinfo: "%{next}님에게 새로운 입사지원이 들어왔습니다."
+                default: "%{prev}님이 %{next}님에게 결재를 요청하였습니다"
+                hrinfo: "%{next}님에게 새로운 입사지원이 들어왔습니다."
         body:
-            default: "%{prev}님이 %{next}님에게 결제를 요청하였습니다. \n %{url}"
+            default: "%{prev}님이 %{next}님에게 결재를 요청하였습니다. \n %{url}"
             hrinfo: "아래 링크를 통해서 확인 가능합니다. \n %{url}"
         rollback:
             title:
-            default: "%{prev}님이 %{next}님에게 결제를 반려하였습니다"
+            default: "%{prev}님이 %{next}님에게 결재를 반려하였습니다"
             hrinfo: "%{next}님에게 입사지원 수정요청이 들어왔습니다"
         body:
-            default: "%{prev}님이 %{next}님에게 결제를 반려하였습니다. \n %{url}"
+            default: "%{prev}님이 %{next}님에게 결재를 반려하였습니다. \n %{url}"
             hrinfo: "아래 링크를 통해서 확인 가능합니다. \n %{url}"
     required_tags:
         index:
