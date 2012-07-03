@@ -1,0 +1,45 @@
+- title t(".title")
+
+#show_command
+  = link_to t('.new'), new_attachment_path
+
+h2
+  = t("common.title.list")
+table#list-table
+  tr
+    th
+      = t('attachments.index.id')
+    th
+      = t('.uploadedby')
+    th
+      = Attachment.human_attribute_name("title")
+    th
+      = Attachment.human_attribute_name("comments")
+    th
+      = Attachment.human_attribute_name("content_type")
+    th
+      = Attachment.human_attribute_name("original_filename")
+    th
+      = Attachment.human_attribute_name("filepath")
+
+  - @attachments.each do |attachment|
+    tr.selectable onclick="location.href='#{attachment_path(attachment)}'"
+      td
+        =h attachment.id
+      - if attachment.user then
+        td
+          =h attachment.user.name
+      - else
+        td
+      td
+        =h attachment.title
+      td
+        =h attachment.comments
+      td
+        =h attachment.contenttype
+      td
+        =h attachment.original_filename
+      td
+        =h attachment.filepath
+center
+  = will_paginate @cardbills

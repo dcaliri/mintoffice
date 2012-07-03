@@ -1,0 +1,25 @@
+- attachments = form.object.attachments
+- if !attachments.blank?
+  - next_id = 0
+  - prev_id = 0
+  - 0.upto(attachments.count-1) do |i|
+    - attachment = attachments[i]
+    - if i != attachments.count-1
+      - next_id = attachments[i+1].id
+    - else
+      - next_id = 0
+    = attachment.id
+    img src="#{url_for(:controller => "attachments", :action => 'picture', :id => attachment.id, :w => "100", :h => "80")}"
+    = link_to "up", :controller => "attachments", :action => "changeseq", :id => attachment, :to => prev_id
+    = attachment.seq
+    = link_to "down", :controller => "attachments", :action => "changeseq", :id => attachment, :to => next_id
+    = link_to t('common.title.destroy'), :controller => "attachments", :action => "delete", :id => attachment
+    br
+    - prev_id = attachment.id
+- else
+  = t('shared.attachments.form.no_attachment')
+  br
+
+= form.fields_for :attachments, attachments.build do |attachform|
+  = attachform.label t('common.title.attachment')
+  = attachform.file_field :uploaded_file

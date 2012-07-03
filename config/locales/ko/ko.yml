@@ -561,6 +561,7 @@ ko:
             new: 새로운 첨부 올리기
             title: 첨부파일
             uploadedby: 업로더
+            id: id
         show:
             title: 첨부 상세 내역
         edit:
@@ -1105,6 +1106,20 @@ ko:
             title: 기본급 수정
     permissions:
         permission_denied: 접근이 제한되었습니다.
+        index:
+            title: Listing permissions
+            name: Name
+        new:
+            title: New permission
+        show:
+            name: Name
+            user: Users
+            left_parenthesis: "["
+            right_parenthesis: "]"
+            none: None
+            add: Add User
+        edit:
+            title: Editing permission
         title: 권한 관리
     pettycashes:
         balance: 잔액
@@ -1183,8 +1198,13 @@ ko:
             title: 필수 태그 신규 작성
             tagname: 태그명
     shared:
+        footer:
+            mint: mint office - M17.0
         show_attachment:
             download: "다운로드"
+        attachments:
+            form:
+                no_attachment: No attachment
     taxbills:
         index:
             title: 세금계산서 관리
