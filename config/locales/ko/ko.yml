@@ -698,7 +698,7 @@ ko:
             total: Total
         show:
             title: 거래처 내역
-            modify: [수정]
+            modify: "[수정]"
             add_contact: 담당자 추가하기
         new:
             title: 새로운 거래처 입력
@@ -1045,6 +1045,12 @@ ko:
             admin: 관리자 메뉴
             nextweek: 다음주
             prevweek: 이전주
+        changepw:
+            title: Change Password
+            password: Password
+            password_again: Password Again
+            old_password: Old Password
+            new_password: New Password
     namecards:
         edit:
             title: 명함 정보 수정
