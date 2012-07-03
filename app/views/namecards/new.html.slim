@@ -1,0 +1,38 @@
+- title t('.title')
+#show_command
+  = link_to t('common.title.back'), documents_path
+
+h2
+  = t("common.title.new")
+= form_for(@namecard, :url => {:action => 'create'}, :html => {:class => "tabular", :multipart => true}) do |f|
+  .box
+    = f.error_messages
+
+    p
+      = f.label Namecard.human_attribute_name('name')
+      = f.text_field :name
+      = t(".name_example")
+    p
+      = f.label Namecard.human_attribute_name('company')
+      = f.text_field :company
+    p
+      = f.label Namecard.human_attribute_name('department')
+      = f.text_field :department
+    p
+      = f.label Namecard.human_attribute_name('jobtitle')
+      = f.text_field :jobtitle
+    p
+      = f.label Namecard.human_attribute_name('phone')
+      = f.text_field :phone
+      = t(".phone_example")
+    p
+      = f.label Namecard.human_attribute_name('homepage')
+      = f.text_field :homepage
+      = t(".homepage_example")
+    p
+      = f.label Namecard.human_attribute_name('email')
+      = f.text_field :email
+      = t(".email_example")
+    p
+      = render 'shared/attachments/form', form: f
+  = f.submit t('common.button.create')
