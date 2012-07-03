@@ -1,0 +1,40 @@
+= stylesheet_link_tag 'main', :cache => true
+h1
+  = t('main.changepw.title')
+
+- if flash[:notice]
+  .notice
+    = flash[:notice]
+
+div
+  = form_tag do
+    fieldset
+      legend
+        = t('main.changepw.old_password')
+
+      div
+        label for="oldpassword"
+          = t('main.changepw.old_password')
+          ' :
+        = password_field_tag :oldpassword, params[:oldpassword]
+
+    fieldset
+      legend
+        = t('main.changepw.new_password')
+
+      div
+        label for="password"
+          = t('main.changepw.password')
+          ' :
+        = password_field_tag :password, params[:password]
+
+      div
+        label for="password_confirmation"
+          = t('main.changepw.password_again')
+          ' :
+        = password_field_tag :password_confirmation, params[:password_confirmation]
+  
+      div
+        = submit_tag "Change"
+
+= button_to "Cancel", :action => 'index'
