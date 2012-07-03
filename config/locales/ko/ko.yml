@@ -1200,9 +1200,13 @@ ko:
         index:
             title: 필수 태그 목록
             new: 새로운 필수 태그 항목 작성
+            index: Index
         new:
             title: 필수 태그 신규 작성
             tagname: 태그명
+            dot: ...
+            new: New
+        required_tags: RequiredTags
     shared:
         footer:
             mint: mint office - M17.0
