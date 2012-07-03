@@ -13,7 +13,11 @@ Mintoffice::Application.routes.draw do
   end
 
   resource :apply do
-    get :try
+    get :complete
+  end
+
+  resources :enrollments do
+    get :try, :on => :collection
     get :complete
   end
 

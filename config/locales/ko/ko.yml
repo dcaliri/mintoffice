@@ -571,7 +571,7 @@ ko:
         new:
             title: 첨부파일 신규 작성
         title: 첨부파일 관리
-    applies:
+    enrollments:
         title: 입사지원
         success: 이미 입사지원서가 등록되어 있습니다.
         form:
