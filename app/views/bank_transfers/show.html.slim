@@ -4,9 +4,9 @@
     = link_to t('bank_transfers.show.to_bank_transaction'), bank_transfer.transaction
     = " | "
   - if bank_transfer.expense_report
-    = link_to "지출내역서 보기", bank_transfer.expense_report
+    = link_to t('bank_transfers.show.view_expense'), bank_transfer.expense_report
   - else
-    = link_to "지출내역서 만들기", new_expense_report_path(target_type: bank_transfer.class, target_id: bank_transfer.id, expensed_at: bank_transfer.transfered_at, amount: bank_transfer.money)
+    = link_to t('bank_transfers.show.create_expense'), new_expense_report_path(target_type: bank_transfer.class, target_id: bank_transfer.id, expensed_at: bank_transfer.transfered_at, amount: bank_transfer.money)
   = " | "
   = link_to t('common.link.edit'), edit_bank_transfer_path(bank_transfer, bank_account_id: bank_transfer.bank_account)
   = " | "

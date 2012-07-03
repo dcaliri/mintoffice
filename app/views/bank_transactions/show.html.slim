@@ -13,7 +13,7 @@ h2
   - if bank_transaction.bank_account
     = "#{bank_transaction.bank_account.name}: #{bank_transaction.bank_account.number}"
   - else
-    = "입출금 상세정보"
+    = t('bank_transactions.show.detail_transfer')
 
 .box
   table

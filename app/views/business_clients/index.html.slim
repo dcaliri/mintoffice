@@ -1,0 +1,43 @@
+- title t('.title')
+
+- content_for :search do
+  = form_tag :business_clients, :method => :get do
+    = t("common.title.search")
+    ' :
+    = text_field_tag 'query', params[:query]
+
+#show_command
+  = link_to t('common.title.new'), [:new, :business_client]
+
+- unless @business_clients.empty?
+    h2
+      = t('business_clients.index.total')
+      ' : 
+      = @business_clients.count
+    table#list-table
+      tr
+        th
+          = BusinessClient.human_attribute_name('name')
+        th
+          = BusinessClient.human_attribute_name('category')
+        th
+          = BusinessClient.human_attribute_name('business_status')
+        th
+          = BusinessClient.human_attribute_name('owner')
+      - @business_clients.each do |client|
+        tr.selectable onclick="location.href='#{business_client_path(client)}'"
+          td
+            span
+              =h client.name
+          td
+            =h client.category
+          td
+            =h client.business_status
+          td
+            =h client.owner
+    br
+    center
+      = will_paginate @business_clients
+- else
+  h3
+    = t 'business_clients.index.empty'

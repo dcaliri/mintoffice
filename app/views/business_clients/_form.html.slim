@@ -1,0 +1,29 @@
+#show_command
+  = link_to t('common.title.back'), :business_clients
+
+h2
+  = t("common.title.#{action_name}")
+= form_for business_client, html: {multipart: true} do |f|
+  = f.error_messages
+  .box
+    p
+      = f.label :name
+      = f.text_field :name
+    p
+      = f.label :registration_number
+      = f.text_field :registration_number
+    p
+      = f.label :category
+      = f.text_field :category
+    p
+      = f.label :business_status
+      = f.text_field :business_status
+    p
+      = f.label :address
+      = f.text_field :address
+    p
+      = f.label :owner
+      = f.text_field :owner
+    = render 'shared/attachments/form', form: f
+    p
+      = f.submit

@@ -1,0 +1,22 @@
+- title t('.title')
+#show_command
+  = link_to t('common.title.back'), projects_path
+h2
+  = t("common.title.new")
+
+= form_for(project, :html => {:class => "tabular"}) do |f|
+  = f.error_messages
+  .box
+    p
+      = f.label :name, Project.human_attribute_name("name")
+      = f.text_field :name
+    p
+      = f.label :started_on, Project.human_attribute_name("started_on")
+      = f.date_select :started_on, :order => [:year, :month, :day]
+    p
+      = f.label :ending_on, Project.human_attribute_name("ending_on")
+      = f.date_select :ending_on, :order => [:year, :month, :day]
+    p
+      = f.label :revenue, Project.human_attribute_name("revenue")
+      = f.text_field :revenue
+  = f.submit t("common.button.create")

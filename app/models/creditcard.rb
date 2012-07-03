@@ -4,6 +4,7 @@ class Creditcard < ActiveRecord::Base
   has_many :cardbills
   has_many :card_used_sources
   has_many :card_approved_sources
+  belongs_to :bank_account
 
   validates_presence_of :cardno
   validates_presence_of :expireyear

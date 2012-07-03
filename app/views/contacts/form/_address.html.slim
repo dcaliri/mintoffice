@@ -1,13 +1,14 @@
 - 3.times { contact.addresses.new }
 
-h3 주소
+h3
+  = t('contacts_form.address.title')
 = contact_form.fields_for :addresses do |address_field|
   .address-form
     p
       = address_field.label :target
       = address_field.select :target, options_for_select(current_company.contact_address_tags.map{|tag| tag.name}, address_field.object.target)
       - if current_user.present? and current_user.admin?
-        = link_to "새로운 대상 만들기", [:new, :contact_address_tag]
+        = link_to t('contacts_form.make_new_one'), [:new, :contact_address_tag]
     p
       = address_field.label :country
       = address_field.text_field :country
@@ -27,7 +28,7 @@ h3 주소
       = address_field.label :postal_code
       = address_field.text_field :postal_code
 
-= link_to "새로운 연락처 작성", "", {class: 'new-address-form new-form-link'}
+= link_to t('contacts_form.address.new'), "", {class: 'new-address-form new-form-link'}
 
 br
 br

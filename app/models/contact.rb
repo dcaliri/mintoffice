@@ -5,7 +5,9 @@ class Contact < ActiveRecord::Base
   belongs_to :target, :polymorphic => true
   belongs_to :owner, class_name: 'User'
 
-  REJECT_IF_EMPTY = proc { |attrs| attrs.all? { |k, v| k != "target" ? v.blank? : true  } }
+  REJECT_IF_EMPTY = proc do |attrs|
+    attrs.all? {|k, v| ["target", "created_at", "updated_at"].include?(k) or v.blank?}
+  end
 
   has_many :addresses, class_name: 'ContactAddress', :dependent => :destroy
   accepts_nested_attributes_for :addresses, :allow_destroy => :true, :reject_if => REJECT_IF_EMPTY
@@ -24,6 +26,13 @@ class Contact < ActiveRecord::Base
   include Historiable
   include Attachmentable
   include Taggable
+
+  validate :validate_if_apply
+  def validate_if_apply
+    errors.add(:address, "가 적어도 하나 이상 필요합니다.") if addresses.length == 0
+    errors.add(:email, "이 적어도 하나 이상 필요합니다.") if emails.length == 0
+    errors.add(:number, "가 적어도 하나 이상 필요합니다.") if phone_numbers.length == 0
+  end
 
   def access?(user)
     isprivate == false || owner == user
