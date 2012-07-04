@@ -30,7 +30,7 @@ class BankTransfer < ActiveRecord::Base
     DEFAULT_COLUMNS
   end
 
-  include StylesheetParsable
+  include SpreadsheetParsable
   include Excels::BankTransfers::Shinhan
   include Excels::BankTransfers::Ibk
 

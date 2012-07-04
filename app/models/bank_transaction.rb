@@ -21,7 +21,7 @@ class BankTransaction < ActiveRecord::Base
     DEFAULT_COLUMNS
   end
 
-  include StylesheetParsable
+  include SpreadsheetParsable
   include Excels::BankTransactions::Shinhan
   include Excels::BankTransactions::Ibk
 

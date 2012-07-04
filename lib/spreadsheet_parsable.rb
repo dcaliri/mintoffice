@@ -1,4 +1,4 @@
-module StylesheetParsable
+module SpreadsheetParsable
   extend ActiveSupport::Concern
 
   module ClassMethods
