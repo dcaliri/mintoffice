@@ -31,7 +31,7 @@ end
 group :development do
   gem 'pow-client'
   gem 'sextant'
-  gem 'ruby-debug19', :require => 'ruby-debug'
+  gem 'debugger'
 end
 
 group :test do
