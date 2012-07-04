@@ -26,7 +26,6 @@ h2
       = Cardbill.human_attribute_name('transdate')
       ' :
       =h @cardbill.transdate.strftime("%Y.%m.%d %H:%M:%S %p") rescue ""
-
     h3
       = Cardbill.human_attribute_name('totalamount')
       ' :

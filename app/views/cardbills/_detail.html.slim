@@ -1,21 +1,28 @@
 h3
-  = t('Cardbills.detail.title')
+  = t('cardbills.detail.title')
 table border="0" cellspacing="5" cellpadding="5"
   tr
-    th align="right"><%= Cardbill.human_attribute_name('amount')
-    ' :
-    td align="right"><%= number_to_currency target.amount
+    th align="right"
+      = Cardbill.human_attribute_name('amount')
+      ' :
+    td align="right"
+      = number_to_currency target.amount
   tr
-    th align="right"><%= Cardbill.human_attribute_name('vat')
-    ' :
-    td align="right"><%= number_to_currency target.vat
+    th align="right"
+      = Cardbill.human_attribute_name('vat')
+      ' :
+    td align="right"
+      = number_to_currency target.vat
   tr
-    th align="right"><%= Cardbill.human_attribute_name('servicecharge')
-    ' :
-    td align="right"><%= number_to_currency target.servicecharge
+    th align="right"
+      = Cardbill.human_attribute_name('servicecharge')
+      ' :
+    td align="right"
+      = number_to_currency target.servicecharge
   tr
-    th align="right"><%= Cardbill.human_attribute_name('totalamount')
-    ' :
+    th align="right"
+      = Cardbill.human_attribute_name('totalamount')
+      ' :
     td align="right" class="target.mismatch?(:totalamount)"
       = number_to_currency target.totalamount
   tr
