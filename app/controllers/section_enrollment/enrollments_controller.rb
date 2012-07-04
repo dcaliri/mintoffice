@@ -1,6 +1,6 @@
 # encoding: UTF-8
 
-class EnrollmentsController < ApplicationController
+class SectionEnrollment::EnrollmentsController < ApplicationController
   skip_before_filter :authorize
   before_filter :find_apply_admin
 

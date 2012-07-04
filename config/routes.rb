@@ -12,15 +12,17 @@ Mintoffice::Application.routes.draw do
     resources :contacts
   end
 
-  resources :enrollments do
-    collection do
-      get :dashboard
-    end
+  scope nil, :module => 'section_enrollment' do
+    resources :enrollments do
+      collection do
+        get :dashboard
+      end
 
-    member do
-      get :attach_item
-      post :attach 
-      delete :delete_attachment
+      member do
+        get :attach_item
+        post :attach 
+        delete :delete_attachment
+      end
     end
   end
 
