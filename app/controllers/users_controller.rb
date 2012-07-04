@@ -54,6 +54,7 @@ class UsersController < ApplicationController
 
   def create
     @this_user = User.new(params[:user])
+    @this_user.companies << current_company
     if @this_user.save
       Boxcar.add_to_boxcar(@this_user.boxcar_account) unless @this_user.boxcar_account.empty?
       flash[:notice] = I18n.t("common.messages.created", :model => User.model_name.human)
