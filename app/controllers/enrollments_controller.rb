@@ -27,12 +27,8 @@ class EnrollmentsController < ApplicationController
 
   def attach
     @enrollment = current_user.enrollment
-    @attachment = Attachment.save_for(@enrollment, current_user, uploaded_file: params[:namecard_picture])
-
-    tag = Tag.find_or_create(name: "재직중명서")
-    tag.targets << @enrollment
-    tag.targets << @attachment
-
+    item = @enrollment.find_or_create_custom_item('명함판')
+    @attachment = Attachment.save_for(item, current_user, uploaded_file: params[:picture])
     redirect_to :back
   end
 

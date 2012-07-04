@@ -18,8 +18,11 @@ Mintoffice::Application.routes.draw do
 
   resources :enrollments do
     collection do
-      post :attach 
       get :dashboard
+    end
+
+    member do
+      post :attach 
     end
   end
 
