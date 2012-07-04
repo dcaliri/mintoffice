@@ -27,12 +27,12 @@ class EnrollmentsController < ApplicationController
 
   def attach_item
     @enrollment = current_user.enrollment
-    @item = @enrollment.items.find_by_name('명함판')
+    @item = @enrollment.items.find_by_name(params[:name])
   end
 
   def attach
     @enrollment = current_user.enrollment
-    item = @enrollment.find_or_create_custom_item('명함판')
+    item = @enrollment.find_or_create_custom_item(params[:name])
     @attachment = Attachment.save_for(item, current_user, uploaded_file: params[:picture])
     redirect_to :back
   end

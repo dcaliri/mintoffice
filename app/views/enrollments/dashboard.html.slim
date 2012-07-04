@@ -4,4 +4,5 @@ p
 	= link_to '기본정보 등록', [:edit, @enrollment]
 
 ul
-	li = link_to "명함판 사진", attach_item_enrollment_path(@enrollment, item: "picture")
+	li = link_to "명함판 사진", attach_item_enrollment_path(@enrollment, name: "picture")
+	li = link_to "졸업증명서", attach_item_enrollment_path(@enrollment, name: "diploma")

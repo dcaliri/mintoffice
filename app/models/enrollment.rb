@@ -8,7 +8,6 @@ class Enrollment < ActiveRecord::Base
 	accepts_nested_attributes_for :contact, :allow_destroy => :true
 
 	def find_or_create_custom_item(name)
-
 		if item = self.items.find_by_name(name)
 			item
 		else
