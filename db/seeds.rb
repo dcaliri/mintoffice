@@ -7,6 +7,13 @@
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Major.create(:name => 'Daley', :city => cities.first)
 
+unless Company.all.empty?
+  company = Company.create!(name: "mintech")
+  company.save!
+end
+
+company = Company.find_by_name("mintech")
+
 unless User.exists?(name: "admin")
   user = User.new
   user.name = "admin"
@@ -21,18 +28,18 @@ unless User.exists?(name: "admin")
   user.permission.build(name: 'business_clients')
 
   user.groups.build(name: 'admin')
-
+  user.companies << company
   user.save!
 end
 
-unless Company.all.empty?
-  company = Company.create!(name: "mintech")
-  user = User.find_by_name("admin")
-  company.users << user
-  company.save!
-end
+unless User.exists?(name: "test")
+  user = User.new
+  user.name = "test"
+  user.password = "1234"
 
-company = Company.find_by_name("mintech")
+  user.companies << company
+  user.save!
+end
 
 if company.contact_address_tags.empty?
   company.contact_address_tags.create!(name: "집")
