@@ -1,0 +1,9 @@
+ul 
+- @item.attachments.each do |attachment|
+	li = attachment.original_filename
+
+
+= form_tag [:attach, @enrollment], multipart: true do
+	= label_tag :picture
+	= file_field_tag :picture
+	= submit_tag '추가'

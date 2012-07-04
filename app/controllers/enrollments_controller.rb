@@ -25,6 +25,11 @@ class EnrollmentsController < ApplicationController
     end
   end
 
+  def attach_item
+    @enrollment = current_user.enrollment
+    @item = @enrollment.items.find_by_name('명함판')
+  end
+
   def attach
     @enrollment = current_user.enrollment
     item = @enrollment.find_or_create_custom_item('명함판')

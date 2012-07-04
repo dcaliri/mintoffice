@@ -22,6 +22,7 @@ Mintoffice::Application.routes.draw do
     end
 
     member do
+      get :attach_item
       post :attach 
     end
   end
