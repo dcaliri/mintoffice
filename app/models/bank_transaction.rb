@@ -138,6 +138,12 @@ class BankTransaction < ActiveRecord::Base
     self.before_remain == transaction.remain
   end
 
+  [:in, :out].each do |accessor|
+    define_method accessor do
+      read_attribute(accessor) || 0
+    end
+  end
+
   def before_remain
     self.remain + self.out - self.in
   end
