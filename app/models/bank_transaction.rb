@@ -77,7 +77,7 @@ class BankTransaction < ActiveRecord::Base
     create_file(path, upload['file'])
     previews = []
     parser.parse(path) {|class_name, query, params| previews << account.send(class_name.to_s.tableize).build(params)}
-    previews
+    previews + [account.bank_transactions.order(:transacted_at).last]
   end
 
   def self.create_with_stylesheet(account, type, name)
@@ -134,8 +134,14 @@ class BankTransaction < ActiveRecord::Base
   end
 
   def verify(transaction)
-    return true if self == transaction
+    return true if !transaction or self == transaction
     self.before_remain == transaction.remain
+  end
+
+  [:in, :out].each do |accessor|
+    define_method accessor do
+      read_attribute(accessor) || 0
+    end
   end
 
   def before_remain
