@@ -12,10 +12,6 @@ Mintoffice::Application.routes.draw do
     resources :contacts
   end
 
-  resource :apply do
-    get :complete
-  end
-
   resources :enrollments do
     collection do
       get :dashboard
