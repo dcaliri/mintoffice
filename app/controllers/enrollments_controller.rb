@@ -4,25 +4,37 @@ class EnrollmentsController < ApplicationController
   skip_before_filter :authorize
   before_filter :find_apply_admin
 
-  def try
+  def dashboard
+    @enrollment = current_user.enrollment
   end
 
-  def new
+  def edit
     @this_user = current_user
-    @enrollment = current_user.enrollments.build
-    @child_contact = @enrollment.build_contact
+    @enrollment = current_user.enrollment
+    @child_contact = @enrollment.contact || @enrollment.build_contact
+    # @child_contact = @enrollment.build_contact
   end
 
-  def create
-    @enrollment = current_user.enrollments.build params[:enrollment]
-    if @enrollment.save
-      redirect_to [:complete, @enrollment], notice: '입사지원서가 저장되었습니다.'
+  def update
+    @enrollment = current_user.enrollment
+    if @enrollment.update_attributes(params[:enrollment])
+      redirect_to [:dashboard, :enrollments], notice: '입사지원서가 저장되었습니다.'
     else
       @child_contact = @enrollment.contact
-      render "new"
+      render "edit"
     end
   end
 
+  def attach
+    @enrollment = current_user.enrollment
+    @attachment = Attachment.save_for(@enrollment, current_user, uploaded_file: params[:namecard_picture])
+
+    tag = Tag.find_or_create(name: "재직중명서")
+    tag.targets << @enrollment
+    tag.targets << @attachment
+
+    redirect_to :back
+  end
 
 =begin
   def show

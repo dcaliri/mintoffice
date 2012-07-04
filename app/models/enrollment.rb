@@ -4,4 +4,6 @@ class Enrollment < ActiveRecord::Base
 	has_one :contact, :as => :target
 	accepts_nested_attributes_for :contact, :allow_destroy => :true
 
+	include Attachmentable
+	include Taggable
 end

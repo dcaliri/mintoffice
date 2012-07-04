@@ -2,7 +2,7 @@
 require 'digest/sha1'
 
 class User < ActiveRecord::Base
-  has_many :enrollments
+  has_one :enrollment
   has_many :attachment
   has_many :document_owners, :order => 'created_at DESC'
   has_many :documents, :through => :document_owners, :source => :document
@@ -41,6 +41,11 @@ class User < ActiveRecord::Base
 
   include Historiable
   include Attachmentable
+
+  def enrollment
+    Enrollment.find_by_user_id(id) || create_enrollment
+  end
+
   def history_except
     [:name, :hashed_password, :salt]
   end
