@@ -3,6 +3,11 @@ h2 입사지원서 관리
 p
 	= link_to '기본정보 등록', [:edit, @enrollment]
 
-ul
-	li = link_to "명함판 사진", attach_item_enrollment_path(@enrollment, name: "picture")
-	li = link_to "졸업증명서", attach_item_enrollment_path(@enrollment, name: "diploma")
+div
+	- @enrollment.items.each do |item|
+		h4 = item.name
+		ul
+			- item.attachments.each do |attachment|
+				li = attachment.original_filename
+			li = link_to "[[#{item.name} 등록]]", attach_item_enrollment_path(@enrollment, name: item.name)
+
