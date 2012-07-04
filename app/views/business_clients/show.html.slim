@@ -59,4 +59,4 @@ h2
           = link_to t('business_clients.show.add_contact'), find_contacts_path(:target_class => Taxman, parent_class: business_client.class, parent: business_client), :class => 'popup'
     = render 'changelog', target: business_client
   = render "shared/attachments/detail", :target => business_client
-  div style="clear: both;"
+  .clear

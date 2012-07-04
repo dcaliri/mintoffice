@@ -2,6 +2,7 @@
 
 class UsersController < ApplicationController
   layout "application", :except => [:login]
+  layout "login", only: [:login]
 
   before_filter :only => [:show] do |c|
     @this_user = User.find(params[:id])
@@ -34,8 +35,6 @@ class UsersController < ApplicationController
       else
         flash.now[:notice] = t("users.login.loginfail")
       end
-    else
-      render layout: "layouts/login"
     end
   end
 

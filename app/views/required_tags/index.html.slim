@@ -1,0 +1,18 @@
+- title t('.title')
+#show_command
+  = link_to t('.new'), :action => "new"
+h2
+  = t('required_tags.index.index')
+- if !@modelnames.blank?
+  ul
+    - for mn in @modelnames
+      li
+        = mn
+        br
+        - if !@required_tags.blank?
+          ul
+            - for rt in @required_tags
+              - if rt.modelname == mn
+                li
+                  = rt.tag.name
+                  = link_to "[X]", rt, :confirm => "Are you sure?", :method => 'delete'

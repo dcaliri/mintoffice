@@ -1,0 +1,18 @@
+- title t('.title')
+#show_command
+  = t('required_tags.new.dot')
+
+h2
+	= t('required_tags.new.new')
+= form_for @required_tag, :html => { :class => 'tabular'} do |f|
+	= hidden_field_tag :returnurl, @returnurl
+	= f.error_messages
+	.box
+		p
+		  = f.label :modelname, RequiredTag.human_attribute_name('modelname')
+		  = f.text_field :modelname
+		= fields_for :tag, @tag do |tag|
+			p
+			  = tag.label :name, t('.tagname')
+			  = tag.text_field :name
+	= f.submit t('common.button.create'), :disable_with => 'Createing...'

@@ -1,3 +1,5 @@
+require 'iconv'
+
 class ExcelParser
   def class_name(class_name)
     @class_name = class_name

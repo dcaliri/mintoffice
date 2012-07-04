@@ -20,7 +20,7 @@ class Creditcard < ActiveRecord::Base
   CARD_LIST = [:card_used_sources, :card_approved_sources, :card_approved_sources_oversea]
   CARD_LIST_FOR_SELECT = [["이용내역", CARD_LIST[0]],["승인내역", CARD_LIST[1]], ["해외승인내역", CARD_LIST[2]]]
 
-  include StylesheetParsable
+  include SpreadsheetParsable
   include Excels::CardUsedSourcesInfo
   include Excels::CardApprovedSourcesInfo
   include Excels::CardApprovedSourcesOverseaInfo
