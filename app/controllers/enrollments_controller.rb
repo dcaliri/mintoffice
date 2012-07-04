@@ -37,6 +37,12 @@ class EnrollmentsController < ApplicationController
     redirect_to :back
   end
 
+  def delete_attachment
+    attachment = Attachment.where(user_id: current_user.id, id: params[:attachment_id]).last
+    attachment.destroy
+    redirect_to :back
+  end
+
 =begin
   def show
     @this_user = User.find(session[:user_id])

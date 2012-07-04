@@ -24,6 +24,7 @@ Mintoffice::Application.routes.draw do
     member do
       get :attach_item
       post :attach 
+      delete :delete_attachment
     end
   end
 
