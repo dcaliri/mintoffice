@@ -1,0 +1,49 @@
+<div  <%= taxbill.billtype == 'purchase' ? "style='padding: 6px; border: 1px solid royalblue; background-color: lavender;'" : "style='padding: 6px; border: 1px solid purple; background-color: pink;'"%>>
+      <table border="0" cellspacing="0" cellpadding="5" width="100%">
+      <tr><td align="right">[<%= link_to t("taxbill_items.new.title"), [:new, taxbill, :taxbill_item] %>]</td></tr>
+      </table>
+      <table border="1" cellspacing="0" cellpadding="5" width="100%">
+        <% unless taxbill.items.empty? %>
+          <tr>
+            <th style="text-align: center"><%= TaxbillItem.human_attribute_name(:transacted_at) %></th>
+            <th style="text-align: center"><%= TaxbillItem.human_attribute_name(:note) %></th>
+            <th style="text-align: center"><%= TaxbillItem.human_attribute_name(:unitprice) %></th>
+            <th style="text-align: center"><%= TaxbillItem.human_attribute_name(:quantity) %></th>
+            <th style="text-align: center"><%= TaxbillItem.human_attribute_name(:price) %></th>
+            <th style="text-align: center"><%= TaxbillItem.human_attribute_name(:tax) %></th>
+            <th style="text-align: center"><%= TaxbillItem.human_attribute_name(:total) %></th>
+            <th></th>
+          </tr>
+          <% taxbill.items.each do |item| %>
+            <tr>
+              <td><%= item.transacted_at.strftime("%Y-%m-%d") rescue "" %></td>
+              <td><%= item.note %></td>
+              <td class="numrow"><%= number_to_currency item.unitprice %></td>
+              <td class="numrow"><%= item.quantity %></td>
+              <td class="numrow"><%= number_to_currency item.price %></td>
+              <td class="numrow"><%= number_to_currency item.tax %></td>
+              <td class="numrow"><%= number_to_currency item.total %></td>
+              <td style="text-align: center">
+                <%= link_to t("common.link.edit"), [:edit, taxbill, item] %>
+                |
+                <%= link_to t("common.link.destroy"), [taxbill, item], :method => :delete, :confirm => "Are you sure?" %>
+              </td>
+            </td>
+          <% end %>
+        <% else %>
+          <tr>
+            <td style="text-align: center; font-weight: bold; color: red;"><%= t('common.messages.no_entries')%></td>
+          </tr>
+        <% end %>
+      </table>
+      <table border="1" cellspacing="0" cellpadding="5" width="100%">
+        <tr>
+          <th class="numrow"><%= Taxbill.human_attribute_name('price') %></th>
+          <td class="numrow"><%= number_to_currency taxbill.price %></td>
+          <th class="numrow"><%= Taxbill.human_attribute_name('tax') %></th>
+          <td class="numrow"><%= number_to_currency taxbill.tax %></td>
+          <th class="numrow"><%= Taxbill.human_attribute_name('total') %></th>
+          <td class="numrow"><%= number_to_currency taxbill.total %></td>
+        </tr>
+      </table>
+      </div>
