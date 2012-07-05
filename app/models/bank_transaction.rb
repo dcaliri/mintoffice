@@ -118,7 +118,6 @@ class BankTransaction < ActiveRecord::Base
     parser.parse(path) do |class_name, query, params|
       collections = account.send(class_name.to_s.tableize).where(query)
       if collections.empty?
-        collections.create!(params)
         resource = collections.build(params)
         resource.no_verify = true
         resource.save!
