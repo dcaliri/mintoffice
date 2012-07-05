@@ -1,4 +1,5 @@
 - title t('.title')
+
 #show_command
   = link_to t('common.title.edit'), [:edit, business_client]
   ' |
@@ -7,55 +8,28 @@
   = link_to t('common.title.list'), :business_clients
 h2
   =h business_client.name
+  
 .box
   #descr
-    table border="0" cellspacing="5" cellpadding="5"
-      tr
-        th align="right"
-          = BusinessClient.human_attribute_name('name')
-          ' :
-        td align="right"
-          = business_client.name
-      tr
-        th align="right"
-          = BusinessClient.human_attribute_name('registration_number')
-          ' :
-        td align="right"
-          = business_client.registration_number
-      tr
-        th align="right"
-          = BusinessClient.human_attribute_name('category')
-          ' :
-        td align="right"
-          = business_client.category
-      tr
-        th align="right"
-          = BusinessClient.human_attribute_name('business_status')
-          ' :
-        td align="right"
-          = business_client.business_status
-      tr
-        th align="right"
-          = BusinessClient.human_attribute_name('address')
-          ' :
-        td align="right"
-          = business_client.address
-      tr
-        td align="right"
-          p
-            = Taxman.model_name.human
-            ' :
+    dl
+      = dtdd business_client, "name"
+      = dtdd business_client, "registration_number"
+      = dtdd business_client, "category"
+      = dtdd business_client, "business_status"
+      = dtdd business_client, "address"
+      dt
+        = Taxman.model_name.human
         - unless business_client.taxmen.empty?
-          td align="right"
-            - business_client.taxmen.map do |taxman|
+          - business_client.taxmen.map do |taxman|
+            dd
               = taxman.fullname
               = link_to t('business_clients.show.modify'), find_contacts_path(:target_class => Taxman, target: taxman, parent_class: business_client.class, parent: business_client), :class => 'popup'
               br
         - else
-          td
+          dd
             p
               = t('taxmen.empty')
-        td
+        dd
           = link_to t('business_clients.show.add_contact'), find_contacts_path(:target_class => Taxman, parent_class: business_client.class, parent: business_client), :class => 'popup'
     = render 'changelog', target: business_client
   = render "shared/attachments/detail", :target => business_client
