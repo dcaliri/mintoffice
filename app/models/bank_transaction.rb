@@ -37,21 +37,28 @@ class BankTransaction < ActiveRecord::Base
   end
 
   before_save :verify_with_prev_transaction
+  before_save :set_transact_order, on: :create
+
   def verify_with_prev_transaction
     parent = bank_account.bank_transactions
     if id
-      prev = parent.where("transacted_at < ?", transacted_at).order(:transacted_at).last
+      prev = parent.where("transacted_at <= ?", transacted_at).order(:transacted_at).last
     else
       prev = parent.order(:transacted_at).last
     end
 
-    # raise prev.inspect
     if verify(prev)
       true
     else
       errors.add(:verify, '에 실패했습니다. 입력 값을 다시 확인해주세요')
       false
     end
+  end
+
+  def set_transact_order
+    parent = bank_account.bank_transactions
+    latest_order = (parent.order(:transact_order).last.transact_order + 1 rescue 0)
+    self.transact_order = latest_order
   end
 
   def self.excel_parser(type)
@@ -77,7 +84,22 @@ class BankTransaction < ActiveRecord::Base
     create_file(path, upload['file'])
     previews = []
     parser.parse(path) {|class_name, query, params| previews << account.send(class_name.to_s.tableize).build(params)}
-    previews + [account.bank_transactions.order(:transacted_at).last]
+
+    old_transaction = previews[-1]
+    new_transaction = previews[0]
+
+    bank_transactions = account.bank_transactions
+    if old_transaction
+      transacted_at = old_transaction.transacted_at
+      previous_transaction_on_db = bank_transactions.where("transacted_at < ?", transacted_at).order(:transacted_at).last
+    end
+
+    if new_transaction
+      transacted_at = new_transaction.transacted_at
+      next_transaction_on_db = bank_transactions.where("transacted_at > ?", transacted_at).order(:transacted_at).first
+    end
+
+    [next_transaction_on_db] + previews + [previous_transaction_on_db]
   end
 
   def self.create_with_stylesheet(account, type, name)
