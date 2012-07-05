@@ -37,7 +37,7 @@ class BankTransaction < ActiveRecord::Base
   end
 
   before_save :verify_with_prev_transaction
-  before_save :set_transact_order, on: :create
+  before_create :set_transact_order
 
   def verify_with_prev_transaction
     parent = bank_account.bank_transactions
@@ -57,7 +57,14 @@ class BankTransaction < ActiveRecord::Base
 
   def set_transact_order
     parent = bank_account.bank_transactions
-    latest_order = (parent.order(:transact_order).last.transact_order + 1 rescue 0)
+    last_transaction = parent.order(:transact_order).last
+
+    if last_transaction
+      latest_order = last_transaction.transact_order + 1
+    else
+      latest_order = 0
+    end
+
     self.transact_order = latest_order
   end
 
