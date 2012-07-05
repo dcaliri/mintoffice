@@ -206,7 +206,7 @@ class Hrinfo < ActiveRecord::Base
       when :join
         where('joined_on IS NOT NULL')
       when :retire
-        where('retired_on IS NOT NULL')
+        where('retired_on IS NOT NULL AND joined_on IS NULL')
       when :apply
         where('joined_on IS NULL')
       end
