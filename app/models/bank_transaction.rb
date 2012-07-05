@@ -36,7 +36,9 @@ class BankTransaction < ActiveRecord::Base
     config.period_subtitle :transacted_at
   end
 
-  before_save :verify_with_prev_transaction
+  attr_accessor :no_verify
+
+  before_save :verify_with_prev_transaction, unless: :no_verify
   before_create :set_transact_order
 
   def verify_with_prev_transaction
@@ -117,8 +119,12 @@ class BankTransaction < ActiveRecord::Base
       collections = account.send(class_name.to_s.tableize).where(query)
       if collections.empty?
         collections.create!(params)
+        resource = collections.build(params)
+        resource.no_verify = true
+        resource.save!
       else
         resource = collections.first
+        resource.no_verify = true
         resource.update_attributes!(params)
       end
     end
