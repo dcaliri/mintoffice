@@ -1209,7 +1209,7 @@ ko:
         required_tags: RequiredTags
     shared:
         footer:
-            mint: mint office - M17.0
+            mint: mint office - M17.1
         show_attachment:
             download: "다운로드"
         attachments:
