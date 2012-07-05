@@ -1,0 +1,39 @@
+#show_command
+  = link_to t('common.title.back'), :bank_accounts
+
+h2
+  = t(".title")
+
+- newest = BankAccount.newest_transaction
+- oldest = BankAccount.oldest_transaction
+
+- period = Time.zone.parse("#{newest.year}-#{newest.month}-01 00:00:00")
+table#list-table
+  thead
+    tr
+      td
+      - BankAccount.all.each do |account|
+        td colspan="2"
+          h3
+            = account.number
+            br
+            = account.note
+    tr
+      th= t(".date")
+      - BankAccount.all.each do |account|
+        th
+          = t(".inmoney")
+        th
+          = t(".outmoney")
+  tbody
+    - while period > oldest
+      tr
+        td
+          = period.strftime("%Y.%m.%d")
+          - BankAccount.all.each do |account|
+             transactions = account.bank_transactions.where(transacted_at: period.all_month)
+              td
+                = number_to_currency transactions.total_in
+              td
+                = number_to_currency transactions.total_out
+      - period -= 1.month

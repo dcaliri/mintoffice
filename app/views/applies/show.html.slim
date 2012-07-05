@@ -43,5 +43,5 @@ p= "상태 - #{hrinfo.apply_status}"
     = hidden_field_tag :reporter, Company.current_company.apply_admin.id
     p
       - if report.report?
-        = submit_tag "수정후 재승인 요청"
+        = submit_tag "수정후 재승인 요청", name: 'report'
 br

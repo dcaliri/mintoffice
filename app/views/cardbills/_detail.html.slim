@@ -1,35 +1,22 @@
 h3
-  = t('Cardbills.detail.title')
-table border="0" cellspacing="5" cellpadding="5"
-  tr
-    th align="right"><%= Cardbill.human_attribute_name('amount')
-    ' :
-    td align="right"><%= number_to_currency target.amount
-  tr
-    th align="right"><%= Cardbill.human_attribute_name('vat')
-    ' :
-    td align="right"><%= number_to_currency target.vat
-  tr
-    th align="right"><%= Cardbill.human_attribute_name('servicecharge')
-    ' :
-    td align="right"><%= number_to_currency target.servicecharge
-  tr
-    th align="right"><%= Cardbill.human_attribute_name('totalamount')
-    ' :
-    td align="right" class="target.mismatch?(:totalamount)"
-      = number_to_currency target.totalamount
-  tr
-    th align="right"
-      = Cardbill.human_attribute_name('storename')
-      ' :
-    td =h target.storename
-  tr
-    th align="right"
-      = Cardbill.human_attribute_name('storeaddr')
-      ' :
-    td=h target.storeaddr
-  tr
-    th align="right"
-      = Cardbill.human_attribute_name('approveno')
-      ' :
-    td=h target.approveno
+  = t('cardbills.detail.title')
+dl
+  dt
+    = Cardbill.human_attribute_name('amount')
+  dd
+    = number_to_currency target.amount
+  dt
+    = Cardbill.human_attribute_name('vat')
+  dd
+    = number_to_currency target.vat
+  dt
+    = Cardbill.human_attribute_name('servicecharge')
+  dd
+    = number_to_currency target.servicecharge
+  dt
+    = Cardbill.human_attribute_name('totalamount')
+  dd class="target.mismatch?(:totalamount)"
+    = number_to_currency target.totalamount
+  = dtdd target, "storename"
+  = dtdd target, "storeaddr"
+  = dtdd target, "approveno"

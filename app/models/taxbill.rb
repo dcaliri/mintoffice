@@ -90,8 +90,7 @@ class Taxbill < ActiveRecord::Base
     end
 
     def search(params)
-      search_billtype(params[:billtype]).search_taxmen(params[:taxman_id]).search_by_transacted(params[:transacted_at])#.text_search(params[:query])
-      text_search(params[:query])
+      search_billtype(params[:billtype]).search_taxmen(params[:taxman_id]).search_by_transacted(params[:transacted_at]).text_search(params[:query])
     end
 
     def text_search(text)

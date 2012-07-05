@@ -1,4 +1,3 @@
-
 #show_command
   = link_to t('common.link.edit'), edit_card_used_source_path(card_used_source, creditcard_id: card_used_source.creditcard)
   = " | "
@@ -10,79 +9,49 @@
 h2= "#{card_used_source.creditcard.nickname}: #{card_used_source.creditcard.cardno}"
 
 .box
-  table
-    tr
-      th= CardUsedSource.human_attribute_name(:card_no)
-      td= card_used_source.card_no
-    tr
-      th= CardUsedSource.human_attribute_name(:bank_account)
-      td= card_used_source.bank_account
-    tr
-      th= CardUsedSource.human_attribute_name(:bank_name)
-      td= card_used_source.bank_name
-    tr
-      th= CardUsedSource.human_attribute_name(:card_holder_name)
-      td= card_used_source.card_holder_name
-    tr
-      th= CardUsedSource.human_attribute_name(:used_area)
-      td= card_used_source.used_area
-    tr
-      th= CardUsedSource.human_attribute_name(:approve_no)
-      td= card_used_source.approve_no
-    tr
-      th= CardUsedSource.human_attribute_name(:approved_at)
-      td= card_used_source.approved_at ? card_used_source.approved_at.strftime("%Y %m.%d") : 0
-    tr
-      th= CardUsedSource.human_attribute_name(:approved_time)
-      td= card_used_source.approved_time ? card_used_source.approved_time.strftime("%H:%M:%S") : 0
-    tr
-      th= CardUsedSource.human_attribute_name(:sales_type)
-      td= card_used_source.sales_type
-    tr
-      th= CardUsedSource.human_attribute_name(:money_krw)
-      td= number_to_currency card_used_source.money_krw
-    tr
-      th= CardUsedSource.human_attribute_name(:money_foreign)
-      td= number_to_currency card_used_source.money_foreign
-    tr
-      th= CardUsedSource.human_attribute_name(:price)
-      td= number_to_currency card_used_source.price
-    tr
-      th= CardUsedSource.human_attribute_name(:tax)
-      td= number_to_currency card_used_source.tax
-    tr
-      th= CardUsedSource.human_attribute_name(:tip)
-      td= number_to_currency card_used_source.tip
-    tr
-      th= CardUsedSource.human_attribute_name(:monthly_duration)
-      td= card_used_source.monthly_duration
-    tr
-      th= CardUsedSource.human_attribute_name(:exchange_krw)
-      td= number_to_currency card_used_source.exchange_krw
-    tr
-      th= CardUsedSource.human_attribute_name(:foreign_country_code)
-      td= card_used_source.foreign_country_code
-    tr
-      th= CardUsedSource.human_attribute_name(:foreign_country_name)
-      td= card_used_source.foreign_country_name
-    tr
-      th= CardUsedSource.human_attribute_name(:store_business_no)
-      td= card_used_source.store_business_no
-    tr
-      th= CardUsedSource.human_attribute_name(:store_name)
-      td= card_used_source.store_name
-    tr
-      th= CardUsedSource.human_attribute_name(:store_type)
-      td= card_used_source.store_type
-    tr
-      th= CardUsedSource.human_attribute_name(:store_zipcode)
-      td= card_used_source.store_zipcode
-    tr
-      th= CardUsedSource.human_attribute_name(:store_addr1)
-      td= card_used_source.store_addr1
-    tr
-      th= CardUsedSource.human_attribute_name(:store_addr2)
-      td= card_used_source.store_addr2
-    tr
-      th= CardUsedSource.human_attribute_name(:store_tel)
-      td= card_used_source.store_tel
+  dl
+    = dtdd card_used_source, "card_no"
+    = dtdd card_used_source, "bank_account"
+    = dtdd card_used_source, "bank_name"
+    = dtdd card_used_source, "card_holder_name"
+    = dtdd card_used_source, "used_area"
+    = dtdd card_used_source, "approve_no"
+    dt
+      = CardUsedSource.human_attribute_name(:approved_at)
+      dd
+        = card_used_source.approved_at ? card_used_source.approved_at.strftime("%Y %m.%d") : 0
+    dt
+      = CardUsedSource.human_attribute_name(:approved_time)
+      dd
+        = card_used_source.approved_time ? card_used_source.approved_time.strftime("%H:%M:%S") : 0
+    = dtdd card_used_source, "sales_type"
+    dt
+      = CardUsedSource.human_attribute_name(:money_foreign)
+      dd
+        = number_to_currency card_used_source.money_foreign
+    dt
+      = CardUsedSource.human_attribute_name(:price)
+      dd
+        = number_to_currency card_used_source.price
+    dt
+      = CardUsedSource.human_attribute_name(:tax)
+      dd
+        = number_to_currency card_used_source.tax
+    dt
+      = CardUsedSource.human_attribute_name(:tip)
+      dd
+        = number_to_currency card_used_source.tip
+    = dtdd card_used_source, "monthly_duration"
+    dt
+      = CardUsedSource.human_attribute_name(:exchange_krw)
+      dd
+        = number_to_currency card_used_source.exchange_krw
+    = dtdd card_used_source, "foreign_country_code"
+    = dtdd card_used_source, "foreign_country_name"
+    = dtdd card_used_source, "store_business_no"
+    = dtdd card_used_source, "store_name"
+    = dtdd card_used_source, "store_type"
+    = dtdd card_used_source, "store_zipcode"
+    = dtdd card_used_source, "store_addr1"
+    = dtdd card_used_source, "store_addr2"
+    = dtdd card_used_source, "store_tel"
