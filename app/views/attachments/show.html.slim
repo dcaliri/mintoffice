@@ -7,41 +7,13 @@ h2
   = t("common.title.show")
 .box
   #descr
-    table border="0" cellspacing="5" cellpadding="5"
-      tr
-        th
-          = Attachment.human_attribute_name('title')
-        td
-          =h @attachment.title
-      tr
-        th
-          = Attachment.human_attribute_name('comments')
-        td
-          =h @attachment.comments
-      tr
-        th
-          = Attachment.human_attribute_name('contenttype')
-        td
-          =h @attachment.contenttype
-      tr
-        th
-          = Attachment.human_attribute_name('original_filename')
-        td
-          =h @attachment.original_filename
-      tr
-        th
-          = Attachment.human_attribute_name('filepath')
-        td
-          =h @attachment.filepath
-      tr
-        th
-          = Attachment.human_attribute_name('owner_type')
-        td
-          =h @attachment.owner_type
-      tr
-        th
-          = Attachment.human_attribute_name('owner_id')
-        td
-          =h @attachment.owner_id
+    dl
+      = dtdd @attachment, "title"
+      = dtdd @attachment, "comments"
+      = dtdd @attachment, "contenttype"
+      = dtdd @attachment, "original_filename"
+      = dtdd @attachment, "filepath"
+      = dtdd @attachment, "owner_type"
+      = dtdd @attachment, "owner_id"
   = render "shared/attachments/detail", :target => OpenStruct.new(:attachments => [@attachment])
   .clear

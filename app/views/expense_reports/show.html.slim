@@ -40,7 +40,7 @@ h2
         td= number_to_currency expense_report.amount
   - if expense_report.target.respond_to?(:attachments)
     = render "shared/attachments/detail", :target => expense_report.target
-.clear
+  .clear
 br
 = render "#{expense_report.target_type.tableize}/detail", target: expense_report.target
 = render 'reports/info', target: expense_report
