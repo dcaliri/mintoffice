@@ -21,9 +21,9 @@ p
         = text_field_tag :comment
       p
         - if report.rollback?
-          = submit_tag t('reports.info.rollback')
+          = submit_tag t('reports.info.rollback'), name: 'rollback'
         - if report.report?
-          = submit_tag t('reports.info.report')
+          = submit_tag t('reports.info.report'), name: 'report'
   - else
     = form_tag :report do
       = hidden_field_tag :target_type, target.class
@@ -33,9 +33,9 @@ p
         = text_field_tag :comment
       p
         - if report.rollback?
-          = submit_tag t('reports.info.rollback')
+          = submit_tag t('reports.info.rollback'), name: 'rollback'
         - if report.approve?
-          = submit_tag t('reports.info.approve')
+          = submit_tag t('reports.info.approve'), name: 'approve'
 
 - unless report.comments.empty?
   .box
