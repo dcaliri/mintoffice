@@ -204,9 +204,9 @@ class Hrinfo < ActiveRecord::Base
     def search_by_type(type)
       case type.to_sym
       when :join
-        where('joined_on IS NOT NULL')
+        where('joined_on IS NOT NULL AND retired_on IS NULL')
       when :retire
-        where('retired_on IS NOT NULL AND joined_on IS NULL')
+        where('retired_on IS NOT NULL')
       when :apply
         where('joined_on IS NULL')
       end
