@@ -7,9 +7,9 @@
 
 h2= t('common.title.show')
 
-ul
-  li= DayworkerTax.human_attribute_name('apply_day') + " : " + dayworker_tax.apply_day.to_s
-  li= DayworkerTax.human_attribute_name('reason') + " : " + dayworker_tax.reason.to_s
-  li= DayworkerTax.human_attribute_name('amount') + " : " + dayworker_tax.amount.to_s
-  li= DayworkerTax.human_attribute_name('tax_amount') + " : " + dayworker_tax.tax_amount.to_s
-  li= DayworkerTax.human_attribute_name('pay_amount') + " : " + dayworker_tax.pay_amount.to_s
+dl
+  =dtdd dayworker_tax, "apply_day"
+  =dtdd dayworker_tax, "reason"
+  =dtdd dayworker_tax, "amount"
+  =dtdd dayworker_tax, "tax_amount"
+  =dtdd dayworker_tax, "pay_amount"

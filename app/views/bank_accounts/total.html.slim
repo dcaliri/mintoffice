@@ -1,0 +1,52 @@
+#show_command
+  = link_to t('common.title.back'), :bank_accounts
+h2
+  = t(".title")
+
+- newest = BankAccount.newest_transaction
+- oldest = BankAccount.oldest_transaction
+
+- period = Time.zone.parse("#{newest.year}-#{newest.month}-01 00:00:00")
+table#list-table
+  thead
+    tr
+      th= t('bank_accounts.total.date')
+      th= t('bank_accounts.total.card_history')
+  tbody
+    - while period > oldest
+      tr
+        td= period.strftime("%Y.%m")
+        td
+          table
+            tr
+              th= BankAccount.human_attribute_name(:name)
+              th= BankAccount.human_attribute_name(:number)
+              th= BankAccount.human_attribute_name(:note)
+              th= BankAccount.human_attribute_name(:total_in)
+              th= BankAccount.human_attribute_name(:total_out)
+              th= BankAccount.human_attribute_name(:margin)
+            - BankAccount.all.each do |account|
+              tr
+                td= account.name
+                td= account.number
+                td= account.note
+                - transactions = account.bank_transactions.where(transacted_at: period.all_month)
+                td.numrow
+                  = number_to_currency transactions.total_in
+                td.numrow
+                  = number_to_currency transactions.total_out
+                td.numrow
+                  = number_to_currency transactions.margin
+            tr style="background-color:yellow;"
+              td
+                = t('bank_accounts.total.total')
+              td
+              td
+              - transactions = BankTransaction.where(transacted_at: period.all_month)
+              td.numrow
+                = number_to_currency transactions.total_in
+              td.numrow
+                = number_to_currency transactions.total_out
+              td.numrow
+                = number_to_currency transactions.margin
+      - period -= 1.month

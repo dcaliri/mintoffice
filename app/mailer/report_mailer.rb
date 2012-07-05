@@ -9,6 +9,6 @@ class ReportMailer
       :to => to.notify_email,
       :subject => subject,
       :body => message
-    }.merge(configure))
+    }.merge(configure)) if to.notify_email
   end
 end

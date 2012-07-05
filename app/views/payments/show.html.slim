@@ -1,0 +1,61 @@
+
+#show_command
+  - if @user.ingroup?(:admin)
+    = link_to t('pay_schedules.new.link'), [:yearly, user, :payments]
+    ' |
+    = link_to t('bonuses.new.link'), [:bonus, user, :payments]
+    ' |
+  = link_to t('hrinfos.show.title'), hrinfo_path(user.hrinfo)
+h2
+  = user.hrinfo.fullname
+
+table#list-table
+  tr
+    th
+      = Payment.human_attribute_name('pay_at')
+    th
+      = Payment.human_attribute_name('pay_start')
+    th
+      = Payment.human_attribute_name('pay_finish')
+    th
+      = Payment.human_attribute_name('note')
+    th
+      = Payment.human_attribute_name('amount')
+    th
+      = Payment.human_attribute_name('total')
+    - if @user.ingroup? :admin
+      th
+  - current_bg = '#e6e6e6'
+  - payments.latest.group_by{|payment| payment.pay_finish.strftime("%Y.%m")}.each do |month, payments|
+    - show_sum = true
+    - payments.each do |payment|
+      - if show_sum
+        - if current_bg == 'white'
+          - current_bg = '#e6e6e6'
+        - else
+          - current_bg = 'white'
+      tr style="background-color:#{ current_bg };"
+        td
+          = show_sum ? month : ''
+        td
+          = payment.pay_start.strftime("%m.%d")
+        td
+          = payment.pay_finish.strftime("%m.%d")
+        td
+          = payment.note
+        td.numrow
+          = number_to_currency(payment.amount)
+        td.numrow
+          = show_sum ? (number_to_currency payments.sum{|payment| payment.amount}) : ''
+        - if @user.ingroup?(:admin)
+          td style="text-align:center;"
+            = link_to t("common.link.edit"), [:edit, user, payment]
+            ' |
+            = link_to t("common.link.destroy"), [user, payment], :method => :delete, :confirm => "Are you sure?"
+      - show_sum = false
+
+- if @user.ingroup? "admin"
+  h3
+    = t("common.changes")
+  - payments.each do |payment|
+    = render 'changelog_item', target: payment

@@ -14,8 +14,10 @@ module ApplicationHelper
   
   def ns str
     return '&nbsp;' if str.nil?
-    if str.instance_of? String.class
+    if str.instance_of? String
       str.empty? ? '&nbsp;' : str
+    elsif str.instance_of? BigDecimal
+      number_to_currency str
     else
       str
     end

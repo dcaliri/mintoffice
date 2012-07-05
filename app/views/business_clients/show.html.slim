@@ -1,0 +1,36 @@
+- title t('.title')
+
+#show_command
+  = link_to t('common.title.edit'), [:edit, business_client]
+  ' |
+  = link_to t('common.title.destroy'), business_client, :confirm => "Are you sure?", :method => :delete
+  ' |
+  = link_to t('common.title.list'), :business_clients
+h2
+  =h business_client.name
+  
+.box
+  #descr
+    dl
+      = dtdd business_client, "name"
+      = dtdd business_client, "registration_number"
+      = dtdd business_client, "category"
+      = dtdd business_client, "business_status"
+      = dtdd business_client, "address"
+      dt
+        = Taxman.model_name.human
+        - unless business_client.taxmen.empty?
+          - business_client.taxmen.map do |taxman|
+            dd
+              = taxman.fullname
+              = link_to t('business_clients.show.modify'), find_contacts_path(:target_class => Taxman, target: taxman, parent_class: business_client.class, parent: business_client), :class => 'popup'
+              br
+        - else
+          dd
+            p
+              = t('taxmen.empty')
+        dd
+          = link_to t('business_clients.show.add_contact'), find_contacts_path(:target_class => Taxman, parent_class: business_client.class, parent: business_client), :class => 'popup'
+    = render 'changelog', target: business_client
+  = render "shared/attachments/detail", :target => business_client
+  .clear

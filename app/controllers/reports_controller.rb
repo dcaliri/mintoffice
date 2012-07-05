@@ -8,14 +8,15 @@ class ReportsController < ApplicationController
     report_target = report_target_class.find(params[:target_id])
     report_url = url_for(report_target.redirect_when_reported)
 
-    case params[:commit]
-    when "상신"
+    if params[:report]
       user = User.find(params[:reporter]) if params[:reporter]
       report_target.report!(user, params[:comment], report_url)
-    when "승인"
+    elsif params[:approve]
       report_target.approve!(params[:comment])
-    when "반려"
+    elsif params[:rollback]
       report_target.rollback!(params[:comment], report_url)
+    else
+      raise NoMethodError, "There is no report action"
     end
 
     redirect_to report_target.redirect_when_reported

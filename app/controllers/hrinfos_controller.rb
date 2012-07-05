@@ -7,23 +7,8 @@ class HrinfosController < ApplicationController
   # GET /hrinfos
   # GET /hrinfos.xml
   def index
-    @retired = params[:retired]
-    unless @user.ingroup?("admin")
-      @retired = ""
-    end
-    if @retired == "on"
-      @hrinfos = Hrinfo.search(params[:q]).not_joined(params[:not_joined]).find(:all, :conditions => "retired_on IS NOT NULL")
-      @hrinfos_count = Hrinfo.not_joined(params[:not_joined]).count(:all, :conditions => "retired_on IS NOT NULL")
-    else
-      if @user.ingroup?("admin")
-        @hrinfos = Hrinfo.search(params[:q]).not_joined(params[:not_joined]).find(:all, :conditions => "retired_on IS NULL")
-        @hrinfos_count = Hrinfo.not_joined(params[:not_joined]).count(:all, :conditions => "retired_on IS NULL")
-      else
-        @hrinfos = Hrinfo.search(params[:q]).not_joined(params[:not_joined]).where(:listed => true).where(:retired_on => nil)
-        @hrinfos_count = Hrinfo.not_joined(params[:not_joined]).count(:all, :conditions => ["retired_on IS NULL AND listed = ?", true])
-      end
-    end
-
+    params[:search_type] ||= :join
+    @hrinfos = Hrinfo.search(params[:search_type], params[:q])
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @hrinfos }

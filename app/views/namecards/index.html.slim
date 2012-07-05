@@ -1,0 +1,36 @@
+- title t('.title')
+
+- content_for :search do
+  = form_tag :namecards, :method => :get do
+    = t("common.title.search")
+    ' : 
+    = text_field_tag 'q', params[:q]
+
+#show_command
+  = link_to t('namecards.new.title'), new_namecard_path
+
+h2
+  = t('common.title.list')
+table#list-table
+  tr
+    th
+      = Namecard.human_attribute_name("name")
+    th
+      = Namecard.human_attribute_name("company")
+    th
+      = Namecard.human_attribute_name("department")
+    th
+      = Namecard.human_attribute_name("jobtitle")
+  - @namecards.each do |namecard|
+    tr.selectable onclick="location.href='#{namecard_path(namecard)}'"
+      td
+        =h namecard.name
+      td
+        =h namecard.company
+      td
+        =h namecard.department
+      td
+        =h namecard.jobtitle
+br
+center
+  = will_paginate @namecards

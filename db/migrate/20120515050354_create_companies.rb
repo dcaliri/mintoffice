@@ -4,6 +4,6 @@ class CreateCompanies < ActiveRecord::Migration
       t.string :name
       t.timestamps
     end
-    Company.create!(name: "minttech")
+    Company.create!(name: "mintech")
   end
 end

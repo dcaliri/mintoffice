@@ -25,7 +25,7 @@ class Commute < ActiveRecord::Base
   def self.during(days)
     commutes = where(go: days).order("go ASC")
     commutes_hash = {}
-    days.begin.to_date.step(days.end.to_date,1.day) do |day|
+    days.begin.to_date.step(days.end.to_date,1) do |day|
       commutes_hash[day] = commutes.to_a.select {|commute| commute.go.to_date === day }.first
     end
     commutes_hash

@@ -1,0 +1,36 @@
+- title t('.title')
+#show_command
+  = link_to t('common.title.show'), namecard_path(@namecard)
+  ' |
+  = link_to t('common.title.list'),  namecards_path
+
+h2
+  = t 'common.title.edit'
+= form_for(@namecard, :url => { :action => "update" }, :html => { :class=>"tabular", :multipart => true }) do |f|
+  .box
+    = f.error_messages
+
+    p
+      = f.label :name, Namecard.human_attribute_name('name')
+      = f.text_field :name
+    p
+      = f.label :company, Namecard.human_attribute_name('company')
+      = f.text_field :company
+    p
+      = f.label :department, Namecard.human_attribute_name('department')
+      = f.text_field :department
+    p
+      = f.label :jobtitle, Namecard.human_attribute_name('jobtitle')
+      = f.text_field :jobtitle
+    p
+      = f.label :phone, Namecard.human_attribute_name('phone')
+      = f.text_field :phone
+    p
+      = f.label :homepage, Namecard.human_attribute_name('homepage')
+      = f.text_field :homepage
+    p
+      = f.label :email, Namecard.human_attribute_name('email')
+      = f.text_field :email
+    p
+      = render 'shared/attachments/form', form: f
+  = f.submit t('common.button.update')

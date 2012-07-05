@@ -4,8 +4,9 @@ div class={@user.admin? ? "admin" : ""}
       h2= t("main.index.human_resources")
       ul
         li= link_to t("hrinfos.index.title"), :controller => "hrinfos"
-        li= link_to t("commutes.index.title"), commute_path(@user)
         li= link_to t("vacations.index.title"), vacation_path(@user)
+        - if @user.permission.any? {|perm| perm.name == 'commutes'}
+          li= link_to t("commutes.index.title"), commute_path(@user)
         - if @user.has_payment_info
           li= link_to t("payments.title"), payment_path(@user)
 

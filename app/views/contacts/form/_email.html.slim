@@ -1,18 +1,19 @@
 - 3.times { contact.emails.new }
 
-h3 이메일
+h3
+  = t('contacts_form.email.title')
 = contact_form.fields_for :emails do |email_field|
   .email-form
     p
       = email_field.label :target
       = email_field.select :target, options_for_select(current_company.contact_email_tags.map{|tag| tag.name}, email_field.object.target)
       - if current_user.present? and current_user.admin?
-        = link_to "새로운 대상 만들기", [:new, :contact_email_tag]
+        = link_to t('contacts_form.make_new_one'), [:new, :contact_email_tag]
 
     p
       = email_field.label :email
       = email_field.email_field :email
-= link_to "새로운 이메일 작성", "", {class: 'new-email-form new-form-link'}
+= link_to t('contacts_form.email.new'), "", {class: 'new-email-form new-form-link'}
 
 br
 br

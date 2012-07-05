@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 module Excels
   module BankTransactions
     module Ibk
@@ -11,18 +13,17 @@ module Excels
           :out => :integer,
           :remain => :integer
         },
-        # 데이터 검증을 하지 않기 대문에 필드명이 필요없다.
         :columns => {
-          :transacted_at            => "",
-          :out                      => "",
-          :in                       => "",
-          :remain                   => "",
-          :note                     => "",
-          :out_bank_account         => "",
-          :out_bank_name            => "",
-          :transaction_type         => "",
-          :promissory_check_amount  => "",
-          :cms_code                 => "",
+          :transacted_at            => "거래일시",
+          :out                      => "출금액",
+          :in                       => "입금액",
+          :remain                   => "잔액",
+          :note                     => "거래내용",
+          :out_bank_account         => "상대계좌번호",
+          :out_bank_name            => "상대은행",
+          :transaction_type         => "거래구분",
+          :promissory_check_amount  => "수표어음금액",
+          :cms_code                 => "CMS코드",
         },
         :position => {
           :start => {
@@ -40,7 +41,7 @@ module Excels
           parser.class_name BankTransaction
           parser.column IBK[:columns]
           parser.key IBK[:keys]
-          parser.option :position => IBK[:position], :validate => false
+          parser.option :position => IBK[:position]
           parser
         end
       end

@@ -22,7 +22,7 @@ class BankTransactionsController < ApplicationController
 
   def preview
     bank_account = BankAccount.find(params[:bank_account])
-    @transactions = BankTransaction.preview_stylesheet(bank_account, bank_account.name_, params[:upload])
+    @bank_transactions = BankTransaction.preview_stylesheet(bank_account, bank_account.name_, params[:upload])
   rescue => error
     redirect_to [:excel, :bank_transactions], alert: error.message
   end
@@ -41,15 +41,19 @@ class BankTransactionsController < ApplicationController
   end
 
   def create
-    bank_transaction = bank_account.bank_transactions.build(params[:bank_transaction])
-    bank_transaction.save!
-    redirect_to bank_transaction
+    @bank_transaction = bank_account.bank_transactions.build(params[:bank_transaction])
+    @bank_transaction.save!
+    redirect_to @bank_transaction
+  rescue ActiveRecord::RecordInvalid, ActiveRecord::RecordNotSaved
+    render 'new'
   end
 
   def update
     bank_transaction.bank_account = bank_account
     bank_transaction.save!
     redirect_to bank_transaction
+  rescue ActiveRecord::RecordInvalid, ActiveRecord::RecordNotSaved
+    render 'edit'
   end
 
   def destroy

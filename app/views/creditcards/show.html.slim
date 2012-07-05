@@ -17,6 +17,8 @@ h2= t("common.title.show")
     = dtdd @creditcard, "nickname"
     = dtdd @creditcard, "issuer"
     = dtdd @creditcard, "cardholder"
+    dt= @creditcard.class.human_attribute_name(:bank_account_id)
+    dd= @creditcard.bank_account.name_with_number rescue ""
   = render "shared/attachments/detail", :target => @creditcard
 
 .clear

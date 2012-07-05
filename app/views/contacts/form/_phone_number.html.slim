@@ -1,17 +1,18 @@
 - 3.times { contact.phone_numbers.new }
 
-h3 전화번호
+h3
+  = t('contacts_form.phonenumber.title')
 = contact_form.fields_for :phone_numbers do |phone_number_field|
   .phone-number-form
     p
       = phone_number_field.label :target
       = phone_number_field.select :target, options_for_select(current_company.contact_phone_number_tags.map{|tag| tag.name}, phone_number_field.object.target)
       - if current_user.present? and current_user.admin?
-        = link_to "새로운 대상 만들기", [:new, :contact_phone_number_tag]
+        = link_to t('contacts_form.make_new_one'), [:new, :contact_phone_number_tag]
     p
       = phone_number_field.label :number
       = phone_number_field.telephone_field :number
-= link_to "새로운 전화번호 작성", "", {class: 'new-phone-number-form new-form-link'}
+= link_to t('contacts_form.phonenumber.new'), "", {class: 'new-phone-number-form new-form-link'}
 
 br
 br
