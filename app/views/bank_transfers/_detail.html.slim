@@ -55,3 +55,25 @@ table
   tr
     th= BankTransfer.human_attribute_name(:currency_code)
     td= target.currency_code
+
+h3
+  = t('bank_transfers.detail.detail_card_transfer')
+dl
+  = dtdd target, "transfer_type"
+  = dtdd target, "transfered_at"
+  = dtdd target, "result"
+  = dtdd target, "out_bank_account"
+  = dtdd target, "in_bank_name"
+  = dtdd target, "in_bank_account"
+  = dtdd target, "money"
+  = dtdd target, "transfer_fee"
+  = dtdd target, "error_money"
+  = dtdd target, "transfer_fee"
+  = dtdd target, "error_code"
+  = dtdd target, "transfer_note"
+  = dtdd target, "incode"
+  = dtdd target, "out_account_note"
+  = dtdd target, "in_account_note"
+  = dtdd target, "in_person_name"
+  = dtdd target, "cms_code"
+  = dtdd target, "currency_code"
