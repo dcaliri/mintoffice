@@ -3,7 +3,7 @@
 #show_command
   = link_to t('common.title.edit'), [:edit, taxbill]
   ' |
-  = link_to t('common.title.destroy'), taxbill, :confirm => "Are you sure?", :method => :delete
+  = link_to t('common.title.destroy'), taxbill, :method => :delete, confirm: t("common.messages.delete_confirm")
   ' |
   = link_to t('common.title.list'), :taxbills
 
@@ -52,6 +52,7 @@ h2
     h3
       = taxbill.billtype == 'purchase' ? t('taxbills.purchase_bill') : t('taxbills.sales_bill')
       = taxbill.transacted_at.strftime("%Y-%m-%d") rescue ""
+      
     = render "taxbills/error", :target => taxbill
     
     = render 'changelog', target: taxbill
