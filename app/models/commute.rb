@@ -5,7 +5,7 @@ class Commute < ActiveRecord::Base
 
   validate :check_unique_date, on: :create
   def check_unique_date
-    errors.add(:go, I18n.t('commutes.error.already_created')) if user.commutes.exists?(go: Time.zone.now.all_day)
+    errors.add(:go, I18n.t('commutes.error.already_created')) if user.commutes.exists?(go: Time.now.all_day)
   end
 
   include Attachmentable

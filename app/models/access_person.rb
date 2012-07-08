@@ -8,7 +8,9 @@ class AccessPerson < ActiveRecord::Base
     end
 
     def access_list(user)
-      if user.nil?
+      if user.admin?
+        where("1")
+      elsif user.nil?
         where("0")
       else
         where(user_id: user.id)
@@ -16,6 +18,7 @@ class AccessPerson < ActiveRecord::Base
     end
 
     def access?(user, access_type)
+      return true if user.admin?
       access_query = access_type == :write ? {access_type: :write} : {}
       where(access_query).exists?(user_id: user.id)
     end
