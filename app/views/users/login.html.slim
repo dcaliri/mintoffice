@@ -51,12 +51,3 @@ css:
         = label_tag :password, t(".password")
         = password_field_tag :password, params[:password]
       = submit_tag t('.login')
-
-.login-link style="text-align: center;"
-  h4
-    ' or login with
-    = link_to "Google", '/auth/google'
-    '  / 
-    = link_to "Daum", '/auth/daum'
-    '  /
-    = link_to "Nate", '/auth/nate'
