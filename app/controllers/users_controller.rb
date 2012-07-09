@@ -87,7 +87,7 @@ class UsersController < ApplicationController
     if @this_user.create_google_app_account
       redirect_to :back, notice: "성공적으로 구글 계정을 생성했습니다."
     else
-      redirect_to :back, alert: "계정 생성에 실패했습니다.."
+      redirect_to :back, alert: "계정 생성에 실패했습니다. 아마도 인사정보가 없습니다."
     end
   end
 
