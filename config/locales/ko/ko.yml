@@ -289,6 +289,7 @@ ko:
                 go: 출근
                 leave: 퇴근
             company:
+                enrollment_items: 입사지원 필수 첨부자료
                 name: 업체명
                 registration_number: 사업자 등록번호
                 owner_name: 대표자 성명
@@ -628,7 +629,7 @@ ko:
             link: 엑셀 파일로 올리기
             type: 은행명
             file: 엑셀 파일
-            submit: 엑셀 파일 
+            submit: 엑셀 파일
             preview: 프리뷰
         upload:
             title: 엑셀로 올리기
@@ -655,7 +656,7 @@ ko:
         title: 이체 내역
         index:
             empty: 이체 내역이 없습니다
-            detail_transfer: 입출금내역 상세보기 
+            detail_transfer: 입출금내역 상세보기
         excel:
             title: 엑셀로 올리기
             link: 엑셀 파일로 올리기

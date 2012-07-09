@@ -1,0 +1,19 @@
+#enrollment-dashboard {
+  width: 320px;
+
+  .title {
+    float: left;
+  }
+
+  .status {
+    float: right;
+    margin-left: 10px;
+  }
+
+  .menu {
+    float: right;
+    display: block;
+    text-align: right;
+    width: 100px;
+  }
+}

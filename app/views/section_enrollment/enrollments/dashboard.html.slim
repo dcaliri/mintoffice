@@ -1,13 +1,16 @@
 h2 입사지원서 관리
 
-p
-	= link_to '기본정보 등록', [:edit, @enrollment]
+#enrollment-dashboard
+  #basic-information
+    p.title 기본 정보 입력
+    p.menu= link_to '기본정보 등록', [:edit, @enrollment]
+    p.status= information_filled?(:basic)
+  .clear
 
-div
-	- @enrollment.items.each do |item|
-		h4 = item.name
-		ul
-			- item.attachments.each do |attachment|
-				li = attachment.original_filename
-			li = link_to "[[#{item.name} 등록]]", attach_item_enrollment_path(@enrollment, name: item.name)
-
+  - @enrollment.item_fields.each do |item_name|
+    .more-information
+      p.title= item_name
+      - if @enrollment.item_required?(item_name)
+        p.menu= link_to "추가하기", attach_item_enrollment_path(@enrollment, name: item_name)
+      p.status= information_filled?(item_name.to_sym)
+    .clear

@@ -22,52 +22,9 @@ h2
     = dtdd company, "redmine_username"
     = dtdd company, "redmine_password"
     = dtdd company, "default_password"
+    = dtdd company, "enrollment_items"
     dt= company.class.human_attribute_name(:apply_admin_id)
     dd= company.apply_admin.fullname rescue ""
-
-    / table
-    /   tr
-    /     th= company.class.human_attribute_name(:name)
-    /     td= company.name
-    /   tr
-    /     th= company.class.human_attribute_name(:registration_number)
-    /     td= company.registration_number
-    /   tr
-    /     th= company.class.human_attribute_name(:owner_name)
-    /     td= company.owner_name
-    /   tr
-    /     th= company.class.human_attribute_name(:address)
-    /     td= company.address
-    /   tr
-    /     th= company.class.human_attribute_name(:phone_number)
-    /     td= company.phone_number
-    /   tr
-    /     th= company.class.human_attribute_name(:pay_basic_date)
-    /     td= company.pay_basic_date
-    /   tr
-    /     th= company.class.human_attribute_name(:payday)
-    /     td= company.payday
-    /   tr
-    /     th= company.class.human_attribute_name(:google_apps_domain)
-    /     td= company.google_apps_domain
-    /   tr
-    /     th= company.class.human_attribute_name(:google_apps_username)
-    /     td= company.google_apps_username
-    /   tr
-    /     th= company.class.human_attribute_name(:google_apps_password)
-    /     td= company.google_apps_password
-    /   tr
-    /     th= company.class.human_attribute_name(:redmine_domain)
-    /     td= company.redmine_domain
-    /   tr
-    /     th= company.class.human_attribute_name(:redmine_username)
-    /     td= company.redmine_username
-    /   tr
-    /     th= company.class.human_attribute_name(:redmine_password)
-    /     td= company.redmine_password
-    /   tr
-    /     th= company.class.human_attribute_name(:default_password)
-    /     td= company.default_password
 
   = render "shared/attachments/detail", :target => company
 br
