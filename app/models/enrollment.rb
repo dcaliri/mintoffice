@@ -1,5 +1,6 @@
 # encoding: utf-8
 class Enrollment < ActiveRecord::Base
+	belongs_to :company
 	belongs_to :user
 	has_one :contact, :as => :target
 	
