@@ -1,14 +1,17 @@
 
-ul
-- if @item.present?
-  - @item.attachments.each do |attachment|
-    li
-      = attachment.original_filename
-      = link_to "[x]", delete_attachment_enrollment_path(attachment_id: attachment.id), method: :delete, confirm: "Are you sure?"
+#enrollment-item-list
+  - if @item.present?
+    ul
+    - @item.attachments.each do |attachment|
+      li
+        = attachment.original_filename
+        = link_to "[x]", delete_attachment_enrollment_path(attachment_id: attachment.id), method: :delete, confirm: "Are you sure?"
 
 
 = form_tag [:attach, @enrollment], multipart: true do
-  = label_tag :picture
+  = label_tag :picture, "첨부파일"
   = hidden_field_tag :name, params[:name]
   = file_field_tag :picture
   = submit_tag '추가'
+
+= link_to "돌아가기", [:dashboard, :enrollments]
