@@ -24,13 +24,15 @@ class CommutesControllerTest < ActionController::TestCase
 
   test "commute can't duplicated between the day" do
     user = User.first
-    morning = Time.now.change(hour: 8)
 
-    before = user.commutes.build(go: morning)
+    yesterday = (Time.now - 1.day).change(hour: 11)
+    today = Time.now.change(hour: 8)
+
+    before = user.commutes.build(go: yesterday)
+    after = user.commutes.build(go: today)
+
     before.save!
-
-    after = user.commutes.build(go: morning)
-    assert after.invalid?
+    assert after.valid?
   end
 
   private
