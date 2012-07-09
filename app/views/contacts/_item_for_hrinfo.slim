@@ -11,7 +11,7 @@ table
         td
           = link_to t('common.link.edit'), [:edit, contact]
           = " | "
-          = link_to t('contacts.item_for_hrinfo.remove'), [contact, email], :method => :delete, :confirm => "Are you sure?"
+          = link_to t('contacts.item_for_hrinfo.remove'), [contact, email], :method => :delete, confirm: t("common.messages.delete_confirm")
 
   - contact.phone_numbers.each do |phone_number|
     tr
@@ -23,7 +23,7 @@ table
         td
           = link_to t('common.link.edit'), [:edit, contact]
           = " | "
-          = link_to t('contacts.item.remove'), [contact, phone_number], :method => :delete, :confirm => "Are you sure?"
+          = link_to t('contacts.item.remove'), [contact, phone_number], :method => :delete, confirm: t("common.messages.delete_confirm")
 
   - contact.addresses.each do |address|
     tr
@@ -35,7 +35,7 @@ table
         td
           = link_to t('common.link.edit'), [:edit, contact]
           = " | "
-          = link_to t('contacts.item.remove'), [contact, address], :method => :delete, :confirm => "Are you sure?"
+          = link_to t('contacts.item.remove'), [contact, address], :method => :delete, confirm: t("common.messages.delete_confirm")
 
     tr
       th= Document.human_attribute_name("tags")

@@ -30,7 +30,7 @@ table
     td= number_to_currency target.error_money
   tr
     th= BankTransfer.human_attribute_name(:registered_at)
-    td= number_to_currency target.transfer_fee
+    td= target.registered_at.strftime("%Y.%m.%d %H:%M") rescue ""
   tr
     th= BankTransfer.human_attribute_name(:error_code)
     td= target.error_code

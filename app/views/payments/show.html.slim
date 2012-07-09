@@ -51,7 +51,7 @@ table#list-table
           td style="text-align:center;"
             = link_to t("common.link.edit"), [:edit, user, payment]
             ' |
-            = link_to t("common.link.destroy"), [user, payment], :method => :delete, :confirm => "Are you sure?"
+            = link_to t("common.link.destroy"), [user, payment], :method => :delete, confirm: t("common.messages.delete_confirm")
       - show_sum = false
 
 - if @user.ingroup? "admin"
