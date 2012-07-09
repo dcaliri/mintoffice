@@ -87,7 +87,7 @@ class UsersController < ApplicationController
     if @this_user.create_google_app_account
       redirect_to :back, notice: "성공적으로 구글 계정을 생성했습니다."
     else
-      redirect_to :back, alert: "계정 생성에 실패했습니다.."
+      redirect_to :back, alert: "계정 생성에 실패했습니다. 아마도 인사정보가 없습니다."
     end
   end
 
@@ -102,12 +102,11 @@ class UsersController < ApplicationController
 
   def create_redmine
     @this_user = User.find(params[:id])
-    redmine = @this_user.create_redmine_account!
+    redmine = @this_user.create_redmine_account
     redirect_to :back, notice: "성공적으로 레드마인 계정을 생성했습니다."
   rescue => e
-    logger.info "errors3 = #{e.message}"
+    logger.info "created_redmine failed: #{e.message}"
     redirect_to :back, alert: "계정 생성에 실패했습니다.. - #{e.message}"
-    # end
   end
 
   def remove_redmine

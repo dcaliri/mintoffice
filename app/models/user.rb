@@ -268,11 +268,28 @@ class User < ActiveRecord::Base
     RedmineUser
   end
 
-  def create_redmine_account!
+  def new_redmine_account
     current_company = Company.current_company
     redmine_user = get_remine_user
 
-    user = redmine_user.new(
+    redmine_user.new(
+      login: self.name,
+      password: current_company.default_password,
+      firstname: (hrinfo.firstname rescue nil),
+      lastname: (hrinfo.lastname rescue nil),
+      mail: notify_email
+    )
+  end
+
+  def create_redmine_account
+    current_company = Company.current_company
+    redmine_user = get_remine_user
+
+    raise ArgumentError, "이름이 등록되어있지 않습니다."  if hrinfo and hrinfo.firstname.blank?
+    raise ArgumentError, "이름이 등록되어있지 않습니다."  if hrinfo and hrinfo.lastname.blank?
+    raise ArgumentError, "이메일이 등록되어있지 않습니다." if notify_email.blank?
+
+    redmine = redmine_user.new(
       login: self.name,
       password: current_company.default_password,
       firstname: (hrinfo.firstname rescue nil),
@@ -280,12 +297,12 @@ class User < ActiveRecord::Base
       mail: notify_email
     )
 
-    if user.save!
-      self.redmine_account = name
-      save!
+    unless redmine.save
+      raise ArgumentError, "아마도 등록된 이메일이 있습니다."
     end
 
-    user
+    redmine_account = redmine.login
+    save!
   end
 
   def remove_redmine_account
