@@ -102,14 +102,10 @@ class UsersController < ApplicationController
 
   def create_redmine
     @this_user = User.find(params[:id])
-    redmine = @this_user.new_redmine_account
-    redmine.save!
-
-    @this_user.redmine_account = redmine.login
-    @this_user.save!
+    redmine = @this_user.create_redmine_account
     redirect_to :back, notice: "성공적으로 레드마인 계정을 생성했습니다."
   rescue => e
-    logger.info "created_redmine failed: #{e.message}, redmine error = #{redmine.errors.inspect}"
+    logger.info "created_redmine failed: #{e.message}"
     redirect_to :back, alert: "계정 생성에 실패했습니다.. - #{e.message}"
   end
 
