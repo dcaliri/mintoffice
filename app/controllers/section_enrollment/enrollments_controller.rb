@@ -2,8 +2,8 @@
 
 class SectionEnrollment::EnrollmentsController < ApplicationController
   skip_before_filter :authorize
-  before_filter :find_enrollment, :except => :delete_attachment
   before_filter :find_apply_admin
+  before_filter :find_enrollment, :except => :delete_attachment
 
   def edit
     @child_contact = @enrollment.contact || @enrollment.build_contact
