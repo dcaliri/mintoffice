@@ -1,5 +1,4 @@
-require File.expand_path('../../../config/environment', __FILE__)
-require 'rails/test_help'
+require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
   test "User should have user name" do
