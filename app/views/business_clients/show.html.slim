@@ -2,9 +2,9 @@
 
 #show_command
   = link_to t('common.title.edit'), [:edit, business_client]
-  ' |
+  = " | "
   = link_to t('common.title.destroy'), business_client, :method => :delete, confirm: t("common.messages.delete_confirm")
-  ' |
+  = " | "
   = link_to t('common.title.list'), :business_clients
 h2
   =h business_client.name
