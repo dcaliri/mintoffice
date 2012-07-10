@@ -138,7 +138,7 @@ class Report < ActiveRecord::Base
   end
 
   def report?
-    self.reporter.present? && self.reporter == User.current_user
+    self.reporter.present? && self.reporter.user == User.current_user
   end
 
   def rollback?

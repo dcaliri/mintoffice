@@ -1,8 +1,9 @@
 h2 입사지원서 관리
 
 #enrollment-dashboard
-  h3 입사지원 등록 상태
-  p= @enrollment.apply_status
+  - if @enrollment.report.status != :not_reported
+    h3 입사지원 등록 상태
+    p= @enrollment.apply_status
 
   h3 입사지원 등록
 
@@ -20,11 +21,13 @@ h2 입사지원서 관리
       p.status= information_filled?(item_name.to_sym)
     .clear
 
+  - unless @enrollment.all_information_filled?
+    p 모든 정보를 기입해야 입사지원을 할 수 있습니다.
 
   = form_tag :report do
     = hidden_field_tag :target_type, @enrollment.class
     = hidden_field_tag :target_id, @enrollment.id
     = hidden_field_tag :reporter, @apply_admin.id
     p
-      - if @enrollment.report.report?
+      - if @enrollment.report.report? and @enrollment.all_information_filled?
         = submit_tag t('reports.info.report')

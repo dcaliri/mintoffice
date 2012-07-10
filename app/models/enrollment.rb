@@ -32,6 +32,10 @@ class Enrollment < ActiveRecord::Base
     end
   end
 
+  def all_information_filled?
+    ([:basic] + required_items).all?{|item| information_filled?(item)}
+  end
+
   def information_filled?(item_field)
     if item_field == :basic
       contact.present?
