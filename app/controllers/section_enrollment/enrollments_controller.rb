@@ -12,7 +12,6 @@ class SectionEnrollment::EnrollmentsController < ApplicationController
     @this_user = current_user
     @enrollment = current_user.enrollment
     @child_contact = @enrollment.contact || @enrollment.build_contact
-    # @child_contact = @enrollment.build_contact
   end
 
   def update
@@ -32,7 +31,7 @@ class SectionEnrollment::EnrollmentsController < ApplicationController
 
   def attach
     @enrollment = current_user.enrollment
-    item = @enrollment.find_or_create_custom_item(params[:name])
+    item = @enrollment.find_or_create_item_by_name(params[:name])
     @attachment = Attachment.save_for(item, current_user, uploaded_file: params[:picture])
     redirect_to :back
   end
@@ -47,5 +46,4 @@ class SectionEnrollment::EnrollmentsController < ApplicationController
     admin = Company.current_company.apply_admin
     raise ActiveRecord::RecordNotFound, "입사지원서 담당자를 지정하지 않았습니다. 회사정보에서 담당자를 지정해주세요." unless admin
   end
-
 end

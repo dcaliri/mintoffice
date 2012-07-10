@@ -7,7 +7,7 @@ h2 입사지원서 관리
     p.status= information_filled?(:basic)
   .clear
 
-  - @enrollment.item_fields.each do |item_name|
+  - @enrollment.item_names.each do |item_name|
     .more-information
       p.title= item_name
       - if @enrollment.item_required?(item_name)

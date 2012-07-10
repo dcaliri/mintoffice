@@ -9,6 +9,15 @@ class Enrollment < ActiveRecord::Base
 
   accepts_nested_attributes_for :contact, :allow_destroy => :true
 
+  def find_or_create_item_by_name(name)
+    item = self.items.find_by_name(name)
+    if item
+      item
+    else
+      self.items.create!(name: name)
+    end
+  end
+
   def information_filled?(item_field)
     if item_field == :basic
       contact.present?
@@ -21,19 +30,11 @@ class Enrollment < ActiveRecord::Base
     required_items.include? item_field
   end
 
-  def find_or_create_custom_item(name)
-    if item = self.items.find_by_name(name)
-      item
-    else
-      self.items.create!(name: name)
-    end
+  def item_names
+    (required_items + items.all.map{|item| item.name}).uniq
   end
 
   def required_items
     company.enrollment_items.split(',')
-  end
-
-  def item_fields
-    (required_items + items.all.map{|item| item.name}).uniq
   end
 end
