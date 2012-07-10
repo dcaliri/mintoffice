@@ -53,6 +53,10 @@ class Enrollment < ActiveRecord::Base
     end
   end
 
+  def modify?
+    [:not_reported, :rollback].include? report.status
+  end
+
   def all_information_filled?
     ([:basic] + required_items).all?{|item| information_filled?(item)}
   end
