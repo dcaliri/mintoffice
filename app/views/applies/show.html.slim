@@ -30,8 +30,9 @@ dl
     dt= other.class.human_attribute_name(:description)
     dd= other.target_view + " " + other.description
 
-h3 검토 상태
-p= "상태 - #{hrinfo.apply_status}"
+h3
+  = t('applies.show.commit')
+p= t('applies.show.status')+" - #{hrinfo.apply_status}"
 
 - target = @this_user.hrinfo
 - report = target.report
@@ -43,5 +44,5 @@ p= "상태 - #{hrinfo.apply_status}"
     = hidden_field_tag :reporter, Company.current_company.apply_admin.id
     p
       - if report.report?
-        = submit_tag "수정후 재승인 요청", name: 'report'
+        = submit_tag t('applies.show.report'), name: 'report'
 br

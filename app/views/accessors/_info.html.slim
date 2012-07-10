@@ -17,7 +17,7 @@ p
     = hidden_field_tag :resources_id, access_target.id
     p
       = label_tag :access_type, t('activerecord.attributes.access_person.access_type')
-      = select_tag :access_type, options_for_select([["읽기", "read"], ["쓰기", "write"]])
+      = select_tag :access_type, options_for_select([[t('accessors.info.read'), "read"], [t('accessors.info.write'), "write"]])
     p
       = label_tag :accessor, t('activerecord.attributes.access_person.accessor')
       = select_tag :accessor, options_for_select(User.enabled.map{|user| [user.name, user.id]})

@@ -2,7 +2,7 @@ h3
   = t('projects.expense.title')
 table
   - if project.started_on
-    - project.started_on.step(project.ending_on, 1) do |date|
+    - project.started_on.step(project.ending_on, 1.month) do |date|
       - reports = project.expense_reports.where(expensed_at: date.to_time.all_month)
       tr
         th= date.strftime("%Y.%_m")
