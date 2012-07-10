@@ -23,16 +23,19 @@ h2
       dt
         = expense_report.class.human_attribute_name(:owner)
         dd = expense_report.hrinfo.fullname
+    dl
       dt
         = expense_report.class.human_attribute_name(:target)
         dd
           = t("activerecord.models.#{expense_report.target_type.tableize.singularize}")
+    dl
       dt
         = expense_report.class.human_attribute_name(:project)
         dd
           = expense_report.project.name rescue ""
-      = dtdd expense_report, "description"
-      = dtdd expense_report, "expensed_at"
+    = dtdd expense_report, "description"
+    = dtdd expense_report, "expensed_at"
+    dl
       dt
         = expense_report.class.human_attribute_name(:amount)
         dd

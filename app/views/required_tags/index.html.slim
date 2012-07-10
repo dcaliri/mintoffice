@@ -14,5 +14,5 @@ h2
             - for rt in @required_tags
               - if rt.modelname == mn
                 li
-                  = rt.tag.name
+                  = rt.tag.name + " "
                   = link_to "[X]", rt, method: :delete, confirm: t("common.messages.delete_confirm")

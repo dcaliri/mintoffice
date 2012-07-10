@@ -32,9 +32,8 @@ h2
       = number_to_currency @cardbill.totalamount
 
     = render 'detail', target: @cardbill
-
-    = render 'changelog', target: @cardbill
-    = render 'accessors/info', access_target: @cardbill
-
   = render "shared/attachments/detail", :target => @cardbill
-  div style="clear: both;"
+  .clear
+
+= render 'changelog', target: @cardbill
+= render 'accessors/info', access_target: @cardbill

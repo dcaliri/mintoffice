@@ -12,15 +12,16 @@ h2
       = Project.human_attribute_name('revenue')
       dd
         = number_to_currency project.revenue
-    = dtdd project, "started_on"
-    = dtdd project, "ending_on"
+  = dtdd project, "started_on"
+  = dtdd project, "ending_on"
   - if project.completed?
     = dtdd project, "ended_on"
-    dt
-      = t('projects.show.users')
-      dd
-        - for user in project.users
-          = user.name
-          = link_to t('projects.show.allocation_ratio'), [:assign, user, :projects]
-          br
+    dl
+      dt
+        = t('projects.show.users')
+        dd
+          - for user in project.users
+            = user.name
+            = link_to t('projects.show.allocation_ratio'), [:assign, user, :projects]
+            br
   = render 'expense'

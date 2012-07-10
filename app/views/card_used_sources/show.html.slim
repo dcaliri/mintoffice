@@ -9,49 +9,55 @@
 h2= "#{card_used_source.creditcard.nickname}: #{card_used_source.creditcard.cardno}"
 
 .box
+  = dtdd card_used_source, "card_no"
+  = dtdd card_used_source, "bank_account"
+  = dtdd card_used_source, "bank_name"
+  = dtdd card_used_source, "card_holder_name"
+  = dtdd card_used_source, "used_area"
+  = dtdd card_used_source, "approve_no"
   dl
-    = dtdd card_used_source, "card_no"
-    = dtdd card_used_source, "bank_account"
-    = dtdd card_used_source, "bank_name"
-    = dtdd card_used_source, "card_holder_name"
-    = dtdd card_used_source, "used_area"
-    = dtdd card_used_source, "approve_no"
     dt
       = CardUsedSource.human_attribute_name(:approved_at)
       dd
         = card_used_source.approved_at ? card_used_source.approved_at.strftime("%Y %m.%d") : 0
+  dl
     dt
       = CardUsedSource.human_attribute_name(:approved_time)
       dd
         = card_used_source.approved_time ? card_used_source.approved_time.strftime("%H:%M:%S") : 0
-    = dtdd card_used_source, "sales_type"
+  = dtdd card_used_source, "sales_type"
+  dl
     dt
       = CardUsedSource.human_attribute_name(:money_foreign)
       dd
         = number_to_currency card_used_source.money_foreign
+  dl
     dt
       = CardUsedSource.human_attribute_name(:price)
       dd
         = number_to_currency card_used_source.price
+  dl
     dt
       = CardUsedSource.human_attribute_name(:tax)
       dd
         = number_to_currency card_used_source.tax
+  dl
     dt
       = CardUsedSource.human_attribute_name(:tip)
       dd
         = number_to_currency card_used_source.tip
-    = dtdd card_used_source, "monthly_duration"
+  = dtdd card_used_source, "monthly_duration"
+  dl
     dt
       = CardUsedSource.human_attribute_name(:exchange_krw)
       dd
         = number_to_currency card_used_source.exchange_krw
-    = dtdd card_used_source, "foreign_country_code"
-    = dtdd card_used_source, "foreign_country_name"
-    = dtdd card_used_source, "store_business_no"
-    = dtdd card_used_source, "store_name"
-    = dtdd card_used_source, "store_type"
-    = dtdd card_used_source, "store_zipcode"
-    = dtdd card_used_source, "store_addr1"
-    = dtdd card_used_source, "store_addr2"
-    = dtdd card_used_source, "store_tel"
+  = dtdd card_used_source, "foreign_country_code"
+  = dtdd card_used_source, "foreign_country_name"
+  = dtdd card_used_source, "store_business_no"
+  = dtdd card_used_source, "store_name"
+  = dtdd card_used_source, "store_type"
+  = dtdd card_used_source, "store_zipcode"
+  = dtdd card_used_source, "store_addr1"
+  = dtdd card_used_source, "store_addr2"
+  = dtdd card_used_source, "store_tel"

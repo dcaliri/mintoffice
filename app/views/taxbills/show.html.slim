@@ -23,18 +23,22 @@ h2
           = taxbill.taxman.business_client.category
           ' /
           = taxbill.taxman.business_client.business_status 
+    dl
       dt
         = BusinessClient.human_attribute_name('address')
         dd
           = taxbill.taxman.business_client.address
+    dl
       dt
         = Taxbill.human_attribute_name('taxman_id')
         dd
           = taxbill.taxman.fullname
+    dl
       dt
         = Taxman.human_attribute_name('email')
         dd
           = taxbill.taxman.email
+    dl
       dt
         = Taxman.human_attribute_name('phonenumber')
         dd
@@ -50,5 +54,4 @@ h2
       = taxbill.transacted_at.strftime("%Y-%m-%d") rescue ""
       
     = render "taxbills/error", :target => taxbill
-    
-    = render 'changelog', target: taxbill
+= render 'changelog', target: taxbill

@@ -2,13 +2,12 @@ h2= user.name
 
 .box
   #desc
-    dl
-      = dtdd user, "google_account"
-      = dtdd user, "daum_account"
-      = dtdd user, "nate_account"
-      = dtdd user, "notify_email"
-      = dtdd user, "boxcar_account"
-      = dtdd user, "redmine_account"
+    = dtdd user, "google_account"
+    = dtdd user, "daum_account"
+    = dtdd user, "nate_account"
+    = dtdd user, "notify_email"
+    = dtdd user, "boxcar_account"
+    = dtdd user, "redmine_account"
 
     =render "shared/attachments/detail", target: user
 
