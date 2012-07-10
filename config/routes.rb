@@ -69,7 +69,7 @@ Mintoffice::Application.routes.draw do
   post '/hrinfos/try_retired/:id', :controller => "hrinfos", :action => "try_retired", as: :try_retired
 
   resources :hrinfos do
-    
+
     member do
     get 'employment_proof', action: :new_employment_proof, as: :employment_proof
     post 'employment_proof', as: :employment_proof
@@ -220,6 +220,7 @@ Mintoffice::Application.routes.draw do
   resources :postings
 
   post 'accessors', controller: :accessors, action: :create, as: :accessors
+  delete 'accessors', controller: :accessors, action: :destroy, as: :accessors
 
   get 'except_columns' => "except_columns#new", as: :except_columns
   post 'except_columns' => "except_columns#create", as: :except_columns
