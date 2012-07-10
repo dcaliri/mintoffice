@@ -3,7 +3,7 @@
 class SectionEnrollment::EnrollmentsController < ApplicationController
   skip_before_filter :authorize
   before_filter :find_apply_admin
-  before_filter :find_enrollment, :except => :delete_attachment
+  before_filter :find_enrollment
 
   def edit
     @child_contact = @enrollment.contact || @enrollment.build_contact
@@ -31,6 +31,10 @@ class SectionEnrollment::EnrollmentsController < ApplicationController
   def delete_attachment
     attachment = Attachment.where(user_id: current_user.id, id: params[:attachment_id]).last
     attachment.destroy
+
+    item = @enrollment.items.find_by_name(params[:name])
+    item.destroy if item.attachments.count == 0
+
     redirect_to :back
   end
 

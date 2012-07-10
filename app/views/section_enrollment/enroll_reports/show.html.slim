@@ -1,0 +1,37 @@
+- title t('.title')
+
+#show_command
+  = link_to t('common.title.back'), :enroll_reports
+
+h2
+  = @enrollment.name
+.box
+  #descr
+    table border="0" cellspacing="5" cellpadding="5"
+      tr
+        th align="right"
+          = Enrollment.human_attribute_name('name')
+          = " : "
+        td
+          = @enrollment.name
+      tr
+        th align="right"
+          = Enrollment.human_attribute_name('email')
+          = " : "
+        td
+          = @enrollment.email
+      tr
+        th align="right"
+          = Enrollment.human_attribute_name('phone_number')
+          = " : "
+        td
+          = @enrollment.phone_number
+      tr
+        th align="right"
+          = Enrollment.human_attribute_name('address')
+          ' :
+        td
+          = @enrollment.address
+  .clear
+
+= render 'reports/info', target: @enrollment

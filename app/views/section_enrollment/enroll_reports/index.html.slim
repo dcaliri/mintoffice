@@ -1,0 +1,31 @@
+- content_for :search do
+  = form_tag({:action => "index"}, :method => :get ) do
+    = t("common.title.search")
+
+#show_command
+  = link_to t('common.title.back'), :root
+
+h2
+  = @enrollments.count
+
+table#list-table
+  tr
+    th
+      = Enrollment.human_attribute_name('name')
+    th
+      = Enrollment.human_attribute_name('email')
+    th
+      = Hrinfo.human_attribute_name('phone_number')
+    th
+      = Hrinfo.human_attribute_name('address')
+
+  - @enrollments.each do |enrollment|
+    tr.selectable onclick="location.href='#{enroll_report_path(enrollment)}'"
+      td
+        =h enrollment.name
+      td
+        =h enrollment.email
+      td
+        =h enrollment.phone_number
+      td
+        =h enrollment.address

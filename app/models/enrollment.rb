@@ -19,8 +19,29 @@ class Enrollment < ActiveRecord::Base
     end
   end
 
+  include Rails.application.routes.url_helpers
   def redirect_when_reported
-    [:dashboard, :enrollments]
+    if user == User.current_user
+      [:dashboard, :enrollments]
+    else
+      enroll_report_path(self)
+    end
+  end
+
+  def name
+    contact.name
+  end
+
+  def email
+    contact.emails.first.email
+  end
+
+  def phone_number
+    contact.phone_numbers.first.number
+  end
+
+  def address
+    contact.addresses.first.info
   end
 
   def find_or_create_item_by_name(name)

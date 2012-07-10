@@ -5,7 +5,7 @@
     - @item.attachments.each do |attachment|
       li
         = attachment.original_filename
-        = link_to "[x]", delete_attachment_enrollment_path(attachment_id: attachment.id), method: :delete, confirm: "Are you sure?"
+        = link_to "[x]", delete_attachment_enrollment_path(attachment_id: attachment.id, name: params[:name]), method: :delete, confirm: "Are you sure?"
 
 
 = form_tag [:attach, @enrollment], multipart: true do

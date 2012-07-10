@@ -19,5 +19,6 @@ class ReportsController < ApplicationController
     end
 
     redirect_to report_target.redirect_when_reported
+    # redirect_to :back
   end
 end

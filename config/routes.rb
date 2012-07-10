@@ -20,9 +20,13 @@ Mintoffice::Application.routes.draw do
 
       member do
         get :attach_item
-        post :attach 
+        post :attach
         delete :delete_attachment
       end
+    end
+
+    resources :enroll_reports do
+
     end
   end
 
