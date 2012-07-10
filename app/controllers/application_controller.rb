@@ -69,7 +69,7 @@ class ApplicationController < ActionController::Base
 
   def force_redirect
     flash[:notice] = "You don't have to permission"
-    redirect_to :controller => 'main', :action => 'index'
+    redirect_to :root
   end
 
   def User(permission)
