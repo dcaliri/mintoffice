@@ -3,7 +3,6 @@
 class Hrinfo < ActiveRecord::Base
   belongs_to :user
   has_one :contact, :as => :target, dependent: :destroy
-  accepts_nested_attributes_for :contact, :allow_destroy => :true
 
   has_many :expense_reports
 
@@ -11,7 +10,6 @@ class Hrinfo < ActiveRecord::Base
 
   include Historiable
   include Attachmentable
-  include Reportable
 
   validates_format_of :juminno, :with => /^\d{6}-\d{7}$/, :message => I18n.t('hrinfos.error.juminno_invalid')
   validates_uniqueness_of :juminno
@@ -23,8 +21,7 @@ class Hrinfo < ActiveRecord::Base
 
   SEARCH_TYPE = {
     "재직자" => :join,
-    "퇴직자" => :retire,
-    "입사지원자" => :apply
+    "퇴직자" => :retire
   }
 
   class << self
@@ -207,8 +204,6 @@ class Hrinfo < ActiveRecord::Base
         where('joined_on IS NOT NULL AND retired_on IS NULL')
       when :retire
         where('retired_on IS NOT NULL')
-      when :apply
-        where('joined_on IS NULL')
       end
     end
 
