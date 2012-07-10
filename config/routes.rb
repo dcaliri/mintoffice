@@ -69,6 +69,7 @@ Mintoffice::Application.routes.draw do
   post '/hrinfos/try_retired/:id', :controller => "hrinfos", :action => "try_retired", as: :try_retired
 
   resources :hrinfos do
+    
     member do
     get 'employment_proof', action: :new_employment_proof, as: :employment_proof
     post 'employment_proof', as: :employment_proof

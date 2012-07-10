@@ -5,13 +5,13 @@
 
 h3= "Payroll Category"
 .box
-  table
-    tr
-      th= PayrollCategory.human_attribute_name(:prtype)
-      td= t("payroll_categories.#{PayrollCategory::PAYROLL_TYPE.rassoc(payroll_category.prtype)[0]}")
-    tr
-      th= PayrollCategory.human_attribute_name(:code)
-      td= t("payroll_categories.#{PayrollCategory::PAYROLL_CODE.rassoc(payroll_category.code)[0]}")
-    tr
-      th= PayrollCategory.human_attribute_name(:title)
-      td= payroll_category.title
+  dl
+    dt
+      = PayrollCategory.human_attribute_name(:prtype)
+      dd
+        = t("payroll_categories.#{PayrollCategory::PAYROLL_TYPE.rassoc(payroll_category.prtype)[0]}")
+    dt
+      = PayrollCategory.human_attribute_name(:code)
+      dd
+        = t("payroll_categories.#{PayrollCategory::PAYROLL_CODE.rassoc(payroll_category.code)[0]}")
+    = dtdd payroll_category, "title"

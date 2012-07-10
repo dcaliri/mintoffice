@@ -8,31 +8,14 @@
 h2= t('.title')
 
 .box
-  table cellspacing="5" cellpadding="5"
-    tr
-      th= posting.class.human_attribute_name('posted_at')
-      td= posting.posted_at
-    tr
-      th= posting.class.human_attribute_name('description')
-      td= posting.description
-    tr
-      th
-        = t('postings.show.detail')
-      td
-        table
-          tr
-            th colspan=2
-              = t('postings.debits')
-            th colspan=2
-              = t('postings.credit')
-            - items = Array.new([posting.items.debits.count, posting.items.credits.count].max)
-            - items = items.zip(posting.items.debits, posting.items.credits)
-            - items.each do |_, debit, credit|
-              tr
-                td= debit.ledger_account.title rescue ""
-                td= number_to_currency debit.amount rescue ""
-                td= credit.ledger_account.title rescue ""
-                td= number_to_currency credit.amount rescue ""
-    tr
-      th= t('postings.show.total')
-      td= number_to_currency posting.total_amount
+  dl
+    = dtdd posting, "posted_at"
+    = dtdd posting, "description"
+    dt
+      = t('postings.show.detail')
+      dd
+        = render "postings/sub_show", :target => posting
+    dt
+      = t('postings.show.total')
+      dd
+        = number_to_currency posting.total_amount

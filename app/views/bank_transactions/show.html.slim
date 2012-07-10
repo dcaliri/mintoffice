@@ -1,4 +1,3 @@
-
 #show_command
   - if bank_transaction.transfer
     = link_to t('bank_transactions.show.to_bank_transfer'), bank_transaction.transfer
@@ -8,45 +7,30 @@
   = link_to t('common.link.destroy'), bank_transaction, :method => :delete, confirm: t("common.messages.delete_confirm")
   = " | "
   = link_to t('common.title.back'), :bank_transactions
-
 h2
   - if bank_transaction.bank_account
     = "#{bank_transaction.bank_account.name}: #{bank_transaction.bank_account.number}"
   - else
     = t('bank_transactions.show.detail_transfer')
-
 .box
-  table
-    tr
-      th= BankTransaction.human_attribute_name(:transacted_at)
-      td= bank_transaction.transacted_at.strftime("%Y.%m.%d %H:%M") rescue ""
-    tr
-      th= BankTransaction.human_attribute_name(:transaction_type)
-      td= bank_transaction.transaction_type
-    tr
-      th= BankTransaction.human_attribute_name(:in)
-      td= number_to_currency bank_transaction.in
-    tr
-      th= BankTransaction.human_attribute_name(:out)
-      td= number_to_currency bank_transaction.out
-    tr
-      th= BankTransaction.human_attribute_name(:note)
-      td= bank_transaction.note
-    tr
-      th= BankTransaction.human_attribute_name(:remain)
-      td= number_to_currency bank_transaction.remain
-    tr
-      th= BankTransaction.human_attribute_name(:branchname)
-      td= bank_transaction.branchname
-    tr
-      th= BankTransaction.human_attribute_name(:out_bank_account)
-      td= bank_transaction.out_bank_account
-    tr
-      th= BankTransaction.human_attribute_name(:out_bank_name)
-      td= bank_transaction.out_bank_name
-    tr
-      th= BankTransaction.human_attribute_name(:promissory_check_amount)
-      td= number_to_currency bank_transaction.promissory_check_amount
-    tr
-      th= BankTransaction.human_attribute_name(:cms_code)
-      td= bank_transaction.cms_code
+  dl
+    dt
+      = BankTransaction.human_attribute_name(:transacted_at)
+      dd
+       = bank_transaction.transacted_at.strftime("%Y.%m.%d %H:%M") rescue ""
+    = dtdd bank_transaction, "transaction_type"
+    dt
+      = BankTransaction.human_attribute_name(:in)
+      dd
+       = number_to_currency bank_transaction.in
+    dt
+      = BankTransaction.human_attribute_name(:out)
+      dd
+       = number_to_currency bank_transaction.out
+    = dtdd bank_transaction, "note"
+    = dtdd bank_transaction, "remain"
+    = dtdd bank_transaction, "branchname"
+    = dtdd bank_transaction, "out_bank_account"
+    = dtdd bank_transaction, "out_bank_name"
+    = dtdd bank_transaction, "promissory_check_amount"
+    = dtdd bank_transaction, "cms_code"

@@ -9,48 +9,13 @@ h2
   =h @namecard.name
 .box
   #descr
-    table
-      tr
-        th
-          = Namecard.human_attribute_name("name")
-          ' :
-        td
-          = @namecard.name
-      tr
-        th
-          = Namecard.human_attribute_name("company")
-          ' :
-        td
-          = @namecard.company
-      tr
-        th
-          = Namecard.human_attribute_name("department")
-          ' :
-        td
-          = @namecard.department
-      tr
-        th
-          = Namecard.human_attribute_name("jobtitle")
-          ' :
-        td
-          = @namecard.jobtitle
-      tr
-        th
-          = Namecard.human_attribute_name("phone")
-          ' :
-        td
-          = @namecard.phone
-      tr
-        th
-          = Namecard.human_attribute_name("homepage")
-          ' :
-        td
-          = @namecard.homepage
-      tr
-        th
-          = Namecard.human_attribute_name("email")
-          ' :
-        td
-          = @namecard.email
+    dl
+      = dtdd @namecard, "name"
+      = dtdd @namecard, "company"
+      = dtdd @namecard, "department"
+      = dtdd @namecard, "jobtitle"
+      = dtdd @namecard, "phone"
+      = dtdd @namecard, "homepage"
+      = dtdd @namecard, "email"
   = render "shared/attachments/detail", :target => @namecard
   .clear
