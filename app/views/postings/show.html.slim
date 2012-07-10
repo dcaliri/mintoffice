@@ -16,7 +16,8 @@ h2= t('.title')
       th= posting.class.human_attribute_name('description')
       td= posting.description
     tr
-      th 내역
+      th
+        = t('postings.show.detail')
       td
         table
           tr
@@ -33,5 +34,5 @@ h2= t('.title')
                 td= credit.ledger_account.title rescue ""
                 td= number_to_currency credit.amount rescue ""
     tr
-      th 총액
+      th= t('postings.show.total')
       td= number_to_currency posting.total_amount

@@ -598,8 +598,12 @@ ko:
             complete_incident: 입사 지원이 완료되었습니다.
         show:
             application_form: 입사지원서
+            commit: 검토 상태
+            status: 상태
+            report: 수정 후 재승인 요청
         try:
             unknown_user: 등록되지 않은 사용자입니다. 입사지원시스템으로 이동하시겠습니까?
+            ok_submit: 예
     bank_accounts:
         index:
             title: 은행계좌 목록
@@ -994,6 +998,8 @@ ko:
         title: 지출내역서
         index:
             title: 지출내역서 관리
+            year: 년
+            month: 월
         show:
             view: 보기
             detail_expense: 지출내역서 상세정보
@@ -1035,10 +1041,15 @@ ko:
             title: 인사정보 수정
         error:
             juminno_invalid: "는 '111111-1111111' 형식으로 써 주세요."
+        new_employment:
+            print: 출력
+            back: 돌아가기
         title: 인사정보관리
     except_columns:
         title: 컬럼 선택
         create_tag: 태그 만들기
+        form: 
+            input_name: 저장할 이름을 입력하세요
         modify: 변경하기
         back: 돌아가기
     holidays:
@@ -1163,11 +1174,15 @@ ko:
         show:
             title: 전표 내역
             link: 전표 내역 보기
+            detail: 내역
+            total: 총액
         new:
             title: 새로운 전표 작성
             link: 전표 만들기
         edit:
             title: 전표 수정
+        form:
+            list: 항목
     projects:
         expense:
             title: 지출내역
@@ -1240,6 +1255,8 @@ ko:
             empty: 세금계산서가 없습니다.
             total: 전체
             total_eng: Total
+            year: 년도
+            quarter: 분기
         show:
             title: 세금계산서 내역
             dot: ...

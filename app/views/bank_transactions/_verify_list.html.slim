@@ -7,7 +7,8 @@
       th= BankTransaction.human_attribute_name(:out)
       th= BankTransaction.human_attribute_name(:note)
       th= BankTransaction.human_attribute_name(:remain)
-      th 검증
+      th
+        = t('bank_transactions.verify.verify')
     - (@bank_transactions + [@bank_transactions.last]).each do |transaction|
       - unless @latest_transaction
         - @latest_transaction = transaction

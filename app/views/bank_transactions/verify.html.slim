@@ -1,44 +1,5 @@
-
 #show_command
   = link_to t('common.title.back'), bank_transactions_path(bank_account_id: params[:bank_account_id])
-
-h2
-  = t('bank_transactions.verify.verify_transfer')
-
-- unless @bank_transactions.empty?
-  table#list-table.bank-transaction-table
-    tr
-      th= BankTransaction.human_attribute_name(:account)
-      th= BankTransaction.human_attribute_name(:transacted_at)
-      th= BankTransaction.human_attribute_name(:in)
-      th= BankTransaction.human_attribute_name(:out)
-      th= BankTransaction.human_attribute_name(:note)
-      th= BankTransaction.human_attribute_name(:remain)
-      th= t('bank_transactions.verify.verify')
-    - (@bank_transactions.all + [@bank_transactions.last]).each do |transaction|
-      - unless @latest_transaction
-        - @latest_transaction = transaction
-        - next
-
-      - onclick = @latest_transaction.new_record? ? "" : "location.href='#{bank_transaction_path(@latest_transaction)}'"
-      - valid = @latest_transaction.verify(transaction)
-      - valid_class = valid ? "valid" : "invalid"
-      tr.selectable onclick="#{onclick}" class=valid_class
-        td= @latest_transaction.bank_account.description rescue ""
-        td= @latest_transaction.transacted_at.strftime("%Y-%m-%d %H.%M") rescue ""
-        td class="numrow"
-          = number_to_currency @latest_transaction.in
-        td class="numrow"
-          = number_to_currency @latest_transaction.out
-        td= @latest_transaction.note
-        td class="numrow"
-          = number_to_currency @latest_transaction.remain
-        td= valid
-
-      - @latest_transaction = transaction
-
-- else
-  h4= t('.empty')
 
 h2 
   = t('bank_transactions.verify.verify_transfer')

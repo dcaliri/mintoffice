@@ -5,5 +5,5 @@ h3= t('hrinfos.show.pdf')
     = label_tag :purpose, t('activerecord.attributes.hrinfo.purpose')
     = text_field_tag :purpose
   p
-    = submit_tag "출력"
-    = link_to "돌아가기", @hrinfo
+    = submit_tag t('hrinfos.new_employment.print')
+    = link_to t('hrinfos.new_employment.back'), @hrinfo

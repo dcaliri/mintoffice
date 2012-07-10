@@ -9,7 +9,9 @@ h2
 
 - @projects.progress_period(year, month) do |projects, start, finish|
   h3
-    = start.strftime("%Y.%m.%d") %> ~ <%= finish.strftime("%Y.%m.%d")
+    = start.strftime("%Y.%m.%d")
+    ' ~
+    = finish.strftime("%Y.%m.%d")
   - if projects.count == 1
     = projects.first.name
     ' 100
