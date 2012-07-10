@@ -13,17 +13,10 @@ h2 ...
 
 .box
   #descr
-    table
-      tr
-        th= bank_account.class.human_attribute_name(:name)
-        td= bank_account.name
-      tr
-        th= bank_account.class.human_attribute_name(:number)
-        td= bank_account.number
-      tr
-        th= bank_account.class.human_attribute_name(:note)
-        td= bank_account.note
-
+    dl
+      = dtdd bank_account, "name"
+      = dtdd bank_account, "number"
+      = dtdd bank_account, "note"
   = render "shared/attachments/detail", :target => bank_account
 
 .clear

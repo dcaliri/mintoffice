@@ -22,14 +22,14 @@ class Project < ActiveRecord::Base
 
   def self.progress_period(year, month)
     start = Time.zone.parse("#{year}-#{month}-01 00:00:00")
-    finish = start + 1.month - 1.day
+    finish = start + 1.month - 1
 
     s = start
-    f = finish.dup
+    f = finish
     cache = nil
 
     (0..30).each do |i|
-      timestamp = start + i.day
+      timestamp = start + i
       p = where('? BETWEEN started_on AND ending_on', timestamp)
 
       if cache != nil && cache.count != p.count

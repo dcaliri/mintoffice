@@ -1,0 +1,14 @@
+table
+  tr
+    th colspan=2
+      = t('postings.debits')
+    th colspan=2
+      = t('postings.credit')
+    - items = Array.new([posting.items.debits.count, posting.items.credits.count].max)
+    - items = items.zip(posting.items.debits, posting.items.credits)
+    - items.each do |_, debit, credit|
+      tr
+        td= debit.ledger_account.title rescue ""
+        td= number_to_currency debit.amount rescue ""
+        td= credit.ledger_account.title rescue ""
+        td= number_to_currency credit.amount rescue ""

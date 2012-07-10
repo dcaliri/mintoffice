@@ -10,25 +10,20 @@ h2
   =h document.title
 .box
   #descr
-    table
-      tr
-        th
-          = Project.model_name.human
-          ' :
-        td
+    dl
+      dt
+        = Project.model_name.human
+        dd
           = document.project_name
-      tr
-        th
-          = Document.human_attribute_name("owner")
-          ' :
-        td
+      dt
+        = Document.human_attribute_name("owner")
+        dd
           - if !document.users.blank?
             - user_names = document.users.index_by {|u| u.name }
             = user_names.keys.sort.join ", "
-      tr
-        th
-          = Document.human_attribute_name("tags")
-        td
+      dt
+        = Document.human_attribute_name("tags")
+        dd
           = document.tag_list
     h3
       = t(".backlink")
