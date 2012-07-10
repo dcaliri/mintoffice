@@ -9,6 +9,20 @@ class Enrollment < ActiveRecord::Base
 
   accepts_nested_attributes_for :contact, :allow_destroy => :true
 
+  include Reportable
+  def apply_status
+    case report.status
+    when :rollback
+      "수정 요청"
+    else
+      "승인 심사중"
+    end
+  end
+
+  def redirect_when_reported
+    [:dashboard, :enrollments]
+  end
+
   def find_or_create_item_by_name(name)
     item = self.items.find_by_name(name)
     if item

@@ -8,7 +8,6 @@ class ProvidersController < ApplicationController
     user = User.create_from_omniauth(auth) unless user
 
     session[:user_id] = user.id
-    my_enrollment = user.enrollment
 
     if user.joined?
       redirect_to :root, :notice => I18n.t("users.login.successfully_signed_in")

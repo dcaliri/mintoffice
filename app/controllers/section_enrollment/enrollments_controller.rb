@@ -40,7 +40,7 @@ class SectionEnrollment::EnrollmentsController < ApplicationController
   end
 
   def find_apply_admin
-    admin = Company.current_company.apply_admin
-    raise ActiveRecord::RecordNotFound, "입사지원서 담당자를 지정하지 않았습니다. 회사정보에서 담당자를 지정해주세요." unless admin
+    @apply_admin = Company.current_company.apply_admin
+    raise ActiveRecord::RecordNotFound, "입사지원서 담당자를 지정하지 않았습니다. 회사정보에서 담당자를 지정해주세요." unless @apply_admin
   end
 end
