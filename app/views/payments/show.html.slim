@@ -2,9 +2,9 @@
 #show_command
   - if @user.ingroup?(:admin)
     = link_to t('pay_schedules.new.link'), [:yearly, user, :payments]
-    ' |
+    = " | "
     = link_to t('bonuses.new.link'), [:bonus, user, :payments]
-    ' |
+    = " | "
   = link_to t('hrinfos.show.title'), hrinfo_path(user.hrinfo)
 h2
   = user.hrinfo.fullname
@@ -50,7 +50,7 @@ table#list-table
         - if @user.ingroup?(:admin)
           td style="text-align:center;"
             = link_to t("common.link.edit"), [:edit, user, payment]
-            ' |
+            = " | "
             = link_to t("common.link.destroy"), [user, payment], :method => :delete, confirm: t("common.messages.delete_confirm")
       - show_sum = false
 

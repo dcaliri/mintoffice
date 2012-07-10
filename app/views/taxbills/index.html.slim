@@ -23,7 +23,7 @@
 
 #show_command
     = link_to t('taxbills.total.link'), [:total, :taxbills]
-    ' |
+    = " | "
     = link_to t('common.title.new'), [:new, :taxbill]
 
 - unless taxbills_pagination.empty?
