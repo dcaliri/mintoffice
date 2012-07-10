@@ -19,6 +19,12 @@ class Enrollment < ActiveRecord::Base
     end
   end
 
+  class << self
+    def applied
+      includes(:report).where("reports.status != 'not_reported'")
+    end
+  end
+
   include Rails.application.routes.url_helpers
   def redirect_when_reported
     if user == User.current_user

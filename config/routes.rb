@@ -25,9 +25,9 @@ Mintoffice::Application.routes.draw do
       end
     end
 
-    resources :enroll_reports do
+    resources :enroll_reports
 
-    end
+    match ':company_name/recruit' => 'enrollments#index'
   end
 
   resources :creditcards do
