@@ -55,5 +55,6 @@ div class={@user.admin? ? "admin" : ""}
             li= link_to t("change_histories.title"), :controller => "change_histories"
             li= link_to t("holidays.title"), :controller => "holidays"
             li= link_to t("dayworker_taxes.title"), :controller => "dayworker_taxes"
+            li= link_to t("enrollments.title"), :enroll_reports
             li= link_to t("companies.title"), current_company
     = render partial: "this_week"

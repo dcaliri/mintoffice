@@ -1,0 +1,10 @@
+- unless target.report.comments.empty?
+  .box
+    - target.report.comments.lastest.each do |comment|
+      p
+        = "["
+        = comment.created_at.strftime("%Y.%m.%d %H:%M:%S")
+        = "]"
+        = comment.owner.user.name
+        = ": "
+        = comment.description

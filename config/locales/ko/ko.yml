@@ -289,6 +289,7 @@ ko:
                 go: 출근
                 leave: 퇴근
             company:
+                enrollment_items: 입사지원 필수 첨부자료
                 name: 업체명
                 registration_number: 사업자 등록번호
                 owner_name: 대표자 성명
@@ -363,6 +364,11 @@ ko:
                 project: 프로젝트
                 owner: 소유자
                 tags: 태그목록
+            enrollment:
+                name: 이름
+                email: 이메일
+                phone_number: 전화번호
+                address: 주소
             expense_report:
                 owner: 작성자
                 hrinfo_id: 작성자
@@ -571,7 +577,19 @@ ko:
         new:
             title: 첨부파일 신규 작성
         title: 첨부파일 관리
-    applies:
+    application:
+      oauth_login:
+        login_with_google: 구글 계정으로 로그인
+        login_with_daum: 다음 계정으로 로그인
+        login_with_daum_explain: ("요즘"서비스 활성화 필요)
+        login_with_nate: 네이트 계정으로 로그인
+    section_enrollment:
+      enroll_reports:
+        show:
+          title: 입사지원 정보
+    enroll_reports:
+        title: 입사지원 관리
+    enrollments:
         title: 입사지원
         success: 이미 입사지원서가 등록되어 있습니다.
         form:
@@ -628,7 +646,7 @@ ko:
             link: 엑셀 파일로 올리기
             type: 은행명
             file: 엑셀 파일
-            submit: 엑셀 파일 
+            submit: 엑셀 파일
             preview: 프리뷰
         upload:
             title: 엑셀로 올리기
@@ -655,7 +673,7 @@ ko:
         title: 이체 내역
         index:
             empty: 이체 내역이 없습니다
-            detail_transfer: 입출금내역 상세보기 
+            detail_transfer: 입출금내역 상세보기
         excel:
             title: 엑셀로 올리기
             link: 엑셀 파일로 올리기
@@ -1302,10 +1320,6 @@ ko:
             loginfail: 아이디 혹은 비밀번호가 잘못되었습니다.
             not_registered: 등록되지 않은 계정입니다.
             successfully_signed_in: 로그인에 성공하였습니다.
-            login_with_google: 구글 계정으로 로그인
-            login_with_daum: 다음 계정으로 로그인
-            login_with_daum_explain: ("요즘"서비스 활성화 필요)
-            login_with_nate: 네이트 계정으로 로그인
         changepw:
             title: 비밀번호 변경
             subtitle: 변경

@@ -1,6 +1,7 @@
 class Tag < ActiveRecord::Base
   belongs_to :company
   has_many :taggings
+  has_many :targets, through: :taggings
   has_many :tags
 
   validates_uniqueness_of :name, scope: :company_id

@@ -2,6 +2,7 @@
 require 'digest/sha1'
 
 class User < ActiveRecord::Base
+  has_one :enrollment
   has_many :attachment
   has_many :document_owners, :order => 'created_at DESC'
   has_many :documents, :through => :document_owners, :source => :document
@@ -40,6 +41,11 @@ class User < ActiveRecord::Base
 
   include Historiable
   include Attachmentable
+
+  def enrollment
+    Enrollment.find_by_user_id(id) || create_enrollment(company_id: Company.current_company.id)
+  end
+
   def history_except
     [:name, :hashed_password, :salt]
   end
@@ -54,6 +60,20 @@ class User < ActiveRecord::Base
     end
     user
   end
+
+  def self.create_from_omniauth(auth)
+    # debugger
+    create! do |user|
+      user.provider = auth["provider"]
+      user.uid = auth["uid"]
+      user.send(auth["provider"] + "_account=", auth["info"]["email"])
+      user.name = auth["info"]["nickname"]
+      user.notify_email = auth["info"]["email"]
+    end
+  end
+
+
+
 
   def fullname
     hrinfo.nil? ? name : hrinfo.fullname
