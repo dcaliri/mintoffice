@@ -364,6 +364,11 @@ ko:
                 project: 프로젝트
                 owner: 소유자
                 tags: 태그목록
+            enrollment:
+                name: 이름
+                email: 이메일
+                phone_number: 전화번호
+                address: 주소
             expense_report:
                 owner: 작성자
                 hrinfo_id: 작성자
@@ -578,6 +583,12 @@ ko:
         login_with_daum: 다음 계정으로 로그인
         login_with_daum_explain: ("요즘"서비스 활성화 필요)
         login_with_nate: 네이트 계정으로 로그인
+    section_enrollment:
+      enroll_reports:
+        show:
+          title: 입사지원 정보
+    enroll_reports:
+        title: 입사지원 관리
     enrollments:
         title: 입사지원
         success: 이미 입사지원서가 등록되어 있습니다.

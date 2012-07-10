@@ -37,16 +37,7 @@ p
         - if report.approve?
           = submit_tag t('reports.info.approve')
 
-- unless report.comments.empty?
-  .box
-    - report.comments.lastest.each do |comment|
-      p
-        = "["
-        = comment.created_at.strftime("%Y.%m.%d %H:%M:%S")
-        = "]"
-        = comment.owner.user.name
-        = ": "
-        = comment.description
+  = render 'reports/log', target: target
 
 - if current_user.admin?
   = render 'accessors/info', access_target: report
