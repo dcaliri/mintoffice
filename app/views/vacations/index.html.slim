@@ -7,9 +7,24 @@ h2= t('common.title.list')
 table#list-table
   tr
     th= User.human_attribute_name("name")
+    th= Vacation.human_attribute_name("period")
+    th= Vacation.human_attribute_name("total")
+    th= Vacation.human_attribute_name("used")
+    th= Vacation.human_attribute_name("remain")
     - @users.each do |user|
       tr.selectable onclick="location.href='#{vacation_path(user)}'"
         td=h user.name
+        - vacation = user.vacations.last
+        - if vacation
+          td= "#{vacation.from} ~ #{vacation.to}"
+          td= "#{vacation.period} 일"
+          td= "#{vacation.used.total} 일"
+          td= "#{vacation.remain} 일"
+        - else
+          td
+          td
+          td
+          td
 
 br
 

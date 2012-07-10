@@ -516,6 +516,9 @@ ko:
                 period: 기간
                 note: 사유
                 approve: 승인 여부
+                total: 할당
+                used: 사용
+                remain: 잔여
             used_vacation:
                 from: 시작
                 to: 종료
@@ -1048,7 +1051,7 @@ ko:
     except_columns:
         title: 컬럼 선택
         create_tag: 태그 만들기
-        form: 
+        form:
             input_name: 저장할 이름을 입력하세요
         modify: 변경하기
         back: 돌아가기
