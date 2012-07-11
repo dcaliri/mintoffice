@@ -10,8 +10,9 @@ h3= "Payroll Category"
       = PayrollCategory.human_attribute_name(:prtype)
       dd
         = t("payroll_categories.#{PayrollCategory::PAYROLL_TYPE.rassoc(payroll_category.prtype)[0]}")
+  dl
     dt
       = PayrollCategory.human_attribute_name(:code)
       dd
         = t("payroll_categories.#{PayrollCategory::PAYROLL_CODE.rassoc(payroll_category.code)[0]}")
-    = dtdd payroll_category, "title"
+  = dtdd payroll_category, "title"

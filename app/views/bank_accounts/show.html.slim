@@ -13,11 +13,9 @@ h2 ...
 
 .box
   #descr
-    dl
-      = dtdd bank_account, "name"
-      = dtdd bank_account, "number"
-      = dtdd bank_account, "note"
+    = dtdd bank_account, "name"
+    = dtdd bank_account, "number"
+    = dtdd bank_account, "note"
   = render "shared/attachments/detail", :target => bank_account
-
-.clear
+  .clear
 = render 'changelog', target: bank_account

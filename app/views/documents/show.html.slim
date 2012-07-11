@@ -15,12 +15,14 @@ h2
         = Project.model_name.human
         dd
           = document.project_name
+    dl
       dt
         = Document.human_attribute_name("owner")
         dd
           - if !document.users.blank?
             - user_names = document.users.index_by {|u| u.name }
             = user_names.keys.sort.join ", "
+    dl
       dt
         = Document.human_attribute_name("tags")
         dd
@@ -31,6 +33,6 @@ h2
       - u = document.user_for_tag(Hrinfo.model_name.human)
       - if u
         li= link_to Hrinfo.model_name.human, :controller => "hrinfos", :action => "show", :id => u.hrinfo
-    = render 'reports/info', target: document
-  = render "shared/attachments/detail", :target => document
   .clear
+= render 'reports/info', target: document
+= render "shared/attachments/detail", :target => document

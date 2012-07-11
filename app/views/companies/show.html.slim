@@ -23,8 +23,9 @@ h2
     = dtdd company, "redmine_password"
     = dtdd company, "default_password"
     = dtdd company, "enrollment_items"
-    dt= company.class.human_attribute_name(:apply_admin_id)
-    dd= company.apply_admin.fullname rescue ""
+    dl
+      dt= company.class.human_attribute_name(:apply_admin_id)
+      dd= company.apply_admin.fullname rescue ""
 
   = render "shared/attachments/detail", :target => company
 br

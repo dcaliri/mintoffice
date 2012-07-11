@@ -8,13 +8,14 @@
 h2= t('.title')
 
 .box
+  = dtdd posting, "posted_at"
+  = dtdd posting, "description"
   dl
-    = dtdd posting, "posted_at"
-    = dtdd posting, "description"
     dt
       = t('postings.show.detail')
       dd
         = render "postings/sub_show", :target => posting
+  dl
     dt
       = t('postings.show.total')
       dd
