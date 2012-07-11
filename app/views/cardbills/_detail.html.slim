@@ -1,22 +1,10 @@
 h3
   = t('cardbills.detail.title')
 dl
-  dt
-    = Cardbill.human_attribute_name('amount')
-  dd
-    = number_to_currency target.amount
-  dt
-    = Cardbill.human_attribute_name('vat')
-  dd
-    = number_to_currency target.vat
-  dt
-    = Cardbill.human_attribute_name('servicecharge')
-  dd
-    = number_to_currency target.servicecharge
-  dt
-    = Cardbill.human_attribute_name('totalamount')
-  dd class="target.mismatch?(:totalamount)"
-    = number_to_currency target.totalamount
+  = dtdd target, "amount"
+  = dtdd target, "vat"
+  = dtdd target, "servicecharge"
+  = dtdd target, "totalamount"
   = dtdd target, "storename"
   = dtdd target, "storeaddr"
   = dtdd target, "approveno"

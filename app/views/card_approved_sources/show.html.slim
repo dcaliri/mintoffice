@@ -13,30 +13,19 @@ h2= "#{card_approved_source.creditcard.nickname}: #{card_approved_source.creditc
 
 .box
   dl
-    dt
-      = CardApprovedSource.human_attribute_name(:used_at)
-      dd
-        = card_approved_source.used_at_to_s
-  = dtdd card_approved_source, "approve_no"
-  = dtdd card_approved_source, "card_no"
-  = dtdd card_approved_source, "card_holder_name"
-  = dtdd card_approved_source, "store_name"
-  = dtdd card_approved_source, "money"
-  = dtdd card_approved_source, "money_foreign"
-  = dtdd card_approved_source, "money_type"
-  = dtdd card_approved_source, "money_type_info"
-  = dtdd card_approved_source, "money_dollar"
-  = dtdd card_approved_source, "used_type"
-  = dtdd card_approved_source, "monthly_duration"
-  = dtdd card_approved_source, "card_type"
-  dl
-    dt
-      = CardApprovedSource.human_attribute_name(:canceled_at)
-      dd
-        = card_approved_source.canceled_at_to_s
-  = dtdd card_approved_source, "status"
-  dl
-    dt
-      = CardApprovedSource.human_attribute_name(:will_be_paied_at)
-      dd
-        = card_approved_source.will_be_paied_at_to_s
+    = dtdd card_approved_source, "used_at"
+    = dtdd card_approved_source, "approve_no"
+    = dtdd card_approved_source, "card_no"
+    = dtdd card_approved_source, "card_holder_name"
+    = dtdd card_approved_source, "store_name"
+    = dtdd card_approved_source, "money"
+    = dtdd card_approved_source, "money_foreign"
+    = dtdd card_approved_source, "money_type"
+    = dtdd card_approved_source, "money_type_info"
+    = dtdd card_approved_source, "money_dollar"
+    = dtdd card_approved_source, "used_type"
+    = dtdd card_approved_source, "monthly_duration"
+    = dtdd card_approved_source, "card_type"
+    = dtdd card_approved_source, "canceled_at"
+    = dtdd card_approved_source, "status"
+    = dtdd card_approved_source, "will_be_paied_at"
