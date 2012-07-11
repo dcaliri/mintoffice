@@ -321,7 +321,7 @@ class User < ActiveRecord::Base
       raise ArgumentError, "아마도 등록된 이메일이 있습니다."
     end
 
-    redmine_account = redmine.login
+    self.redmine_account = redmine.login
     save!
   end
 
