@@ -1,5 +1,7 @@
 class Permission < ActiveRecord::Base
- has_and_belongs_to_many :user
+  has_and_belongs_to_many :user
+
+  validates :name, presence: true, uniqueness: true
 
   def self.can_access? (user, controller_name, action_name)
     exception_list = [
