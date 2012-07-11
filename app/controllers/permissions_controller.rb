@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class PermissionsController < ApplicationController
   # GET /permissions
   # GET /permissions.xml
@@ -11,11 +13,16 @@ class PermissionsController < ApplicationController
   end
 
   def adduser
-    @user = User.find_by_name(params[:username])
     @permission = Permission.find(params[:id])
-    @permission.user << @user
-
-    redirect_to @permission
+    @user = User.find_by_name(params[:username])
+    if !@user
+      redirect_to @permission, alert: "등록되지 않은 사용자입니다."
+    elsif @permission.user.include?(@user)
+      redirect_to @permission, alert: "이미 등록된 사용자입니다."
+    else
+      @permission.user << @user
+      redirect_to @permission, notice: "성공적으로 사용자를 등록했습니다."
+    end
   end
 
   def removeuser
