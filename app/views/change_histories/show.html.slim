@@ -8,14 +8,14 @@
 h2= t("common.title.show")
 .box
   #descr
+    = dtdd change_history, "fieldname"
+    = dtdd change_history, "before_value"
+    = dtdd change_history, "after_value"
     dl
-      = dtdd change_history, "fieldname"
-      = dtdd change_history, "before_value"
-      = dtdd change_history, "after_value"
       dt
         = ChangeHistory.human_attribute_name('user_id')
         dd
           = change_history.user.name rescue ""
-      = dtdd change_history, "changable_type"
-      = dtdd change_history, "changable_id"
+    = dtdd change_history, "changable_type"
+    = dtdd change_history, "changable_id"
   .clear
