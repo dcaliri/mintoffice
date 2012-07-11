@@ -544,6 +544,11 @@ ko:
                 not_a_number: "은(는) 반드시 숫자여야 합니다."
                 taken: 은(는) 이미 사용중입니다.
             models:
+                user:
+                    attributes:
+                        password:
+                            confirmation: 가 서로 다릅니다.
+                            missing: 가 없습니다.
                 contact_email:
                     attributes:
                         email:

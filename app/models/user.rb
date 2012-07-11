@@ -345,7 +345,7 @@ class User < ActiveRecord::Base
 private
   def password_non_blank
     if hashed_password.blank?
-      errors.add(:password, I18n.t('users.error.missing_password'))
+      errors.add(:password, I18n.t('activerecord.errors.models.user.attributes.password.missing'))
     end
   end
 
