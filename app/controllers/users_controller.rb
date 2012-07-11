@@ -9,7 +9,7 @@ class UsersController < ApplicationController
     c.save_attachment_id @this_user
   end
 
-  before_filter :except => [:my, :login, :logout, :google_apps] do |c|
+  before_filter :except => [:my, :changepw, :login, :edit, :update, :logout, :google_apps] do |c|
     unless @user.admin?
       flash[:notice] = I18n.t("common.messages.not_allowed")
       redirect_to :controller => "main", :action => "index"
@@ -72,7 +72,11 @@ class UsersController < ApplicationController
       Boxcar.add_to_boxcar(@this_user.boxcar_account) if ! @this_user.boxcar_account.empty?
 
       flash[:notice] = I18n.t("common.messages.updated", :model => User.model_name.human)
-      redirect_to user_path(@this_user)
+      if @this_user.admin?
+        redirect_to user_path(@this_user)
+      else
+        redirect_to [:users, :my]
+      end
     else
       render :action => "edit"
     end
