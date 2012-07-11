@@ -2,7 +2,8 @@ h3
   = t('projects.expense.title')
 table
   - if project.started_on
-    - project.started_on.step(project.ending_on, 1) do |date|
+    - date = project.started_on.dup
+    - while date <= project.ending_on
       - reports = project.expense_reports.where(expensed_at: date.to_time.all_month)
       tr
         th= date.strftime("%Y.%_m")
@@ -20,6 +21,7 @@ table
             = t('projects.expense.monthly')
           td
           td = number_to_currency reports.total_amount
+        - date += 1.month
     tr
       td
         = t('projects.expense.total')
