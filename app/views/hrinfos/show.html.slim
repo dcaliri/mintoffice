@@ -45,6 +45,7 @@ h2
           - for rtn in @required_tagnames
             li
               = rtn
+              = " "
               - if @required_documents[rtn]
                 = link_to @required_documents[rtn].title, :controller => "documents", :action => "show", :id => @required_documents[rtn]
               - else
