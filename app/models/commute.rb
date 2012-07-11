@@ -32,13 +32,14 @@ class Commute < ActiveRecord::Base
   end
 
   def go!
-    write_attribute(:go, Time.zone.now)
+    # write_attribute(:go, Time.zone.now)
+    write_attribute(:go, Time.now)
     save!
     Boxcar.send_to_boxcar_group("admin",self.user.fullname, "#{Commute.human_attribute_name('go')} : #{self.go.strftime("%Y-%m-%d %H:%M")}")
   end
 
   def leave!
-    write_attribute(:leave, Time.zone.now)
+    write_attribute(:leave, Time.now)
     save!
     Boxcar.send_to_boxcar_group("admin",self.user.fullname, "#{Commute.human_attribute_name('leave')} : #{self.leave.strftime("%Y-%m-%d %H:%M")}")
   end
@@ -47,3 +48,17 @@ class Commute < ActiveRecord::Base
     super(options.merge(:only => [:go, :leave]))
   end
 end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
