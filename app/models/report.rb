@@ -117,23 +117,25 @@ class Report < ActiveRecord::Base
     self.comments.build(owner: prev_reporter, description: "#{prev_reporter.fullname}님이 결재를 반려하였습니다")
     self.comments.build(owner: prev_reporter, description: comment) unless comment.blank?
 
-    target_name = target.class.to_s.downcase
-    title = I18n.t("reports.rollback.title.#{target_name}", {
-      default: I18n.t("reports.rollback.title.default"),
-      prev: prev_reporter.fullname,
-      next: next_reporter.fullname
-    })
+    if next_reporter
+      target_name = target.class.to_s.downcase
+      title = I18n.t("reports.rollback.title.#{target_name}", {
+        default: I18n.t("reports.rollback.title.default"),
+        prev: prev_reporter.fullname,
+        next: next_reporter.fullname
+      })
 
-    body = I18n.t("reports.rollback.body.#{target_name}", {
-      default: I18n.t("reports.rollback.body.default"),
-      prev: prev_reporter.fullname,
-      next: next_reporter.fullname,
-      url: report_url,
-    })
+      body = I18n.t("reports.rollback.body.#{target_name}", {
+        default: I18n.t("reports.rollback.body.default"),
+        prev: prev_reporter.fullname,
+        next: next_reporter.fullname,
+        url: report_url,
+      })
 
-    Boxcar.send_to_boxcar_user(next_reporter.user, prev_reporter.fullname, title)
-    ReportMailer.report(target, prev_reporter.user, next_reporter.user, title, body)
-
+      Boxcar.send_to_boxcar_user(next_reporter.user, prev_reporter.fullname, title)
+      ReportMailer.report(target, prev_reporter.user, next_reporter.user, title, body)
+    end
+    
     save!
   end
 
