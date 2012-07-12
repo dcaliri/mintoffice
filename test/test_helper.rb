@@ -6,7 +6,7 @@ class ActionController::TestCase
   setup :global_setup
   teardown :global_teardown
 
-  fixtures :users, :companies, :companies_users
+  fixtures :users, :companies, :companies_users, :groups, :groups_users
 
   def global_setup
     DatabaseCleaner.strategy = :truncation

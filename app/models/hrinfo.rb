@@ -198,24 +198,17 @@ class Hrinfo < ActiveRecord::Base
   end
 
   class << self
-    def search(type, text)
-      search_by_type(type).search_by_text(text)
+    def search(user, type, text)
+      search_by_type(user, type).search_by_text(text)
     end
 
-    def search_by_type(type)
+    def search_by_type(user, type)
       type = type.to_sym
-      if User.current_user.admin? && type == :retire
+      if user and user.admin? and type == :retire
         where('retired_on IS NOT NULL')
       else
         where('joined_on IS NOT NULL AND retired_on IS NULL')
       end
-
-      # case type.to_sym
-      # when :join
-      #   where('joined_on IS NOT NULL AND retired_on IS NULL')
-      # when :retire
-      #   where('retired_on IS NOT NULL')
-      # end
     end
 
     def search_by_text(text)
