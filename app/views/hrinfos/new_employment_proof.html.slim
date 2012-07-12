@@ -1,3 +1,5 @@
+#show_command
+	= link_to t('hrinfos.new_employment.back'), @hrinfo
 h3= t('hrinfos.show.pdf')
 
 = form_tag([:employment_proof, @hrinfo]) do
@@ -6,4 +8,4 @@ h3= t('hrinfos.show.pdf')
     = text_field_tag :purpose
   p
     = submit_tag t('hrinfos.new_employment.print')
-    = link_to t('hrinfos.new_employment.back'), @hrinfo
+    
