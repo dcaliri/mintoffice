@@ -564,8 +564,9 @@ ko:
     accessors:
         info:
             permissions: 권한
-            write: 쓰기
+            read_write: 읽기/쓰기
             read: 읽기
+            write: 쓰기
             change_permissions: 권한 변경
         search:
             all_view: 전체 보기
@@ -592,6 +593,22 @@ ko:
         login_with_daum_explain: ("요즘"서비스 활성화 필요)
         login_with_nate: 네이트 계정으로 로그인
     section_enrollment:
+      enrollment:
+        attachment_item:
+          attachments: 첨부파일
+          back: 돌아가기
+          add: 추가
+        edit:
+          basic: 기본정보
+          enrollment: 입사 지원 신청
+        dashboard:
+          title: 입사지원서 관리
+          status: 입사지원 등록 상태
+          enrollment: 입사지원 등록
+          basic: 기본 정보 입력
+          update: 기본정보 등록
+          add: 추가하기
+          please_input: 모든 정보를 기입해야 입사지원을 할 수 있습니다.
       enroll_reports:
         show:
           title: 입사지원 정보

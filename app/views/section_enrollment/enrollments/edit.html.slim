@@ -2,7 +2,8 @@
   .box
     = f.error_messages
 
-    h3 기본정보
+    h3 
+      = t('section_enrollment.enrollment.edit.basic')
     = f.label :juminno
     = f.text_field :juminno
 
@@ -20,4 +21,4 @@
       = render 'contacts/form/others', contact_form: contact_field, contact: @child_contact 
 
   p
-    = f.submit '입사 지원 신청'
+    = f.submit t('section_enrollment.enrollment.edit.enrollment')
