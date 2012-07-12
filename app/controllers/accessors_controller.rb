@@ -7,4 +7,10 @@ class AccessorsController < ApplicationController
     resource.accessors.permission(user, params[:access_type])
     redirect_to :back, notice: "성공적으로 권한을 설정하였습니다."
   end
+
+  def destroy
+		person = AccessPerson.find(params[:accessor_id])
+		person.destroy
+		redirect_to :back, notice: "성공적으로 권한을 제거하였습니다."
+  end
 end

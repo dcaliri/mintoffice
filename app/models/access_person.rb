@@ -33,21 +33,25 @@ class AccessPerson < ActiveRecord::Base
 
     def permission(user, access_type)
       collection = where(user_id: user.id)
-      unless access_type.to_sym == :remove
-        unless collection.empty?
-          accessor = collection.first
-          accessor.access_type = access_type
-          accessor.save!
-        else
-          create!(user_id: user.id, access_type: access_type)
-        end
+      unless collection.empty?
+        accessor = collection.first
+        accessor.access_type = access_type
+        accessor.save!
       else
-        collection.destroy_all
+        create!(user_id: user.id, access_type: access_type)
       end
     end
   end
 
   def fullname
     user.name
+  end
+
+  def read?
+    [:read, :write].include? access_type.to_sym
+  end
+
+  def write?
+    access_type.to_sym == :write
   end
 end
