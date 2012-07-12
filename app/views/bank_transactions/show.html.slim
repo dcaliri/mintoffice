@@ -16,23 +16,15 @@ h2
   dl
     dt
       = BankTransaction.human_attribute_name(:transacted_at)
-      dd
-        = bank_transaction.transacted_at.strftime("%Y.%m.%d %H:%M") rescue ""
-  = dtdd bank_transaction, "transaction_type"
-  dl
-    dt
-      = BankTransaction.human_attribute_name(:in)
-      dd
-        = number_to_currency bank_transaction.in
-  dl
-    dt
-      = BankTransaction.human_attribute_name(:out)
-      dd
-        = number_to_currency bank_transaction.out
-  = dtdd bank_transaction, "note"
-  = dtdd bank_transaction, "remain"
-  = dtdd bank_transaction, "branchname"
-  = dtdd bank_transaction, "out_bank_account"
-  = dtdd bank_transaction, "out_bank_name"
-  = dtdd bank_transaction, "promissory_check_amount"
-  = dtdd bank_transaction, "cms_code"
+    dd
+      = bank_transaction.transacted_at.strftime("%Y.%m.%d %H:%M") rescue ""
+    = dtdd bank_transaction, "transaction_type"
+    = dtdd bank_transaction, "in"
+    = dtdd bank_transaction, "out"
+    = dtdd bank_transaction, "note"
+    = dtdd bank_transaction, "remain"
+    = dtdd bank_transaction, "branchname"
+    = dtdd bank_transaction, "out_bank_account"
+    = dtdd bank_transaction, "out_bank_name"
+    = dtdd bank_transaction, "promissory_check_amount"
+    = dtdd bank_transaction, "cms_code"

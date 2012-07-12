@@ -8,22 +8,22 @@ h2
 
 .box
   #descr
-    = dtdd company, "name"
-    = dtdd company, "registration_number"
-    = dtdd company, "owner_name"
-    = dtdd company, "address"
-    = dtdd company, "phone_number"
-    = dtdd company, "pay_basic_date"
-    = dtdd company, "payday"
-    = dtdd company, "google_apps_domain"
-    = dtdd company, "google_apps_username"
-    = dtdd company, "google_apps_password"
-    = dtdd company, "redmine_domain"
-    = dtdd company, "redmine_username"
-    = dtdd company, "redmine_password"
-    = dtdd company, "default_password"
-    = dtdd company, "enrollment_items"
     dl
+      = dtdd company, "name"
+      = dtdd company, "registration_number"
+      = dtdd company, "owner_name"
+      = dtdd company, "address"
+      = dtdd company, "phone_number"
+      = dtdd company, "pay_basic_date"
+      = dtdd company, "payday"
+      = dtdd company, "google_apps_domain"
+      = dtdd company, "google_apps_username"
+      = dtdd company, "google_apps_password"
+      = dtdd company, "redmine_domain"
+      = dtdd company, "redmine_username"
+      = dtdd company, "redmine_password"
+      = dtdd company, "default_password"
+      = dtdd company, "enrollment_items"
       dt= company.class.human_attribute_name(:apply_admin_id)
       dd= company.apply_admin.fullname rescue ""
 

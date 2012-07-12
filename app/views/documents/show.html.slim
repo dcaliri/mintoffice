@@ -13,20 +13,18 @@ h2
     dl
       dt
         = Project.model_name.human
-        dd
-          = document.project_name
-    dl
+      dd
+        = document.project_name
       dt
         = Document.human_attribute_name("owner")
-        dd
-          - if !document.users.blank?
-            - user_names = document.users.index_by {|u| u.name }
-            = user_names.keys.sort.join ", "
-    dl
+      dd
+        - if !document.users.blank?
+          - user_names = document.users.index_by {|u| u.name }
+          = user_names.keys.sort.join ", "
       dt
         = Document.human_attribute_name("tags")
-        dd
-          = document.tag_list
+      dd
+        = document.tag_list
     h3
       = t(".backlink")
     ul

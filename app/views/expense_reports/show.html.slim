@@ -22,24 +22,18 @@ h2
     dl
       dt
         = expense_report.class.human_attribute_name(:owner)
-        dd = expense_report.hrinfo.fullname
-    dl
+      dd = expense_report.hrinfo.fullname
       dt
         = expense_report.class.human_attribute_name(:target)
-        dd
-          = t("activerecord.models.#{expense_report.target_type.tableize.singularize}")
-    dl
+      dd
+        = t("activerecord.models.#{expense_report.target_type.tableize.singularize}")
       dt
         = expense_report.class.human_attribute_name(:project)
-        dd
-          = expense_report.project.name rescue ""
-    = dtdd expense_report, "description"
-    = dtdd expense_report, "expensed_at"
-    dl
-      dt
-        = expense_report.class.human_attribute_name(:amount)
-        dd
-          = number_to_currency expense_report.amount
+      dd
+        = expense_report.project.name rescue ""
+      = dtdd expense_report, "description"
+      = dtdd expense_report, "expensed_at"
+      = dtdd expense_report, "amount"
   - if expense_report.target.respond_to?(:attachments)
     = render "shared/attachments/detail", :target => expense_report.target
   .clear

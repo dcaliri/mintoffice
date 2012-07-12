@@ -12,15 +12,8 @@ h2
 .box
   #descr
     dl
-      dt
-        = Pettycash.human_attribute_name('inmoney')
-        dd
-          = number_to_currency @pettycash.inmoney
-    dl
-      dt
-        = Pettycash.human_attribute_name('outmoney')
-        dd
-          = number_to_currency @pettycash.outmoney
+      = dtdd @pettycash, "inmoney"
+      = dtdd @pettycash, "outmoney"
     p
       b= Pettycash.human_attribute_name('description')
     p=simple_format @pettycash.description
