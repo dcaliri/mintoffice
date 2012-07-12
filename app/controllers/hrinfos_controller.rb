@@ -4,6 +4,8 @@ class HrinfosController < ApplicationController
     c.save_attachment_id @hrinfo
   end
 
+  before_filter :retired_hrinfo_can_access_only_admin, except: :index
+
   # GET /hrinfos
   # GET /hrinfos.xml
   def index
@@ -16,7 +18,6 @@ class HrinfosController < ApplicationController
   end
 
   def edit_required_tag
-
   end
 
   def retire
@@ -138,5 +139,11 @@ class HrinfosController < ApplicationController
       format.html { redirect_to(hrinfos_url) }
       format.xml  { head :ok }
     end
+  end
+
+  private
+  def retired_hrinfo_can_access_only_admin
+    @hrinfo = Hrinfo.find(params[:id])
+    force_redirect if !(current_user.admin? and @hrinfo.retired?)
   end
 end
