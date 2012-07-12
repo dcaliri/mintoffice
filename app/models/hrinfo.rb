@@ -42,6 +42,10 @@ class Hrinfo < ActiveRecord::Base
     not joined?
   end
 
+  def retired?
+    retired_on?
+  end
+
   def contact_or_build
     self.contact || build_contact
   end
@@ -184,7 +188,7 @@ class Hrinfo < ActiveRecord::Base
       pdf.draw_text company.name, :at => [250, 255]
       pdf.draw_text company.owner_name, :at => [250, 225]
 
-      pdf.draw_text "*  발급확인코드: #{hash_key}", :at => [14, 45], :size => 10
+      pdf.draw_text "* 발급확인코드: #{hash_key}", :at => [14, 45], :size => 10
     end
 
     employment_proof_hash << hash_key
@@ -194,16 +198,16 @@ class Hrinfo < ActiveRecord::Base
   end
 
   class << self
-    def search(type, text)
-      search_by_type(type).search_by_text(text)
+    def search(user, type, text)
+      search_by_type(user, type).search_by_text(text)
     end
 
-    def search_by_type(type)
-      case type.to_sym
-      when :join
-        where('joined_on IS NOT NULL AND retired_on IS NULL')
-      when :retire
+    def search_by_type(user, type)
+      type = type.to_sym
+      if user and user.admin? and type == :retire
         where('retired_on IS NOT NULL')
+      else
+        where('joined_on IS NOT NULL AND retired_on IS NULL')
       end
     end
 
