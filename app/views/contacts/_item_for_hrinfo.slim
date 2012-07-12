@@ -1,41 +1,38 @@
-- contact.emails.each do |email|
-  dl
+dl
+  - contact.emails.each do |email|
     dt
       = t('contacts.item.email')
       = "(#{email.target})"
+    dd
+      = email.email
+    - if menu && contact.edit?(current_user)
       dd
-        = email.email
-      - if menu && contact.edit?(current_user)
-        dd
-          = link_to t('common.link.edit'), [:edit, contact]
-          = " | "
-          = link_to t('contacts.item.remove'), [contact, email], :method => :delete, confirm: t("common.messages.delete_confirm")
-- contact.phone_numbers.each do |phone_number|
-  dl
+        = link_to t('common.link.edit'), [:edit, contact]
+        = " | "
+        = link_to t('contacts.item.remove'), [contact, email], :method => :delete, confirm: t("common.messages.delete_confirm")
+  - contact.phone_numbers.each do |phone_number|
     dt
       = t('contacts.item.phonenumber')
       = "(#{phone_number.target})"
+    dd
+      = phone_number.number
+    - if menu && contact.edit?(current_user)
       dd
-        = phone_number.number
-      - if menu && contact.edit?(current_user)
-        dd
-          = link_to t('common.link.edit'), [:edit, contact]
-          = " | "
-          = link_to t('contacts.item.remove'), [contact, email], :method => :delete, confirm: t("common.messages.delete_confirm")
-- contact.addresses.each do |address|
-  dl
+        = link_to t('common.link.edit'), [:edit, contact]
+        = " | "
+        = link_to t('contacts.item.remove'), [contact, email], :method => :delete, confirm: t("common.messages.delete_confirm")
+  - contact.addresses.each do |address|
     dt
       = t('contacts.item.address')
       = "(#{address.target})"
+    dd
+      = "#{address.country} #{address.province} #{address.city} #{address.other1} #{address.other2} #{address.postal_code}"
+    - if menu && contact.edit?(current_user)
       dd
-        = "#{address.country} #{address.province} #{address.city} #{address.other1} #{address.other2} #{address.postal_code}"
-      - if menu && contact.edit?(current_user)
-        dd
-          = link_to t('common.link.edit'), [:edit, contact]
-          = " | "
-          = link_to t('contacts.item.remove'), [contact, email], :method => :delete, confirm: t("common.messages.delete_confirm")
-dl
+        = link_to t('common.link.edit'), [:edit, contact]
+        = " | "
+        = link_to t('contacts.item.remove'), [contact, email], :method => :delete, confirm: t("common.messages.delete_confirm")
   dt
     = Document.human_attribute_name("tags")
-    dd
-      = contact.tag_list
+  dd
+    = contact.tag_list

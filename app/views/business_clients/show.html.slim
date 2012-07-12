@@ -19,18 +19,18 @@ h2
       = dtdd business_client, "address"
       dt
         = Taxman.model_name.human
-        - unless business_client.taxmen.empty?
-          - business_client.taxmen.map do |taxman|
-            dd
-              = taxman.fullname
-              = link_to t('business_clients.show.modify'), find_contacts_path(:target_class => Taxman, target: taxman, parent_class: business_client.class, parent: business_client), :class => 'popup'
-              br
-        - else
+      - unless business_client.taxmen.empty?
+        - business_client.taxmen.map do |taxman|
           dd
-            p
-              = t('taxmen.empty')
+            = taxman.fullname
+            = link_to t('business_clients.show.modify'), find_contacts_path(:target_class => Taxman, target: taxman, parent_class: business_client.class, parent: business_client), :class => 'popup'
+            br
+      - else
         dd
-          = link_to t('business_clients.show.add_contact'), find_contacts_path(:target_class => Taxman, parent_class: business_client.class, parent: business_client), :class => 'popup'
+          p
+            = t('taxmen.empty')
+      dd
+        = link_to t('business_clients.show.add_contact'), find_contacts_path(:target_class => Taxman, parent_class: business_client.class, parent: business_client), :class => 'popup'
   = render "shared/attachments/detail", :target => business_client
   .clear
 = render 'changelog', target: business_client

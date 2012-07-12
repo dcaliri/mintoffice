@@ -1,41 +1,27 @@
 h3
   = t('bank_transfers.detail.detail_card_transfer')
-
-= dtdd target, "transfer_type"
 dl
+  = dtdd target, "transfer_type"
   dt
     = BankTransfer.human_attribute_name(:transfered_at)
-    dd
-      = target.transfered_at.strftime("%Y.%m.%d %H:%M") rescue ""
-= dtdd target, "result"
-= dtdd target, "out_bank_account"
-= dtdd target, "in_bank_name"
-= dtdd target, "in_bank_account"
-dl
-  dt
-    = BankTransfer.human_attribute_name(:money)
-    dd
-      = number_to_currency target.money
-dl
-  dt
-    = BankTransfer.human_attribute_name(:transfer_fee)
-    dd
-      = number_to_currency target.transfer_fee
-dl
-  dt
-    = BankTransfer.human_attribute_name(:error_money)
-    dd
-      = number_to_currency target.error_money
-dl
+  dd
+    = target.transfered_at.strftime("%Y.%m.%d %H:%M") rescue ""
+  = dtdd target, "result"
+  = dtdd target, "out_bank_account"
+  = dtdd target, "in_bank_name"
+  = dtdd target, "in_bank_account"
+  = dtdd target, "money"
+  = dtdd target, "transfer_fee"
+  = dtdd target, "error_money"
   dt
     = BankTransfer.human_attribute_name(:registered_at)
-    dd
-      = target.registered_at.strftime("%Y.%m.%d %H:%M") rescue ""
-= dtdd target, "error_code"
-= dtdd target, "transfer_note"
-= dtdd target, "incode"
-= dtdd target, "out_account_note"
-= dtdd target, "in_account_note"
-= dtdd target, "in_person_name"
-= dtdd target, "cms_code"
-= dtdd target, "currency_code"
+  dd
+    = target.registered_at.strftime("%Y.%m.%d %H:%M") rescue ""
+  = dtdd target, "error_code"
+  = dtdd target, "transfer_note"
+  = dtdd target, "incode"
+  = dtdd target, "out_account_note"
+  = dtdd target, "in_account_note"
+  = dtdd target, "in_person_name"
+  = dtdd target, "cms_code"
+  = dtdd target, "currency_code"

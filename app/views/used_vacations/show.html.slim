@@ -9,13 +9,13 @@
 h2= t('.title')
 
 .box
-  = dtdd used_vacation, "from"
-  = dtdd used_vacation, "to"
   dl
+    = dtdd used_vacation, "from"
+    = dtdd used_vacation, "to"
     dt
       = used_vacation.class.human_attribute_name('period')
-      dd
-        = "#{used_vacation.period} #{t('datetime.prompts.day')}"
-  = dtdd used_vacation, "note"
+    dd
+      = "#{used_vacation.period} #{t('datetime.prompts.day')}"
+    = dtdd used_vacation, "note"
 
 = render 'reports/info', target: used_vacation
