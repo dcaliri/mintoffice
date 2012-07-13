@@ -1,17 +1,21 @@
-h2 입사지원서 관리
+h2
+  = t('section_enrollment.enrollment.dashboard.title')
 
 #descr
   #enrollment-dashboard
     - if @enrollment.report.status != :not_reported
-      h3 입사지원 등록 상태
+      h3
+        = t('section_enrollment.enrollment.dashboard.status')
       p= @enrollment.apply_status
 
-    h3 입사지원 등록
+    h3
+      = t('section_enrollment.enrollment.dashboard.enrollment')
 
     #basic-information
-      p.title 기본 정보 입력
+      p.title
+        = t('section_enrollment.enrollment.dashboard.basic')
       - if @enrollment.modify?
-        p.menu= link_to '기본정보 등록', [:edit, @enrollment]
+        p.menu= link_to t('section_enrollment.enrollment.dashboard.update'), [:edit, @enrollment]
       p.status= information_filled?(:basic)
     .clear
 
@@ -19,12 +23,12 @@ h2 입사지원서 관리
       .more-information
         p.title= item_name
         - if @enrollment.item_required?(item_name) and @enrollment.modify?
-          p.menu= link_to "추가하기", attach_item_enrollment_path(@enrollment, name: item_name)
+          p.menu= link_to t('section_enrollment.enrollment.dashboard.add'), attach_item_enrollment_path(@enrollment, name: item_name)
         p.status= information_filled?(item_name.to_sym)
       .clear
 
     - unless @enrollment.all_information_filled?
-      p 모든 정보를 기입해야 입사지원을 할 수 있습니다.
+      p= t('section_enrollment.enrollment.dashboard.please_input')
 
     = form_tag :report do
       = hidden_field_tag :target_type, @enrollment.class
