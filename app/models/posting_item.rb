@@ -10,11 +10,11 @@ class PostingItem < ActiveRecord::Base
 
   class << self
     def debits
-      where(item_type: ITEM_TYPE.index("차변"))
+      where(item_type: ITEM_TYPE.index("차변"))   # models.posting.debit
     end
 
     def credits
-      where(item_type: ITEM_TYPE.index("대변"))
+      where(item_type: ITEM_TYPE.index("대변"))   # models.posting.credit
     end
 
     def total_amount
@@ -22,7 +22,7 @@ class PostingItem < ActiveRecord::Base
     end
   end
 
-  ITEM_TYPE = ["차변", "대변"]
+  ITEM_TYPE = ["차변", "대변"]    # models.posting.debit    models.posting.credit
   def item_type
     ITEM_TYPE[read_attribute(:item_type) || 0]
   end
