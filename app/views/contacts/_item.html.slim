@@ -39,6 +39,7 @@ dl
         = link_to t('contacts.item.remove'), [contact, address], :method => :delete, confirm: t("common.messages.delete_confirm")
   - contact.others.each do |other|
     dt
+      = t('contacts.show.etc')
       = "#{other.target_view}"
     dd
       = other.description
