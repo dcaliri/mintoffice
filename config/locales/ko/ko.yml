@@ -610,6 +610,10 @@ ko:
             debt: 부채
             expense: 비용
             benefit: 수익
+        posting:
+            debit: 차변
+            credit: 대변
+            incorrect: 의 합계가 맞지 않습니다.
     accessors:
         info:
             permissions: 권한
