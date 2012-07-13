@@ -7,7 +7,7 @@ class Permission < ActiveRecord::Base
     exception_list = [
         "attachments.picture", "attachments.download",
         "documents.*",
-        "hrinfos.index", "hrinfos.show",
+        "hrinfos.index", "hrinfos.show", "hrinfos.new_employment_proof", "hrinfos.employment_proof",
         "main.*",
         "users.my", "users.changepw", "users.edit", "users.update", "users.google_apps",
         "reports.*",

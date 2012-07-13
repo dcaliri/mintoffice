@@ -1,9 +1,10 @@
 - title t('.title')
 #show_command
-  - if @hrinfo.joined?
-    = link_to t('hrinfos.show.pdf'), [:employment_proof, @hrinfo]
-    = " | "
-  - if @user.ingroup?("admin") && ! @hrinfo.retired_on
+  - if @user.ingroup?("admin") or @hrinfo == current_user.hrinfo
+    - if @hrinfo.joined?
+      = link_to t('hrinfos.show.pdf'), [:employment_proof, @hrinfo]
+      = " | "
+  - if @user.ingroup?("admin") and !@hrinfo.retired_on
     - if @hrinfo.joined?
       = link_to t('hrinfos.retire.title'), :action => :retire, :id => @hrinfo
       = " | "
