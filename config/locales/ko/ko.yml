@@ -314,6 +314,9 @@ ko:
                 owner: 작성자
                 position: 직위
                 isprivate: 비공개
+                address: 주소
+                email: 이메일
+                number: 전화번호
             contact_address:
                 info: 주소
                 target: 대상
@@ -366,9 +369,11 @@ ko:
                 tags: 태그목록
             enrollment:
                 name: 이름
-                email: 이메일
-                phone_number: 전화번호
-                address: 주소
+                contact:
+                    email: 이메일
+                    phone_number: 전화번호
+                    address: 주소
+                juminno: 주민등록번호
             expense_report:
                 owner: 작성자
                 hrinfo_id: 작성자
@@ -400,10 +405,6 @@ ko:
                 joined_on: 입사일
                 email: 이메일
                 listed: 목록 출력 여부
-                contact:
-                  address: 주소
-                  email: 이메일
-                  number: 전화번호
                 localized_status:
                   reporting: 입사지원 심사중
                   rollback: 입사지원 수정 요청
