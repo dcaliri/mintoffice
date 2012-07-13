@@ -591,6 +591,9 @@ ko:
             cancel: 취소
         cardbill:
             already_exist: 가 올해에 이미 존재합니다.
+        contact:
+            one_more_need_ga: 가 적어도 하나 이상 필요합니다.
+            one_more_need_i: 이 적어도 하나 이상 필요합니다.
     accessors:
         info:
             permissions: 권한
