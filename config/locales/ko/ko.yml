@@ -572,7 +572,7 @@ ko:
             success_read: 성공적으로 연락처를 읽어왔습니다.
             fail_read: 연락처를 읽어올 수 없었습니다.
         used_vacations:
-            report: 연차를 신청하였습니다. 신청 후에는 결재를 올려주세요.
+            reports: 연차를 신청하였습니다. 신청 후에는 결재를 올려주세요.
         users:
             create_google: 성공적으로 구글 계정을 생성했습니다.
             fail_create_google: 계정 생성에 실패했습니다. 아마도 인사정보가 없습니다.
