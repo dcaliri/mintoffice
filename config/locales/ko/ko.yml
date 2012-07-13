@@ -581,6 +581,10 @@ ko:
             fail_create_redmine: 계정 생성에 실패했습니다.
             remove_redmine: 성공적으로 레드마인 계정을 제거했습니다.
             fail_remove_redmine: 계정 제거에 실패했습니다.
+    models:
+        bank_account:
+            shinhan: 신한 은행
+            ibk: 기업 은행
     accessors:
         info:
             permissions: 권한
