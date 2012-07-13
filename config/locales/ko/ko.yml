@@ -594,6 +594,10 @@ ko:
         contact:
             one_more_need_ga: 가 적어도 하나 이상 필요합니다.
             one_more_need_i: 이 적어도 하나 이상 필요합니다.
+        creditcard:
+            used_detail: 이용내역
+            approved_detail: 승인내역
+            foreign_detail: 해외승인내역
     accessors:
         info:
             permissions: 권한
