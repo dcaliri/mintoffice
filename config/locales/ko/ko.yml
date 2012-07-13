@@ -585,6 +585,8 @@ ko:
         bank_account:
             shinhan: 신한 은행
             ibk: 기업 은행
+        bank_transaction:
+            fail: 에 실패했습니다. 입력 값을 다시 확인해주세요.
     accessors:
         info:
             permissions: 권한
