@@ -598,6 +598,9 @@ ko:
             used_detail: 이용내역
             approved_detail: 승인내역
             foreign_detail: 해외승인내역
+        expense_report:
+            debit: 차변
+            credit: 대변
     accessors:
         info:
             permissions: 권한
