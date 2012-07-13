@@ -589,6 +589,8 @@ ko:
             fail: 에 실패했습니다. 입력 값을 다시 확인해주세요.
         card_approved_source:
             cancel: 취소
+        cardbill:
+            already_exist: 가 올해에 이미 존재합니다.
     accessors:
         info:
             permissions: 권한
