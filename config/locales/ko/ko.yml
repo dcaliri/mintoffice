@@ -579,9 +579,9 @@ ko:
             remove_google: 성공적으로 구글 계정을 제거했습니다.
             fail_remove_google: 계정 제거에 실패했습니다.
             create_redmine: 성공적으로 레드마인 계정을 생성했습니다.
-            fail_create_redmine: 계정 생성에 실패했습니다.
+            fail_create_redmine: 계정 생성에 실패했습니다. - %{message}
             remove_redmine: 성공적으로 레드마인 계정을 제거했습니다.
-            fail_remove_redmine: 계정 제거에 실패했습니다.
+            fail_remove_redmine: 계정 제거에 실패했습니다. - %{message}
     models:
         bank_account:
             shinhan: 신한 은행

@@ -15,7 +15,7 @@ class UsedVacationsController < ApplicationController
   def create
     used_vacation.save!
     # Boxcar.send_to_boxcar_group("admin",used_vacation.vacation.user.hrinfo.fullname, I18n.t("used_vacations.new.link"))
-    redirect_to [vacation, used_vacation], notice: "연차를 신청하였습니다. 신청 후에는 결재를 올려주세요."  # controllers.used_vacations.reports
+    redirect_to [vacation, used_vacation], notice: t('controllers.used_vacations.reports')
   end
 
   def update
