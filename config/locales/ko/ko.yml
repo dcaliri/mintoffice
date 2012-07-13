@@ -587,6 +587,8 @@ ko:
             ibk: 기업 은행
         bank_transaction:
             fail: 에 실패했습니다. 입력 값을 다시 확인해주세요.
+        card_approved_source:
+            cancel: 취소
     accessors:
         info:
             permissions: 권한
