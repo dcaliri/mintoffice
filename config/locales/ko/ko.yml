@@ -621,6 +621,9 @@ ko:
             reporting: 결재 진행 중
             rollback: 반려
             reported: 결재 완료
+            to_report: 님에게 결재를 요청하였습니다.
+            to_approve: 님이 결재를 승인하였습니다.
+            to_rollback: 님이 결재를 반려하였습니다.
     accessors:
         info:
             permissions: 권한

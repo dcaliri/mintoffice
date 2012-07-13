@@ -63,7 +63,7 @@ class Report < ActiveRecord::Base
     end
 
     self.status = :reporting
-    self.comments.build(owner: prev_reporter, description: "#{next_reporter.fullname}님에게 결재를 요청하였습니다")
+    self.comments.build(owner: prev_reporter, description: "#{next_reporter.fullname}님에게 결재를 요청하였습니다")  # models.report.to_report
     self.comments.build(owner: prev_reporter, description: comment) unless comment.blank?
 
     next_reporter.save!
@@ -95,7 +95,7 @@ class Report < ActiveRecord::Base
   def approve!(comment)
     self.status = :reported
     User.current_user.reporters.create!(report_id: id, owner: true) unless self.reporter
-    self.comments.build(owner: self.reporter, description: "#{reporter.fullname}님이 결재를 승인하였습니다")
+    self.comments.build(owner: self.reporter, description: "#{reporter.fullname}님이 결재를 승인하였습니다")  # models.report.to_approve
     self.comments.build(owner: self.reporter, description: comment) unless comment.blank?
     save!
   end
@@ -114,7 +114,7 @@ class Report < ActiveRecord::Base
       permission next_reporter.user, :write
       permission prev_reporter.user, :read
     end
-    self.comments.build(owner: prev_reporter, description: "#{prev_reporter.fullname}님이 결재를 반려하였습니다")
+    self.comments.build(owner: prev_reporter, description: "#{prev_reporter.fullname}님이 결재를 반려하였습니다") # models.report.to_rollback
     self.comments.build(owner: prev_reporter, description: comment) unless comment.blank?
 
     if next_reporter
