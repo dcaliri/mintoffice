@@ -624,6 +624,8 @@ ko:
             to_report: 님에게 결재를 요청하였습니다.
             to_approve: 님이 결재를 승인하였습니다.
             to_rollback: 님이 결재를 반려하였습니다.
+        taxbill:
+            etc: 기타
     accessors:
         info:
             permissions: 권한
