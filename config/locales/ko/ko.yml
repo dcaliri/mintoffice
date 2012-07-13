@@ -601,6 +601,9 @@ ko:
         expense_report:
             debit: 차변
             credit: 대변
+        hrinfo:
+            join: 재직자
+            retire: 퇴직자
     accessors:
         info:
             permissions: 권한

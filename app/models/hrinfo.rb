@@ -20,8 +20,8 @@ class Hrinfo < ActiveRecord::Base
   attr_accessor :email, :phone_number, :address
 
   SEARCH_TYPE = {
-    "재직자" => :join,
-    "퇴직자" => :retire
+    "재직자" => :join,       # models.hrinfo.join
+    "퇴직자" => :retire      # models.hrinfo.retire
   }
 
   class << self
