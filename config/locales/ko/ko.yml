@@ -565,6 +565,11 @@ ko:
         accessors:
             set_permission: 성공적으로 권한을 설정하였습니다.
             delete_permission: 성공적으로 권한을 제거하였습니다.
+        contacts:
+            success_save: 성공적으로 연락처를 저장했습니다.
+            fail_save: 연락처를 저장할 수 없었습니다.
+            success_read: 성공적으로 연락처를 읽어왔습니다.
+            fail_read: 연락처를 읽어올 수 없었습니다.
     accessors:
         info:
             permissions: 권한
