@@ -614,6 +614,13 @@ ko:
             debit: 차변
             credit: 대변
             incorrect: 의 합계가 맞지 않습니다.
+        report:
+            all: 전체
+            default: 결재전 + 나의 결재 대기중
+            not_reported: 결재 대기 중
+            reporting: 결재 진행 중
+            rollback: 반려
+            reported: 결재 완료
     accessors:
         info:
             permissions: 권한

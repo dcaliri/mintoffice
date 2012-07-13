@@ -15,12 +15,12 @@ class Report < ActiveRecord::Base
   end
 
   STATUS_SELECT = {
-    "전체" => :all,
-    "결재전 + 나의 결재 대기중" => :default,
-    "결재 대기 중" => :not_reported,
-    "결재 진행 중" => :reporting,
-    "반려" => :rollback,
-    "결재 완료" => :reported
+    "전체" => :all,                         # models.report.all
+    "결재전 + 나의 결재 대기중" => :default,    # models.report.default
+    "결재 대기 중" => :not_reported,         # models.report.not_reported
+    "결재 진행 중" => :reporting,            # models.report.reporting
+    "반려" => :rollback,                    # models.report.rollback
+    "결재 완료" => :reported                # models.report.reported
   }
 
   include Permissionable
