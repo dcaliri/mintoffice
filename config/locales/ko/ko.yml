@@ -572,6 +572,15 @@ ko:
             fail_read: 연락처를 읽어올 수 없었습니다.
         used_vacations:
             report: 연차를 신청하였습니다. 신청 후에는 결재를 올려주세요.
+        users:
+            create_google: 성공적으로 구글 계정을 생성했습니다.
+            fail_create_google: 계정 생성에 실패했습니다. 아마도 인사정보가 없습니다.
+            remove_google: 성공적으로 구글 계정을 제거했습니다.
+            fail_remove_google: 계정 제거에 실패했습니다.
+            create_redmine: 성공적으로 레드마인 계정을 생성했습니다.
+            fail_create_redmine: 계정 생성에 실패했습니다.
+            remove_redmine: 성공적으로 레드마인 계정을 제거했습니다.
+            fail_remove_redmine: 계정 제거에 실패했습니다.
     accessors:
         info:
             permissions: 권한

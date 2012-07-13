@@ -89,37 +89,37 @@ class UsersController < ApplicationController
   def create_google_apps
     @this_user = User.find(params[:id])
     if @this_user.create_google_app_account
-      redirect_to :back, notice: "성공적으로 구글 계정을 생성했습니다."
+      redirect_to :back, notice: "성공적으로 구글 계정을 생성했습니다." # controllers.users.create_google
     else
-      redirect_to :back, alert: "계정 생성에 실패했습니다. 아마도 인사정보가 없습니다."
+      redirect_to :back, alert: "계정 생성에 실패했습니다. 아마도 인사정보가 없습니다." # controllers.users.fail_create_google
     end
   end
 
   def remove_google_apps
     @this_user = User.find(params[:id])
     if @this_user.remove_google_app_account
-      redirect_to :back, notice: "성공적으로 구글 계정을 제거했습니다."
+      redirect_to :back, notice: "성공적으로 구글 계정을 제거했습니다." # controllers.users.remove_google
     else
-      redirect_to :back, alert: "계정 제거에 실패했습니다.."
+      redirect_to :back, alert: "계정 제거에 실패했습니다." # controllers.users.fail_remove_google
     end
   end
 
   def create_redmine
     @this_user = User.find(params[:id])
     redmine = @this_user.create_redmine_account
-    redirect_to :back, notice: "성공적으로 레드마인 계정을 생성했습니다."
+    redirect_to :back, notice: "성공적으로 레드마인 계정을 생성했습니다." # controllers.users.create_redmine
   rescue => e
     logger.info "created_redmine failed: #{e.message}"
-    redirect_to :back, alert: "계정 생성에 실패했습니다.. - #{e.message}"
+    redirect_to :back, alert: "계정 생성에 실패했습니다.. - #{e.message}" # controllers.users.fail_create_redmine     expect "- #{e.message}"
   end
 
   def remove_redmine
     @this_user = User.find(params[:id])
     @this_user.remove_redmine_account
-    redirect_to :back, notice: "성공적으로 레드마인 계정을 제거했습니다."
+    redirect_to :back, notice: "성공적으로 레드마인 계정을 제거했습니다." # controllers.users.remove_redmine
   rescue => e
     logger.info "remove_redmine failed: #{e.message}"
-    redirect_to :back, alert: "계정 제거에 실패했습니다.. - #{e.message}"
+    redirect_to :back, alert: "계정 제거에 실패했습니다.. - #{e.message}" # controllers.users.fail_remove_redmine     expect "- #{e.message}"
   end
 
   def changepw
