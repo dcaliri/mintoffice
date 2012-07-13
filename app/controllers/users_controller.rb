@@ -110,7 +110,7 @@ class UsersController < ApplicationController
     redirect_to :back, notice: "성공적으로 레드마인 계정을 생성했습니다." # controllers.users.create_redmine
   rescue => e
     logger.info "created_redmine failed: #{e.message}"
-    redirect_to :back, alert: "계정 생성에 실패했습니다.. - #{e.message}" # controllers.users.fail_create_redmine     expect "- #{e.message}"
+    redirect_to :back, alert: "계정 생성에 실패했습니다.. - #{e.message}" # controllers.users.fail_create_redmine     except "- #{e.message}"
   end
 
   def remove_redmine
@@ -119,7 +119,7 @@ class UsersController < ApplicationController
     redirect_to :back, notice: "성공적으로 레드마인 계정을 제거했습니다." # controllers.users.remove_redmine
   rescue => e
     logger.info "remove_redmine failed: #{e.message}"
-    redirect_to :back, alert: "계정 제거에 실패했습니다.. - #{e.message}" # controllers.users.fail_remove_redmine     expect "- #{e.message}"
+    redirect_to :back, alert: "계정 제거에 실패했습니다.. - #{e.message}" # controllers.users.fail_remove_redmine     except "- #{e.message}"
   end
 
   def changepw
