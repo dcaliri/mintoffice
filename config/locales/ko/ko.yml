@@ -561,6 +561,10 @@ ko:
                     attributes:
                         modelname:
                             taken: 이미 사용중입니다.
+    controllers:
+        accessors:
+            set_permission: 성공적으로 권한을 설정하였습니다.
+            delete_permission: 성공적으로 권한을 제거하였습니다.
     accessors:
         info:
             permissions: 권한
