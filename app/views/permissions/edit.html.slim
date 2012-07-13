@@ -12,7 +12,7 @@ h1
 		= f.label :users
 		br
 		- if !User.all.blank?
-		  - for user in User.all
+		  - for user in User.enabled
 				= check_box_tag "permission[user_ids][]", user.id, @permission.user.include?(user)
 				= user.name
   p
