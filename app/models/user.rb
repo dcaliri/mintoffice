@@ -71,9 +71,7 @@ class User < ActiveRecord::Base
       user.notify_email = auth["info"]["email"]
     end
   end
-
-
-
+  
 
   def fullname
     hrinfo.nil? ? name : hrinfo.fullname

@@ -52,7 +52,7 @@ class BankTransaction < ActiveRecord::Base
     if verify(prev)
       true
     else
-      errors.add(:verify, '에 실패했습니다. 입력 값을 다시 확인해주세요')  # models.bank_transaction.fail
+      errors.add(:verify, I18n.t('models.bank_transaction.fail'))  # models.bank_transaction.fail
       false
     end
   end
