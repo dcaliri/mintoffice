@@ -16,7 +16,7 @@ class Cardbill < ActiveRecord::Base
 
   # validates_presence_of :cardno
   validates_presence_of :totalamount
-  validates_presence_of :approveno
+  validates_presence_of :approveno, uniqueness: true
   validates_numericality_of :totalamount
   validates_numericality_of :amount
   validates_numericality_of :servicecharge
@@ -31,7 +31,7 @@ class Cardbill < ActiveRecord::Base
 
   def check_unique_approve_no
     if creditcard.cardbills.except_me(self).unique?(self)
-      errors.add(:approveno, "가 올해에 이미 존재합니다.")   # models.cardbill.already_exist
+      errors.add(:approveno, I18n.t('# models.cardbill.already_exist'))   # models.cardbill.already_exist
     end
   end
 

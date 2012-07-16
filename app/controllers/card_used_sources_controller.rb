@@ -9,8 +9,11 @@ class CardUsedSourcesController < ApplicationController
 
   def create
     card_used_source = creditcard.card_used_sources.build(params[:card_used_source])
-    card_used_source.save!
-    redirect_to card_used_source
+    if card_used_source.save
+      redirect_to card_used_source
+    else
+      redirect_to new_card_used_source_path, notice: t('controllers.card_used_sources.check_approveno')
+    end
   end
 
   def update

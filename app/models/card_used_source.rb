@@ -29,6 +29,8 @@ class CardUsedSource < ActiveRecord::Base
                      :store_addr2,
                      :store_tel
                      ]
+                     
+  validates :approve_no, uniqueness: true
 
   def self.default_columns
     DEFAULT_COLUMNS

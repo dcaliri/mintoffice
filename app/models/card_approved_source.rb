@@ -23,6 +23,8 @@ class CardApprovedSource < ActiveRecord::Base
                      :money_dollar
                      ]
 
+  validates :approve_no, uniqueness: true
+
   def self.default_columns
     DEFAULT_COLUMNS
   end
