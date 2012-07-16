@@ -72,7 +72,7 @@ class UsersController < ApplicationController
       Boxcar.add_to_boxcar(@this_user.boxcar_account) if ! @this_user.boxcar_account.empty?
 
       flash[:notice] = I18n.t("common.messages.updated", :model => User.model_name.human)
-      if @this_user.admin?
+      if @user.admin?
         redirect_to user_path(@this_user)
       else
         redirect_to [:users, :my]

@@ -30,9 +30,9 @@ class Contact < ActiveRecord::Base
   validate :validate_if_apply
   def validate_if_apply
     if target.class == Enrollment
-      errors.add(:address, "가 적어도 하나 이상 필요합니다.") if addresses.length == 0     # models.contact.one_more_need_ga
-      errors.add(:email, "이 적어도 하나 이상 필요합니다.") if emails.length == 0          # models.contact.one_more_need_i
-      errors.add(:number, "가 적어도 하나 이상 필요합니다.") if phone_numbers.length == 0  # models.contact.one_more_need_ga
+      errors.add(:address, I18n.t('models.contact.one_more_need_ga')) if addresses.length == 0     # models.contact.one_more_need_ga
+      errors.add(:email, I18n.t('models.contact.one_more_need_i')) if emails.length == 0          # models.contact.one_more_need_i
+      errors.add(:number, I18n.t('models.contact.one_more_need_ga')) if phone_numbers.length == 0  # models.contact.one_more_need_ga
     end
   end
 
