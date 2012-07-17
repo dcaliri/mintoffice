@@ -623,9 +623,9 @@ ko:
             incorrect: 의 합계가 맞지 않습니다.
         report:
             all: 전체
-            default: 결재전 + 나의 결재 대기중
-            not_reported: 결재 대기 중
-            reporting: 결재 진행 중
+            default: 결재전 + 나의 결재 요청 전
+            not_reported: 결재 요청 전
+            reporting: 결재 대기 중
             rollback: 반려
             reported: 결재 완료
             to_report: 님에게 결재를 요청하였습니다.
