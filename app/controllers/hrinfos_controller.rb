@@ -143,7 +143,7 @@ class HrinfosController < ApplicationController
 
   private
   def retired_hrinfo_can_access_only_admin
-    @hrinfo = Hrinfo.find(params[:id])
+    @hrinfo = Hrinfo.find(session[:user_id])
     force_redirect if @hrinfo.retired? and !current_user.admin?
   end
 end
