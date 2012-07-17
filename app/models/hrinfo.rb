@@ -134,9 +134,9 @@ class Hrinfo < ActiveRecord::Base
   def apply_status
     case report.status
     when :rollback
-      "수정 요청"
+      "수정 요청"     # models.hrinfo.request
     else
-      "승인 심사중"
+      "승인 심사중"    # models.hrinfo.approve
     end
   end
 

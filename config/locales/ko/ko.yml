@@ -607,6 +607,8 @@ ko:
         hrinfo:
             join: 재직자
             retire: 퇴직자
+            request: 수정 요청
+            approve: 승인 심사중
             representative: 대표
             code: "* 발급확인코드:"
         ledger_account:
