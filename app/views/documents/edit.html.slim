@@ -35,4 +35,6 @@ h2
       = text_field_tag :username
   = submit_tag t("common.button.add"), :id => "submit"
   .clear
-= render 'tags/form', target: document
+
+- if @user.ingroup?("admin")
+  = render 'tags/form', target: document
