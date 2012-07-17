@@ -21,9 +21,9 @@ div class={@user.admin? ? "admin" : ""}
         - if @user.permission.any? {|perm| perm.name == 'taxbills'}
           li= link_to t("taxbills.index.title"), :taxbills
         li= link_to t("expense_reports.index.title"), :expense_reports
-        - if @user.permission.any? {|perm| perm.name == 'bank_accounts'}
+        - if @user.permission.any? {|perm| perm.name == 'ledger_accounts'}
           li= link_to t("ledger_accounts.title"), :ledger_accounts
-        - if @user.permission.any? {|perm| perm.name == 'bank_accounts'}
+        - if @user.permission.any? {|perm| perm.name == 'postings'}
           li= link_to t("postings.title"), :postings
 
     .menubar_item.item3
