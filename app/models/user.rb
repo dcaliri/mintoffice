@@ -306,9 +306,9 @@ class User < ActiveRecord::Base
     current_company = Company.current_company
     redmine_user = get_remine_user
 
-    raise ArgumentError, "이름이 등록되어있지 않습니다."  if hrinfo and hrinfo.firstname.blank?  # models.user.no_name
-    raise ArgumentError, "이름이 등록되어있지 않습니다."  if hrinfo and hrinfo.lastname.blank?   # models.user.no_name
-    raise ArgumentError, "이메일이 등록되어있지 않습니다." if notify_email.blank?                 # models.user.no_email
+    raise ArgumentError, I18n.t('models.user.no_name') if hrinfo and hrinfo.firstname.blank?
+    raise ArgumentError, I18n.t('models.user.no_name') if hrinfo and hrinfo.lastname.blank?
+    raise ArgumentError, I18n.t('models.user.no_email') if notify_email.blank?
 
     redmine = redmine_user.new(
       login: self.name,
@@ -319,7 +319,7 @@ class User < ActiveRecord::Base
     )
 
     unless redmine.save
-      raise ArgumentError, "아마도 등록된 이메일이 있습니다."   # models.user.already_exist_email
+      raise ArgumentError, I18n.t('models.user.already_exist_email')
     end
 
     self.redmine_account = redmine.login

@@ -10,11 +10,11 @@ class PostingItem < ActiveRecord::Base
 
   class << self
     def debits
-      where(item_type: ITEM_TYPE.index(I18n.t('models.posting.debit')))   # models.posting.debit
+      where(item_type: ITEM_TYPE.index(I18n.t('models.posting.debit')))
     end
 
     def credits
-      where(item_type: ITEM_TYPE.index(I18n.t('models.posting.credit')))   # models.posting.credit
+      where(item_type: ITEM_TYPE.index(I18n.t('models.posting.credit')))
     end
 
     def total_amount
@@ -22,7 +22,7 @@ class PostingItem < ActiveRecord::Base
     end
   end
 
-  ITEM_TYPE = [I18n.t('models.posting.debit'), I18n.t('models.posting.credit')]    # models.posting.debit    models.posting.credit
+  ITEM_TYPE = [I18n.t('models.posting.debit'), I18n.t('models.posting.credit')]
   def item_type
     ITEM_TYPE[read_attribute(:item_type) || 0]
   end

@@ -31,7 +31,7 @@ class Cardbill < ActiveRecord::Base
 
   def check_unique_approve_no
     if creditcard.cardbills.except_me(self).unique?(self)
-      errors.add(:approveno, I18n.t('# models.cardbill.already_exist'))   # models.cardbill.already_exist
+      errors.add(:approveno, I18n.t('# models.cardbill.already_exist'))
     end
   end
 

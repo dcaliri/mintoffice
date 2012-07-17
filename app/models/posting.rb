@@ -11,10 +11,10 @@ class Posting < ActiveRecord::Base
   validate :check_total_amount
   def check_total_amount
     list = items.to_a
-    credit_list = list.select{|item| item.item_type == I18n.t('models.posting.debit')}.sum(&:amount)    # models.posting.debit
-    debit_list = list.select{|item| item.item_type == I18n.t('models.posting.credit')}.sum(&:amount)     # models.posting.credit
+    credit_list = list.select{|item| item.item_type == I18n.t('models.posting.debit')}.sum(&:amount)
+    debit_list = list.select{|item| item.item_type == I18n.t('models.posting.credit')}.sum(&:amount)
     unless credit_list == debit_list
-      errors.add(:total_amount, I18n.t('models.posting.incorrect'))        # models.posting.incorrect
+      errors.add(:total_amount, I18n.t('models.posting.incorrect'))
     end
   end
 

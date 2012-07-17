@@ -78,7 +78,7 @@ class Taxbill < ActiveRecord::Base
         if purchase.taxman and purchase.taxman.business_client
           purchase.taxman.business_client.name
         else
-          I18n.t('models.taxbill.etc')  # models.taxbill.etc
+          I18n.t('models.taxbill.etc')
         end
       end.map do |name, purchases|
         {
