@@ -94,7 +94,7 @@ class CardApprovedSource < ActiveRecord::Base
     end
 
     def no_canceled
-     where('status NOT LIKE ?', "%취소%")   # models.card_approved_source.cancel
+     where('status NOT LIKE ?', I18n.t('models.card_approved_source.cancel'))
     end
 
     def generate_cardbill(owner)
