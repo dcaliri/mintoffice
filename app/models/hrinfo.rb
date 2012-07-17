@@ -177,7 +177,7 @@ class Hrinfo < ActiveRecord::Base
       pdf.draw_text Hrinfo.not_retired.count, :at => [142, 460]
       pdf.draw_text purpose, :at => [333, 460]
 
-      pdf.draw_text "대표", :at => [175, 433]
+      pdf.draw_text "대표", :at => [175, 433]               # models.hrinfo.representative
       pdf.draw_text company.owner_name, :at => [385, 433]
 
       today = Time.zone.now
@@ -188,7 +188,7 @@ class Hrinfo < ActiveRecord::Base
       pdf.draw_text company.name, :at => [250, 255]
       pdf.draw_text company.owner_name, :at => [250, 225]
 
-      pdf.draw_text "* 발급확인코드: #{hash_key}", :at => [14, 45], :size => 10
+      pdf.draw_text "* 발급확인코드: #{hash_key}", :at => [14, 45], :size => 10   # models.hrinfo.code
     end
 
     employment_proof_hash << hash_key

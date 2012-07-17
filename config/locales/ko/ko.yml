@@ -607,6 +607,8 @@ ko:
         hrinfo:
             join: 재직자
             retire: 퇴직자
+            representative: 대표
+            code: "* 발급확인코드:"
         ledger_account:
             fund: 자본
             asset: 자산
