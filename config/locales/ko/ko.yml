@@ -610,7 +610,7 @@ ko:
             request: 수정 요청
             approve: 승인 심사중
             representative: 대표
-            code: "* 발급확인코드:"
+            code: "* 발급확인코드: "
         ledger_account:
             fund: 자본
             asset: 자산

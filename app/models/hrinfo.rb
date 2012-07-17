@@ -188,7 +188,7 @@ class Hrinfo < ActiveRecord::Base
       pdf.draw_text company.name, :at => [250, 255]
       pdf.draw_text company.owner_name, :at => [250, 225]
 
-      pdf.draw_text "* 발급확인코드: #{hash_key}", :at => [14, 45], :size => 10   # models.hrinfo.code
+      pdf.draw_text I18n.t('models.hrinfo.code')+"#{hash_key}", :at => [14, 45], :size => 10   # models.hrinfo.code
     end
 
     employment_proof_hash << hash_key
