@@ -629,6 +629,10 @@ ko:
             to_rollback: 님이 결재를 반려하였습니다.
         taxbill:
             etc: 기타
+        user:
+            no_name: 이름이 등록되어있지 않습니다.
+            no_email: 이메일이 등록되어있지 않습니다.
+            already_exist_email: 아마도 등록된 이메일이 있습니다.
     accessors:
         info:
             permissions: 권한
