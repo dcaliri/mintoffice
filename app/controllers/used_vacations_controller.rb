@@ -11,6 +11,7 @@ class UsedVacationsController < ApplicationController
   expose(:user) { vacation.user }
 
   before_filter {|controller| controller.redirect_unless_me(user)}
+  before_filter :another_user_cant_access_yearly, :except => [:index, :new, :show]
 
   def create
     used_vacation.save!
@@ -41,5 +42,9 @@ class UsedVacationsController < ApplicationController
   def destroy
     used_vacation.destroy
     redirect_to vacation_path(user)
+  end
+
+  def another_user_cant_access_yearly
+    force_redirect if !current_user.admin?
   end
 end
