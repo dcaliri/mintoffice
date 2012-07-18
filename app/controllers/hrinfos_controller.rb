@@ -4,7 +4,7 @@ class HrinfosController < ApplicationController
     c.save_attachment_id @hrinfo
   end
 
-  #before_filter :retired_hrinfo_can_access_only_admin, except: [:index, :new]
+  before_filter :retired_hrinfo_can_access_only_admin, except: [:index, :new]
 
   # GET /hrinfos
   # GET /hrinfos.xml
