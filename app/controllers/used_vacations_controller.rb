@@ -11,7 +11,7 @@ class UsedVacationsController < ApplicationController
   expose(:user) { vacation.user }
 
   before_filter {|controller| controller.redirect_unless_me(user)}
-  before_filter :another_user_cant_access_yearly, :except => [:index, :new, :show]
+  before_filter :another_user_cant_access_yearly, :only => [:edit]
 
   def create
     used_vacation.save!

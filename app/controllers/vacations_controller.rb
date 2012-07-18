@@ -10,7 +10,7 @@ class VacationsController < ApplicationController
   expose(:vacation)
 
   before_filter {|controller| controller.redirect_unless_me(user)}
-  before_filter :another_user_cant_access_yearly, :except => [:index, :show]
+  before_filter :another_user_cant_access_yearly, :except => [:index, :show, :edit]
 
   def index
     @users = User(:protected).enabled.page(params[:page])
