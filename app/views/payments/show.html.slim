@@ -6,6 +6,8 @@
     = link_to t('bonuses.new.link'), [:bonus, user, :payments]
     = " | "
   = link_to t('hrinfos.show.title'), hrinfo_path(user.hrinfo)
+  = " | "
+  = link_to t('common.title.back'), :payments
 h2
   = user.hrinfo.fullname
 
