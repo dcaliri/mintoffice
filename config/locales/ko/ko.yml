@@ -1418,6 +1418,7 @@ ko:
             bonus2: Bonus 2
             bonus3: Bonus 3
             bonus4: Bonus 4
+            request: "'hanmail.net' 으로 해주세요."
         my:
             title: 내 계정
         show:

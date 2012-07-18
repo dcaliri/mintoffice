@@ -76,7 +76,7 @@ class ContactsController < ApplicationController
   def update
     contact.save!
     redirect_to contact
-  rescue ActiveRecord::RecordInvalid
+  rescue ArgumentError => e
     render "edit"
   end
 
