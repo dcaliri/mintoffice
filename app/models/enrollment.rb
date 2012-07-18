@@ -16,9 +16,9 @@ class Enrollment < ActiveRecord::Base
   def apply_status
     case report.status
     when :rollback
-      "수정 요청"
+      I18n.t('models.hrinfo.request')
     else
-      "승인 심사중"
+      I18n.t('models.hrinfo.approve')
     end
   end
 

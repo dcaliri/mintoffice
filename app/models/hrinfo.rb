@@ -20,8 +20,8 @@ class Hrinfo < ActiveRecord::Base
   attr_accessor :email, :phone_number, :address
 
   SEARCH_TYPE = {
-    "재직자" => :join,       # models.hrinfo.join
-    "퇴직자" => :retire      # models.hrinfo.retire
+    I18n.t('models.hrinfo.join') => :join,
+    I18n.t('models.hrinfo.retire') => :retire
   }
 
   class << self
@@ -134,9 +134,9 @@ class Hrinfo < ActiveRecord::Base
   def apply_status
     case report.status
     when :rollback
-      "수정 요청"     # models.hrinfo.request
+      I18n.t('models.hrinfo.request')
     else
-      "승인 심사중"    # models.hrinfo.approve
+      I18n.t('models.hrinfo.approve')
     end
   end
 
@@ -177,7 +177,7 @@ class Hrinfo < ActiveRecord::Base
       pdf.draw_text Hrinfo.not_retired.count, :at => [142, 460]
       pdf.draw_text purpose, :at => [333, 460]
 
-      pdf.draw_text "대표", :at => [175, 433]               # models.hrinfo.representative
+      pdf.draw_text I18n.t('models.hrinfo.representative'), :at => [175, 433]
       pdf.draw_text company.owner_name, :at => [385, 433]
 
       today = Time.zone.now
@@ -188,7 +188,7 @@ class Hrinfo < ActiveRecord::Base
       pdf.draw_text company.name, :at => [250, 255]
       pdf.draw_text company.owner_name, :at => [250, 225]
 
-      pdf.draw_text "* 발급확인코드: #{hash_key}", :at => [14, 45], :size => 10   # models.hrinfo.code
+      pdf.draw_text I18n.t('models.hrinfo.code')+"#{hash_key}", :at => [14, 45], :size => 10
     end
 
     employment_proof_hash << hash_key

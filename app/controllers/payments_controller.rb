@@ -7,8 +7,13 @@ class PaymentsController < ApplicationController
   def redirect_unless_permission
   end
 
+  def another_user_cant_access_yearly
+    force_redirect if !current_user.admin?
+  end
+
   before_filter :redirect_unless_admin, :only => [:index, :new, :edit, :destroy, :create, :update]
   before_filter {|controller| controller.redirect_unless_me(user)}
+  before_filter :another_user_cant_access_yearly, :except => [:show]
 
   def index
     @from = Time.zone.now - 4.month

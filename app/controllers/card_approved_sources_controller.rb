@@ -18,8 +18,11 @@ class CardApprovedSourcesController < ApplicationController
 
   def update
     card_approved_source.creditcard = creditcard
-    card_approved_source.save!
-    redirect_to card_approved_source
+    if card_approved_source.save
+      redirect_to card_approved_source
+    else
+      redirect_to card_approved_source, notice: t('controllers.card_used_sources.check_approveno')
+    end
   end
 
   def export

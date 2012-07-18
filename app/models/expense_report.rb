@@ -13,8 +13,8 @@ class ExpenseReport < ActiveRecord::Base
 
   def make_posting
     build_posting(posted_at: expensed_at).tap do |posting|
-      posting.items.build(item_type: "차변", amount: amount)  # models.expense_report.debit
-      posting.items.build(item_type: "대변", amount: amount)  # models.expense_report.credit
+      posting.items.build(item_type: I18n.t('models.expense_report.debit'), amount: amount)
+      posting.items.build(item_type: I18n.t('models.expense_report.credit'), amount: amount)
     end
   end
 

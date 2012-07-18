@@ -5,7 +5,7 @@ class ProvidersController < ApplicationController
     auth = request.env["omniauth.auth"]
 
     user = User.find_by_omniauth(auth)
-    user = User.create_from_omniauth(auth) unless user
+    user = User.create_from_omniauth(auth) unless User
 
     session[:user_id] = user.id
 

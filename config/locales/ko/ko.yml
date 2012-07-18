@@ -591,7 +591,7 @@ ko:
         bank_transaction:
             fail: 에 실패했습니다. 입력 값을 다시 확인해주세요.
         card_approved_source:
-            cancel: 취소
+            cancel: "%취소%"
         cardbill:
             already_exist: 가 올해에 이미 존재합니다.
         contact:
@@ -610,7 +610,7 @@ ko:
             request: 수정 요청
             approve: 승인 심사중
             representative: 대표
-            code: "* 발급확인코드:"
+            code: "* 발급확인코드: "
         ledger_account:
             fund: 자본
             asset: 자산

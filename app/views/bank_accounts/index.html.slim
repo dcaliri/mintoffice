@@ -1,4 +1,9 @@
-
+- content_for :search do
+  = form_tag :bank_accounts, :method => :get do
+    = select_tag :bank_account_id,
+      bank_account_select_list(params[:bank_account_id]),
+      "onchange" => "this.form.submit()"
+      
 #show_command
   = link_to t('bank_accounts.index.total_view'), [:total, :bank_accounts]
   = " | "

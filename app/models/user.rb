@@ -4,7 +4,7 @@ require 'digest/sha1'
 class User < ActiveRecord::Base
   has_one :enrollment
   has_many :attachment
-  has_many :document_owners, :order => 'created_at DESC'
+  has_many :document_owners
   has_many :documents, :through => :document_owners, :source => :document
   has_and_belongs_to_many :groups
   has_and_belongs_to_many :permission
@@ -30,9 +30,6 @@ class User < ActiveRecord::Base
 
   validates_presence_of :name
   validates_uniqueness_of :name
-  validates_uniqueness_of :nate_account, :if => Proc.new{ nate_account && nate_account.empty? == false }
-  validates_uniqueness_of :daum_account, :if => Proc.new{ daum_account && daum_account.empty? == false }
-  validates_uniqueness_of :notify_email, :if => Proc.new{ notify_email && notify_email.empty? == false }
   validates_uniqueness_of :google_account, :if => Proc.new{ google_account && google_account.empty? == false }
   attr_accessor :password_confirmation
   validates_confirmation_of :password, :if => Proc.new{|user| user.provider.blank?}
@@ -306,9 +303,9 @@ class User < ActiveRecord::Base
     current_company = Company.current_company
     redmine_user = get_remine_user
 
-    raise ArgumentError, "이름이 등록되어있지 않습니다."  if hrinfo and hrinfo.firstname.blank?  # models.user.no_name
-    raise ArgumentError, "이름이 등록되어있지 않습니다."  if hrinfo and hrinfo.lastname.blank?   # models.user.no_name
-    raise ArgumentError, "이메일이 등록되어있지 않습니다." if notify_email.blank?                 # models.user.no_email
+    raise ArgumentError, I18n.t('models.user.no_name') if hrinfo and hrinfo.firstname.blank?
+    raise ArgumentError, I18n.t('models.user.no_name') if hrinfo and hrinfo.lastname.blank?
+    raise ArgumentError, I18n.t('models.user.no_email') if notify_email.blank?
 
     redmine = redmine_user.new(
       login: self.name,
@@ -319,7 +316,7 @@ class User < ActiveRecord::Base
     )
 
     unless redmine.save
-      raise ArgumentError, "아마도 등록된 이메일이 있습니다."   # models.user.already_exist_email
+      raise ArgumentError, I18n.t('models.user.already_exist_email')
     end
 
     self.redmine_account = redmine.login
