@@ -30,6 +30,9 @@ class User < ActiveRecord::Base
 
   validates_presence_of :name
   validates_uniqueness_of :name
+  validates_uniqueness_of :daum_account, :if => Proc.new{ daum_account && daum_account.empty? == false }
+  validates_uniqueness_of :nate_account, :if => Proc.new{ nate_account && nate_account.empty? == false }
+  validates_uniqueness_of :notify_email, :if => Proc.new{ notify_email && notify_email.empty? == false }
   validates_uniqueness_of :google_account, :if => Proc.new{ google_account && google_account.empty? == false }
   attr_accessor :password_confirmation
   validates_confirmation_of :password, :if => Proc.new{|user| user.provider.blank?}
