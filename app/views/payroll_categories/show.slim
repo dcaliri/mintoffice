@@ -1,6 +1,8 @@
 #show_command
   = link_to t('common.title.edit'), edit_payroll_category_path()
   = " | "
+  = link_to t('common.title.destroy'), payroll_category, :method => :delete, confirm: t("common.messages.delete_confirm")
+  = " | "
   = link_to t('common.title.list'), payroll_categories_path()
 
 h3= "Payroll Category"
@@ -14,4 +16,4 @@ h3= "Payroll Category"
       = PayrollCategory.human_attribute_name(:code)
     dd
       = t("payroll_categories.#{PayrollCategory::PAYROLL_CODE.rassoc(payroll_category.code)[0]}")
-  = dtdd payroll_category, "title"
+    = dtdd payroll_category, "title"
