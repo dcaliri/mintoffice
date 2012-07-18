@@ -83,7 +83,7 @@ class UsersController < ApplicationController
   end
 
   def google_apps
-    @users = User.has_google_apps_account
+    @users = User.find(:all)
   end
 
   def create_google_apps

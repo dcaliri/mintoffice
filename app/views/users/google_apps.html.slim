@@ -6,6 +6,13 @@ h2= t(".title")
 table#list-table
   tr
     th= User.human_attribute_name('name')
+    th= User.human_attribute_name('google_account')
+    th= User.human_attribute_name('notify_email')
+    th= User.human_attribute_name('boxcar_account')
   - @users.each do |user|
-    tr.selectable
-      td= user[:name]
+  	- if user.google_account != ""	
+	  	tr.selectable onclick="location.href='#{user_path(user)}'"
+	  		td= user[:name]
+	  		td= user[:google_account]
+			  td= user[:notify_email]
+			  td= user[:boxcar_account]
