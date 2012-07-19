@@ -4,7 +4,7 @@ class HrinfosController < ApplicationController
     c.save_attachment_id @hrinfo
   end
 
-  before_filter :retired_hrinfo_can_access_only_admin, except: [:index, :new]
+  before_filter :retired_hrinfo_can_access_only_admin, except: [:index, :new, :create]
 
   # GET /hrinfos
   # GET /hrinfos.xml
@@ -143,7 +143,7 @@ class HrinfosController < ApplicationController
 
   private
   def retired_hrinfo_can_access_only_admin
-    @hrinfo = Hrinfo.find(session[:user_id])
+    @hrinfo = Hrinfo.find(params[:id])
     force_redirect if @hrinfo.retired? and !current_user.admin?
   end
 end
