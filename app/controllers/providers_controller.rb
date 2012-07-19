@@ -14,10 +14,5 @@ class ProvidersController < ApplicationController
     else
       redirect_to [:dashboard, :enrollments]
     end
-    # elsif user.not_joined? && my_enrollment.present?
-    #   redirect_to [:edit, my_enrollment], :notice => I18n.t("enrollments.success")
-    # elsif user.not_joined? && my_enrollment.blank?
-    #   redirect_to [:new, :enrollment]
-    # end
   end
 end
