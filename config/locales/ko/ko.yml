@@ -566,8 +566,6 @@ ko:
         accessors:
             set_permission: 성공적으로 권한을 설정하였습니다.
             delete_permission: 성공적으로 권한을 제거하였습니다.
-        card_used_sources:
-            check_approveno: 승인 번호가 이미 존재합니다.
         contacts:
             success_save: 성공적으로 연락처를 저장했습니다.
             fail_save: 연락처를 저장할 수 없었습니다.

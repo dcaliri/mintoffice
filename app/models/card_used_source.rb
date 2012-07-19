@@ -29,15 +29,6 @@ class CardUsedSource < ActiveRecord::Base
                      :store_addr2,
                      :store_tel
                      ]
-                     
-  validates_uniqueness_of :approve_no
-  validates_presence_of :approve_no
-  validates_presence_of :price
-  validates_presence_of :tax
-  validates_presence_of :tip
-  validates_presence_of :store_addr1
-  validates_presence_of :store_addr2
-
   def self.default_columns
     DEFAULT_COLUMNS
   end

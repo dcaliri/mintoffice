@@ -9,20 +9,14 @@ class CardApprovedSourcesController < ApplicationController
 
   def create
     card_approved_source = creditcard.card_approved_sources.build(params[:card_approved_source])
-    if card_approved_source.save
-      redirect_to card_approved_source
-    else
-      redirect_to new_card_approved_source_path, notice: t('controllers.card_approved_source.check')
-    end
+    card_approved_source.save!
+    redirect_to card_approved_source
   end
 
   def update
     card_approved_source.creditcard = creditcard
-    if card_approved_source.save
-      redirect_to card_approved_source
-    else
-      redirect_to card_approved_source, notice: t('controllers.card_approved_source.check')
-    end
+    card_approved_source.save!
+    redirect_to card_approved_source
   end
 
   def export
