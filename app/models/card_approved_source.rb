@@ -23,7 +23,11 @@ class CardApprovedSource < ActiveRecord::Base
                      :money_dollar
                      ]
 
-  validates :approve_no, uniqueness: true
+  validates_uniqueness_of :approve_no, :message => I18n.t('hrinfos.error.juminno_invalid')
+  validates_presence_of :approve_no
+  validates_presence_of :money
+  validates_presence_of :store_name
+  validates_presence_of :approve_no
 
   def self.default_columns
     DEFAULT_COLUMNS

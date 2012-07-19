@@ -12,7 +12,7 @@ class CardApprovedSourcesController < ApplicationController
     if card_approved_source.save
       redirect_to card_approved_source
     else
-      redirect_to new_card_approved_source_path, notice: t('controllers.card_used_sources.check_approveno')
+      redirect_to new_card_approved_source_path, notice: t('controllers.card_approved_source.check')
     end
   end
 
@@ -21,7 +21,7 @@ class CardApprovedSourcesController < ApplicationController
     if card_approved_source.save
       redirect_to card_approved_source
     else
-      redirect_to card_approved_source, notice: t('controllers.card_used_sources.check_approveno')
+      redirect_to card_approved_source, notice: t('controllers.card_approved_source.check')
     end
   end
 
