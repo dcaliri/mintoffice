@@ -136,7 +136,7 @@ class User < ActiveRecord::Base
   end
 
   def permission?(name)
-    admin? or permission.any? {|perm| perm.name == name.to_s}
+    admin? or permission.exists?(name: name.to_s)
   end
 
   def admin?

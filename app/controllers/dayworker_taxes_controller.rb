@@ -1,5 +1,4 @@
 class DayworkerTaxesController < ApplicationController
-  # 
   # before_filter :redirect_unless_admin, :only => :index
   # 
   # expose(:users) { User(:protected) }
@@ -27,7 +26,7 @@ class DayworkerTaxesController < ApplicationController
   #   vacation.destroy
   #   redirect_to [user, vacation]
   # end
-  
+
   expose (:dayworker_taxes) { DayworkerTax.all }
   expose (:dayworker_tax)
   # 
