@@ -74,7 +74,6 @@ class User < ActiveRecord::Base
       user.notify_email = auth["info"]["email"]
     end
   end
-  
 
   def fullname
     hrinfo.nil? ? name : hrinfo.fullname
@@ -133,17 +132,21 @@ class User < ActiveRecord::Base
     end
   end
 
+  def self.no_admins
+    joins(:groups).where('groups.name != ?', "admin")
+  end
+
   def admin?
     self.ingroup? "admin"
   end
 
   def self.search(query)
     query = "%#{query}%"
-    where('name like ?', query)
+    where('users.name like ?', query)
   end
 
   def self.enabled
-    where("name NOT LIKE '[X] %'")
+    where("users.name NOT LIKE '[X] %'")
   end
 
   def as_json(options={})
