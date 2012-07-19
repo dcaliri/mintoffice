@@ -41,5 +41,4 @@ h2= t("common.title.#{action_name}")
   p
     = f.submit
     
-- if @user.ingroup?("admin")
-  = render 'tags/form', target: @contact
+= render 'tags/form', target: @contact
