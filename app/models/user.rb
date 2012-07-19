@@ -135,6 +135,10 @@ class User < ActiveRecord::Base
     joins(:groups).where('groups.name != ?', "admin")
   end
 
+  def permission?(name)
+    permission.any? {|perm| perm.name == name.to_s}
+  end
+
   def admin?
     self.ingroup? "admin"
   end
