@@ -1,10 +1,10 @@
 - title t('.title')
 
 #show_command
-  - if @cardbill.used and @user.ingroup?("admin")
+  - if @cardbill.used and current_user.permission? :card_used_sources
     = link_to t('cardbills.show.to_use'), @cardbill.used
     = " | "
-  -  if @cardbill.status == 'verified'
+  -  if @cardbill.status == 'verified' and current_user.permission? :expense_reports
     - if @cardbill.expense_report
       = link_to t('cardbills.show.view_expense'), @cardbill.expense_report
     - else
