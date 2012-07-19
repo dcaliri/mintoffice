@@ -46,7 +46,7 @@ class User < ActiveRecord::Base
   include Attachmentable
 
   def enrollment
-    Enrollment.find_by_user_id(id) || create_enrollment(company_id: Company.current_company.id)
+    Enrollment.find_by_user_id(id) || create_enrollment!(company_id: Company.current_company.id)
   end
 
   def history_except
@@ -65,12 +65,11 @@ class User < ActiveRecord::Base
   end
 
   def self.create_from_omniauth(auth)
-    # debugger
     create! do |user|
       user.provider = auth["provider"]
       user.uid = auth["uid"]
       user.send(auth["provider"] + "_account=", auth["info"]["email"])
-      user.name = auth["info"]["nickname"]
+      user.name = auth["info"]["nickname"] || auth["info"]["name"]
       user.notify_email = auth["info"]["email"]
     end
   end

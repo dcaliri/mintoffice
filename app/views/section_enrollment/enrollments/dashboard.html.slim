@@ -36,6 +36,6 @@ h2
       = hidden_field_tag :reporter, @apply_admin.id
       p
         - if @enrollment.report.report? and @enrollment.all_information_filled?
-          = submit_tag t('reports.info.report')
+          = submit_tag t('reports.info.report'), name: :report
 #attach
   = render 'reports/log', target: @enrollment

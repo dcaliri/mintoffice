@@ -9,8 +9,8 @@ class Enrollment < ActiveRecord::Base
 
   accepts_nested_attributes_for :contact, :allow_destroy => :true
 
-  validates_format_of :juminno, :with => /^\d{6}-\d{7}$/, :message => I18n.t('hrinfos.error.juminno_invalid')
-  validates_uniqueness_of :juminno
+  validates_format_of :juminno, :with => /^\d{6}-\d{7}$/, :message => I18n.t('hrinfos.error.juminno_invalid'), on: :update
+  validates_uniqueness_of :juminno, on: :update
 
   include Reportable
   def apply_status
