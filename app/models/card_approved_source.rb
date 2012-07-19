@@ -23,7 +23,7 @@ class CardApprovedSource < ActiveRecord::Base
                      :money_dollar
                      ]
 
-  validates_uniqueness_of :approve_no, :message => I18n.t('hrinfos.error.juminno_invalid')
+  validates_uniqueness_of :approve_no
   validates_presence_of :approve_no
   validates_presence_of :money
   validates_presence_of :store_name
