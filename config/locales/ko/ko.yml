@@ -1320,16 +1320,16 @@ ko:
             title:
                 default: "%{prev}님이 %{next}님에게 결재를 요청하였습니다"
                 hrinfo: "%{next}님에게 새로운 입사지원이 들어왔습니다."
-        body:
-            default: "%{prev}님이 %{next}님에게 결재를 요청하였습니다. \n %{url}"
-            hrinfo: "아래 링크를 통해서 확인 가능합니다. \n %{url}"
+            body:
+                default: "%{prev}님이 %{next}님에게 결재를 요청하였습니다. \n %{url}"
+                hrinfo: "아래 링크를 통해서 확인 가능합니다. \n %{url}"
         rollback:
             title:
-            default: "%{prev}님이 %{next}님에게 결재를 반려하였습니다"
-            hrinfo: "%{next}님에게 입사지원 수정요청이 들어왔습니다"
-        body:
-            default: "%{prev}님이 %{next}님에게 결재를 반려하였습니다. \n %{url}"
-            hrinfo: "아래 링크를 통해서 확인 가능합니다. \n %{url}"
+                default: "%{prev}님이 %{next}님에게 결재를 반려하였습니다"
+                hrinfo: "%{next}님에게 입사지원 수정요청이 들어왔습니다"
+            body:
+                default: "%{prev}님이 %{next}님에게 결재를 반려하였습니다. \n %{url}"
+                hrinfo: "아래 링크를 통해서 확인 가능합니다. \n %{url}"
     required_tags:
         index:
             title: 필수 태그 목록
