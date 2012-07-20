@@ -4,12 +4,6 @@ require 'test_helper'
 class BankAccountTest < ActionDispatch::IntegrationTest
   fixtures :bank_accounts
 
-  class << self
-    def startup
-      Capybara.default_driver = :selenium
-    end
-  end
-
   test 'should visit document list' do
     visit '/'
     click_link '은행계좌 목록'
