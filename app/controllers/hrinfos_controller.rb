@@ -122,7 +122,11 @@ class HrinfosController < ApplicationController
   end
 
   def new_employment_proof
-    @hrinfo = Hrinfo.find(params[:id])
+    if !current_company.seal.empty?
+      @hrinfo = Hrinfo.find(params[:id])
+    else
+      redirect_to @hrinfo, alert: "Check company attachment."
+    end
   end
 
   def employment_proof
