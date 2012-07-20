@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class HrinfosControllerTest < ActionController::TestCase
-  fixtures :hrinfos
+  fixtures :hrinfos, :attachments
 
   def setup
     current_user.permission.create!(name: 'hrinfos')

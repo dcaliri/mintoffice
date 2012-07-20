@@ -122,9 +122,8 @@ class HrinfosController < ApplicationController
   end
 
   def new_employment_proof
-    if !current_company.seal.empty?
-      @hrinfo = Hrinfo.find(params[:id])
-    else
+    @hrinfo = Hrinfo.find(params[:id])
+    if current_company.seal.empty?
       redirect_to @hrinfo, alert: "Check company attachment."
     end
   end
@@ -154,6 +153,6 @@ class HrinfosController < ApplicationController
 
   def user_only_access_my_employment
     @hrinfo = Hrinfo.find(params[:id])
-    force_redirect if @hrinfo.user_id != current_user.id and !current_user.admin?
+    force_redirect if @hrinfo.user_id != current_user.id or !current_user.admin?
   end
 end

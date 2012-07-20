@@ -1,0 +1,5 @@
+fixture:
+  id: 1
+  filepath: "seal.png"
+  owner_type: "Company"
+  owner_id: 1
