@@ -9,7 +9,9 @@ h2
 
 - @projects.progress_period(year, month) do |projects, start, finish|
   h3
-    = start.strftime("%Y.%m.%d") %> ~ <%= finish.strftime("%Y.%m.%d")
+    = start.strftime("%Y.%m.%d")
+    ' ~
+    = finish.strftime("%Y.%m.%d")
   - if projects.count == 1
     = projects.first.name
     ' 100
@@ -26,5 +28,5 @@ h2
 
 center
   = link_to t('common.button.prev'), assign_user_projects_path(@this_user, year: year, month: month - 1)
-  ' |
+  = " | "
   = link_to t('common.button.next'), assign_user_projects_path(@this_user, year: year, month: month + 1)

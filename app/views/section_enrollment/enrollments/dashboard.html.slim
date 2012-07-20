@@ -1,0 +1,41 @@
+h2
+  = t('section_enrollment.enrollment.dashboard.title')
+
+#descr
+  #enrollment-dashboard
+    - if @enrollment.report.status != :not_reported
+      h3
+        = t('section_enrollment.enrollment.dashboard.status')
+      p= @enrollment.apply_status
+
+    h3
+      = t('section_enrollment.enrollment.dashboard.enrollment')
+
+    #basic-information
+      p.title
+        = t('section_enrollment.enrollment.dashboard.basic')
+      - if @enrollment.modify?
+        p.menu= link_to t('section_enrollment.enrollment.dashboard.update'), [:edit, @enrollment]
+      p.status= information_filled?(:basic)
+    .clear
+
+    - @enrollment.item_names.each do |item_name|
+      .more-information
+        p.title= item_name
+        - if @enrollment.item_required?(item_name) and @enrollment.modify?
+          p.menu= link_to t('section_enrollment.enrollment.dashboard.add'), attach_item_enrollment_path(@enrollment, name: item_name)
+        p.status= information_filled?(item_name.to_sym)
+      .clear
+
+    - unless @enrollment.all_information_filled?
+      p= t('section_enrollment.enrollment.dashboard.please_input')
+
+    = form_tag :report do
+      = hidden_field_tag :target_type, @enrollment.class
+      = hidden_field_tag :target_id, @enrollment.id
+      = hidden_field_tag :reporter, @apply_admin.id
+      p
+        - if @enrollment.report.report? and @enrollment.all_information_filled?
+          = submit_tag t('reports.info.report'), name: :report
+#attach
+  = render 'reports/log', target: @enrollment

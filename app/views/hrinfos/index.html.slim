@@ -4,7 +4,8 @@
     = t("common.title.search")
     ' :
     = text_field_tag 'q', params[:q]
-    = select_tag :search_type, options_for_select(Hrinfo::SEARCH_TYPE, params[:search_type]), "onchange" => "this.form.submit()"
+    - if current_user.admin?
+      = select_tag :search_type, options_for_select(Hrinfo::SEARCH_TYPE, params[:search_type]), "onchange" => "this.form.submit()"
 
 #show_command
   - if @user.ingroup?("admin")
@@ -12,7 +13,7 @@
 h2
   = t('hrinfos.index.total')
   ' :
-  = @hrinfos_count
+  = @hrinfos.size
 table#list-table
   tr
     th

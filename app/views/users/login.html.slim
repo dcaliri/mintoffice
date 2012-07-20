@@ -1,45 +1,7 @@
 - title t("users.login.title")
 
-css:
-  #oauth-login {
-    width: 400px;
-    margin: 50px auto 0 auto;
-  }
-  #oauth-login > div {
-    padding: 30px 0;
-    margin: 10px 10px;
-    font-size: large;
-    font-weight: bold;
-  }
-  #google-login {
-    background-image: url(/assets/google_logo.png);
-    background-repeat: no-repeat;
-    background-position: right;
-  }
-  #daum-login {
-    background-image: url(/assets/daum_logo.png);
-    background-repeat: no-repeat;
-    background-position: right;
-  }
-  
-  #nate-login {
-    background-image: url(/assets/nate_logo.png);
-    background-repeat: no-repeat;
-    background-position: right;
-  }
-  #tiny {
-    font-weight: normal;
-    font-size: small;
-  }
-#oauth-login
-  #google-login
-    = link_to t(".login_with_google"), '/auth/google'
-  #daum-login
-    = link_to  t(".login_with_daum"), '/auth/daum'
-    br 
-    #tiny= t(".login_with_daum_explain")
-  #nate-login
-    = link_to  t(".login_with_nate"), '/auth/nate'
+= render 'oauth_login'
+
 
 #login-form
   = form_tag do
@@ -51,12 +13,3 @@ css:
         = label_tag :password, t(".password")
         = password_field_tag :password, params[:password]
       = submit_tag t('.login')
-
-.login-link style="text-align: center;"
-  h4
-    ' or login with
-    = link_to "Google", '/auth/google'
-    '  / 
-    = link_to "Daum", '/auth/daum'
-    '  /
-    = link_to "Nate", '/auth/nate'

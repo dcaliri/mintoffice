@@ -2,11 +2,11 @@ ENV["RAILS_ENV"] = "test"
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 
-class ActiveSupport::TestCase
+class ActionController::TestCase
   setup :global_setup
   teardown :global_teardown
 
-  fixtures :users, :companies, :companies_users
+  fixtures :users, :companies, :companies_users, :groups, :groups_users
 
   def global_setup
     DatabaseCleaner.strategy = :truncation

@@ -5,7 +5,7 @@
   = " | "
   = link_to t('common.link.edit'), [:edit, bank_account]
   = " | "
-  = link_to t('common.link.destroy'), bank_account, :method => :delete, :confirm => "Are you sure?"
+  = link_to t('common.link.destroy'), bank_account, :method => :delete, confirm: t("common.messages.delete_confirm")
   = " | "
   = link_to t('common.title.list'), :bank_accounts
 
@@ -13,18 +13,9 @@ h2 ...
 
 .box
   #descr
-    table
-      tr
-        th= bank_account.class.human_attribute_name(:name)
-        td= bank_account.name
-      tr
-        th= bank_account.class.human_attribute_name(:number)
-        td= bank_account.number
-      tr
-        th= bank_account.class.human_attribute_name(:note)
-        td= bank_account.note
-
+    = dtdd bank_account, "name"
+    = dtdd bank_account, "number"
+    = dtdd bank_account, "note"
   = render "shared/attachments/detail", :target => bank_account
-
-.clear
+  .clear
 = render 'changelog', target: bank_account

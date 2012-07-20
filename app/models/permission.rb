@@ -1,11 +1,13 @@
 class Permission < ActiveRecord::Base
- has_and_belongs_to_many :user
+  has_and_belongs_to_many :user
+
+  validates :name, presence: true, uniqueness: true
 
   def self.can_access? (user, controller_name, action_name)
     exception_list = [
         "attachments.picture", "attachments.download",
         "documents.*",
-        "hrinfos.index", "hrinfos.show",
+        "hrinfos.index", "hrinfos.show", "hrinfos.new_employment_proof", "hrinfos.employment_proof",
         "main.*",
         "users.my", "users.changepw", "users.edit", "users.update", "users.google_apps",
         "reports.*",

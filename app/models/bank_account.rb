@@ -9,8 +9,8 @@ class BankAccount < ActiveRecord::Base
   include Attachmentable
 
   BANK_LIST = [
-    ["신한 은행", :shinhan],
-    ["기업 은행", :ibk],
+    [I18n.t('models.bank_account.shinhan'), :shinhan],
+    [I18n.t('models.bank_account.ibk'), :ibk],
     ["HSBC", :hsbc]
   ]
 

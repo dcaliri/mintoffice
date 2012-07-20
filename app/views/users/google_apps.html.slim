@@ -7,5 +7,5 @@ table#list-table
   tr
     th= User.human_attribute_name('name')
   - @users.each do |user|
-    tr.selectable
-      td= user[:name]
+    tr
+	  	td= user[:name]

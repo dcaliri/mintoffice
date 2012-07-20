@@ -11,10 +11,10 @@ h2= t("common.title.#{action_name}")
       = f.date_select :from, :order => [:year, :month, :day], :default => Time.zone.now
     p
       = f.label :to
-      = f.date_select :to, :order => [:year, :month, :day], :default => Time.zone.now + 1.day
+      = f.date_select :to, :order => [:year, :month, :day], :default => Time.zone.now
     p
       = f.label :period
-      = f.number_field :period, min: 0, max: 10, step: 0.5
+      = f.number_field :period, min: 0, max: 10, step: 0.5, value: 1.0
       br
       = t("used_vacations.period_help")
     p

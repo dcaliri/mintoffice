@@ -3,7 +3,6 @@
 class Hrinfo < ActiveRecord::Base
   belongs_to :user
   has_one :contact, :as => :target, dependent: :destroy
-  accepts_nested_attributes_for :contact, :allow_destroy => :true
 
   has_many :expense_reports
 
@@ -11,7 +10,6 @@ class Hrinfo < ActiveRecord::Base
 
   include Historiable
   include Attachmentable
-  include Reportable
 
   validates_format_of :juminno, :with => /^\d{6}-\d{7}$/, :message => I18n.t('hrinfos.error.juminno_invalid')
   validates_uniqueness_of :juminno
@@ -22,9 +20,8 @@ class Hrinfo < ActiveRecord::Base
   attr_accessor :email, :phone_number, :address
 
   SEARCH_TYPE = {
-    "재직자" => :join,
-    "퇴직자" => :retire,
-    "입사지원자" => :apply
+    I18n.t('models.hrinfo.join') => :join,
+    I18n.t('models.hrinfo.retire') => :retire
   }
 
   class << self
@@ -43,6 +40,10 @@ class Hrinfo < ActiveRecord::Base
 
   def not_joined?
     not joined?
+  end
+
+  def retired?
+    retired_on?
   end
 
   def contact_or_build
@@ -133,9 +134,9 @@ class Hrinfo < ActiveRecord::Base
   def apply_status
     case report.status
     when :rollback
-      "수정 요청"
+      I18n.t('models.hrinfo.request')
     else
-      "승인 심사중"
+      I18n.t('models.hrinfo.approve')
     end
   end
 
@@ -176,7 +177,7 @@ class Hrinfo < ActiveRecord::Base
       pdf.draw_text Hrinfo.not_retired.count, :at => [142, 460]
       pdf.draw_text purpose, :at => [333, 460]
 
-      pdf.draw_text "대표", :at => [175, 433]
+      pdf.draw_text I18n.t('models.hrinfo.representative'), :at => [175, 433]
       pdf.draw_text company.owner_name, :at => [385, 433]
 
       today = Time.zone.now
@@ -187,7 +188,7 @@ class Hrinfo < ActiveRecord::Base
       pdf.draw_text company.name, :at => [250, 255]
       pdf.draw_text company.owner_name, :at => [250, 225]
 
-      pdf.draw_text "*  발급확인코드: #{hash_key}", :at => [14, 45], :size => 10
+      pdf.draw_text I18n.t('models.hrinfo.code')+"#{hash_key}", :at => [14, 45], :size => 10
     end
 
     employment_proof_hash << hash_key
@@ -197,18 +198,16 @@ class Hrinfo < ActiveRecord::Base
   end
 
   class << self
-    def search(type, text)
-      search_by_type(type).search_by_text(text)
+    def search(user, type, text)
+      search_by_type(user, type).search_by_text(text)
     end
 
-    def search_by_type(type)
-      case type.to_sym
-      when :join
-        where('joined_on IS NOT NULL AND retired_on IS NULL')
-      when :retire
+    def search_by_type(user, type)
+      type = type.to_sym
+      if user and user.admin? and type == :retire
         where('retired_on IS NOT NULL')
-      when :apply
-        where('joined_on IS NULL')
+      else
+        where('joined_on IS NOT NULL AND retired_on IS NULL')
       end
     end
 

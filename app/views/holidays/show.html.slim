@@ -9,11 +9,6 @@ h2 ...
 
 .box
   #descr
-    table cellspacing="5" cellpadding="5"
-      tr
-        th =Holiday.human_attribute_name('theday')
-        td= holiday.theday
-      tr
-        th =Holiday.human_attribute_name('dayname')
-        td= holiday.dayname
+    = dtdd holiday, "theday"
+    = dtdd holiday, "dayname"
   .clear

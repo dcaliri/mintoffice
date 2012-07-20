@@ -1,20 +1,20 @@
 - title t('.title')
 
 #show_command
-  - if @cardbill.used
+  - if @cardbill.used and current_user.permission? :card_used_sources
     = link_to t('cardbills.show.to_use'), @cardbill.used
-    ' |
-  -  if @cardbill.status == 'verified'
+    = " | "
+  -  if @cardbill.status == 'verified' and current_user.permission? :expense_reports
     - if @cardbill.expense_report
       = link_to t('cardbills.show.view_expense'), @cardbill.expense_report
     - else
       = link_to t('cardbills.show.create_expense'), new_expense_report_path(target_type: @cardbill.class, target_id: @cardbill.id, expensed_at: @cardbill.transdate, amount: @cardbill.totalamount)
-    ' |
-  - if @cardbill.approved
+    = " | "
+  - if @cardbill.approved and @user.ingroup?("admin")
     = link_to t('.to_approved'), @cardbill.approved
-    ' |
+    = " | "
   = link_to t('common.title.edit'), edit_cardbill_path(@cardbill)
-  ' |
+  = " | "
   = link_to t('common.title.list'), cardbills_path
 
 h2
@@ -32,9 +32,8 @@ h2
       = number_to_currency @cardbill.totalamount
 
     = render 'detail', target: @cardbill
-
-    = render 'changelog', target: @cardbill
-    = render 'accessors/info', access_target: @cardbill
-
   = render "shared/attachments/detail", :target => @cardbill
-  div style="clear: both;"
+  .clear
+
+= render 'changelog', target: @cardbill
+= render 'accessors/info', access_target: @cardbill

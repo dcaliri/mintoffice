@@ -9,7 +9,7 @@ class UsersController < ApplicationController
     c.save_attachment_id @this_user
   end
 
-  before_filter :except => [:my, :login, :logout, :google_apps] do |c|
+  before_filter :except => [:my, :changepw, :login, :edit, :update, :logout, :google_apps] do |c|
     unless @user.admin?
       flash[:notice] = I18n.t("common.messages.not_allowed")
       redirect_to :controller => "main", :action => "index"
@@ -49,6 +49,7 @@ class UsersController < ApplicationController
   end
 
   def edit
+    session[:return_to] = request.referer
     @this_user = User.find(params[:id])
   end
 
@@ -72,7 +73,7 @@ class UsersController < ApplicationController
       Boxcar.add_to_boxcar(@this_user.boxcar_account) if ! @this_user.boxcar_account.empty?
 
       flash[:notice] = I18n.t("common.messages.updated", :model => User.model_name.human)
-      redirect_to user_path(@this_user)
+      redirect_to session[:return_to]
     else
       render :action => "edit"
     end
@@ -85,41 +86,37 @@ class UsersController < ApplicationController
   def create_google_apps
     @this_user = User.find(params[:id])
     if @this_user.create_google_app_account
-      redirect_to :back, notice: "성공적으로 구글 계정을 생성했습니다."
+      redirect_to :back, notice: t('controllers.users.create_google')
     else
-      redirect_to :back, alert: "계정 생성에 실패했습니다.."
+      redirect_to :back, alert: t('controllers.users.fail_create_google')
     end
   end
 
   def remove_google_apps
     @this_user = User.find(params[:id])
     if @this_user.remove_google_app_account
-      redirect_to :back, notice: "성공적으로 구글 계정을 제거했습니다."
+      redirect_to :back, notice: t('controllers.users.remove_google')
     else
-      redirect_to :back, alert: "계정 제거에 실패했습니다.."
+      redirect_to :back, alert: t('controllers.users.fail_remove_google')
     end
   end
 
   def create_redmine
     @this_user = User.find(params[:id])
-    redmine = @this_user.new_redmine_account
-    redmine.save!
-
-    @this_user.redmine_account = redmine.login
-    @this_user.save!
-    redirect_to :back, notice: "성공적으로 레드마인 계정을 생성했습니다."
+    redmine = @this_user.create_redmine_account
+    redirect_to :back, notice: t('controllers.users.create_redmine')
   rescue => e
-    logger.info "created_redmine failed: #{e.message}, redmine error = #{redmine.errors.inspect}"
-    redirect_to :back, alert: "계정 생성에 실패했습니다.. - #{e.message}"
+    logger.info "created_redmine failed: #{e.message}"
+    redirect_to :back, alert: t('controllers.users.fail_create_redmine', message: e.message)
   end
 
   def remove_redmine
     @this_user = User.find(params[:id])
-    if @this_user.remove_redmine_account
-      redirect_to :back, notice: "성공적으로 레드마인 계정을 제거했습니다."
-    else
-      redirect_to :back, alert: "계정 제거에 실패했습니다.."
-    end
+    @this_user.remove_redmine_account
+    redirect_to :back, notice: t('controllers.users.remove_redmine')
+  rescue => e
+    logger.info "remove_redmine failed: #{e.message}"
+    redirect_to :back, alert: t('controllers.users.fail_remove_redmine', message: e.message)
   end
 
   def changepw

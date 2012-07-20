@@ -10,17 +10,18 @@
 h2= t("common.title.show")
 .box
   #descr
-    = dtdd @creditcard, "cardno"
-    = dtdd @creditcard, "short_name"
-    = dtdd @creditcard, "expireyear"
-    = dtdd @creditcard, "expiremonth"
-    = dtdd @creditcard, "nickname"
-    = dtdd @creditcard, "issuer"
-    = dtdd @creditcard, "cardholder"
-    dt= @creditcard.class.human_attribute_name(:bank_account_id)
-    dd= @creditcard.bank_account.name_with_number rescue ""
+    dl
+      = dtdd @creditcard, "cardno"
+      = dtdd @creditcard, "short_name"
+      = dtdd @creditcard, "expireyear"
+      = dtdd @creditcard, "expiremonth"
+      = dtdd @creditcard, "nickname"
+      = dtdd @creditcard, "issuer"
+      = dtdd @creditcard, "cardholder"
+      dt= @creditcard.class.human_attribute_name(:bank_account_id)
+      dd= @creditcard.bank_account.name_with_number rescue ""
   = render "shared/attachments/detail", :target => @creditcard
 
-.clear
-  -if @user.ingroup? "admin"
-    = render 'changelog', target: @creditcard
+  .clear
+-if @user.ingroup? "admin"
+  = render 'changelog', target: @creditcard

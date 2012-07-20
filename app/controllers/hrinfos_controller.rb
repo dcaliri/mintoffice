@@ -4,11 +4,13 @@ class HrinfosController < ApplicationController
     c.save_attachment_id @hrinfo
   end
 
+  before_filter :retired_hrinfo_can_access_only_admin, except: [:index, :new, :create]
+
   # GET /hrinfos
   # GET /hrinfos.xml
   def index
     params[:search_type] ||= :join
-    @hrinfos = Hrinfo.search(params[:search_type], params[:q])
+    @hrinfos = Hrinfo.search(User.current_user, params[:search_type], params[:q])
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @hrinfos }
@@ -16,7 +18,6 @@ class HrinfosController < ApplicationController
   end
 
   def edit_required_tag
-
   end
 
   def retire
@@ -138,5 +139,11 @@ class HrinfosController < ApplicationController
       format.html { redirect_to(hrinfos_url) }
       format.xml  { head :ok }
     end
+  end
+
+  private
+  def retired_hrinfo_can_access_only_admin
+    @hrinfo = Hrinfo.find(params[:id])
+    force_redirect if @hrinfo.retired? and !current_user.admin?
   end
 end

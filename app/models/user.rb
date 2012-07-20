@@ -2,6 +2,7 @@
 require 'digest/sha1'
 
 class User < ActiveRecord::Base
+  has_one :enrollment
   has_many :attachment
   has_many :document_owners, :order => 'created_at DESC'
   has_many :documents, :through => :document_owners, :source => :document
@@ -29,6 +30,9 @@ class User < ActiveRecord::Base
 
   validates_presence_of :name
   validates_uniqueness_of :name
+  validates_uniqueness_of :daum_account, :if => Proc.new{ daum_account && daum_account.empty? == false }
+  validates_uniqueness_of :nate_account, :if => Proc.new{ nate_account && nate_account.empty? == false }
+  validates_uniqueness_of :notify_email, :if => Proc.new{ notify_email && notify_email.empty? == false }
   validates_uniqueness_of :google_account, :if => Proc.new{ google_account && google_account.empty? == false }
   attr_accessor :password_confirmation
   validates_confirmation_of :password, :if => Proc.new{|user| user.provider.blank?}
@@ -40,6 +44,11 @@ class User < ActiveRecord::Base
 
   include Historiable
   include Attachmentable
+
+  def enrollment
+    Enrollment.find_by_user_id(id) || create_enrollment!(company_id: Company.current_company.id)
+  end
+
   def history_except
     [:name, :hashed_password, :salt]
   end
@@ -53,6 +62,16 @@ class User < ActiveRecord::Base
       nil
     end
     user
+  end
+
+  def self.create_from_omniauth(auth)
+    create! do |user|
+      user.provider = auth["provider"]
+      user.uid = auth["uid"]
+      user.send(auth["provider"] + "_account=", auth["info"]["email"])
+      user.name = auth["info"]["nickname"] || auth["info"]["name"]
+      user.notify_email = auth["info"]["email"]
+    end
   end
 
   def fullname
@@ -112,17 +131,25 @@ class User < ActiveRecord::Base
     end
   end
 
+  def self.no_admins
+    joins(:groups).where('groups.name != ?', "admin")
+  end
+
+  def permission?(name)
+    admin? or permission.exists?(name: name.to_s)
+  end
+
   def admin?
     self.ingroup? "admin"
   end
 
   def self.search(query)
     query = "%#{query}%"
-    where('name like ?', query)
+    where('users.name like ?', query)
   end
 
   def self.enabled
-    where("name NOT LIKE '[X] %'")
+    where("users.name NOT LIKE '[X] %'")
   end
 
   def as_json(options={})
@@ -281,6 +308,30 @@ class User < ActiveRecord::Base
     )
   end
 
+  def create_redmine_account
+    current_company = Company.current_company
+    redmine_user = get_remine_user
+
+    raise ArgumentError, I18n.t('models.user.no_name') if hrinfo and hrinfo.firstname.blank?
+    raise ArgumentError, I18n.t('models.user.no_name') if hrinfo and hrinfo.lastname.blank?
+    raise ArgumentError, I18n.t('models.user.no_email') if notify_email.blank?
+
+    redmine = redmine_user.new(
+      login: self.name,
+      password: current_company.default_password,
+      firstname: (hrinfo.firstname rescue nil),
+      lastname: (hrinfo.lastname rescue nil),
+      mail: notify_email
+    )
+
+    unless redmine.save
+      raise ArgumentError, I18n.t('models.user.already_exist_email')
+    end
+
+    self.redmine_account = redmine.login
+    save!
+  end
+
   def remove_redmine_account
     redmine_user = get_remine_user
     user = redmine_user.all.find {|user| user.login == self.name}
@@ -301,7 +352,7 @@ class User < ActiveRecord::Base
 private
   def password_non_blank
     if hashed_password.blank?
-      errors.add(:password, I18n.t('users.error.missing_password'))
+      errors.add(:password, I18n.t('activerecord.errors.models.user.attributes.password.missing'))
     end
   end
 

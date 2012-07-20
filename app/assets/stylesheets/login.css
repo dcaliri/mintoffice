@@ -1,0 +1,34 @@
+#oauth-login {
+  width: 400px;
+  margin: 50px auto 0 auto;
+}
+
+#oauth-login > div {
+  padding: 30px 0;
+  margin: 10px 10px;
+  font-size: large;
+  font-weight: bold;
+}
+
+#google-login {
+  background-image: url(/assets/google_logo.png);
+  background-repeat: no-repeat;
+  background-position: right;
+}
+
+#daum-login {
+  background-image: url(/assets/daum_logo.png);
+  background-repeat: no-repeat;
+  background-position: right;
+}
+
+#nate-login {
+  background-image: url(/assets/nate_logo.png);
+  background-repeat: no-repeat;
+  background-position: right;
+}
+
+#tiny {
+  font-weight: normal;
+  font-size: small;
+}

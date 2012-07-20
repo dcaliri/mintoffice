@@ -5,6 +5,12 @@ class AccessorsController < ApplicationController
     user = User.find(params[:accessor])
     resource = params[:resources_type].constantize.find(params[:resources_id])
     resource.accessors.permission(user, params[:access_type])
-    redirect_to :back, notice: "성공적으로 권한을 설정하였습니다."
+    redirect_to :back, notice: t('controllers.accessors.set_permission')
+  end
+
+  def destroy
+		person = AccessPerson.find(params[:accessor_id])
+		person.destroy
+		redirect_to :back, notice: t('controllers.accessors.delete_permission')
   end
 end

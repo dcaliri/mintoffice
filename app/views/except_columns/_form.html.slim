@@ -30,7 +30,7 @@ javascript:
   $('#save_except_columns').click(function(e){
     e.preventDefault();
 
-    name = prompt('저장할 이름을 입력하세요');
+    name = prompt('#{t('except_columns.form.input_name')}');
     if(name && name != 'null'){
       form.get(0).setAttribute('action', "#{save_except_columns_path}");
       form.get(0).setAttribute('action', '/save_except_columns');

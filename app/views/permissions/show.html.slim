@@ -10,8 +10,8 @@ h2
   ul
     - for user in @permission.user
       li
-  		  = user.name
-  		  = link_to " [X]", :action => 'removeuser', :id => @permission,:user_id => user
+  		  = user.name + " "
+  		  = link_to "[X]", :action => 'removeuser', :id => @permission,:user_id => user
 - else
   = t('permissions.show.none')
 
@@ -23,5 +23,5 @@ h2
 
 hr
 = link_to 'Edit', edit_permission_path(@permission)
-' |
+= " | "
 = link_to 'Back', permissions_path

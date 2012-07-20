@@ -4,7 +4,7 @@
     = " | "
   = link_to t('common.link.edit'), edit_card_approved_source_path(card_approved_source, creditcard_id: card_approved_source.creditcard)
   = " | "
-  = link_to t('common.link.destroy'), card_approved_source, :method => :delete, :confirm => "Are you sure?"
+  = link_to t('common.link.destroy'), card_approved_source, :method => :delete, confirm: t("common.messages.delete_confirm")
   = " | "
   = link_to t('common.title.back'), :card_approved_sources
 
@@ -13,10 +13,7 @@ h2= "#{card_approved_source.creditcard.nickname}: #{card_approved_source.creditc
 
 .box
   dl
-    dt
-      = CardApprovedSource.human_attribute_name(:used_at)
-      dd
-        = card_approved_source.used_at_to_s
+    = dtdd card_approved_source, "used_at"
     = dtdd card_approved_source, "approve_no"
     = dtdd card_approved_source, "card_no"
     = dtdd card_approved_source, "card_holder_name"
@@ -29,12 +26,6 @@ h2= "#{card_approved_source.creditcard.nickname}: #{card_approved_source.creditc
     = dtdd card_approved_source, "used_type"
     = dtdd card_approved_source, "monthly_duration"
     = dtdd card_approved_source, "card_type"
-    dt
-      = CardApprovedSource.human_attribute_name(:canceled_at)
-      dd
-        = card_approved_source.canceled_at_to_s
+    = dtdd card_approved_source, "canceled_at"
     = dtdd card_approved_source, "status"
-    dt
-      = CardApprovedSource.human_attribute_name(:will_be_paied_at)
-      dd
-        = card_approved_source.will_be_paied_at_to_s
+    = dtdd card_approved_source, "will_be_paied_at"

@@ -4,7 +4,11 @@ class LedgerAccount < ActiveRecord::Base
   # has_many :posting_items
   has_many :items, class_name: 'PostingItem'
 
-  CATEGORY_TYPE = ["자본", "자산", "부채", "비용", "수익"]
+  CATEGORY_TYPE = [I18n.t('models.ledger_account.fund'), 
+                  I18n.t('models.ledger_account.asset'), 
+                  I18n.t('models.ledger_account.debt'), 
+                  I18n.t('models.ledger_account.expense'), 
+                  I18n.t('models.ledger_account.benefit')]
   def category
     CATEGORY_TYPE[read_attribute(:category) || 0]
   end

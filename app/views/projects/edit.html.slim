@@ -1,9 +1,9 @@
 - title t(".title")
 #show_command
   = link_to t("common.title.show"), project
-  ' |
+  = " | "
   = link_to t("common.title.back"), projects_path
-  ' |
+  = " | "
   = link_to t(".completed"), {:action => "completed", :id => project}, {:confirm => t(".confirm_complete")}
 h2
   = t("common.title.edit")

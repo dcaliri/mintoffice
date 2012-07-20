@@ -12,6 +12,11 @@ class HrinfosControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "should see index page of retired member" do
+    get :index, search_type: :retire
+    assert_response :success
+  end
+
   test "should see new page" do
     get :new
     assert_response :success

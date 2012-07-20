@@ -25,4 +25,8 @@ class PayrollCategoriesController < ApplicationController
     end
   end
   
+  def destroy
+    payroll_category.destroy
+    redirect_to payroll_categories_path
+  end
 end
