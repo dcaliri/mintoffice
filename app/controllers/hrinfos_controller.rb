@@ -5,6 +5,7 @@ class HrinfosController < ApplicationController
   end
 
   before_filter :retired_hrinfo_can_access_only_admin, except: [:index, :new, :create]
+  before_filter :user_only_access_my_employment, only: [:new_employment_proof]
 
   # GET /hrinfos
   # GET /hrinfos.xml
@@ -121,7 +122,11 @@ class HrinfosController < ApplicationController
   end
 
   def new_employment_proof
-    @hrinfo = Hrinfo.find(params[:id])
+    if !current_company.seal.empty?
+      @hrinfo = Hrinfo.find(params[:id])
+    else
+      redirect_to @hrinfo, alert: "Check company attachment."
+    end
   end
 
   def employment_proof
@@ -145,5 +150,10 @@ class HrinfosController < ApplicationController
   def retired_hrinfo_can_access_only_admin
     @hrinfo = Hrinfo.find(params[:id])
     force_redirect if @hrinfo.retired? and !current_user.admin?
+  end
+
+  def user_only_access_my_employment
+    @hrinfo = Hrinfo.find(params[:id])
+    force_redirect if @hrinfo.user_id != current_user.id and !current_user.admin?
   end
 end
