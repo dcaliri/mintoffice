@@ -1,9 +1,11 @@
 fixture:
     id: 1
     name: "admin"
-    hashed_password: "1234"
+    hashed_password: "96043f0adf13e8d440a0e90ec7a2b7757a16bc2c"
+    salt: "21757029800.1164294613723833"
 
 no_hrinfo:
     id: 2
     name: "no hrinfo"
     hashed_password: "1234"
+    salt: "q"

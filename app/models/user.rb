@@ -132,7 +132,8 @@ class User < ActiveRecord::Base
   end
 
   def self.no_admins
-    joins(:groups).where('groups.name != ?', "admin")
+    # joins(:groups).where('groups.name != ?', "admin")
+    all - joins(:groups).where('groups.name == ?', "admin")
   end
 
   def permission?(name)
