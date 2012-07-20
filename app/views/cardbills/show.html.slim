@@ -10,7 +10,7 @@
     - else
       = link_to t('cardbills.show.create_expense'), new_expense_report_path(target_type: @cardbill.class, target_id: @cardbill.id, expensed_at: @cardbill.transdate, amount: @cardbill.totalamount)
     = " | "
-  - if @cardbill.approved and @user.ingroup?("admin")
+  - if @cardbill.approved and current_user.permission? :card_approved_sources
     = link_to t('.to_approved'), @cardbill.approved
     = " | "
   = link_to t('common.title.edit'), edit_cardbill_path(@cardbill)
