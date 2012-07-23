@@ -1,0 +1,6 @@
+fixture:
+  id: 1
+  name: 집
+  created_at: 2012-07-18 16:08:13.117074
+  updated_at: 2012-07-18 16:08:13.117074
+  company_id: 1
