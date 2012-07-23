@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
 
   has_many :payments
   # has_many :commutes
-  has_many :vacations
+  # has_many :vacations
   has_many :change_histories
   has_many :reporters, class_name: 'ReportPerson'
 

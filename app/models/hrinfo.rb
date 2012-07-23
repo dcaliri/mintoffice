@@ -5,6 +5,7 @@ class Hrinfo < ActiveRecord::Base
   has_one :contact, :as => :target, dependent: :destroy
 
   has_many :commutes
+  has_many :vacations
   has_many :expense_reports
 
   serialize :employment_proof_hash, Array

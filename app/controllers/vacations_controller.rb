@@ -6,7 +6,7 @@ class VacationsController < ApplicationController
 
   expose(:users) { User(:protected) }
   expose(:user)
-  expose(:vacations) { user.vacations.latest }
+  expose(:vacations) { user.hrinfo.vacations.latest }
   expose(:vacation)
 
   before_filter {|controller| controller.redirect_unless_me(user)}

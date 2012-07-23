@@ -8,7 +8,7 @@ class UsedVacationsController < ApplicationController
   expose(:used_vacations) { vacation.used }
   expose(:used_vacation)
 
-  expose(:user) { vacation.user }
+  expose(:user) { vacation.hrinfo.user }
 
   before_filter {|controller| controller.redirect_unless_me(user)}
   before_filter :another_user_cant_access_yearly, :only => [:edit]
