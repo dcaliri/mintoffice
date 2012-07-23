@@ -1,5 +1,6 @@
 class ExceptColumn < ActiveRecord::Base
-  belongs_to :user
+  # belongs_to :user
+  belongs_to :hrifo
   belongs_to :model, polymorphic: true
   serialize :columns, Hash
 

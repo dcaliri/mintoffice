@@ -10,6 +10,8 @@ class Hrinfo < ActiveRecord::Base
   has_many :expense_reports
   has_many :payrolls
 
+  has_many :except_columns
+
   serialize :employment_proof_hash, Array
 
   include Historiable

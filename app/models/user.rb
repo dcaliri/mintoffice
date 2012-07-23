@@ -21,7 +21,7 @@ class User < ActiveRecord::Base
   has_many :change_histories
   has_many :reporters, class_name: 'ReportPerson'
 
-  has_many :except_columns
+  # has_many :except_columns
   has_and_belongs_to_many :companies
 
   scope :nohrinfo, :conditions =>['id not in (select user_id from hrinfos)']
