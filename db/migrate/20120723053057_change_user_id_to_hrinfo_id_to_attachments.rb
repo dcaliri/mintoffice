@@ -17,10 +17,12 @@ class ChangeUserIdToHrinfoIdToAttachments < ActiveRecord::Migration
     add_column :attachments, :user_id, :integer
 
     Attachment.find_each do |attachment|
-      hrinfo = Hrinfo.find(attachment.hrinfo_id)
+      if change_history.hrinfo_id
+        hrinfo = Hrinfo.find(attachment.hrinfo_id)
 
-      attachment.user_id = hrinfo.user_id
-      attachment.save!
+        attachment.user_id = hrinfo.user_id
+        attachment.save!
+      end
     end  
 
     remove_column :attachments, :hrinfo_id
