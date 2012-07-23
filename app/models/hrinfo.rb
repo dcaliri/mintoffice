@@ -3,6 +3,7 @@
 class Hrinfo < ActiveRecord::Base
   belongs_to :user
 
+  has_and_belongs_to_many :groups
   has_and_belongs_to_many :permission
   
   has_one :contact, :as => :target, dependent: :destroy
@@ -52,6 +53,19 @@ class Hrinfo < ActiveRecord::Base
         where('joined_on IS NOT NULL')
       end
     end
+  end
+
+  def ingroup? (name)
+    group = Group.find_by_name(name)
+    unless group.nil?
+      group.hrinfos.include? self
+    else
+      false
+    end
+  end
+  
+  def admin?
+    self.ingroup? "admin"
   end
 
   def joined?

@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   # has_many :document_owners, :order => 'created_at DESC'
   # has_many :documents, :through => :document_owners, :source => :document
   
-  has_and_belongs_to_many :groups
+  # has_and_belongs_to_many :groups
   # has_and_belongs_to_many :permission
   
   # has_many :project_infos, class_name: "ProjectAssignInfo"
@@ -126,17 +126,11 @@ class User < ActiveRecord::Base
   end
 
   def ingroup? (gname)
-    g = Group.find_by_name(gname)
-    unless g.nil?
-      g.users.include? self
-    else
-      false
-    end
+    hrinfo.ingroup?(gname)
   end
 
   def self.no_admins
-    # joins(:groups).where('groups.name != ?', "admin")
-    all - joins(:groups).where('groups.name == ?', "admin")
+    all - joins(:hrinfo => :groups).where('groups.name == ?', "admin")
   end
 
   def permission?(name)
@@ -144,7 +138,8 @@ class User < ActiveRecord::Base
   end
 
   def admin?
-    self.ingroup? "admin"
+    # self.ingroup? "admin"
+    hrinfo.admin?
   end
 
   def self.search(query)
