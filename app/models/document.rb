@@ -3,9 +3,10 @@ class Document < ActiveRecord::Base
 
   belongs_to :project
   has_many :document_owners
-  has_many :users, :through => :document_owners, :source => :user
+  has_many :hrinfos, :through => :document_owners, :source => :hrinfo
+  # has_many :users, :through => :document_owners, :source => :user
 
-  validates_presence_of :title
+  # validates_presence_of :title
 
   include Attachmentable
   include Taggable

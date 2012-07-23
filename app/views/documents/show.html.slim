@@ -18,9 +18,9 @@ h2
       dt
         = Document.human_attribute_name("owner")
       dd
-        - if !document.users.blank?
-          - user_names = document.users.index_by {|u| u.name }
-          = user_names.keys.sort.join ", "
+        - if !document.hrinfos.blank?
+          - names = document.hrinfos.index_by {|hrinfo| hrinfo.fullname }
+          = names.keys.sort.join ", "
       dt
         = Document.human_attribute_name("tags")
       dd

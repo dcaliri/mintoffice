@@ -14,7 +14,7 @@ class AccessPerson < ActiveRecord::Base
       elsif user.nil?
         where("0")
       else
-        where(hrinfo_id: hrinfo.id)
+        where(hrinfo_id: user.hrinfo.id)
       end
     end
 

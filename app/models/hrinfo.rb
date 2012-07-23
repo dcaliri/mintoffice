@@ -17,6 +17,9 @@ class Hrinfo < ActiveRecord::Base
   has_many :reporters, class_name: 'ReportPerson'
   has_many :accessors, class_name: 'AccessPerson'
 
+  has_many :document_owners, :order => 'created_at DESC'
+  has_many :documents, :through => :document_owners, :source => :document
+  
   serialize :employment_proof_hash, Array
 
   include Historiable

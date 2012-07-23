@@ -37,9 +37,9 @@ table#list-table
         td
           =h document.project_name
         td
-          - if !document.users.blank?
-            - user_names = document.users.index_by {|u| u.name }
-            = user_names.keys.sort.join(", ")
+          - if !document.hrinfos.blank?
+            - names = document.hrinfos.index_by {|hrinfo| hrinfo.fullname }
+            = names.keys.sort.join(", ")
         td
           =h document.tag_list
         td
