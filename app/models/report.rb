@@ -1,5 +1,6 @@
 # encoding: UTF-8
 
+
 class Report < ActiveRecord::Base
   belongs_to :target, polymorphic: true
   has_many :reporters, class_name: "ReportPerson", dependent: :destroy
@@ -52,9 +53,11 @@ class Report < ActiveRecord::Base
     prev_reporter = self.reporter
     prev_reporter.owner = false
 
-    collection = reporters.where(user_id: user.id)
+    # collection = reporters.where(user_id: user.id)
+    collection = reporters.where(hrinfo_id: user.hrinfo.id)
     if collection.empty?
-      next_reporter = user.reporters.build(owner: true)
+      # next_reporter = user.reporters.build(owner: true)
+      next_reporter = user.hrinfo.reporters.build(owner: true)
       next_reporter.prev = prev_reporter
       self.reporters << next_reporter
     else
@@ -83,18 +86,22 @@ class Report < ActiveRecord::Base
       url: report_url,
     })
 
-    Boxcar.send_to_boxcar_user(next_reporter.user, prev_reporter.fullname, title)
-    ReportMailer.report(target, prev_reporter.user, next_reporter.user, title, body)
+    # Boxcar.send_to_boxcar_user(next_reporter.user, prev_reporter.fullname, title)
+    # ReportMailer.report(target, prev_reporter.user, next_reporter.user, title, body)
+    
+    Boxcar.send_to_boxcar_user(next_reporter.hrinfo.user, prev_reporter.fullname, title)
+    ReportMailer.report(target, prev_reporter.hrinfo.user, next_reporter.hrinfo.user, title, body)
 
     permission user, :write
-    permission prev_reporter.user, :read
+    permission prev_reporter.hrinfo.user, :read
 
     save!
   end
 
   def approve!(comment)
     self.status = :reported
-    User.current_user.reporters.create!(report_id: id, owner: true) unless self.reporter
+    # User.current_user.reporters.create!(report_id: id, owner: true) unless self.reporter
+    User.current_user.hrinfo.reporters.create!(report_id: id, owner: true) unless self.reporter
     self.comments.build(owner: self.reporter, description: "#{reporter.fullname}"+I18n.t('models.report.to_approve'))
     self.comments.build(owner: self.reporter, description: comment) unless comment.blank?
     save!
@@ -111,8 +118,10 @@ class Report < ActiveRecord::Base
       prev_reporter.owner = false
       prev_reporter.save!
 
-      permission next_reporter.user, :write
-      permission prev_reporter.user, :read
+      # permission next_reporter.user, :write
+      # permission prev_reporter.user, :read
+      permission next_reporter.hrinfo.user, :write
+      permission prev_reporter.hrinfo.user, :read
     end
     self.comments.build(owner: prev_reporter, description: "#{prev_reporter.fullname}"+I18n.t('models.report.to_rollback'))
     self.comments.build(owner: prev_reporter, description: comment) unless comment.blank?
@@ -132,15 +141,19 @@ class Report < ActiveRecord::Base
         url: report_url,
       })
 
-      Boxcar.send_to_boxcar_user(next_reporter.user, prev_reporter.fullname, title)
-      ReportMailer.report(target, prev_reporter.user, next_reporter.user, title, body)
+      # Boxcar.send_to_boxcar_user(next_reporter.user, prev_reporter.fullname, title)
+      # ReportMailer.report(target, prev_reporter.user, next_reporter.user, title, body)
+
+      Boxcar.send_to_boxcar_user(next_reporter.hrinfo.user, prev_reporter.fullname, title)
+      ReportMailer.report(target, prev_reporter.hrinfo.user, next_reporter.hrinfo.user, title, body)
     end
     
     save!
   end
 
   def report?
-    self.reporter.present? && self.reporter.user == User.current_user
+    # self.reporter.present? && self.reporter.user == User.current_user
+    self.reporter.present? && self.reporter.hrinfo == User.current_user.hrinfo
   end
 
   def rollback?

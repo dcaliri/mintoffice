@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
   # has_many :commutes
   # has_many :vacations
   # has_many :change_histories
-  has_many :reporters, class_name: 'ReportPerson'
+  # has_many :reporters, class_name: 'ReportPerson'
 
   # has_many :except_columns
   has_and_belongs_to_many :companies

@@ -3,7 +3,7 @@ module Reportable
 
   def create_initial_report
     report = build_report
-    report.reporters << User.current_user.reporters.build(report_id: report, owner: true)
+    report.reporters << User.current_user.hrinfo.reporters.build(report_id: report, owner: true)
   end
 
   def create_initial_accessor
@@ -15,7 +15,7 @@ module Reportable
       report = create_report
       user = User.current_user
       if user.ingroup?(:admin)
-        report.reporters << user.reporters.build(report_id: report, owner: true)
+        report.reporters << user.hrinfo.reporters.build(report_id: report, owner: true)
         report.permission user, :write
         report.save!
       end
