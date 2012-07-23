@@ -12,6 +12,7 @@ class Hrinfo < ActiveRecord::Base
 
   has_many :attachment
   has_many :except_columns
+  has_many :change_histories
 
   serialize :employment_proof_hash, Array
 
