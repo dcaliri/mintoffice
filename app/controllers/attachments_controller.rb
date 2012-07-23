@@ -81,11 +81,19 @@ class AttachmentsController < ApplicationController
 
   def save
     @attachment = Attachment.new(params[:attachment])
+    
+    # if session[:user_id]
+    #   @attachment.user = User.find(session[:user_id])
+    # else
+    #   @attachment.user = User.find(1)
+    # end
+
     if session[:user_id]
-      @attachment.user = User.find(session[:user_id])
+      @attachment.hrinfo = User.find(session[:user_id]).hrinfo
     else
-      @attachment.user = User.find(1)
+      @attachment.hrinfo = User.find(1).hrinfo
     end
+
     if @attachment.save
       redirect_to(:action => 'index')
     else

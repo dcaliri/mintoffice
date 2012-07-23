@@ -1,11 +1,17 @@
 class Attachment < ActiveRecord::Base
   default_scope :order => 'seq ASC'
-  belongs_to  :user
+  # belongs_to  :user
+  belongs_to  :hrinfo
 
   belongs_to :owner, :polymorphic => true
-  before_save :save_user_info
-  def save_user_info
-    self.user = User.current_user unless self.user
+  # before_save :save_user_info
+  # def save_user_info
+  #   self.user = User.current_user unless self.user
+  # end
+
+  before_save :save_hrinfo
+  def save_hrinfo
+    self.hrinfo = User.current_user.hrinfo unless self.hrinfo
   end
 
   validates_presence_of :filepath, :on => :create, :message => "can't be blank"
@@ -28,9 +34,9 @@ class Attachment < ActiveRecord::Base
                                     :owner_id => obj.id})
   end
 
-  def self.save_for (obj,user,param)
+  def self.save_for (obj, user, param)
     attachment = Attachment.new(param)
-    attachment.save_for(obj,user)
+    attachment.save_for(obj, user)
   end
 
   def save_for(obj, user)
@@ -39,7 +45,7 @@ class Attachment < ActiveRecord::Base
     unless user
       user = User.find(1)
     end
-    self.user = user
+    self.hrinfo = user.hrinfo
     self.save
   end
 

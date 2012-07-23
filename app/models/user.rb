@@ -3,7 +3,7 @@ require 'digest/sha1'
 
 class User < ActiveRecord::Base
   has_one :enrollment
-  has_many :attachment
+  # has_many :attachment
   has_many :document_owners, :order => 'created_at DESC'
   has_many :documents, :through => :document_owners, :source => :document
   has_and_belongs_to_many :groups
@@ -178,7 +178,7 @@ class User < ActiveRecord::Base
   end
 
   def has_payment_info
-    not payments.empty?
+    not hrinfo.payments.empty?
   end
 
   class << self
