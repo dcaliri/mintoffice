@@ -1,7 +1,7 @@
 class PaymentsController < ApplicationController
   expose(:users) { User(:protected) }
   expose(:user)
-  expose(:payments) { user.payments }
+  expose(:payments) { user.hrinfo.payments }
   expose(:payment)
 
   def redirect_unless_permission

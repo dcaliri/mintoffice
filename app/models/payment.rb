@@ -1,7 +1,9 @@
 #encoding: UTF-8
 
 class Payment < ActiveRecord::Base
-  belongs_to :user
+  # belongs_to :user
+  belongs_to :hrinfo
+
   before_save :modify_bonus_date
   def modify_bonus_date
     self.pay_start = self.pay_finish if self.payment_type == 'bonus'

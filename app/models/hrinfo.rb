@@ -4,6 +4,7 @@ class Hrinfo < ActiveRecord::Base
   belongs_to :user
   has_one :contact, :as => :target, dependent: :destroy
 
+  has_many :payments
   has_many :commutes
   has_many :vacations
   has_many :expense_reports
@@ -109,7 +110,7 @@ class Hrinfo < ActiveRecord::Base
   end
 
   def self.payment_in?(from, to)
-    select{|hrinfo| hrinfo.user.payments.payment_in?(from, to).total > 0 }
+    select{|hrinfo| hrinfo.payments.payment_in?(from, to).total > 0 }
   end
 
   def self.not_retired

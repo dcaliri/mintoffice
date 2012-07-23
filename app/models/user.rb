@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
 
   has_many :contacts, foreign_key: 'owner_id'
 
-  has_many :payments
+  # has_many :payments
   # has_many :commutes
   # has_many :vacations
   has_many :change_histories

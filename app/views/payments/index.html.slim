@@ -24,7 +24,7 @@ table#list-table.payment-table
         - while from < period
           - td_class = (period.month == Time.zone.now.month ? :today : '')
           td.numrow[class=td_class]
-            = number_to_currency user.payments.by_month(period.to_date).total
+            = number_to_currency hrinfo.payments.by_month(period.to_date).total
           - period -= 1.month
   tr
     td
