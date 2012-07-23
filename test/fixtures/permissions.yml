@@ -1,3 +1,5 @@
 fixture:
-    id: 1
-    name: "bank_accounts"
+  id: 1
+  name: "bank_accounts"
+  created_at: 2012-07-18 16:08:13.066854
+  updated_at: 2012-07-18 16:08:13.066854
