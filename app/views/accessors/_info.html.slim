@@ -1,5 +1,6 @@
 h3
   = t('accessors.info.permissions')
+
 ul
   - access_target.accessors.each do |accessor| 
     li
@@ -7,10 +8,8 @@ ul
       = "("
       = accessor.write? ? t('accessors.info.read_write') : t('accessors.info.read')
       = ")"
-      - unless accessor.user.admin? 
+      - unless accessor.hrinfo.user.admin? 
         = link_to "[x]", accessors_path(accessor_id: accessor.id), :method => :delete
-
-
 
 - if access_target.access?(current_user, :write)
   h3

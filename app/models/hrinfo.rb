@@ -15,6 +15,7 @@ class Hrinfo < ActiveRecord::Base
   has_many :change_histories
 
   has_many :reporters, class_name: 'ReportPerson'
+  has_many :accessors, class_name: 'AccessPerson'
 
   serialize :employment_proof_hash, Array
 
