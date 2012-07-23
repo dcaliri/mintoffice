@@ -8,6 +8,7 @@ class Hrinfo < ActiveRecord::Base
   has_many :commutes
   has_many :vacations
   has_many :expense_reports
+  has_many :payrolls
 
   serialize :employment_proof_hash, Array
 
