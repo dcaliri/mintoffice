@@ -39,7 +39,7 @@ class ProjectsController < ApplicationController
 
   def assign
     @this_user = User.find(params[:user_id])
-    @projects = @this_user.projects.inprogress
+    @projects = @this_user.hrinfo.projects.inprogress
   end
 
   def assign_projects
@@ -55,10 +55,10 @@ class ProjectsController < ApplicationController
   def add_user
     user = User.find_by_name(params[:username])
     if user
-      if project.users.include? user
+      if project.hrinfos.include? user.hrinfo
         flash[:notice] = I18n.t "common.messages.already_exist"
       else
-        project.users << user
+        project.hrinfos << user.hrinfo
       end
     else
       flash[:notice] = I18n.t "common.messages.no_such_user"
@@ -68,8 +68,11 @@ class ProjectsController < ApplicationController
   end
 
   def del_user
-    user = User.find(params[:uid])
-    project.users.delete(user)
+    # user = User.find(params[:uid])
+    # project.users.delete(user)
+    # redirect_to [:edit, project]
+    hrinfo = Hrinfo.find(params[:uid])
+    project.hrinfos.delete(hrinfo)
     redirect_to [:edit, project]
   end
 end

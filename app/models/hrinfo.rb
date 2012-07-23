@@ -20,6 +20,9 @@ class Hrinfo < ActiveRecord::Base
   has_many :document_owners, :order => 'created_at DESC'
   has_many :documents, :through => :document_owners, :source => :document
   
+  has_many :project_infos, class_name: "ProjectAssignInfo"
+  has_many :projects, through: :project_infos
+  
   serialize :employment_proof_hash, Array
 
   include Historiable

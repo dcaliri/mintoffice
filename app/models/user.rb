@@ -6,10 +6,13 @@ class User < ActiveRecord::Base
   # has_many :attachment
   # has_many :document_owners, :order => 'created_at DESC'
   # has_many :documents, :through => :document_owners, :source => :document
+  
   has_and_belongs_to_many :groups
   has_and_belongs_to_many :permission
-  has_many :project_infos, class_name: "ProjectAssignInfo"
-  has_many :projects, through: :project_infos
+  
+  # has_many :project_infos, class_name: "ProjectAssignInfo"
+  # has_many :projects, through: :project_infos
+
   has_one :hrinfo, dependent: :destroy
   accepts_nested_attributes_for :hrinfo, :allow_destroy => :true
 
