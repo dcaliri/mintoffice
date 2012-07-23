@@ -70,6 +70,7 @@ class Hrinfo < ActiveRecord::Base
     contact_email = contact.emails.empty? ? contact.emails.build : contact.emails.first
     contact_email.email = email
     contact_email.save!
+
   end
 
   def phone_number=(number)
