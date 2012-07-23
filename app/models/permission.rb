@@ -1,5 +1,6 @@
 class Permission < ActiveRecord::Base
-  has_and_belongs_to_many :user
+  # has_and_belongs_to_many :user
+  has_and_belongs_to_many :hrinfo
 
   validates :name, presence: true, uniqueness: true
 
@@ -23,7 +24,7 @@ class Permission < ActiveRecord::Base
       return true
     end
 
-    if user.permission.any? { |perm| perm.name == controller_name }
+    if user.hrinfo.permission.any? { |perm| perm.name == controller_name }
       return true
     else
       return false

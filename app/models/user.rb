@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   # has_many :documents, :through => :document_owners, :source => :document
   
   has_and_belongs_to_many :groups
-  has_and_belongs_to_many :permission
+  # has_and_belongs_to_many :permission
   
   # has_many :project_infos, class_name: "ProjectAssignInfo"
   # has_many :projects, through: :project_infos
@@ -140,7 +140,7 @@ class User < ActiveRecord::Base
   end
 
   def permission?(name)
-    admin? or permission.exists?(name: name.to_s)
+    admin? or hrinfo.permission.exists?(name: name.to_s)
   end
 
   def admin?

@@ -15,15 +15,15 @@ table align="center" border="0" cellspacing="5" cellpadding="5"  style="margin-t
     th style="background-color:lightgray;"
       = t("main.index.finance")
     td
-      - if @user.permission.any? {|perm| perm.name == 'pettycashes'}
+      - if @user.hrinfo.permission.any? {|perm| perm.name == 'pettycashes'}
         = link_to t("pettycashes.index.title"), :controller => "pettycashes"
         '  /
       = link_to t("cardbills.index.title"), :controller => "cardbills" 
       '  /
-      - if @user.permission.any? {|perm| perm.name == 'bank_accounts'} 
+      - if @user.hrinfo.permission.any? {|perm| perm.name == 'bank_accounts'} 
         = link_to t("bank_accounts.index.title"), :bank_accounts
         '  /
-      - if @user.permission.any? {|perm| perm.name == 'taxbills'}
+      - if @user.hrinfo.permission.any? {|perm| perm.name == 'taxbills'}
         = link_to t("taxbills.index.title"), :taxbills
         '  /
       = link_to t("expense_reports.index.title"), :expense_reports
@@ -35,7 +35,7 @@ table align="center" border="0" cellspacing="5" cellpadding="5"  style="margin-t
     th style="background-color:lightgray;"
       = t("main.index.project")
     td
-      - if @user.permission.any? {|perm| perm.name == 'projects'}
+      - if @user.hrinfo.permission.any? {|perm| perm.name == 'projects'}
         = link_to t("projects.index.title"), :controller => "projects"
   tr
     th style="background-color:lightgray;"
@@ -43,10 +43,10 @@ table align="center" border="0" cellspacing="5" cellpadding="5"  style="margin-t
     td
       = link_to t("documents.index.title"), :controller => "documents"
       '  /
-      - if @user.permission.any? {|perm| perm.name == 'business_clients'}
+      - if @user.hrinfo.permission.any? {|perm| perm.name == 'business_clients'}
         = link_to t("business_clients.index.title"), :business_clients
         '  /
-      - if @user.permission.any? {|perm| perm.name == 'contacts'}
+      - if @user.hrinfo.permission.any? {|perm| perm.name == 'contacts'}
         = link_to t("contacts.index.title"), :contacts
       
   - if @user.ingroup?(:admin)

@@ -17,18 +17,18 @@ class PermissionsController < ApplicationController
     @user = User.find_by_name(params[:username])
     if !@user
       redirect_to @permission, alert: "등록되지 않은 사용자입니다."
-    elsif @permission.user.include?(@user)
+    elsif @permission.hrinfo.include?(@user.hrinfo)
       redirect_to @permission, alert: "이미 등록된 사용자입니다."
     else
-      @permission.user << @user
+      @permission.hrinfo << @user.hrinfo
       redirect_to @permission, notice: "성공적으로 사용자를 등록했습니다."
     end
   end
 
   def removeuser
-    @user = User.find(params[:user_id])
+    @hrinfo = Hrinfo.find(params[:hrinfo_id])
     @permission = Permission.find(params[:id])
-    @permission.user.delete(@user)
+    @permission.hrinfo.delete(@hrinfo)
 
     redirect_to @permission
   end
@@ -79,7 +79,7 @@ class PermissionsController < ApplicationController
   # PUT /permissions/1
   # PUT /permissions/1.xml
   def update
-    params[:permission][:user_ids] ||= []
+    params[:permission][:hrinfo_ids] ||= []
     @permission = Permission.find(params[:id])
 
     respond_to do |format|
