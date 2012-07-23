@@ -12,7 +12,8 @@ class CommutesController < ApplicationController
   expose(:commutes_everyone) { Commute.every_during((week_begin_time - page.week)..(week_end_time - page.week)) }
 
   before_filter :only => [:show] { |c| commutes_by_month.each.collect(&:values).flatten.each { |commute| c.save_attachment_id commute unless commute.nil? } }
-  expose(:commutes_by_month) { (0..3).collect {|w| user.commutes.during((week_begin_time - (4*page+w).week)..(week_end_time - (4*page+w).week)) } }
+  # expose(:commutes_by_month) { (0..3).collect {|w| user.commutes.during((week_begin_time - (4*page+w).week)..(week_end_time - (4*page+w).week)) } }
+  expose(:commutes_by_month) { (0..3).collect {|w| user.hrinfo.commutes.during((week_begin_time - (4*page+w).week)..(week_end_time - (4*page+w).week)) } }
 
   before_filter :only => [:detail] { |c| c.save_attachment_id commute }
   expose(:commute)

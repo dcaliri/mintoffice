@@ -3,11 +3,10 @@ class ChangeUserIdToHrinfoIdToCommutes < ActiveRecord::Migration
     add_column :commutes, :hrinfo_id, :integer
     
     Commute.find_each do |commute|
-      next unless commute.user_id
-      user = User.find(commute.user_id)
-      next unless user.hrinfo
+      hrinfo = Hrinfo.find_by_user_id(commute.user_id)
 
-      commute.hrinfo_id = user.hrinfo.id
+      commute.hrinfo_id = hrinfo.id
+      commute.save!
     end  
 
     remove_column :commutes, :user_id
@@ -17,10 +16,10 @@ class ChangeUserIdToHrinfoIdToCommutes < ActiveRecord::Migration
     add_column :commutes, :user_id, :integer
 
     Commute.find_each do |commute|
-      next unless commute.hrinfo_id
       hrinfo = Hrinfo.find(commute.hrinfo_id)
-      next unless hrinfo.user
-      commute.user_id = hrinfo.user.id
+
+      commute.user_id = hrinfo.user_id
+      commute.save!
     end  
 
     remove_column :commutes, :hrinfo_id
