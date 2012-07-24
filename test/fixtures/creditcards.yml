@@ -1,8 +1,25 @@
-fixture:
-    id: 1
-    cardno: 1
-    expireyear: 1
-    expiremonth: 1
-    nickname: 1
-    issuer: 1
-    cardholder: 1
+shinhan_card:
+  id: 1
+  cardno: 321-321-1234
+  expireyear: 2013
+  expiremonth: 07
+  nickname: 식대카드
+  issuer: 신한은행
+  cardholder: 손어지리
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
+  short_name: 결재용
+  bank_account_id: 1
+
+ibk_card:
+  id: 2
+  cardno: 123-321-4321
+  expireyear: 2013
+  expiremonth: 07
+  nickname: 접대카드
+  issuer: 기업은행
+  cardholder: 손어지리
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
+  short_name: 결재용
+  bank_account_id: 2

@@ -15,3 +15,15 @@ pettycashes:
   name: "pettycashes"
   created_at: 2012-07-18 16:08:13.066854
   updated_at: 2012-07-18 16:08:13.066854
+
+cardbills:
+  id: 4
+  name: "cardbills"
+  created_at: 2012-07-18 16:08:13.066854
+  updated_at: 2012-07-18 16:08:13.066854
+
+expenses:
+  id: 5
+  name: "expense_reports"
+  created_at: 2012-07-18 16:08:13.066854
+  updated_at: 2012-07-18 16:08:13.066854

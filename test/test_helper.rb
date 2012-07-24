@@ -58,7 +58,7 @@ class ActionController::TestCase
 
   def current_user
     unless @user
-      @user = users(:fixture)
+      @user = users(:admin_account)
       @user.groups.create!(name: "admin")
     end
     @user
