@@ -42,7 +42,10 @@ class User < ActiveRecord::Base
   validates_confirmation_of :password, :if => Proc.new{|user| user.provider.blank?}
   validate :password_non_blank, :if => Proc.new{|user| user.provider.blank?}
 
-  has_one :company, foreign_key: :apply_admin_id
+  # has_one :company, foreign_key: :apply_admin_id
+  # def company
+  #   person.company
+  # end
 
   cattr_accessor :current_user
 

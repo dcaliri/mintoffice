@@ -13,7 +13,8 @@ class Company < ActiveRecord::Base
   # has_and_belongs_to_many :users
   has_and_belongs_to_many :people
 
-  belongs_to :apply_admin, class_name: 'User'
+  # belongs_to :apply_admin, class_name: 'User'
+  belongs_to :apply_admin, class_name: 'Person'
 
   cattr_accessor :current_company
 
