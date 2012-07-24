@@ -27,3 +27,15 @@ expenses:
   name: "expense_reports"
   created_at: 2012-07-18 16:08:13.066854
   updated_at: 2012-07-18 16:08:13.066854
+
+bank_trasacions:
+  id: 6
+  name: "bank_trasacions"
+  created_at: 2012-07-18 16:08:13.066854
+  updated_at: 2012-07-18 16:08:13.066854
+
+bank_trasfers:
+  id: 7
+  name: "bank_trasfers"
+  created_at: 2012-07-18 16:08:13.066854
+  updated_at: 2012-07-18 16:08:13.066854

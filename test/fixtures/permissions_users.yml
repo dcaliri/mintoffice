@@ -17,3 +17,11 @@ cardbills:
 expenses:
   permission_id: 5
   user_id: 1
+
+bank_trasactions:
+  permission_id: 6
+  user_id: 1  
+
+bank_trasfers:
+  permission_id: 7
+  user_id: 1
