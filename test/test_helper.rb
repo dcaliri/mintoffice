@@ -68,3 +68,17 @@ class ActionController::TestCase
     @company ||= companies(:fixture)
   end
 end
+
+class ActiveSupport::TestCase
+  setup :global_setup
+  teardown :global_teardown
+
+  DatabaseCleaner.strategy = :truncation
+  def global_setup
+    DatabaseCleaner.start
+  end
+
+  def global_teardown
+    DatabaseCleaner.clean
+  end
+end

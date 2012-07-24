@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class UsedVacationTest < ActiveSupport::TestCase
-  fixtures :users, :groups_users, :groups
+  fixtures :users#, :groups_users, :groups
 
   test "UsedVacation during should retreive correct vacation list" do
     User.current_user = User.first
