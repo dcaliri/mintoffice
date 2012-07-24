@@ -8,7 +8,7 @@ ul
       = "("
       = accessor.write? ? t('accessors.info.read_write') : t('accessors.info.read')
       = ")"
-      - unless accessor.hrinfo.user.admin? 
+      - unless accessor.person.user.admin? 
         = link_to "[x]", accessors_path(accessor_id: accessor.id), :method => :delete
 
 - if access_target.access?(current_user, :write)

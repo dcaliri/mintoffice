@@ -37,5 +37,6 @@ h2
       p
         - if @enrollment.report.report? and @enrollment.all_information_filled?
           = submit_tag t('reports.info.report'), name: :report
+
 #attach
   = render 'reports/log', target: @enrollment

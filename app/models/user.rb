@@ -53,8 +53,13 @@ class User < ActiveRecord::Base
     person.hrinfo
   end
 
+  def person
+    Person.find_by_id(person_id) || create_person!
+  end
+
   def enrollment
-    Enrollment.find_by_user_id(id) || create_enrollment!(company_id: Company.current_company.id)
+    # Enrollment.find_by_user_id(id) || create_enrollment!(company_id: Company.current_company.id)
+    Enrollment.find_by_person_id(person.id) || person.create_enrollment!(company_id: Company.current_company.id)
   end
 
   def history_except
@@ -135,7 +140,7 @@ class User < ActiveRecord::Base
   end
 
   def self.no_admins
-    all - joins(:hrinfo => :groups).where('groups.name == ?', "admin")
+    all - joins(:person => {:hrinfo => :groups}).where('groups.name == ?', "admin")
   end
 
   def permission?(name)
@@ -144,7 +149,7 @@ class User < ActiveRecord::Base
 
   def admin?
     # self.ingroup? "admin"
-    hrinfo.admin?
+    hrinfo and hrinfo.admin?
   end
 
   def self.search(query)

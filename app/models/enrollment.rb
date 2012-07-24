@@ -2,7 +2,8 @@
 
 class Enrollment < ActiveRecord::Base
   belongs_to :company
-  belongs_to :user
+  # belongs_to :user
+  belongs_to :person
   has_one :contact, :as => :target
 
   has_many :items, class_name: 'EnrollmentItem', dependent: :destroy
@@ -26,6 +27,10 @@ class Enrollment < ActiveRecord::Base
     def applied
       includes(:report).where("reports.status != 'not_reported'")
     end
+  end
+
+  def user
+    person.user
   end
 
   include Rails.application.routes.url_helpers
@@ -87,6 +92,7 @@ class Enrollment < ActiveRecord::Base
   end
 
   def required_items
-    company.enrollment_items.split(',')
+    items = company.enrollment_items || ""
+    items.split(',')
   end
 end

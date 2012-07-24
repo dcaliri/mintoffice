@@ -1,6 +1,7 @@
 class ReportPerson < ActiveRecord::Base
   # belongs_to :user
-  belongs_to :hrinfo
+  # belongs_to :hrinfo
+  belongs_to :person
   belongs_to :report
 
   has_many :next, class_name: "ReportPerson"
@@ -11,7 +12,8 @@ class ReportPerson < ActiveRecord::Base
   class << self
     def access_list(user)
       # where(user ? {user_id: user.id} : "0")
-      where(user ? {hrinfo_id: user.hrinfo.id} : "0")
+      # where(user ? {hrinfo_id: user.hrinfo.id} : "0")
+      where(user ? {person_id: user.person.id} : "0")
     end
 
     def readers
@@ -23,7 +25,7 @@ class ReportPerson < ActiveRecord::Base
     end
 
     def by_me
-      where(hrinfo_id: User.current_user.hrinfo.id, owner: true)
+      where(person_id: User.current_user.person.id, owner: true)
     end
   end
 
