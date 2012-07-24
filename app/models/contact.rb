@@ -6,7 +6,8 @@ class Contact < ActiveRecord::Base
   # belongs_to :target, :polymorphic => true
   belongs_to :person
 
-  belongs_to :owner, class_name: 'User'
+  # belongs_to :owner, class_name: 'User'
+  belongs_to :owner, class_name: 'Person'
 
   REJECT_IF_EMPTY = proc do |attrs|
     attrs.all? {|k, v| ["target", "created_at", "updated_at"].include?(k) or v.blank?}
