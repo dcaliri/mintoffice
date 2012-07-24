@@ -1,6 +1,6 @@
 fixture:
   id: 1
-  user_id: 1
+  person_id: 1
   from: 2012-07-18
   to: 2013-07-17
   period: 10

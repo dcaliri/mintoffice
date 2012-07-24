@@ -7,7 +7,7 @@ fixture:
   updated_at: 2012-07-20 13:36:03.201237
   joined_on: 2012-07-18
   retired_on:
-  user_id: 1
+  person_id: 1
   position: 사장
   companyno: 1
   juminno: 123456-1234567
