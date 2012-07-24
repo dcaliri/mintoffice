@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
   # has_many :reporters, class_name: 'ReportPerson'
 
   # has_many :except_columns
-  has_and_belongs_to_many :companies
+  # has_and_belongs_to_many :companies
 
   scope :nohrinfo, :conditions =>['id not in (select user_id from hrinfos)']
   scope :enabled, :conditions =>["name NOT LIKE '[X] %%'"]
@@ -351,11 +351,12 @@ class User < ActiveRecord::Base
   end
 
   def joined?
-    companies.exists?
+    # companies.exists?
+    person.joined?
   end
 
   def not_joined?
-    not joined?
+    person.not_joined?
   end
 
 private
