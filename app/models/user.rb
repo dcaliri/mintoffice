@@ -13,8 +13,9 @@ class User < ActiveRecord::Base
   # has_many :project_infos, class_name: "ProjectAssignInfo"
   # has_many :projects, through: :project_infos
 
-  has_one :hrinfo, dependent: :destroy
-  accepts_nested_attributes_for :hrinfo, :allow_destroy => :true
+  # has_one :hrinfo, dependent: :destroy
+  belongs_to :person
+  # accepts_nested_attributes_for :hrinfo, :allow_destroy => :true
 
   has_many :contacts, foreign_key: 'owner_id'
 
@@ -47,6 +48,10 @@ class User < ActiveRecord::Base
 
   include Historiable
   include Attachmentable
+
+  def hrinfo
+    person.hrinfo
+  end
 
   def enrollment
     Enrollment.find_by_user_id(id) || create_enrollment!(company_id: Company.current_company.id)

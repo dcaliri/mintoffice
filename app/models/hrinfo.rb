@@ -1,7 +1,8 @@
 # encoding: UTF-8
 
 class Hrinfo < ActiveRecord::Base
-  belongs_to :user
+  # belongs_to :user
+  belongs_to :person
 
   has_and_belongs_to_many :groups
   has_and_belongs_to_many :permission
@@ -53,6 +54,10 @@ class Hrinfo < ActiveRecord::Base
         where('joined_on IS NOT NULL')
       end
     end
+  end
+
+  def user
+    person.user
   end
 
   def ingroup? (name)
@@ -248,7 +253,7 @@ class Hrinfo < ActiveRecord::Base
 
     def search_by_text(text)
       text = "%#{text}%"
-      joins(:user).where('users.name LIKE ? OR users.notify_email LIKE ? OR hrinfos.firstname like ? OR hrinfos.lastname LIKE ? OR hrinfos.position LIKE ?', text, text, text, text, text)
+      joins(:person => :user).where('users.name LIKE ? OR users.notify_email LIKE ? OR hrinfos.firstname like ? OR hrinfos.lastname LIKE ? OR hrinfos.position LIKE ?', text, text, text, text, text)
     end
   end
 end
