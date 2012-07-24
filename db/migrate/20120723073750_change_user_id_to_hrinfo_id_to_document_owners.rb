@@ -1,29 +1,26 @@
 class ChangeUserIdToHrinfoIdToDocumentOwners < ActiveRecord::Migration
   def up
     add_column :document_owners, :hrinfo_id, :integer
-    
-    DocumentOwner.find_each do |document_owner|
-      hrinfo = Hrinfo.find_by_user_id(document_owner.user_id)
-      if hrinfo
-        document_owner.hrinfo_id = hrinfo.id
-        document_owner.save!
-      end
-    end
+
+    execute <<-SQL
+      UPDATE document_owners
+      SET hrinfo_id = (SELECT hrinfos.id
+      FROM hrinfos
+      WHERE hrinfos.user_id = document_owners.user_id)
+    SQL
 
     remove_column :document_owners, :user_id
   end
 
   def down
     add_column :document_owners, :user_id, :integer
-
-    DocumentOwner.find_each do |document_owner|
-      if document_owner.hrinfo_id
-        hrinfo = Hrinfo.find(document_owner.hrinfo_id)
-
-        document_owner.user_id = hrinfo.user_id
-        document_owner.save!
-      end
-    end
+    
+    execute <<-SQL
+      UPDATE document_owners
+      SET user_id = (SELECT hrinfos.user_id
+      FROM hrinfos
+      WHERE hrinfos.id = document_owners.hrinfo_id)
+    SQL
 
     remove_column :document_owners, :hrinfo_id
   end

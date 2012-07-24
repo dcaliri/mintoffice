@@ -2,13 +2,12 @@ class ChangeUserIdToHrinfoIdToAccessPerson < ActiveRecord::Migration
   def up
     add_column :access_people, :hrinfo_id, :integer
     
-    AccessPerson.find_each do |access_person|
-      hrinfo = Hrinfo.find_by_user_id(access_person.user_id)
-      if hrinfo
-        access_person.hrinfo_id = hrinfo.id
-        access_person.save!
-      end
-    end
+    execute <<-SQL
+      UPDATE access_people
+      SET hrinfo_id = (SELECT hrinfos.id
+      FROM hrinfos
+      WHERE hrinfos.user_id = access_people.user_id)
+    SQL
 
     remove_column :access_people, :user_id
   end
@@ -16,14 +15,12 @@ class ChangeUserIdToHrinfoIdToAccessPerson < ActiveRecord::Migration
   def down
     add_column :access_people, :user_id, :integer
 
-    AccessPerson.find_each do |access_person|
-      if access_person.hrinfo_id
-        hrinfo = Hrinfo.find(access_person.hrinfo_id)
-
-        access_person.user_id = hrinfo.user_id
-        access_person.save!
-      end
-    end
+    execute <<-SQL
+      UPDATE access_people
+      SET user_id = (SELECT hrinfos.user_id
+      FROM hrinfos
+      WHERE hrinfos.id = access_people.hrinfo_id)
+    SQL
 
     remove_column :access_people, :hrinfo_id
   end

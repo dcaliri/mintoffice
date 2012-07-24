@@ -2,12 +2,12 @@ class ChangeUserIdToHrinfoIdToVacations < ActiveRecord::Migration
   def up
     add_column :vacations, :hrinfo_id, :integer
     
-    Vacation.find_each do |vacation|
-      hrinfo = Hrinfo.find_by_user_id(vacation.user_id)
-
-      vacation.hrinfo_id = hrinfo.id
-      vacation.save!
-    end  
+    execute <<-SQL
+      UPDATE vacations
+      SET hrinfo_id = (SELECT hrinfos.id
+      FROM hrinfos
+      WHERE hrinfos.user_id = vacations.user_id)
+    SQL
 
     remove_column :vacations, :user_id
   end
@@ -15,12 +15,12 @@ class ChangeUserIdToHrinfoIdToVacations < ActiveRecord::Migration
   def down
     add_column :vacations, :user_id, :integer
 
-    Vacation.find_each do |vacation|
-      hrinfo = Hrinfo.find(vacation.hrinfo_id)
-
-      vacation.user_id = hrinfo.user_id
-      vacation.save!
-    end  
+    execute <<-SQL
+      UPDATE vacations
+      SET user_id = (SELECT hrinfos.user_id
+      FROM hrinfos
+      WHERE hrinfos.id = vacations.hrinfo_id)
+    SQL
 
     remove_column :vacations, :hrinfo_id
   end

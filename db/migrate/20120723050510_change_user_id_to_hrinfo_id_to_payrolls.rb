@@ -2,12 +2,12 @@ class ChangeUserIdToHrinfoIdToPayrolls < ActiveRecord::Migration
   def up
     add_column :payrolls, :hrinfo_id, :integer
     
-    Payroll.find_each do |payroll|
-      hrinfo = Hrinfo.find_by_user_id(payroll.user_id)
-
-      payroll.hrinfo_id = hrinfo.id
-      payroll.save!
-    end  
+    execute <<-SQL
+      UPDATE payrolls
+      SET hrinfo_id = (SELECT hrinfos.id
+      FROM hrinfos
+      WHERE hrinfos.user_id = payrolls.user_id)
+    SQL
 
     remove_column :payrolls, :user_id
   end
@@ -15,12 +15,12 @@ class ChangeUserIdToHrinfoIdToPayrolls < ActiveRecord::Migration
   def down
     add_column :payrolls, :user_id, :integer
 
-    Payroll.find_each do |payroll|
-      hrinfo = Hrinfo.find(payroll.hrinfo_id)
-
-      payroll.user_id = hrinfo.user_id
-      payroll.save!
-    end  
+    execute <<-SQL
+      UPDATE payrolls
+      SET user_id = (SELECT hrinfos.user_id
+      FROM hrinfos
+      WHERE hrinfos.id = payrolls.hrinfo_id)
+    SQL
 
     remove_column :payrolls, :hrinfo_id
   end

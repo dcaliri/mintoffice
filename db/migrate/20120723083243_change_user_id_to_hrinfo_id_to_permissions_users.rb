@@ -20,7 +20,7 @@ class ChangeUserIdToHrinfoIdToPermissionsUsers < ActiveRecord::Migration
     add_column :hrinfos_permissions, :user_id, :integer
 
     execute <<-SQL
-      UPDATE permissions_hrinfos
+      UPDATE hrinfos_permissions
       SET user_id = (SELECT hrinfos.user_id
       FROM hrinfos
       WHERE hrinfos.id = hrinfos_permissions.hrinfo_id)

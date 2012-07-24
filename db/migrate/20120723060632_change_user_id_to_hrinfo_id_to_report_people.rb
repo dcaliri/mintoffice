@@ -2,13 +2,12 @@ class ChangeUserIdToHrinfoIdToReportPeople < ActiveRecord::Migration
   def up
     add_column :report_people, :hrinfo_id, :integer
     
-    ReportPerson.find_each do |report_person|
-      hrinfo = Hrinfo.find_by_user_id(report_person.user_id)
-      if hrinfo
-        report_person.hrinfo_id = hrinfo.id
-        report_person.save!
-      end
-    end
+    execute <<-SQL
+      UPDATE report_people
+      SET hrinfo_id = (SELECT hrinfos.id
+      FROM hrinfos
+      WHERE hrinfos.user_id = report_people.user_id)
+    SQL
 
     remove_column :report_people, :user_id
   end
@@ -16,15 +15,13 @@ class ChangeUserIdToHrinfoIdToReportPeople < ActiveRecord::Migration
   def down
     add_column :report_people, :user_id, :integer
 
-    ReportPerson.find_each do |report_person|
-      if report_person.hrinfo_id
-        hrinfo = Hrinfo.find(report_person.hrinfo_id)
-
-        report_person.user_id = hrinfo.user_id
-        report_person.save!
-      end
-    end  
-
+    execute <<-SQL
+      UPDATE report_people
+      SET user_id = (SELECT hrinfos.user_id
+      FROM hrinfos
+      WHERE hrinfos.id = report_people.hrinfo_id)
+    SQL
+    
     remove_column :report_people, :hrinfo_id
   end
 end
