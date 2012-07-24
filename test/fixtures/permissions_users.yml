@@ -5,3 +5,7 @@ fixture:
 commutes:
   permission_id: 2
   user_id: 1
+
+pettycashes:
+  permission_id: 3
+  user_id: 1
