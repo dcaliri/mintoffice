@@ -1,6 +1,9 @@
 class Taxman < ActiveRecord::Base
   belongs_to :business_client
   has_many :taxbills
+
+  belongs_to :person
+  
   has_one :contact, :as => :target
   accepts_nested_attributes_for :contact, :allow_destroy => :true, :reject_if => proc { |attrs| attrs.all? { |k, v| v.blank? } }
 
