@@ -2,7 +2,10 @@
 
 class Contact < ActiveRecord::Base
   belongs_to :company
-  belongs_to :target, :polymorphic => true
+  
+  # belongs_to :target, :polymorphic => true
+  belongs_to :person
+
   belongs_to :owner, class_name: 'User'
 
   REJECT_IF_EMPTY = proc do |attrs|

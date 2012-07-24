@@ -4,9 +4,13 @@ class Taxman < ActiveRecord::Base
 
   belongs_to :person
   
-  has_one :contact, :as => :target
-  accepts_nested_attributes_for :contact, :allow_destroy => :true, :reject_if => proc { |attrs| attrs.all? { |k, v| v.blank? } }
+  # has_one :contact, :as => :target
+  # accepts_nested_attributes_for :contact, :allow_destroy => :true, :reject_if => proc { |attrs| attrs.all? { |k, v| v.blank? } }
 
+  def contact
+    person.contact
+  end
+  
   include Historiable
   def history_parent
     business_client

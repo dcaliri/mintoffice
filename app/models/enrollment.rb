@@ -4,14 +4,18 @@ class Enrollment < ActiveRecord::Base
   belongs_to :company
   # belongs_to :user
   belongs_to :person
-  has_one :contact, :as => :target
+  # has_one :contact, :as => :target
 
   has_many :items, class_name: 'EnrollmentItem', dependent: :destroy
 
-  accepts_nested_attributes_for :contact, :allow_destroy => :true
+  # accepts_nested_attributes_for :contact, :allow_destroy => :true
 
   validates_format_of :juminno, :with => /^\d{6}-\d{7}$/, :message => I18n.t('hrinfos.error.juminno_invalid'), on: :update
   validates_uniqueness_of :juminno, on: :update
+
+  def contact
+    person.contact
+  end
 
   include Reportable
   def apply_status

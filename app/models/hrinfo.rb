@@ -7,7 +7,7 @@ class Hrinfo < ActiveRecord::Base
   has_and_belongs_to_many :groups
   has_and_belongs_to_many :permission
   
-  has_one :contact, :as => :target, dependent: :destroy
+  # has_one :contact, :as => :target, dependent: :destroy
 
   has_many :payments
   has_many :commutes
@@ -58,6 +58,10 @@ class Hrinfo < ActiveRecord::Base
 
   def user
     person.user
+  end
+  
+  def contact
+    person.contact
   end
 
   def ingroup? (name)
