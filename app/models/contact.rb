@@ -33,7 +33,7 @@ class Contact < ActiveRecord::Base
 
   validate :validate_if_apply
   def validate_if_apply
-    if target.class == Enrollment
+    if person.class == Enrollment
       errors.add(:address, I18n.t('models.contact.one_more_need_ga')) if addresses.length == 0
       errors.add(:email, I18n.t('models.contact.one_more_need_i')) if emails.length == 0
       errors.add(:number, I18n.t('models.contact.one_more_need_ga')) if phone_numbers.length == 0

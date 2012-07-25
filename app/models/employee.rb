@@ -159,7 +159,7 @@ class Employee < ActiveRecord::Base
   end
 
   def retire!
-    account.payments.retire!(retired_on)
+    payments.retire!(retired_on)
     save!
   end
 

@@ -21,7 +21,7 @@ h2
           = t('.after_retire')
         th
           = t('.retire_total')
-      = @employee.account.payments.pay_from(@employee.retired_on).find_each do |payment|
+      = @hrinfo.payments.pay_from(@hrinfo.retired_on).find_each do |payment|
         tr
           td
             = payment.pay_finish.strftime("%Y.%m")
