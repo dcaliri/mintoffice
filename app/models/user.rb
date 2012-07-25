@@ -62,7 +62,12 @@ class User < ActiveRecord::Base
   end
 
   def person
-    Person.find_by_id(person_id) || create_person!
+    myself = Person.find_by_id(person_id)
+    unless myself
+      myself = create_person!
+      self.update_column(person_id, myself.id)
+    end
+    myself
   end
 
   def enrollment
@@ -143,7 +148,7 @@ class User < ActiveRecord::Base
     user
   end
 
-  def ingroup? (gname)
+  def ingroup?(gname)
     hrinfo.ingroup?(gname)
   end
 
