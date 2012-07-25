@@ -90,7 +90,7 @@ class Employee < ActiveRecord::Base
   end
 
   def contact_or_build
-    self.contact || build_contact
+    self.person.contact || person.build_contact
   end
 
   def firstname=(value)

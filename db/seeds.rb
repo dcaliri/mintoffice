@@ -14,36 +14,38 @@ end
 
 company = Company.find_by_name("mintech")
 
-unless User.exists?(name: "admin")
-  user = User.new
-  user.name = "admin"
-  user.password = "1234"
 
-  user.permission.build(name: 'users')
-  user.permission.build(name: 'pettycashes')
-  user.permission.build(name: 'cardbills')
-  user.permission.build(name: 'projects')
-  user.permission.build(name: 'taxbills')
-  user.permission.build(name: 'namecards')
-  user.permission.build(name: 'bank_accounts')
-  user.permission.build(name: 'business_clients')
-  user.permission.build(name: 'commutes')
-  user.permission.build(name: 'ledger_accounts')
-  user.permission.build(name: 'postings')
+unless User.exists?(name: 'admin')
+  person = Person.create!
+  user = person.create_user(name: 'admin', password: '1234')
+  hrinfo = person.create_hrinfo(juminno: '771122-1111111')
 
-  user.groups.build(name: 'admin')
-  user.companies << company
-  user.save!
+  hrinfo.permission.build(name: 'users')
+  hrinfo.permission.build(name: 'pettycashes')
+  hrinfo.permission.build(name: 'cardbills')
+  hrinfo.permission.build(name: 'projects')
+  hrinfo.permission.build(name: 'taxbills')
+  hrinfo.permission.build(name: 'namecards')
+  hrinfo.permission.build(name: 'bank_accounts')
+  hrinfo.permission.build(name: 'business_clients')
+  hrinfo.permission.build(name: 'commutes')
+  hrinfo.permission.build(name: 'ledger_accounts')
+  hrinfo.permission.build(name: 'postings')
+
+  hrinfo.groups.build(name: 'admin')
+
+  hrinfo.save!
+  person.companies << company
+  person.save!  
 end
 
 unless User.exists?(name: "test")
-  user = User.new
-  user.name = "test"
-  user.password = "1234"
-
-  user.companies << company
-  user.save!
+  person2 = Person.create!
+  user2 = person2.create_user(name: 'test', password: '1234')
+  person2.companies << company
+  person2.save!
 end
+
 
 if company.contact_address_tags.empty?
   company.contact_address_tags.create!(name: "집")
@@ -72,3 +74,48 @@ if LedgerAccount.all.empty?
   LedgerAccount.create!(title: "현금", category: "자본")
   LedgerAccount.create!(title: "신용카드", category: "부채")
 end
+
+
+
+
+=begin
+  
+
+unless User.exists?(name: "admin")
+  user = User.create!(name: 'admin', password: '1234')
+  person = user.create_person!
+  person.create_hrinfo(juminno: '771122-1111111')
+  user.person_id = person.id
+  # user.person.create_hrinfo(juminno: '771122-1111111')
+
+  user.hrinfo.permission.build(name: 'users')
+  user.hrinfo.permission.build(name: 'pettycashes')
+  user.hrinfo.permission.build(name: 'cardbills')
+  user.hrinfo.permission.build(name: 'projects')
+  user.hrinfo.permission.build(name: 'taxbills')
+  user.hrinfo.permission.build(name: 'namecards')
+  user.hrinfo.permission.build(name: 'bank_accounts')
+  user.hrinfo.permission.build(name: 'business_clients')
+  user.hrinfo.permission.build(name: 'commutes')
+  user.hrinfo.permission.build(name: 'ledger_accounts')
+  user.hrinfo.permission.build(name: 'postings')
+
+  user.hrinfo.groups.build(name: 'admin')
+  user.person.companies << company
+  user.save!
+end
+  
+
+
+
+unless User.exists?(name: "test")
+  user = User.create!(name: 'test', password: '1234')
+
+  person = user.create_person!
+  person.companies << company
+  user.person_id = person.id
+
+  user.save!
+end
+
+=end

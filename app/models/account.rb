@@ -66,7 +66,12 @@ class Account < ActiveRecord::Base
   end
 
   def person
-    Person.find_by_id(person_id) || create_person!
+    myself = Person.find_by_id(person_id)
+    unless myself
+      myself = create_person!
+      self.update_column(person_id, myself.id)
+    end
+    myself
   end
 
   def enrollment
@@ -159,7 +164,7 @@ class Account < ActiveRecord::Base
   def ingroup? (gname)
     employee.ingroup?(gname)
   end
-
+  
   def self.no_admins
     all - joins(:person => {:employee => :groups}).where('groups.name == ?', "admin")
   end

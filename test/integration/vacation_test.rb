@@ -7,7 +7,7 @@ class VacationTest < ActionDispatch::IntegrationTest
   fixtures :used_vacations
   fixtures :users
   fixtures :groups
-  fixtures :groups_users
+  fixtures :groups_hrinfos
 
   test 'should visit vacations list for admin' do
     visit '/'

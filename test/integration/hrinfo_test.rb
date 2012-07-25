@@ -5,7 +5,7 @@ class HrinfoTest < ActionDispatch::IntegrationTest
   fixtures :hrinfos
   fixtures :users
   fixtures :groups
-  fixtures :groups_users
+  fixtures :groups_hrinfos
   fixtures :contacts
   fixtures :contact_emails
   fixtures :contact_email_tags
