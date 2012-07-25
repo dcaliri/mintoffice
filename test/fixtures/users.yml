@@ -1,4 +1,4 @@
-fixture:
+admin_account:
     id: 1
     name: "admin"
     hashed_password: "96043f0adf13e8d440a0e90ec7a2b7757a16bc2c"
