@@ -1,10 +1,10 @@
 require 'test_helper'
 
-class HrinfosControllerTest < ActionController::TestCase
-  fixtures :hrinfos, :attachments
+class EmployeesControllerTest < ActionController::TestCase
+  fixtures :employees, :attachments
 
   def setup
-    current_user.hrinfo.permission.create!(name: 'hrinfos')
+    current_account.employee.permission.create!(name: 'employees')
   end
 
   test "should see index page" do
@@ -23,22 +23,22 @@ class HrinfosControllerTest < ActionController::TestCase
   end
 
   test "should see show page" do
-    get :show, :id => current_hrinfo.id
+    get :show, :id => current_employee.id
     assert_response :success
   end
 
   test "should see edit page" do
-    get :edit, :id => current_hrinfo.id
+    get :edit, :id => current_employee.id
     assert_response :success
   end
 
   test "should see employment proof page" do
-    get :new_employment_proof, :id => current_hrinfo.id
+    get :new_employment_proof, :id => current_employee.id
     assert_response :success
   end
 
   private
-  def current_hrinfo
-    @hrinfo ||= hrinfos(:fixture)
+  def current_employee
+    @employee ||= employees(:fixture)
   end
 end

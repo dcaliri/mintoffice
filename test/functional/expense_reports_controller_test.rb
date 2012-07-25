@@ -1,10 +1,10 @@
 require 'test_helper'
 
 class ExpenseReportsControllerTest < ActionController::TestCase
-  fixtures :cardbills, :expense_reports, :reports, :hrinfos, :projects
+  fixtures :cardbills, :expense_reports, :reports, :employees, :projects
 
   def setup
-    current_user.hrinfo.permission.create!(name: 'expense_reports')
+    current_account.employee.permission.create!(name: 'expense_reports')
   end
 
   test "should see index page" do

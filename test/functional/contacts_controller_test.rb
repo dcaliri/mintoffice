@@ -4,7 +4,7 @@ class ContactsControllerTest < ActionController::TestCase
   fixtures :contacts
 
   def setup
-    current_user.hrinfo.permission.create!(name: 'contacts')
+    current_account.employee.permission.create!(name: 'contacts')
   end
 
   test "should see index page" do

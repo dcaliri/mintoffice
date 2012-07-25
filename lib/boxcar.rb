@@ -26,7 +26,7 @@ class Boxcar
   end
 
   def self.send_to_boxcar_group(groupname, from, msg)
-    Group.users_in_group(groupname).each do |u|
+    Group.accounts_in_group(groupname).each do |u|
       unless u.boxcar_account.nil?
         unless u.boxcar_account.empty?
           Boxcar.send_to_boxcar(u.boxcar_account, from, msg)
@@ -35,10 +35,10 @@ class Boxcar
     end
   end
 
-  def self.send_to_boxcar_user(user, from, msg)
-    unless user.boxcar_account.nil?
-      unless user.boxcar_account.empty?
-        Boxcar.send_to_boxcar(user.boxcar_account, from, msg)
+  def self.send_to_boxcar_account(account, from, msg)
+    unless account.boxcar_account.nil?
+      unless account.boxcar_account.empty?
+        Boxcar.send_to_boxcar(account.boxcar_account, from, msg)
       end
     end
   end

@@ -52,7 +52,7 @@ module ResourceExportable
 
   module ClassMethods
     def make_filename(extension)
-      "#{Rails.root}/tmp/#{table_name}_#{Time.now.utc.strftime("%Y%m%d%H%M%S")}#{User.current_user.id}.#{extension}"
+      "#{Rails.root}/tmp/#{table_name}_#{Time.now.utc.strftime("%Y%m%d%H%M%S")}#{Account.current_account.id}.#{extension}"
       # "#{Rails.root}/tmp/#{table_name}.#{extension}"
     end
 

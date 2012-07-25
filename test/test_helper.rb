@@ -7,7 +7,7 @@ require 'capybara/rails'
 
 class ActionDispatch::IntegrationTest
   include Capybara::DSL
-  fixtures :users, :people, :companies, :companies_people, :hrinfos_permissions, :permissions, :hrinfos, :groups_hrinfos, :groups
+  fixtures :accounts, :people, :companies, :companies_people, :employees_permissions, :permissions, :employees, :employees_groups, :groups
   setup :global_setup
   teardown :global_teardown
 
@@ -27,7 +27,7 @@ class ActionDispatch::IntegrationTest
   end
 
   def simple_authenticate
-    visit '/test/sessions?user_id=1'
+    visit '/test/sessions?account_id=1'
   end
 
   def clear_session
@@ -39,18 +39,18 @@ class ActionController::TestCase
   setup :global_setup
   teardown :global_teardown
 
-  # fixtures :users, :companies, :companies_users, :groups, :groups_users
+  # fixtures :accounts, :companies, :companies_accounts, :groups, :groups_accounts
   
-  fixtures :users, :people, :hrinfos, :companies_people, :groups_hrinfos, :groups, :companies
+  fixtures :accounts, :people, :employees, :companies_people, :employees_groups, :groups, :companies
 
   def global_setup
     DatabaseCleaner.strategy = :truncation
     DatabaseCleaner.start
 
-    session[:user_id] = current_user.id
+    session[:account_id] = current_account.id
     session[:company_id] = current_company.id
 
-    User.current_user = current_user
+    Account.current_account = current_account
     Company.current_company = current_company
   end
 
@@ -58,12 +58,12 @@ class ActionController::TestCase
     DatabaseCleaner.clean
   end
 
-  def current_user
-    unless @user
-      @user = users(:fixture)
-      @user.hrinfo.groups.create!(name: "admin")
+  def current_account
+    unless @account
+      @account = accounts(:fixture)
+      @account.employee.groups.create!(name: "admin")
     end
-    @user
+    @account
   end
 
   def current_company

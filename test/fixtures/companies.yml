@@ -10,10 +10,10 @@ fixture:
   address: 가산동 가산디지털단지
   phone_number: 02-123-1234
   google_apps_domain: wangsy.com
-  google_apps_username: zzilssun
+  google_apps_accountname: zzilssun
   google_apps_password: 1234
   redmine_domain: redmine.mintech.kr
-  redmine_username: zzilssun
+  redmine_accountname: zzilssun
   redmine_password: 1234
   default_password: 1234
   apply_admin_id: 1

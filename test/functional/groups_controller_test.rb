@@ -4,7 +4,7 @@ class GroupsControllerTest < ActionController::TestCase
   fixtures :groups
 
   def setup
-    current_user.hrinfo.permission.create!(name: 'groups')
+    current_account.employee.permission.create!(name: 'groups')
   end
 
   test "should see index page" do

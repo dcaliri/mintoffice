@@ -3,11 +3,11 @@ require 'test_helper'
 
 class VacationTest < ActionDispatch::IntegrationTest
   fixtures :vacations
-  fixtures :hrinfos
+  fixtures :employees
   fixtures :used_vacations
-  fixtures :users
+  fixtures :accounts
   fixtures :groups
-  fixtures :groups_hrinfos
+  fixtures :employees_groups
 
   test 'should visit vacations list for admin' do
     visit '/'
@@ -63,7 +63,7 @@ class VacationTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('연차 정보'))
   end
 
-  test 'should show hrinfo' do
+  test 'should show employee' do
     visit '/'
     
     click_link '연차 정보'

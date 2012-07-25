@@ -1,6 +1,6 @@
 fixture:
     id: 1
-    hrinfo_id: 1
+    employee_id: 1
     project_id: 1
     target_type: "Cardbill"
     target_id: 1

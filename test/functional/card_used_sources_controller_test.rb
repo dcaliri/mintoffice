@@ -5,7 +5,7 @@ class CardUsedSourcesControllerTest < ActionController::TestCase
   fixtures :card_used_sources
 
   def setup
-    current_user.hrinfo.permission.create!(name: 'card_used_sources')
+    current_account.employee.permission.create!(name: 'card_used_sources')
   end
 
   test "should see index page" do

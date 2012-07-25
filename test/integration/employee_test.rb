@@ -1,11 +1,11 @@
 # encoding: UTF-8
 require 'test_helper'
 
-class HrinfoTest < ActionDispatch::IntegrationTest
-  fixtures :hrinfos
-  fixtures :users
+class EmployeeTest < ActionDispatch::IntegrationTest
+  fixtures :employees
+  fixtures :accounts
   fixtures :groups
-  fixtures :groups_hrinfos
+  fixtures :employees_groups
   fixtures :contacts
   fixtures :contact_emails
   fixtures :contact_email_tags
@@ -23,7 +23,7 @@ class HrinfoTest < ActionDispatch::IntegrationTest
   fixtures :tags
   fixtures :companies
 
-  test 'should visit hrinfo list.' do
+  test 'should visit employee list.' do
     visit '/'
     click_link '인사정보관리 - 사원목록'
 
@@ -32,7 +32,7 @@ class HrinfoTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('admin'))
   end
 
-  test 'should visit hrinfos' do
+  test 'should visit employees' do
     visit '/'
     click_link '인사정보관리 - 사원목록'
     find("tr.selectable").click
@@ -40,7 +40,7 @@ class HrinfoTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('인사정보'))
   end
 
-  test 'should create a new hrinfo' do
+  test 'should create a new employee' do
     visit '/'
     click_link '인사정보관리 - 사원목록'
 
@@ -64,7 +64,7 @@ class HrinfoTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('인사정보'))
   end
 
-  test 'should visit hrinfos to find contact' do
+  test 'should visit employees to find contact' do
     visit '/'
     click_link '인사정보관리 - 사원목록'
     find("tr.selectable").click
@@ -75,7 +75,7 @@ class HrinfoTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('전체 공개'))
   end
 
-  test 'should visit hrinfos to edit contact' do
+  test 'should visit employees to edit contact' do
     visit '/'
     click_link '인사정보관리 - 사원목록'
     find("tr.selectable").click
@@ -95,7 +95,7 @@ class HrinfoTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('연락처 관리'))
   end
 
-  test 'should visit hrinfos to destroy contact items' do
+  test 'should visit employees to destroy contact items' do
     visit '/'
     click_link '인사정보관리 - 사원목록'
     find("tr.selectable").click
@@ -110,7 +110,7 @@ class HrinfoTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('연락처 관리'))
   end
 
-  test 'should visit hrinfos to destroy contact' do
+  test 'should visit employees to destroy contact' do
     visit '/'
     click_link '인사정보관리 - 사원목록'
     find("tr.selectable").click
@@ -159,7 +159,7 @@ class HrinfoTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('모델명 이미 사용중입니다.'))
   end
 
-  test 'should visit hrinfos to find payments' do
+  test 'should visit employees to find payments' do
     visit '/'
     click_link '인사정보관리 - 사원목록'
     find("tr.selectable").click
@@ -169,7 +169,7 @@ class HrinfoTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('연봉 관리'))
   end
 
-  test 'should visit hrinfos to find vacations' do
+  test 'should visit employees to find vacations' do
     visit '/'
     click_link '인사정보관리 - 사원목록'
     find("tr.selectable").click
@@ -195,7 +195,7 @@ class HrinfoTest < ActionDispatch::IntegrationTest
 #    assert(page.has_content?('Check company attachment.'))
 #  end
 
-  test 'should visit hrinfos to retire' do
+  test 'should visit employees to retire' do
     visit '/'
     click_link '인사정보관리 - 사원목록'
     find("tr.selectable").click
@@ -213,7 +213,7 @@ class HrinfoTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('인사정보이(가) 성공적으로 업데이트 되었습니다.'))
   end
 
-  test 'should edit the exist hrinfo' do
+  test 'should edit the exist employee' do
     visit '/'
     click_link '인사정보관리 - 사원목록'
     find("tr.selectable").click

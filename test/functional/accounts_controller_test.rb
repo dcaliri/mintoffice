@@ -1,10 +1,10 @@
 require 'test_helper'
 
-class UsersControllerTest < ActionController::TestCase
-  fixtures :users
+class AccountsControllerTest < ActionController::TestCase
+  fixtures :accounts
 
   def setup
-    current_user.hrinfo.permission.create!(name: 'users')
+    current_account.employee.permission.create!(name: 'accounts')
   end
 
   test "should see index page" do
@@ -18,17 +18,17 @@ class UsersControllerTest < ActionController::TestCase
   end
 
   test "should see show page" do
-    get :show, :id => current_user.id
+    get :show, :id => current_account.id
     assert_response :success
   end
 
   test "should see edit page" do
-    get :edit, :id => current_user.id
+    get :edit, :id => current_account.id
     assert_response :success
   end
 
   test "should see changepw page" do
-    get :changepw, :user_id => current_user.id
+    get :changepw, :account_id => current_account.id
     assert_response :success
   end
 

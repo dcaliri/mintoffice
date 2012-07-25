@@ -4,7 +4,7 @@ class ProjectsControllerTest < ActionController::TestCase
   fixtures :companies, :projects
 
   def setup
-    current_user.hrinfo.permission.create!(name: 'projects')
+    current_account.employee.permission.create!(name: 'projects')
   end
 
   test "should see index page" do

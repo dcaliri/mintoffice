@@ -23,7 +23,7 @@ module Historiable
         :fieldname => k,
         :before_value => info ? info.call(self, v[0]) : v[0].to_s,
         :after_value => info ? info.call(self, v[1]) : v[1].to_s,
-        :hrinfo => User.current_user.hrinfo
+        :employee => Account.current_account.employee
       )
     end if history_parent.present? and not history_parent.new_record?
   end

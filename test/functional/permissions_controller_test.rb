@@ -4,7 +4,7 @@ class PermissionsControllerTest < ActionController::TestCase
   fixtures :permissions
 
   def setup
-    current_user.hrinfo.permission.create!(name: 'documents')
+    current_account.employee.permission.create!(name: 'documents')
   end
 
   test "should see index page" do

@@ -1,10 +1,10 @@
 require 'test_helper'
 
 class PayrollsControllerTest < ActionController::TestCase
-  fixtures :users, :hrinfos, :payrolls, :payroll_items
+  fixtures :accounts, :employees, :payrolls, :payroll_items
 
   def setup
-    current_user.hrinfo.permission.create!(name: 'documents')
+    current_account.employee.permission.create!(name: 'documents')
   end
 
   test "should see index page" do

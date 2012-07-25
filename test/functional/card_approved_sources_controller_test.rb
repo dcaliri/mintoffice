@@ -5,7 +5,7 @@ class CardApprovedSourcesControllerTest < ActionController::TestCase
   fixtures :card_approved_sources
 
   def setup
-    current_user.hrinfo.permission.create!(name: 'card_approved_sources')
+    current_account.employee.permission.create!(name: 'card_approved_sources')
   end
 
   test "should see list of card approved sourcepage" do
@@ -34,7 +34,7 @@ class CardApprovedSourcesControllerTest < ActionController::TestCase
   end
 
   test "should see generate cardbills page" do
-    get :generate_cardbills, owner: current_user.id
+    get :generate_cardbills, owner: current_account.id
     assert_response :redirect
   end
 

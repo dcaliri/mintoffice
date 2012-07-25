@@ -4,7 +4,7 @@ class CompaniesControllerTest < ActionController::TestCase
   fixtures :companies
 
   def setup
-    current_user.hrinfo.permission.create!(name: 'companies')
+    current_account.employee.permission.create!(name: 'companies')
   end
 
   test "should see show page" do

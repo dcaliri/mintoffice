@@ -3,38 +3,38 @@ module Reportable
 
   def create_initial_report
     report = build_report
-    report.reporters << User.current_user.person.reporters.build(report_id: report, owner: true)
+    report.reporters << Account.current_account.person.reporters.build(report_id: report, owner: true)
   end
 
   def create_initial_accessor
-    report.permission User.current_user, :write
+    report.permission Account.current_account, :write
   end
 
   def create_if_no_report
     if report.nil?
       report = create_report
-      user = User.current_user
-      if user.ingroup?(:admin)
-        report.reporters << user.person.reporters.build(report_id: report, owner: true)
-        report.permission user, :write
+      account = Account.current_account
+      if account.ingroup?(:admin)
+        report.reporters << account.person.reporters.build(report_id: report, owner: true)
+        report.permission account, :write
         report.save!
       end
     end
   end
 
   def localize_status
-    if self.class == Hrinfo
-      I18n.t("activerecord.attributes.hrinfo.localized_status.#{report.status}")
+    if self.class == Employee
+      I18n.t("activerecord.attributes.employee.localized_status.#{report.status}")
     else
       report.localize_status rescue I18n.t("activerecord.attributes.report.localized_status.not_reported")
     end
   end
 
-  def access?(user, permission_type = :read)
+  def access?(account, permission_type = :read)
     if report.present?
-      report.access?(user, permission_type)
+      report.access?(account, permission_type)
     else
-      user.ingroup?(:admin)
+      account.ingroup?(:admin)
     end
   end
   delegate :report!, :approve!, :rollback!, :to => :report
@@ -48,8 +48,8 @@ module Reportable
       includes(:report => :accessors).merge(AccessPerson.no_permission)
     end
 
-    def access_list(user)
-      includes(:report => :accessors).merge(AccessPerson.access_list(user))
+    def access_list(account)
+      includes(:report => :accessors).merge(AccessPerson.access_list(account))
     end
 
     def report_status(status)

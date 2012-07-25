@@ -4,7 +4,7 @@ class CreditcardsControllerTest < ActionController::TestCase
   fixtures :creditcards
 
   def setup
-    current_user.hrinfo.permission.create!(name: 'creditcards')
+    current_account.employee.permission.create!(name: 'creditcards')
   end
 
   test "should see list page" do
