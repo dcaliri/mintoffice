@@ -26,12 +26,12 @@ class SectionEnrollment::EnrollmentsController < ApplicationController
 
   def attach
     item = @enrollment.find_or_create_item_by_name(params[:name])
-    @attachment = Attachment.save_for(item, current_user, uploaded_file: params[:picture])
+    @attachment = Attachment.save_for(item, current_account, uploaded_file: params[:picture])
     redirect_to :back
   end
 
   def delete_attachment
-    attachment = Attachment.where(user_id: current_user.id, id: params[:attachment_id]).last
+    attachment = Attachment.where(account_id: current_account.id, id: params[:attachment_id]).last
     attachment.destroy
 
     item = @enrollment.items.find_by_name(params[:name])
@@ -42,7 +42,7 @@ class SectionEnrollment::EnrollmentsController < ApplicationController
 
   private
   def find_enrollment
-    @enrollment = current_user.enrollment
+    @enrollment = current_account.enrollment
   end
 
   def find_apply_admin

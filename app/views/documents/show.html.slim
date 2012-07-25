@@ -28,7 +28,7 @@ h2
     h3
       = t(".backlink")
     ul
-      - u = document.user_for_tag(Hrinfo.model_name.human)
+      - u = document.account_for_tag(Hrinfo.model_name.human)
       - if u
         li= link_to Hrinfo.model_name.human, :controller => "hrinfos", :action => "show", :id => u.hrinfo
     = render 'reports/info', target: document

@@ -13,7 +13,7 @@ h2= t("common.title.show")
       = dtdd change_history, "before_value"
       = dtdd change_history, "after_value"
       dt
-        = ChangeHistory.human_attribute_name('user_id')
+        = ChangeHistory.human_attribute_name('account_id')
       dd
         = change_history.hrinfo.fullname rescue ""
       = dtdd change_history, "changable_type"

@@ -12,20 +12,20 @@ class PermissionsController < ApplicationController
     end
   end
 
-  def adduser
+  def addaccount
     @permission = Permission.find(params[:id])
-    @user = User.find_by_name(params[:username])
-    if !@user
+    @account = Account.find_by_name(params[:accountname])
+    if !@account
       redirect_to @permission, alert: "등록되지 않은 사용자입니다."
-    elsif @permission.hrinfo.include?(@user.hrinfo)
+    elsif @permission.hrinfo.include?(@account.hrinfo)
       redirect_to @permission, alert: "이미 등록된 사용자입니다."
     else
-      @permission.hrinfo << @user.hrinfo
+      @permission.hrinfo << @account.hrinfo
       redirect_to @permission, notice: "성공적으로 사용자를 등록했습니다."
     end
   end
 
-  def removeuser
+  def removeaccount
     @hrinfo = Hrinfo.find(params[:hrinfo_id])
     @permission = Permission.find(params[:id])
     @permission.hrinfo.delete(@hrinfo)

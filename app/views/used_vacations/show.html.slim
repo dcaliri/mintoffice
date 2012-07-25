@@ -1,10 +1,10 @@
 #show_command
-  - if @user.ingroup?("admin")
+  - if @account.ingroup?("admin")
     = link_to t('common.title.edit'), [:edit, vacation, used_vacation]
     = " | "
     = link_to t('common.title.destroy'), [vacation, used_vacation], :method => :delete, :confirm => t("common.messages.delete_confirm")
     = " | "
-  = link_to t('common.title.list'), vacation_path(vacation.hrinfo.user)
+  = link_to t('common.title.list'), vacation_path(vacation.hrinfo.account)
 
 h2= t('.title')
 

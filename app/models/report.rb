@@ -49,15 +49,15 @@ class Report < ActiveRecord::Base
     I18n.t("activerecord.attributes.report.localized_status.#{status}")
   end
 
-  def report!(user, comment, report_url)
+  def report!(account, comment, report_url)
     prev_reporter = self.reporter
     prev_reporter.owner = false
 
-    # collection = reporters.where(user_id: user.id)
-    collection = reporters.where(person_id: user.person.id)
+    # collection = reporters.where(account_id: account.id)
+    collection = reporters.where(person_id: account.person.id)
     if collection.empty?
-      # next_reporter = user.reporters.build(owner: true)
-      next_reporter = user.person.reporters.build(owner: true)
+      # next_reporter = account.reporters.build(owner: true)
+      next_reporter = account.person.reporters.build(owner: true)
       next_reporter.prev = prev_reporter
       self.reporters << next_reporter
     else
@@ -86,22 +86,22 @@ class Report < ActiveRecord::Base
       url: report_url,
     })
 
-    # Boxcar.send_to_boxcar_user(next_reporter.user, prev_reporter.fullname, title)
-    # ReportMailer.report(target, prev_reporter.user, next_reporter.user, title, body)
+    # Boxcar.send_to_boxcar_account(next_reporter.account, prev_reporter.fullname, title)
+    # ReportMailer.report(target, prev_reporter.account, next_reporter.account, title, body)
     
-    Boxcar.send_to_boxcar_user(next_reporter.person.user, prev_reporter.fullname, title)
-    ReportMailer.report(target, prev_reporter.person.user, next_reporter.person.user, title, body)
+    Boxcar.send_to_boxcar_account(next_reporter.person.account, prev_reporter.fullname, title)
+    ReportMailer.report(target, prev_reporter.person.account, next_reporter.person.account, title, body)
 
-    permission user, :write
-    permission prev_reporter.person.user, :read
+    permission account, :write
+    permission prev_reporter.person.account, :read
 
     save!
   end
 
   def approve!(comment)
     self.status = :reported
-    # User.current_user.reporters.create!(report_id: id, owner: true) unless self.reporter
-    User.current_user.person.reporters.create!(report_id: id, owner: true) unless self.reporter
+    # Account.current_account.reporters.create!(report_id: id, owner: true) unless self.reporter
+    Account.current_account.person.reporters.create!(report_id: id, owner: true) unless self.reporter
     self.comments.build(owner: self.reporter, description: "#{reporter.fullname}"+I18n.t('models.report.to_approve'))
     self.comments.build(owner: self.reporter, description: comment) unless comment.blank?
     save!
@@ -118,10 +118,10 @@ class Report < ActiveRecord::Base
       prev_reporter.owner = false
       prev_reporter.save!
 
-      # permission next_reporter.user, :write
-      # permission prev_reporter.user, :read
-      permission next_reporter.person.user, :write
-      permission prev_reporter.person.user, :read
+      # permission next_reporter.account, :write
+      # permission prev_reporter.account, :read
+      permission next_reporter.person.account, :write
+      permission prev_reporter.person.account, :read
     end
     self.comments.build(owner: prev_reporter, description: "#{prev_reporter.fullname}"+I18n.t('models.report.to_rollback'))
     self.comments.build(owner: prev_reporter, description: comment) unless comment.blank?
@@ -141,19 +141,19 @@ class Report < ActiveRecord::Base
         url: report_url,
       })
 
-      # Boxcar.send_to_boxcar_user(next_reporter.user, prev_reporter.fullname, title)
-      # ReportMailer.report(target, prev_reporter.user, next_reporter.user, title, body)
+      # Boxcar.send_to_boxcar_account(next_reporter.account, prev_reporter.fullname, title)
+      # ReportMailer.report(target, prev_reporter.account, next_reporter.account, title, body)
 
-      Boxcar.send_to_boxcar_user(next_reporter.person.user, prev_reporter.fullname, title)
-      ReportMailer.report(target, prev_reporter.person.user, next_reporter.person.user, title, body)
+      Boxcar.send_to_boxcar_account(next_reporter.person.account, prev_reporter.fullname, title)
+      ReportMailer.report(target, prev_reporter.person.account, next_reporter.person.account, title, body)
     end
 
     save!
   end
 
   def report?
-    # self.reporter.present? && self.reporter.user == User.current_user
-    self.reporter.present? && self.reporter.person == User.current_user.person
+    # self.reporter.present? && self.reporter.account == Account.current_account
+    self.reporter.present? && self.reporter.person == Account.current_account.person
   end
 
   def rollback?

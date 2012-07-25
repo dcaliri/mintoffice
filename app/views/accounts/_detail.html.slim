@@ -1,0 +1,25 @@
+h2= account.name
+
+.box
+  #desc
+    = dtdd account, "google_account"
+    = dtdd account, "daum_account"
+    = dtdd account, "nate_account"
+    = dtdd account, "notify_email"
+    = dtdd account, "boxcar_account"
+    = dtdd account, "redmine_account"
+
+    =render "shared/attachments/detail", target: account
+
+    - if account.google_account?
+      = button_to t("accounts.google.destroy"), [:google_apps, account], method: :delete, confirm: t("common.messages.delete_confirm")
+    - else
+      = button_to t("accounts.google.create"), [:google_apps, account], method: :post
+
+    - if account.redmine_account?
+        = button_to t("accounts.redmine.destroy"), [:redmine, account], method: :delete, confirm: t("common.messages.delete_confirm")
+    - else
+      = button_to t("accounts.redmine.create"), [:redmine, account], method: :post
+
+  .clear
+= render 'changelog', target: account

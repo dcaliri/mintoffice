@@ -1,11 +1,11 @@
 - title t('.title')
 
 #show_command
-  - if @user.ingroup?("admin") or @hrinfo == current_user.hrinfo
+  - if @account.ingroup?("admin") or @hrinfo == current_account.hrinfo
     - if @hrinfo.joined?
       = link_to t('hrinfos.show.pdf'), [:employment_proof, @hrinfo]
       = " | "
-  - if @user.ingroup?("admin") and !@hrinfo.retired_on
+  - if @account.ingroup?("admin") and !@hrinfo.retired_on
     - if @hrinfo.joined?
       = link_to t('hrinfos.retire.title'), :action => :retire, :id => @hrinfo
       = " | "
@@ -24,10 +24,10 @@ h2
         = @hrinfo.companyno
       = dtdd @hrinfo, "position"
       dt
-        = Hrinfo.human_attribute_name('username')
+        = Hrinfo.human_attribute_name('accountname')
       dd
-        = @hrinfo.user.name
-      - if @user.ingroup?("admin") || @hrinfo.user == @user
+        = @hrinfo.account.name
+      - if @account.ingroup?("admin") || @hrinfo.account == @account
         = dtdd @hrinfo, "juminno"
       = dtdd @hrinfo, "joined_on"
       - if @hrinfo.retired_on
@@ -39,8 +39,8 @@ h2
           = t("contacts.show.title")
         ul
           = render 'contacts/item_for_hrinfo', contact: @hrinfo.contact,menu: false
-      - if @user.ingroup?("admin") || @hrinfo.user == @user
-        - if @user.ingroup? "admin"
+      - if @account.ingroup?("admin") || @hrinfo.account == @account
+        - if @account.ingroup? "admin"
           #show_command
             = link_to t('required_tags.new.title'), :controller => "required_tags",  :action => "new", :modelname => Hrinfo.name, :returnurl => request.url
         h3
@@ -54,7 +54,7 @@ h2
                 - if @required_documents[rtn]
                   = link_to @required_documents[rtn].title, :controller => "documents", :action => "show", :id => @required_documents[rtn]
                 - else
-                  = link_to " Register", :controller => "documents", :action => "new", :tag => [rtn, Hrinfo.model_name.human, @hrinfo.user.name].join(',')
+                  = link_to " Register", :controller => "documents", :action => "new", :tag => [rtn, Hrinfo.model_name.human, @hrinfo.account.name].join(',')
           - if !@unrequired_documents.blank?
             - for d in @unrequired_documents
               li
@@ -64,17 +64,17 @@ h2
           h3
             = t(".related_admin_actions")
           ul
-            - if @user.ingroup?("admin") || @hrinfo.user == @user
+            - if @account.ingroup?("admin") || @hrinfo.account == @account
               li
-                = link_to t('payments.title'), payment_path(@hrinfo.user)
+                = link_to t('payments.title'), payment_path(@hrinfo.account)
               li
-                = link_to t('vacations.show.link'), vacation_path(@hrinfo.user)
+                = link_to t('vacations.show.link'), vacation_path(@hrinfo.account)
   #attach
     = render "shared/attachments/detail", :target => @hrinfo
   .clear
 
 
-- if @user.ingroup? "admin"
+- if @account.ingroup? "admin"
   = render 'changelog', target: @hrinfo
 
 

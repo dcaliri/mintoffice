@@ -41,7 +41,7 @@ class Cardbill < ActiveRecord::Base
       result = if params[:empty_permission] == 'true'
                 result.no_permission
               else
-                result.access_list(params[:user])
+                result.access_list(params[:account])
               end
       result
     end

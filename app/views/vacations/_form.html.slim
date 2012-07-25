@@ -1,9 +1,9 @@
 #show_command
-  = link_to t('common.title.back'), [user, :vacations]
+  = link_to t('common.title.back'), [account, :vacations]
 
 h2= t("common.title.#{action_name}")
 
-= form_for [user, vacation], html: {class: "tabular"} do |f|
+= form_for [account, vacation], html: {class: "tabular"} do |f|
   = f.error_messages
   .box
     p

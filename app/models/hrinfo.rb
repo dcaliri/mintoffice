@@ -1,7 +1,7 @@
 # encoding: UTF-8
 
 class Hrinfo < ActiveRecord::Base
-  # belongs_to :user
+  # belongs_to :account
   belongs_to :person
 
   has_and_belongs_to_many :groups
@@ -56,8 +56,8 @@ class Hrinfo < ActiveRecord::Base
     end
   end
 
-  def user
-    person.user
+  def account
+    person.account
   end
   
   def contact
@@ -159,7 +159,7 @@ class Hrinfo < ActiveRecord::Base
   end
 
   def retire!
-    user.payments.retire!(retired_on)
+    account.payments.retire!(retired_on)
     save!
   end
 
@@ -242,13 +242,13 @@ class Hrinfo < ActiveRecord::Base
   end
 
   class << self
-    def search(user, type, text)
-      search_by_type(user, type).search_by_text(text)
+    def search(account, type, text)
+      search_by_type(account, type).search_by_text(text)
     end
 
-    def search_by_type(user, type)
+    def search_by_type(account, type)
       type = type.to_sym
-      if user and user.admin? and type == :retire
+      if account and account.admin? and type == :retire
         where('retired_on IS NOT NULL')
       else
         where('joined_on IS NOT NULL AND retired_on IS NULL')
@@ -257,7 +257,7 @@ class Hrinfo < ActiveRecord::Base
 
     def search_by_text(text)
       text = "%#{text}%"
-      joins(:person => :user).where('users.name LIKE ? OR users.notify_email LIKE ? OR hrinfos.firstname like ? OR hrinfos.lastname LIKE ? OR hrinfos.position LIKE ?', text, text, text, text, text)
+      joins(:person => :account).where('accounts.name LIKE ? OR accounts.notify_email LIKE ? OR hrinfos.firstname like ? OR hrinfos.lastname LIKE ? OR hrinfos.position LIKE ?', text, text, text, text, text)
     end
   end
 end

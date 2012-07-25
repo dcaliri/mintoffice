@@ -1,0 +1,11 @@
+#show_command
+  = link_to t('common.title.back'), :accounts
+
+h2= t(".title")
+
+table#list-table
+  tr
+    th= Account.human_attribute_name('name')
+  - @accounts.each do |account|
+    tr
+	  	td= account[:name]

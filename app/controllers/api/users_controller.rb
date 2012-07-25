@@ -1,13 +1,13 @@
 module Api
-  class UsersController < Api::ApplicationController
-    skip_before_filter :find_user
+  class AccountsController < Api::ApplicationController
+    skip_before_filter :find_account
     respond_to :json
 
     def login
-      @user = User.authenticate(params[:user], params[:password])
-      if @user
-        @user.create_api_key(params[:user], params[:password])
-        render :json => {:status => :ok, :user => @user}
+      @account = Account.authenticate(params[:account], params[:password])
+      if @account
+        @account.create_api_key(params[:account], params[:password])
+        render :json => {:status => :ok, :account => @account}
       else
         render :json => {:status => :not_found}
       end

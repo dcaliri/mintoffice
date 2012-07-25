@@ -5,13 +5,13 @@ class HrinfosController < ApplicationController
   end
 
   before_filter :retired_hrinfo_can_access_only_admin, except: [:index, :new, :create]
-  before_filter :user_only_access_my_employment, only: [:new_employment_proof]
+  before_filter :account_only_access_my_employment, only: [:new_employment_proof]
 
   # GET /hrinfos
   # GET /hrinfos.xml
   def index
     params[:search_type] ||= :join
-    @hrinfos = Hrinfo.search(User.current_user, params[:search_type], params[:q])
+    @hrinfos = Hrinfo.search(Account.current_account, params[:search_type], params[:q])
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @hrinfos }
@@ -41,7 +41,7 @@ class HrinfosController < ApplicationController
   # GET /hrinfos/1.xml
   def show
     @hrinfo = Hrinfo.find(params[:id])
-    @related_documents = current_company.tags.related_documents(@hrinfo.user.name, Hrinfo.model_name.human)
+    @related_documents = current_company.tags.related_documents(@hrinfo.account.name, Hrinfo.model_name.human)
     @required_tagnames = RequiredTag.find_all_by_modelname(Hrinfo.name).collect do |rt| rt.tag.name end
     @required_tagnames = @required_tagnames.uniq.sort
 
@@ -69,11 +69,11 @@ class HrinfosController < ApplicationController
   # GET /hrinfos/new.xml
   def new
     @hrinfo = Hrinfo.new
-    # @users = User.nohrinfo
+    # @accounts = Account.nohrinfo
     @people = Person.nohrinfo
 
     if @people.blank?
-      flash[:notice] = t('hrinfos.new.users_blank')
+      flash[:notice] = t('hrinfos.new.accounts_blank')
       redirect_to :action => "index"
     else
       respond_to do |format|
@@ -149,12 +149,12 @@ class HrinfosController < ApplicationController
   private
   def retired_hrinfo_can_access_only_admin
     @hrinfo = Hrinfo.find(params[:id])
-    force_redirect if @hrinfo.retired? and !current_user.admin?
+    force_redirect if @hrinfo.retired? and !current_account.admin?
   end
 
-  def user_only_access_my_employment
+  def account_only_access_my_employment
     @hrinfo = Hrinfo.find(params[:id])
-    # force_redirect if @hrinfo.user_id != current_user.id and !current_user.admin?
-    force_redirect if @hrinfo.person.user != current_user and !current_user.admin?
+    # force_redirect if @hrinfo.account_id != current_account.id and !current_account.admin?
+    force_redirect if @hrinfo.person.account != current_account and !current_account.admin?
   end
 end

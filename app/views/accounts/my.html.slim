@@ -1,0 +1,8 @@
+- title t(".title")
+
+#show_command
+  = link_to t("accounts.edit.title"), [:edit, @account]
+  '  |
+  = link_to t("accounts.changepw.title"), :action => "changepw", :id => @account
+
+= render 'detail', :account => @account

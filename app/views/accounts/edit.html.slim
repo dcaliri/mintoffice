@@ -1,0 +1,10 @@
+- title t(".title")
+#show_command
+  -if @this_account.admin?
+    = link_to t('common.title.show'), @account
+    '  |
+  = link_to t('accounts.changepw.title'), :action => "changepw", :id => @account
+  '  |
+  = link_to t('common.title.back'), :back 
+
+= render "form"

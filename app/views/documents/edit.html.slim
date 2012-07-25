@@ -31,8 +31,8 @@ h2
 = form_tag({:action => :add_owner, :id => document},{:class => 'tabular'}) do
   .box
     p
-      = label_tag :username, t(".adduser")
-      = text_field_tag :username
+      = label_tag :accountname, t(".addaccount")
+      = text_field_tag :accountname
   = submit_tag t("common.button.add"), :id => "submit"
   .clear
 

@@ -82,16 +82,16 @@ class AttachmentsController < ApplicationController
   def save
     @attachment = Attachment.new(params[:attachment])
     
-    # if session[:user_id]
-    #   @attachment.user = User.find(session[:user_id])
+    # if session[:account_id]
+    #   @attachment.account = Account.find(session[:account_id])
     # else
-    #   @attachment.user = User.find(1)
+    #   @attachment.account = Account.find(1)
     # end
 
-    if session[:user_id]
-      @attachment.hrinfo = User.find(session[:user_id]).hrinfo
+    if session[:account_id]
+      @attachment.hrinfo = Account.find(session[:account_id]).hrinfo
     else
-      @attachment.hrinfo = User.find(1).hrinfo
+      @attachment.hrinfo = Account.find(1).hrinfo
     end
 
     if @attachment.save

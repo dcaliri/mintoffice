@@ -8,14 +8,14 @@ class UsedVacationsController < ApplicationController
   expose(:used_vacations) { vacation.used }
   expose(:used_vacation)
 
-  expose(:user) { vacation.hrinfo.user }
+  expose(:account) { vacation.hrinfo.account }
 
-  before_filter {|controller| controller.redirect_unless_me(user)}
-  before_filter :another_user_cant_access_yearly, :only => [:edit]
+  before_filter {|controller| controller.redirect_unless_me(account)}
+  before_filter :another_account_cant_access_yearly, :only => [:edit]
 
   def create
     used_vacation.save!
-    # Boxcar.send_to_boxcar_group("admin",used_vacation.vacation.user.hrinfo.fullname, I18n.t("used_vacations.new.link"))
+    # Boxcar.send_to_boxcar_group("admin",used_vacation.vacation.account.hrinfo.fullname, I18n.t("used_vacations.new.link"))
     redirect_to [vacation, used_vacation], notice: t('controllers.used_vacations.reports')
   end
 
@@ -36,15 +36,15 @@ class UsedVacationsController < ApplicationController
     else
       approve_txt = I18n.t("used_vacations.approval_waiting")
     end
-    redirect_to vacation_path(user)
+    redirect_to vacation_path(account)
   end
 
   def destroy
     used_vacation.destroy
-    redirect_to vacation_path(user)
+    redirect_to vacation_path(account)
   end
 
-  def another_user_cant_access_yearly
-    force_redirect if !current_user.admin?
+  def another_account_cant_access_yearly
+    force_redirect if !current_account.admin?
   end
 end

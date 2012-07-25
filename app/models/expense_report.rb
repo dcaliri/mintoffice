@@ -18,14 +18,14 @@ class ExpenseReport < ActiveRecord::Base
     end
   end
 
-  def report!(user, comment, report_url)
+  def report!(account, comment, report_url)
     if target_type == "Cardbill"
-      target.permission user, :read
+      target.permission account, :read
     end
     super
   end
 
-  def access?(user, access_type = :read)
+  def access?(account, access_type = :read)
     return false if access_type == :write and posting
     super
   end
@@ -36,7 +36,7 @@ class ExpenseReport < ActiveRecord::Base
       result = if params[:empty_permission] == 'true'
                 result.no_permission
               else
-                result.access_list(params[:user])
+                result.access_list(params[:account])
               end
       result
     end

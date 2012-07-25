@@ -1,5 +1,5 @@
 class ReportPerson < ActiveRecord::Base
-  # belongs_to :user
+  # belongs_to :account
   # belongs_to :hrinfo
   belongs_to :person
   belongs_to :report
@@ -10,10 +10,10 @@ class ReportPerson < ActiveRecord::Base
   has_many :comments, class_name: "ReportComment"
 
   class << self
-    def access_list(user)
-      # where(user ? {user_id: user.id} : "0")
-      # where(user ? {hrinfo_id: user.hrinfo.id} : "0")
-      where(user ? {person_id: user.person.id} : "0")
+    def access_list(account)
+      # where(account ? {account_id: account.id} : "0")
+      # where(account ? {hrinfo_id: account.hrinfo.id} : "0")
+      where(account ? {person_id: account.person.id} : "0")
     end
 
     def readers
@@ -25,7 +25,7 @@ class ReportPerson < ActiveRecord::Base
     end
 
     def by_me
-      where(person_id: User.current_user.person.id, owner: true)
+      where(person_id: Account.current_account.person.id, owner: true)
     end
   end
 

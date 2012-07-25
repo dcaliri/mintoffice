@@ -10,7 +10,7 @@ class ContactsController < ApplicationController
   before_filter :redirect_cannot_edit, :only => [:edit, :update, :destroy]
 
   def index
-    @contacts = contacts.isprivate(@user).search(params[:query])
+    @contacts = contacts.isprivate(@account).search(params[:query])
     @paginated = @contacts.paginate(:page => params[:page], :per_page => 20)
   end
 
@@ -41,7 +41,7 @@ class ContactsController < ApplicationController
 
   def save
     contact = OpenApi::GoogleContact.new(id: params[:id], password: params[:password])
-    current_user.contacts.save_to(contact)
+    current_account.contacts.save_to(contact)
     redirect_to :contacts, notice: t('controllers.contacts.success_save')
   rescue ArgumentError => e
     logger.info "failed to save google contact - #{e.message}"
@@ -50,7 +50,7 @@ class ContactsController < ApplicationController
 
   def load
     contact = OpenApi::GoogleContact.new(id: params[:id], password: params[:password])
-    current_user.contacts.load_from(contact)
+    current_account.contacts.load_from(contact)
     redirect_to :contacts, notice: t('controllers.contacts.success_read')
   rescue ArgumentError => e
     logger.info "failed to load google contact - #{e.message}"
@@ -58,7 +58,7 @@ class ContactsController < ApplicationController
   end
 
   def new
-    @contact = contacts.where(owner_id: current_user.id).build
+    @contact = contacts.where(owner_id: current_account.id).build
   end
 
   def edit
@@ -66,7 +66,7 @@ class ContactsController < ApplicationController
   end
 
   def create
-    @contact = contacts.where(owner_id: current_user.id).build(params[:contact])
+    @contact = contacts.where(owner_id: current_account.id).build(params[:contact])
     @contact.save!
     redirect_to @contact
   rescue ActiveRecord::RecordInvalid
@@ -88,12 +88,12 @@ class ContactsController < ApplicationController
   private
   def redirect_if_private
     @contact = contacts.find(params[:id])
-    force_redirect unless @contact.access?(current_user)
+    force_redirect unless @contact.access?(current_account)
   end
 
   def redirect_cannot_edit
     @contact = contacts.find(params[:id])
-    force_redirect unless @contact.edit?(current_user)
+    force_redirect unless @contact.edit?(current_account)
   end
 
 end

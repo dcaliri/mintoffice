@@ -9,7 +9,7 @@ class CardbillsController < ApplicationController
   # GET /cardbills
   # GET /cardbills.xml
   def index
-    @cardbills = Cardbill.filter_by_params(params.merge(user: current_user))
+    @cardbills = Cardbill.filter_by_params(params.merge(account: current_account))
                          .paginate(:order => 'transdate desc', :page => params[:page], :per_page => 20)
     respond_to do |format|
       format.html # index.html.erb

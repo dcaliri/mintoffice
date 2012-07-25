@@ -4,11 +4,11 @@
     = t("common.title.search")
     ' :
     = text_field_tag 'q', params[:q]
-    - if current_user.admin?
+    - if current_account.admin?
       = select_tag :search_type, options_for_select(Hrinfo::SEARCH_TYPE, params[:search_type]), "onchange" => "this.form.submit()"
 
 #show_command
-  - if @user.ingroup?("admin")
+  - if @account.ingroup?("admin")
     = link_to t('hrinfos.new.title'), new_hrinfo_path
 h2
   = t('hrinfos.index.total')
@@ -23,7 +23,7 @@ table#list-table
     th
       = Hrinfo.human_attribute_name('position')
     th
-      = Hrinfo.human_attribute_name('username')
+      = Hrinfo.human_attribute_name('accountname')
     th
       = Hrinfo.human_attribute_name('joined_on')
 
@@ -35,9 +35,9 @@ table#list-table
         =h hrinfo.fullname
       td
         =h hrinfo.position
-      - if hrinfo.user
+      - if hrinfo.account
         td
-          =h hrinfo.user.name
+          =h hrinfo.account.name
       - else
         td
       td

@@ -2,7 +2,7 @@
 
 class Enrollment < ActiveRecord::Base
   belongs_to :company
-  # belongs_to :user
+  # belongs_to :account
   belongs_to :person
   # has_one :contact, :as => :target
 
@@ -33,13 +33,13 @@ class Enrollment < ActiveRecord::Base
     end
   end
 
-  def user
-    person.user
+  def account
+    person.account
   end
 
   include Rails.application.routes.url_helpers
   def redirect_when_reported
-    if user == User.current_user
+    if account == Account.current_account
       [:dashboard, :enrollments]
     else
       enroll_report_path(self)

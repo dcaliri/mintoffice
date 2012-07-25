@@ -1,5 +1,5 @@
 class DocumentOwner < ActiveRecord::Base
   belongs_to :document
-  # belongs_to :user
+  # belongs_to :account
   belongs_to :hrinfo
 end

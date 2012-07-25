@@ -1,11 +1,11 @@
 #show_command
-  = link_to t('common.title.back'), payment_path(user)
+  = link_to t('common.title.back'), payment_path(account)
 
 h2
   = t("payments.#{action_name}.title")
 
 
-= form_for [user, payment] do |f|
+= form_for [account, payment] do |f|
   = f.error_messages
   = f.hidden_field :payment_type
   .box

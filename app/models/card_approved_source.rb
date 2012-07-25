@@ -114,7 +114,7 @@ class CardApprovedSource < ActiveRecord::Base
           storename: approved_source.store_name,
           storeaddr: used_source.store_addr1 + " " + used_source.store_addr2,
         )
-        cardbill.accessors.build(user_id: owner.id, access_type: "write")
+        cardbill.accessors.build(account_id: owner.id, access_type: "write")
         cardbill.save!
         total_count += 1
       end

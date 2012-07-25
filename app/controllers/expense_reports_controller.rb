@@ -4,9 +4,9 @@ class ExpenseReportsController < ApplicationController
 
   def index
     project = Project.find(params[:project_id]) unless params[:project_id].blank?
-    @expenses_by_menu = ExpenseReport.filter(user: current_user)
+    @expenses_by_menu = ExpenseReport.filter(account: current_account)
     @expenses = ExpenseReport.filter(
-                                user: current_user,
+                                account: current_account,
                                 project: project,
                                 year: params[:year].to_i,
                                 month: params[:month].to_i,
@@ -17,13 +17,13 @@ class ExpenseReportsController < ApplicationController
   end
 
   def no_permission
-    @expenses_by_menu = ExpenseReport.filter(user: current_user)
+    @expenses_by_menu = ExpenseReport.filter(account: current_account)
     @expenses = ExpenseReport.no_permission.page(params[:page])
     render 'index'
   end
 
   def create
-    expense_report.hrinfo = current_user.hrinfo
+    expense_report.hrinfo = current_account.hrinfo
     expense_report.save!
     redirect_to expense_report
   end

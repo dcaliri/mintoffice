@@ -38,38 +38,38 @@ class ProjectsController < ApplicationController
   end
 
   def assign
-    @this_user = User.find(params[:user_id])
-    @projects = @this_user.hrinfo.projects.inprogress
+    @this_account = Account.find(params[:account_id])
+    @projects = @this_account.hrinfo.projects.inprogress
   end
 
   def assign_projects
-    @this_user = User.find(params[:user_id])
-    if projects.assign_projects(@this_user, params[:projects])
-      redirect_to [:assign, @this_user, :projects]
+    @this_account = Account.find(params[:account_id])
+    if projects.assign_projects(@this_account, params[:projects])
+      redirect_to [:assign, @this_account, :projects]
     else
-      redirect_to [:assign, @this_user, :projects], notice: t('projects.assign.not_hundred')
+      redirect_to [:assign, @this_account, :projects], notice: t('projects.assign.not_hundred')
     end
   end
 
 
-  def add_user
-    user = User.find_by_name(params[:username])
-    if user
-      if project.hrinfos.include? user.hrinfo
+  def add_account
+    account = Account.find_by_name(params[:accountname])
+    if account
+      if project.hrinfos.include? account.hrinfo
         flash[:notice] = I18n.t "common.messages.already_exist"
       else
-        project.hrinfos << user.hrinfo
+        project.hrinfos << account.hrinfo
       end
     else
-      flash[:notice] = I18n.t "common.messages.no_such_user"
+      flash[:notice] = I18n.t "common.messages.no_such_account"
     end
 
     redirect_to [:edit, project]
   end
 
-  def del_user
-    # user = User.find(params[:uid])
-    # project.users.delete(user)
+  def del_account
+    # account = Account.find(params[:uid])
+    # project.accounts.delete(account)
     # redirect_to [:edit, project]
     hrinfo = Hrinfo.find(params[:uid])
     project.hrinfos.delete(hrinfo)

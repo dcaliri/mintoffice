@@ -2,7 +2,7 @@ class MainController < ApplicationController
   layout "main", :except => ['login', 'pdf']
 
   def index
-      @user = User.find(session[:user_id])
+      @account = Account.find(session[:account_id])
       @page = params[:page].nil? ? 0 : params[:page].to_i
       @start_day = (Time.zone.now + @page.week).beginning_of_week
       @end_day = (Time.zone.now + @page.week).end_of_week

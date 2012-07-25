@@ -8,11 +8,11 @@ class DocumentsController < ApplicationController
   before_filter :access_check, except: [:index, :new, :create]
 
   def index
-    @documents = documents.filter_by_params(params.merge(user: current_user)).latest.page(params[:page])
+    @documents = documents.filter_by_params(params.merge(account: current_account)).latest.page(params[:page])
   end
 
   def create
-    document.hrinfos << current_user.hrinfo
+    document.hrinfos << current_account.hrinfo
     document.add_tags(params[:tag])
     document.save!
     redirect_to document, notice: t('common.messages.created', :model => Document.model_name.human)
@@ -33,7 +33,7 @@ class DocumentsController < ApplicationController
   end
 
   def add_owner
-    owner = User.find_by_name(params[:username])
+    owner = Account.find_by_name(params[:accountname])
     if owner
       if document.hrinfos.exists?(owner.hrinfo)
         flash[:notice] = 'Already exists'
@@ -41,7 +41,7 @@ class DocumentsController < ApplicationController
         document.hrinfos << owner.hrinfo
       end
     else
-      flash[:notice] = 'No such user'
+      flash[:notice] = 'No such account'
     end
 
     redirect_to [:edit, document]

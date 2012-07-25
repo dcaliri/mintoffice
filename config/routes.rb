@@ -8,7 +8,7 @@ Mintoffice::Application.routes.draw do
   end
 
   namespace :api do
-    match 'login', controller: :users, action: :login
+    match 'login', controller: :accounts, action: :login
 
     resources :commutes do
       collection do
@@ -90,14 +90,14 @@ Mintoffice::Application.routes.draw do
     end
   end
 
-  match '/users/changepw/:user_id', :controller => 'users', :action => 'changepw'
-  match '/users/login', :controller => 'users', :action => 'login'
-  match '/users/logout', :controller => 'users', :action => 'logout', :conditions => { :method => :get}
-  match '/users/my', :controller => "users", :action => "my"
+  match '/accounts/changepw/:account_id', :controller => 'accounts', :action => 'changepw'
+  match '/accounts/login', :controller => 'accounts', :action => 'login'
+  match '/accounts/logout', :controller => 'accounts', :action => 'logout', :conditions => { :method => :get}
+  match '/accounts/my', :controller => "accounts", :action => "my"
 
   resources :groups
 
-  resources :users do
+  resources :accounts do
     collection do
       get 'google_apps', as: :google_apps
     end

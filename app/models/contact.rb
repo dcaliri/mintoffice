@@ -6,7 +6,7 @@ class Contact < ActiveRecord::Base
   # belongs_to :target, :polymorphic => true
   belongs_to :person
 
-  # belongs_to :owner, class_name: 'User'
+  # belongs_to :owner, class_name: 'Account'
   belongs_to :owner, class_name: 'Person'
 
   REJECT_IF_EMPTY = proc do |attrs|
@@ -40,16 +40,16 @@ class Contact < ActiveRecord::Base
     end
   end
 
-  def access?(user)
-    isprivate == false || owner == user
+  def access?(account)
+    isprivate == false || owner == account
   end
 
-  def owner?(user)
-    owner == user
+  def owner?(account)
+    owner == account
   end
 
-  def edit?(user)
-    user.admin? || owner?(user)
+  def edit?(account)
+    account.admin? || owner?(account)
   end
 
   def owner_name
@@ -57,8 +57,8 @@ class Contact < ActiveRecord::Base
   end
 
   class << self
-    def isprivate(current_user)
-      where("isprivate = ? OR owner_id = ?", false, current_user.id)
+    def isprivate(current_account)
+      where("isprivate = ? OR owner_id = ?", false, current_account.id)
     end
 
     def search(query)

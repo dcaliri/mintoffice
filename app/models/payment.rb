@@ -1,7 +1,7 @@
 #encoding: UTF-8
 
 class Payment < ActiveRecord::Base
-  # belongs_to :user
+  # belongs_to :account
   belongs_to :hrinfo
 
   before_save :modify_bonus_date

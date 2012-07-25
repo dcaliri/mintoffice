@@ -6,13 +6,13 @@ class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
   before_filter :authorize, :except => [:login, :logout]
-  before_filter :set_global_current_user_and_company
+  before_filter :set_global_current_account_and_company
   helper_method :title
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
 
-  def set_global_current_user_and_company
-    User.current_user = current_user
+  def set_global_current_account_and_company
+    Account.current_account = current_account
     Company.current_company = current_company
   end
 
@@ -24,10 +24,10 @@ class ApplicationController < ActionController::Base
   end
   helper_method :current_company
 
-  def current_user
-    User.find(session[:user_id]) unless session[:user_id].nil?
+  def current_account
+    Account.find(session[:account_id]) unless session[:account_id].nil?
   end
-  helper_method :current_user
+  helper_method :current_account
 
 
   before_filter :modify_query_parameter
@@ -39,12 +39,12 @@ class ApplicationController < ActionController::Base
 
   protected
   def authorize
-    @user = User.find(session[:user_id]) if session[:user_id]
-    if @user.nil? or @user.not_joined?
-      redirect_to users_login_path
+    @account = Account.find(session[:account_id]) if session[:account_id]
+    if @account.nil? or @account.not_joined?
+      redirect_to accounts_login_path
       return
     end
-    if @user.ingroup? "admin"
+    if @account.ingroup? "admin"
       return
     end
 
@@ -52,18 +52,18 @@ class ApplicationController < ActionController::Base
   end
 
   def redirect_unless_permission
-    unless Permission.can_access? @user, controller_name, action_name
+    unless Permission.can_access? @account, controller_name, action_name
       force_redirect
     end
   end
 
   def redirect_unless_admin
-    force_redirect unless @user.ingroup? "admin"
+    force_redirect unless @account.ingroup? "admin"
   end
 
-  def redirect_unless_me(user)
-    unless @user.ingroup? "admin"
-      force_redirect unless @user == user
+  def redirect_unless_me(account)
+    unless @account.ingroup? "admin"
+      force_redirect unless @account == account
     end
   end
 
@@ -72,11 +72,11 @@ class ApplicationController < ActionController::Base
     redirect_to :root
   end
 
-  def User(permission)
-    if permission == :protedted && @user.ingroup?(:admin) == false
-      User.where(name: @user.name)
+  def Account(permission)
+    if permission == :protedted && @account.ingroup?(:admin) == false
+      Account.where(name: @account.name)
     else
-      User
+      Account
     end
   end
 
@@ -97,6 +97,6 @@ class ApplicationController < ActionController::Base
   def access_check
     model_name = (controller_name.singularize.classify).constantize
     model = model_name.find(params[:id])
-    force_redirect unless model.access?(current_user)
+    force_redirect unless model.access?(current_account)
   end
 end

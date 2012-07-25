@@ -7,7 +7,7 @@ h3
     p
       = phone_number_field.label :target
       = phone_number_field.select :target, options_for_select(current_company.contact_phone_number_tags.map{|tag| tag.name}, phone_number_field.object.target)
-      - if current_user.present? and current_user.admin?
+      - if current_account.present? and current_account.admin?
         = link_to t('contacts_form.make_new_one'), [:new, :contact_phone_number_tag]
     p
       = phone_number_field.label :number

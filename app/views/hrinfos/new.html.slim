@@ -7,8 +7,8 @@ h2
   .box
     = f.error_messages
     p
-      = f.label :username, Hrinfo.human_attribute_name('username')
-      / = f.collection_select(:user_id, @users, :id, :name)
+      = f.label :accountname, Hrinfo.human_attribute_name('accountname')
+      / = f.collection_select(:account_id, @accounts, :id, :name)
       = f.collection_select(:person_id, @people, :id, :name)
     p
       = f.label :companyno, Hrinfo.human_attribute_name('companyno')

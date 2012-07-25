@@ -11,7 +11,7 @@ h2= t("common.title.#{action_name}")
       = f.text_field :name
     p
       = f.label :hrinfos
-      - User.enabled.each do |u|
+      - Account.enabled.each do |u|
         - if u.hrinfo
           = check_box_tag "group[hrinfo_ids][]", u.hrinfo.id, group.hrinfos.include?(u.hrinfo)
           = u.fullname

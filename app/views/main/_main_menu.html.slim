@@ -5,25 +5,25 @@ table align="center" border="0" cellspacing="5" cellpadding="5"  style="margin-t
     td
       = link_to t("hrinfos.index.title"), :controller => "hrinfos"
       '  /
-      = link_to t("commutes.index.title"), commute_path(@user)
+      = link_to t("commutes.index.title"), commute_path(@account)
       '  /
-      = link_to t("vacations.index.title"), vacation_path(@user)
-      -  if @user.has_payment_info
+      = link_to t("vacations.index.title"), vacation_path(@account)
+      -  if @account.has_payment_info
         '  /
-        = link_to t("payments.title"), payment_path(@user)
+        = link_to t("payments.title"), payment_path(@account)
   tr
     th style="background-color:lightgray;"
       = t("main.index.finance")
     td
-      - if @user.hrinfo.permission.any? {|perm| perm.name == 'pettycashes'}
+      - if @account.hrinfo.permission.any? {|perm| perm.name == 'pettycashes'}
         = link_to t("pettycashes.index.title"), :controller => "pettycashes"
         '  /
       = link_to t("cardbills.index.title"), :controller => "cardbills" 
       '  /
-      - if @user.hrinfo.permission.any? {|perm| perm.name == 'bank_accounts'} 
+      - if @account.hrinfo.permission.any? {|perm| perm.name == 'bank_accounts'} 
         = link_to t("bank_accounts.index.title"), :bank_accounts
         '  /
-      - if @user.hrinfo.permission.any? {|perm| perm.name == 'taxbills'}
+      - if @account.hrinfo.permission.any? {|perm| perm.name == 'taxbills'}
         = link_to t("taxbills.index.title"), :taxbills
         '  /
       = link_to t("expense_reports.index.title"), :expense_reports
@@ -35,7 +35,7 @@ table align="center" border="0" cellspacing="5" cellpadding="5"  style="margin-t
     th style="background-color:lightgray;"
       = t("main.index.project")
     td
-      - if @user.hrinfo.permission.any? {|perm| perm.name == 'projects'}
+      - if @account.hrinfo.permission.any? {|perm| perm.name == 'projects'}
         = link_to t("projects.index.title"), :controller => "projects"
   tr
     th style="background-color:lightgray;"
@@ -43,13 +43,13 @@ table align="center" border="0" cellspacing="5" cellpadding="5"  style="margin-t
     td
       = link_to t("documents.index.title"), :controller => "documents"
       '  /
-      - if @user.hrinfo.permission.any? {|perm| perm.name == 'business_clients'}
+      - if @account.hrinfo.permission.any? {|perm| perm.name == 'business_clients'}
         = link_to t("business_clients.index.title"), :business_clients
         '  /
-      - if @user.hrinfo.permission.any? {|perm| perm.name == 'contacts'}
+      - if @account.hrinfo.permission.any? {|perm| perm.name == 'contacts'}
         = link_to t("contacts.index.title"), :contacts
       
-  - if @user.ingroup?(:admin)
+  - if @account.ingroup?(:admin)
     tr
       th style="background-color:lightgray;"
         = t("main.index.admin")
@@ -61,7 +61,7 @@ table align="center" border="0" cellspacing="5" cellpadding="5"  style="margin-t
           '  /
           = link_to t("payments.title"), :payments
           '  /
-          = link_to t("users.index.title"), :controller => "users"
+          = link_to t("accounts.index.title"), :controller => "accounts"
           '  /
           = link_to t("groups.title"), :controller => "groups"
         p

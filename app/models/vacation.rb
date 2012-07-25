@@ -1,5 +1,5 @@
 class Vacation < ActiveRecord::Base
-  # belongs_to :user
+  # belongs_to :account
   belongs_to :hrinfo
   has_many :used, class_name: 'UsedVacation'
 

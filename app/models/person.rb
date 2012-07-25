@@ -1,5 +1,5 @@
 class Person < ActiveRecord::Base
-  has_one :user
+  has_one :account
   has_and_belongs_to_many :companies
 
   has_one :hrinfo
@@ -13,11 +13,11 @@ class Person < ActiveRecord::Base
   has_many :accessors, class_name: 'AccessPerson'
 
   def self.nohrinfo
-    joins(:user).where('users.person_id == people.id') - joins(:hrinfo).where('hrinfos.person_id == people.id')
+    joins(:account).where('accounts.person_id == people.id') - joins(:hrinfo).where('hrinfos.person_id == people.id')
   end
 
   def name
-    user.name
+    account.name
   end
 
   def joined?

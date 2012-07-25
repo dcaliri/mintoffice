@@ -11,11 +11,11 @@ h1
   p
     = f.label :hrinfos
     br
-    - if !User.all.blank?
-      - for user in User.enabled
-        - if user.hrinfo
-          = check_box_tag "permission[hrinfo_ids][]", user.hrinfo.id, @permission.hrinfo.include?(user.hrinfo)
-          = user.hrinfo.fullname
+    - if !Account.all.blank?
+      - for account in Account.enabled
+        - if account.hrinfo
+          = check_box_tag "permission[hrinfo_ids][]", account.hrinfo.id, @permission.hrinfo.include?(account.hrinfo)
+          = account.hrinfo.fullname
   p
     = f.submit 'Update'
 
