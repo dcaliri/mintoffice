@@ -7,6 +7,7 @@ class Person < ActiveRecord::Base
   has_one :taxman
 
   has_one :contact, dependent: :destroy
+  has_many :contacts, foreign_key: 'owner_id'
 
   has_many :reporters, class_name: 'ReportPerson'
   has_many :accessors, class_name: 'AccessPerson'

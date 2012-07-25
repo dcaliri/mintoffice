@@ -60,13 +60,8 @@ class ActionController::TestCase
 
   def current_user
     unless @user
-      begin
-        @user = users(:fixture)
-        puts @user.inspect
-        @user.hrinfo.groups.create!(name: "admin")
-      rescue ActiveRecord::RecordNotFound
-        puts "Fail"
-      end
+      @user = users(:fixture)
+      @user.hrinfo.groups.create!(name: "admin")
     end
     @user
   end
