@@ -7,7 +7,7 @@ require 'capybara/rails'
 
 class ActionDispatch::IntegrationTest
   include Capybara::DSL
-  fixtures :users, :companies, :companies_users, :permissions_users, :permissions
+  fixtures :users, :companies, :companies_people, :hrinfos_permissions, :permissions
   setup :global_setup
   teardown :global_teardown
 
