@@ -16,8 +16,8 @@ h2
       dt
         = t('projects.show.accounts')
       dd
-        - for hrinfo in project.hrinfos
-          = hrinfo.fullname
-          = link_to t('projects.show.allocation_ratio'), [:assign, hrinfo.account, :projects]
+        - for employee in project.employees
+          = employee.fullname
+          = link_to t('projects.show.allocation_ratio'), [:assign, employee.account, :projects]
           br
 = render 'expense'

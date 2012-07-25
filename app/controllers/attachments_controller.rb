@@ -89,9 +89,9 @@ class AttachmentsController < ApplicationController
     # end
 
     if session[:account_id]
-      @attachment.hrinfo = Account.find(session[:account_id]).hrinfo
+      @attachment.employee = Account.find(session[:account_id]).employee
     else
-      @attachment.hrinfo = Account.find(1).hrinfo
+      @attachment.employee = Account.find(1).employee
     end
 
     if @attachment.save

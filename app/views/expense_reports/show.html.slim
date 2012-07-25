@@ -23,7 +23,7 @@ h2
     dl
       dt
         = expense_report.class.human_attribute_name(:owner)
-      dd = expense_report.hrinfo.fullname
+      dd = expense_report.employee.fullname
       dt
         = expense_report.class.human_attribute_name(:target)
       dd

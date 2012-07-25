@@ -12,7 +12,7 @@ class DocumentsController < ApplicationController
   end
 
   def create
-    document.hrinfos << current_account.hrinfo
+    document.employees << current_account.employee
     document.add_tags(params[:tag])
     document.save!
     redirect_to document, notice: t('common.messages.created', :model => Document.model_name.human)
@@ -35,10 +35,10 @@ class DocumentsController < ApplicationController
   def add_owner
     owner = Account.find_by_name(params[:accountname])
     if owner
-      if document.hrinfos.exists?(owner.hrinfo)
+      if document.employees.exists?(owner.employee)
         flash[:notice] = 'Already exists'
       else
-        document.hrinfos << owner.hrinfo
+        document.employees << owner.employee
       end
     else
       flash[:notice] = 'No such account'
@@ -48,8 +48,8 @@ class DocumentsController < ApplicationController
   end
 
   def remove_owner
-    owner = Hrinfo.find(params[:uid])
-    document.hrinfos.delete(owner)
+    owner = Employee.find(params[:uid])
+    document.employees.delete(owner)
     redirect_to [:edit, document]
   end
 

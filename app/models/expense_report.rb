@@ -1,7 +1,7 @@
 # encoding: UTF-8
 
 class ExpenseReport < ActiveRecord::Base
-  belongs_to :hrinfo
+  belongs_to :employee
   belongs_to :target, polymorphic: true
   belongs_to :project
 

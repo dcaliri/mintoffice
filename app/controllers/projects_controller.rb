@@ -39,7 +39,7 @@ class ProjectsController < ApplicationController
 
   def assign
     @this_account = Account.find(params[:account_id])
-    @projects = @this_account.hrinfo.projects.inprogress
+    @projects = @this_account.employee.projects.inprogress
   end
 
   def assign_projects
@@ -55,10 +55,10 @@ class ProjectsController < ApplicationController
   def add_account
     account = Account.find_by_name(params[:accountname])
     if account
-      if project.hrinfos.include? account.hrinfo
+      if project.employees.include? account.employee
         flash[:notice] = I18n.t "common.messages.already_exist"
       else
-        project.hrinfos << account.hrinfo
+        project.employees << account.employee
       end
     else
       flash[:notice] = I18n.t "common.messages.no_such_account"
@@ -71,8 +71,8 @@ class ProjectsController < ApplicationController
     # account = Account.find(params[:uid])
     # project.accounts.delete(account)
     # redirect_to [:edit, project]
-    hrinfo = Hrinfo.find(params[:uid])
-    project.hrinfos.delete(hrinfo)
+    employee = Employee.find(params[:uid])
+    project.employees.delete(employee)
     redirect_to [:edit, project]
   end
 end

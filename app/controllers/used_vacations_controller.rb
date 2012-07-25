@@ -8,14 +8,14 @@ class UsedVacationsController < ApplicationController
   expose(:used_vacations) { vacation.used }
   expose(:used_vacation)
 
-  expose(:account) { vacation.hrinfo.account }
+  expose(:account) { vacation.employee.account }
 
   before_filter {|controller| controller.redirect_unless_me(account)}
   before_filter :another_account_cant_access_yearly, :only => [:edit]
 
   def create
     used_vacation.save!
-    # Boxcar.send_to_boxcar_group("admin",used_vacation.vacation.account.hrinfo.fullname, I18n.t("used_vacations.new.link"))
+    # Boxcar.send_to_boxcar_group("admin",used_vacation.vacation.account.employee.fullname, I18n.t("used_vacations.new.link"))
     redirect_to [vacation, used_vacation], notice: t('controllers.used_vacations.reports')
   end
 

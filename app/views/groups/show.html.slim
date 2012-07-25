@@ -10,5 +10,5 @@ h2= t('common.title.show')
 = group.name
 
 ul
-  - group.hrinfos.each do |hrinfo|
-    li= hrinfo.fullname
+  - group.employees.each do |employee|
+    li= employee.fullname

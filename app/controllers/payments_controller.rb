@@ -1,7 +1,7 @@
 class PaymentsController < ApplicationController
   expose(:accounts) { Account(:protected) }
   expose(:account)
-  expose(:payments) { account.hrinfo.payments }
+  expose(:payments) { account.employee.payments }
   expose(:payment)
 
   def redirect_unless_permission
@@ -21,11 +21,11 @@ class PaymentsController < ApplicationController
     params[:with_no_payment] = params[:with_no_payment].to_bool
 
     if params[:with_no_payment]
-      @hrinfos = Hrinfo
+      @employees = Employee
     else
-      @hrinfos = Hrinfo.payment_in?(@from.to_date, @to.to_date)
+      @employees = Employee.payment_in?(@from.to_date, @to.to_date)
     end
-    @hrinfos = @hrinfos.paginate(:page => params[:page], :per_page => 20)
+    @employees = @employees.paginate(:page => params[:page], :per_page => 20)
     @payments = Payment
   end
 

@@ -15,7 +15,7 @@ h2= t("common.title.show")
       dt
         = ChangeHistory.human_attribute_name('account_id')
       dd
-        = change_history.hrinfo.fullname rescue ""
+        = change_history.employee.fullname rescue ""
       = dtdd change_history, "changable_type"
       = dtdd change_history, "changable_id"
   .clear

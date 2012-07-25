@@ -2,12 +2,12 @@
 
 class Commute < ActiveRecord::Base
   # belongs_to :account
-  belongs_to :hrinfo
+  belongs_to :employee
 
   validate :check_unique_date, on: :create
   def check_unique_date
     # errors.add(:go, I18n.t('commutes.error.already_created')) if account.commutes.exists?(go: Time.now.all_day)
-    errors.add(:go, I18n.t('commutes.error.already_created')) if hrinfo.commutes.exists?(go: Time.now.all_day)
+    errors.add(:go, I18n.t('commutes.error.already_created')) if employee.commutes.exists?(go: Time.now.all_day)
   end
 
   include Attachmentable
@@ -17,11 +17,11 @@ class Commute < ActiveRecord::Base
   end
 
   def self.every_during(days)
-    commutes_by_hrinfo_id = {}
-    where(go: days).select("DISTINCT hrinfo_id").collect(&:hrinfo_id).each do |hrinfo_id|
-      commutes_by_hrinfo_id[hrinfo_id] = Hrinfo.find(hrinfo_id).commutes.during(days)
+    commutes_by_employee_id = {}
+    where(go: days).select("DISTINCT employee_id").collect(&:employee_id).each do |employee_id|
+      commutes_by_employee_id[employee_id] = Employee.find(employee_id).commutes.during(days)
     end
-    commutes_by_hrinfo_id
+    commutes_by_employee_id
   end
 
   def self.during(days)
@@ -36,13 +36,13 @@ class Commute < ActiveRecord::Base
   def go!
     write_attribute(:go, Time.now)
     save!
-    Boxcar.send_to_boxcar_group("admin",self.hrinfo.fullname, "#{Commute.human_attribute_name('go')} : #{self.go.strftime("%Y-%m-%d %H:%M")}")
+    Boxcar.send_to_boxcar_group("admin",self.employee.fullname, "#{Commute.human_attribute_name('go')} : #{self.go.strftime("%Y-%m-%d %H:%M")}")
   end
 
   def leave!
     write_attribute(:leave, Time.now)
     save!
-    Boxcar.send_to_boxcar_group("admin",self.hrinfo.fullname, "#{Commute.human_attribute_name('leave')} : #{self.leave.strftime("%Y-%m-%d %H:%M")}")
+    Boxcar.send_to_boxcar_group("admin",self.employee.fullname, "#{Commute.human_attribute_name('leave')} : #{self.leave.strftime("%Y-%m-%d %H:%M")}")
   end
 
   def as_json(options={})

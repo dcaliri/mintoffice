@@ -6,12 +6,12 @@ p
 hr
 h2
   = t('permissions.show.account')
-- if !@permission.hrinfo.blank?
+- if !@permission.employee.blank?
   ul
-    - for hrinfo in @permission.hrinfo
+    - for employee in @permission.employee
       li
-  		  = hrinfo.fullname + " "
-  		  = link_to "[X]", :action => 'removeaccount', :id => @permission, :hrinfo_id => hrinfo
+  		  = employee.fullname + " "
+  		  = link_to "[X]", :action => 'removeaccount', :id => @permission, :employee_id => employee
 - else
   = t('permissions.show.none')
 

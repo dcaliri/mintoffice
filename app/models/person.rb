@@ -2,7 +2,7 @@ class Person < ActiveRecord::Base
   has_one :account
   has_and_belongs_to_many :companies
 
-  has_one :hrinfo
+  has_one :employee
   has_one :enrollment
   has_one :taxman
 
@@ -12,8 +12,8 @@ class Person < ActiveRecord::Base
   has_many :reporters, class_name: 'ReportPerson'
   has_many :accessors, class_name: 'AccessPerson'
 
-  def self.nohrinfo
-    joins(:account).where('accounts.person_id == people.id') - joins(:hrinfo).where('hrinfos.person_id == people.id')
+  def self.noemployee
+    joins(:account).where('accounts.person_id == people.id') - joins(:employee).where('employees.person_id == people.id')
   end
 
   def name

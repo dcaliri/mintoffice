@@ -3,9 +3,9 @@ div class={@account.admin? ? "admin" : ""}
     .menubar_item.item1
       h2= t("main.index.human_resources")
       ul
-        li= link_to t("hrinfos.index.title"), :controller => "hrinfos"
+        li= link_to t("employees.index.title"), :controller => "employees"
         li= link_to t("vacations.index.title"), vacation_path(@account)
-        - if @account.hrinfo.permission.any? {|perm| perm.name == 'commutes'}
+        - if @account.employee.permission.any? {|perm| perm.name == 'commutes'}
           li= link_to t("commutes.index.title"), commute_path(@account)
         - if @account.has_payment_info
           li= link_to t("payments.title"), payment_path(@account)
@@ -13,30 +13,30 @@ div class={@account.admin? ? "admin" : ""}
     .menubar_item.item2
       h2= t("main.index.finance")
       ul
-        - if @account.hrinfo.permission.any? {|perm| perm.name == 'pettycashes'}
+        - if @account.employee.permission.any? {|perm| perm.name == 'pettycashes'}
           li= link_to t("pettycashes.index.title"), :controller => "pettycashes"
         li= link_to t("cardbills.index.title"), :controller => "cardbills"
-        - if @account.hrinfo.permission.any? {|perm| perm.name == 'bank_accounts'}
+        - if @account.employee.permission.any? {|perm| perm.name == 'bank_accounts'}
           li= link_to t("bank_accounts.index.title"), :bank_accounts
-        - if @account.hrinfo.permission.any? {|perm| perm.name == 'taxbills'}
+        - if @account.employee.permission.any? {|perm| perm.name == 'taxbills'}
           li= link_to t("taxbills.index.title"), :taxbills
         li= link_to t("expense_reports.index.title"), :expense_reports
-        - if @account.hrinfo.permission.any? {|perm| perm.name == 'ledger_accounts'}
+        - if @account.employee.permission.any? {|perm| perm.name == 'ledger_accounts'}
           li= link_to t("ledger_accounts.title"), :ledger_accounts
-        - if @account.hrinfo.permission.any? {|perm| perm.name == 'postings'}
+        - if @account.employee.permission.any? {|perm| perm.name == 'postings'}
           li= link_to t("postings.title"), :postings
 
     .menubar_item.item3
       h2= t("main.index.project")
       ul
-        - if @account.hrinfo.permission.any? {|perm| perm.name == 'projects'}
+        - if @account.employee.permission.any? {|perm| perm.name == 'projects'}
           li= link_to t("projects.index.title"), :controller => "projects"
 
     .menubar_item.item4
       h2= t("main.index.document")
       ul
         li= link_to t("documents.index.title"), :controller => "documents"
-        - if @account.hrinfo.permission.any? {|perm| perm.name == 'business_clients'}
+        - if @account.employee.permission.any? {|perm| perm.name == 'business_clients'}
           li= link_to t("business_clients.index.title"), :business_clients
         li= link_to t("contacts.index.title"), :contacts
 

@@ -20,12 +20,12 @@ class ApplicationController < ActionController::Base
     if session[:company_id].nil?
       session[:company_id] = Company.find_by_name("mintech") || Company.first
     end
-    Company.find(session[:company_id]) unless session[:company_id].nil?
+    @current_company ||= Company.find(session[:company_id]) unless session[:company_id].nil?
   end
   helper_method :current_company
 
   def current_account
-    Account.find(session[:account_id]) unless session[:account_id].nil?
+    @current_account ||= Account.find(session[:account_id]) unless session[:account_id].nil?
   end
   helper_method :current_account
 
@@ -39,7 +39,7 @@ class ApplicationController < ActionController::Base
 
   protected
   def authorize
-    @account = Account.find(session[:account_id]) if session[:account_id]
+    @account = current_account
     if @account.nil? or @account.not_joined?
       redirect_to accounts_login_path
       return

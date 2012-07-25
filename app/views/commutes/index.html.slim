@@ -8,7 +8,7 @@ h2= t('common.title.list')
 - unless commutes_everyone.values.empty?
   table#list-table
     tr
-      th= Hrinfo.human_attribute_name("fullname")
+      th= Employee.human_attribute_name("fullname")
       - commutes_everyone.values.first.keys.sort.first.to_date.step(commutes_everyone.values.first.keys.sort.last.to_date, 1.day).each do |day|
         th= l day, format: :compact_long
     - commutes_everyone.keys.sort.each do |account_id|

@@ -28,9 +28,9 @@ h2
   .box
     p
       = label_tag :accountname, Account.human_attribute_name("name")
-      - for hrinfo in project.hrinfos
-        = hrinfo.fullname 
-        = link_to t("common.title.destroy"), :action => "del_account", :id => project, :uid => hrinfo.id
+      - for employee in project.employees
+        = employee.fullname 
+        = link_to t("common.title.destroy"), :action => "del_account", :id => project, :uid => employee.id
         br
       = text_field_tag :accountname
       = submit_tag t("common.button.add")

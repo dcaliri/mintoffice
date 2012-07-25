@@ -1,6 +1,6 @@
 class AccessPerson < ActiveRecord::Base
   # belongs_to :account
-  # belongs_to :hrinfo
+  # belongs_to :employee
   belongs_to :person
   belongs_to :access_target, polymorphic: true
 
@@ -15,7 +15,7 @@ class AccessPerson < ActiveRecord::Base
       elsif account.nil?
         where("0")
       else
-        # where(hrinfo_id: account.hrinfo.id)
+        # where(employee_id: account.employee.id)
         where(person_id: account.person.id)
       end
     end
@@ -23,7 +23,7 @@ class AccessPerson < ActiveRecord::Base
     def access?(account, access_type)
       return true if account.admin?
       access_query = access_type == :write ? {access_type: :write} : {}
-      # where(access_query).exists?(hrinfo_id: account.hrinfo.id)
+      # where(access_query).exists?(employee_id: account.employee.id)
       where(access_query).exists?(person_id: account.person.id)
     end
 
@@ -36,14 +36,14 @@ class AccessPerson < ActiveRecord::Base
     end
 
     def permission(account, access_type)
-      # collection = where(hrinfo_id: account.hrinfo.id)
+      # collection = where(employee_id: account.employee.id)
       collection = where(person_id: account.person.id)
       unless collection.empty?
         accessor = collection.first
         accessor.access_type = access_type
         accessor.save!
       else
-        # create!(hrinfo_id: account.hrinfo.id, access_type: access_type)
+        # create!(employee_id: account.employee.id, access_type: access_type)
         create!(person_id: account.person.id, access_type: access_type)
       end
     end

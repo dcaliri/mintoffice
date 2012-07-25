@@ -18,8 +18,8 @@ h2
       dt
         = Document.human_attribute_name("owner")
       dd
-        - if !document.hrinfos.blank?
-          - names = document.hrinfos.index_by {|hrinfo| hrinfo.fullname }
+        - if !document.employees.blank?
+          - names = document.employees.index_by {|employee| employee.fullname }
           = names.keys.sort.join ", "
       dt
         = Document.human_attribute_name("tags")
@@ -28,9 +28,9 @@ h2
     h3
       = t(".backlink")
     ul
-      - u = document.account_for_tag(Hrinfo.model_name.human)
+      - u = document.account_for_tag(Employee.model_name.human)
       - if u
-        li= link_to Hrinfo.model_name.human, :controller => "hrinfos", :action => "show", :id => u.hrinfo
+        li= link_to Employee.model_name.human, :controller => "employees", :action => "show", :id => u.employee
     = render 'reports/info', target: document
   = render "shared/attachments/detail", :target => document
   .clear

@@ -73,10 +73,10 @@ Mintoffice::Application.routes.draw do
   resources :payroll_items
   resources :holidays
 
-  post '/hrinfos/retired/:id', :controller => "hrinfos", :action => "retired", as: :retired
-  post '/hrinfos/try_retired/:id', :controller => "hrinfos", :action => "try_retired", as: :try_retired
+  post '/employees/retired/:id', :controller => "employees", :action => "retired", as: :retired
+  post '/employees/try_retired/:id', :controller => "employees", :action => "try_retired", as: :try_retired
 
-  resources :hrinfos do
+  resources :employees do
 
     member do
     get 'employment_proof', action: :new_employment_proof, as: :employment_proof

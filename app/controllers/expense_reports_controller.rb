@@ -23,7 +23,7 @@ class ExpenseReportsController < ApplicationController
   end
 
   def create
-    expense_report.hrinfo = current_account.hrinfo
+    expense_report.employee = current_account.employee
     expense_report.save!
     redirect_to expense_report
   end

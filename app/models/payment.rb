@@ -2,7 +2,7 @@
 
 class Payment < ActiveRecord::Base
   # belongs_to :account
-  belongs_to :hrinfo
+  belongs_to :employee
 
   before_save :modify_bonus_date
   def modify_bonus_date

@@ -3,7 +3,7 @@ class Document < ActiveRecord::Base
 
   belongs_to :project
   has_many :document_owners
-  has_many :hrinfos, :through => :document_owners, :source => :hrinfo
+  has_many :employees, :through => :document_owners, :source => :employee
   # has_many :accounts, :through => :document_owners, :source => :account
 
   # validates_presence_of :title

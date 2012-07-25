@@ -12,9 +12,9 @@ table#list-table
     th
       = Enrollment.human_attribute_name('email')
     th
-      = Hrinfo.human_attribute_name('phone_number')
+      = Employee.human_attribute_name('phone_number')
     th
-      = Hrinfo.human_attribute_name('address')
+      = Employee.human_attribute_name('address')
 
   - @enrollments.each do |enrollment|
     tr.selectable onclick="location.href='#{enroll_report_path(enrollment)}'"

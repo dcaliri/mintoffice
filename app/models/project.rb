@@ -5,7 +5,7 @@ class Project < ActiveRecord::Base
   has_many :expense_reports
   has_many :assign_infos, class_name: "ProjectAssignInfo"
   # has_many :accounts, through: :assign_infos
-  has_many :hrinfos, through: :assign_infos
+  has_many :employees, through: :assign_infos
 
   scope :completed, :conditions =>['ended_on is not null'], :order => "started_on ASC"
   scope :inprogress, :conditions =>['ended_on is null'], :order => "started_on ASC"
@@ -18,7 +18,7 @@ class Project < ActiveRecord::Base
   end
 
   def self.assign_list(account)
-    joins(:assign_infos).where('project_assign_infos.hrinfo_id = ?', account.hrinfo.id)
+    joins(:assign_infos).where('project_assign_infos.employee_id = ?', account.employee.id)
   end
 
   def self.progress_period(year, month)
@@ -53,13 +53,13 @@ class Project < ActiveRecord::Base
     start = start.to_date
     finish = finish.to_date
 
-    assign_info = assign_infos.where(hrinfo_id: account.hrinfo.id).first
+    assign_info = assign_infos.where(employee_id: account.employee.id).first
     rates = assign_info.rates.where(start: start, finish: finish)
 
     unless rates.empty?
       rates.first.percentage
     else
-      number_of_project = account.hrinfo.projects.where('(? BETWEEN started_on AND ending_on) AND (? BETWEEN started_on AND ending_on)', start, finish).count
+      number_of_project = account.employee.projects.where('(? BETWEEN started_on AND ending_on) AND (? BETWEEN started_on AND ending_on)', start, finish).count
       if number_of_project > 0
         100 / number_of_project
       else
@@ -79,7 +79,7 @@ class Project < ActiveRecord::Base
       project = find(assign_info[0])
       percentage = assign_info[1]
 
-      assign_info = project.assign_infos.where(hrinfo_id: account.hrinfo.id).first
+      assign_info = project.assign_infos.where(employee_id: account.employee.id).first
       rates = assign_info.rates.where(start: start, finish: finish)
       if rates.empty?
         rate = rates.build

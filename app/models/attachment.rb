@@ -1,7 +1,7 @@
 class Attachment < ActiveRecord::Base
   default_scope :order => 'seq ASC'
   # belongs_to  :account
-  belongs_to  :hrinfo
+  belongs_to  :employee
 
   belongs_to :owner, :polymorphic => true
   # before_save :save_account_info
@@ -9,9 +9,9 @@ class Attachment < ActiveRecord::Base
   #   self.account = Account.current_account unless self.account
   # end
 
-  before_save :save_hrinfo
-  def save_hrinfo
-    self.hrinfo = Account.current_account.hrinfo unless self.hrinfo
+  before_save :save_employee
+  def save_employee
+    self.employee = Account.current_account.employee unless self.employee
   end
 
   validates_presence_of :filepath, :on => :create, :message => "can't be blank"
@@ -45,7 +45,7 @@ class Attachment < ActiveRecord::Base
     unless account
       account = Account.find(1)
     end
-    self.hrinfo = account.hrinfo
+    self.employee = account.employee
     self.save
   end
 

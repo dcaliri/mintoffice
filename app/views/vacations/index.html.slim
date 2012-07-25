@@ -12,10 +12,10 @@ table#list-table
     th= Vacation.human_attribute_name("used")
     th= Vacation.human_attribute_name("remain")
     - @accounts.each do |account|
-      - if account.hrinfo
+      - if account.employee
         tr.selectable onclick="location.href='#{vacation_path(account)}'"
           td=h account.name
-          - vacation = account.hrinfo.vacations.last
+          - vacation = account.employee.vacations.last
           - if vacation
             td= "#{vacation.from} ~ #{vacation.to}"
             td= "#{vacation.period} 일"

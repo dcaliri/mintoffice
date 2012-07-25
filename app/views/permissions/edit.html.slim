@@ -9,13 +9,13 @@ h1
     br
     = f.text_field :name
   p
-    = f.label :hrinfos
+    = f.label :employees
     br
     - if !Account.all.blank?
       - for account in Account.enabled
-        - if account.hrinfo
-          = check_box_tag "permission[hrinfo_ids][]", account.hrinfo.id, @permission.hrinfo.include?(account.hrinfo)
-          = account.hrinfo.fullname
+        - if account.employee
+          = check_box_tag "permission[employee_ids][]", account.employee.id, @permission.employee.include?(account.employee)
+          = account.employee.fullname
   p
     = f.submit 'Update'
 

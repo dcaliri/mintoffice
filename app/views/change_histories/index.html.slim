@@ -15,7 +15,7 @@ table#list-table
       td=h history.before_value
       td=h history.after_value
       td=h history.created_at
-      td=h history.hrinfo.fullname rescue ""
+      td=h history.employee.fullname rescue ""
 br
 center
   = will_paginate @histories

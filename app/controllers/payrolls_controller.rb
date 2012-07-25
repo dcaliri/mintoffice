@@ -5,7 +5,7 @@ class PayrollsController < ApplicationController
   expose (:payrolls) {Payroll.all}
   expose (:payroll)
   expose (:accounts) {Account(:protected).enabled}
-  expose (:hrinfos) {Hrinfo.not_retired}
+  expose (:employees) {Employee.not_retired}
 
   def create
     payroll.save!

@@ -1,6 +1,6 @@
 class Permission < ActiveRecord::Base
   # has_and_belongs_to_many :account
-  has_and_belongs_to_many :hrinfo
+  has_and_belongs_to_many :employee
 
   validates :name, presence: true, uniqueness: true
 
@@ -8,7 +8,7 @@ class Permission < ActiveRecord::Base
     exception_list = [
         "attachments.picture", "attachments.download",
         "documents.*",
-        "hrinfos.index", "hrinfos.show", "hrinfos.new_employment_proof", "hrinfos.employment_proof",
+        "employees.index", "employees.show", "employees.new_employment_proof", "employees.employment_proof",
         "main.*",
         "accounts.my", "accounts.changepw", "accounts.edit", "accounts.update", "accounts.google_apps",
         "reports.*",
@@ -24,7 +24,7 @@ class Permission < ActiveRecord::Base
       return true
     end
 
-    if account.hrinfo.permission.any? { |perm| perm.name == controller_name }
+    if account.employee.permission.any? { |perm| perm.name == controller_name }
       return true
     else
       return false

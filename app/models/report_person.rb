@@ -1,6 +1,6 @@
 class ReportPerson < ActiveRecord::Base
   # belongs_to :account
-  # belongs_to :hrinfo
+  # belongs_to :employee
   belongs_to :person
   belongs_to :report
 
@@ -12,7 +12,7 @@ class ReportPerson < ActiveRecord::Base
   class << self
     def access_list(account)
       # where(account ? {account_id: account.id} : "0")
-      # where(account ? {hrinfo_id: account.hrinfo.id} : "0")
+      # where(account ? {employee_id: account.employee.id} : "0")
       where(account ? {person_id: account.person.id} : "0")
     end
 
@@ -30,6 +30,6 @@ class ReportPerson < ActiveRecord::Base
   end
 
   def fullname
-    hrinfo.fullname rescue ""
+    employee.fullname rescue ""
   end
 end

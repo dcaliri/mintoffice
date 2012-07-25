@@ -20,11 +20,11 @@ h2
       = render 'shared/attachments/form', form: f
     p
       = f.label :owners, Document.human_attribute_name('owner')
-      - if !document.hrinfos.blank?
-        - for hrinfo in document.hrinfos
-          =h hrinfo.fullname
-          = link_to t('common.title.destroy'), :action => :remove_owner, :id => document, :uid => hrinfo.id
-          - unless hrinfo == document.hrinfos.last
+      - if !document.employees.blank?
+        - for employee in document.employees
+          =h employee.fullname
+          = link_to t('common.title.destroy'), :action => :remove_owner, :id => document, :uid => employee.id
+          - unless employee == document.employees.last
             br
   = f.submit t('common.button.update')
 

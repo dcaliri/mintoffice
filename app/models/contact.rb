@@ -53,7 +53,7 @@ class Contact < ActiveRecord::Base
   end
 
   def owner_name
-    owner.hrinfo.fullname rescue ""
+    owner.employee.fullname rescue ""
   end
 
   class << self

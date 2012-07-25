@@ -10,7 +10,7 @@ class Enrollment < ActiveRecord::Base
 
   # accepts_nested_attributes_for :contact, :allow_destroy => :true
 
-  validates_format_of :juminno, :with => /^\d{6}-\d{7}$/, :message => I18n.t('hrinfos.error.juminno_invalid'), on: :update
+  validates_format_of :juminno, :with => /^\d{6}-\d{7}$/, :message => I18n.t('employees.error.juminno_invalid'), on: :update
   validates_uniqueness_of :juminno, on: :update
 
   def contact
@@ -21,9 +21,9 @@ class Enrollment < ActiveRecord::Base
   def apply_status
     case report.status
     when :rollback
-      I18n.t('models.hrinfo.request')
+      I18n.t('models.employee.request')
     else
-      I18n.t('models.hrinfo.approve')
+      I18n.t('models.employee.approve')
     end
   end
 

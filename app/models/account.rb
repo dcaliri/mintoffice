@@ -13,9 +13,9 @@ class Account < ActiveRecord::Base
   # has_many :project_infos, class_name: "ProjectAssignInfo"
   # has_many :projects, through: :project_infos
 
-  # has_one :hrinfo, dependent: :destroy
+  # has_one :employee, dependent: :destroy
   belongs_to :person
-  # accepts_nested_attributes_for :hrinfo, :allow_destroy => :true
+  # accepts_nested_attributes_for :employee, :allow_destroy => :true
 
   # has_many :contacts, foreign_key: 'owner_id'
 
@@ -28,10 +28,10 @@ class Account < ActiveRecord::Base
   # has_many :except_columns
   # has_and_belongs_to_many :companies
 
-  # scope :nohrinfo, joins(:person => :hrinfo).where("hrinfos.person_id is NULL")
-  # scope :with_hrinfo, joins(:person => :hrinfo).where('hrinfos.person_id == accounts.person_id')
-  # def self.nohrinfo
-  #   all - with_hrinfo
+  # scope :noemployee, joins(:person => :employee).where("employees.person_id is NULL")
+  # scope :with_employee, joins(:person => :employee).where('employees.person_id == accounts.person_id')
+  # def self.noemployee
+  #   all - with_employee
   # end
 
   scope :enabled, :conditions =>["name NOT LIKE '[X] %%'"]
@@ -61,8 +61,8 @@ class Account < ActiveRecord::Base
   include Historiable
   include Attachmentable
 
-  def hrinfo
-    person.hrinfo
+  def employee
+    person.employee
   end
 
   def person
@@ -109,7 +109,7 @@ class Account < ActiveRecord::Base
   end
 
   def fullname
-    hrinfo.nil? ? name : hrinfo.fullname
+    employee.nil? ? name : employee.fullname
   end
 
   def password
@@ -157,20 +157,20 @@ class Account < ActiveRecord::Base
   end
 
   def ingroup? (gname)
-    hrinfo.ingroup?(gname)
+    employee.ingroup?(gname)
   end
 
   def self.no_admins
-    all - joins(:person => {:hrinfo => :groups}).where('groups.name == ?', "admin")
+    all - joins(:person => {:employee => :groups}).where('groups.name == ?', "admin")
   end
 
   def permission?(name)
-    admin? or hrinfo.permission.exists?(name: name.to_s)
+    admin? or employee.permission.exists?(name: name.to_s)
   end
 
   def admin?
     # self.ingroup? "admin"
-    hrinfo and hrinfo.admin?
+    employee and employee.admin?
   end
 
   def self.search(query)
@@ -207,7 +207,7 @@ class Account < ActiveRecord::Base
   end
 
   def has_payment_info
-    not hrinfo.payments.empty?
+    not employee.payments.empty?
   end
 
   class << self
@@ -241,7 +241,7 @@ class Account < ActiveRecord::Base
         account.provider = params[:provider]
         account.send(params[:provider] + "_account=", params[:email])
         account.notify_email = params[:email]
-        account.build_hrinfo.build_contact
+        account.build_employee.build_contact
       end
     end
   end
@@ -251,18 +251,18 @@ class Account < ActiveRecord::Base
 
   def save_apply(report_url)
     tap do |account|
-      account.hrinfo.prevent_create_report = true
-      account.hrinfo.contact.firstname = account.hrinfo.firstname
-      account.hrinfo.contact.lastname = account.hrinfo.lastname
+      account.employee.prevent_create_report = true
+      account.employee.contact.firstname = account.employee.firstname
+      account.employee.contact.lastname = account.employee.lastname
       account.save!
 
       Account.current_account = account
-      account.hrinfo.create_initial_report
-      account.hrinfo.report.save!
-      account.hrinfo.create_initial_accessor
+      account.employee.create_initial_report
+      account.employee.report.save!
+      account.employee.create_initial_accessor
 
       admin = Company.current_company.apply_admin
-      account.hrinfo.report!(admin, "", report_url)
+      account.employee.report!(admin, "", report_url)
     end
   rescue => e
     destroy
@@ -274,14 +274,14 @@ class Account < ActiveRecord::Base
   end
 
   def create_google_app_account
-    return false unless hrinfo
+    return false unless employee
 
     current_company = Company.current_company
     transporter = google_transporter
 
     # Creating a Account
     account = GoogleApps::Atom::Account.new
-    account.new_account name, hrinfo.firstname, hrinfo.lastname, current_company.default_password, 2048
+    account.new_account name, employee.firstname, employee.lastname, current_company.default_password, 2048
     transporter.new_account account
 
     doc = Nokogiri::XML(transporter.response.body)
@@ -332,8 +332,8 @@ class Account < ActiveRecord::Base
     redmine_account.new(
       login: self.name,
       password: current_company.default_password,
-      firstname: (hrinfo.firstname rescue nil),
-      lastname: (hrinfo.lastname rescue nil),
+      firstname: (employee.firstname rescue nil),
+      lastname: (employee.lastname rescue nil),
       mail: notify_email
     )
   end
@@ -342,15 +342,15 @@ class Account < ActiveRecord::Base
     current_company = Company.current_company
     redmine_account = get_remine_account
 
-    raise ArgumentError, I18n.t('models.account.no_name') if hrinfo and hrinfo.firstname.blank?
-    raise ArgumentError, I18n.t('models.account.no_name') if hrinfo and hrinfo.lastname.blank?
+    raise ArgumentError, I18n.t('models.account.no_name') if employee and employee.firstname.blank?
+    raise ArgumentError, I18n.t('models.account.no_name') if employee and employee.lastname.blank?
     raise ArgumentError, I18n.t('models.account.no_email') if notify_email.blank?
 
     redmine = redmine_account.new(
       login: self.name,
       password: current_company.default_password,
-      firstname: (hrinfo.firstname rescue nil),
-      lastname: (hrinfo.lastname rescue nil),
+      firstname: (employee.firstname rescue nil),
+      lastname: (employee.lastname rescue nil),
       mail: notify_email
     )
 

@@ -26,9 +26,9 @@ table#list-table
     tr.selectable onclick="location.href='#{attachment_path(attachment)}'"
       td
         =h attachment.id
-      - if attachment.hrinfo then
+      - if attachment.employee then
         td
-          =h attachment.hrinfo.fullname
+          =h attachment.employee.fullname
       - else
         td
       td
