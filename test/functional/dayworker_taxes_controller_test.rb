@@ -5,7 +5,7 @@ class DayworkerTaxesControllerTest < ActionController::TestCase
   fixtures :dayworkers, :dayworker_taxes
 
   def setup
-    current_user.permission.create!(name: 'dayworker_taxes')
+    current_user.hrinfo.permission.create!(name: 'dayworker_taxes')
   end
 
   test "should see index page" do

@@ -4,7 +4,7 @@ class PostingsControllerTest < ActionController::TestCase
   fixtures :postings
 
   def setup
-    current_user.permission.create!(name: 'documents')
+    current_user.hrinfo.permission.create!(name: 'documents')
   end
 
   test "should see index page" do

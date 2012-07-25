@@ -4,7 +4,7 @@ class TaxbillItemsControllerTest < ActionController::TestCase
   fixtures :taxbills, :taxbill_items
 
   def setup
-    current_user.permission.create!(name: 'taxbills')
+    current_user.hrinfo.permission.create!(name: 'taxbills')
   end
 
   test "should see new page" do

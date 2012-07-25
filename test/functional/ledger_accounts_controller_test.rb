@@ -4,7 +4,7 @@ class LedgerAccountsControllerTest < ActionController::TestCase
   fixtures :ledger_accounts
 
   def setup
-    current_user.permission.create!(name: 'ledger_accounts')
+    current_user.hrinfo.permission.create!(name: 'ledger_accounts')
   end
 
   test "should see index page" do

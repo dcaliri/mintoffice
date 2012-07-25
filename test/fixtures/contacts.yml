@@ -6,8 +6,7 @@ fixture:
     department:
     position: 사장
     email_list:
-    target_id: 1
-    target_type: Hrinfo
+    person_id: 1
     migrated_data: f
     owner_id:
     isprivate: f

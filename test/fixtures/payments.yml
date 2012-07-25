@@ -1,5 +1,5 @@
 fixture:
     id: 1
-    person_id: 1
+    hrinfo_id: 1
     pay_start: <%= Time.zone.now %>
     pay_finish: <%= Time.zone.now %>

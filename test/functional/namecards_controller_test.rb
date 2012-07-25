@@ -4,7 +4,7 @@ class NamecardsControllerTest < ActionController::TestCase
   fixtures :namecards
 
   def setup
-    current_user.permission.create!(name: 'namecards')
+    current_user.hrinfo.permission.create!(name: 'namecards')
   end
 
   test "should see index page" do

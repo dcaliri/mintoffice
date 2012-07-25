@@ -11,6 +11,14 @@ class Person < ActiveRecord::Base
   has_many :reporters, class_name: 'ReportPerson'
   has_many :accessors, class_name: 'AccessPerson'
 
+  def self.nohrinfo
+    joins(:user).where('users.person_id == people.id') - joins(:hrinfo).where('hrinfos.person_id == people.id')
+  end
+
+  def name
+    user.name
+  end
+
   def joined?
     companies.exists?
   end

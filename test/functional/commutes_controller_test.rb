@@ -4,7 +4,7 @@ class CommutesControllerTest < ActionController::TestCase
   fixtures :commutes
 
   def setup
-    current_user.permission.create!(name: 'commutes')
+    current_user.hrinfo.permission.create!(name: 'commutes')
   end
 
   test "should see index page" do

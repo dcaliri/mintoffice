@@ -4,7 +4,7 @@ class ExpenseReportsControllerTest < ActionController::TestCase
   fixtures :cardbills, :expense_reports, :reports, :hrinfos, :projects
 
   def setup
-    current_user.permission.create!(name: 'expense_reports')
+    current_user.hrinfo.permission.create!(name: 'expense_reports')
   end
 
   test "should see index page" do

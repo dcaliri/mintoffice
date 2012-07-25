@@ -4,7 +4,7 @@ class HolidaysControllerTest < ActionController::TestCase
   fixtures :holidays
 
   def setup
-    current_user.permission.create!(name: 'holidays')
+    current_user.hrinfo.permission.create!(name: 'holidays')
   end
 
   test "should see index page" do

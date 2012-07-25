@@ -5,7 +5,7 @@ class CardApprovedSourcesControllerTest < ActionController::TestCase
   fixtures :card_approved_sources
 
   def setup
-    current_user.permission.create!(name: 'card_approved_sources')
+    current_user.hrinfo.permission.create!(name: 'card_approved_sources')
   end
 
   test "should see list of card approved sourcepage" do

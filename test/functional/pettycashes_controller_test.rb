@@ -4,7 +4,7 @@ class PettycashesControllerTest < ActionController::TestCase
   fixtures :pettycashes
 
   def setup
-    current_user.permission.create!(name: 'pettycashes')
+    current_user.hrinfo.permission.create!(name: 'pettycashes')
   end
 
   test "should see index page" do

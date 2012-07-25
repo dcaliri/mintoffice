@@ -4,7 +4,7 @@ class BusinessClientsControllerTest < ActionController::TestCase
   fixtures :business_clients
 
   def setup
-    current_user.permission.create!(name: 'business_clients')
+    current_user.hrinfo.permission.create!(name: 'business_clients')
   end
 
   test "should see index page" do

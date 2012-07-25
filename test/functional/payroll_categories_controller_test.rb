@@ -4,7 +4,7 @@ class PayrollCategoriesControllerTest < ActionController::TestCase
   fixtures :users, :hrinfos, :payrolls, :payroll_categories
 
   def setup
-    current_user.permission.create!(name: 'payroll_categories')
+    current_user.hrinfo.permission.create!(name: 'payroll_categories')
   end
 
   test "should see index page" do

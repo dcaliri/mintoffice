@@ -28,7 +28,12 @@ class User < ActiveRecord::Base
   # has_many :except_columns
   # has_and_belongs_to_many :companies
 
-  scope :nohrinfo, :conditions =>['id not in (select user_id from hrinfos)']
+  # scope :nohrinfo, joins(:person => :hrinfo).where("hrinfos.person_id is NULL")
+  # scope :with_hrinfo, joins(:person => :hrinfo).where('hrinfos.person_id == users.person_id')
+  # def self.nohrinfo
+  #   all - with_hrinfo
+  # end
+
   scope :enabled, :conditions =>["name NOT LIKE '[X] %%'"]
   scope :disabled, :conditions =>["name LIKE '[X] %%'"]
 

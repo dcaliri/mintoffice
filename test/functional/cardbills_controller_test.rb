@@ -4,7 +4,7 @@ class CardbillsControllerTest < ActionController::TestCase
   fixtures :cardbills
 
   def setup
-    current_user.permission.create!(name: 'cardbills')
+    current_user.hrinfo.permission.create!(name: 'cardbills')
   end
 
   test "should index document list" do

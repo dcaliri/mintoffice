@@ -4,7 +4,7 @@ class HrinfosControllerTest < ActionController::TestCase
   fixtures :hrinfos, :attachments
 
   def setup
-    current_user.permission.create!(name: 'hrinfos')
+    current_user.hrinfo.permission.create!(name: 'hrinfos')
   end
 
   test "should see index page" do

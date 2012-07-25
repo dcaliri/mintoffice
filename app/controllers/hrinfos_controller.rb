@@ -69,9 +69,10 @@ class HrinfosController < ApplicationController
   # GET /hrinfos/new.xml
   def new
     @hrinfo = Hrinfo.new
-    @users = User.nohrinfo
+    # @users = User.nohrinfo
+    @people = Person.nohrinfo
 
-    if @users.blank?
+    if @people.blank?
       flash[:notice] = t('hrinfos.new.users_blank')
       redirect_to :action => "index"
     else
@@ -91,7 +92,7 @@ class HrinfosController < ApplicationController
   # POST /hrinfos.xml
   def create
     @hrinfo = Hrinfo.new(params[:hrinfo])
-    @users = User.nohrinfo
+    @people = Person.nohrinfo
 
     respond_to do |format|
       if @hrinfo.save
@@ -153,6 +154,7 @@ class HrinfosController < ApplicationController
 
   def user_only_access_my_employment
     @hrinfo = Hrinfo.find(params[:id])
-    force_redirect if @hrinfo.user_id != current_user.id and !current_user.admin?
+    # force_redirect if @hrinfo.user_id != current_user.id and !current_user.admin?
+    force_redirect if @hrinfo.person.user != current_user and !current_user.admin?
   end
 end

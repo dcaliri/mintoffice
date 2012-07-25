@@ -39,7 +39,9 @@ class ActionController::TestCase
   setup :global_setup
   teardown :global_teardown
 
-  fixtures :users, :companies, :companies_users, :groups, :groups_users
+  # fixtures :users, :companies, :companies_users, :groups, :groups_users
+  
+  fixtures :users, :people, :hrinfos, :companies_people, :groups_hrinfos, :groups, :companies
 
   def global_setup
     DatabaseCleaner.strategy = :truncation
@@ -58,8 +60,13 @@ class ActionController::TestCase
 
   def current_user
     unless @user
-      @user = users(:fixture)
-      @user.groups.create!(name: "admin")
+      begin
+        @user = users(:fixture)
+        puts @user.inspect
+        @user.hrinfo.groups.create!(name: "admin")
+      rescue ActiveRecord::RecordNotFound
+        puts "Fail"
+      end
     end
     @user
   end

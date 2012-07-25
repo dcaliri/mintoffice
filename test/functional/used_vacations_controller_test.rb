@@ -4,7 +4,7 @@ class UsedVacationsControllerTest < ActionController::TestCase
   fixtures :hrinfos, :vacations, :used_vacations
 
   def setup
-    current_user.permission.create!(name: 'vacations')
+    current_user.hrinfo.permission.create!(name: 'vacations')
   end
 
   test "should see new page" do

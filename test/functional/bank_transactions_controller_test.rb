@@ -5,7 +5,7 @@ class BankTransactionsControllerTest < ActionController::TestCase
   fixtures :bank_transactions
 
   def setup
-    current_user.permission.create!(name: 'bank_transactions')
+    current_user.hrinfo.permission.create!(name: 'bank_transactions')
   end
 
   test "should see list page" do

@@ -8,7 +8,8 @@ h2
     = f.error_messages
     p
       = f.label :username, Hrinfo.human_attribute_name('username')
-      = f.collection_select(:user_id, @users, :id, :name)
+      / = f.collection_select(:user_id, @users, :id, :name)
+      = f.collection_select(:person_id, @people, :id, :name)
     p
       = f.label :companyno, Hrinfo.human_attribute_name('companyno')
       = f.text_field :companyno, value: Hrinfo.maximum(:companyno).nil? ? 1 : Hrinfo.maximum(:companyno)+1

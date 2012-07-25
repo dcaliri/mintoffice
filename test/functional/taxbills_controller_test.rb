@@ -4,7 +4,7 @@ class TaxbillsControllerTest < ActionController::TestCase
   fixtures :taxbills, :taxmen, :business_clients
 
   def setup
-    current_user.permission.create!(name: 'taxmen')
+    current_user.hrinfo.permission.create!(name: 'taxmen')
   end
 
   test "should see index page" do
