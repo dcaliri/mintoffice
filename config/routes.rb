@@ -79,8 +79,8 @@ Mintoffice::Application.routes.draw do
   resources :hrinfos do
 
     member do
-    get 'employment_proof', action: :new_employment_proof, as: :employment_proof
-    post 'employment_proof', as: :employment_proof
+      get 'employment_proof', action: :new_employment_proof, as: :employment_proof
+      post 'employment_proof', as: :employment_proof
     end
   end
 

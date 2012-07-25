@@ -159,7 +159,7 @@ class Hrinfo < ActiveRecord::Base
   end
 
   def retire!
-    user.payments.retire!(retired_on)
+    payments.retire!(retired_on)
     save!
   end
 
