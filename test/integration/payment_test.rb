@@ -91,13 +91,7 @@ class PaymentTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('연봉 관리'))
 
     click_link '삭제'
-
-    assert(page.has_content?('연봉 수정'))
-
-    fill_in "금액", with: "100000"
-    fill_in "내역", with: "수정된 내역"
-
-    click_button '연봉 수정하기'
+    page.driver.browser.switch_to.alert.accept
 
     assert(page.has_content?('연봉 관리'))
   end
