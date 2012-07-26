@@ -1,6 +1,7 @@
 # encoding: UTF-8
 
 class AccountsController < ApplicationController
+  skip_before_filter :authorize, :only => [:login, :logout]
   layout "application", :except => [:login]
   layout "login", only: [:login]
 

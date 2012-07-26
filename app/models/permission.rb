@@ -5,6 +5,8 @@ class Permission < ActiveRecord::Base
   validates :name, presence: true, uniqueness: true
 
   def self.can_access? (account, controller_name, action_name)
+    return true if account and account.admin?
+
     exception_list = [
         "attachments.picture", "attachments.download",
         "documents.*",
