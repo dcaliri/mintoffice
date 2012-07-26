@@ -1,7 +1,7 @@
 - title t('groups.title')
 
 #show_command
-  = link_to t("common.title.new"), new_group_path
+  = link_to t("common.title.new"), [:new, :group]
   '  |
   = link_to t('common.title.back'), :root
 
@@ -9,6 +9,6 @@ h2= t('common.title.list')
 table#list-table
   tr
     th= Group.human_attribute_name("name")
-    - groups.each do |group|
-      tr.selectable onclick="location.href='#{group_path(group)}'"
-        td= group.name
+  - groups.each do |group|
+    tr.selectable.link_to*{"data-url" => group_path(group)} 
+      td= group.name

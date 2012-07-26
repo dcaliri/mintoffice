@@ -1,9 +1,9 @@
 - title t('groups.title')
 
 #show_command
-  = link_to t('common.title.edit'), edit_group_path
+  = link_to t('common.title.edit'), [:edit, group]
   '  |
-  = link_to t('common.title.list'), groups_path
+  = link_to t('common.title.list'), :groups
 
 h2= t('common.title.show')
 
