@@ -5,7 +5,7 @@ module ActionController
 
       def authorize
         redirect_unless_logged_in
-        redirect_unless_permission
+        redirect_unless_permission if current_account
       end
 
       def redirect_unless_logged_in

@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
     @account ||= @current_account ||= Account.find(session[:account_id]) unless session[:account_id].nil?
   end
   helper_method :current_account
-
+  
   include ActionController::Extensions::Parameter
   include ActionController::Extensions::Title
   include ActionController::Extensions::AuthorizeAndAccess

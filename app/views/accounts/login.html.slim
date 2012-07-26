@@ -4,7 +4,7 @@
 
 
 #login-form
-  = form_tag do
+  = form_tag [:authenticate, :accounts] do
     .box
       p
         = label_tag :name, t(".name")

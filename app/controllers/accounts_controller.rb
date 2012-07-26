@@ -2,6 +2,7 @@
 
 class AccountsController < ApplicationController
   skip_before_filter :authorize, :only => [:login, :logout]
+
   layout "application", :except => [:login]
   layout "login", only: [:login]
 
@@ -10,20 +11,27 @@ class AccountsController < ApplicationController
     c.save_attachment_id @this_account
   end
 
-  before_filter :except => [:my, :changepw, :login, :edit, :update, :logout, :google_apps] do |c|
-    unless current_account.admin?
-      flash[:notice] = I18n.t("common.messages.not_allowed")
-      redirect_to :controller => "main", :action => "index"
-    end
-  end
+  # before_filter :except => [:my, :changepw, :login, :authenticate, :edit, :update, :logout, :google_apps] do |c|
+  #   unless current_account.admin?
+  #     flash[:notice] = I18n.t("common.messages.not_allowed")
+  #     redirect_to :root
+  #   end
+  # end
 
   def index
-    @accounts = Account.check_disabled(params[:disabled]).search(params[:q]).order(:id)
+    @accounts = Account.disabled(params[:disabled]).search(params[:q]).order(:id)
   end
 
-  def logout
-    session[:account_id] = nil
-    redirect_to(:controller => "main", :action => "index")
+  def authenticate
+    if request.post?
+      account = Account.authenticate(params[:name], params[:password])
+      if account
+        session[:account_id] = account.id
+        redirect_to :root
+      else
+        flash.now[:notice] = t("accounts.login.loginfail")
+      end
+    end
   end
 
   def login
@@ -31,11 +39,16 @@ class AccountsController < ApplicationController
       account = Account.authenticate(params[:name], params[:password])
       if account
         session[:account_id] = account.id
-        redirect_to(:controller => "main", :action => "index")
+        redirect_to :root
       else
         flash.now[:notice] = t("accounts.login.loginfail")
       end
     end
+  end
+
+  def logout
+    session[:account_id] = nil
+    redirect_to(:controller => "main", :action => "index")
   end
 
   def disable

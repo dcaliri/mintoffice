@@ -169,7 +169,7 @@ class Account < ActiveRecord::Base
   end
 
   class << self
-    def check_disabled(check)
+    def disabled(check)
       if check == 'on'
         disabled
       else

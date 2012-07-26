@@ -36,13 +36,13 @@ class Commute < ActiveRecord::Base
   def go!
     write_attribute(:go, Time.now)
     save!
-    Boxcar.send_to_boxcar_group("admin",self.employee.fullname, "#{Commute.human_attribute_name('go')} : #{self.go.strftime("%Y-%m-%d %H:%M")}")
+    # Boxcar.send_to_boxcar_group("admin",self.employee.fullname, "#{Commute.human_attribute_name('go')} : #{self.go.strftime("%Y-%m-%d %H:%M")}")
   end
 
   def leave!
     write_attribute(:leave, Time.now)
     save!
-    Boxcar.send_to_boxcar_group("admin",self.employee.fullname, "#{Commute.human_attribute_name('leave')} : #{self.leave.strftime("%Y-%m-%d %H:%M")}")
+    # Boxcar.send_to_boxcar_group("admin",self.employee.fullname, "#{Commute.human_attribute_name('leave')} : #{self.leave.strftime("%Y-%m-%d %H:%M")}")
   end
 
   def as_json(options={})

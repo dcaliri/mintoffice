@@ -100,6 +100,7 @@ Mintoffice::Application.routes.draw do
   resources :accounts do
     collection do
       get 'google_apps', as: :google_apps
+      post 'authenticate', as: :authenticate
     end
 
     member do
