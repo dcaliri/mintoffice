@@ -25,3 +25,7 @@ bank_trasactions:
 bank_trasfers:
   permission_id: 7
   user_id: 1
+
+projects:
+  permission_id: 8
+  user_id: 1

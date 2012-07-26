@@ -39,3 +39,9 @@ bank_trasfers:
   name: "bank_trasfers"
   created_at: 2012-07-18 16:08:13.066854
   updated_at: 2012-07-18 16:08:13.066854
+
+projects:
+  id: 8
+  name: "projects"
+  created_at: 2012-07-18 16:08:13.066854
+  updated_at: 2012-07-18 16:08:13.066854
