@@ -3,9 +3,9 @@ require 'test_helper'
 
 class ProjectTest < ActionDispatch::IntegrationTest
   fixtures :groups
-  fixtures :groups_users
+  fixtures :employees_groups
   fixtures :projects
-  fixtures :users
+  fixtures :accounts
 
   test 'should visit poject list' do
     visit '/'

@@ -6,8 +6,9 @@ class DocumentTest < ActionDispatch::IntegrationTest
   fixtures :document_owners
   fixtures :documents_tags
   fixtures :projects
-  fixtures :users
-  fixtures :hrinfos
+  fixtures :accounts
+  fixtures :people
+  fixtures :employees
   fixtures :tags
   fixtures :taggings
   fixtures :reports
@@ -15,7 +16,7 @@ class DocumentTest < ActionDispatch::IntegrationTest
   fixtures :report_comments
   fixtures :access_people
   fixtures :groups
-  fixtures :groups_users
+  fixtures :employees_groups
 
   test 'should visit document list' do
     visit '/'
@@ -69,10 +70,14 @@ class DocumentTest < ActionDispatch::IntegrationTest
 
     click_link '수정하기'
 
-    fill_in "사용자 추가", with: "no hrinfo"
+    # fill_in "사용자 추가", with: "no employee"
+    # click_button '추가하기'
+
+    # assert(page.has_content?('no employee'))
+    fill_in "사용자 추가", with: "normal"
     click_button '추가하기'
 
-    assert(page.has_content?('no hrinfo'))
+    assert(page.has_content?('김 개똥'))
   end
 
   test 'should delete owners' do

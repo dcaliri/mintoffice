@@ -30,6 +30,6 @@ class ReportPerson < ActiveRecord::Base
   end
 
   def fullname
-    employee.fullname rescue ""
+    person.name rescue ""
   end
 end

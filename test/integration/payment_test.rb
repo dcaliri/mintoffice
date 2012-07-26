@@ -3,10 +3,10 @@ require 'test_helper'
 
 class PaymentTest < ActionDispatch::IntegrationTest
   fixtures :payments
-  fixtures :hrinfos
-  fixtures :users
+  fixtures :employees
+  fixtures :accounts
   fixtures :groups
-  fixtures :groups_users
+  fixtures :employees_groups
 
   test 'should visit payment list for admin' do
     visit '/'

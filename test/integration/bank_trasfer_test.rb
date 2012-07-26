@@ -6,8 +6,8 @@ class BankTransferTest < ActionDispatch::IntegrationTest
   fixtures :bank_transactions
   fixtures :bank_transfers
   fixtures :groups
-  fixtures :groups_users
-  fixtures :hrinfos
+  fixtures :employees_groups
+  fixtures :employees
   fixtures :projects
   fixtures :project_assign_infos
 

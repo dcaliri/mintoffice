@@ -5,9 +5,9 @@ class CardBillTest < ActionDispatch::IntegrationTest
   fixtures :cardbills
   fixtures :creditcards
   fixtures :groups
-  fixtures :groups_users
-  fixtures :users
-  fixtures :hrinfos
+  fixtures :employees_groups
+  fixtures :accounts
+  fixtures :employees
   fixtures :access_people
   fixtures :card_used_sources
   fixtures :card_approved_sources
@@ -144,7 +144,7 @@ class CardBillTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('카드 영수증 내역'))
 
     select('쓰기', :from => 'access_type')
-    select('no hrinfo', :from => 'accessor')
+    select('no employee', :from => 'accessor')
 
     click_button 'Save changes'
 

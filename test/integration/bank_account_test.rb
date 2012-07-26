@@ -6,7 +6,7 @@ class BankAccountTest < ActionDispatch::IntegrationTest
   fixtures :bank_transactions
   fixtures :bank_transfers
   fixtures :groups
-  fixtures :groups_users
+  fixtures :employees_groups
 
   test 'should visit document list' do
     visit '/'
