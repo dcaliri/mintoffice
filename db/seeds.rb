@@ -15,10 +15,10 @@ end
 company = Company.find_by_name("mintech")
 
 
-unless User.exists?(name: 'admin')
+unless Account.exists?(name: 'admin')
   person = Person.create!
   user = person.create_user(name: 'admin', password: '1234')
-  hrinfo = person.create_hrinfo(juminno: '771122-1111111')
+  hrinfo = person.create_employee(juminno: '771122-1111111')
 
   hrinfo.permission.build(name: 'users')
   hrinfo.permission.build(name: 'pettycashes')
@@ -39,7 +39,7 @@ unless User.exists?(name: 'admin')
   person.save!  
 end
 
-unless User.exists?(name: "test")
+unless Account.exists?(name: "test")
   person2 = Person.create!
   user2 = person2.create_user(name: 'test', password: '1234')
   person2.companies << company
@@ -74,8 +74,6 @@ if LedgerAccount.all.empty?
   LedgerAccount.create!(title: "현금", category: "자본")
   LedgerAccount.create!(title: "신용카드", category: "부채")
 end
-
-
 
 
 =begin
