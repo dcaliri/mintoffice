@@ -9,6 +9,6 @@ h2= t('common.title.list')
 table#list-table
   tr
     th= Group.human_attribute_name("name")
-    - groups.each do |group|
-      tr.selectable onclick="location.href='#{group_path(group)}'"
-        td= group.name
+  - groups.each do |group|
+    tr.selectable.link_to*{"data-url" => group_path(group)} 
+      td= group.name
