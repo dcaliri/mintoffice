@@ -2,37 +2,7 @@
 require 'digest/sha1'
 
 class Account < ActiveRecord::Base
-  # has_one :enrollment
-  # has_many :attachment
-  # has_many :document_owners, :order => 'created_at DESC'
-  # has_many :documents, :through => :document_owners, :source => :document
-  
-  # has_and_belongs_to_many :groups
-  # has_and_belongs_to_many :permission
-  
-  # has_many :project_infos, class_name: "ProjectAssignInfo"
-  # has_many :projects, through: :project_infos
-
-  # has_one :employee, dependent: :destroy
   belongs_to :person
-  # accepts_nested_attributes_for :employee, :allow_destroy => :true
-
-  # has_many :contacts, foreign_key: 'owner_id'
-
-  # has_many :payments
-  # has_many :commutes
-  # has_many :vacations
-  # has_many :change_histories
-  # has_many :reporters, class_name: 'ReportPerson'
-
-  # has_many :except_columns
-  # has_and_belongs_to_many :companies
-
-  # scope :noemployee, joins(:person => :employee).where("employees.person_id is NULL")
-  # scope :with_employee, joins(:person => :employee).where('employees.person_id == accounts.person_id')
-  # def self.noemployee
-  #   all - with_employee
-  # end
 
   scope :enabled, :conditions =>["name NOT LIKE '[X] %%'"]
   scope :disabled, :conditions =>["name LIKE '[X] %%'"]
@@ -50,12 +20,6 @@ class Account < ActiveRecord::Base
   validates_confirmation_of :password, :if => Proc.new{|account| account.provider.blank?}
   validate :password_non_blank, :if => Proc.new{|account| account.provider.blank?}
 
-  # has_one :company, foreign_key: :apply_admin_id
-  # def company
-  #   person.company
-  # end
-
-  # cattr_accessor :current_account
   cattr_accessor :current_account
 
   include Historiable
@@ -75,7 +39,6 @@ class Account < ActiveRecord::Base
   end
 
   def enrollment
-    # Enrollment.find_by_account_id(id) || create_enrollment!(company_id: Company.current_company.id)
     Enrollment.find_by_person_id(person.id) || person.create_enrollment!(company_id: Company.current_company.id)
   end
 
@@ -92,15 +55,6 @@ class Account < ActiveRecord::Base
       nil
     end
     account
-
-    # key = "#{auth["provider"]}_account".to_sym
-    # accounts = where(key => auth['info']['email'])
-    # account = if not accounts.empty?
-    #   accounts.first
-    # else
-    #   nil
-    # end
-    # account
   end
 
   def self.create_from_omniauth(auth)
@@ -174,7 +128,6 @@ class Account < ActiveRecord::Base
   end
 
   def admin?
-    # self.ingroup? "admin"
     employee and employee.admin?
   end
 
@@ -251,7 +204,6 @@ class Account < ActiveRecord::Base
     end
   end
 
-  # include ActionView::Helpers::UrlHelper
   include Rails.application.routes.url_helpers
 
   def save_apply(report_url)

@@ -14,7 +14,6 @@ class AccountsController < ApplicationController
     unless current_account.admin?
       flash[:notice] = I18n.t("common.messages.not_allowed")
       redirect_to :controller => "main", :action => "index"
-      return
     end
   end
 
