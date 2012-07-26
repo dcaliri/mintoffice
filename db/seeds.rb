@@ -17,7 +17,7 @@ company = Company.find_by_name("mintech")
 
 unless Account.exists?(name: 'admin')
   person = Person.create!
-  user = person.create_user(name: 'admin', password: '1234')
+  user = person.create_account(name: 'admin', password: '1234')
   hrinfo = person.create_employee(juminno: '771122-1111111')
 
   hrinfo.permission.build(name: 'users')
@@ -41,7 +41,7 @@ end
 
 unless Account.exists?(name: "test")
   person2 = Person.create!
-  user2 = person2.create_user(name: 'test', password: '1234')
+  user2 = person2.create_account(name: 'test', password: '1234')
   person2.companies << company
   person2.save!
 end
