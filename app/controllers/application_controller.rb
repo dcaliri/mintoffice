@@ -8,8 +8,6 @@ class ApplicationController < ActionController::Base
   before_filter :authorize, :except => [:login, :logout]
   before_filter :set_global_current_account_and_company
   helper_method :title
-  # Scrub sensitive parameters from your log
-  # filter_parameter_logging :password
 
   def set_global_current_account_and_company
     Account.current_account = current_account
