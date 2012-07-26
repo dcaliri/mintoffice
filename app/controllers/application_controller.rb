@@ -21,21 +21,26 @@ class ApplicationController < ActionController::Base
   helper_method :current_company
 
   def current_account
-    @current_account ||= Account.find(session[:account_id]) unless session[:account_id].nil?
+    @account ||= @current_account ||= Account.find(session[:account_id]) unless session[:account_id].nil?
   end
   helper_method :current_account
 
   include ActionController::Extensions::Parameter
   include ActionController::Extensions::Title
   include ActionController::Extensions::AuthorizeAndAccess
-  include ActionController::Extensions::Attachment
 
   protected
   def Account(permission)
-    if permission == :protedted && @account.ingroup?(:admin) == false
-      Account.where(name: @account.name)
+    if permission == :protedted && current_account.ingroup?(:admin) == false
+      Account.where(name: current_account.name)
     else
       Account
     end
+  end
+
+  def save_attachment_id(resource)
+    @attachment_ids ||= []
+    resource.attachments.each { |at| @attachment_ids << at.id }
+    session[:attachments] = @attachment_ids
   end
 end

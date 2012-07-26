@@ -52,4 +52,4 @@
 	
 	p
 		= submit_tag "Add"
-		= link_to "Back", :action => "show", :id => @account
+		= link_to "Back", :action => "show", :id => current_account

@@ -10,7 +10,7 @@ class ContactsController < ApplicationController
   before_filter :redirect_cannot_edit, :only => [:edit, :update, :destroy]
 
   def index
-    @contacts = contacts.isprivate(@account).search(params[:query])
+    @contacts = contacts.isprivate(current_account).search(params[:query])
     @paginated = @contacts.paginate(:page => params[:page], :per_page => 20)
   end
 

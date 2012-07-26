@@ -7,12 +7,12 @@ module Api
     respond_to :json
 
     def index
-      @contacts = contacts.isprivate(@account)
+      @contacts = contacts.isprivate(current_account)
       render :json => {:status => :ok, :contacts => @contacts}
     end
 
     def create
-      @contact = contacts.where(owner_id: @account.id).build(params[:contact])
+      @contact = contacts.where(owner_id: current_account.id).build(params[:contact])
       @contact.save!
       render :json => {:status => :ok, :contact => @contact}
     rescue => e

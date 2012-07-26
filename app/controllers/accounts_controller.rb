@@ -11,7 +11,7 @@ class AccountsController < ApplicationController
   end
 
   before_filter :except => [:my, :changepw, :login, :edit, :update, :logout, :google_apps] do |c|
-    unless @account.admin?
+    unless current_account.admin?
       flash[:notice] = I18n.t("common.messages.not_allowed")
       redirect_to :controller => "main", :action => "index"
       return
@@ -130,7 +130,7 @@ class AccountsController < ApplicationController
          this_account.password = params[:password]
          this_account.save
          flash[:notice] = I18n.t("accounts.changepw.successfully_changed")
-         if @account.ingroup? "admin"
+         if current_account.ingroup? "admin"
            redirect_to(:action => "index")
          else
            redirect_to accounts_my_path()
