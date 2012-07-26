@@ -3,6 +3,6 @@ class Group < ActiveRecord::Base
   
   def self.people_in_group(group)
   	# FIXME: join 쿼리.
-    self.where(:name => group).first.employees.map(:&person)
+    self.where(:name => group).first.employees.map(&:person)
   end
 end
