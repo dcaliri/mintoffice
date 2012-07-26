@@ -29,13 +29,7 @@ class ApplicationController < ActionController::Base
   end
   helper_method :current_account
 
-
-  before_filter :modify_query_parameter
-  def modify_query_parameter
-    [:q, :query].each do |query|
-      params[query] = "#{params[query] ? params[query].strip : ""}" unless params[query].blank?
-    end
-  end
+  include ActionController::Extensions::Parameter
 
   protected
   def authorize
