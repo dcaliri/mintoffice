@@ -29,7 +29,7 @@ class ExpenseReportsControllerTest < ActionController::TestCase
 
   private
   def current_cardbill
-    @cardbill ||= cardbills(:fixture)
+    @cardbill ||= cardbills(:has_permission_cardbill)
   end
 
   def current_expense_report

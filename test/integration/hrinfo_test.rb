@@ -236,7 +236,7 @@ class HrinfoTest < ActionDispatch::IntegrationTest
     visit '/'
     click_link '인사정보관리 - 사원목록'
     find("tr.selectable").click
-
+    save_and_open_page
     click_link '돌아가기'
 
     assert(page.has_content?('인사정보관리'))

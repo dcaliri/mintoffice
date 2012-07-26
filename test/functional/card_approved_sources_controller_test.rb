@@ -45,7 +45,7 @@ class CardApprovedSourcesControllerTest < ActionController::TestCase
 
   private
   def current_creditcard
-    @creditcard ||= creditcards(:fixture)
+    @creditcard ||= creditcards(:shinhan_card)
   end
 
   def current_card_approved_source
