@@ -4,10 +4,6 @@ class CardUsedSourcesControllerTest < ActionController::TestCase
   fixtures :creditcards
   fixtures :card_used_sources
 
-  def setup
-    current_account.employee.permission.create!(name: 'card_used_sources')
-  end
-
   test "should see index page" do
     get :index
     assert_response :success
@@ -35,7 +31,7 @@ class CardUsedSourcesControllerTest < ActionController::TestCase
 
   private
   def current_creditcard
-    @creditcard ||= creditcards(:fixture)
+    @creditcard ||= creditcards(:shinhan_card)
   end
 
   def current_card_used_source

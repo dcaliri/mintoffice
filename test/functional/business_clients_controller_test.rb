@@ -2,11 +2,7 @@ require 'test_helper'
 
 class BusinessClientsControllerTest < ActionController::TestCase
   fixtures :business_clients
-
-  def setup
-    current_account.employee.permission.create!(name: 'business_clients')
-  end
-
+  
   test "should see index page" do
     get :index
     assert_response :success

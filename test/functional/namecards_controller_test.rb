@@ -3,10 +3,6 @@ require 'test_helper'
 class NamecardsControllerTest < ActionController::TestCase
   fixtures :namecards
 
-  def setup
-    current_account.employee.permission.create!(name: 'namecards')
-  end
-
   test "should see index page" do
     get :index
     assert_response :success

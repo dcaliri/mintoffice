@@ -3,10 +3,6 @@ require 'test_helper'
 class CreditcardsControllerTest < ActionController::TestCase
   fixtures :creditcards
 
-  def setup
-    current_account.employee.permission.create!(name: 'creditcards')
-  end
-
   test "should see list page" do
     get :index
     assert_response :success
@@ -38,6 +34,6 @@ class CreditcardsControllerTest < ActionController::TestCase
   end
 
   def current_creditcard
-    @creditcard ||= creditcards(:fixture)
+    @creditcard ||= creditcards(:shinhan_card)
   end
 end

@@ -3,10 +3,6 @@ require 'test_helper'
 class CompaniesControllerTest < ActionController::TestCase
   fixtures :companies
 
-  def setup
-    current_account.employee.permission.create!(name: 'companies')
-  end
-
   test "should see show page" do
     get :show, :id => current_company.id
     assert_response :success

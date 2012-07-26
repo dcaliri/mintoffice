@@ -3,10 +3,6 @@ require 'test_helper'
 class HolidaysControllerTest < ActionController::TestCase
   fixtures :holidays
 
-  def setup
-    current_account.employee.permission.create!(name: 'holidays')
-  end
-
   test "should see index page" do
     get :index
     assert_response :success

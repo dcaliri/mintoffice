@@ -3,10 +3,6 @@ require 'test_helper'
 class TaxbillsControllerTest < ActionController::TestCase
   fixtures :taxbills, :taxmen, :business_clients
 
-  def setup
-    current_account.employee.permission.create!(name: 'taxmen')
-  end
-
   test "should see index page" do
     get :index
     assert_response :success

@@ -3,10 +3,6 @@ require 'test_helper'
 class UsedVacationsControllerTest < ActionController::TestCase
   fixtures :employees, :vacations, :used_vacations
 
-  def setup
-    current_account.employee.permission.create!(name: 'vacations')
-  end
-
   test "should see new page" do
     get :new, account_id: 1, vacation_id: 1
     assert_response :success

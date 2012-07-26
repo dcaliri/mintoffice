@@ -3,10 +3,6 @@ require 'test_helper'
 class CommutesControllerTest < ActionController::TestCase
   fixtures :commutes
 
-  def setup
-    current_account.employee.permission.create!(name: 'commutes')
-  end
-
   test "should see index page" do
     get :index, account_id: 1
     assert_response :success

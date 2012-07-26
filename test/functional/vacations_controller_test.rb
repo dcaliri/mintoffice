@@ -2,11 +2,7 @@ require 'test_helper'
 
 class VacationsControllerTest < ActionController::TestCase
   fixtures :employees, :vacations
-
-  def setup
-    current_account.employee.permission.create!(name: 'vacations')
-  end
-
+  
   test "should see index page" do
     get :index, account_id: 1
     assert_response :success

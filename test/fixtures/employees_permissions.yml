@@ -1,3 +1,31 @@
 fixture:
   permission_id: 1
   employee_id: 1
+
+commutes:
+  permission_id: 2
+  user_id: 1
+
+pettycashes:
+  permission_id: 3
+  user_id: 1
+
+cardbills:
+  permission_id: 4
+  user_id: 1
+
+expenses:
+  permission_id: 5
+  user_id: 1
+
+bank_trasactions:
+  permission_id: 6
+  user_id: 1  
+
+bank_trasfers:
+  permission_id: 7
+  user_id: 1
+
+projects:
+  permission_id: 8
+  user_id: 1

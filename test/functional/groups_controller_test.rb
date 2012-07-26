@@ -3,10 +3,6 @@ require 'test_helper'
 class GroupsControllerTest < ActionController::TestCase
   fixtures :groups
 
-  def setup
-    current_account.employee.permission.create!(name: 'groups')
-  end
-
   test "should see index page" do
     get :index
     assert_response :success
@@ -29,6 +25,6 @@ class GroupsControllerTest < ActionController::TestCase
 
   private
   def current_group
-    @group ||= groups(:fixture)
+    @group ||= groups(:admin)
   end
 end

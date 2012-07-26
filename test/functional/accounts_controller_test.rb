@@ -3,10 +3,6 @@ require 'test_helper'
 class AccountsControllerTest < ActionController::TestCase
   fixtures :accounts
 
-  def setup
-    current_account.employee.permission.create!(name: 'accounts')
-  end
-
   test "should see index page" do
     get :index
     assert_response :success

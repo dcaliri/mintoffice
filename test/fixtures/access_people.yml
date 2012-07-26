@@ -1,0 +1,17 @@
+admin_write_access_cardbill:
+  id: 1
+  user_id: 1
+  access_target_id: 1
+  access_target_type: Cardbill
+  access_type: write
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
+
+admin_write_access_document:
+  id: 2
+  user_id: 1
+  access_target_id: 1
+  access_target_type: Document
+  access_type: write
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>

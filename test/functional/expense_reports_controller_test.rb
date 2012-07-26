@@ -3,10 +3,6 @@ require 'test_helper'
 class ExpenseReportsControllerTest < ActionController::TestCase
   fixtures :cardbills, :expense_reports, :reports, :employees, :projects
 
-  def setup
-    current_account.employee.permission.create!(name: 'expense_reports')
-  end
-
   test "should see index page" do
     get :index
     assert_response :success
@@ -29,7 +25,7 @@ class ExpenseReportsControllerTest < ActionController::TestCase
 
   private
   def current_cardbill
-    @cardbill ||= cardbills(:fixture)
+    @cardbill ||= cardbills(:has_permission_cardbill)
   end
 
   def current_expense_report

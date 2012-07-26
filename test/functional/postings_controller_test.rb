@@ -3,10 +3,6 @@ require 'test_helper'
 class PostingsControllerTest < ActionController::TestCase
   fixtures :postings
 
-  def setup
-    current_account.employee.permission.create!(name: 'documents')
-  end
-
   test "should see index page" do
     get :index
     assert_response :success

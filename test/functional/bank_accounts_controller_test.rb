@@ -3,10 +3,6 @@ require 'test_helper'
 class BankAccountsControllerTest < ActionController::TestCase
   fixtures :bank_accounts
 
-  def setup
-    current_account.employee.permission.create!(name: 'bank_accounts')
-  end
-
   test "should see list page" do
     get :index
     assert_response :success
@@ -35,6 +31,6 @@ class BankAccountsControllerTest < ActionController::TestCase
 
   private
   def current_bank_account
-    @bank_account ||= bank_accounts(:fixture)
+    @bank_account ||= bank_accounts(:shinhan_bank)
   end
 end

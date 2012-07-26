@@ -60,7 +60,7 @@ class ActionController::TestCase
 
   def current_account
     unless @account
-      @account = accounts(:fixture)
+      @account = accounts(:admin_account)
       @account.employee.groups.create!(name: "admin")
     end
     @account

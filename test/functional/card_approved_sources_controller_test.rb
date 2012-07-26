@@ -4,10 +4,6 @@ class CardApprovedSourcesControllerTest < ActionController::TestCase
   fixtures :creditcards
   fixtures :card_approved_sources
 
-  def setup
-    current_account.employee.permission.create!(name: 'card_approved_sources')
-  end
-
   test "should see list of card approved sourcepage" do
     get :index
     assert_response :success
@@ -45,7 +41,7 @@ class CardApprovedSourcesControllerTest < ActionController::TestCase
 
   private
   def current_creditcard
-    @creditcard ||= creditcards(:fixture)
+    @creditcard ||= creditcards(:shinhan_card)
   end
 
   def current_card_approved_source
