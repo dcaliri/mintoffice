@@ -6,7 +6,7 @@ p
 hr
 h2
   = t('permissions.show.account')
-- if !@permission.employee.blank?
+- if !@permission.employees.blank?
   ul
     - for employee in @permission.employee
       li

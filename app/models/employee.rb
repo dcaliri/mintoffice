@@ -5,7 +5,15 @@ class Employee < ActiveRecord::Base
   belongs_to :person
 
   has_and_belongs_to_many :groups
-  has_and_belongs_to_many :permission
+#  has_and_belongs_to_many :permissions
+
+  ### deprecated methods
+  # def permission
+  #   add_to_fix_me_log('permission')
+  #   permissions
+  # end
+  # ### deprecated methods
+
   
   # has_one :contact, :as => :target, dependent: :destroy
 
@@ -67,7 +75,7 @@ class Employee < ActiveRecord::Base
   def ingroup? (name)
     group = Group.find_by_name(name)
     unless group.nil?
-      group.employees.include? self
+      group.people.include? self.person
     else
       false
     end
