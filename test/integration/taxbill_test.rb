@@ -3,7 +3,7 @@ require 'test_helper'
 
 class TaxBillTest < ActionDispatch::IntegrationTest
   fixtures :groups
-  fixtures :employees_groups
+  fixtures :groups_people
   fixtures :taxbills
   fixtures :taxbill_items
   fixtures :taxmen

@@ -1,47 +1,47 @@
 fixture:
   permission_id: 1
-  employee_id: 1
+  person_id: 1
 
 commutes:
   permission_id: 2
-  employee_id: 1
+  person_id: 1
 
 pettycashes:
   permission_id: 3
-  employee_id: 1
+  person_id: 1
 
 cardbills:
   permission_id: 4
-  employee_id: 1
+  person_id: 1
 
 expenses:
   permission_id: 5
-  employee_id: 1
+  person_id: 1
 
 bank_trasactions:
   permission_id: 6
-  employee_id: 1
+  person_id: 1
   
 bank_trasfers:
   permission_id: 7
-  employee_id: 1
+  person_id: 1
 
 projects:
   permission_id: 8
-  employee_id: 1
+  person_id: 1
 
 business_clients:
   permission_id: 9
-  employee_id: 1
+  person_id: 1
 
 taxbills:
   permission_id: 10
-  employee_id: 1
+  person_id: 1
 
 postings:
   permission_id: 11
-  employee_id: 1
+  person_id: 1
 
 ledger_accounts:
   permission_id: 12
-  employee_id: 1
+  person_id: 1
