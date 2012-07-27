@@ -41,6 +41,14 @@ class ApplicationController < ActionController::Base
   include ActionController::Extensions::AuthorizeAndAccess
 
   protected
+  def Employee(permission)
+    if permission == :protedted and current_employee.admin? == false
+      Employee.where(id: current_employee.id)
+    else
+      Employee.scoped
+    end
+  end
+
   def Account(permission)
     if permission == :protedted && current_account.ingroup?(:admin) == false
       Account.where(name: current_account.name)

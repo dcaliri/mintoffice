@@ -1,6 +1,8 @@
 class Person < ActiveRecord::Base
   has_one :account
   has_and_belongs_to_many :companies
+  has_and_belongs_to_many :groups
+  has_and_belongs_to_many :permissions
 
   has_one :employee
   has_one :enrollment

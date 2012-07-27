@@ -37,3 +37,11 @@ business_clients:
 taxbills:
   permission_id: 10
   employee_id: 1
+
+postings:
+  permission_id: 11
+  employee_id: 1
+
+ledger_accounts:
+  permission_id: 12
+  employee_id: 1

@@ -1,11 +1,14 @@
 class Permission < ActiveRecord::Base
   # has_and_belongs_to_many :account
-  has_and_belongs_to_many :employees
+  # has_and_belongs_to_many :employees
+  has_and_belongs_to_many :people
 
-  def employee
-    add_to_fix_me_log('employee')
-    employees
-  end
+  ### deprecated methods
+  # def employee
+  #   add_to_fix_me_log('employee')
+  #   employees
+  # end
+  ### deprecated methods
 
 
 
@@ -34,7 +37,7 @@ class Permission < ActiveRecord::Base
     return false unless account and account.employee
     return true if account and account.admin?
     
-    if account.employee.permission.any? { |perm| perm.name == controller_name }
+    if account.person.permissions.any? { |perm| perm.name == controller_name }
       return true
     else
       return false
