@@ -2,8 +2,6 @@
 require 'test_helper'
 
 class PostingTest < ActionDispatch::IntegrationTest
-  fixtures :groups
-  fixtures :employees_groups
   fixtures :postings
   fixtures :posting_items
   fixtures :ledger_accounts

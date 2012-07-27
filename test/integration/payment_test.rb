@@ -5,8 +5,6 @@ class PaymentTest < ActionDispatch::IntegrationTest
   fixtures :payments
   fixtures :employees
   fixtures :accounts
-  fixtures :groups
-  fixtures :groups_people
 
   test 'should visit payment list for admin' do
     visit '/'

@@ -2,8 +2,6 @@
 require 'test_helper'
 
 class ProjectTest < ActionDispatch::IntegrationTest
-  fixtures :groups
-  fixtures :groups_people
   fixtures :projects
   fixtures :accounts
 
