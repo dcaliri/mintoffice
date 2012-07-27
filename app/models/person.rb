@@ -19,7 +19,7 @@ class Person < ActiveRecord::Base
   end
 
   def permission?(name)
-    permissions.exists?(name: name.to_s)
+    admin? or permissions.exists?(name: name.to_s)
   end
 
   def ingroup?(name)
