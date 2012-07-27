@@ -11,8 +11,8 @@ table
 	    td
 	    	= link_to 'Show', permission
 	    td
-	    	= link_to 'Edit', edit_permission_path(permission)
+	    	= link_to 'Edit', [:edit, permission]
 	    td
 	    	= link_to 'Destroy', permission, :method => :delete, confirm: t("common.messages.delete_confirm")
 br
-= link_to 'New permission', new_permission_path
+= link_to 'New permission', [:new, :permission]
