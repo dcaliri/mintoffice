@@ -63,3 +63,9 @@ postings:
   name: "postings"
   created_at: 2012-07-18 16:08:13.066854
   updated_at: 2012-07-18 16:08:13.066854
+
+ledger_accounts:
+  id: 12
+  name: "ledger_accounts"
+  created_at: 2012-07-18 16:08:13.066854
+  updated_at: 2012-07-18 16:08:13.066854
