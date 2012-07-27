@@ -3,7 +3,7 @@ require 'test_helper'
 
 class PettyCashTest < ActionDispatch::IntegrationTest
   fixtures :groups
-  fixtures :employees_groups
+  fixtures :groups_people
   fixtures :pettycashes
 
   test 'should visit pettycash list' do

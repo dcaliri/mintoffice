@@ -7,7 +7,7 @@ require 'capybara/rails'
 
 class ActionDispatch::IntegrationTest
   include Capybara::DSL
-  fixtures :accounts, :people, :companies, :companies_people, :employees_permissions, :permissions, :employees, :employees_groups, :groups
+  fixtures :accounts, :people, :companies, :companies_people, :people_permissions, :permissions, :employees, :groups_people, :groups
   setup :global_setup
   teardown :global_teardown
 
@@ -41,7 +41,7 @@ class ActionController::TestCase
 
   # fixtures :accounts, :companies, :companies_accounts, :groups, :groups_accounts
   
-  fixtures :accounts, :people, :employees, :companies_people, :employees_groups, :groups, :companies
+  fixtures :accounts, :people, :employees, :companies_people, :groups_people, :groups, :companies
 
   def global_setup
     DatabaseCleaner.strategy = :truncation
@@ -61,7 +61,7 @@ class ActionController::TestCase
   def current_account
     unless @account
       @account = accounts(:admin_account)
-      @account.employee.groups.create!(name: "admin")
+      @account.person.groups.create!(name: "admin")
     end
     @account
   end

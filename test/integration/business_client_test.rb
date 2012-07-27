@@ -5,6 +5,7 @@ class BusinessClientTest < ActionDispatch::IntegrationTest
   fixtures :groups
   fixtures :employees_groups
   fixtures :groups_users
+  fixtures :groups_people
   fixtures :business_clients
   fixtures :contacts
   fixtures :taxmen

@@ -16,7 +16,7 @@ class DocumentTest < ActionDispatch::IntegrationTest
   fixtures :report_comments
   fixtures :access_people
   fixtures :groups
-  fixtures :employees_groups
+  fixtures :groups_people
 
   test 'should visit document list' do
     visit '/'

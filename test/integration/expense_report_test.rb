@@ -3,7 +3,7 @@ require 'test_helper'
 
 class ExpenseReportTest < ActionDispatch::IntegrationTest
   fixtures :groups
-  fixtures :employees_groups
+  fixtures :groups_people
   fixtures :expense_reports
   fixtures :employees
   fixtures :postings

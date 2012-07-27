@@ -3,7 +3,7 @@ require 'test_helper'
 
 class ProjectTest < ActionDispatch::IntegrationTest
   fixtures :groups
-  fixtures :employees_groups
+  fixtures :groups_people
   fixtures :projects
   fixtures :accounts
 

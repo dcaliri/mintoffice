@@ -3,9 +3,6 @@
 class Employee < ActiveRecord::Base
   belongs_to :person
 
-  has_and_belongs_to_many :groups
-
-
   has_many :payments
   has_many :commutes
   has_many :vacations
