@@ -29,6 +29,6 @@ class ExpenseReportsControllerTest < ActionController::TestCase
   end
 
   def current_expense_report
-    @expense_report ||= expense_reports(:fixture)
+    @expense_report ||= expense_reports(:cardbill)
   end
 end
