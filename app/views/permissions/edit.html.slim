@@ -14,8 +14,8 @@ h1
     - if !Account.all.blank?
       - for account in Account.enabled
         - if account.employee
-          = check_box_tag "permission[employee_ids][]", account.employee.id, @permission.employee.include?(account.employee)
-          = account.employee.fullname
+          = check_box_tag "permission[person_ids][]", account.person.id, @permission.people.include?(account.person)
+          = account.person.name
   p
     = f.submit 'Update'
 

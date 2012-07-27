@@ -24,7 +24,7 @@ class AccountsControllerTest < ActionController::TestCase
   end
 
   test "should see changepw page" do
-    get :changepw, :account_id => current_account.id
+    get :changepw, :id => current_account.id
     assert_response :success
   end
 
