@@ -21,8 +21,8 @@ class ApplicationController < ActionController::Base
   helper_method :current_company
 
   def current_account
-    # @account ||= @current_account ||= Account.find(session[:account_id]) unless session[:account_id].nil?
-    @current_account ||= Account.find(session[:account_id]) unless session[:account_id].nil?
+    @account ||= @current_account ||= Account.find(session[:account_id]) unless session[:account_id].nil?
+    # @current_account ||= Account.find(session[:account_id]) unless session[:account_id].nil?
   end
   helper_method :current_account
   
