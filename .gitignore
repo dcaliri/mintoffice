@@ -5,6 +5,7 @@ config/oauth_key.yml
 config/initializers/mail_configure.rb
 db/development.sqlite3.old
 db/*.sqlite3
+db/*.sqlite3-journal
 db/schema.rb
 public/assets/
 tmp/
