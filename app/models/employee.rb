@@ -26,6 +26,7 @@ class Employee < ActiveRecord::Base
 
   include Historiable
   include Attachmentable
+  include EmploymentProof
 
   validates_format_of :juminno, :with => /^\d{6}-\d{7}$/, :message => I18n.t('employees.error.juminno_invalid')
   validates_uniqueness_of :juminno
@@ -139,11 +140,7 @@ class Employee < ActiveRecord::Base
   end
 
   def fullname
-    if lastname == nil || firstname == nil
-      "unknown"
-    else
-      lastname + " " + firstname
-    end
+    lastname + " " + firstname rescue ""
   end
 
   def email
@@ -183,6 +180,4 @@ class Employee < ActiveRecord::Base
       I18n.t('models.employee.approve')
     end
   end
-
-  include EmploymentProof
 end

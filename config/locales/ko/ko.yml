@@ -400,7 +400,7 @@ ko:
                 position: 직급
                 purpose: 용도
                 fullname: 이름
-                accountname: 계정
+                person_id: 계정
                 phone_number: 핸드폰번호
                 joined_on: 입사일
                 email: 이메일

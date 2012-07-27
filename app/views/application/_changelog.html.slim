@@ -1,3 +1,3 @@
-- if @account.ingroup? "admin"
+- if current_account.ingroup? "admin"
   h3= t("common.changes")
   = render 'changelog_item', target: target

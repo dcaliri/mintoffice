@@ -8,7 +8,7 @@
       = select_tag :search_type, options_for_select(Employee::SEARCH_TYPE, params[:search_type]), "onchange" => "this.form.submit()"
 
 #show_command
-  - if @account.ingroup?("admin")
+  - if current_account.ingroup?("admin")
     = link_to t('employees.new.title'), new_employee_path
 h2
   = t('employees.index.total')
@@ -35,10 +35,7 @@ table#list-table
         =h employee.fullname
       td
         =h employee.position
-      - if employee.account
-        td
-          =h employee.account.name
-      - else
-        td
+      td
+        =h employee.fullname
       td
         =h employee.joined_on

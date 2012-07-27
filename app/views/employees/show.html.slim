@@ -1,11 +1,11 @@
 - title t('.title')
 
 #show_command
-  - if @account.ingroup?("admin") or @employee == current_account.employee
+  - if current_account.ingroup?("admin") or @employee == current_account.employee
     - if @employee.joined?
       = link_to t('employees.show.pdf'), [:employment_proof, @employee]
       = " | "
-  - if @account.ingroup?("admin") and !@employee.retired_on
+  - if current_account.ingroup?("admin") and !@employee.retired_on
     - if @employee.joined?
       = link_to t('employees.retire.title'), :action => :retire, :id => @employee
       = " | "
@@ -24,10 +24,10 @@ h2
         = @employee.companyno
       = dtdd @employee, "position"
       dt
-        = Employee.human_attribute_name('accountname')
+        = Employee.human_attribute_name('person_id')
       dd
         = @employee.account.name
-      - if @account.ingroup?("admin") || @employee.account == @account
+      - if current_account.ingroup?("admin") || @employee.account == current_account
         = dtdd @employee, "juminno"
       = dtdd @employee, "joined_on"
       - if @employee.retired_on
@@ -39,8 +39,8 @@ h2
           = t("contacts.show.title")
         ul
           = render 'contacts/item_for_employee', contact: @employee.contact,menu: false
-      - if @account.ingroup?("admin") || @employee.account == @account
-        - if @account.ingroup? "admin"
+      - if current_account.ingroup?("admin") || @employee.account == current_account
+        - if current_account.ingroup? "admin"
           #show_command
             = link_to t('required_tags.new.title'), :controller => "required_tags",  :action => "new", :modelname => Employee.name, :returnurl => request.url
         h3
@@ -64,7 +64,7 @@ h2
           h3
             = t(".related_admin_actions")
           ul
-            - if @account.ingroup?("admin") || @employee.account == @account
+            - if current_account.ingroup?("admin") || @employee.account == current_account
               li
                 = link_to t('payments.title'), payment_path(@employee.account)
               li
@@ -74,7 +74,7 @@ h2
   .clear
 
 
-- if @account.ingroup? "admin"
+- if current_account.ingroup? "admin"
   = render 'changelog', target: @employee
 
 
