@@ -30,7 +30,16 @@ class Person < ActiveRecord::Base
     not joined?
   end
 
+  def ingroup? (name)
+    group = Group.find_by_name(name)
+    unless group.nil?
+      group.people.include? self
+    else
+      false
+    end
+  end
+  
   def admin?
-    account.admin?
+    self.ingroup? "admin"
   end
 end

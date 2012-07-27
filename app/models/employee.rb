@@ -75,16 +75,11 @@ class Employee < ActiveRecord::Base
   end
 
   def ingroup? (name)
-    group = Group.find_by_name(name)
-    unless group.nil?
-      group.people.include? self.person
-    else
-      false
-    end
+    person.ingroup?(name)
   end
   
   def admin?
-    self.ingroup? "admin"
+    person.admin?
   end
 
   def joined?
