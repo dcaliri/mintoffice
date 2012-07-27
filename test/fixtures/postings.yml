@@ -1,2 +1,7 @@
 fixture:
     id: 1
+    posted_at: <%= Time.zone.now %>
+    description: 상세내용 기입 테스트
+    created_at: <%= Time.zone.now %>
+    updated_at: <%= Time.zone.now %>
+    expense_report_id: 2

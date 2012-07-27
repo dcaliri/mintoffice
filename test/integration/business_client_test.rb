@@ -3,7 +3,11 @@ require 'test_helper'
 
 class BusinessClientTest < ActionDispatch::IntegrationTest
   fixtures :groups
+<<<<<<< HEAD
   fixtures :employees_groups
+=======
+  fixtures :groups_users
+>>>>>>> efeca4dbd866dccb37cb383516c2bcee562648c1
   fixtures :business_clients
   fixtures :contacts
   fixtures :taxmen

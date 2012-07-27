@@ -3,7 +3,11 @@ require 'test_helper'
 
 class ContactTest < ActionDispatch::IntegrationTest
   fixtures :groups
+<<<<<<< HEAD
   fixtures :employees_groups
+=======
+  fixtures :groups_users
+>>>>>>> efeca4dbd866dccb37cb383516c2bcee562648c1
   fixtures :contacts
   fixtures :contact_emails
   fixtures :contact_email_tags
@@ -131,7 +135,11 @@ class ContactTest < ActionDispatch::IntegrationTest
     assert(!page.has_content?('왕 수용'))
   end
 
+<<<<<<< HEAD
   test 'should remove email' do
+=======
+  test 'should delete contact' do
+>>>>>>> efeca4dbd866dccb37cb383516c2bcee562648c1
     visit '/'
     click_link '연락처'
     find("tr.selectable").click
