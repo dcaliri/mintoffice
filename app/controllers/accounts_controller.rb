@@ -64,6 +64,12 @@ class AccountsController < ApplicationController
     end
   end
 
+  def login
+    if current_account.present?
+      redirect_to :root, notice: '로그인된 상태에서는 접근할 수 없는 페이지입니다.'
+    end
+  end
+
   def logout
     session[:account_id] = nil
     redirect_to(:controller => "main", :action => "index")
