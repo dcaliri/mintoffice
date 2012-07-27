@@ -45,6 +45,10 @@ class Account < ActiveRecord::Base
   def admin?
     person and person.admin?
   end
+
+  def permission?(name)
+    person and person.permission?(name)
+  end
   ##########################################################################################
 
   def person
