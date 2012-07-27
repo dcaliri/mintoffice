@@ -1,46 +1,46 @@
-div class={@account.admin? ? "admin" : ""}
+div class={current_person.admin? ? "admin" : ""}
   .menubar
     .menubar_item.item1
       h2= t("main.index.human_resources")
       ul
         li= link_to t("employees.index.title"), :controller => "employees"
-        li= link_to t("vacations.index.title"), vacation_path(@account)
-        - if @account.permission? 'commutes'
-          li= link_to t("commutes.index.title"), commute_path(@account)
-        - if @account.has_payment_info
-          li= link_to t("payments.title"), payment_path(@account)
+        li= link_to t("vacations.index.title"), vacation_path(current_employee)
+        - if current_person.permission? 'commutes'
+          li= link_to t("commutes.index.title"), commute_path(current_employee)
+        - if current_account.has_payment_info
+          li= link_to t("payments.title"), payment_path(current_employee)
 
     .menubar_item.item2
       h2= t("main.index.finance")
       ul
-        - if @account.permission? 'pettycashes'
+        - if current_person.permission? 'pettycashes'
           li= link_to t("pettycashes.index.title"), :controller => "pettycashes"
         li= link_to t("cardbills.index.title"), :controller => "cardbills"
-        - if @account.permission? 'bank_accounts'
+        - if current_person.permission? 'bank_accounts'
           li= link_to t("bank_accounts.index.title"), :bank_accounts
-        - if @account.permission? 'taxbills'
+        - if current_person.permission? 'taxbills'
           li= link_to t("taxbills.index.title"), :taxbills
         li= link_to t("expense_reports.index.title"), :expense_reports
-        - if @account.permission? 'ledger_accounts'
+        - if current_person.permission? 'ledger_accounts'
           li= link_to t("ledger_accounts.title"), :ledger_accounts
-        - if @account.permission? 'postings'
+        - if current_person.permission? 'postings'
           li= link_to t("postings.title"), :postings
 
     .menubar_item.item3
       h2= t("main.index.project")
       ul
-        - if @account.permission? 'projects'
+        - if current_person.permission? 'projects'
           li= link_to t("projects.index.title"), :controller => "projects"
 
     .menubar_item.item4
       h2= t("main.index.document")
       ul
         li= link_to t("documents.index.title"), :controller => "documents"
-        - if @account.permission? 'business_clients'
+        - if current_person.permission? 'business_clients'
           li= link_to t("business_clients.index.title"), :business_clients
         li= link_to t("contacts.index.title"), :contacts
 
-    - if @account.admin?
+    - if current_person.admin?
       .menubar_item.item5
           h2= t("main.index.admin")
           ul
