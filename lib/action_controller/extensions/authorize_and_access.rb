@@ -29,7 +29,7 @@ module ActionController
       end
 
       def redirect_unless_me(account)
-        unless current_account.ingroup? "admin"
+        unless current_account.admin?
           force_redirect unless current_account == account
         end
       end

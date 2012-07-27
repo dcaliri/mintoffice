@@ -1,12 +1,10 @@
 # encoding: UTF-8
 
 class Commute < ActiveRecord::Base
-  # belongs_to :account
   belongs_to :employee
 
   validate :check_unique_date, on: :create
   def check_unique_date
-    # errors.add(:go, I18n.t('commutes.error.already_created')) if account.commutes.exists?(go: Time.now.all_day)
     errors.add(:go, I18n.t('commutes.error.already_created')) if employee.commutes.exists?(go: Time.now.all_day)
   end
 

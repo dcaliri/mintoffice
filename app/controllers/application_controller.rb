@@ -45,7 +45,7 @@ class ApplicationController < ActionController::Base
     if permission == :protedted && current_account.ingroup?(:admin) == false
       Account.where(name: current_account.name)
     else
-      Account
+      Account.scoped
     end
   end
 

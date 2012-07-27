@@ -27,4 +27,8 @@ class Person < ActiveRecord::Base
   def not_joined?
     not joined?
   end
+
+  def admin?
+    account.admin?
+  end
 end
