@@ -18,8 +18,16 @@ class Person < ActiveRecord::Base
     joins(:account).where('accounts.person_id == people.id') - joins(:employee).where('employees.person_id == people.id')
   end
 
+  def permission?(name)
+    permissions.exists?(name: name.to_s)
+  end
+
   def ingroup?(name)
     self.groups.where(name: name).present?
+  end
+  
+  def admin?
+    self.ingroup?("admin")
   end
 
   def name
@@ -32,9 +40,5 @@ class Person < ActiveRecord::Base
 
   def not_joined?
     not joined?
-  end
-  
-  def admin?
-    self.ingroup?("admin")
   end
 end
