@@ -61,6 +61,10 @@ class Employee < ActiveRecord::Base
     def not_retired
       where("retired_on IS NULL")
     end
+
+    def enabled
+    joins(:person => :account).merge(Account.enabled)
+  end
   end
 
   def account

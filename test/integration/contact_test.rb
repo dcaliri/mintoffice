@@ -131,7 +131,11 @@ class ContactTest < ActionDispatch::IntegrationTest
     assert(!page.has_content?('왕 수용'))
   end
 
+<<<<<<< HEAD
   test 'should remove email' do
+=======
+  test 'should delete contact' do
+>>>>>>> efeca4dbd866dccb37cb383516c2bcee562648c1
     visit '/'
     click_link '연락처'
     find("tr.selectable").click

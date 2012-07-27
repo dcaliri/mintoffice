@@ -14,4 +14,4 @@ cardbill:
     id: 3
     target_id: 2
     target_type: "ExpenseReport"
-    status: "not_reported"
+    status: "reported"

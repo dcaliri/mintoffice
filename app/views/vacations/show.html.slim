@@ -1,19 +1,19 @@
 #show_command
-  - if @account.ingroup?("admin")
-    = link_to t('vacations.new.link'), [:new, account, :vacation]
+  - if current_person.ingroup?("admin")
+    = link_to t('vacations.new.link'), [:new, employee, :vacation]
     = " | "
-  = link_to t('employees.show.title'), employee_path(account.employee)
-h2= account.fullname
+  = link_to t('employees.show.title'), employee_path(employee)
+h2= employee.fullname
 
 - unless vacations.empty?
   - vacations.each do |vacation|
     div style="float: right;"
       = link_to t('used_vacations.new.link'), [:new, vacation, :used_vacation]
-      - if @account.ingroup?("admin")
+      - if current_person.ingroup?("admin")
         = " | "
-        = link_to t('common.link.edit'), [:edit, account, vacation]
+        = link_to t('common.link.edit'), [:edit, employee, vacation]
         = " | "
-        = link_to t('common.link.destroy'), [account, vacation], :method => :delete, confirm: t("common.messages.delete_confirm")
+        = link_to t('common.link.destroy'), [employee, vacation], :method => :delete, confirm: t("common.messages.delete_confirm")
     h3= "#{vacation.from} ~ #{vacation.to} : #{t('vacations.show.info', total: vacation.period, used: vacation.used.total, remain: vacation.remain)}"
 
     - unless vacation.used.empty?
