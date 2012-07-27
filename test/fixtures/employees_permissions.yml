@@ -29,3 +29,7 @@ bank_trasfers:
 projects:
   permission_id: 8
   employee_id: 1
+
+business_clients:
+  permission_id: 9
+  employee_id: 1
