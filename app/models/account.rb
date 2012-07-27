@@ -39,7 +39,7 @@ class Account < ActiveRecord::Base
   end
 
   def ingroup? (gname)
-    employee and employee.ingroup?(gname)
+    person and person.ingroup?(gname)
   end
   
   def self.no_admins
@@ -47,11 +47,11 @@ class Account < ActiveRecord::Base
   end
 
   def permission?(name)
-    admin? or (employee and employee.permission.exists?(name: name.to_s))
+    admin? or (person and person.permission.exists?(name: name.to_s))
   end
 
   def admin?
-    employee and employee.admin?
+    person and person.admin?
   end
   ##########################################################################################
 
