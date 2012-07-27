@@ -33,9 +33,27 @@ class Account < ActiveRecord::Base
   include Historiable
   include Attachmentable
 
+  # Need to Remove ###########################################################################
   def employee
     person.employee
   end
+
+  def ingroup? (gname)
+    employee and employee.ingroup?(gname)
+  end
+  
+  def self.no_admins
+    all - joins(:person => {:employee => :groups}).where('groups.name == ?', "admin")
+  end
+
+  def permission?(name)
+    admin? or (employee and employee.permission.exists?(name: name.to_s))
+  end
+
+  def admin?
+    employee and employee.admin?
+  end
+  ##########################################################################################
 
   def person
     myself = Person.find_by_id(person_id)
@@ -123,22 +141,6 @@ class Account < ActiveRecord::Base
     account
   end
 
-  def ingroup? (gname)
-    employee and employee.ingroup?(gname)
-  end
-  
-  def self.no_admins
-    all - joins(:person => {:employee => :groups}).where('groups.name == ?', "admin")
-  end
-
-  def permission?(name)
-    admin? or (employee and employee.permission.exists?(name: name.to_s))
-  end
-
-  def admin?
-    employee and employee.admin?
-  end
-
   def self.search(query)
     query = "%#{query}%"
     where('accounts.name like ?', query)
@@ -201,37 +203,6 @@ class Account < ActiveRecord::Base
       transporter.authenticate current_company.google_apps_accountname, current_company.google_apps_password
       transporter
     end
-
-    def prepare_apply(params)
-      new.tap do |account|
-        account.provider = params[:provider]
-        account.send(params[:provider] + "_account=", params[:email])
-        account.notify_email = params[:email]
-        account.build_employee.build_contact
-      end
-    end
-  end
-
-  include Rails.application.routes.url_helpers
-
-  def save_apply(report_url)
-    tap do |account|
-      account.employee.prevent_create_report = true
-      account.employee.contact.firstname = account.employee.firstname
-      account.employee.contact.lastname = account.employee.lastname
-      account.save!
-
-      Account.current_account = account
-      account.employee.create_initial_report
-      account.employee.report.save!
-      account.employee.create_initial_accessor
-
-      admin = Company.current_company.apply_admin
-      account.employee.report!(admin, "", report_url)
-    end
-  rescue => e
-    destroy
-    raise e
   end
 
   def google_transporter
@@ -337,7 +308,6 @@ class Account < ActiveRecord::Base
   end
 
   def joined?
-    # companies.exists?
     person.joined?
   end
 
