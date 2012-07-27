@@ -1,7 +1,7 @@
 module Api
   class CommutesController < Api::ApplicationController
     def checkin
-      @commute = current_account.employee.commutes.build
+      @commute = current_employee.commutes.build
       @commute.go!
       Attachment.save_for(@commute, current_account, uploaded_file: params[:file])
       render :json => {:status => :ok, :commute => @commute}
@@ -10,7 +10,7 @@ module Api
     end
 
     def checkout
-      @commute = current_account.employee.commutes.latest.first
+      @commute = current_employee.commutes.latest.first
       if @commute && @commute.leave == nil
         @commute.leave!
         Attachment.save_for(@commute, current_account, uploaded_file: params[:file])
