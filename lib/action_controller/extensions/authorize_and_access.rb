@@ -4,13 +4,15 @@ module ActionController
       extend ActiveSupport::Concern
 
       def authorize
-        redirect_unless_logged_in
-        redirect_unless_permission if current_account
+        redirect_unless_logged_in and redirect_unless_permission
       end
 
       def redirect_unless_logged_in
         if current_account.nil? or current_account.not_joined?
-          redirect_to accounts_login_path
+          redirect_to login_accounts_path
+          false
+        else
+          true
         end
       end
 

@@ -1440,13 +1440,15 @@ ko:
             successfully_signed_in: 로그인에 성공하였습니다.
         changepw:
             title: 비밀번호 변경
+            oldpassword_wrong: 이전 비밀번호가 틀렸습니다.
+            password_confirm_wrong: 비밀번호와 비밀번호 확인이 일치하지 않습니다.
+            successfully_changed: 성공적으로 변경하였습니다.
+        changepw_form:
+            title: 비밀번호 변경
             subtitle: 변경
             password: 비밀번호
             password_again: 비밀번호 확인
             oldpassword: 이전 비밀번호
-            oldpassword_wrong: 이전 비밀번호가 틀렸습니다.
-            password_confirm_wrong: 비밀번호와 비밀번호 확인이 일치하지 않습니다.
-            successfully_changed: 성공적으로 변경하였습니다.
         google:
             create: 구글 앱스 계정 생성하기
             destroy: 구글 앱스 계정 제거하기

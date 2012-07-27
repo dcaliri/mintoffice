@@ -2,6 +2,7 @@ require 'net/http'
 
 class Boxcar
   def self.add_to_boxcar(email)
+    return unless email.blank?
     Rails.logger.info "Boxcar = #{email}"
     
     uri = URI('http://boxcar.io/devices/providers/i7pThv4s27chmnqFz2FJ/notifications/subscribe')

@@ -3,6 +3,7 @@ require 'digest/sha1'
 
 class Account < ActiveRecord::Base
   belongs_to :person
+  accepts_nested_attributes_for :person
 
   scope :enabled, :conditions =>["name NOT LIKE '[X] %%'"]
   scope :disabled, :conditions =>["name LIKE '[X] %%'"]
@@ -22,6 +23,13 @@ class Account < ActiveRecord::Base
 
   cattr_accessor :current_account
 
+  before_create :create_person_and_add_current_comapny
+
+  def create_person_and_add_current_comapny
+    myself = create_person
+    myself.companies << Company.current_company
+  end
+
   include Historiable
   include Attachmentable
 
@@ -33,7 +41,7 @@ class Account < ActiveRecord::Base
     myself = Person.find_by_id(person_id)
     unless myself
       myself = create_person!
-      self.update_column(person_id, myself.id)
+      self.update_column(:person_id, myself.id)
     end
     myself
   end
@@ -116,7 +124,7 @@ class Account < ActiveRecord::Base
   end
 
   def ingroup? (gname)
-    employee.ingroup?(gname)
+    employee and employee.ingroup?(gname)
   end
   
   def self.no_admins
@@ -124,7 +132,7 @@ class Account < ActiveRecord::Base
   end
 
   def permission?(name)
-    admin? or employee.permission.exists?(name: name.to_s)
+    admin? or (employee and employee.permission.exists?(name: name.to_s))
   end
 
   def admin?
@@ -165,7 +173,7 @@ class Account < ActiveRecord::Base
   end
 
   def has_payment_info
-    not employee.payments.empty?
+    not (employee and employee.payments.empty?)
   end
 
   class << self

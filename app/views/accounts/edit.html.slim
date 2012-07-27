@@ -1,9 +1,9 @@
 - title t(".title")
 #show_command
-  -if @this_account.admin?
+  -if @account.admin?
     = link_to t('common.title.show'), @account
     '  |
-  = link_to t('accounts.changepw.title'), :action => "changepw", :id => @account
+  = link_to t('accounts.changepw.title'), changepw_account_path(@account)
   '  |
   = link_to t('common.title.back'), :back 
 

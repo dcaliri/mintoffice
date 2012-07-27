@@ -90,20 +90,24 @@ Mintoffice::Application.routes.draw do
     end
   end
 
-  match '/accounts/changepw/:account_id', :controller => 'accounts', :action => 'changepw'
-  match '/accounts/login', :controller => 'accounts', :action => 'login'
-  match '/accounts/logout', :controller => 'accounts', :action => 'logout', :conditions => { :method => :get}
-  match '/accounts/my', :controller => "accounts", :action => "my"
-
+  get '/accounts/changepw/:account_id', :controller => 'accounts', :action => 'changepw_form'
+  post '/accounts/changepw/:account_id', :controller => 'accounts', :action => 'changepw'
+  
   resources :groups
-
   resources :accounts do
     collection do
+      get 'login', as: :login
+      get 'logout', as: :logout
+      get 'my', as: :my
+
       get 'google_apps', as: :google_apps
       post 'authenticate', as: :authenticate
     end
 
     member do
+      get 'changepw', action: :changepw_form
+      post 'changepw'
+
       post 'create_google_apps', as: :google_apps, path: 'google_apps'
       post 'create_redmine', as: :redmine, path: 'redmine'
 
