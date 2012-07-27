@@ -8,10 +8,11 @@ class UsedVacationsController < ApplicationController
   expose(:used_vacations) { vacation.used }
   expose(:used_vacation)
 
-  expose(:account) { vacation.employee.account }
+  expose(:employee) { vacation.employee }
+  # expose(:account) { vacation.employee.account }
 
-  before_filter {|controller| controller.redirect_unless_me(account)}
-  before_filter :another_account_cant_access_yearly, :only => [:edit]
+  before_filter {|controller| controller.redirect_unless_me(employee)}
+  before_filter :another_person_cant_access_yearly, :only => [:edit]
 
   def create
     used_vacation.save!
@@ -36,15 +37,15 @@ class UsedVacationsController < ApplicationController
     else
       approve_txt = I18n.t("used_vacations.approval_waiting")
     end
-    redirect_to vacation_path(account)
+    redirect_to vacation_path(employee)
   end
 
   def destroy
     used_vacation.destroy
-    redirect_to vacation_path(account)
+    redirect_to vacation_path(employee)
   end
 
-  def another_account_cant_access_yearly
-    force_redirect if !current_account.admin?
+  def another_person_cant_access_yearly
+    force_redirect if !current_person.admin?
   end
 end

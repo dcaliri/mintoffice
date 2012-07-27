@@ -88,6 +88,8 @@ Mintoffice::Application.routes.draw do
         get 'detail'
       end
     end
+    
+    resources :vacations
   end
 
   resources :attachments do
@@ -132,8 +134,6 @@ Mintoffice::Application.routes.draw do
         get 'bonus'
       end
     end
-
-    resources :vacations
 
     resources :projects do
       collection do
