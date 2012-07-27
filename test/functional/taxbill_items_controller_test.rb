@@ -15,6 +15,6 @@ class TaxbillItemsControllerTest < ActionController::TestCase
 
   private
   def current_taxbill_item
-    @taxbill_item ||= taxbill_items(:fixture)
+    @taxbill_item ||= taxbill_items(:purchase_item)
   end
 end

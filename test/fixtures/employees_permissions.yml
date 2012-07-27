@@ -33,3 +33,7 @@ projects:
 business_clients:
   permission_id: 9
   employee_id: 1
+
+taxbills:
+  permission_id: 10
+  employee_id: 1

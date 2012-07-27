@@ -51,3 +51,9 @@ business_clients:
   name: "business_clients"
   created_at: 2012-07-18 16:08:13.066854
   updated_at: 2012-07-18 16:08:13.066854
+
+taxbills:
+  id: 10
+  name: "taxbills"
+  created_at: 2012-07-18 16:08:13.066854
+  updated_at: 2012-07-18 16:08:13.066854
