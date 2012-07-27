@@ -43,7 +43,7 @@ class Account < ActiveRecord::Base
   end
   
   def self.no_admins
-    all - joins(:person => {:employee => :groups}).where('groups.name == ?', "admin")
+    all - joins(:person => :groups).where('groups.name == ?', "admin")
   end
 
   def permission?(name)

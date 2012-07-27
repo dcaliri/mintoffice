@@ -1,37 +1,39 @@
 class VacationsController < ApplicationController
-  def redirect_unless_permission
-  end
-
+  skip_before_filter :redirect_unless_permission
   before_filter :redirect_unless_admin, :only => :index
 
-  expose(:accounts) { Account(:protected) }
-  expose(:account)
-  expose(:vacations) { account.employee.vacations.latest }
+  # expose(:accounts) { Account(:protected) }
+  # expose(:account)
+
+  expose(:employees) { Employee(:protected) }
+  expose(:employee)
+
+  expose(:vacations) { employee.vacations.latest }
   expose(:vacation)
 
-  before_filter {|controller| controller.redirect_unless_me(account)}
+  before_filter {|controller| controller.redirect_unless_me(employee)}
   before_filter :only_admin_access_vacation, :except => [:index, :show]
 
   def index
-    @accounts = Account(:protected).enabled.page(params[:page])
+    @employees = Employee(:protected).enabled.page(params[:page])
   end
 
   def create
     vacation.save!
-    redirect_to [account, vacation]
+    redirect_to [employee, vacation]
   end
 
   def update
     vacation.save!
-    redirect_to [account, vacation]
+    redirect_to [employee, vacation]
   end
 
   def destroy
     vacation.destroy
-    redirect_to [account, vacation]
+    redirect_to [employee, vacation]
   end
 
   def only_admin_access_vacation
-    force_redirect if !current_account.admin?
+    force_redirect if !current_employee.admin?
   end
 end
