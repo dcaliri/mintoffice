@@ -5,8 +5,6 @@ class BankTransactionTest < ActionDispatch::IntegrationTest
   fixtures :bank_accounts
   fixtures :bank_transactions
   fixtures :bank_transfers
-  fixtures :groups
-  fixtures :groups_people
 
   test "should visit bank_transaction list" do
     visit '/'

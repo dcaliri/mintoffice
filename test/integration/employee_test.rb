@@ -4,8 +4,6 @@ require 'test_helper'
 class EmployeeTest < ActionDispatch::IntegrationTest
   fixtures :employees
   fixtures :accounts
-  fixtures :groups
-  fixtures :groups_people
   fixtures :contacts
   fixtures :contact_emails
   fixtures :contact_email_tags

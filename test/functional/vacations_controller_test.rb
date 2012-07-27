@@ -4,22 +4,22 @@ class VacationsControllerTest < ActionController::TestCase
   fixtures :employees, :vacations
   
   test "should see index page" do
-    get :index, account_id: 1
+    get :index, employee_id: 1
     assert_response :success
   end
 
   test "should see new page" do
-    get :new, account_id: 1
+    get :new, employee_id: 1
     assert_response :success
   end
 
   test "should see show page" do
-    get :show, account_id: 1, :id => current_vacation.id
+    get :show, employee_id: 1, :id => current_vacation.id
     assert_response :success
   end
 
   test "should see edit page" do
-    get :edit, account_id: 1, :id => current_vacation.id
+    get :edit, employee_id: 1, :id => current_vacation.id
     assert_response :success
   end
 
