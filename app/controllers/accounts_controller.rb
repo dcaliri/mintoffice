@@ -12,7 +12,7 @@ class AccountsController < ApplicationController
   end
 
   before_filter :except => [:my, :changepw, :changepw_form, :login, :authenticate, :edit, :update, :logout, :google_apps] do |c|
-    unless current_account.admin?
+    unless current_person.admin?
       flash[:notice] = I18n.t("common.messages.not_allowed")
       redirect_to :root
     end

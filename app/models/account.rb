@@ -42,10 +42,6 @@ class Account < ActiveRecord::Base
     all - joins(:person => :groups).where('groups.name == ?', "admin")
   end
 
-  def permission?(name)
-    admin? or (person and person.permissions.exists?(name: name.to_s))
-  end
-
   def admin?
     person and person.admin?
   end

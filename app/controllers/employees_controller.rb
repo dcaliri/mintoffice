@@ -148,12 +148,11 @@ class EmployeesController < ApplicationController
   private
   def retired_employee_can_access_only_admin
     @employee = Employee.find(params[:id])
-    force_redirect if @employee.retired? and !current_account.admin?
+    force_redirect if @employee.retired? and !current_person.admin?
   end
 
   def account_only_access_my_employment
     @employee = Employee.find(params[:id])
-    # force_redirect if @employee.account_id != current_account.id and !current_account.admin?
-    force_redirect if @employee.person.account != current_account and !current_account.admin?
+    force_redirect if @employee.person != current_person and !current_person.admin?
   end
 end

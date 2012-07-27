@@ -1,6 +1,6 @@
 - title t(".title")
 #show_command
-  -if @account.admin?
+  -if current_person.admin?
     = link_to t('common.title.show'), @account
     '  |
   = link_to t('accounts.changepw.title'), changepw_account_path(@account)
