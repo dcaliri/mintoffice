@@ -12,7 +12,7 @@ class Person < ActiveRecord::Base
   has_many :reporters, class_name: 'ReportPerson'
   has_many :accessors, class_name: 'AccessPerson'
 
-  def self.noemployee
+  def self.no_employee
     joins(:account).where('accounts.person_id == people.id') - joins(:employee).where('employees.person_id == people.id')
   end
 

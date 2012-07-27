@@ -69,8 +69,7 @@ class EmployeesController < ApplicationController
   # GET /employees/new.xml
   def new
     @employee = Employee.new
-    # @accounts = Account.noemployee
-    @people = Person.noemployee
+    @people = Person.no_employee
 
     if @people.blank?
       flash[:notice] = t('employees.new.accounts_blank')
@@ -92,7 +91,7 @@ class EmployeesController < ApplicationController
   # POST /employees.xml
   def create
     @employee = Employee.new(params[:employee])
-    @people = Person.noemployee
+    @people = Person.no_employee
 
     respond_to do |format|
       if @employee.save
