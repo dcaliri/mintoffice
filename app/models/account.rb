@@ -47,7 +47,7 @@ class Account < ActiveRecord::Base
   end
 
   def permission?(name)
-    admin? or (person and person.permission.exists?(name: name.to_s))
+    admin? or (person and person.permissions.exists?(name: name.to_s))
   end
 
   def admin?
