@@ -1,6 +1,23 @@
-fixture:
+cardbill:
     id: 1
     employee_id: 1
-    project_id: 1
-    target_type: "Cardbill"
     target_id: 1
+    target_type: "Cardbill"
+    project_id: 1
+    description: 카드영수증 지출내역서
+    amount: 4500
+    created_at: <%= Time.zone.now %>
+    updated_at: <%= Time.zone.now %>
+    expensed_at: <%= Time.zone.now %>
+
+bankTransfer:
+    id: 2
+    employee_id: 1
+    target_id: 1
+    target_type: "BankTransfer"
+    project_id: 1
+    description: 이체내역 지출내역서
+    amount: 999500
+    created_at: <%= Time.zone.now %>
+    updated_at: <%= Time.zone.now %>
+    expensed_at: <%= Time.zone.now %>

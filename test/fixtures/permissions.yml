@@ -57,3 +57,9 @@ taxbills:
   name: "taxbills"
   created_at: 2012-07-18 16:08:13.066854
   updated_at: 2012-07-18 16:08:13.066854
+
+postings:
+  id: 11
+  name: "postings"
+  created_at: 2012-07-18 16:08:13.066854
+  updated_at: 2012-07-18 16:08:13.066854

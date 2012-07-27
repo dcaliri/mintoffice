@@ -1,7 +1,7 @@
 # encoding: UTF-8
 require 'test_helper'
 
-class BankAccountTest < ActionDispatch::IntegrationTest
+class TaxBillTest < ActionDispatch::IntegrationTest
   fixtures :groups
   fixtures :employees_groups
   fixtures :taxbills
