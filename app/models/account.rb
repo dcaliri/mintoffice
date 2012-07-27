@@ -16,14 +16,12 @@ class Account < ActiveRecord::Base
   validates_uniqueness_of :nate_account, :if => Proc.new{ nate_account && nate_account.empty? == false }
   validates_uniqueness_of :notify_email, :if => Proc.new{ notify_email && notify_email.empty? == false }
   validates_uniqueness_of :google_account, :if => Proc.new{ google_account && google_account.empty? == false }
-  attr_accessor :password_confirmation
-  # validates_confirmation_of :password, :if => Proc.new{|account| account.provider.blank?}
-  # validate :password_non_blank, :if => Proc.new{|account| account.provider.blank?}
 
   validates_confirmation_of :password, :if => Proc.new{|account| account.provider.blank?}
   validate :password_non_blank, :if => Proc.new{|account| account.provider.blank?}
 
   cattr_accessor :current_account
+  attr_accessor :password_confirmation
 
   before_create :create_person_and_add_current_comapny
 

@@ -1,13 +1,10 @@
 # encoding: UTF-8
 
 class Employee < ActiveRecord::Base
-  # belongs_to :account
   belongs_to :person
 
   has_and_belongs_to_many :groups
   has_and_belongs_to_many :permission
-  
-  # has_one :contact, :as => :target, dependent: :destroy
 
   has_many :payments
   has_many :commutes
@@ -18,9 +15,6 @@ class Employee < ActiveRecord::Base
   has_many :attachment
   has_many :except_columns
   has_many :change_histories
-
-  has_many :reporters, class_name: 'ReportPerson'
-  has_many :accessors, class_name: 'AccessPerson'
 
   has_many :document_owners, :order => 'created_at DESC'
   has_many :documents, :through => :document_owners, :source => :document
@@ -36,9 +30,6 @@ class Employee < ActiveRecord::Base
   validates_format_of :juminno, :with => /^\d{6}-\d{7}$/, :message => I18n.t('employees.error.juminno_invalid')
   validates_uniqueness_of :juminno
 
-  # validates_presence_of :firstname
-  # validates_presence_of :lastname
-
   attr_accessor :email, :phone_number, :address
 
   SEARCH_TYPE = {
@@ -47,12 +38,30 @@ class Employee < ActiveRecord::Base
   }
 
   class << self
-    def not_joined(not_joined)
-      if not_joined
-        where('joined_on IS NULL')
+    def search(account, type, text)
+      search_by_type(account, type).search_by_text(text)
+    end
+
+    def search_by_type(account, type)
+      type = type.to_sym
+      if account and account.admin? and type == :retire
+        where('retired_on IS NOT NULL')
       else
-        where('joined_on IS NOT NULL')
+        where('joined_on IS NOT NULL AND retired_on IS NULL')
       end
+    end
+
+    def search_by_text(text)
+      text = "%#{text}%"
+      joins(:person => :account).where('accounts.name LIKE ? OR accounts.notify_email LIKE ? OR employees.firstname like ? OR employees.lastname LIKE ? OR employees.position LIKE ?', text, text, text, text, text)
+    end
+
+    def payment_in?(from, to)
+      select{|employee| employee.payments.payment_in?(from, to).total > 0 }
+    end
+
+    def not_retired
+      where("retired_on IS NULL")
     end
   end
 
@@ -113,7 +122,6 @@ class Employee < ActiveRecord::Base
     contact_email = contact.emails.empty? ? contact.emails.build : contact.emails.first
     contact_email.email = email
     contact_email.save!
-
   end
 
   def phone_number=(number)
@@ -150,14 +158,6 @@ class Employee < ActiveRecord::Base
     contact.addresses.first.info rescue ""
   end
 
-  def self.payment_in?(from, to)
-    select{|employee| employee.payments.payment_in?(from, to).total > 0 }
-  end
-
-  def self.not_retired
-    where("retired_on IS NULL")
-  end
-
   def retire!
     payments.retire!(retired_on)
     save!
@@ -184,80 +184,5 @@ class Employee < ActiveRecord::Base
     end
   end
 
-  def generate_employment_proof(purpose)
-    filename = "#{Rails.root}/tmp/#{fullname}_employment_proof.pdf"
-    template = "#{Rails.root}/app/assets/images/employment_proof_tempate.pdf"
-    hash_key = Time.now.utc.strftime("%Y%m%d%H%M%S") + id.to_s + Array.new(10).map { (65 + rand(58)).chr }.join
-    hash_key = Digest::SHA1.hexdigest(hash_key)
-
-    Prawn::Document.generate(filename, template: template) do |pdf|
-      pdf.image company.seal, :at => [320, 255], width: 50, height: 50
-      pdf.image company.seal, :at => [415, 463], width: 50, height: 50
-
-      pdf.font "#{Rails.root}/public/fonts/NanumGothic.ttf"
-      pdf.font_size 12
-
-      pdf.draw_text fullname, :at => [142, 685]
-      pdf.draw_text juminno, :at => [142, 661]
-      pdf.draw_text address.strip, :at => [142, 637]
-      pdf.draw_text department, :at => [142, 526]
-      pdf.draw_text position, :at => [333, 526]
-
-      pdf.draw_text company.name, :at => [142, 613]
-      pdf.draw_text company.registration_number, :at => [333, 613]
-      pdf.draw_text company.owner_name, :at => [142, 589]
-      pdf.draw_text company.address, :at => [142, 558]
-      pdf.draw_text company.phone_number, :at => [333, 589]
-
-      pdf.draw_text work_from.year, :at => [168, 494]
-      pdf.draw_text work_from.month, :at => [220, 494]
-      pdf.draw_text work_from.day, :at => [252, 494]
-
-      pdf.draw_text work_to.year, :at => [318, 494]
-      pdf.draw_text work_to.month, :at => [370, 494]
-      pdf.draw_text work_to.day, :at => [402, 494]
-
-      # pdf.draw_text company.employees.not_retired.count, :at => [402, 494]
-      pdf.draw_text Employee.not_retired.count, :at => [142, 460]
-      pdf.draw_text purpose, :at => [333, 460]
-
-      pdf.draw_text I18n.t('models.employee.representative'), :at => [175, 433]
-      pdf.draw_text company.owner_name, :at => [385, 433]
-
-      today = Time.zone.now
-      pdf.draw_text today.year, :at => [198, 311]
-      pdf.draw_text today.month, :at => [262, 311]
-      pdf.draw_text today.day, :at => [306, 311]
-
-      pdf.draw_text company.name, :at => [250, 255]
-      pdf.draw_text company.owner_name, :at => [250, 225]
-
-      pdf.draw_text I18n.t('models.employee.code')+"#{hash_key}", :at => [14, 45], :size => 10
-    end
-
-    employment_proof_hash << hash_key
-    save!
-
-    filename
-  end
-
-  class << self
-    def search(account, type, text)
-      search_by_type(account, type).search_by_text(text)
-    end
-
-    def search_by_type(account, type)
-      type = type.to_sym
-      if account and account.admin? and type == :retire
-        where('retired_on IS NOT NULL')
-      else
-        where('joined_on IS NOT NULL AND retired_on IS NULL')
-      end
-    end
-
-    def search_by_text(text)
-      text = "%#{text}%"
-      joins(:person => :account).where('accounts.name LIKE ? OR accounts.notify_email LIKE ? OR employees.firstname like ? OR employees.lastname LIKE ? OR employees.position LIKE ?', text, text, text, text, text)
-    end
-  end
+  include EmploymentProof
 end
