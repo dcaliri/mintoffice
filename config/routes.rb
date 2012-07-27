@@ -82,6 +82,12 @@ Mintoffice::Application.routes.draw do
       get 'employment_proof', action: :new_employment_proof, as: :employment_proof
       post 'employment_proof', as: :employment_proof
     end
+
+    resources :commutes do
+      member do
+        get 'detail'
+      end
+    end
   end
 
   resources :attachments do
@@ -124,19 +130,6 @@ Mintoffice::Application.routes.draw do
         post 'calculate'
         post 'new_yearly', :action => 'create_new_yearly'
         get 'bonus'
-      end
-    end
-
-    resources :commutes do
-      collection do
-        get 'go'
-        post 'go', :action => 'go!'
-      end
-
-      member do
-        get 'detail'
-        get 'leave'
-        put 'leave', :action => 'leave!'
       end
     end
 

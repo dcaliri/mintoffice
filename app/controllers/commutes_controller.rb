@@ -1,9 +1,6 @@
 class CommutesController < ApplicationController
   skip_before_filter :redirect_unless_permission
 
-  # expose(:accounts) { Account(:protected) }
-  # expose(:account)
-
   expose(:employees) { Employee(:protected) }
   expose(:employee)
 
@@ -22,16 +19,4 @@ class CommutesController < ApplicationController
   expose(:page) { params[:page].nil? ? 0 : params[:page].to_i }
   expose(:week_begin_time) { Time.zone.now.beginning_of_week }
   expose(:week_end_time) { Time.zone.now.end_of_week }
-  
-  def go!
-    commute.go!
-    redirect_to commute_path(account)
-  rescue ActiveRecord::RecordInvalid
-    render 'go'
-  end
-
-  def leave!
-    commute.leave!
-    redirect_to commute_path(account)
-  end
 end

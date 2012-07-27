@@ -16,7 +16,7 @@ h2= t('.title')
           - commutes_by_week.keys.sort.each do |d|
             - commute = commutes_by_week[d]
             - unless commute.nil?
-              td.selectable onclick="location.href='#{detail_account_commute_path(current_person.account, commute)}'" valign="top" align="center"
+              td.selectable onclick="location.href='#{detail_employee_commute_path(employee, commute)}'" valign="top" align="center"
                 = t("commutes.arrive_at_work") + " : " + (l commute.go, format: :time)
                 br
                 br
