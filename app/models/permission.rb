@@ -1,6 +1,13 @@
 class Permission < ActiveRecord::Base
   # has_and_belongs_to_many :account
-  has_and_belongs_to_many :employee
+  has_and_belongs_to_many :employees
+
+  def employee
+    add_to_fix_me_log('employee')
+    employees
+  end
+
+
 
   validates :name, presence: true, uniqueness: true
 
