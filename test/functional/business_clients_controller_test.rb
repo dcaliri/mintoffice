@@ -2,11 +2,7 @@ require 'test_helper'
 
 class BusinessClientsControllerTest < ActionController::TestCase
   fixtures :business_clients
-<<<<<<< HEAD
   
-=======
-
->>>>>>> efeca4dbd866dccb37cb383516c2bcee562648c1
   test "should see index page" do
     get :index
     assert_response :success
