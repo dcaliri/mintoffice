@@ -37,10 +37,6 @@ class Account < ActiveRecord::Base
   def employee
     person.employee
   end
-
-  def ingroup? (gname)
-    person and person.ingroup?(gname)
-  end
   
   def self.no_admins
     all - joins(:person => :groups).where('groups.name == ?', "admin")

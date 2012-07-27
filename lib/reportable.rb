@@ -14,7 +14,7 @@ module Reportable
     if report.nil?
       report = create_report
       account = Account.current_account
-      if account.ingroup?(:admin)
+      if account.admin?
         report.reporters << account.person.reporters.build(report_id: report, owner: true)
         report.permission account, :write
         report.save!
@@ -34,7 +34,7 @@ module Reportable
     if report.present?
       report.access?(account, permission_type)
     else
-      account.ingroup?(:admin)
+      account.admin?
     end
   end
   delegate :report!, :approve!, :rollback!, :to => :report

@@ -40,7 +40,7 @@ div class={@account.admin? ? "admin" : ""}
           li= link_to t("business_clients.index.title"), :business_clients
         li= link_to t("contacts.index.title"), :contacts
 
-    - if @account.ingroup?(:admin)
+    - if @account.admin?
       .menubar_item.item5
           h2= t("main.index.admin")
           ul

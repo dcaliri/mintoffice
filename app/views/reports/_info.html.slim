@@ -8,7 +8,7 @@ p
   = " - #{target.localize_status}"
 
 - if target.access?(current_account, :write)
-  - unless current_account.ingroup?(:admin)
+  - unless current_account.admin?
     = form_tag :report do
       = hidden_field_tag :target_type, target.class
       = hidden_field_tag :target_id, target.id

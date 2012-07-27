@@ -1,6 +1,6 @@
 
 #show_command
-  - if @account.ingroup?(:admin)
+  - if @account.admin?
     = link_to t('pay_schedules.new.link'), [:yearly, account, :payments]
     = " | "
     = link_to t('bonuses.new.link'), [:bonus, account, :payments]
@@ -25,7 +25,7 @@ table#list-table
       = Payment.human_attribute_name('amount')
     th
       = Payment.human_attribute_name('total')
-    - if @account.ingroup? :admin
+    - if @account.admin?
       th
   - current_bg = '#e6e6e6'
   - payments.latest.group_by{|payment| payment.pay_finish.strftime("%Y.%m")}.each do |month, payments|
@@ -49,14 +49,14 @@ table#list-table
           = number_to_currency(payment.amount)
         td.numrow
           = show_sum ? (number_to_currency payments.sum{|payment| payment.amount}) : ''
-        - if @account.ingroup?(:admin)
+        - if @account.admin?
           td style="text-align:center;"
             = link_to t("common.link.edit"), [:edit, account, payment]
             = " | "
             = link_to t("common.link.destroy"), [account, payment], :method => :delete, confirm: t("common.messages.delete_confirm")
       - show_sum = false
 
-- if @account.ingroup? "admin"
+- if @account.admin?
   h3
     = t("common.changes")
   - payments.each do |payment|

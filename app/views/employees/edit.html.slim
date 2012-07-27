@@ -9,7 +9,7 @@ h2
   .box
     = f.error_messages
 
-    - if current_account.ingroup?("admin")
+    - if current_account.admin?
       p
         = f.label :companyno, Employee.human_attribute_name('companyno')
         = f.text_field :companyno
@@ -43,7 +43,7 @@ h2
     p
       = f.label :address, Employee.human_attribute_name('address')
       = f.text_field :address
-    - if current_account.ingroup?("admin")
+    - if current_account.admin?
       p
         = render 'shared/attachments/form', form: f
   = f.submit t("common.button.update")

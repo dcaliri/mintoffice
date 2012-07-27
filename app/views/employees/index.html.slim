@@ -8,7 +8,7 @@
       = select_tag :search_type, options_for_select(Employee::SEARCH_TYPE, params[:search_type]), "onchange" => "this.form.submit()"
 
 #show_command
-  - if current_account.ingroup?("admin")
+  - if current_account.admin?
     = link_to t('employees.new.title'), new_employee_path
 h2
   = t('employees.index.total')

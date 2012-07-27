@@ -23,5 +23,5 @@ h2= t("common.title.show")
   = render "shared/attachments/detail", :target => @creditcard
 
   .clear
--if @account.ingroup? "admin"
+-if @account.admin?
   = render 'changelog', target: @creditcard

@@ -1,5 +1,5 @@
 #show_command
-  - if current_person.ingroup?("admin")
+  - if current_person.admin?
     = link_to t('vacations.new.link'), [:new, employee, :vacation]
     = " | "
   = link_to t('employees.show.title'), employee_path(employee)
@@ -9,7 +9,7 @@ h2= employee.fullname
   - vacations.each do |vacation|
     div style="float: right;"
       = link_to t('used_vacations.new.link'), [:new, vacation, :used_vacation]
-      - if current_person.ingroup?("admin")
+      - if current_person.admin?
         = " | "
         = link_to t('common.link.edit'), [:edit, employee, vacation]
         = " | "

@@ -74,10 +74,6 @@ class Employee < ActiveRecord::Base
   def contact
     person.contact
   end
-
-  def ingroup? (name)
-    person.ingroup?(name)
-  end
   
   def admin?
     person.admin?

@@ -15,7 +15,7 @@ module Permissionable
     unless accessors.empty?
       accessors.access?(account, permission_type)
     else
-      account.ingroup?(:admin).tap do |admin|
+      account.admin?.tap do |admin|
         accessors.permission(account, :write) if admin
       end
     end
