@@ -1,3 +1,23 @@
-fixture:
+purchase_item:
     id: 1
+    transacted_at: <%= Time.zone.now %>
+    note: 테스트 매입 노트
+    unitprice: 6500
+    quantity: 55
+    total: 393250
+    tax: 35750
     taxbill_id: 1
+    created_at: <%= Time.zone.now %>
+    updated_at: <%= Time.zone.now %>
+
+sale_item:
+    id: 2
+    transacted_at: <%= Time.zone.now %>
+    note: 테스트 매출 노트
+    unitprice: 6500
+    quantity: 55
+    total: 393250
+    tax: 35750
+    taxbill_id: 2
+    created_at: <%= Time.zone.now %>
+    updated_at: <%= Time.zone.now %>
