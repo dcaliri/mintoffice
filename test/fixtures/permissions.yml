@@ -50,7 +50,6 @@ business_clients:
   id: 9
   name: "business_clients"
   created_at: 2012-07-18 16:08:13.066854
-<<<<<<< HEAD
   updated_at: 2012-07-18 16:08:13.066854
 
 taxbills:
@@ -69,6 +68,4 @@ ledger_accounts:
   id: 12
   name: "ledger_accounts"
   created_at: 2012-07-18 16:08:13.066854
-=======
->>>>>>> efeca4dbd866dccb37cb383516c2bcee562648c1
   updated_at: 2012-07-18 16:08:13.066854
