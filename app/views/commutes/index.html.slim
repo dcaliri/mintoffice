@@ -16,7 +16,7 @@ h2= t('common.title.list')
       - commutes_for_employee = commutes_everyone[employee_id]
 
       - employee = Employee.find(employee_id)
-      tr.selectable onclick="location.href='#{commute_path(account)}'"
+      tr.selectable onclick="location.href='#{commute_path(employee)}'"
         td
           nobr
             = employee.fullname
