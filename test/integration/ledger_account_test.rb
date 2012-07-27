@@ -2,8 +2,6 @@
 require 'test_helper'
 
 class LedgerAccountTest < ActionDispatch::IntegrationTest
-  fixtures :groups
-  fixtures :groups_people
   fixtures :ledger_accounts
 
   test 'should visit ledger list' do
