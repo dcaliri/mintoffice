@@ -29,6 +29,7 @@ class AccountsControllerTest < ActionController::TestCase
   end
 
   test "should see login page" do
+    session[:account_id] = nil
     get :login
     assert_response :success
   end
