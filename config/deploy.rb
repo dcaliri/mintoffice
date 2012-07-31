@@ -15,7 +15,7 @@ set :branch, 'master'
 set :scm_verbose, true
 
 set :use_sudo, false
-set :rails_env, :development
+set :rails_env, :production
 
 set :port, 3022
 ssh_options[:forward_agent] = true
@@ -24,7 +24,7 @@ role :web, domain                          # Your HTTP server, Apache/etc
 role :app, domain                          # This may be the same as your `Web` server
 role :db,  domain, :primary => true # This is where Rails migrations will run
 
-set :unicorn_env, :development
+set :unicorn_env, :production
 require "capistrano-unicorn"
 
 namespace :deploy do
