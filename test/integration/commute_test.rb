@@ -2,9 +2,6 @@
 require 'test_helper'
 
 class CommuteTest < ActionDispatch::IntegrationTest
-  fixtures :groups
-  fixtures :groups_people
-
   test 'should visit my commute' do
     visit '/'
     click_link '출퇴근 관리'
