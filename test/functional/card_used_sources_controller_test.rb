@@ -35,6 +35,6 @@ class CardUsedSourcesControllerTest < ActionController::TestCase
   end
 
   def current_card_used_source
-    @card_used_source ||= card_used_sources(:fixture)
+    @card_used_source ||= card_used_sources(:exist_cardbill)
   end
 end
