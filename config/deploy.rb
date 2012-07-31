@@ -1,3 +1,5 @@
+load 'deploy/assets'
+
 set :user, 'wangsy'
 set :domain, "o.mintech.kr"
 set :application, 'mintoffice'
