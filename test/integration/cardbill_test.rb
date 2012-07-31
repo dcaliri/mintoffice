@@ -4,8 +4,6 @@ require 'test_helper'
 class CardBillTest < ActionDispatch::IntegrationTest
   fixtures :cardbills
   fixtures :creditcards
-  fixtures :accounts
-  fixtures :employees
   fixtures :access_people
   fixtures :card_used_sources
   fixtures :card_approved_sources

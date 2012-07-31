@@ -6,9 +6,6 @@ class DocumentTest < ActionDispatch::IntegrationTest
   fixtures :document_owners
   fixtures :documents_tags
   fixtures :projects
-  fixtures :accounts
-  fixtures :people
-  fixtures :employees
   fixtures :tags
   fixtures :taggings
   fixtures :reports

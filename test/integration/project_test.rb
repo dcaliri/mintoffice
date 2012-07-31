@@ -3,7 +3,6 @@ require 'test_helper'
 
 class ProjectTest < ActionDispatch::IntegrationTest
   fixtures :projects
-  fixtures :accounts
 
   test 'should visit poject list' do
     visit '/'

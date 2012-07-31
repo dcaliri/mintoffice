@@ -6,7 +6,6 @@ class TaxBillTest < ActionDispatch::IntegrationTest
   fixtures :taxbill_items
   fixtures :taxmen
   fixtures :business_clients
-  fixtures :employees
   fixtures :contacts
   fixtures :contact_phone_numbers
   fixtures :contact_emails
