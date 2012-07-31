@@ -11,7 +11,7 @@ class AccountsController < ApplicationController
     c.save_attachment_id @account
   end
 
-  before_filter :except => [:my, :changepw, :changepw_form, :login, :authenticate, :edit, :update, :logout, :google_apps] do |c|
+  before_filter :except => [:my, :show, :changepw, :changepw_form, :login, :authenticate, :edit, :update, :logout, :google_apps] do |c|
     unless current_person.admin?
       flash[:notice] = I18n.t("common.messages.not_allowed")
       redirect_to :root
