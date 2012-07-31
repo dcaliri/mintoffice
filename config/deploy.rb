@@ -42,4 +42,4 @@ namespace :unicorn do
   end
 end
 
-after 'deploy:create_symlink', 'deploy:create_socket_directory'
+after 'deploy:finalize_update', 'deploy:create_socket_directory'
