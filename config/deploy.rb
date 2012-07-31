@@ -31,6 +31,7 @@ namespace :deploy do
   task :create_socket_directory, :roles => :app do 
     run "mkdir -p #{release_path}/tmp/sockets"
     run "ln -sf #{deploy_to}/shared/files #{release_path}/"
+    run "if [ -e #{deploy_to}/shared/database.yml ]; then cp #{deploy_to}/shared/database.yml #{release_path}/config/; fi"
   end
 end
 
