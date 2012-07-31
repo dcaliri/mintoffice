@@ -1,90 +1,168 @@
 # encoding: UTF-8
 require 'test_helper'
 
-class CreditCardTest < ActionDispatch::IntegrationTest
+class CardBillTest < ActionDispatch::IntegrationTest
+  fixtures :cardbills
   fixtures :creditcards
-  fixtures :card_approved_sources
+  fixtures :access_people
   fixtures :card_used_sources
-  fixtures :bank_accounts
+  fixtures :card_approved_sources
+  fixtures :projects
+  fixtures :project_assign_infos
 
-  test 'should visit creditcard list' do
+  test 'should visit cardbill list' do
     visit '/'
-    click_link '신용카드 관리'
+    click_link '카드 영수증 목록'
 
-    assert(page.has_content?('식대카드'))
-    assert(page.has_content?('법인카드'))
+    assert(page.has_content?('카드영수증 관리'))
   end
 
-  test 'should show creditcard' do
+  test 'should show has_permission_cardbills' do
     visit '/'
-    click_link '신용카드 관리'
+    click_link '카드 영수증 목록'
+
+    assert(page.has_content?('카드영수증 관리'))
+
     find("tr.selectable").click
 
-    assert(page.has_content?('321-321-1234'))
+    assert(page.has_content?('카드 영수증 내역'))
   end
 
-  test 'should create a new creditcard' do
+  test 'should show has_not_permission_cardbills' do
     visit '/'
-    click_link '신용카드 관리'
-    click_link '신규 작성'
+    click_link '카드 영수증 목록'
 
-    fill_in "카드번호", with: "432-234-2345"
-    fill_in "카드명칭", with: "카드명칭 입력 테스트"
-    fill_in "만료연도", with: "2013"
-    fill_in "만료월", with: "01"
-    fill_in "별칭", with: "별칭 입력 테스트"
-    fill_in "발급사", with: "발급사 입력 테스트"
-    fill_in "소유자이름", with: "소유자이름 입력 테스트"
-    select('HSBC : 123-321-3211234', from: 'creditcard_bank_account_id')
+    assert(page.has_content?('카드영수증 관리'))
 
-    click_button '만들기'
+    select('권한을 알 수 없는 내역 보기', :from => 'empty_permission')
 
-    assert(page.has_content?('Creditcard was successfully created.'))
-  end
+    assert(page.has_content?('카드영수증 관리'))
 
-  test 'should edit creditcard' do
-    visit '/'
-    click_link '신용카드 관리'
     find("tr.selectable").click
-    click_link '수정하기'
 
-    fill_in "카드번호", with: "432-234-2345"
-    fill_in "카드명칭", with: "카드명칭 수정 테스트"
-    fill_in "만료연도", with: "2014"
-    fill_in "만료월", with: "02"
-    fill_in "별칭", with: "별칭 수정 테스트"
-    fill_in "발급사", with: "발급사 수정 테스트"
-    fill_in "소유자이름", with: "소유자이름 수정 테스트"
-    select('신한 은행 : 321-123-123456', from: 'creditcard_bank_account_id')
-
-    click_button '갱신하기'
-
-    assert(page.has_content?('신용카드이(가) 성공적으로 업데이트 되었습니다.'))
+    assert(page.has_content?('카드 영수증 내역'))
   end
 
-  test 'should show card_used_sources' do
+  test 'should show used_sources' do
     visit '/'
-    click_link '신용카드 관리'
+    click_link '카드 영수증 목록'
+
+    assert(page.has_content?('카드영수증 관리'))
+
     find("tr.selectable").click
-    click_link '카드별 이용내역'
+
+    assert(page.has_content?('카드 영수증 내역'))
+
+    click_link '사용 내역'
 
     assert(page.has_content?('신용카드 이용내역'))
   end
 
-  test 'should show card_approved_sources' do
+  test 'should create/show expense_reports' do
     visit '/'
-    click_link '신용카드 관리'
+    click_link '카드 영수증 목록'
+
+    assert(page.has_content?('카드영수증 관리'))
+
     find("tr.selectable").click
-    click_link '카드별 승인내역'
+
+    assert(page.has_content?('카드 영수증 내역'))
+
+    click_link '지출내역서 만들기'
+
+    assert(page.has_content?('지출내역서'))
+
+    fill_in "내역", with: "내역 입력 테스트"
+
+    click_button '지출 내역서 만들기'
+
+    assert(page.has_content?('지출내역서 상세정보'))
+
+    visit '/'
+    click_link '카드 영수증 목록'
+
+    assert(page.has_content?('카드영수증 관리'))
+
+    find("tr.selectable").click
+
+    assert(page.has_content?('카드 영수증 내역'))
+
+    click_link '지출내역서 보기'
+
+    assert(page.has_content?('지출내역서 상세정보'))
+  end
+
+  test 'should show approved_sources' do
+    visit '/'
+    click_link '카드 영수증 목록'
+
+    assert(page.has_content?('카드영수증 관리'))
+
+    find("tr.selectable").click
+
+    assert(page.has_content?('카드 영수증 내역'))
+
+    click_link '승인내역'
 
     assert(page.has_content?('카드승인내역'))
   end
 
-  test 'should show total' do
+  test 'should edit cardbill' do
     visit '/'
-    click_link '신용카드 관리'
-    click_link '합계표 보기'
+    click_link '카드 영수증 목록'
 
-    assert(page.has_content?('신용카드 관리'))
+    assert(page.has_content?('카드영수증 관리'))
+
+    find("tr.selectable").click
+
+    assert(page.has_content?('카드 영수증 내역'))
+
+    click_link '수정하기'
+
+    assert(page.has_content?('카드 영수증 내용 수정'))
+
+    fill_in "가맹점", with: "수정된 가맹점"
+    fill_in "가맹점 주소", with: "수정된 가맹점 주소"
+
+    click_button '갱신하기'
+
+    assert(page.has_content?('카드 영수증이(가) 성공적으로 업데이트 되었습니다.'))
+  end
+
+  test 'should add permission and delete permission' do
+    visit '/'
+    click_link '카드 영수증 목록'
+
+    assert(page.has_content?('카드영수증 관리'))
+
+    find("tr.selectable").click
+
+    assert(page.has_content?('카드 영수증 내역'))
+
+    select('쓰기', :from => 'access_type')
+    select('no employee', :from => 'accessor')
+
+    click_button 'Save changes'
+
+    assert(page.has_content?('성공적으로 권한을 설정하였습니다.'))
+
+    click_link '[x]'
+
+    assert(page.has_content?('성공적으로 권한을 제거하였습니다.'))
+  end
+
+  test 'should back cardbill list' do
+    visit '/'
+    click_link '카드 영수증 목록'
+
+    assert(page.has_content?('카드영수증 관리'))
+
+    find("tr.selectable").click
+
+    assert(page.has_content?('카드 영수증 내역'))
+
+    click_link '목록'
+
+    assert(page.has_content?('카드영수증 관리'))
   end
 end
