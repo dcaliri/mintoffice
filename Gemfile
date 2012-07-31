@@ -20,6 +20,14 @@ gem 'pony'
 
 gem 'by_star'
 
+# Use unicorn as the app server
+gem 'unicorn'
+
+# Deploy with Capistrano
+gem 'capistrano'
+gem 'capistrano-unicorn'
+gem 'rvm-capistrano'
+
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
@@ -39,7 +47,6 @@ group :test do
   gem 'database_cleaner'
   gem 'test-unit'
 end
-
 
 group :development, :test do
   gem "capybara", "~> 1.1.2"
