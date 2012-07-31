@@ -59,7 +59,12 @@ class EmployeeTest < ActionDispatch::IntegrationTest
 
     click_button '만들기'
 
-    assert(page.has_content?('인사정보'))
+    assert(page.has_content?('손 어지리'))
+    assert(page.has_content?('123456-7654321'))
+    assert(page.has_content?('test@test.com'))
+    assert(page.has_content?('010-1234-3214'))
+    assert(page.has_content?('금천구 가산동'))
+    assert(page.has_content?('인턴'))
   end
 
   test 'should visit employees to find contact' do
@@ -220,14 +225,18 @@ class EmployeeTest < ActionDispatch::IntegrationTest
 
     assert(page.has_content?('인사정보 수정'))
     
-    fill_in "주민등록번", with: "123456-0123456"
-    fill_in "이메일", with: "zzilssun@wangsy.com"
+    fill_in "주민등록번호", with: "123456-0123456"
+    fill_in "이메일", with: "zzilssun@test.com"
     fill_in "핸드폰번호", with: "010-5678-5678"
     fill_in "주소", with: "수정된 주소"
 
     click_button '갱신하기'
 
     assert(page.has_content?('인사정보이(가) 성공적으로 업데이트 되었습니다.'))
+    assert(page.has_content?('123456-0123456'))
+    assert(page.has_content?('zzilssun@test.com'))
+    assert(page.has_content?('010-5678-5678'))
+    assert(page.has_content?('수정된 주소'))
   end
 
   test 'should back' do
