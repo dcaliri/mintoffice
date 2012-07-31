@@ -16,7 +16,7 @@ ibk_card:
   cardno: 123-321-4321
   expireyear: 2013
   expiremonth: 07
-  nickname: 접대카드
+  nickname: 법인카드
   issuer: 기업은행
   cardholder: 손어지리
   created_at: <%= Time.zone.now %>
