@@ -17,7 +17,7 @@ h2= t("common.title.#{action_name}")
       = f.email_field :google_account, :size => 40
     p
       = f.label :daum_account, User.human_attribute_name("daum_account")
-      = f.email_field :daum_account, :size => 40
+      = f.email_field :daum_account, :size => 40, placeholder: t('users.add.request')
     p
       = f.label :nate_account, User.human_attribute_name("nate_account")
       = f.email_field :nate_account, :size => 40

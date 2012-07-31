@@ -14,7 +14,7 @@
       - 4.downto(1) do |quarter|
         - time = Time.zone.parse("#{year}-#{quarter * 3 - 2}-01 00:00:00")
         - if Taxbill.exists?(transacted_at: time.all_quarter)
-          - period["#{year}년도 #{quarter}분기"] = time
+          - period[ "#{year}" + t('taxbills.index.year') + " #{quarter}" + t('taxbills.index.quarter') ] = time
 
     = select_tag :transacted_at, options_for_select(period, params[:transacted_at]), "onchange" => "this.form.submit()"
 
@@ -23,7 +23,7 @@
 
 #show_command
     = link_to t('taxbills.total.link'), [:total, :taxbills]
-    ' |
+    = " | "
     = link_to t('common.title.new'), [:new, :taxbill]
 
 - unless taxbills_pagination.empty?

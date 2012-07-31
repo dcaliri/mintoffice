@@ -29,7 +29,6 @@ class CardUsedSource < ActiveRecord::Base
                      :store_addr2,
                      :store_tel
                      ]
-
   def self.default_columns
     DEFAULT_COLUMNS
   end

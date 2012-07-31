@@ -1,0 +1,17 @@
+
+#enrollment-item-list
+  - if @item.present?
+    ul
+    - @item.attachments.each do |attachment|
+      li
+        = attachment.original_filename
+        = link_to "[x]", delete_attachment_enrollment_path(attachment_id: attachment.id, name: params[:name]), method: :delete, confirm: t("common.messages.delete_confirm")
+
+
+= form_tag [:attach, @enrollment], multipart: true do
+  = label_tag :picture, t('section_enrollment.enrollment.attachment_item.attachments')
+  = hidden_field_tag :name, params[:name]
+  = file_field_tag :picture
+  = submit_tag t('section_enrollment.enrollment.attachment_item.add')
+
+= link_to t('section_enrollment.enrollment.attachment_item.back'), [:dashboard, :enrollments]

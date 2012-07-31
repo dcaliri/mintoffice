@@ -11,14 +11,9 @@ h2
 
 .box
   #descr
-    table border="0" cellspacing="5" cellpadding="5"
-      tr
-        th align="right" = Pettycash.human_attribute_name('inmoney')
-        td align="right" = number_to_currency @pettycash.inmoney
-      tr
-        th align="right" = Pettycash.human_attribute_name('outmoney')
-        td align="right" = number_to_currency @pettycash.outmoney
-
+    dl
+      = dtdd @pettycash, "inmoney"
+      = dtdd @pettycash, "outmoney"
     p
       b= Pettycash.human_attribute_name('description')
     p=simple_format @pettycash.description

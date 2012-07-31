@@ -1,7 +1,0 @@
-h1
-  = t('applies.try.unknown_user')
-= form_tag [:new, :apply], method: :get do
-  = hidden_field_tag :provider, params[:provider]
-  = hidden_field_tag :email, params[:email]
-  p
-    = submit_tag "예"

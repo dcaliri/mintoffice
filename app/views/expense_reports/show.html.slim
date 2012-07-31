@@ -3,14 +3,15 @@
     - if expense_report.posting
       = link_to t("postings.show.link"), expense_report.posting
     - else
-      = link_to t("postings.new.link"), new_posting_path(report: expense_report)
-    = " | "
+      - if @user.permission? :postings
+        = link_to t("postings.new.link"), new_posting_path(report: expense_report)
+        = " | "
   = link_to t("activerecord.models.#{expense_report.target_type.tableize.singularize}") + " " + t('expense_reports.show.view'), expense_report.target
   = " | "
   - unless expense_report.posting
     = link_to t('common.link.edit'), [:edit, expense_report]
     = " | "
-    = link_to t('common.link.destroy'), expense_report, :method => :delete, :confirm => "Are  you sure?"
+    = link_to t('common.link.destroy'), expense_report, :method => :delete, confirm: t("common.messages.delete_confirm")
     = " | "
   = link_to t('common.title.back'), :expense_reports
 
@@ -19,30 +20,24 @@ h2
 
 .box
   #descr
-    table
-      tr
-        th= expense_report.class.human_attribute_name(:owner)
-        td= expense_report.hrinfo.fullname
-      tr
-        th= expense_report.class.human_attribute_name(:target)
-        td= t("activerecord.models.#{expense_report.target_type.tableize.singularize}")
-      tr
-        th= expense_report.class.human_attribute_name(:project)
-        td= expense_report.project.name rescue ""
-      tr
-        th= expense_report.class.human_attribute_name(:description)
-        td= expense_report.description
-      tr
-        th= expense_report.class.human_attribute_name(:expensed_at)
-        td= expense_report.expensed_at
-      tr
-        th= expense_report.class.human_attribute_name(:amount)
-        td= number_to_currency expense_report.amount
+    dl
+      dt
+        = expense_report.class.human_attribute_name(:owner)
+      dd = expense_report.hrinfo.fullname
+      dt
+        = expense_report.class.human_attribute_name(:target)
+      dd
+        = t("activerecord.models.#{expense_report.target_type.tableize.singularize}")
+      dt
+        = expense_report.class.human_attribute_name(:project)
+      dd
+        = expense_report.project.name rescue ""
+      = dtdd expense_report, "description"
+      = dtdd expense_report, "expensed_at"
+      = dtdd expense_report, "amount"
   - if expense_report.target.respond_to?(:attachments)
     = render "shared/attachments/detail", :target => expense_report.target
   .clear
 br
 = render "#{expense_report.target_type.tableize}/detail", target: expense_report.target
 = render 'reports/info', target: expense_report
-
-

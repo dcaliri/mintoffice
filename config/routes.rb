@@ -1,4 +1,12 @@
 Mintoffice::Application.routes.draw do
+  if Rails.env == 'development' or Rails.env == 'test'
+    namespace :test do
+      resource :sessions, only: :show do
+        match 'clear', :action => 'destroy', on: :collection
+      end
+    end
+  end
+
   namespace :api do
     match 'login', controller: :users, action: :login
 
@@ -12,9 +20,22 @@ Mintoffice::Application.routes.draw do
     resources :contacts
   end
 
-  resource :apply do
-    get :try
-    get :complete
+  scope nil, :module => 'section_enrollment' do
+    resources :enrollments do
+      collection do
+        get :dashboard
+      end
+
+      member do
+        get :attach_item
+        post :attach
+        delete :delete_attachment
+      end
+    end
+
+    resources :enroll_reports
+
+    match ':company_name/recruit' => 'enrollments#index'
   end
 
   resources :creditcards do
@@ -56,6 +77,7 @@ Mintoffice::Application.routes.draw do
   post '/hrinfos/try_retired/:id', :controller => "hrinfos", :action => "try_retired", as: :try_retired
 
   resources :hrinfos do
+
     member do
     get 'employment_proof', action: :new_employment_proof, as: :employment_proof
     post 'employment_proof', as: :employment_proof
@@ -206,6 +228,7 @@ Mintoffice::Application.routes.draw do
   resources :postings
 
   post 'accessors', controller: :accessors, action: :create, as: :accessors
+  delete 'accessors', controller: :accessors, action: :destroy, as: :accessors
 
   get 'except_columns' => "except_columns#new", as: :except_columns
   post 'except_columns' => "except_columns#create", as: :except_columns

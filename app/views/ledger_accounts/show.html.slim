@@ -9,13 +9,9 @@ h2= t('.title')
 
 .box
   #descr
-    table cellspacing="5" cellpadding="5"
-      tr
-        th= ledger_account.class.human_attribute_name('title')
-        td= ledger_account.title
-      tr
-        th= ledger_account.class.human_attribute_name('category')
-        td= ledger_account.category
+    = dtdd ledger_account, "title"
+    = dtdd ledger_account, "category"
+
   #references
     table cellspacing="5" cellpadding="5"
       tr
@@ -27,5 +23,5 @@ h2= t('.title')
         tr
           td= item.posting.posted_at.strftime("%Y.%m.%d") rescue ""
           td= number_to_currency item.amount
-
+        
   .clear

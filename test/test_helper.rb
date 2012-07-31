@@ -1,12 +1,45 @@
+# encoding: UTF-8
+
 ENV["RAILS_ENV"] = "test"
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
+require 'capybara/rails'
 
-class ActiveSupport::TestCase
+class ActionDispatch::IntegrationTest
+  include Capybara::DSL
+  fixtures :users, :companies, :companies_users, :permissions_users, :permissions
   setup :global_setup
   teardown :global_teardown
 
-  fixtures :users, :companies, :companies_users
+  self.use_transactional_fixtures = false
+
+  Capybara.default_driver = :selenium
+  DatabaseCleaner.strategy = :truncation
+
+  private
+  def global_setup
+    simple_authenticate
+  end
+
+  def global_teardown
+    DatabaseCleaner.clean
+    Capybara.reset_sessions!
+  end
+
+  def simple_authenticate
+    visit '/test/sessions?user_id=1'
+  end
+
+  def clear_session
+    visit '/test/sessions/clear'
+  end
+end
+
+class ActionController::TestCase
+  setup :global_setup
+  teardown :global_teardown
+
+  fixtures :users, :companies, :companies_users, :groups, :groups_users
 
   def global_setup
     DatabaseCleaner.strategy = :truncation

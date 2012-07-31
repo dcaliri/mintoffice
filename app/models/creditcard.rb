@@ -18,7 +18,9 @@ class Creditcard < ActiveRecord::Base
   include Attachmentable
 
   CARD_LIST = [:card_used_sources, :card_approved_sources, :card_approved_sources_oversea]
-  CARD_LIST_FOR_SELECT = [["이용내역", CARD_LIST[0]],["승인내역", CARD_LIST[1]], ["해외승인내역", CARD_LIST[2]]]
+  CARD_LIST_FOR_SELECT = [[I18n.t('models.creditcard.used_detail'), CARD_LIST[0]],
+                         [I18n.t('models.creditcard.approved_detail'), CARD_LIST[1]], 
+                         [I18n.t('models.creditcard.foreign_detail'), CARD_LIST[2]]]
 
   include SpreadsheetParsable
   include Excels::CardUsedSourcesInfo

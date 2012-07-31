@@ -21,8 +21,10 @@ div class={@user.admin? ? "admin" : ""}
         - if @user.permission.any? {|perm| perm.name == 'taxbills'}
           li= link_to t("taxbills.index.title"), :taxbills
         li= link_to t("expense_reports.index.title"), :expense_reports
-        li= link_to t("ledger_accounts.title"), :ledger_accounts
-        li= link_to t("postings.title"), :postings
+        - if @user.permission.any? {|perm| perm.name == 'ledger_accounts'}
+          li= link_to t("ledger_accounts.title"), :ledger_accounts
+        - if @user.permission.any? {|perm| perm.name == 'postings'}
+          li= link_to t("postings.title"), :postings
 
     .menubar_item.item3
       h2= t("main.index.project")
@@ -55,5 +57,6 @@ div class={@user.admin? ? "admin" : ""}
             li= link_to t("change_histories.title"), :controller => "change_histories"
             li= link_to t("holidays.title"), :controller => "holidays"
             li= link_to t("dayworker_taxes.title"), :controller => "dayworker_taxes"
+            li= link_to t("enrollments.title"), :enroll_reports
             li= link_to t("companies.title"), current_company
     = render partial: "this_week"

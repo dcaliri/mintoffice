@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class HrinfosControllerTest < ActionController::TestCase
-  fixtures :hrinfos
+  fixtures :hrinfos, :attachments
 
   def setup
     current_user.permission.create!(name: 'hrinfos')
@@ -9,6 +9,11 @@ class HrinfosControllerTest < ActionController::TestCase
 
   test "should see index page" do
     get :index
+    assert_response :success
+  end
+
+  test "should see index page of retired member" do
+    get :index, search_type: :retire
     assert_response :success
   end
 

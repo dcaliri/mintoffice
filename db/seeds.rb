@@ -25,7 +25,11 @@ unless User.exists?(name: "admin")
   user.permission.build(name: 'projects')
   user.permission.build(name: 'taxbills')
   user.permission.build(name: 'namecards')
+  user.permission.build(name: 'bank_accounts')
   user.permission.build(name: 'business_clients')
+  user.permission.build(name: 'commutes')
+  user.permission.build(name: 'ledger_accounts')
+  user.permission.build(name: 'postings')
 
   user.groups.build(name: 'admin')
   user.companies << company

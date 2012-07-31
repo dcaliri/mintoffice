@@ -11,11 +11,12 @@ class UsedVacationsController < ApplicationController
   expose(:user) { vacation.user }
 
   before_filter {|controller| controller.redirect_unless_me(user)}
+  before_filter :another_user_cant_access_yearly, :only => [:edit]
 
   def create
     used_vacation.save!
     # Boxcar.send_to_boxcar_group("admin",used_vacation.vacation.user.hrinfo.fullname, I18n.t("used_vacations.new.link"))
-    redirect_to [vacation, used_vacation], notice: "연차를 신청하였습니다. 신청 후에는 결재를 올려주세요."
+    redirect_to [vacation, used_vacation], notice: t('controllers.used_vacations.reports')
   end
 
   def update
@@ -41,5 +42,9 @@ class UsedVacationsController < ApplicationController
   def destroy
     used_vacation.destroy
     redirect_to vacation_path(user)
+  end
+
+  def another_user_cant_access_yearly
+    force_redirect if !current_user.admin?
   end
 end

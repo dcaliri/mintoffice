@@ -1,13 +1,16 @@
-h3 
+h3
   = t('accessors.info.permissions')
-p
-  = t('accessors.info.write')
-  ' : 
-  = access_target.accessors.writers.map{|accessor| accessor.fullname}.join(', ')
-p
-  = t('accessors.info.read')
-  ' :
-  = access_target.accessors.readers.map{|accessor| accessor.fullname}.join(', ')
+ul
+  - access_target.accessors.each do |accessor| 
+    li
+      = accessor.fullname
+      = "("
+      = accessor.write? ? t('accessors.info.read_write') : t('accessors.info.read')
+      = ")"
+      - unless accessor.user.admin? 
+        = link_to "[x]", accessors_path(accessor_id: accessor.id), :method => :delete
+
+
 
 - if access_target.access?(current_user, :write)
   h3
@@ -17,9 +20,9 @@ p
     = hidden_field_tag :resources_id, access_target.id
     p
       = label_tag :access_type, t('activerecord.attributes.access_person.access_type')
-      = select_tag :access_type, options_for_select([["읽기", "read"], ["쓰기", "write"]])
+      = select_tag :access_type, options_for_select([[t('accessors.info.read'), "read"], [t('accessors.info.write'), "write"]])
     p
       = label_tag :accessor, t('activerecord.attributes.access_person.accessor')
-      = select_tag :accessor, options_for_select(User.enabled.map{|user| [user.name, user.id]})
+      = select_tag :accessor, options_for_select(User.enabled.no_admins.map{|user| [user.name, user.id]})
     p
       = submit_tag

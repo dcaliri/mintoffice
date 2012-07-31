@@ -6,7 +6,7 @@ h2= t("common.title.new")
 / 입사일,급여지급일,계약기간,기본급
 
 = form_tag [:calculate, user, payment] do
-  #box
+  .box
     p
       = label_tag :join_at, t('activerecord.attributes.payment.pay_start')
       = date_select :payments, :join_at, :order => [:year, :month, :day]

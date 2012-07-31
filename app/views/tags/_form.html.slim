@@ -1,19 +1,21 @@
-.box
-  h3= Tag.model_name.human
-  - unless target.tags.blank?
-    ul.tag-list
-      - target.tags.each do |tag|
-        li
-          = tag.name
-          = "["
-          = link_to t('common.title.destroy'), tag, :method => :delete
-          = "]"
+- if current_user.permission?(:tags)
+  - unless target.new_record?
+    .box
+      h3= Tag.model_name.human
+      - unless target.tags.blank?
+        ul.tag-list
+          - target.tags.each do |tag|
+            li
+              = tag.name
+              = "["
+              = link_to t('common.title.destroy'), tag, :method => :delete
+              = "]"
 
-  = form_for target.tags.build do |tag_form|
-    = hidden_field_tag :owner_type, target.class
-    = hidden_field_tag :owner_id, target.id
+      = form_for target.tags.build do |tag_form|
+        = hidden_field_tag :owner_type, target.class
+        = hidden_field_tag :owner_id, target.id
 
-    p
-      = tag_form.label :name
-      = tag_form.text_field :name
-    = tag_form.submit t("common.button.add"), :id => "submit"
+        p
+          = tag_form.label :name
+          = tag_form.text_field :name
+        = tag_form.submit t("common.button.add"), :id => "submit"
