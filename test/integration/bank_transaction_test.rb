@@ -155,11 +155,22 @@ class BankTransactionTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('입출금 내역이 없습니다'))
   end
 
-#  test "should upload a excel file" do
-#    visit '/'
-#    click_link '은행계좌 목록'
-#    click_link '입출금내역 보기'
-#    
-#    click_link '엑셀 파일로 올리기'
-#  end  
+  test "should upload an excel file" do
+    BankTransaction.destroy_all
+
+    visit '/'
+    click_link '은행계좌 목록'
+    click_link '입출금내역 보기'
+   
+    click_link '엑셀 파일로 올리기'
+    path = File.join(::Rails.root, "test/fixtures/excels/bank_transaction_fixture.xls") 
+    attach_file("upload_file", path)
+
+    click_button '미리보기'
+    click_button '엑셀 파일'
+
+    assert(page.has_content?('e_만기'))
+    assert(page.has_content?('₩30,360,000'))
+    assert(page.has_content?('엘지전자(주)'))
+  end
 end
