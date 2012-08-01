@@ -80,7 +80,10 @@ class BankTransactionTest < ActionDispatch::IntegrationTest
     uncheck('CMS 코드')
 
     click_button '태그 만들기'
-    page.driver.browser.switch_to.alert.accept
+    
+    alert = page.driver.browser.switch_to.alert
+    alert.send_keys("test tag")
+    alert.accept
 
     assert(page.has_content?('입출금 내역'))
   end
