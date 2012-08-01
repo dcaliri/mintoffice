@@ -4,4 +4,8 @@ class Group < ActiveRecord::Base
   def self.users_in_group(group)
     self.where(:name => group)[0].users
   end
+
+  def self.admins
+    where(name: "admin")
+  end
 end
