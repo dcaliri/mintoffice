@@ -9,8 +9,8 @@ normal_account:
     id: 2
     person_id: 2
     name: "normal"
-    hashed_password: "1234"
-    salt: "q"
+    hashed_password: "96043f0adf13e8d440a0e90ec7a2b7757a16bc2c"
+    salt: "21757029800.1164294613723833"
 
 no_employee:
     id: 3
