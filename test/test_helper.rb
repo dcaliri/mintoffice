@@ -16,6 +16,15 @@ class ActionDispatch::IntegrationTest
   Capybara.default_driver = :selenium
   DatabaseCleaner.strategy = :truncation
 
+  protected
+  def switch_to_rack_test
+    browser = Capybara.current_session.driver.browser
+    browser.manage.delete_all_cookies
+
+    Capybara.current_driver = :rack_test
+    simple_authenticate
+  end
+
   private
   def global_setup
     simple_authenticate
@@ -24,6 +33,7 @@ class ActionDispatch::IntegrationTest
   def global_teardown
     DatabaseCleaner.clean
     Capybara.reset_sessions!
+    Capybara.use_default_driver
   end
 
   def simple_authenticate

@@ -9,6 +9,7 @@ class Person < ActiveRecord::Base
   has_one :taxman
 
   has_one :contact, dependent: :destroy
+  accepts_nested_attributes_for :contact, :allow_destroy => :true, :reject_if => :all_blank
   has_many :contacts, foreign_key: 'owner_id'
 
   has_many :reporters, class_name: 'ReportPerson'

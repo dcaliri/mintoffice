@@ -1,6 +1,7 @@
 # encoding: UTF-8
 require 'test_helper'
 
+
 class EmployeeTest < ActionDispatch::IntegrationTest
   fixtures :contacts
   fixtures :contact_emails
@@ -180,21 +181,41 @@ class EmployeeTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('연차 관리'))
   end
 
-#  test 'should fail to get employment_proof' do
-#    visit '/'
-#    click_link '인사정보관리 - 사원목록'
-#    find("tr.selectable").click
-#
-#    click_link '재직증명서'
-#
-#    assert(page.has_content?('재직증명서'))
-#
-#    fill_in "용도", with: "test"
-#
-#    click_button '출력'
-#
-#    assert(page.has_content?('Check company attachment.'))
-#  end
+  test 'should success to get employment_proof' do
+    # visit '/'
+    # click_link '인사정보관리 - 사원목록'
+    # find("tr.selectable").click
+
+    # click_link '재직증명서'
+
+    # assert(page.has_content?('재직증명서'))
+
+    class ::Company < ActiveRecord::Base
+      def seal
+        "#{Rails.root}/test/fixtures/images/120731092154_Untitled.png"
+      end
+    end
+
+    switch_to_rack_test
+
+    visit '/employees/1/employment_proof'
+
+    fill_in "용도", with: "test"
+
+    click_button '출력'
+
+    assert_equal(page.response_headers['Content-Disposition'], "attachment; filename=\"왕 수용_employment_proof.pdf\"")
+  end
+
+  test 'should fail to get employment_proof' do
+    visit '/'
+    click_link '인사정보관리 - 사원목록'
+    find("tr.selectable").click
+
+    click_link '재직증명서'
+
+    assert(page.has_content?('Check company attachment.'))
+  end
 
   test 'should visit employees to retire' do
     visit '/'
