@@ -9,7 +9,8 @@ div.this_week
           li class={holiday_css holidays, day} = h.dayname
         -  unless holiday? holidays, day
           - today_v.each do |tv|
-            li= t("used_vacations.vacation") + tv.vacation.user.fullname
+            - unless tv.vacation == nil
+              li= t("used_vacations.vacation") + tv.vacation.user.fullname
   center
     '  &laquo;
     = link_to t("main.index.prevweek"), root_path(page: @page - 1)
