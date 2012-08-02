@@ -7,6 +7,3 @@ fixture:
     created_at: <%= Time.zone.now %>
     updated_at: <%= Time.zone.now %>
     person_id: 1
-    phonenumber: 010-1234-1234
-    created_at: <%= Time.zone.now %>
-    updated_at: <%= Time.zone.now %>

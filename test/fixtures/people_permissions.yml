@@ -18,11 +18,11 @@ expenses:
   permission_id: 5
   person_id: 1
 
-bank_trasactions:
+bank_transactions:
   permission_id: 6
   person_id: 1
   
-bank_trasfers:
+bank_transfers:
   permission_id: 7
   person_id: 1
 

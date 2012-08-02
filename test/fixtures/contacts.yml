@@ -10,6 +10,6 @@ fixture:
     migrated_data: f
     owner_id:
     isprivate: f
-    company_id:
+    company_id: 1
     google_id:
     google_etag: 
