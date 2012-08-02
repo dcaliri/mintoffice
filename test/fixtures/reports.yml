@@ -3,3 +3,9 @@ expense_report:
     target_id: 1
     target_type: "ExpenseReport"
     status: "not_reported"
+    
+document:
+    id: 2
+    target_id: 1
+    target_type: "Document"
+    status: "not_reported"

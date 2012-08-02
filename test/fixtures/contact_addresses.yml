@@ -1,0 +1,12 @@
+fixture:
+  id: 1
+  contact_id: 1
+  target:
+  country:
+  province:
+  city:
+  other1: 서울시 강남구 신사동
+  other2:
+  postal_code:
+  created_at: 2012-07-18 16:17:56.759405
+  updated_at: 2012-07-18 16:17:56.759405

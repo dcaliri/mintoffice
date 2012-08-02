@@ -1,7 +1,6 @@
 - target.create_if_no_report
 - report = target.report
 - reporter_list ||= User.all.delete_if{|user| user == current_user or user.disabled?}
-
 h3
   = t('reports.info.approval')
 p

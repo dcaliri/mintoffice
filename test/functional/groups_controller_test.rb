@@ -29,6 +29,6 @@ class GroupsControllerTest < ActionController::TestCase
 
   private
   def current_group
-    @group ||= groups(:fixture)
+    @group ||= groups(:admin)
   end
 end

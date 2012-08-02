@@ -38,6 +38,6 @@ class CreditcardsControllerTest < ActionController::TestCase
   end
 
   def current_creditcard
-    @creditcard ||= creditcards(:fixture)
+    @creditcard ||= creditcards(:shinhan_card)
   end
 end

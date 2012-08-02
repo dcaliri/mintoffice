@@ -45,7 +45,7 @@ class BankTransactionsControllerTest < ActionController::TestCase
 
   private
   def current_bank_account
-    @bank_account ||= bank_accounts(:fixture)
+    @bank_account ||= bank_accounts(:shinhan_bank)
   end
 
   def current_bank_transaction

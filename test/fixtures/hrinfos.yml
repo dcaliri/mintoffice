@@ -1,5 +1,16 @@
 fixture:
-    id: 1
-    user_id: 1
-    firstname: "John"
-    lastname: "Doe"
+  id: 1
+  firstname: 수용
+  lastname: 왕
+  picture_id: 
+  created_at: 2012-07-18 16:17:56.775700
+  updated_at: 2012-07-20 13:36:03.201237
+  joined_on: 2012-07-18
+  retired_on:
+  user_id: 1
+  position: 사장
+  companyno: 1
+  juminno: 123456-1234567
+  listed: f
+  department: 민트기술
+  employment_proof_hash: 
