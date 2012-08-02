@@ -10,7 +10,7 @@ class CardbillsController < ApplicationController
   # GET /cardbills.xml
   def index
     @cardbills = Cardbill.filter_by_params(params.merge(user: current_user))
-                         .paginate(:order => 'transdate desc', :page => params[:page], :per_page => 2)
+                         .paginate(:order => 'transdate desc', :page => params[:page], :per_page => 20)
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @cardbills }
