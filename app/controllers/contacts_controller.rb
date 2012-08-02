@@ -31,11 +31,13 @@ class ContactsController < ApplicationController
       unless params[:target].blank?
         @target = collections.find(params[:target])
       else
-        @target = collections.build
+        # @target = collections.build
+        @target = collections.create!
+        @target.build_person
       end
     end
 
-    @target.contact = @contact
+    @target.person.contact = @contact
     @target.save!
   end
 
