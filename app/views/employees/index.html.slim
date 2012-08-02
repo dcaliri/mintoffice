@@ -23,7 +23,7 @@ table#list-table
     th
       = Employee.human_attribute_name('position')
     th
-      = Employee.human_attribute_name('accountname')
+      = Employee.human_attribute_name('account.name')
     th
       = Employee.human_attribute_name('joined_on')
 
@@ -36,6 +36,6 @@ table#list-table
       td
         =h employee.position
       td
-        =h employee.fullname
+        =h employee.person.account.name
       td
         =h employee.joined_on
