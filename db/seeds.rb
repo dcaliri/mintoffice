@@ -13,24 +13,24 @@ unless Company.all.empty?
 end
 
 company = Company.find_by_name("mintech")
-
+Company.current_company = company
 
 unless Account.exists?(name: 'admin')
   person = Person.create!
   user = person.create_account(name: 'admin', password: '1234')
   hrinfo = person.create_employee(juminno: '771122-1111111')
 
-  hrinfo.permission.build(name: 'users')
-  hrinfo.permission.build(name: 'pettycashes')
-  hrinfo.permission.build(name: 'cardbills')
-  hrinfo.permission.build(name: 'projects')
-  hrinfo.permission.build(name: 'taxbills')
-  hrinfo.permission.build(name: 'namecards')
-  hrinfo.permission.build(name: 'bank_accounts')
-  hrinfo.permission.build(name: 'business_clients')
-  hrinfo.permission.build(name: 'commutes')
-  hrinfo.permission.build(name: 'ledger_accounts')
-  hrinfo.permission.build(name: 'postings')
+  hrinfo.permissions.build(name: 'users')
+  hrinfo.permissions.build(name: 'pettycashes')
+  hrinfo.permissions.build(name: 'cardbills')
+  hrinfo.permissions.build(name: 'projects')
+  hrinfo.permissions.build(name: 'taxbills')
+  hrinfo.permissions.build(name: 'namecards')
+  hrinfo.permissions.build(name: 'bank_accounts')
+  hrinfo.permissions.build(name: 'business_clients')
+  hrinfo.permissions.build(name: 'commutes')
+  hrinfo.permissions.build(name: 'ledger_accounts')
+  hrinfo.permissions.build(name: 'postings')
 
   hrinfo.groups.build(name: 'admin')
 
