@@ -18,9 +18,18 @@ class GetEmploymentProofTest < ActionDispatch::IntegrationTest
   fixtures :required_tags
   fixtures :tags
   fixtures :companies
-  fixtures :attachments
 
   test 'admin should get his proof' do
+    visit '/'
+    click_link '회사 관리'
+    click_link '수정'
+
+    find_by_id('company_attachments_attributes_0_uploaded_file').click
+    path = File.join(::Rails.root, "test/fixtures/images/seal.png")
+    attach_file("company_attachments_attributes_0_uploaded_file", path)
+
+    click_button '회사 수정하기'
+
     visit '/'
     click_link '인사정보관리 - 사원목록'
 
@@ -35,6 +44,16 @@ class GetEmploymentProofTest < ActionDispatch::IntegrationTest
 
   test 'admin should get another employee proof' do
     visit '/'
+    click_link '회사 관리'
+    click_link '수정'
+
+    find_by_id('company_attachments_attributes_0_uploaded_file').click
+    path = File.join(::Rails.root, "test/fixtures/images/seal.png")
+    attach_file("company_attachments_attributes_0_uploaded_file", path)
+
+    click_button '회사 수정하기'
+
+    visit '/'
     click_link '인사정보관리 - 사원목록'
 
     visit '/employees/2'
@@ -48,6 +67,16 @@ class GetEmploymentProofTest < ActionDispatch::IntegrationTest
   end  
 
   test 'normal user should get his proof' do
+    visit '/'
+    click_link '회사 관리'
+    click_link '수정'
+
+    find_by_id('company_attachments_attributes_0_uploaded_file').click
+    path = File.join(::Rails.root, "test/fixtures/images/seal.png")
+    attach_file("company_attachments_attributes_0_uploaded_file", path)
+
+    click_button '회사 수정하기'
+
     clear_session
 
     visit '/'
@@ -68,6 +97,16 @@ class GetEmploymentProofTest < ActionDispatch::IntegrationTest
   end
 
   test 'normal user should not get another employee proof' do
+    visit '/'
+    click_link '회사 관리'
+    click_link '수정'
+
+    find_by_id('company_attachments_attributes_0_uploaded_file').click
+    path = File.join(::Rails.root, "test/fixtures/images/seal.png")
+    attach_file("company_attachments_attributes_0_uploaded_file", path)
+
+    click_button '회사 수정하기'
+
     clear_session
 
     visit '/'

@@ -2,12 +2,12 @@ fixture:
   id: 1
   title:
   comments:
-  filepath: 120731092154_Untitled.png
+  filepath: Untitled.xls
   created_at: <%= Time.zone.now %>
   updated_at: <%= Time.zone.now %>
-  contenttype: image/png
-  owner_type: "Company"
+  contenttype: application/vnd.ms-excel
+  owner_type: Document
   owner_id: 1
   original_filename: Untitled.png
   seq:
-  employee_id: 1
+  employee_id: 2

@@ -85,7 +85,6 @@ class AccountTest < ActionDispatch::IntegrationTest
     find_field('q').set("normal")
     find_field('q').native.send_key(:enter)
 
-    save_and_open_page
     assert(page.has_content?('normal'))
   end
 end
