@@ -71,7 +71,7 @@ class Employee < ActiveRecord::Base
     person.account
   end
 
-  def company_account
+  def employee_account
     person.account.id
   end
   
