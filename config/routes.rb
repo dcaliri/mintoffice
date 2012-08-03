@@ -63,8 +63,8 @@ Mintoffice::Application.routes.draw do
   resources :documents
   resources :projects, except: [:destroy] do
     member do
-    post :employee, action: 'add_employee'
-    delete :employee, action: 'remove_employee'
+      post :employee, action: 'add_employee'
+      delete :employee, action: 'remove_employee'
     end
   end
 
