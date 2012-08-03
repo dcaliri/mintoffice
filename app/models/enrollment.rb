@@ -2,13 +2,10 @@
 
 class Enrollment < ActiveRecord::Base
   belongs_to :company
-  # belongs_to :account
   belongs_to :person
-  # has_one :contact, :as => :target
+  accepts_nested_attributes_for :person, :allow_destroy => :true
 
   has_many :items, class_name: 'EnrollmentItem', dependent: :destroy
-
-  # accepts_nested_attributes_for :contact, :allow_destroy => :true
 
   validates_format_of :juminno, :with => /^\d{6}-\d{7}$/, :message => I18n.t('employees.error.juminno_invalid'), on: :update
   validates_uniqueness_of :juminno, on: :update
@@ -22,8 +19,10 @@ class Enrollment < ActiveRecord::Base
     case report.status
     when :rollback
       I18n.t('models.employee.request')
+    when :reported
+      I18n.t('models.employee.approved')
     else
-      I18n.t('models.employee.approve')
+      I18n.t('models.employee.approving')
     end
   end
 
@@ -51,15 +50,15 @@ class Enrollment < ActiveRecord::Base
   end
 
   def email
-    contact.emails.first.email
+    contact.emails.first.email rescue ""
   end
 
   def phone_number
-    contact.phone_numbers.first.number
+    contact.phone_numbers.first.number rescue ""
   end
 
   def address
-    contact.addresses.first.info
+    contact.addresses.first.info rescue ""
   end
 
   def find_or_create_item_by_name(name)

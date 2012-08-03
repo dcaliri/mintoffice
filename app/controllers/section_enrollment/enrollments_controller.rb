@@ -8,7 +8,8 @@ class SectionEnrollment::EnrollmentsController < ApplicationController
   before_filter :find_enrollment, :except => :index
 
   def edit
-    @child_contact = @enrollment.contact || @enrollment.build_contact
+    # @child_contact = @enrollment.person.contact || @enrollment.person.build_contact
+    @contact = @enrollment.person.contact || @enrollment.person.build_contact
   end
 
   def update

@@ -606,7 +606,8 @@ ko:
             join: 재직자
             retire: 퇴직자
             request: 수정 요청
-            approve: 승인 심사중
+            approving: 승인 심사중
+            approved: 승인 심사 완료
             representative: 대표
             code: "* 발급확인코드: "
         ledger_account:

@@ -3,6 +3,7 @@
 h3
   = t('contacts_form.address.title')
 = contact_form.fields_for :addresses do |address_field|
+  
   .address-form
     p
       = address_field.label :target
