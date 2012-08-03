@@ -4,7 +4,7 @@
   - if @cardbill.used and current_person.permission? :card_used_sources
     = link_to t('cardbills.show.to_use'), @cardbill.used
     = " | "
-  -  if @cardbill.status == 'verified' and current_person.permission? :expense_reports
+  -  if @cardbill.status == 'verified'
     - if @cardbill.expense_report
       = link_to t('cardbills.show.view_expense'), @cardbill.expense_report
     - else
@@ -36,4 +36,4 @@ h2
   .clear
 
 = render 'changelog', target: @cardbill
-= render 'accessors/info', access_target: @cardbill
+= render 'reports/info', target: @cardbill

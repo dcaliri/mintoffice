@@ -11,3 +11,17 @@ fixture:
   original_filename: Untitled.png
   seq:
   employee_id: 2
+
+seal:
+  id: 2
+  title:
+  comments:
+  filepath: seal.png
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
+  contenttype: application/vnd.ms-excel
+  owner_type: Company
+  owner_id: 1
+  original_filename: seal.png
+  seq:
+  employee_id: 2

@@ -123,7 +123,6 @@ class EmployeesController < ApplicationController
 
   def new_employment_proof
     @employee = Employee.find(params[:id])
-    # raise current_company.seal
     if current_company.seal.empty?
       redirect_to @employee, alert: "Check company attachment."
     end

@@ -5,4 +5,7 @@ class Group < ActiveRecord::Base
     self.where(:name => group).people
   end
 
+  def self.admins
+    where(name: "admin")
+  end
 end

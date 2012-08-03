@@ -114,8 +114,13 @@ class CardApprovedSource < ActiveRecord::Base
           storename: approved_source.store_name,
           storeaddr: used_source.store_addr1 + " " + used_source.store_addr2,
         )
-        cardbill.accessors.build(person_id: owner.id, access_type: "write")
+
+        report = cardbill.build_report
+        report.reporters << owner.reporters.build(report_id: report, owner: true)
         cardbill.save!
+
+        cardbill.report.permission owner, :write
+        
         total_count += 1
       end
       total_count

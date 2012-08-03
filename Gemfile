@@ -17,8 +17,12 @@ gem 'omniauth-nate'
 gem 'google_apps'
 
 gem 'pony'
-
 gem 'by_star'
+
+gem 'unicorn'
+gem 'capistrano'
+gem 'capistrano-unicorn'
+gem 'rvm-capistrano'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

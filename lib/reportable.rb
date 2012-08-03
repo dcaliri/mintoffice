@@ -2,8 +2,10 @@ module Reportable
   extend ActiveSupport::Concern
 
   def create_initial_report
-    report = build_report
-    report.reporters << Account.current_account.person.reporters.build(report_id: report, owner: true)
+    unless self.report
+      report = build_report
+      report.reporters << Account.current_account.person.reporters.build(report_id: report, owner: true)
+    end
   end
 
   def create_initial_accessor

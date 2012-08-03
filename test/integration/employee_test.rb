@@ -243,7 +243,7 @@ class EmployeeTest < ActionDispatch::IntegrationTest
     click_link '수정하기'
 
     assert(page.has_content?('인사정보 수정'))
-    
+
     fill_in "주민등록번호", with: "123456-0123456"
     fill_in "이메일", with: "zzilssun@test.com"
     fill_in "핸드폰번호", with: "010-5678-5678"
