@@ -9,10 +9,10 @@ class ProvidersController < ApplicationController
 
     session[:account_id] = account.id
 
-    if account.joined?
-      redirect_to :root, :notice => I18n.t("accounts.login.successfully_signed_in")
-    else
+    if account.needs_apply?
       redirect_to [:dashboard, :enrollments]
+    else
+      redirect_to :root, :notice => I18n.t("accounts.login.successfully_signed_in")
     end
   end
 end

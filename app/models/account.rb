@@ -303,6 +303,10 @@ class Account < ActiveRecord::Base
     save
   end
 
+  def needs_apply?
+    not employee
+  end
+
   def joined?
     person.joined?
   end
