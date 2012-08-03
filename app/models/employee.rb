@@ -70,6 +70,10 @@ class Employee < ActiveRecord::Base
   def account
     person.account
   end
+
+  def company_account
+    person.account.id
+  end
   
   def contact
     person.contact

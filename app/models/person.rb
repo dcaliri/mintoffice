@@ -35,6 +35,10 @@ class Person < ActiveRecord::Base
     account.name
   end
 
+  def fullname
+    account.fullname
+  end
+
   def joined?
     companies.exists?
   end
