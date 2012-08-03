@@ -30,7 +30,8 @@ module ActionController
 
       def redirect_unless_me(account)
         unless current_account.admin?
-          force_redirect unless current_account == account
+          force_redirect unless current_account.id == account.id
+          # force_redirect unless current_account == account
         end
       end
 
