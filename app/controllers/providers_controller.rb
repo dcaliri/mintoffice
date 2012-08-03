@@ -6,6 +6,7 @@ class ProvidersController < ApplicationController
 
     @account = Account.find_by_omniauth(auth)
     @account = Account.create_from_omniauth(auth) unless @account
+    raise @account.errors.inspect if @account.invalid?
 
     session[:account_id] = @account.id
 
@@ -14,7 +15,5 @@ class ProvidersController < ApplicationController
     else
       redirect_to :root, :notice => I18n.t("accounts.login.successfully_signed_in")
     end
-  rescue ActiveRecord::RecordInvalid
-    raise @account.errors.inspect
   end
 end
