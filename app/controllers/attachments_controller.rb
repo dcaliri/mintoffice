@@ -17,6 +17,7 @@ class AttachmentsController < ApplicationController
   # GET /attachments/1.xml
   def show
     @attachment = Attachment.find(params[:id])
+    session[:attachments] = [@attachment.id]
 
     respond_to do |format|
       format.html # show.html.erb
@@ -40,11 +41,13 @@ class AttachmentsController < ApplicationController
   end
   def picture
     @attachment = Attachment.find(params[:id])
+
     unless session[:attachments] && (session[:attachments].include? (@attachment.id))
       flash[:notice] = I18n.t("permissions.permission_denied")
       redirect_to root_path
       return
     end
+
     if params[:w] && params[:h]
       width = params[:w].to_i
       height = params[:h].to_i
