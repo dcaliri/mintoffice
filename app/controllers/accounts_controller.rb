@@ -7,8 +7,8 @@ class AccountsController < ApplicationController
   layout "login", only: [:login]
 
   before_filter :only => [:show] do |c|
-    @account = Account.find(params[:id])
-    c.save_attachment_id @account
+    @this_account = Account.find(params[:id])
+    c.save_attachment_id @this_account
   end
 
   before_filter :except => [:my, :show, :changepw, :changepw_form, :login, :authenticate, :edit, :update, :logout, :google_apps] do |c|
@@ -23,18 +23,18 @@ class AccountsController < ApplicationController
   end
 
   def new
-    @account = Account.new
+    @this_account = Account.new
   end
 
   def edit
     session[:return_to] = request.referer
-    @account = Account.find(params[:id])
+    @this_account = Account.find(params[:id])
   end
 
   def create
-    @account = Account.new(params[:account])
-    if @account.save
-      Boxcar.add_to_boxcar(@account.boxcar_account)
+    @this_account = Account.new(params[:account])
+    if @this_account.save
+      Boxcar.add_to_boxcar(@this_account.boxcar_account)
       flash[:notice] = I18n.t("common.messages.created", :model => Account.model_name.human)
       redirect_to :accounts
     else
@@ -43,9 +43,9 @@ class AccountsController < ApplicationController
   end
 
   def update
-    @account = Account.find(params[:id])
-    if @account.update_attributes(params[:account])
-      Boxcar.add_to_boxcar(@account.boxcar_account)
+    @this_account = Account.find(params[:id])
+    if @this_account.update_attributes(params[:account])
+      Boxcar.add_to_boxcar(@this_account.boxcar_account)
       flash[:notice] = I18n.t("common.messages.updated", :model => Account.model_name.human)
       redirect_to session[:return_to]
     else
@@ -76,8 +76,8 @@ class AccountsController < ApplicationController
   end
 
   def disable
-    @account = Account.find(params[:id])
-    @account.disable
+    @this_account = Account.find(params[:id])
+    @this_account.disable
     redirect_to :accounts
   end
 
