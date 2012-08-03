@@ -195,6 +195,7 @@ class Account < ActiveRecord::Base
 
     def google_transporter
       current_company = Company.current_company
+      
       transporter = GoogleApps::Transport.new current_company.google_apps_domain
       transporter.authenticate current_company.google_apps_accountname, current_company.google_apps_password
       transporter
@@ -212,9 +213,9 @@ class Account < ActiveRecord::Base
     transporter = google_transporter
 
     # Creating a Account
-    account = GoogleApps::Atom::Account.new
-    account.new_account name, employee.firstname, employee.lastname, current_company.default_password, 2048
-    transporter.new_account account
+    user = GoogleApps::Atom::User.new
+    user.set login: name, password: current_company.default_password, first_name: employee.firstname, last_name: employee.lastname
+    transporter.new_user user
 
     doc = Nokogiri::XML(transporter.response.body)
     Rails.logger.info "#create_google_app_account - response = #{transporter.response.body}"
@@ -230,7 +231,7 @@ class Account < ActiveRecord::Base
 
   def remove_google_app_account
     transporter = google_transporter
-    transporter.delete_account name
+    transporter.delete_user name
 
     Rails.logger.info "#remove_google_app_account - response = #{transporter.response.body}"
 
