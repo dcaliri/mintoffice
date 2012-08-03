@@ -19,7 +19,7 @@ class AccountsController < ApplicationController
   end
 
   def index
-    @accounts = Account.disabled(params[:disabled]).search(params[:q]).order(:id)
+    @accounts = Account.check_disabled(params[:disabled]).search(params[:q]).order(:id)
   end
 
   def new
