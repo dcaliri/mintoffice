@@ -95,9 +95,9 @@ class AttachmentsController < ApplicationController
     end
 
     if @attachment.save
-      redirect_to(:action => 'index')
+      redirect_to :attachments, notice: I18n.t("common.messages.created", :model => Attachment.model_name.human)
     else
-      redirect_to(:action => 'index')
+      render 'new'
     end
   end
 

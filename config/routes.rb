@@ -96,6 +96,10 @@ Mintoffice::Application.routes.draw do
     member do
       get 'picture', action: :picture, as: :picture
     end
+
+    collection do
+      post 'save', action: :save, as: :save
+    end
   end
 
   get '/accounts/changepw/:account_id', :controller => 'accounts', :action => 'changepw_form'
