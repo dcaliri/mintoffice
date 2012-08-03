@@ -23,6 +23,7 @@ class Permission < ActiveRecord::Base
         "accounts.my", "accounts.changepw", "accounts.edit", "accounts.update", "accounts.google_apps",
         "reports.*",
         "expense_reports.*", "cardbills.*", "documents.*",
+        "except_columns.*",
         "accessors.*",
         "contacts.*"
       ]
