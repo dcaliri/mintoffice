@@ -61,7 +61,13 @@ Mintoffice::Application.routes.draw do
   end
 
   resources :documents
-  resources :projects, except: [:destroy]
+  resources :projects, except: [:destroy] do
+    member do
+    post :employee, action: 'add_employee'
+    delete :employee, action: 'remove_employee'
+    end
+  end
+
   resources :pettycashes
   resources :permissions
   resources :cardbills
@@ -90,6 +96,13 @@ Mintoffice::Application.routes.draw do
     end
     
     resources :vacations
+
+    resources :projects do
+      collection do
+        get 'assign'
+        post 'assign', action: 'assign_projects'
+      end
+    end
   end
 
   resources :attachments do
@@ -136,13 +149,6 @@ Mintoffice::Application.routes.draw do
         post 'calculate'
         post 'new_yearly', :action => 'create_new_yearly'
         get 'bonus'
-      end
-    end
-
-    resources :projects do
-      collection do
-        get 'assign'
-        post 'assign', action: 'assign_projects'
       end
     end
   end

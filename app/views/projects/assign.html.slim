@@ -16,17 +16,17 @@ h2
     = projects.first.name
     ' 100
   - else
-    = form_tag [:assign, @this_account, :projects] do
+    = form_tag [:assign, @employee, :projects] do
       = hidden_field_tag "projects[start]", start
       = hidden_field_tag "projects[finish]", finish
       - projects.each do |project|
         p
           = project.name
-          = select_tag "projects[assign][#{project.id}]", options_for_select((0..100), project.assign_rate(@this_account, start, finish))
+          = select_tag "projects[assign][#{project.id}]", options_for_select((0..100), project.assign_rate(@employee, start, finish))
       p
         = submit_tag t('common.button.change')
 
 center
-  = link_to t('common.button.prev'), assign_account_projects_path(@this_account, year: year, month: month - 1)
+  = link_to t('common.button.prev'), assign_employee_projects_path(@employee, year: year, month: month - 1)
   = " | "
-  = link_to t('common.button.next'), assign_account_projects_path(@this_account, year: year, month: month + 1)
+  = link_to t('common.button.next'), assign_employee_projects_path(@employee, year: year, month: month + 1)

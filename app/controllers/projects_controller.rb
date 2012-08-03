@@ -38,27 +38,28 @@ class ProjectsController < ApplicationController
   end
 
   def assign
-    @this_account = Account.find(params[:account_id])
-    @projects = @this_account.employee.projects.inprogress
+    @employee = Employee.find(params[:employee_id])
+    @projects = @employee.projects.inprogress
   end
 
   def assign_projects
-    @this_account = Account.find(params[:account_id])
-    if projects.assign_projects(@this_account, params[:projects])
-      redirect_to [:assign, @this_account, :projects]
+    @employee = Employee.find(params[:employee_id])
+    if projects.assign_projects(@employee, params[:projects])
+      redirect_to [:assign, @employee, :projects]
     else
-      redirect_to [:assign, @this_account, :projects], notice: t('projects.assign.not_hundred')
+      redirect_to [:assign, @employee, :projects], notice: t('projects.assign.not_hundred')
     end
   end
 
 
-  def add_account
-    account = Account.find_by_name(params[:accountname])
-    if account
-      if project.employees.include? account.employee
+  def add_employee
+    employees = Employee.find_by_account_name(params[:accountname])
+    unless employees.empty?
+      employee  = employees.first
+      if project.employees.include? employee
         flash[:notice] = I18n.t "common.messages.already_exist"
       else
-        project.employees << account.employee
+        project.employees << employee
       end
     else
       flash[:notice] = I18n.t "common.messages.no_such_account"
@@ -67,11 +68,8 @@ class ProjectsController < ApplicationController
     redirect_to [:edit, project]
   end
 
-  def del_account
-    # account = Account.find(params[:uid])
-    # project.accounts.delete(account)
-    # redirect_to [:edit, project]
-    employee = Employee.find(params[:uid])
+  def remove_employee
+    employee = Employee.find(params[:employee_id])
     project.employees.delete(employee)
     redirect_to [:edit, project]
   end

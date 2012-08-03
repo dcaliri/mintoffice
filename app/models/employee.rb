@@ -36,6 +36,10 @@ class Employee < ActiveRecord::Base
   }
 
   class << self
+    def find_by_account_name(account_name)
+      joins(:person => :account).merge(Account.where(name: account_name))
+    end
+
     def search(account, type, text)
       search_by_type(account, type).search_by_text(text)
     end

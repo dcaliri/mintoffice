@@ -24,13 +24,13 @@ h2
       = f.label :revenue, Project.human_attribute_name("revenue")
       = f.text_field :revenue
   = f.submit t('common.button.update')
-= form_tag({:action => "add_account", :id => project }, {:class => "tabular"}) do
+= form_tag(project_employee_path(project), {:class => "tabular"}) do
   .box
     p
       = label_tag :accountname, Account.human_attribute_name("name")
       - for employee in project.employees
-        = employee.fullname 
-        = link_to t("common.title.destroy"), :action => "del_account", :id => project, :uid => employee.id
+        = employee.fullname
+        = link_to t("common.title.destroy"), project_employee_path(project, employee_id: employee), method: :delete
         br
       = text_field_tag :accountname
       = submit_tag t("common.button.add")
