@@ -20,7 +20,7 @@ unless Account.exists?(name: 'admin')
   person = account.person
   Account.current_account = account
   
-  employee = person.create_employee(juminno: '771122-1111111')
+  employee = person.create_employee(juminno: '771122-1111111', joined_on: Date.today)
 
   employee.person.permissions.build(name: 'users')
   employee.person.permissions.build(name: 'pettycashes')
