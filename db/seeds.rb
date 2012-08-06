@@ -17,33 +17,39 @@ Company.current_company = company
 
 unless Account.exists?(name: 'admin')
   person = Person.create!
-  user = person.create_account(name: 'admin', password: '1234')
-  hrinfo = person.create_employee(juminno: '771122-1111111')
+  account = person.create_account(name: 'admin', password: '1234')
+  Account.current_account = accout
+  
+  employee = person.create_employee(juminno: '771122-1111111')
 
-  hrinfo.permissions.build(name: 'users')
-  hrinfo.permissions.build(name: 'pettycashes')
-  hrinfo.permissions.build(name: 'cardbills')
-  hrinfo.permissions.build(name: 'projects')
-  hrinfo.permissions.build(name: 'taxbills')
-  hrinfo.permissions.build(name: 'namecards')
-  hrinfo.permissions.build(name: 'bank_accounts')
-  hrinfo.permissions.build(name: 'business_clients')
-  hrinfo.permissions.build(name: 'commutes')
-  hrinfo.permissions.build(name: 'ledger_accounts')
-  hrinfo.permissions.build(name: 'postings')
+  employee.person.permissions.build(name: 'users')
+  employee.person.permissions.build(name: 'pettycashes')
+  employee.person.permissions.build(name: 'cardbills')
+  employee.person.permissions.build(name: 'projects')
+  employee.person.permissions.build(name: 'taxbills')
+  employee.person.permissions.build(name: 'namecards')
+  employee.person.permissions.build(name: 'bank_accounts')
+  employee.person.permissions.build(name: 'business_clients')
+  employee.person.permissions.build(name: 'commutes')
+  employee.person.permissions.build(name: 'ledger_accounts')
+  employee.person.permissions.build(name: 'postings')
 
-  hrinfo.groups.build(name: 'admin')
+  employee.person.groups.build(name: 'admin')
 
-  hrinfo.save!
+  employee.save!
   person.companies << company
-  person.save!  
+  person.save! 
+  account.save!
 end
 
 unless Account.exists?(name: "test")
-  person2 = Person.create!
-  user2 = person2.create_account(name: 'test', password: '1234')
-  person2.companies << company
-  person2.save!
+  person = Person.create!
+  account = person.create_account(name: 'test', password: '1234')
+  Account.current_account = accout
+
+  person.companies << company
+  person.save!
+  account.save!
 end
 
 
@@ -74,46 +80,3 @@ if LedgerAccount.all.empty?
   LedgerAccount.create!(title: "현금", category: "자본")
   LedgerAccount.create!(title: "신용카드", category: "부채")
 end
-
-
-=begin
-  
-
-unless User.exists?(name: "admin")
-  user = User.create!(name: 'admin', password: '1234')
-  person = user.create_person!
-  person.create_hrinfo(juminno: '771122-1111111')
-  user.person_id = person.id
-  # user.person.create_hrinfo(juminno: '771122-1111111')
-
-  user.hrinfo.permission.build(name: 'users')
-  user.hrinfo.permission.build(name: 'pettycashes')
-  user.hrinfo.permission.build(name: 'cardbills')
-  user.hrinfo.permission.build(name: 'projects')
-  user.hrinfo.permission.build(name: 'taxbills')
-  user.hrinfo.permission.build(name: 'namecards')
-  user.hrinfo.permission.build(name: 'bank_accounts')
-  user.hrinfo.permission.build(name: 'business_clients')
-  user.hrinfo.permission.build(name: 'commutes')
-  user.hrinfo.permission.build(name: 'ledger_accounts')
-  user.hrinfo.permission.build(name: 'postings')
-
-  user.hrinfo.groups.build(name: 'admin')
-  user.person.companies << company
-  user.save!
-end
-  
-
-
-
-unless User.exists?(name: "test")
-  user = User.create!(name: 'test', password: '1234')
-
-  person = user.create_person!
-  person.companies << company
-  user.person_id = person.id
-
-  user.save!
-end
-
-=end
