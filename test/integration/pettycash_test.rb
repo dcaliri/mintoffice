@@ -73,7 +73,7 @@ class PettyCashTest < ActionDispatch::IntegrationTest
 
     click_link '수정하기'
 
-    assert(page.has_content?('소액현금 거래내용 수정'))    
+    assert(page.has_content?('소액현금 거래내용 수정'))
 
     select('2012', :from => 'pettycash_transdate_1i')
     select('1', :from => 'pettycash_transdate_2i')

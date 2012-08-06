@@ -119,12 +119,12 @@ class CardBillTest < ActionDispatch::IntegrationTest
 
     click_link '수정하기'
 
-    assert(page.has_content?('카드 영수증 내용 수정'))
+    assert(page.has_content?('수정하기'))
 
     fill_in "가맹점", with: "수정된 가맹점"
     fill_in "가맹점 주소", with: "수정된 가맹점 주소"
 
-    click_button '갱신하기'
+    click_button '카드 영수증 수정하기'
 
     assert(page.has_content?('카드 영수증이(가) 성공적으로 업데이트 되었습니다.'))
   end

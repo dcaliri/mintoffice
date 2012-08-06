@@ -27,7 +27,7 @@ class CardbillsController < ApplicationController
   def create
     @cardbill = Cardbill.new(params[:cardbill])
     @cardbill.save!
-    redirect_to(@cardbill)
+    redirect_to @cardbill, notice: I18n.t("common.messages.created", :model => Cardbill.model_name.human)
   rescue ActiveRecord::RecordInvalid
     render 'new'
   end
@@ -35,7 +35,7 @@ class CardbillsController < ApplicationController
   def update
     @cardbill = Cardbill.find(params[:id])
     @cardbill.update_attributes!(params[:cardbill])
-    redirect_to(@cardbill)
+    redirect_to @cardbill, notice: I18n.t("common.messages.updated", :model => Cardbill.model_name.human)
   rescue ActiveRecord::RecordInvalid
     render 'edit'
   end

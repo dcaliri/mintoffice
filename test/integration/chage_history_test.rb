@@ -21,7 +21,8 @@ class ChangeHistoryTest < ActionDispatch::IntegrationTest
 
     fill_in "사용처 상세내역", with: "변경 후 description"
 
-    click_button '갱신하기'
+    # click_button '갱신하기'
+    click_button '소액현금 수정하기'
 
     assert(page.has_content?('[소액현금] 사용처 상세내역: test → 변경 후 description(왕 수용)'))
 
