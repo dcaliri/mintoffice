@@ -1,4 +1,55 @@
-fixture:
+exist_cardbill:
     id: 1
     creditcard_id: 1
-    approve_no: "ABCD"
+    card_no: 321-321-1234
+    bank_account: 
+    bank_name: 신한은행
+    card_holder_name: 손어지리
+    used_area:
+    approve_no: 1
+    approved_time:
+    sales_type:
+    money_krw:
+    money_foreign:
+    price: 5800
+    tax: 123
+    tip: 123
+    monthly_duration: 3
+    exchange_krw: 300
+    foreign_country_code:
+    foreign_country_name:
+    store_business_no: 123-321-12343
+    store_name: GS25
+    store_type: 편의점
+    store_zipcode: 123-321
+    store_addr1: sk트윈타워
+    store_addr2: A동
+    store_tel: 123-1234
+
+not_exist_cardbill:
+    id: 2
+    creditcard_id: 1
+    card_no: 321-321-1234
+    bank_account: 
+    bank_name: 신한은행
+    card_holder_name: 손어지리
+    used_area:
+    approve_no: 3
+    approved_time:
+    sales_type:
+    money_krw:
+    money_foreign:
+    price: 5800
+    tax: 123
+    tip: 123
+    monthly_duration: 3
+    exchange_krw: 300
+    foreign_country_code:
+    foreign_country_name:
+    store_business_no: 123-321-12343
+    store_name: GS25
+    store_type: 편의점
+    store_zipcode: 123-321
+    store_addr1: sk트윈타워
+    store_addr2: A동
+    store_tel: 123-1234

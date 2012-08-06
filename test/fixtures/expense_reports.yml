@@ -1,6 +1,11 @@
 fixture:
     id: 1
     hrinfo_id: 1
-    project_id: 1
-    target_type: "Cardbill"
     target_id: 1
+    target_type: "Cardbill"
+    project_id: 1
+    description: "test"
+    amount: 50000
+    created_at: <%= Time.zone.now %>
+    updated_at: <%= Time.zone.now %>
+    expensed_at: <%= Time.zone.now %>

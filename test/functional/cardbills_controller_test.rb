@@ -29,6 +29,6 @@ class CardbillsControllerTest < ActionController::TestCase
 
   private
   def current_cardbill
-    @cardbill ||= cardbills(:fixture)
+    @cardbill ||= cardbills(:has_permission_cardbill)
   end
 end

@@ -1,2 +1,9 @@
 fixture:
     id: 1
+    transdate: <%= Time.zone.now %>
+    inmoney: 50000
+    outmoney: 50000
+    description: test
+    attachment_id: 
+    created_at: <%= Time.zone.now %>
+    updated_at: <%= Time.zone.now %>

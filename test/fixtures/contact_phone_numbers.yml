@@ -1,0 +1,5 @@
+fixture:
+  id: 1
+  contact_id: 1
+  target:
+  number: 010-1234-1234

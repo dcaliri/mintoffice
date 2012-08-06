@@ -1,3 +1,8 @@
 fixture:
     id: 1
     business_client_id: 1
+    fullname: 왕 수용
+    email: wangsy@wangsy.com
+    phonenumber: 010-1234-1234
+    created_at: <%= Time.zone.now %>
+    updated_at: <%= Time.zone.now %>

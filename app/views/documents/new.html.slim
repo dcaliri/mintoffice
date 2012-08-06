@@ -7,7 +7,7 @@ h2
   .box
     = f.error_messages
     p
-      = f.label Document.human_attribute_name('title')
+      = f.label :title, Document.human_attribute_name('title')
       = f.text_field :title
     p
       = f.label Project.model_name.human

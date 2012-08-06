@@ -1,3 +1,16 @@
 fixture:
     id: 1
-    owner_id: 1
+    firstname: 수용
+    lastname: 왕
+    company_name:
+    department:
+    position: 사장
+    email_list:
+    target_id: 1
+    target_type: Hrinfo
+    migrated_data: f
+    owner_id:
+    isprivate: f
+    company_id:
+    google_id:
+    google_etag: 
