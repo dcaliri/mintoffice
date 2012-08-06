@@ -1,10 +1,10 @@
-- title t('.title')
+
 #show_command
-  = link_to t('common.title.back'), pettycashes_path
+  = link_to t("common.title.back"), pettycashes_path
 
-h2= t("common.title.new")
+h2= t("common.title.#{action_name}")
 
-= form_for(@pettycash, html: { class: :tabular, multipart: true } ) do |f|
+= form_for(@pettycash, :html => { :class => "tabular", :multipart => true } ) do |f|
   = f.error_messages
   .box
     p
@@ -22,4 +22,4 @@ h2= t("common.title.new")
     p
       = render 'shared/attachments/form', form: f
   p
-    = f.submit t('common.button.create')
+    = f.submit

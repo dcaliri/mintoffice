@@ -1259,6 +1259,7 @@ ko:
             title: Editing permission
         title: 권한 관리
     pettycashes:
+        title: 소액현금관리
         balance: 잔액
         index:
             title: 소액현금관리
