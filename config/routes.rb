@@ -18,6 +18,23 @@ Mintoffice::Application.routes.draw do
     end
 
     resources :contacts
+
+    namespace :bank_transactions do
+      post 'export'
+    end
+
+    namespace :bank_transfers do
+      post 'export'
+    end
+
+    namespace :card_used_sources do
+      post 'export'
+    end
+
+    namespace :card_approved_sources do
+      post 'export'
+    end
+    
   end
 
   scope nil, :module => 'section_enrollment' do

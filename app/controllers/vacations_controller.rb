@@ -16,6 +16,14 @@ class VacationsController < ApplicationController
     @users = User(:protected).enabled.page(params[:page])
   end
 
+  def show
+    if current_user.admin?
+      @vacations = vacations
+    else
+      @vacations = vacations.include_today
+    end
+  end
+
   def create
     vacation.save!
     redirect_to [user, vacation]

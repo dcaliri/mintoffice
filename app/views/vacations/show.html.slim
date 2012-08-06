@@ -5,8 +5,8 @@
   = link_to t('hrinfos.show.title'), hrinfo_path(user.hrinfo)
 h2= user.fullname
 
-- unless vacations.empty?
-  - vacations.each do |vacation|
+- unless @vacations.empty?
+  - @vacations.each do |vacation|
     div style="float: right;"
       = link_to t('used_vacations.new.link'), [:new, vacation, :used_vacation]
       - if @user.ingroup?("admin")
