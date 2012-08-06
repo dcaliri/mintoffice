@@ -4,16 +4,24 @@ class Vacation < ActiveRecord::Base
 
   include Historiable
 
+  class << self
+    def latest
+      order('id DESC')
+    end
+
+    def include_today
+      today = Date.today
+      where('? BETWEEN "vacations"."from" AND "vacations"."to"', today)
+    end
+
+  end
+
   def remain
     (period - used.total)
   end
 
   def period
     read_attribute(:period) || 0
-  end
-
-  def self.latest
-    order('id DESC')
   end
 
   def current?
