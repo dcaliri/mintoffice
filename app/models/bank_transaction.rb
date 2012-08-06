@@ -41,6 +41,25 @@ class BankTransaction < ActiveRecord::Base
   before_save :verify_with_prev_transaction, unless: :no_verify
   before_create :set_transact_order
 
+  module ClassMethods
+    def find_valid_transaction
+      collection = self + [last]
+      latest = nil
+
+      collection.each do |transaction|
+        unless latest
+          latest = transaction
+          next
+        end
+
+        return transaction unless latest.verify(transaction)
+        latest = transaction
+      end
+      nil
+    end
+  end
+  extend ClassMethods
+
   def verify_with_prev_transaction
     parent = bank_account.bank_transactions
     if id
@@ -108,7 +127,9 @@ class BankTransaction < ActiveRecord::Base
       next_transaction_on_db = bank_transactions.where("transacted_at > ?", transacted_at).order(:transacted_at).first
     end
 
-    [next_transaction_on_db] + previews + [previous_transaction_on_db]
+    result = [next_transaction_on_db] + previews + [previous_transaction_on_db]
+    result.extend(ClassMethods)
+    result
   end
 
   def self.create_with_stylesheet(account, type, name)
