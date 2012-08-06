@@ -31,6 +31,7 @@ class HolidayTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('휴일명목 입력 테스트'))
 
     visit '/'
+
     assert(page.has_content?('휴일명목 입력 테스트'))
   end
 
@@ -44,7 +45,7 @@ class HolidayTest < ActionDispatch::IntegrationTest
     click_button '휴일관리 만들기'
 
     click_link '수정하기'
-    
+
     fill_in "휴일명목", with: "휴일명목 수정 테스트"
     click_button '휴일관리 수정하기'
 

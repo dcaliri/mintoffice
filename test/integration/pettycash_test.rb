@@ -45,7 +45,7 @@ class PettyCashTest < ActionDispatch::IntegrationTest
 
     click_link '새로운 소액 거래 작성'
 
-    assert(page.has_content?('새로운 소액 거래 작성'))
+    assert(page.has_content?('신규 작성'))
 
     select('2011', :from => 'pettycash_transdate_1i')
     select('11', :from => 'pettycash_transdate_2i')
@@ -58,7 +58,7 @@ class PettyCashTest < ActionDispatch::IntegrationTest
 
     click_button '만들기'
 
-    assert(page.has_content?('Pettycash was successfully created.'))
+    assert(page.has_content?('소액현금이(가) 성공적으로 생성되었습니다.'))
   end
 
   test 'should edit pettycash' do
@@ -73,7 +73,7 @@ class PettyCashTest < ActionDispatch::IntegrationTest
 
     click_link '수정하기'
 
-    assert(page.has_content?('소액현금 거래내용 수정'))
+    assert(page.has_content?('수정하기'))
 
     select('2012', :from => 'pettycash_transdate_1i')
     select('1', :from => 'pettycash_transdate_2i')
@@ -84,7 +84,7 @@ class PettyCashTest < ActionDispatch::IntegrationTest
     fill_in "지출금액", with: "10000"
     fill_in "사용처 상세내역", with: "수정된 상세내역"
 
-    click_button '갱신하기'
+    click_button '수정하기'
 
     assert(page.has_content?('소액현금이(가) 성공적으로 업데이트 되었습니다.'))
   end
@@ -101,11 +101,7 @@ class PettyCashTest < ActionDispatch::IntegrationTest
 
     click_link '수정하기'
 
-    assert(page.has_content?('소액현금 거래내용 수정'))    
-
-    click_link '내용 보기'    
-
-    assert(page.has_content?('소액현금 내역'))
+    assert(page.has_content?('수정하기'))
   end
 
   test 'should back pettycash list while editing' do
@@ -120,8 +116,7 @@ class PettyCashTest < ActionDispatch::IntegrationTest
 
     click_link '수정하기'
 
-    assert(page.has_content?('소액현금 거래내용 수정'))    
-
+    assert(page.has_content?('수정하기'))
     click_link '돌아가기'    
 
     assert(page.has_content?('소액현금관리'))

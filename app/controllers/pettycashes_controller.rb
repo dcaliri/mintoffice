@@ -24,7 +24,7 @@ class PettycashesController < ApplicationController
   def create
     @pettycash = Pettycash.new(params[:pettycash])
     @pettycash.save!
-    redirect_to(@pettycash)
+    redirect_to @pettycash, notice: I18n.t("common.messages.created", :model => Pettycash.model_name.human)
   rescue ActiveRecord::RecordInvalid
     render 'new'
   end
@@ -32,7 +32,7 @@ class PettycashesController < ApplicationController
   def update
     @pettycash = Pettycash.find(params[:id])
     @pettycash.update_attributes!(params[:pettycash])
-    redirect_to(@pettycash)
+    redirect_to @pettycash, notice: I18n.t("common.messages.updated", :model => Pettycash.model_name.human)
   rescue ActiveRecord::RecordInvalid
     render 'edit'
   end
