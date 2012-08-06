@@ -9,14 +9,17 @@ class AccessPerson < ActiveRecord::Base
       group(:access_target_id).having('count(access_people.access_target_id) = 0')
     end
 
-    def access_list(account)
-      if account.admin?
+    def access_list(person)
+      if person.admin?
         where("1")
-      elsif account.nil?
+      elsif person.nil?
         where("0")
       else
-        # where(employee_id: account.employee.id)
-        where(person_id: account.person.id)
+        if person.class == Account
+          where(person_id: person.person.id)
+        else
+          where(person_id: person.id)
+        end
       end
     end
 

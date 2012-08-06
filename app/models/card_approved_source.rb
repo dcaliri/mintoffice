@@ -116,11 +116,11 @@ class CardApprovedSource < ActiveRecord::Base
         )
 
         report = cardbill.build_report
-        report.reporters << owner.reporters.build(report_id: report, owner: true)
+        report.reporters << owner.person.reporters.build(report_id: report, owner: true)
         cardbill.save!
 
         cardbill.report.permission owner, :write
-        
+
         total_count += 1
       end
       total_count

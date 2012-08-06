@@ -24,7 +24,7 @@ module ActionController
 
       def redirect_unless_admin
         unless current_account.admin?
-          force_redirect 
+          force_redirect
         end
       end
 
@@ -40,7 +40,7 @@ module ActionController
         model = model_name.find(params[:id])
         force_redirect unless model.access?(current_account)
       end
-  
+
       def force_redirect
         flash[:notice] = "You don't have to permission"
         redirect_to :root

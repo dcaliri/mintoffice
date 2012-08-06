@@ -1,6 +1,8 @@
 # encoding: UTF-8
 
 class Cardbill < ActiveRecord::Base
+  default_scope order('transdate desc')
+
   belongs_to :creditcard
   has_one :expense_report, as: :target
 
@@ -8,13 +10,14 @@ class Cardbill < ActiveRecord::Base
   include Attachmentable
   include Reportable
 
+  self.per_page = 20
+
   def history_info
     {
       :creditcard_id => proc { |cardbill, v| Creditcard.find(v).cardno }
     }
   end
 
-  # validates_presence_of :cardno
   validates_presence_of :totalamount
   validates_presence_of :approveno
   validates_numericality_of :totalamount
@@ -22,12 +25,10 @@ class Cardbill < ActiveRecord::Base
   validates_numericality_of :servicecharge
   validates_numericality_of :vat
 
-  # validate :check_amount_of_money, :check_unique_approve_no
-  # def check_amount_of_money
-  #   unless amount.to_i + vat.to_i + servicecharge.to_i == totalamount.to_i
-  #     errors.add(:totalamount, "의 합계가 맞지 않습니다")
-  #   end
-  # end
+  before_save :strip_approve_no
+  def strip_approve_no
+    approveno.strip!
+  end
 
   def check_unique_approve_no
     if creditcard.cardbills.except_me(self).unique?(self)
@@ -36,34 +37,41 @@ class Cardbill < ActiveRecord::Base
   end
 
   class << self
-    def filter_by_params(params)
-      result = search(params[:query]).searchbycreditcard(params[:creditcard_id])
+    def search(params)
+      result = search_by_text(params[:query]).search_by_creditcard(params[:creditcard_id])
       result = if params[:empty_permission] == 'true'
                 result.no_permission
               else
-                result.access_list(params[:account])
+                result.access_list(params[:person])
               end
       result
     end
-  end
 
-  def self.except_me(cardbill)
-    if cardbill.id
-      where('id != ?', cardbill.id)
-    else
-      where('')
+    def search_by_text(query)
+      query = "%#{query}%"
+      where('storename like ? OR storeaddr like ?', query, query)
+    end
+
+    def search_by_creditcard(query)
+      if query == nil or query == ""
+        where("")
+      else
+        where("creditcard_id = ?", query)
+      end
+    end
+
+    def except_me(cardbill)
+      if cardbill.id
+        where('id != ?', cardbill.id)
+      else
+        where('')
+      end
+    end
+
+    def unique?(cardbill)
+      exists?(approveno: cardbill.approveno, transdate: cardbill.transdate.all_year)
     end
   end
-
-  def self.unique?(cardbill)
-    exists?(approveno: cardbill.approveno, transdate: cardbill.transdate.all_year)
-  end
-
-  before_save :strip_approve_no
-  def strip_approve_no
-    approveno.strip!
-  end
-
 
   def used
     collection = CardUsedSource.where(approve_no: approveno)
@@ -82,14 +90,6 @@ class Cardbill < ActiveRecord::Base
       cardno
     end
   end
-
-  # def cardno_long
-  #   unless self.creditcard.nil?
-  #     self.creditcard.cardno_long
-  #   else`x`
-  #     cardno
-  #   end
-  # end
 
   def approved_mismatch
     mismatch?(:totalamount) || mismatch?(:transdate)
@@ -123,19 +123,6 @@ class Cardbill < ActiveRecord::Base
       "misnatch-sources"
     else
       "verified"
-    end
-  end
-
-  def self.search(query)
-    query = "%#{query}%"
-    where('storename like ? OR storeaddr like ?', query, query)
-  end
-
-  def self.searchbycreditcard(query)
-    if query == nil or query == ""
-      where("")
-    else
-      where("creditcard_id = ?", query)
     end
   end
 end
