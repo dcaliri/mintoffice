@@ -49,3 +49,15 @@ projects:
 business_clients:
   permission_id: 9
   user_id: 1
+
+creditcards:
+  permission_id: 10
+  user_id: 1
+
+creditcards_manager:
+  permission_id: 10
+  user_id: 3
+
+creditcards_user:
+  permission_id: 10
+  user_id: 4
