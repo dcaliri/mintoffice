@@ -37,7 +37,7 @@ unless Account.exists?(name: 'admin')
   employee.person.groups.build(name: 'admin')
 
   employee.save!
-  person.save!
+  employee.person.save!
 end
 
 unless Account.exists?(name: "test")
