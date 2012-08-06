@@ -16,9 +16,9 @@ company = Company.find_by_name("mintech")
 Company.current_company = company
 
 unless Account.exists?(name: 'admin')
-  person = Person.create!
-  account = person.create_account(name: 'admin', password: '1234')
-  Account.current_account = accout
+  account = Account.create!(name: 'admin', password: '1234')
+  person = account.person
+  Account.current_account = account
   
   employee = person.create_employee(juminno: '771122-1111111')
 
@@ -37,19 +37,11 @@ unless Account.exists?(name: 'admin')
   employee.person.groups.build(name: 'admin')
 
   employee.save!
-  person.companies << company
-  person.save! 
-  account.save!
+  person.save!
 end
 
 unless Account.exists?(name: "test")
-  person = Person.create!
-  account = person.create_account(name: 'test', password: '1234')
-  Account.current_account = accout
-
-  person.companies << company
-  person.save!
-  account.save!
+  account = Account.create!(name: 'test', password: '1234')
 end
 
 
