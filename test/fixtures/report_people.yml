@@ -7,3 +7,43 @@ admin_has_document:
   updated_at: <%= Time.zone.now %>
   permission_type: read
   owner: t
+
+admin_has_cardbill:
+  id: 2
+  user_id: 3
+  report_id: 3
+  prev_id:
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
+  permission_type: write
+  owner: t
+
+manager_has_cardbill:
+  id: 3
+  user_id: 3
+  report_id: 3
+  prev_id:
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
+  permission_type: write
+  owner: f
+
+user_has_cardbill:
+  id: 4
+  user_id: 4
+  report_id: 4
+  prev_id: 3
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
+  permission_type: write
+  owner: t
+
+user_has_expense_report:
+  id: 5
+  user_id: 4
+  report_id: 1
+  prev_id:
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
+  permission_type: write
+  owner: t

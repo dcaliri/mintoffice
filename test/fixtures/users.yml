@@ -4,8 +4,26 @@ admin_account:
     hashed_password: "96043f0adf13e8d440a0e90ec7a2b7757a16bc2c"
     salt: "21757029800.1164294613723833"
 
-no_hrinfo:
+normal_account:
     id: 2
-    name: "no hrinfo"
+    name: "normal"
+    hashed_password: "96043f0adf13e8d440a0e90ec7a2b7757a16bc2c"
+    salt: "21757029800.1164294613723833"
+
+card_manager_account:
+    id: 3
+    name: "card_manager"
+    hashed_password: "96043f0adf13e8d440a0e90ec7a2b7757a16bc2c"
+    salt: "21757029800.1164294613723833"    
+
+card_user_account:
+    id: 4
+    name: "card_user"
+    hashed_password: "96043f0adf13e8d440a0e90ec7a2b7757a16bc2c"
+    salt: "21757029800.1164294613723833"    
+
+no_employee:
+    id: 5
+    name: "no employee"
     hashed_password: "1234"
     salt: "q"

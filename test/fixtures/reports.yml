@@ -1,4 +1,4 @@
-expense_report:
+user_expense_report:
     id: 1
     target_id: 1
     target_type: "ExpenseReport"
@@ -9,3 +9,15 @@ document:
     target_id: 1
     target_type: "Document"
     status: "not_reported"
+
+cardbill:
+    id: 3
+    target_id: 1
+    target_type: "Cardbill"
+    status: "not_reported"
+
+user_cardbill:
+    id: 4
+    target_id: 1
+    target_type: "Cardbill"
+    status: "reporting"

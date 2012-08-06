@@ -14,9 +14,25 @@ cardbills:
   permission_id: 4
   user_id: 1
 
+cardbills_manager:
+  permission_id: 4
+  user_id: 3
+
+cardbills_user:
+  permission_id: 4
+  user_id: 4
+
 expenses:
   permission_id: 5
   user_id: 1
+
+expenses_manager:
+  permission_id: 5
+  user_id: 3
+
+expenses_user:
+  permission_id: 5
+  user_id: 4
 
 bank_transactions:
   permission_id: 6
