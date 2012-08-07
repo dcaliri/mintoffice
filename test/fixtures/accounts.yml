@@ -18,3 +18,11 @@ no_employee:
     name: "no employee"
     hashed_password: "1234"
     salt: "q"
+
+
+has_google_apps_account:
+    id: 4
+    person_id: 4
+    name: "has_google_apps_account"
+    hashed_password: "96043f0adf13e8d440a0e90ec7a2b7757a16bc2c"
+    salt: "21757029800.1164294613723833"

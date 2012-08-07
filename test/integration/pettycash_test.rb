@@ -46,7 +46,6 @@ class PettyCashTest < ActionDispatch::IntegrationTest
 
     click_button '만들기'
 
-    save_and_open_page
     assert(page.has_content?('20,000'))
     assert(page.has_content?('10,000'))
     assert(page.has_content?('상세내역 입력 테스트'))

@@ -101,21 +101,40 @@ class Employee < ActiveRecord::Base
 
   def contact_or_build
     self.person.contact || person.create_contact
+
+    if contact_or_build.company_name.nil?
+      contact_or_build.company_name = self.person.companies.first.name
+    end
   end
 
   def firstname=(value)
     super
     contact_or_build.firstname = value
+    contact_or_build.save!
   end
 
   def lastname=(value)
     super
     contact_or_build.lastname = value
+    contact_or_build.save!
   end
 
   def position=(value)
     super
     contact_or_build.position = value
+    contact_or_build.save!
+  end
+
+  def department=(value)
+    super
+    contact_or_build.department = value
+    contact_or_build.save!
+  end
+
+  def owner_id=(value)
+    super
+    contact_or_build.owner_id = value
+    contact_or_build.save!
   end
 
   def email=(email)

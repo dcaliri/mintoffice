@@ -3,7 +3,10 @@ dl
   = dtdd contact, "company_name"
   = dtdd contact, "department"
   = dtdd contact, "position"
-  = dtdd contact, "owner_name"
+  dt
+    = Contact.human_attribute_name("owner")
+  dd
+    = contact.owner_name
   - contact.emails.each do |email|
     dt
       = t('contacts.item.email')
