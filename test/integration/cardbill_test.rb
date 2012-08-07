@@ -20,9 +20,6 @@ class CardBillTest < ActionDispatch::IntegrationTest
   test 'should show has_permission_cardbills' do
     visit '/'
     click_link '카드 영수증 목록'
-
-    assert(page.has_content?('카드영수증 관리'))
-
     find("tr.selectable").click
 
     assert(page.has_content?('카드 영수증 내역'))
@@ -31,12 +28,7 @@ class CardBillTest < ActionDispatch::IntegrationTest
   test 'should show has_not_permission_cardbills' do
     visit '/'
     click_link '카드 영수증 목록'
-
-    assert(page.has_content?('카드영수증 관리'))
-
     select('권한을 알 수 없는 내역 보기', :from => 'empty_permission')
-
-    assert(page.has_content?('카드영수증 관리'))
 
     find("tr.selectable").click
 
@@ -46,12 +38,7 @@ class CardBillTest < ActionDispatch::IntegrationTest
   test 'should show used_sources' do
     visit '/'
     click_link '카드 영수증 목록'
-
-    assert(page.has_content?('카드영수증 관리'))
-
     find("tr.selectable").click
-
-    assert(page.has_content?('카드 영수증 내역'))
 
     click_link '사용 내역'
 
@@ -61,31 +48,19 @@ class CardBillTest < ActionDispatch::IntegrationTest
   test 'should create/show expense_reports' do
     visit '/'
     click_link '카드 영수증 목록'
-
-    assert(page.has_content?('카드영수증 관리'))
-
     find("tr.selectable").click
 
-    assert(page.has_content?('카드 영수증 내역'))
-
     click_link '지출내역서 만들기'
-
-    assert(page.has_content?('지출내역서'))
 
     fill_in "내역", with: "내역 입력 테스트"
 
     click_button '지출 내역서 만들기'
 
-    assert(page.has_content?('지출내역서 상세정보'))
+    assert(page.has_content?('내역 입력 테스트'))
 
     visit '/'
     click_link '카드 영수증 목록'
-
-    assert(page.has_content?('카드영수증 관리'))
-
     find("tr.selectable").click
-
-    assert(page.has_content?('카드 영수증 내역'))
 
     click_link '지출내역서 보기'
 
@@ -95,12 +70,7 @@ class CardBillTest < ActionDispatch::IntegrationTest
   test 'should show approved_sources' do
     visit '/'
     click_link '카드 영수증 목록'
-
-    assert(page.has_content?('카드영수증 관리'))
-
     find("tr.selectable").click
-
-    assert(page.has_content?('카드 영수증 내역'))
 
     click_link '승인내역'
 
@@ -110,34 +80,23 @@ class CardBillTest < ActionDispatch::IntegrationTest
   test 'should edit cardbill' do
     visit '/'
     click_link '카드 영수증 목록'
-
-    assert(page.has_content?('카드영수증 관리'))
-
     find("tr.selectable").click
 
-    assert(page.has_content?('카드 영수증 내역'))
-
     click_link '수정하기'
-
-    assert(page.has_content?('수정하기'))
 
     fill_in "가맹점", with: "수정된 가맹점"
     fill_in "가맹점 주소", with: "수정된 가맹점 주소"
 
     click_button '카드 영수증 수정하기'
 
-    assert(page.has_content?('카드 영수증이(가) 성공적으로 업데이트 되었습니다.'))
+    assert(page.has_content?('수정된 가맹점'))
+    assert(page.has_content?('수정된 가맹점 주소'))
   end
 
   test 'should add permission and delete permission' do
     visit '/'
     click_link '카드 영수증 목록'
-
-    assert(page.has_content?('카드영수증 관리'))
-
     find("tr.selectable").click
-
-    assert(page.has_content?('카드 영수증 내역'))
 
     select('쓰기', :from => 'access_type')
     select('no employee', :from => 'accessor')
@@ -154,12 +113,7 @@ class CardBillTest < ActionDispatch::IntegrationTest
   test 'should back cardbill list' do
     visit '/'
     click_link '카드 영수증 목록'
-
-    assert(page.has_content?('카드영수증 관리'))
-
     find("tr.selectable").click
-
-    assert(page.has_content?('카드 영수증 내역'))
 
     click_link '목록'
 
