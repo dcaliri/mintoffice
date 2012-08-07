@@ -8,11 +8,11 @@ class DocumentsController < ApplicationController
   before_filter :access_check, except: [:index, :new, :create]
 
   def index
-    @documents = documents.filter_by_params(params.merge(account: current_account)).latest.page(params[:page])
+    @documents = documents.search(params.merge(person: current_person)).latest.page(params[:page])
   end
 
   def create
-    document.employees << current_account.employee
+    document.employees << current_employee
     document.add_tags(params[:tag])
     document.save!
     redirect_to document, notice: t('common.messages.created', :model => Document.model_name.human)

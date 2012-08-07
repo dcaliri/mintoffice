@@ -27,7 +27,7 @@ h2
         = Employee.human_attribute_name('person_id')
       dd
         = @employee.account.name
-      - if current_person.admin? || @employee.account == current_account
+      - if current_person.admin? || @employee == current_employee
         = dtdd @employee, "juminno"
       = dtdd @employee, "joined_on"
       - if @employee.retired_on

@@ -9,8 +9,8 @@ class ReportsController < ApplicationController
     report_url = url_for(report_target.redirect_when_reported)
 
     if params[:report]
-      account = Account.find(params[:reporter]) if params[:reporter]
-      report_target.report!(account, params[:comment], report_url)
+      person = Person.find(params[:reporter]) if params[:reporter]
+      report_target.report!(person, params[:comment], report_url)
     elsif params[:approve]
       report_target.approve!(params[:comment])
     elsif params[:rollback]
@@ -20,6 +20,5 @@ class ReportsController < ApplicationController
     end
 
     redirect_to report_target.redirect_when_reported
-    # redirect_to :back
   end
 end

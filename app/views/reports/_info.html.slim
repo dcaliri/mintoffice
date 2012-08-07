@@ -1,6 +1,6 @@
 - target.create_if_no_report
 - report = target.report
-- reporter_list ||= Account.all.delete_if{|account| account == current_account or account.disabled?}
+- reporter_list ||= Person.with_account.delete_if{|person| person == current_person or person.disabled?}
 
 h3
   = t('reports.info.approval')
@@ -15,7 +15,7 @@ p
       = hidden_field_tag :target_id, target.id
       p
         = label_tag :reporter, t('activerecord.attributes.report.reporter')
-        = select_tag :reporter, options_for_select(reporter_list.map{|account| [account.fullname, account.id]}, (report.reporter.id if report.reporter))
+        = select_tag :reporter, options_for_select(reporter_list.map{|person| [person.fullname, person.id]}, (report.reporter.id if report.reporter))
       p
         = label_tag :comment, t('activerecord.attributes.report.comment')
         = text_field_tag :comment

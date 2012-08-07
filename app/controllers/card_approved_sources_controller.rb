@@ -21,7 +21,7 @@ class CardApprovedSourcesController < ApplicationController
 
   def export
     approved_sources = creditcard.nil? ? CardApprovedSource : creditcard.card_approved_sources
-    include_column = current_account.employee.except_columns.default_columns_by_key('CardApprovedSource')
+    include_column = current_employee.except_columns.default_columns_by_key('CardApprovedSource')
 
     send_file approved_sources.filter_by_params(params).export(params[:to].to_sym, include_column)
   end

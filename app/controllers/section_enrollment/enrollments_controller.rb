@@ -8,7 +8,6 @@ class SectionEnrollment::EnrollmentsController < ApplicationController
   before_filter :find_enrollment, :except => :index
 
   def edit
-    # @child_contact = @enrollment.person.contact || @enrollment.person.build_contact
     @contact = @enrollment.person.contact || @enrollment.person.build_contact
   end
 
@@ -27,12 +26,12 @@ class SectionEnrollment::EnrollmentsController < ApplicationController
 
   def attach
     item = @enrollment.find_or_create_item_by_name(params[:name])
-    @attachment = Attachment.save_for(item, current_account, uploaded_file: params[:picture])
+    @attachment = Attachment.save_for(item, current_employee, uploaded_file: params[:picture])
     redirect_to :back
   end
 
   def delete_attachment
-    attachment = Attachment.where(account_id: current_account.id, id: params[:attachment_id]).last
+    attachment = Attachment.where(employ_id: current_employee.id, id: params[:attachment_id]).last
     attachment.destroy
 
     item = @enrollment.items.find_by_name(params[:name])
@@ -43,7 +42,7 @@ class SectionEnrollment::EnrollmentsController < ApplicationController
 
   private
   def find_enrollment
-    @enrollment = current_account.enrollment
+    @enrollment = current_person.enrollment
   end
 
   def find_apply_admin

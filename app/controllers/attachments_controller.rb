@@ -84,17 +84,12 @@ class AttachmentsController < ApplicationController
 
   def save
     @attachment = Attachment.new(params[:attachment])
-    
-    # if session[:account_id]
-    #   @attachment.account = Account.find(session[:account_id])
-    # else
-    #   @attachment.account = Account.find(1)
-    # end
 
-    if session[:account_id]
-      @attachment.employee = Account.find(session[:account_id]).employee
+
+    if current_employee
+      @attachment.employee = current_employee
     else
-      @attachment.employee = Account.find(1).employee
+      @attachment.employee = Employee.find(1)
     end
 
     if @attachment.save

@@ -21,6 +21,10 @@ class Person < ActiveRecord::Base
     joins(:account).where('accounts.person_id == people.id') - joins(:employee).where('employees.person_id == people.id')
   end
 
+  def self.with_account
+    joins(:account).where('accounts.person_id == people.id')
+  end
+
   def permission?(name)
     admin? or permissions.exists?(name: name.to_s)
   end
@@ -47,5 +51,9 @@ class Person < ActiveRecord::Base
 
   def not_joined?
     not joined?
+  end
+
+  def has_payment_info
+    not (employee and employee.payments.empty?)
   end
 end

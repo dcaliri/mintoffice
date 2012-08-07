@@ -8,7 +8,7 @@ module ActionController
       end
 
       def redirect_unless_logged_in
-        if current_account.nil? or current_account.not_joined?
+        if current_person.nil? or current_person.not_joined?
           redirect_to login_accounts_path
           false
         else

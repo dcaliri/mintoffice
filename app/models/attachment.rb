@@ -1,17 +1,11 @@
 class Attachment < ActiveRecord::Base
   default_scope :order => 'seq ASC'
-  # belongs_to  :account
   belongs_to  :employee
 
   belongs_to :owner, :polymorphic => true
-  # before_save :save_account_info
-  # def save_account_info
-  #   self.account = Account.current_account unless self.account
-  # end
-
   before_save :save_employee
   def save_employee
-    self.employee = Account.current_account.employee unless self.employee
+    self.employee = Person.current_person.employee unless self.employee
   end
 
   validates_presence_of :filepath, :on => :create, :message => "can't be blank"
@@ -34,18 +28,18 @@ class Attachment < ActiveRecord::Base
                                     :owner_id => obj.id})
   end
 
-  def self.save_for (obj, account, param)
+  def self.save_for(obj, employee, param)
     attachment = Attachment.new(param)
-    attachment.save_for(obj, account)
+    attachment.save_for(obj, employee)
   end
 
-  def save_for(obj, account)
+  def save_for(obj, employee)
     self.owner_type = obj.class.to_s
     self.owner_id = obj.id
-    unless account
-      account = Account.find(1)
+    unless employee
+      employee = Employee.find(1)
     end
-    self.employee = account.employee
+    self.employee = employee.employee
     self.save
   end
 

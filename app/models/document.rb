@@ -12,12 +12,12 @@ class Document < ActiveRecord::Base
   self.per_page = 20
 
   class << self
-    def filter_by_params(params)
-      result = report_status(params[:report_status]).search(params[:query])
+    def search(params)
+      result = report_status(params[:report_status]).search_by_text(params[:query])
       result = if params[:empty_permission] == 'true'
                 result.no_permission
               else
-                result.access_list(params[:account])
+                result.access_list(params[:person])
               end
       result
     end
@@ -50,7 +50,7 @@ class Document < ActiveRecord::Base
     if project then project.name else "none" end
   end
 
-  def self.search(query)
+  def self.search_by_text(query)
     query = "%#{query}%"
     includes(:project).includes(:tags).where('title like ? OR projects.name like ? OR tags.name LIKE ?', query, query, query)
   end

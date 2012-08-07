@@ -38,7 +38,7 @@ class Enrollment < ActiveRecord::Base
 
   include Rails.application.routes.url_helpers
   def redirect_when_reported
-    if account == Account.current_account
+    if person == Person.current_person
       [:dashboard, :enrollments]
     else
       enroll_report_path(self)

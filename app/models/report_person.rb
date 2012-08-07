@@ -11,8 +11,6 @@ class ReportPerson < ActiveRecord::Base
 
   class << self
     def access_list(account)
-      # where(account ? {account_id: account.id} : "0")
-      # where(account ? {employee_id: account.employee.id} : "0")
       where(account ? {person_id: account.person.id} : "0")
     end
 
@@ -25,7 +23,7 @@ class ReportPerson < ActiveRecord::Base
     end
 
     def by_me
-      where(person_id: Account.current_account.person.id, owner: true)
+      where(person_id: Person.current_person.id, owner: true)
     end
   end
 

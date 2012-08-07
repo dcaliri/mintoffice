@@ -21,7 +21,7 @@ class CardUsedSourcesController < ApplicationController
 
   def export
     used_sources = creditcard.nil? ? CardUsedSource : creditcard.card_used_sources
-    include_column = current_account.employee.except_columns.default_columns_by_key('CardUsedSource')
+    include_column = current_employee.except_columns.default_columns_by_key('CardUsedSource')
 
     send_file used_sources.latest.search(params[:query]).export(params[:to].to_sym, include_column)
   end

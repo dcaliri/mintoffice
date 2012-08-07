@@ -11,7 +11,7 @@ ul
       - unless accessor.person.admin?
         = link_to "[x]", accessors_path(accessor_id: accessor.id), :method => :delete
 
-- if access_target.access?(current_account, :write)
+- if access_target.access?(current_person, :write)
   h3
     = t('accessors.info.change_permissions')
   = form_tag :accessors do

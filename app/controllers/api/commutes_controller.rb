@@ -3,7 +3,7 @@ module Api
     def checkin
       @commute = current_employee.commutes.build
       @commute.go!
-      Attachment.save_for(@commute, current_account, uploaded_file: params[:file])
+      Attachment.save_for(@commute, current_employee, uploaded_file: params[:file])
       render :json => {:status => :ok, :commute => @commute}
     rescue ActiveRecord::RecordInvalid
       render :json => {:status => :already_exists, :errors => @commute.errors}
@@ -13,7 +13,7 @@ module Api
       @commute = current_employee.commutes.latest.first
       if @commute && @commute.leave == nil
         @commute.leave!
-        Attachment.save_for(@commute, current_account, uploaded_file: params[:file])
+        Attachment.save_for(@commute, current_employee, uploaded_file: params[:file])
         render :json => {:status => :ok, :commute => @commute}
       else
         render :json => {:status => :not_found}

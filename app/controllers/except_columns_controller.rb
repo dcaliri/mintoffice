@@ -36,7 +36,7 @@ class ExceptColumnsController < ApplicationController
 
   private
   def except_columns
-    current_account.employee.except_columns.where(model_name: class_name)
+    current_employee.except_columns.where(model_name: class_name)
   end
 
   def default_except_columns

@@ -49,15 +49,13 @@ class Report < ActiveRecord::Base
     I18n.t("activerecord.attributes.report.localized_status.#{status}")
   end
 
-  def report!(account, comment, report_url)
+  def report!(person, comment, report_url)
     prev_reporter = self.reporter
     prev_reporter.owner = false
 
-    # collection = reporters.where(account_id: account.id)
-    collection = reporters.where(person_id: account.person.id)
+    collection = reporters.where(person_id: person.id)
     if collection.empty?
-      # next_reporter = account.reporters.build(owner: true)
-      next_reporter = account.person.reporters.build(owner: true)
+      next_reporter = person.reporters.build(owner: true)
       next_reporter.prev = prev_reporter
       self.reporters << next_reporter
     else
@@ -88,7 +86,7 @@ class Report < ActiveRecord::Base
 
     # Boxcar.send_to_boxcar_account(next_reporter.account, prev_reporter.fullname, title)
     # ReportMailer.report(target, prev_reporter.account, next_reporter.account, title, body)
-    
+
     Boxcar.send_to_boxcar_account(next_reporter.person.account, prev_reporter.fullname, title)
     ReportMailer.report(target, prev_reporter.person.account, next_reporter.person.account, title, body)
 
@@ -100,8 +98,7 @@ class Report < ActiveRecord::Base
 
   def approve!(comment)
     self.status = :reported
-    # Account.current_account.reporters.create!(report_id: id, owner: true) unless self.reporter
-    Account.current_account.person.reporters.create!(report_id: id, owner: true) unless self.reporter
+    Person.current_person.reporters.create!(report_id: id, owner: true) unless self.reporter
     self.comments.build(owner: self.reporter, description: "#{reporter.fullname}"+I18n.t('models.report.to_approve'))
     self.comments.build(owner: self.reporter, description: comment) unless comment.blank?
     save!
@@ -152,8 +149,7 @@ class Report < ActiveRecord::Base
   end
 
   def report?
-    # self.reporter.present? && self.reporter.account == Account.current_account
-    self.reporter.present? && self.reporter.person == Account.current_account.person
+    self.reporter.present? && self.reporter.person == Person.current_person
   end
 
   def rollback?
