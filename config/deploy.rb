@@ -35,6 +35,7 @@ namespace :deploy do
     run "if [ -e #{deploy_to}/shared/database.yml ]; then cp #{deploy_to}/shared/database.yml #{release_path}/config/; fi"
     run "if [ -e #{deploy_to}/shared/oauth_key.yml ]; then cp #{deploy_to}/shared/oauth_key.yml #{release_path}/config/; fi"
     run "if [ -e #{deploy_to}/shared/google_apps.yml ]; then cp #{deploy_to}/shared/google_apps.yml #{release_path}/config/; fi"
+    run "if [ -e #{deploy_to}/shared/mail_configure.rb ]; then cp #{deploy_to}/shared/mail_configure.rb #{release_path}/config/initializers/; fi"
     run "ln -sf #{deploy_to}/shared/files #{release_path}/"
   end
 end
