@@ -72,6 +72,9 @@ class BankTransactionTest < ActionDispatch::IntegrationTest
     click_link '입출금내역 보기'
     click_link '컬럼 선택하기'
 
+    assert(page.has_content?('이자'))
+    assert(page.has_content?('하나 은행'))
+
     uncheck('적요')
     uncheck('상대 은행')
     uncheck('거래점명')
@@ -85,7 +88,8 @@ class BankTransactionTest < ActionDispatch::IntegrationTest
     alert.send_keys("test tag")
     alert.accept
 
-    assert(page.has_content?('입출금 내역'))
+    assert(!page.has_content?('이자'))
+    assert(!page.has_content?('하나 은행'))
   end
 
   test "should create a new bank_transactions" do

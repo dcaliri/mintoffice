@@ -22,6 +22,9 @@ class BankTransferTest < ActionDispatch::IntegrationTest
     click_link '이체내역 보기'
     click_link '컬럼 선택하기'
 
+    assert(page.has_content?('28505013648'))
+    assert(page.has_content?('KRW'))
+
     uncheck('이체구분')
     uncheck('출금계좌')
     uncheck('입금계좌')
@@ -31,9 +34,13 @@ class BankTransferTest < ActionDispatch::IntegrationTest
     uncheck('통화 코드')
 
     click_button '태그 만들기'
-    page.driver.browser.switch_to.alert.accept
 
-    assert(page.has_content?('이체 내역'))
+    alert = page.driver.browser.switch_to.alert
+    alert.send_keys("test tag")
+    alert.accept
+
+    assert(!page.has_content?('28505013648'))
+    assert(!page.has_content?('KRW'))
   end
 
   test "should create a new bank_transfer" do
