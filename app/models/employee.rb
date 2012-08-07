@@ -101,10 +101,6 @@ class Employee < ActiveRecord::Base
 
   def contact_or_build
     self.person.contact || person.create_contact
-
-    if contact_or_build.company_name.nil?
-      contact_or_build.company_name = self.person.companies.first.name
-    end
   end
 
   def firstname=(value)
