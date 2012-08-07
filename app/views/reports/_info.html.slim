@@ -1,6 +1,6 @@
 - target.create_if_no_report
 - report = target.report
-- reporter_list ||= Person.with_account.delete_if{|person| person == current_person or person.disabled?}
+- reporter_list ||= Person.with_account.delete_if{|person| person == current_person}
 
 h3
   = t('reports.info.approval')
