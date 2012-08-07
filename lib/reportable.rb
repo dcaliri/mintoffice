@@ -4,21 +4,21 @@ module Reportable
   def create_initial_report
     unless self.report
       report = build_report
-      report.reporters << Account.current_account.person.reporters.build(report_id: report, owner: true)
+      report.reporters << Person.current_person.reporters.build(report_id: report, owner: true)
     end
   end
 
   def create_initial_accessor
-    report.permission Account.current_account, :write
+    report.permission Person.current_person, :write
   end
 
   def create_if_no_report
     if report.nil?
       report = create_report
-      account = Account.current_account
-      if account.admin?
-        report.reporters << account.person.reporters.build(report_id: report, owner: true)
-        report.permission account, :write
+      person = Person.current_person
+      if person.admin?
+        report.reporters << person.reporters.build(report_id: report, owner: true)
+        report.permission person, :write
         report.save!
       end
     end
@@ -32,11 +32,11 @@ module Reportable
     end
   end
 
-  def access?(account, permission_type = :read)
+  def access?(person, permission_type = :read)
     if report.present?
-      report.access?(account, permission_type)
+      report.access?(person, permission_type)
     else
-      account.admin?
+      person.admin?
     end
   end
   delegate :report!, :approve!, :rollback!, :to => :report
@@ -50,8 +50,8 @@ module Reportable
       includes(:report => :accessors).merge(AccessPerson.no_permission)
     end
 
-    def access_list(account)
-      includes(:report => :accessors).merge(AccessPerson.access_list(account))
+    def access_list(person)
+      includes(:report => :accessors).merge(AccessPerson.access_list(person))
     end
 
     def report_status(status)

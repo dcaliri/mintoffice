@@ -1,2 +1,2 @@
-- if current_account.admin?
+- if current_person.admin?
   = select_tag :empty_permission, options_for_select([[t('accessors.search.all_view'), false], [t('accessors.search.view__unknown_permissions'), true]], params[:empty_permission]), "onchange" => "this.form.submit()"

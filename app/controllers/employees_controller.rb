@@ -11,7 +11,8 @@ class EmployeesController < ApplicationController
   # GET /employees.xml
   def index
     params[:search_type] ||= :join
-    @employees = Employee.search(Account.current_account, params[:search_type], params[:q])
+    # @employees = Employee.search(Account.current_account, params[:search_type], params[:q])
+    @employees = Employee.search(current_person, params[:search_type], params[:q])
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @employees }

@@ -94,13 +94,25 @@ Mintoffice::Application.routes.draw do
         get 'detail'
       end
     end
-    
+
     resources :vacations
 
     resources :projects do
       collection do
         get 'assign'
         post 'assign', action: 'assign_projects'
+      end
+    end
+
+    resources :payments do
+      collection do
+        get 'yearly'
+        post 'yearly', :action => 'create_yearly'
+
+        get 'new_yearly'
+        post 'calculate'
+        post 'new_yearly', :action => 'create_new_yearly'
+        get 'bonus'
       end
     end
   end
@@ -117,7 +129,7 @@ Mintoffice::Application.routes.draw do
 
   get '/accounts/changepw/:account_id', :controller => 'accounts', :action => 'changepw_form'
   post '/accounts/changepw/:account_id', :controller => 'accounts', :action => 'changepw'
-  
+
   resources :groups
   resources :accounts do
     collection do

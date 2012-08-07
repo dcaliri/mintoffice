@@ -1,14 +1,15 @@
 - target.create_if_no_report
 - report = target.report
 - reporter_list ||= Account.all.delete_if{|account| account == current_account or account.disabled?}
+
 h3
   = t('reports.info.approval')
 p
   = t('reports.info.status')
   = " - #{target.localize_status}"
 
-- if target.access?(current_account, :write)
-  - unless current_account.admin?
+- if target.access?(current_person, :write)
+  - unless current_person.admin?
     = form_tag :report do
       = hidden_field_tag :target_type, target.class
       = hidden_field_tag :target_id, target.id
@@ -38,7 +39,7 @@ p
 
   = render 'reports/log', target: target
 
-- if current_account.admin?
+- if current_person.admin?
   = render 'accessors/info', access_target: report
 
 br

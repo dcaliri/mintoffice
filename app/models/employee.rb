@@ -40,13 +40,13 @@ class Employee < ActiveRecord::Base
       joins(:person => :account).merge(Account.where(name: account_name))
     end
 
-    def search(account, type, text)
-      search_by_type(account, type).search_by_text(text)
+    def search(person, type, text)
+      search_by_type(person, type).search_by_text(text)
     end
 
-    def search_by_type(account, type)
+    def search_by_type(person, type)
       type = type.to_sym
-      if account and account.admin? and type == :retire
+      if person and person.admin? and type == :retire
         where('retired_on IS NOT NULL')
       else
         where('joined_on IS NOT NULL AND retired_on IS NULL')

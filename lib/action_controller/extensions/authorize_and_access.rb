@@ -17,21 +17,20 @@ module ActionController
       end
 
       def redirect_unless_permission
-        unless Permission.can_access? current_account, controller_name, action_name
+        unless Permission.can_access? current_person, controller_name, action_name
           force_redirect
         end
       end
 
       def redirect_unless_admin
-        unless current_account.admin?
+        unless current_person.admin?
           force_redirect
         end
       end
 
-      def redirect_unless_me(account)
-        unless current_account.admin?
-          force_redirect unless current_account.id == account.id
-          # force_redirect unless current_account == account
+      def redirect_unless_me(employee)
+        unless current_person.admin?
+          force_redirect unless current_person.employee.id == employee.id
         end
       end
 

@@ -1,15 +1,15 @@
 
 #show_command
-  - if @account.admin?
-    = link_to t('pay_schedules.new.link'), [:yearly, account, :payments]
+  - if current_person.admin?
+    = link_to t('pay_schedules.new.link'), [:yearly, employee, :payments]
     = " | "
-    = link_to t('bonuses.new.link'), [:bonus, account, :payments]
+    = link_to t('bonuses.new.link'), [:bonus, employee, :payments]
     = " | "
-  = link_to t('employees.show.title'), employee_path(account.employee)
+  = link_to t('employees.show.title'), employee_path(employee)
   = " | "
   = link_to t('common.title.back'), :payments
 h2
-  = account.employee.fullname
+  = employee.fullname
 
 table#list-table
   tr
@@ -25,7 +25,7 @@ table#list-table
       = Payment.human_attribute_name('amount')
     th
       = Payment.human_attribute_name('total')
-    - if @account.admin?
+    - if current_person.admin?
       th
   - current_bg = '#e6e6e6'
   - payments.latest.group_by{|payment| payment.pay_finish.strftime("%Y.%m")}.each do |month, payments|
@@ -49,14 +49,14 @@ table#list-table
           = number_to_currency(payment.amount)
         td.numrow
           = show_sum ? (number_to_currency payments.sum{|payment| payment.amount}) : ''
-        - if @account.admin?
+        - if current_person.admin?
           td style="text-align:center;"
-            = link_to t("common.link.edit"), [:edit, account, payment]
+            = link_to t("common.link.edit"), [:edit, employee, payment]
             = " | "
-            = link_to t("common.link.destroy"), [account, payment], :method => :delete, confirm: t("common.messages.delete_confirm")
+            = link_to t("common.link.destroy"), [employee, payment], :method => :delete, confirm: t("common.messages.delete_confirm")
       - show_sum = false
 
-- if @account.admin?
+- if current_person.admin?
   h3
     = t("common.changes")
   - payments.each do |payment|

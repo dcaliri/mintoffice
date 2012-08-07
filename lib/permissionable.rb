@@ -6,23 +6,23 @@ module Permissionable
       includes(:accessors).merge(AccessPerson.no_permission)
     end
 
-    def access_list(account)
-      joins(:accessors).merge(AccessPerson.access_list(account))
+    def access_list(person)
+      joins(:accessors).merge(AccessPerson.access_list(person))
     end
   end
 
-  def access?(account, permission_type = :read)
+  def access?(person, permission_type = :read)
     unless accessors.empty?
-      accessors.access?(account, permission_type)
+      accessors.access?(person, permission_type)
     else
-      account.admin?.tap do |admin|
-        accessors.permission(account, :write) if admin
+      person.admin?.tap do |admin|
+        accessors.permission(person, :write) if admin
       end
     end
   end
 
-  def permission(account, access_type)
-    accessors.permission(account, access_type)
+  def permission(person, access_type)
+    accessors.permission(person, access_type)
   end
 
   included do

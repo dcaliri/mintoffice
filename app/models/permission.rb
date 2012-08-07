@@ -14,7 +14,7 @@ class Permission < ActiveRecord::Base
 
   validates :name, presence: true, uniqueness: true
 
-  def self.can_access? (account, controller_name, action_name)
+  def self.can_access? (person, controller_name, action_name)
     exception_list = [
         "attachments.picture", "attachments.download",
         "documents.*",
@@ -35,10 +35,10 @@ class Permission < ActiveRecord::Base
       return true
     end
 
-    return false unless account and account.employee
-    return true if account and account.admin?
-    
-    if account.person.permissions.any? { |perm| perm.name == controller_name }
+    return false unless person and person.employee
+    return true if person and person.admin?
+
+    if person.permissions.any? { |perm| perm.name == controller_name }
       return true
     else
       return false

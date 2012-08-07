@@ -15,6 +15,8 @@ class Person < ActiveRecord::Base
   has_many :reporters, class_name: 'ReportPerson'
   has_many :accessors, class_name: 'AccessPerson'
 
+  cattr_accessor :current_person
+
   def self.no_employee
     joins(:account).where('accounts.person_id == people.id') - joins(:employee).where('employees.person_id == people.id')
   end
@@ -26,7 +28,7 @@ class Person < ActiveRecord::Base
   def ingroup?(name)
     self.groups.where(name: name).present?
   end
-  
+
   def admin?
     self.ingroup?("admin")
   end

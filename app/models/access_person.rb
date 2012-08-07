@@ -39,14 +39,22 @@ class AccessPerson < ActiveRecord::Base
       where(access_type: :write)
     end
 
-    def permission(account, access_type)
-      collection = where(person_id: account.person.id)
+    def permission(person, access_type)
+      if person.class == Account
+        collection = where(person_id: person.person.id)
+      else
+        collection = where(person_id: person.person.id)
+      end
       unless collection.empty?
         accessor = collection.first
         accessor.access_type = access_type
         accessor.save!
       else
-        create!(person_id: account.person.id, access_type: access_type)
+        if person.class == Account
+          create!(person_id: person.person.id, access_type: access_type)
+        else
+          create!(person_id: person.id, access_type: access_type)
+        end
       end
     end
   end

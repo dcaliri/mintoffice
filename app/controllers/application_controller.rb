@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
 
   def set_global_current_account_and_company
     Account.current_account = current_account
+    Person.current_person = current_person
     Company.current_company = current_company
   end
 

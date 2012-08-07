@@ -17,9 +17,8 @@ table#list-table.payment-table
       - period -= 1.month
 
     - @employees.each do |employee|
-      - account = employee.account
       - period = Time.zone.parse("#{to.year}-#{to.month}-01 00:00:00")
-      tr.selectable onclick="location.href='#{payment_path(account)}'"
+      tr.selectable onclick="location.href='#{payment_path(employee)}'"
         td=h employee.fullname
         - while from < period
           - td_class = (period.month == Time.zone.now.month ? :today : '')

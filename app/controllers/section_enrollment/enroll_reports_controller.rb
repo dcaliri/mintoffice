@@ -13,7 +13,6 @@ class SectionEnrollment::EnrollReportsController < ApplicationController
 
   private
   def redirect_unless_enroll_permission
-    account = Account.current_account
-    force_redirect unless (account.admin? or current_company.apply_admin == account)
+    force_redirect unless (current_person.admin? or current_company.apply_admin == current_person)
   end
 end
