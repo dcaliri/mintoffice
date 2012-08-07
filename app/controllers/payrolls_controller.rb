@@ -1,7 +1,6 @@
 class PayrollsController < ApplicationController
-  def redirect_unless_permission
-  end
-  
+  skip_before_filter :redirect_unless_permission
+
   expose (:payrolls) {Payroll.all}
   expose (:payroll)
   expose (:accounts) {Account(:protected).enabled}
@@ -11,10 +10,9 @@ class PayrollsController < ApplicationController
     payroll.save!
     redirect_to [:payrolls]
   end
-  
+
   def update
     payroll.save!
     redirect_to [:payroll]
   end
-  
 end

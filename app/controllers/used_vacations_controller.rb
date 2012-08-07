@@ -1,22 +1,19 @@
 # encoding: UTF-8
 
 class UsedVacationsController < ApplicationController
-  def redirect_unless_permission
-  end
+  skip_before_filter :redirect_unless_permission
 
   expose(:vacation)
   expose(:used_vacations) { vacation.used }
   expose(:used_vacation)
 
   expose(:employee) { vacation.employee }
-  # expose(:account) { vacation.employee.account }
 
   before_filter {|controller| controller.redirect_unless_me(employee)}
   before_filter :another_person_cant_access_yearly, :only => [:edit]
 
   def create
     used_vacation.save!
-    # Boxcar.send_to_boxcar_group("admin",used_vacation.vacation.account.employee.fullname, I18n.t("used_vacations.new.link"))
     redirect_to [vacation, used_vacation], notice: t('controllers.used_vacations.reports')
   end
 
