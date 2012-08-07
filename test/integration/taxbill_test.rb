@@ -22,7 +22,6 @@ class TaxBillTest < ActionDispatch::IntegrationTest
     click_link '세금계산서 관리'
     click_link '합계표 보기'
 
-    assert(page.has_content?('매출처별 합계'))
     assert(page.has_content?('매입처별 합계'))
   end
 
@@ -94,6 +93,10 @@ class TaxBillTest < ActionDispatch::IntegrationTest
     click_button '항목 만들기'
 
     assert(page.has_content?('항목이(가) 성공적으로 생성되었습니다.'))
+
+    assert(page.has_content?('10,000'))
+    assert(page.has_content?('10'))
+    assert(page.has_content?('내역 입력 테스트'))
   end
 
   test 'should edit taxbill item' do
@@ -110,6 +113,10 @@ class TaxBillTest < ActionDispatch::IntegrationTest
     click_button '항목 수정하기'
 
     assert(page.has_content?('항목이(가) 성공적으로 생성되었습니다.'))
+
+    assert(page.has_content?('1,000'))
+    assert(page.has_content?('5'))
+    assert(page.has_content?('내역 수정 테스트'))
   end
 
   test 'should destroy taxbill item' do

@@ -65,10 +65,6 @@ class DocumentTest < ActionDispatch::IntegrationTest
 
     click_link '수정하기'
 
-    # fill_in "사용자 추가", with: "no employee"
-    # click_button '추가하기'
-
-    # assert(page.has_content?('no employee'))
     fill_in "사용자 추가", with: "normal"
     click_button '추가하기'
 

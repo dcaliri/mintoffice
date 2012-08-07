@@ -22,6 +22,9 @@ class BankTransferTest < ActionDispatch::IntegrationTest
     click_link '이체내역 보기'
     click_link '컬럼 선택하기'
 
+    assert(page.has_content?('28505013648'))
+    assert(page.has_content?('KRW'))
+
     uncheck('이체구분')
     uncheck('출금계좌')
     uncheck('입금계좌')
@@ -31,9 +34,13 @@ class BankTransferTest < ActionDispatch::IntegrationTest
     uncheck('통화 코드')
 
     click_button '태그 만들기'
-    page.driver.browser.switch_to.alert.accept
 
-    assert(page.has_content?('이체 내역'))
+    alert = page.driver.browser.switch_to.alert
+    alert.send_keys("test tag")
+    alert.accept
+
+    assert(!page.has_content?('28505013648'))
+    assert(!page.has_content?('KRW'))
   end
 
   test "should create a new bank_transfer" do
@@ -59,18 +66,19 @@ class BankTransferTest < ActionDispatch::IntegrationTest
     select('26', :from => 'bank_transfer_registered_at_3i')
     select('11', :from => 'bank_transfer_registered_at_4i')
     select('11', :from => 'bank_transfer_registered_at_5i')
-    fill_in "오류코드", with: ""
     fill_in "거래메모", with: "거래메모 입력 테스트"
-    fill_in "입금인코드", with: ""
     fill_in "출금통장표시내용", with: "출금통장표시내용 입력 테스트"
     fill_in "입금통장표시내용", with: "입금통장표시내용 입력 테스트"
     fill_in "입금인성명", with: "입금인성명 입력 테스트"
-    fill_in "CMS코드", with: ""
-    fill_in "통화 코드", with: ""
 
     click_button '이체 내역 만들기'
 
-    assert(page.has_content?('이체내역 상세정보'))
+    assert(page.has_content?('이체구분 입력 테스트'))
+    assert(page.has_content?('처리결과 입력 테스트'))
+    assert(page.has_content?('거래메모 입력 테스트'))
+    assert(page.has_content?('출금통장표시내용 입력 테스트'))
+    assert(page.has_content?('입금통장표시내용 입력 테스트'))
+    assert(page.has_content?('입금인성명 입력 테스트'))
   end
 
   test "should edit bank_transfer" do
@@ -108,7 +116,12 @@ class BankTransferTest < ActionDispatch::IntegrationTest
 
     click_button '이체 내역 수정하기'
 
-    assert(page.has_content?('이체내역 상세정보'))
+    assert(page.has_content?('이체구분 수정 테스트'))
+    assert(page.has_content?('처리결과 수정 테스트'))
+    assert(page.has_content?('거래메모 수정 테스트'))
+    assert(page.has_content?('출금통장표시내용 수정 테스트'))
+    assert(page.has_content?('입금통장표시내용 수정 테스트'))
+    assert(page.has_content?('입금인성명 수정 테스트'))
   end
 
   test "should destroy bank_transfer" do
@@ -137,6 +150,8 @@ class BankTransferTest < ActionDispatch::IntegrationTest
 
     click_button '지출 내역서 만들기'
 
+    assert(page.has_content?('지출내역서 내역 입력 테스트'))
+
     click_link '이체 내역 보기'
     click_link '지출내역서 보기'
 
@@ -161,12 +176,4 @@ class BankTransferTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('기업은행'))
     assert(page.has_content?('28505013648'))
   end
-
- test "should upload a excel file" do
-   visit '/'
-   click_link '은행계좌 목록'
-   click_link '이체내역 보기'
-   
-   click_link '엑셀 파일로 올리기'
- end  
 end
