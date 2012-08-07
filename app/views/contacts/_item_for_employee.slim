@@ -5,7 +5,7 @@ dl
       = "(#{email.target})"
     dd
       = email.email
-    - if menu && contact.edit?(current_account)
+    - if menu && contact.edit?(current_person)
       dd
         = link_to t('common.link.edit'), [:edit, contact]
         = " | "
@@ -16,7 +16,7 @@ dl
       = "(#{phone_number.target})"
     dd
       = phone_number.number
-    - if menu && contact.edit?(current_account)
+    - if menu && contact.edit?(current_person)
       dd
         = link_to t('common.link.edit'), [:edit, contact]
         = " | "
@@ -27,7 +27,7 @@ dl
       = "(#{address.target})"
     dd
       = "#{address.country} #{address.province} #{address.city} #{address.other1} #{address.other2} #{address.postal_code}"
-    - if menu && contact.edit?(current_account)
+    - if menu && contact.edit?(current_person)
       dd
         = link_to t('common.link.edit'), [:edit, contact]
         = " | "

@@ -25,7 +25,7 @@ h2= t("common.title.#{action_name}")
       p
         = f.label :owner
         = f.select :owner_id, options_from_collection_for_select(Account.enabled, 'id', 'fullname', @contact.owner_id)
-    - if @contact.new_record? || @contact.owner?(current_account)
+    - if @contact.new_record? || @contact.owner?(current_person)
       p
         = f.label :isprivate
         = f.check_box :isprivate

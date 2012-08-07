@@ -7,7 +7,7 @@ h3
     p
       = email_field.label :target
       = email_field.select :target, options_for_select(current_company.contact_email_tags.map{|tag| tag.name}, email_field.object.target)
-      - if current_account.present? and current_account.admin?
+      - if current_person.present? and current_person.admin?
         = link_to t('contacts_form.make_new_one'), [:new, :contact_email_tag]
 
     p

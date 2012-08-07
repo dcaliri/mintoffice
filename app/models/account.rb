@@ -5,8 +5,6 @@ class Account < ActiveRecord::Base
   belongs_to :person
   accepts_nested_attributes_for :person
 
-  has_many :contacts, foreign_key: 'owner_id'
-
   scope :enabled, :conditions =>["name NOT LIKE '[X] %%'"]
   scope :disabled, :conditions =>["name LIKE '[X] %%'"]
 
