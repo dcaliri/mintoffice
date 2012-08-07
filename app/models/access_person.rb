@@ -43,7 +43,7 @@ class AccessPerson < ActiveRecord::Base
       if person.class == Account
         collection = where(person_id: person.person.id)
       else
-        collection = where(person_id: person.person.id)
+        collection = where(person_id: person.id)
       end
       unless collection.empty?
         accessor = collection.first

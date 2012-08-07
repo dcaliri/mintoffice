@@ -37,7 +37,7 @@ module ActionController
       def access_check
         model_name = (controller_name.singularize.classify).constantize
         model = model_name.find(params[:id])
-        force_redirect unless model.access?(current_account)
+        force_redirect unless model.access?(current_person)
       end
 
       def force_redirect

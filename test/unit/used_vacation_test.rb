@@ -4,8 +4,8 @@ class UsedVacationTest < ActiveSupport::TestCase
   fixtures :accounts#, :groups_accounts, :groups
 
   test "UsedVacation during should retreive correct vacation list" do
-    Account.current_account = Account.first
-    
+    Person.current_person = Person.first
+
     far_before_startDate = Date.new(2010, 5, 1)
     before_startDate = Date.new(2010, 5, 3)
     startDate = Date.new(2010, 5, 5)
