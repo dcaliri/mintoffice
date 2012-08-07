@@ -7,6 +7,7 @@
     = select_tag :month, options_for_select([["all", nil]] + (1..12).map{|month| [month.to_s+" "+t('expense_reports.index.month'), month]}, params[:month]), "onchange" => "this.form.submit()"
     = select_tag :project_id, options_from_collection_for_select([Project.new(:name => "all")]+Project.all, :id, :name, params[:project_id]), "onchange" => "this.form.submit()"
     = render 'accessors/search_form'
+
 #show_command
   = link_to t('common.title.back'), :root
 
