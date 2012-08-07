@@ -25,7 +25,7 @@ class PostingTest < ActionDispatch::IntegrationTest
 
     click_button '전표 만들기'
 
-    assert(page.has_content?('전표 내역'))
+    assert(page.has_content?('상세정보 입력 테스트'))
   end
 
   test 'should edit posting' do
@@ -41,7 +41,7 @@ class PostingTest < ActionDispatch::IntegrationTest
 
     click_button '전표 수정하기'
 
-    assert(page.has_content?('전표 내역'))
+    assert(page.has_content?('상세정보 수정 테스트'))
   end
 
   test 'should destroy posting' do
@@ -52,7 +52,7 @@ class PostingTest < ActionDispatch::IntegrationTest
     click_link '삭제하기'
     page.driver.browser.switch_to.alert.accept
 
-    assert(page.has_content?('목록'))
+    assert(!page.has_content?('상세내용 기입 테스트'))
   end
 
 end

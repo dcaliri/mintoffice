@@ -1,7 +1,6 @@
 # encoding: UTF-8
 require 'test_helper'
 
-
 class EmployeeTest < ActionDispatch::IntegrationTest
   fixtures :contacts
   fixtures :contact_emails
@@ -41,11 +40,7 @@ class EmployeeTest < ActionDispatch::IntegrationTest
     visit '/'
     click_link '인사정보관리 - 사원목록'
 
-    assert(page.has_content?('인사정보관리'))
-
     click_link '새로운 인사정보 입력'
-
-    assert(page.has_content?('새로운 인사정보 입력'))
 
     fill_in "성", with: "손"
     fill_in "이름", with: "어지리"
@@ -84,17 +79,17 @@ class EmployeeTest < ActionDispatch::IntegrationTest
 
     click_link '주소록 찾기'
 
-    assert(page.has_content?('연락처 관리'))
-
     click_link '수정'
 
     fill_in "군/구", with: "수정된 주소"
     fill_in "이메일", with: "123@wangsy.com"
-    fill_in "전화번", with: "123-1234"
+    fill_in "전화번호", with: "123-1234"
 
     click_button '연락처 수정하기'
 
-    assert(page.has_content?('연락처 관리'))
+    assert(page.has_content?('수정된 주소'))
+    assert(page.has_content?('123@wangsy.com'))
+    assert(page.has_content?('123-1234'))
   end
 
   test 'should visit employees to destroy contact items' do
@@ -104,12 +99,10 @@ class EmployeeTest < ActionDispatch::IntegrationTest
 
     click_link '주소록 찾기'
 
-    assert(page.has_content?('연락처 관리'))
-
     click_link '제거'
     page.driver.browser.switch_to.alert.accept
 
-    assert(page.has_content?('연락처 관리'))
+    assert(!page.has_content?('wangsy@wangsy.com'))
   end
 
   test 'should visit employees to destroy contact' do
@@ -124,7 +117,7 @@ class EmployeeTest < ActionDispatch::IntegrationTest
     click_link '삭제'
     page.driver.browser.switch_to.alert.accept
 
-    assert(page.has_content?('연락처 관리'))
+    assert(!page.has_content?('왕 수용'))
   end
 
   test 'should create required tag.' do
@@ -182,14 +175,6 @@ class EmployeeTest < ActionDispatch::IntegrationTest
   end
 
   test 'should success to get employment_proof' do
-    # visit '/'
-    # click_link '인사정보관리 - 사원목록'
-    # find("tr.selectable").click
-
-    # click_link '재직증명서'
-
-    # assert(page.has_content?('재직증명서'))
-
     class ::Company < ActiveRecord::Base
       def seal
         "#{Rails.root}/test/fixtures/images/120731092154_Untitled.png"
@@ -252,6 +237,7 @@ class EmployeeTest < ActionDispatch::IntegrationTest
     click_button '갱신하기'
 
     assert(page.has_content?('인사정보이(가) 성공적으로 업데이트 되었습니다.'))
+
     assert(page.has_content?('123456-0123456'))
     assert(page.has_content?('zzilssun@test.com'))
     assert(page.has_content?('010-5678-5678'))

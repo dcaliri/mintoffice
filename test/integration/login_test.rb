@@ -2,7 +2,7 @@
 require 'test_helper'
 
 class LoginTest < ActionDispatch::IntegrationTest
-  test 'show login' do
+  test 'show admin login' do
     clear_session
     
     visit '/'
@@ -15,12 +15,25 @@ class LoginTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('Mint Office'))
   end
 
+  test 'show normal login' do
+    clear_session
+    
+    visit '/'
+
+    fill_in "사용자계정", with: "normal"
+    fill_in "비밀번호", with: "1234"
+
+    click_button "로그인"
+
+    assert(page.has_content?('Mint Office'))
+  end
+
   test 'login fail' do
     clear_session
     
     visit '/'
 
-    fill_in "사용자계정", with: "test"
+    fill_in "사용자계정", with: "no_account"
     fill_in "비밀번호", with: "1234"
 
     click_button "로그인"

@@ -107,12 +107,15 @@ class BankTransactionTest < ActionDispatch::IntegrationTest
     fill_in "거래점명", with: "GS25"
     fill_in "상대 계좌번호", with: "123-321-1234"
     fill_in "상대 은행", with: "기업은행"
-    fill_in "수표 어음금액", with: ""
-    fill_in "CMS 코드", with: ""
 
     click_button '입출금 내역 만들기'
 
-    assert(page.has_content?('입출금 내역'))
+    assert(page.has_content?('적요 입력 테스트'))
+    assert(page.has_content?('160'))
+    assert(page.has_content?('내용 입력 테스트'))
+    assert(page.has_content?('GS25'))
+    assert(page.has_content?('123-321-1234'))
+    assert(page.has_content?('기업은행'))
   end
 
   test "should edit bank_transaction" do
@@ -135,12 +138,14 @@ class BankTransactionTest < ActionDispatch::IntegrationTest
     fill_in "거래점명", with: "수정된 거래점명"
     fill_in "상대 계좌번호", with: "123-321-1234"
     fill_in "상대 은행", with: "수정된 상대 은행"
-    fill_in "수표 어음금액", with: ""
-    fill_in "CMS 코드", with: ""
 
     click_button '입출금 내역 수정하기'
 
-    assert(page.has_content?('입출금 내역'))
+    assert(page.has_content?('적요 수정 테스트'))
+    assert(page.has_content?('160'))
+    assert(page.has_content?('내용 수정 테스트'))
+    assert(page.has_content?('수정된 거래점명'))
+    assert(page.has_content?('수정된 상대 은행'))
   end
 
   test "should destroy bank_transaction" do

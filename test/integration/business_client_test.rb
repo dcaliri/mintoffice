@@ -28,6 +28,12 @@ class BusinessClientTest < ActionDispatch::IntegrationTest
     click_button '거래처 만들기'
 
     assert(page.has_content?('거래처이(가) 성공적으로 생성되었습니다.'))
+
+    assert(page.has_content?('거래처명 입력 테스트'))
+    assert(page.has_content?('123-321-12345'))
+    assert(page.has_content?('업종 입력 테스트'))
+    assert(page.has_content?('업태 입력 테스트'))
+    assert(page.has_content?('주소 입력 테스트'))
   end
 
   test 'should edit business_client' do
@@ -46,6 +52,13 @@ class BusinessClientTest < ActionDispatch::IntegrationTest
     click_button '거래처 수정하기'
 
     assert(page.has_content?('거래처이(가) 성공적으로 업데이트 되었습니다.'))
+
+    assert(page.has_content?('거래처명 수정 테스트'))
+    assert(page.has_content?('321-123-54321'))
+    assert(page.has_content?('업종 수정 테스트'))
+    assert(page.has_content?('업태 수정 테스트'))
+    assert(page.has_content?('주소 수정 테스트'))
+    assert(page.has_content?('대표자 수정 테스트'))
   end
 
   test 'should destroy business_client' do
