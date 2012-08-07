@@ -11,7 +11,7 @@ class Vacation < ActiveRecord::Base
 
     def include_today
       today = Date.today
-      where('? BETWEEN "vacations"."from" AND "vacations"."to"', today)
+      where('"vacations"."from" <= ?', today).where('"vacations"."to" > ?', today)
     end
 
   end
