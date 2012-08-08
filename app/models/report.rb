@@ -84,16 +84,13 @@ class Report < ActiveRecord::Base
       url: report_url,
     })
 
-    # Boxcar.send_to_boxcar_account(next_reporter.account, prev_reporter.fullname, title)
-    # ReportMailer.report(target, prev_reporter.account, next_reporter.account, title, body)
-
-    Boxcar.send_to_boxcar_account(next_reporter.person.account, prev_reporter.fullname, title)
-    ReportMailer.report(target, prev_reporter.person.account, next_reporter.person.account, title, body)
-
     permission person, :write
-    permission prev_reporter.person.account, :read
+    permission prev_reporter.person, :read
 
     save!
+
+    Boxcar.send_to_boxcar_account(next_reporter.person, prev_reporter.fullname, title)
+    ReportMailer.report(target, prev_reporter.person, next_reporter.person, title, body)
   end
 
   def approve!(comment)
@@ -115,10 +112,8 @@ class Report < ActiveRecord::Base
       prev_reporter.owner = false
       prev_reporter.save!
 
-      # permission next_reporter.account, :write
-      # permission prev_reporter.account, :read
-      permission next_reporter.person.account, :write
-      permission prev_reporter.person.account, :read
+      permission next_reporter.person, :write
+      permission prev_reporter.person, :read
     end
     self.comments.build(owner: prev_reporter, description: "#{prev_reporter.fullname}"+I18n.t('models.report.to_rollback'))
     self.comments.build(owner: prev_reporter, description: comment) unless comment.blank?
@@ -138,11 +133,9 @@ class Report < ActiveRecord::Base
         url: report_url,
       })
 
-      # Boxcar.send_to_boxcar_account(next_reporter.account, prev_reporter.fullname, title)
-      # ReportMailer.report(target, prev_reporter.account, next_reporter.account, title, body)
 
-      Boxcar.send_to_boxcar_account(next_reporter.person.account, prev_reporter.fullname, title)
-      ReportMailer.report(target, prev_reporter.person.account, next_reporter.person.account, title, body)
+      Boxcar.send_to_boxcar_account(next_reporter.person, prev_reporter.fullname, title)
+      ReportMailer.report(target, prev_reporter.person, next_reporter.person, title, body)
     end
 
     save!

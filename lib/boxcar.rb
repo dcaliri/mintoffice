@@ -36,7 +36,8 @@ class Boxcar
     end
   end
 
-  def self.send_to_boxcar_account(account, from, msg)
+  def self.send_to_boxcar_account(person, from, msg)
+    account = person.account
     unless account.boxcar_account.nil?
       unless account.boxcar_account.empty?
         Boxcar.send_to_boxcar(account.boxcar_account, from, msg)
