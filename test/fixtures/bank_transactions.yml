@@ -11,7 +11,7 @@ fixture:
     created_at: <%= Time.zone.now %>
     updated_at: <%= Time.zone.now %>
     out_bank_account:
-    out_bank_name:
+    out_bank_name: 하나 은행
     promissory_check_amount:
     cms_code:
     transact_order: 0

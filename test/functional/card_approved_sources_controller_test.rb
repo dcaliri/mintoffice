@@ -49,6 +49,6 @@ class CardApprovedSourcesControllerTest < ActionController::TestCase
   end
 
   def current_card_approved_source
-    @card_approved_source ||= card_approved_sources(:fixture)
+    @card_approved_source ||= card_approved_sources(:exist_cardbill)
   end
 end

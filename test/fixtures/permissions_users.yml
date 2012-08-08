@@ -36,8 +36,8 @@ expenses_user:
 
 bank_transactions:
   permission_id: 6
-  user_id: 1  
-
+  user_id: 1
+  
 bank_transfers:
   permission_id: 7
   user_id: 1
@@ -50,14 +50,14 @@ business_clients:
   permission_id: 9
   user_id: 1
 
-creditcards:
+taxbills:
   permission_id: 10
   user_id: 1
 
-creditcards_manager:
-  permission_id: 10
-  user_id: 3
+postings:
+  permission_id: 11
+  user_id: 1
 
-creditcards_user:
-  permission_id: 10
-  user_id: 4
+ledger_accounts:
+  permission_id: 12
+  user_id: 1

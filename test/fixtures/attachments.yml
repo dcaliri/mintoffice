@@ -1,5 +1,27 @@
 fixture:
   id: 1
-  filepath: "seal.png"
-  owner_type: "Company"
+  title:
+  comments:
+  filepath: Untitled.xls
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
+  contenttype: application/vnd.ms-excel
+  owner_type: Document
   owner_id: 1
+  original_filename: Untitled.png
+  seq:
+  user_id: 1
+
+seal:
+  id: 2
+  title:
+  comments:
+  filepath: seal.png
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
+  contenttype: application/vnd.ms-excel
+  owner_type: Company
+  owner_id: 1
+  original_filename: seal.png
+  seq:
+  user_id: 1

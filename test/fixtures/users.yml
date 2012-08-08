@@ -24,6 +24,13 @@ card_user_account:
 
 no_employee:
     id: 5
-    name: "no employee"
+    name: "no hrinfo"
     hashed_password: "1234"
     salt: "q"
+
+has_google_apps_account:
+    id: 6
+    name: "has_google_apps_account"
+    hashed_password: "96043f0adf13e8d440a0e90ec7a2b7757a16bc2c"
+    salt: "21757029800.1164294613723833"
+    google_account: has_google_apps_account@wangsy.com

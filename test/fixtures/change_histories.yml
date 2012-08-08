@@ -1,0 +1,11 @@
+description:
+  id: 1
+  fieldname: description
+  before_value: 변경 전 description
+  after_value: test
+  changable_id: 1
+  changable_type: Pettycash
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
+  target: Pettycash
+  employee_id: 1

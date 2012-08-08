@@ -29,6 +29,6 @@ class LedgerAccountsControllerTest < ActionController::TestCase
 
   private
   def current_ledger_account
-    @document ||= ledger_accounts(:fixture)
+    @document ||= ledger_accounts(:cash)
   end
 end

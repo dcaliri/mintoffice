@@ -1,2 +1,6 @@
 fixture:
     id: 1
+    theday: 2012-08-15
+    dayname: 광복절
+    created_at: <%= Time.zone.now %>
+    updated_at: <%= Time.zone.now %>

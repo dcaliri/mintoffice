@@ -65,37 +65,3 @@ card_used_user:
   listed: f
   department: 경리부
   employment_proof_hash: 
-
-join:
-  id: 5
-  firstname: A
-  lastname: B
-  picture_id: 
-  created_at: 2012-07-18 16:17:56.775700
-  updated_at: 2012-07-20 13:36:03.201237
-  joined_on: <%= Time.zone.now %>
-  retired_on:
-  user_id: 4
-  position: 사원
-  companyno: 5
-  juminno: 830101-1010110
-  listed: f
-  department: 경리부
-  employment_proof_hash: 
-
-retire:
-  id: 6
-  firstname: A
-  lastname: B
-  picture_id: 
-  created_at: 2012-07-18 16:17:56.775700
-  updated_at: 2012-07-20 13:36:03.201237
-  joined_on: <%= Time.zone.now %>
-  retired_on: <%= Time.zone.now %>
-  user_id: 4
-  position: 사원
-  companyno: 6
-  juminno: 830101-1010111
-  listed: f
-  department: 경리부
-  employment_proof_hash: 
