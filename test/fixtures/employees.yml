@@ -31,3 +31,37 @@ normal:
   listed: f
   department: 민트기술
   employment_proof_hash: 
+
+card_bill_manager:
+  id: 3
+  firstname: 매니저
+  lastname: 카드영수증
+  picture_id: 
+  created_at: 2012-07-18 16:17:56.775700
+  updated_at: 2012-07-20 13:36:03.201237
+  joined_on: 2012-07-18
+  retired_on:
+  person_id: 3
+  position: 관리자
+  companyno: 1
+  juminno: 123456-1234569
+  listed: f
+  department: 경리부
+  employment_proof_hash: 
+
+card_used_user:
+  id: 4
+  firstname: 사용자
+  lastname: 카드
+  picture_id: 
+  created_at: 2012-07-18 16:17:56.775700
+  updated_at: 2012-07-20 13:36:03.201237
+  joined_on: 2012-07-18
+  retired_on:
+  person_id: 4
+  position: 사원
+  companyno: 1
+  juminno: 123456-1234560
+  listed: f
+  department: 경리부
+  employment_proof_hash: 

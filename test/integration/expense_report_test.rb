@@ -51,25 +51,30 @@ class ExpenseReportTest < ActionDispatch::IntegrationTest
     click_link '삭제'
     page.driver.browser.switch_to.alert.accept
 
-    assert(!page.has_content?('카드영수증 지출내역서'))
+    assert(!page.has_content?('이체 내역'))
   end
 
   test 'should show cardbill' do
     visit '/'
     click_link '지출내역서 관리'
     visit '/expenses/1'
-    click_link '카드 영수증 보기'
+    click_link '이체 내역 보기'
 
-    assert(page.has_content?('카드영수증 상세정보'))
+    assert(page.has_content?('타행이체'))
+    assert(page.has_content?('신한은행'))
+    assert(page.has_content?('28505013648'))
   end
 
   test 'should show transfer' do
     visit '/'
     click_link '지출내역서 관리'
     visit '/expenses/2'
-    click_link '이체 내역 보기'
-
-    assert(page.has_content?('이체내역 상세정보'))
+    click_link '카드 영수증 보기'
+    
+    assert(page.has_content?('5,800'))
+    assert(page.has_content?('4,500'))
+    assert(page.has_content?('GS25'))
+    assert(page.has_content?('sk트윈타워 A동'))
   end
 
   test 'should approve expense and create postings' do

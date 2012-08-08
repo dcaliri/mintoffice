@@ -4,5 +4,14 @@ fixture:
 normal:
   id: 2
 
-no_employee:
+card_manager_account:
   id: 3
+
+card_user_account:
+  id: 4
+
+no_employee:
+  id: 5
+
+has_google_apps_account:
+  id: 6
