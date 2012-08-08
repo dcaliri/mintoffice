@@ -72,7 +72,7 @@ class EmployeesController < ApplicationController
     @employee = Employee.new(params[:employee])
     @people = Person.no_employee
     @employee.save!
-    redirect_to @employee
+    redirect_to @employee, notice: I18n.t("common.messages.created", :model => Employee.model_name.human)
   rescue ActiveRecord::RecordInvalid
     render 'new'
   end
@@ -80,7 +80,7 @@ class EmployeesController < ApplicationController
   def update
     @employee = Employee.find(params[:id])
     @employee.update_attributes!(params[:employee])
-    redirect_to @employee
+    redirect_to @employee, notice: I18n.t("common.messages.updated", :model => Employee.model_name.human)
   rescue ActiveRecord::RecordInvalid
     render 'edit'
   end
