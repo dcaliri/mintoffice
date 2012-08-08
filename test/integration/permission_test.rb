@@ -40,7 +40,7 @@ class PermissionTest < ActionDispatch::IntegrationTest
 
     click_button 'Update'
 
-    assert(page.has_content?('Permission was successfully updated.'))
+    assert(page.has_content?('권한이(가) 성공적으로 업데이트 되었습니다.'))
   end
 
   test 'should create a new permission' do
@@ -52,7 +52,7 @@ class PermissionTest < ActionDispatch::IntegrationTest
 
     click_button 'Create'
 
-    assert(page.has_content?('Permission was successfully created.'))
+    assert(page.has_content?('권한이(가) 성공적으로 생성되었습니다.'))
   end
 
   test 'should edit permission' do
@@ -63,10 +63,10 @@ class PermissionTest < ActionDispatch::IntegrationTest
     fill_in "Name", with: "test 수정"
     find(:css, "#permission_person_ids_[value='1']").set(true)
     find(:css, "#permission_person_ids_[value='2']").set(true)
-    
+
     click_button 'Update'
 
-    assert(page.has_content?('Permission was successfully updated.'))
+    assert(page.has_content?('권한이(가) 성공적으로 업데이트 되었습니다.'))
   end
 
   test 'should destroy page' do

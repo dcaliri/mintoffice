@@ -39,7 +39,8 @@ class CreditCardTest < ActionDispatch::IntegrationTest
 
     click_button '만들기'
 
-    assert(page.has_content?('Creditcard was successfully created.'))
+
+    assert(page.has_content?('신용카드이(가) 성공적으로 생성되었습니다.'))
   end
 
   test 'should edit creditcard' do
