@@ -4,10 +4,6 @@ class BankTransfersControllerTest < ActionController::TestCase
   fixtures :bank_accounts
   fixtures :bank_transfers
 
-  def setup
-    current_user.permission.create!(name: 'bank_transfers')
-  end
-
   test "should see list page" do
     get :index
     assert_response :success

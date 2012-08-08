@@ -3,10 +3,6 @@ require 'test_helper'
 class LedgerAccountsControllerTest < ActionController::TestCase
   fixtures :ledger_accounts
 
-  def setup
-    current_user.permission.create!(name: 'ledger_accounts')
-  end
-
   test "should see index page" do
     get :index
     assert_response :success

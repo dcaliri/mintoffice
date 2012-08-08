@@ -3,10 +3,6 @@ require 'test_helper'
 class ExpenseReportsControllerTest < ActionController::TestCase
   fixtures :cardbills, :expense_reports, :reports, :hrinfos, :projects
 
-  def setup
-    current_user.permission.create!(name: 'expense_reports')
-  end
-
   test "should see index page" do
     get :index
     assert_response :success

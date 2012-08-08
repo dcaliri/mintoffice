@@ -12,12 +12,10 @@ class CardbillTest < ActiveSupport::TestCase
 
     prev_reporter = current_report.reporter
     prev_reporter.owner = false
-
     
     next_reporter = current_target_user.reporters.build(owner: true)
     next_reporter.prev = prev_reporter
     assert current_report.reporters << next_reporter
-    
 
     current_report.status = :reporting
     assert current_report.comments.build(owner: prev_reporter, description: "#{next_reporter.fullname}"+I18n.t('models.report.to_report'))
@@ -46,18 +44,16 @@ class CardbillTest < ActiveSupport::TestCase
   test "user report to admin" do
     User.current_user = users(:card_user_account)
 
-    prev_reporter = current_user_cardbill.reporter
+    prev_reporter = current_report.reporter
     prev_reporter.owner = false
-
     
     next_reporter = current_target_admin.reporters.build(owner: true)
     next_reporter.prev = prev_reporter
-    assert current_user_cardbill.reporters << next_reporter
-    
+    assert current_report.reporters << next_reporter
 
-    current_user_cardbill.status = :reporting
-    assert current_user_cardbill.comments.build(owner: prev_reporter, description: "#{next_reporter.fullname}"+I18n.t('models.report.to_report'))
-    assert current_user_cardbill.comments.build(owner: prev_reporter, description: "test")
+    current_report.status = :reporting
+    assert current_report.comments.build(owner: prev_reporter, description: "#{next_reporter.fullname}"+I18n.t('models.report.to_report'))
+    assert current_report.comments.build(owner: prev_reporter, description: "test")
 
     assert next_reporter.save!
     assert prev_reporter.save!
@@ -76,19 +72,19 @@ class CardbillTest < ActiveSupport::TestCase
       url: '/'
     })
 
-    assert current_user_cardbill.save!
+    assert current_report.save!
   end
 
   test "admin approve cardbill to user" do
     User.current_user = users(:admin_account)
 
-    prev_reporter = current_user_cardbill.reporter
+    prev_reporter = current_report.reporter
 
-    current_user_cardbill.status = :reported
-    User.current_user.reporters.create!(report_id: id, owner: true) unless current_user_cardbill.reporter
-    assert current_user_cardbill.comments.build(owner: prev_reporter, description: "#{prev_reporter.fullname}"+I18n.t('models.report.to_approve'))
-    assert current_user_cardbill.comments.build(owner: prev_reporter, description: "test")
-    assert current_user_cardbill.save!
+    current_report.status = :reported
+    User.current_user.reporters.create!(report_id: id, owner: true) unless current_report.reporter
+    assert current_report.comments.build(owner: prev_reporter, description: "#{prev_reporter.fullname}"+I18n.t('models.report.to_approve'))
+    assert current_report.comments.build(owner: prev_reporter, description: "test")
+    assert current_report.save!
   end
 
   private
@@ -109,14 +105,6 @@ class CardbillTest < ActiveSupport::TestCase
   end
 
   def current_report
-    @report ||= reports(:cardbill)
-  end
-
-  def current_user_cardbill
-    @user_cardbill ||= reports(:user_cardbill)
-  end
-
-  def current_user_expense_report
-    @user_expense_report ||= reports(:user_expense_report)
+    @cardbill_report ||= reports(:cardbill_process_cardbill_fixture)
   end
 end

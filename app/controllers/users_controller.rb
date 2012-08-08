@@ -81,6 +81,9 @@ class UsersController < ApplicationController
 
   def google_apps
     @users = User.has_google_apps_account
+  rescue  => e
+    logger.info "find_google_apps failed: #{e.message}"
+    redirect_to :back, alert: 'Access fails to google apps'
   end
 
   def create_google_apps

@@ -3,10 +3,6 @@ require 'test_helper'
 class CardbillsControllerTest < ActionController::TestCase
   fixtures :cardbills
 
-  def setup
-    current_user.permission.create!(name: 'cardbills')
-  end
-
   test "should index document list" do
     get :index
     assert_response :success

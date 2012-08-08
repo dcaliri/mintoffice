@@ -92,10 +92,10 @@ class ExpenseReportTest < ActiveSupport::TestCase
   end
 
   def current_expense_report
-    @expense_report ||= expense_reports(:cardbill)
+    @expense_report ||= expense_reports(:user_expense_report)
   end
 
   def current_report
-    @report ||= reports(:user_expense_report)
+    @report ||= reports(:cardbill_process_expense_report_cardbill)
   end
 end
