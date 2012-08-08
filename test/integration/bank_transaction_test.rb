@@ -81,7 +81,7 @@ class BankTransactionTest < ActionDispatch::IntegrationTest
     uncheck('상대 계좌번호')
     uncheck('수표 어음금액')
     uncheck('CMS 코드')
-
+    
     click_button '태그 만들기'
     
     alert = page.driver.browser.switch_to.alert
