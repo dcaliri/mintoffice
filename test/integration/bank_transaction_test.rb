@@ -10,7 +10,7 @@ class BankTransactionTest < ActionDispatch::IntegrationTest
     visit '/'
     click_link '은행계좌 목록'
     click_link '입출금내역 보기'
-    
+
     assert(page.has_content?('입출금 내역'))
   end
 
@@ -83,10 +83,12 @@ class BankTransactionTest < ActionDispatch::IntegrationTest
     uncheck('CMS 코드')
 
     click_button '태그 만들기'
-    
+
     alert = page.driver.browser.switch_to.alert
     alert.send_keys("test tag")
     alert.accept
+
+    page.driver.send(:sleep, 1)
 
     assert(!page.has_content?('이자'))
     assert(!page.has_content?('하나 은행'))
