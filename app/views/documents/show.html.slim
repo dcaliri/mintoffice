@@ -31,6 +31,6 @@ h2
       - u = document.user_for_tag(Hrinfo.model_name.human)
       - if u
         li= link_to Hrinfo.model_name.human, :controller => "hrinfos", :action => "show", :id => u.hrinfo
+  = render "shared/attachments/detail", :target => document
   .clear
 = render 'reports/info', target: document
-= render "shared/attachments/detail", :target => document
