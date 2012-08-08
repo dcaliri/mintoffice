@@ -7,15 +7,9 @@ class EmployeesController < ApplicationController
   before_filter :retired_employee_can_access_only_admin, except: [:index, :new, :create]
   before_filter :account_only_access_my_employment, only: [:new_employment_proof]
 
-  # GET /employees
-  # GET /employees.xml
   def index
     params[:search_type] ||= :join
     @employees = Employee.search(current_person, params[:search_type], params[:q])
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @employees }
-    end
   end
 
   def edit_required_tag
@@ -37,8 +31,6 @@ class EmployeesController < ApplicationController
     redirect_to @employee, notice: I18n.t("common.messages.updated", :model => Employee.model_name.human)
   end
 
-  # GET /employees/1
-  # GET /employees/1.xml
   def show
     @employee = Employee.find(params[:id])
     @related_documents = current_company.tags.related_documents(@employee.account.name, Employee.model_name.human)
@@ -58,67 +50,39 @@ class EmployeesController < ApplicationController
         end
       end
     end
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @employee }
-    end
   end
 
-  # GET /employees/new
-  # GET /employees/new.xml
   def new
     @employee = Employee.new
     @people = Person.no_employee
 
     if @people.blank?
       flash[:notice] = t('employees.new.accounts_blank')
-      redirect_to :action => "index"
+      redirect_to :employees
     else
-      respond_to do |format|
-        format.html # new.html.erb
-        format.xml  { render :xml => @employee }
-      end
+      render 'new'
     end
   end
 
-  # GET /employees/1/edit
   def edit
     @employee = Employee.find(params[:id])
   end
 
-  # POST /employees
-  # POST /employees.xml
   def create
     @employee = Employee.new(params[:employee])
     @people = Person.no_employee
-
-    respond_to do |format|
-      if @employee.save
-        flash[:notice] = I18n.t("common.messages.created", :model => Employee.model_name.human)
-        format.html { redirect_to(@employee) }
-        format.xml  { render :xml => @employee, :status => :created, :location => @employee }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @employee.errors, :status => :unprocessable_entity }
-      end
-    end
+    @employee.save!
+    redirect_to @employee
+  rescue ActiveRecord::RecordInvalid
+    render 'new'
   end
 
-  # PUT /employees/1
-  # PUT /employees/1.xml
   def update
     @employee = Employee.find(params[:id])
-    respond_to do |format|
-      if @employee.update_attributes(params[:employee])
-        flash[:notice] = I18n.t("common.messages.updated", :model => Employee.model_name.human)
-        format.html { redirect_to(@employee) }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @employee.errors, :status => :unprocessable_entity }
-      end
-    end
+    @employee.update_attributes!(params[:employee])
+    redirect_to @employee
+  rescue ActiveRecord::RecordInvalid
+    render 'edit'
   end
 
   def new_employment_proof
@@ -133,16 +97,10 @@ class EmployeesController < ApplicationController
     send_file @employee.generate_employment_proof(params[:purpose])
   end
 
-  # DELETE /employees/1
-  # DELETE /employees/1.xml
   def destroy
     @employee = Employee.find(params[:id])
     @employee.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(employees_url) }
-      format.xml  { head :ok }
-    end
+    redirect_to :employees
   end
 
   private

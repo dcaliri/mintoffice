@@ -1,28 +1,14 @@
 # require 'RMagick'
 
 class AttachmentsController < ApplicationController
-  # GET /attachments
-  # GET /attachments.xml
   protect_from_forgery :except => [:save]
   def index
     @attachments = Attachment.paginate(:page => params[:page], :per_page => 20).order('created_at DESC')
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @attachments }
-    end
   end
 
-  # GET /attachments/1
-  # GET /attachments/1.xml
   def show
     @attachment = Attachment.find(params[:id])
     session[:attachments] = [@attachment.id]
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @attachment }
-    end
   end
 
   def download
@@ -71,15 +57,8 @@ class AttachmentsController < ApplicationController
                                     :disposition => 'inline'
   end
 
-  # GET /attachments/new
-  # GET /attachments/new.xml
   def new
     @attachment = Attachment.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @attachment }
-    end
   end
 
   def save
@@ -99,55 +78,30 @@ class AttachmentsController < ApplicationController
     end
   end
 
-  # GET /attachments/1/edit
   def edit
     @attachment = Attachment.find(params[:id])
   end
 
-  # POST /attachments
-  # POST /attachments.xml
   def create
     @attachment = Attachment.new(params[:attachment])
-
-    respond_to do |format|
-      if @attachment.save
-        flash[:notice] = I18n.t("common.messages.created", :model => Attachment.model_name.human )
-        format.html { redirect_to(@attachment) }
-        format.xml  { render :xml => @attachment, :status => :created, :location => @attachment }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @attachment.errors, :status => :unprocessable_entity }
-      end
-    end
+    @attachment.save!
+    redirect_to @attachment
+  rescue ActiveRecord::RecordInvalid
+    render 'new'
   end
 
-  # PUT /attachments/1
-  # PUT /attachments/1.xml
   def update
     @attachment = Attachment.find(params[:id])
-
-    respond_to do |format|
-      if @attachment.update_attributes(params[:attachment])
-        flash[:notice] = t("attachments.msg.update")
-        format.html { redirect_to(@attachment) }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @attachment.errors, :status => :unprocessable_entity }
-      end
-    end
+    @attachment.update_attributes!(params[:attachment])
+    redirect_to @attachment
+  rescue ActiveRecord::RecordInvalid
+    render 'edit'
   end
 
-  # DELETE /attachments/1
-  # DELETE /attachments/1.xml
   def destroy
     @attachment = Attachment.find(params[:id])
     @attachment.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(attachments_url) }
-      format.xml  { head :ok }
-    end
+    redirect_to :attachments
   end
 
   def delete

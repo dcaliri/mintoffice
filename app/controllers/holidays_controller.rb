@@ -1,7 +1,7 @@
 class HolidaysController < ApplicationController
   expose(:holidays) { Holiday.order("theday DESC") }
   expose(:holiday)
-  
+
   def create
     holiday.save!
     redirect_to holiday_path(holiday)

@@ -4,7 +4,8 @@ module Api
     skip_before_filter :verify_authenticity_token
 
     before_filter :find_account
-  protected
+
+    protected
     def find_account
       account = Account.find_by_api_key(request.env['HTTP_API_KEY'])
       unless account
