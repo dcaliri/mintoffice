@@ -8,10 +8,7 @@ h2
   = project.name
 .box
   dl
-    dt
-     = Project.human_attribute_name("revenue")
-    dd
-     = number_to_currency project.revenue
+    = dtdd project, "revenue"
     = dtdd project, "started_on"
     = dtdd project, "ending_on"
     - if project.completed?
