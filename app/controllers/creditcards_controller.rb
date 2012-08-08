@@ -23,7 +23,7 @@ class CreditcardsController < ApplicationController
   def create
     @creditcard = Creditcard.new(params[:creditcard])
     @creditcard.save!
-    redirect_to @creditcard
+    redirect_to @creditcard, notice: t("common.messages.created", :model => Creditcard.model_name.human)
   rescue ActiveRecord::RecordInvalid
     render 'new'
   end
@@ -31,8 +31,7 @@ class CreditcardsController < ApplicationController
   def update
     @creditcard = Creditcard.find(params[:id])
     @creditcard.update_attributes!(params[:creditcard])
-    flash[:notice] = t("common.messages.updated", :model => Creditcard.model_name.human)
-    redirect_to @creditcard
+    redirect_to @creditcard, notice: t("common.messages.updated", :model => Creditcard.model_name.human)
   rescue ActiveRecord::RecordInvalid
     render 'edit'
   end
