@@ -19,7 +19,7 @@ seal:
   filepath: seal.png
   created_at: <%= Time.zone.now %>
   updated_at: <%= Time.zone.now %>
-  contenttype: application/vnd.ms-excel
+  contenttype: image/png
   owner_type: Company
   owner_id: 1
   original_filename: seal.png
