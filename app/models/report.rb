@@ -90,7 +90,7 @@ class Report < ActiveRecord::Base
     Boxcar.send_to_boxcar_account(next_reporter.person.account, prev_reporter.fullname, title)
     ReportMailer.report(target, prev_reporter.person.account, next_reporter.person.account, title, body)
 
-    permission account, :write
+    permission person, :write
     permission prev_reporter.person.account, :read
 
     save!
