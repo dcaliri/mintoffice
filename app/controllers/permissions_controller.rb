@@ -41,7 +41,7 @@ class PermissionsController < ApplicationController
   def create
     @permission = Permission.new(params[:permission])
     @permission.save!
-    redirect_to @permission
+    redirect_to @permission, notice: t('common.messages.created', :model => Permissions.model_name.human)
   rescue ActiveRecord::RecordInvalid
     render 'new'
   end
@@ -50,7 +50,7 @@ class PermissionsController < ApplicationController
     params[:permission][:person_ids] ||= []
     @permission = Permission.find(params[:id])
     @permission.update_attributes!(params[:permission])
-    redirect_to @permission
+    redirect_to @permission, notice: I18n.t("common.messages.updated", :model => Permissions.model_name.human)
   rescue ActiveRecord::RecordInvalid
     render 'new'
   end
