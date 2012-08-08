@@ -5,7 +5,7 @@
     - else
       - if current_person.permission? :postings
         = link_to t("postings.new.link"), new_posting_path(report: expense_report)
-  = " | "
+    = " | "
   = link_to t("activerecord.models.#{expense_report.target_type.tableize.singularize}") + " " + t('expense_reports.show.view'), expense_report.target
   = " | "
   - unless expense_report.posting
