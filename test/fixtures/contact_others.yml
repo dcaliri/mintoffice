@@ -1,0 +1,7 @@
+fixture:
+  id: 1
+  contact_id: 1
+  target: 홈페이지
+  description: 123
+  created_at: 2012-07-18 16:08:13.117074
+  updated_at: 2012-07-18 16:08:13.117074

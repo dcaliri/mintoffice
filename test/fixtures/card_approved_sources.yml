@@ -1,4 +1,43 @@
-fixture:
+exist_cardbill:
     id: 1
     creditcard_id: 1
-    approve_no: "ABCD"
+    used_at: <%= Time.zone.now %>
+    approve_no: 1
+    card_holder_name: 손어지리
+    store_name: GS25
+    money: 4500
+    used_type: test
+    monthly_duration: 3
+    card_type: test
+    canceled_at: <%= Time.zone.now %>
+    status: test
+    will_be_paied_at: <%= Time.zone.now %>
+    created_at: <%= Time.zone.now %>
+    updated_at: <%= Time.zone.now %>
+    card_no: 1
+    money_foreign:
+    money_type:
+    money_type_info:
+    money_dollar: 
+
+not_exist_cardbill:
+    id: 2
+    creditcard_id: 1
+    used_at: <%= Time.zone.now %>
+    approve_no: 3
+    card_holder_name: 손어지리
+    store_name: GS25
+    money: 4500
+    used_type: test
+    monthly_duration: 3
+    card_type: test
+    canceled_at: <%= Time.zone.now %>
+    status: test
+    will_be_paied_at: <%= Time.zone.now %>
+    created_at: <%= Time.zone.now %>
+    updated_at: <%= Time.zone.now %>
+    card_no: 1
+    money_foreign:
+    money_type:
+    money_type_info:
+    money_dollar: 

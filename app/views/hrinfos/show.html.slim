@@ -1,4 +1,5 @@
 - title t('.title')
+
 #show_command
   - if @user.ingroup?("admin") or @hrinfo == current_user.hrinfo
     - if @hrinfo.joined?
