@@ -32,7 +32,7 @@ class CardApprovedSourcesController < ApplicationController
   end
 
   def generate_cardbills
-    owner = Account.find(params[:owner])
+    owner = Person.find(params[:owner])
     total_count = CardApprovedSource.generate_cardbill(owner)
     redirect_to :card_approved_sources, notice: t('card_approved_sources.generate.success', owner: owner.name, amount: total_count)
   end
