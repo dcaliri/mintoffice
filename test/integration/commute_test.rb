@@ -2,8 +2,6 @@
 require 'test_helper'
 
 class CommuteTest < ActionDispatch::IntegrationTest
-  fixtures :groups
-  fixtures :groups_users
 
   test 'should visit my commute' do
     visit '/'

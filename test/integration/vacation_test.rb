@@ -3,11 +3,7 @@ require 'test_helper'
 
 class VacationTest < ActionDispatch::IntegrationTest
   fixtures :vacations
-  fixtures :hrinfos
   fixtures :used_vacations
-  fixtures :users
-  fixtures :groups
-  fixtures :groups_users
 
   test 'should visit vacations list for admin' do
     visit '/'

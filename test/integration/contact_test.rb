@@ -2,8 +2,6 @@
 require 'test_helper'
 
 class ContactTest < ActionDispatch::IntegrationTest
-  fixtures :groups
-  fixtures :groups_users
   fixtures :contacts
   fixtures :contact_emails
   fixtures :contact_email_tags

@@ -1,23 +1,35 @@
-user_expense_report:
+admin_expense_report_bank_transfer:
     id: 1
     target_id: 1
     target_type: "ExpenseReport"
     status: "not_reported"
+
+admin_expense_report_cardbill:
+    id: 2
+    target_id: 2
+    target_type: "ExpenseReport"
+    status: "not_reported"
     
 document:
-    id: 2
+    id: 3
     target_id: 1
     target_type: "Document"
     status: "not_reported"
 
 cardbill:
-    id: 3
+    id: 4
     target_id: 1
     target_type: "Cardbill"
     status: "not_reported"
 
-user_cardbill:
-    id: 4
-    target_id: 1
+cardbill_process_cardbill_fixture:
+    id: 5
+    target_id: 3
     target_type: "Cardbill"
-    status: "reporting"
+    status: "not_reported"
+
+cardbill_process_expense_report_cardbill:
+    id: 6
+    target_id: 3
+    target_type: "ExpenseReport"
+    status: "not_reported"

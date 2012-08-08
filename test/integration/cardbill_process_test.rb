@@ -4,17 +4,11 @@ require 'test_helper'
 class CardBillProcessTest < ActionDispatch::IntegrationTest
   fixtures :cardbills
   fixtures :creditcards
-  fixtures :users
-  fixtures :hrinfos
   fixtures :access_people
   fixtures :card_used_sources
   fixtures :card_approved_sources
   fixtures :projects
   fixtures :project_assign_infos
-  fixtures :permissions
-  fixtures :permissions_users
-  fixtures :groups
-  fixtures :groups_users
 
   test 'should see CardBillProcess' do
     visit '/'

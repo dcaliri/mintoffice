@@ -6,16 +6,12 @@ class DocumentTest < ActionDispatch::IntegrationTest
   fixtures :document_owners
   fixtures :documents_tags
   fixtures :projects
-  fixtures :users
-  fixtures :hrinfos
   fixtures :tags
   fixtures :taggings
   fixtures :reports
   fixtures :report_people
   fixtures :report_comments
   fixtures :access_people
-  fixtures :groups
-  fixtures :groups_users
 
   test 'should visit document list' do
     visit '/'

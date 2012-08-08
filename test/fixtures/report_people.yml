@@ -1,49 +1,71 @@
-admin_has_document:
+admin_has_expense_report_bank_transfer:
   id: 1
+  user_id: 1
+  report_id: 1
+  prev_id:
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
+  owner: t
+
+admin_has_expense_report_cardbill:
+  id: 2
   user_id: 1
   report_id: 2
   prev_id:
   created_at: <%= Time.zone.now %>
   updated_at: <%= Time.zone.now %>
-  permission_type: read
+  owner: t
+
+admin_has_document:
+  id: 3
+  user_id: 1
+  report_id: 3
+  prev_id:
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
   owner: t
 
 admin_has_cardbill:
-  id: 2
-  user_id: 3
-  report_id: 3
+  id: 4
+  user_id: 1
+  report_id: 4
   prev_id:
   created_at: <%= Time.zone.now %>
   updated_at: <%= Time.zone.now %>
-  permission_type: write
   owner: t
 
 manager_has_cardbill:
-  id: 3
+  id: 5
   user_id: 3
-  report_id: 3
+  report_id: 5
   prev_id:
   created_at: <%= Time.zone.now %>
   updated_at: <%= Time.zone.now %>
-  permission_type: write
-  owner: f
+  owner: t
 
 user_has_cardbill:
-  id: 4
+  id: 6
   user_id: 4
-  report_id: 4
-  prev_id: 3
+  report_id: 5
+  prev_id: 5
   created_at: <%= Time.zone.now %>
   updated_at: <%= Time.zone.now %>
-  permission_type: write
   owner: t
 
 user_has_expense_report:
-  id: 5
+  id: 7
   user_id: 4
-  report_id: 1
+  report_id: 6
   prev_id:
   created_at: <%= Time.zone.now %>
   updated_at: <%= Time.zone.now %>
-  permission_type: write
+  owner: t
+
+admin_has_expense_report:
+  id: 8
+  user_id: 1
+  report_id: 6
+  prev_id: 7
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
   owner: t
