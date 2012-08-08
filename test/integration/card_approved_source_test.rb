@@ -6,6 +6,7 @@ class CardApprovedSourcesTest < ActionDispatch::IntegrationTest
   fixtures :card_approved_sources
   fixtures :card_used_sources
   fixtures :bank_accounts
+  fixtures :cardbills
 
   test 'should visit card_approved_sources list' do
     visit '/'
@@ -130,7 +131,7 @@ class CardApprovedSourcesTest < ActionDispatch::IntegrationTest
     select('normal', from: 'owner')
     click_button '카드영수증 생성'
 
-    assert(page.has_content?('normal 이(가) 총 2개의 카드영수증을 생성했습니다.'))
+    assert(page.has_content?('normal 이(가) 총 1개의 카드영수증을 생성했습니다.'))
   end
 
   test 'should show list without cardbill' do
