@@ -37,7 +37,7 @@ class ActionDispatch::IntegrationTest
   end
 
   def simple_authenticate
-    visit '/test/sessions?account_id=1'
+    visit '/test/sessions?person_id=1'
   end
 
   def clear_session
@@ -49,18 +49,16 @@ class ActionController::TestCase
   setup :global_setup
   teardown :global_teardown
 
-  # fixtures :accounts, :companies, :companies_accounts, :groups, :groups_accounts
-  
   fixtures :accounts, :people, :employees, :companies_people, :groups_people, :groups, :companies
 
   def global_setup
     DatabaseCleaner.strategy = :truncation
     DatabaseCleaner.start
 
-    session[:account_id] = current_account.id
+    session[:person_id] = current_person.id
     session[:company_id] = current_company.id
 
-    Account.current_account = current_account
+    Person.current_person = current_person
     Company.current_company = current_company
   end
 
@@ -68,12 +66,12 @@ class ActionController::TestCase
     DatabaseCleaner.clean
   end
 
-  def current_account
-    unless @account
-      @account = accounts(:admin_account)
-      @account.person.groups.create!(name: "admin")
+  def current_person
+    unless @person
+      @person = people(:fixture)
+      @person.groups.create!(name: "admin")
     end
-    @account
+    @person
   end
 
   def current_company

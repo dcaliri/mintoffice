@@ -49,7 +49,7 @@
 		= text_field_tag :bonus_4_percent, nil, :size => 3
 		' % to month
 		= text_field_tag :bonus_4_month, nil, :size => 3
-	
+
 	p
 		= submit_tag "Add"
-		= link_to "Back", :action => "show", :id => current_account
+		= link_to "Back", :action => "show", :id => current_person.account

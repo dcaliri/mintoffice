@@ -18,8 +18,8 @@ Company.current_company = company
 unless Account.exists?(name: 'admin')
   account = Account.create!(name: 'admin', password: '1234')
   person = account.person
-  Account.current_account = account
-  
+  Person.current_person = person
+
   employee = person.create_employee(juminno: '771122-1111111', joined_on: Date.today)
 
   employee.person.permissions.build(name: 'users')

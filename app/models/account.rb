@@ -18,7 +18,6 @@ class Account < ActiveRecord::Base
   validates_confirmation_of :password, :if => Proc.new{|account| account.provider.blank?}
   validate :password_non_blank, :if => Proc.new{|account| account.provider.blank?}
 
-  cattr_accessor :current_account
   attr_accessor :password_confirmation
 
   before_create :create_person_and_add_current_comapny

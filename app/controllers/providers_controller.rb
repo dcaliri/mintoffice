@@ -8,7 +8,7 @@ class ProvidersController < ApplicationController
     @account = Account.create_from_omniauth(auth) unless @account
     raise @account.errors.inspect if @account.invalid?
 
-    session[:account_id] = @account.id
+    session[:person_id] = @account.person.id
 
     if @account.needs_apply?
       redirect_to [:dashboard, :enrollments]

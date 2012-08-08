@@ -2,7 +2,7 @@
   #account
     ul
       li
-        = link_to t("accounts.my.title")+(@account != nil ? "(#{@account.name})" : ""), my_accounts_path
+        = link_to t("accounts.my.title")+(current_person != nil ? "(#{current_person.name})" : ""), my_accounts_path
       li
         = link_to t("common.link.logout"), logout_accounts_path
   ul
