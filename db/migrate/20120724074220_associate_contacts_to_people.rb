@@ -1,4 +1,12 @@
 class AssociateContactsToPeople < ActiveRecord::Migration
+  class ::Hrinfo < ActiveRecord::Base
+    belongs_to :person
+  end
+
+  class ::Person < ActiveRecord::Base
+    has_many :hrinfo
+  end
+
   def up
     add_column :contacts, :person_id, :integer
 
