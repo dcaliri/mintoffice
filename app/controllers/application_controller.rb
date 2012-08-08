@@ -5,10 +5,9 @@
 class ApplicationController < ActionController::Base
   helper :all
   protect_from_forgery
-  before_filter :set_global_current_account_and_company
+  before_filter :set_global_current_person_and_company
 
-  def set_global_current_account_and_company
-    Account.current_account = current_account
+  def set_global_current_person_and_company
     Person.current_person = current_person
     Company.current_company = current_company
   end
@@ -21,14 +20,8 @@ class ApplicationController < ActionController::Base
   end
   helper_method :current_company
 
-  def current_account
-    @account ||= @current_account ||= Account.find(session[:account_id]) unless session[:account_id].nil?
-    # @current_account ||= Account.find(session[:account_id]) unless session[:account_id].nil?
-  end
-  helper_method :current_account
-
   def current_person
-    current_account.person if current_account
+    @current_person ||= Person.find(session[:person_id]) unless session[:person_id].nil?
   end
   helper_method :current_person
 
@@ -47,14 +40,6 @@ class ApplicationController < ActionController::Base
       Employee.where(id: current_employee.id)
     else
       Employee.scoped
-    end
-  end
-
-  def Account(permission)
-    if permission == :protedted && current_account.admin? == false
-      Account.where(name: current_account.name)
-    else
-      Account.scoped
     end
   end
 
