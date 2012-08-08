@@ -21,3 +21,15 @@ cardbill:
     target_id: 1
     target_type: "Cardbill"
     status: "not_reported"
+
+cardbill_process_cardbill_fixture:
+    id: 5
+    target_id: 3
+    target_type: "Cardbill"
+    status: "not_reported"
+
+cardbill_process_expense_report_cardbill:
+    id: 6
+    target_id: 3
+    target_type: "ExpenseReport"
+    status: "not_reported"
