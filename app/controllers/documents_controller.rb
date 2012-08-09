@@ -34,11 +34,12 @@ class DocumentsController < ApplicationController
 
   def add_owner
     owner = Account.find_by_name(params[:accountname])
+    employee = owner.person.employee
     if owner
-      if document.employees.exists?(owner.employee)
+      if document.employees.exists?(employee)
         flash[:notice] = 'Already exists'
       else
-        document.employees << owner.employee
+        document.employees << employee
       end
     else
       flash[:notice] = 'No such account'

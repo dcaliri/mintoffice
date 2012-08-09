@@ -50,7 +50,6 @@ class Employee < ActiveRecord::Base
 
       if person and person.admin? and type == :retire
         where('retired_on IS NOT NULL')
-        # [last]
       else
         where('joined_on IS NOT NULL AND retired_on IS NULL')
       end
