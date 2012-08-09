@@ -48,10 +48,10 @@ class EnrollmentTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('google_account_user: admin님에게 결재를 요청하였습니다.'))
 
     clear_session
-    
+
     visit '/'
 
-    fill_in "사용자계정", with: "google_account_user"
+    fill_in "사용자계정", with: "admin"
     fill_in "비밀번호", with: "1234"
 
     click_button "로그인"

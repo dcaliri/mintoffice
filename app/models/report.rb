@@ -70,10 +70,10 @@ class Report < ActiveRecord::Base
     permission person, :write
     permission prev_reporter.person, :read
 
-    save!
-
     self.comments.build(owner: prev_reporter, description: "#{next_reporter.fullname}"+I18n.t('models.report.to_report'))
     self.comments.build(owner: prev_reporter, description: comment) unless comment.blank?
+
+    save!
 
     notify(:report, prev_reporter, next_reporter, report_url)
   end

@@ -15,3 +15,6 @@ no_employee:
 
 has_google_apps_account:
   id: 6
+
+google_account_user:
+  id: 7
