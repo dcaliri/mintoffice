@@ -1,7 +1,6 @@
 # encoding: UTF-8
 
 class LedgerAccount < ActiveRecord::Base
-  # has_many :posting_items
   has_many :items, class_name: 'PostingItem'
 
   CATEGORY_TYPE = [I18n.t('models.ledger_account.fund'),

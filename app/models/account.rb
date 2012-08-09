@@ -30,36 +30,18 @@ class Account < ActiveRecord::Base
   include Historiable
   include Attachmentable
 
-  ## Need to Remove ########################################################################
-  def employee
-    person.employee
-  end
-  
-  def self.no_admins
-    all - joins(:person => :groups).where('groups.name == ?', "admin")
-  end
+  # def person
+  #   myself = Person.find_by_id(person_id)
+  #   unless myself
+  #     myself = create_person!
+  #     self.update_column(:person_id, myself.id)
+  #   end
+  #   myself
+  # end
 
-  def admin?
-    person and person.admin?
-  end
-
-  def permission?(name)
-    person and person.permission?(name)
-  end
-  ##########################################################################################
-
-  def person
-    myself = Person.find_by_id(person_id)
-    unless myself
-      myself = create_person!
-      self.update_column(:person_id, myself.id)
-    end
-    myself
-  end
-
-  def enrollment
-    Enrollment.find_by_person_id(person.id) || person.create_enrollment!(company_id: Company.current_company.id)
-  end
+  # def enrollment
+  #   Enrollment.find_by_person_id(person.id) || person.create_enrollment!(company_id: Company.current_company.id)
+  # end
 
   def history_except
     [:name, :hashed_password, :salt]
@@ -87,7 +69,7 @@ class Account < ActiveRecord::Base
   end
 
   def fullname
-    employee.nil? ? name : employee.fullname
+    person.employee.nil? ? name : person.employee.fullname
   end
 
   def password

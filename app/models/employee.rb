@@ -15,10 +15,10 @@ class Employee < ActiveRecord::Base
 
   has_many :document_owners, :order => 'created_at DESC'
   has_many :documents, :through => :document_owners, :source => :document
-  
+
   has_many :project_infos, class_name: "ProjectAssignInfo"
   has_many :projects, through: :project_infos
-  
+
   serialize :employment_proof_hash, Array
 
   include Historiable
@@ -47,8 +47,10 @@ class Employee < ActiveRecord::Base
 
     def search_by_type(person, type)
       type = type.to_sym
+
       if person and person.admin? and type == :retire
         where('retired_on IS NOT NULL')
+        # [last]
       else
         where('joined_on IS NOT NULL AND retired_on IS NULL')
       end
@@ -72,18 +74,6 @@ class Employee < ActiveRecord::Base
   end
   end
 
-  def account
-    person.account
-  end
-
-  def employee_account
-    person.account.id
-  end
-  
-  def contact
-    person.contact
-  end
-  
   def admin?
     person.admin?
   end
@@ -107,13 +97,13 @@ class Employee < ActiveRecord::Base
   def firstname=(value)
     super
     contact_or_build.firstname = value
-    # contact_or_build.save!
+    contact_or_build.save!
   end
 
   def lastname=(value)
     super
     contact_or_build.lastname = value
-    # contact_or_build.save!
+    contact_or_build.save!
   end
 
   def position=(value)

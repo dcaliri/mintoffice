@@ -1,16 +1,5 @@
 class Permission < ActiveRecord::Base
-  # has_and_belongs_to_many :account
-  # has_and_belongs_to_many :employees
   has_and_belongs_to_many :people
-
-  ### deprecated methods
-  # def employee
-  #   add_to_fix_me_log('employee')
-  #   employees
-  # end
-  ### deprecated methods
-
-
 
   validates :name, presence: true, uniqueness: true
 

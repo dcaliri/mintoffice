@@ -11,11 +11,10 @@ h1
   p
     = f.label :employees
     br
-    - if !Account.all.blank?
-      - for account in Account.enabled
-        - if account.employee
-          = check_box_tag "permission[person_ids][]", account.person.id, @permission.people.include?(account.person)
-          = account.person.name
+    - unless Person.count == 0
+      - Person.with_account.each do |person|
+        = check_box_tag "permission[person_ids][]", person.id, @permission.people.include?(person)
+        = person.name
   p
     = f.submit 'Update'
 

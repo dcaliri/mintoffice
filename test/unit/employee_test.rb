@@ -13,8 +13,8 @@ class EmployeeTest < ActiveSupport::TestCase
     Employee.destroy_all
     account = Account.first
 
-    joined  = Employee.create(juminno: "830101-1010110", joined_on: Date.today)
-    retired = Employee.create(juminno: "830101-1010111", joined_on: Date.today, retired_on: Date.today)
+    joined  = Employee.create(juminno: "830101-1010110", companyno: 1, joined_on: Date.today)
+    retired = Employee.create(juminno: "830101-1010111", companyno: 2, joined_on: Date.today, retired_on: Date.today)
 
     assert_equal([joined], Employee.search_by_type(account, :join))
     assert_equal([retired], Employee.search_by_type(account, :retire))

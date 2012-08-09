@@ -26,19 +26,19 @@ h2
       dt
         = Employee.human_attribute_name('person_id')
       dd
-        = @employee.account.name
+        = @employee.person.account.name
       - if current_person.admin? || @employee == current_employee
         = dtdd @employee, "juminno"
       = dtdd @employee, "joined_on"
       - if @employee.retired_on
         = dtdd @employee, "retired_on"
-      - if @employee.contact
+      - if @employee.person.contact
         #show_command
-          = link_to t('employees.show.find_address'), @employee.contact
+          = link_to t('employees.show.find_address'), @employee.person.contact
         h3
           = t("contacts.show.title")
         ul
-          = render 'contacts/item_for_employee', contact: @employee.contact,menu: false
+          = render 'contacts/item_for_employee', contact: @employee.person.contact,menu: false
       - if current_person.admin? || @employee == current_employee
         - if current_person.admin?
           #show_command
@@ -54,7 +54,7 @@ h2
                 - if @required_documents[rtn]
                   = link_to @required_documents[rtn].title, :controller => "documents", :action => "show", :id => @required_documents[rtn]
                 - else
-                  = link_to " Register", :controller => "documents", :action => "new", :tag => [rtn, Employee.model_name.human, @employee.account.name].join(',')
+                  = link_to " Register", :controller => "documents", :action => "new", :tag => [rtn, Employee.model_name.human, @employee.person.account.name].join(',')
           - if !@unrequired_documents.blank?
             - for d in @unrequired_documents
               li
@@ -66,9 +66,9 @@ h2
           ul
             - if current_person.admin? || @employee == current_employee
               li
-                = link_to t('payments.title'), payment_path(@employee.account)
+                = link_to t('payments.title'), payment_path(@employee)
               li
-                = link_to t('vacations.show.link'), vacation_path(@employee.account)
+                = link_to t('vacations.show.link'), vacation_path(@employee)
   #attach
     = render "shared/attachments/detail", :target => @employee
   .clear

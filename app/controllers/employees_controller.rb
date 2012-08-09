@@ -33,7 +33,7 @@ class EmployeesController < ApplicationController
 
   def show
     @employee = Employee.find(params[:id])
-    @related_documents = current_company.tags.related_documents(@employee.account.name, Employee.model_name.human)
+    @related_documents = current_company.tags.related_documents(@employee.person.account.name, Employee.model_name.human)
     @required_tagnames = RequiredTag.find_all_by_modelname(Employee.name).collect do |rt| rt.tag.name end
     @required_tagnames = @required_tagnames.uniq.sort
 
