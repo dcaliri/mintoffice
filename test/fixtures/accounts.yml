@@ -40,3 +40,33 @@ has_google_apps_account:
     hashed_password: "96043f0adf13e8d440a0e90ec7a2b7757a16bc2c"
     salt: "21757029800.1164294613723833"
     google_account: has_google_apps_account@wangsy.com
+
+google_account_user:
+    id: 7
+    name: "google_account_user"
+    person_id: 7
+    hashed_password: "96043f0adf13e8d440a0e90ec7a2b7757a16bc2c"
+    salt: "21757029800.1164294613723833"
+    provider: google
+    uid: https://www.google.com/accounts/o8/id?id=google_account_user
+    google_account: google_account_user@wangsy.com
+    notify_email: google_account_user@wangsy.com
+
+daum_account_user:
+    id: 8
+    name: "daum_account_user"
+    person_id: 8
+    provider: daum
+    uid: daum_account_user
+    notify_email: daum_account_user@hanmail.com
+    daum_account: daum_account_user@hanmail.com
+
+nate_account_user:
+    id: 9
+    name: "nate_account_user"
+    person_id: 9
+    provider: nate
+    uid: nate_account_user@lycos.co.kr
+    notify_email: nate_account_user@lycos.co.kr
+    nate_account: nate_account_user@lycos.co.kr
+

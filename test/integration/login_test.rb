@@ -27,7 +27,24 @@ class LoginTest < ActionDispatch::IntegrationTest
 
     assert(page.has_content?('Mint Office'))
   end
-  
+
+#  test 'show google auth login' do
+#    clear_session
+#    
+#    visit '/'
+#
+#    click_link '구글 계정으로 로그인'
+#
+#    fill_in "이메일", with: ""
+#    fill_in "비밀번호", with: ""
+#
+#    click_button '로그인'
+#
+#    click_button '허용'
+#
+#    assert(page.has_content?('입사지원서 관리'))
+#  end
+
   test 'login fail' do
     clear_session
     
