@@ -39,6 +39,8 @@ class BankTransferTest < ActionDispatch::IntegrationTest
     alert.send_keys("test tag")
     alert.accept
 
+    page.driver.send(:sleep, 1)
+
     assert(!page.has_content?('28505013648'))
     assert(!page.has_content?('KRW'))
   end
