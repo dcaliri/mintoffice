@@ -31,8 +31,7 @@ class CompanyTest < ActionDispatch::IntegrationTest
     select('김 개똥', from: 'company_apply_admin_id')
     fill_in "입사지원 필수 첨부자료", with: "이력서"
 
-    find_by_id('company_attachments_attributes_0_uploaded_file').click
-    path = File.join(::Rails.root, "test/fixtures/images/seal.png")
+    path = File.join(::Rails.root, "test/fixtures/images/attachment_test_file.png")
     attach_file("company_attachments_attributes_0_uploaded_file", path)
 
     click_button '회사 수정하기'
