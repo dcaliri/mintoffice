@@ -44,7 +44,6 @@ class LedgerAccountTest < ActionDispatch::IntegrationTest
     find("tr.selectable").click
 
     click_link '삭제하기'
-    page.driver.browser.switch_to.alert.accept
 
     assert(!page.has_content?('현금'))
   end

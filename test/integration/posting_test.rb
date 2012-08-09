@@ -48,9 +48,10 @@ class PostingTest < ActionDispatch::IntegrationTest
     visit '/'
     click_link '전표 관리'
     find("tr.selectable").click
-    
+
+    disable_confirm_box
+
     click_link '삭제하기'
-    page.driver.browser.switch_to.alert.accept
 
     assert(!page.has_content?('상세내용 기입 테스트'))
   end

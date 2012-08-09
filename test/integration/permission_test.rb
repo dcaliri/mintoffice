@@ -73,9 +73,10 @@ class PermissionTest < ActionDispatch::IntegrationTest
     visit '/'
     click_link '권한 관리'
 
+    disable_confirm_box
+
     click_link 'Destroy'
-    page.driver.browser.switch_to.alert.accept
-    
+
     assert(!page.has_content?('accessors'))
   end
 end

@@ -48,8 +48,9 @@ class ExpenseReportTest < ActionDispatch::IntegrationTest
     click_link '지출내역서 관리'
     find("tr.selectable").click
 
+    disable_confirm_box
+
     click_link '삭제'
-    page.driver.browser.switch_to.alert.accept
 
     assert(!page.has_content?('이체 내역'))
   end

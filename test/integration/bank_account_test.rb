@@ -56,9 +56,10 @@ class BankAccountTest < ActionDispatch::IntegrationTest
     visit '/'
     click_link '은행계좌 목록'
     find("tr.selectable").click
-    
+
+    disable_confirm_box
+
     click_link '삭제'
-    page.driver.browser.switch_to.alert.accept
 
     assert(!page.has_content?('신한 은행'))
   end

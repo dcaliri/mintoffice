@@ -25,6 +25,10 @@ class ActionDispatch::IntegrationTest
     simple_authenticate
   end
 
+  def disable_confirm_box
+    page.evaluate_script('window.confirm = function() { return true; }')
+  end
+
   private
   def global_setup
     simple_authenticate

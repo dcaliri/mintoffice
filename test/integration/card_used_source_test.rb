@@ -151,8 +151,9 @@ class CardUsedSourcesTest < ActionDispatch::IntegrationTest
     click_link '카드별 이용내역'
     find("tr.selectable").click
 
-    click_link '삭제'    
-    page.driver.browser.switch_to.alert.accept
+    disable_confirm_box
+
+    click_link '삭제'
 
     assert(page.has_content?('신용카드 이용내역'))
   end

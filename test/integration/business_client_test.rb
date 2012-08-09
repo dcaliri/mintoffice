@@ -66,8 +66,9 @@ class BusinessClientTest < ActionDispatch::IntegrationTest
     click_link '거래처 관리'
     find("tr.selectable").click
 
+    disable_confirm_box
+
     click_link '삭제하기'
-    page.driver.browser.switch_to.alert.accept
 
     assert(page.has_content?('거래처이(가) 성공적으로 제거 되었습니다.'))
   end

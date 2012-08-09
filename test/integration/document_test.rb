@@ -52,8 +52,9 @@ class DocumentTest < ActionDispatch::IntegrationTest
     click_link '문서 관리'
     find("tr.selectable").click
 
+    disable_confirm_box
+
     click_link '삭제하기'
-    page.driver.browser.switch_to.alert.accept
 
     assert(!page.has_content?('테스트 문서'))
   end

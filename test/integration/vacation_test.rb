@@ -49,10 +49,12 @@ class VacationTest < ActionDispatch::IntegrationTest
 
   test 'should destroy vacations priod' do
     visit '/'
-    
+
     click_link '연차 정보'
+
+    disable_confirm_box
+
     click_link '삭제'
-    page.driver.browser.switch_to.alert.accept
 
     assert(page.has_content?('연차 정보'))
   end
@@ -138,7 +140,7 @@ class VacationTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('사용한 연차 정보'))
 
     click_link '삭제하기'
-    page.driver.browser.switch_to.alert.accept
+    
 
     assert(page.has_content?('연차 관리'))
   end

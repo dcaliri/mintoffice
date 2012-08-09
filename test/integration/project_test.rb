@@ -80,7 +80,7 @@ class ProjectTest < ActionDispatch::IntegrationTest
 
     click_link '수정하기'
     click_link '프로젝트 완료'
-    page.driver.browser.switch_to.alert.accept
+    
 
     click_link '프로젝트 관리 - 완료'
 

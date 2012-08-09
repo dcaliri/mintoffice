@@ -130,11 +130,12 @@ class BankTransferTest < ActionDispatch::IntegrationTest
     visit '/'
     click_link '은행계좌 목록'
     click_link '이체내역 보기'
-    
+
     find("tr.selectable").click
 
+    disable_confirm_box
+
     click_link '삭제'
-    page.driver.browser.switch_to.alert.accept
 
     assert(page.has_content?('이체 내역이 없습니다'))
   end
@@ -143,7 +144,7 @@ class BankTransferTest < ActionDispatch::IntegrationTest
     visit '/'
     click_link '은행계좌 목록'
     click_link '이체내역 보기'
-    
+
     find("tr.selectable").click
 
     click_link '지출내역서 만들기'

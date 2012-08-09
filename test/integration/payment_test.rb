@@ -64,8 +64,9 @@ class PaymentTest < ActionDispatch::IntegrationTest
     visit '/'
     click_link '연봉 관리'
 
+    disable_confirm_box
+
     click_link '삭제'
-    page.driver.browser.switch_to.alert.accept
 
     assert(page.has_content?('연봉 관리'))
   end

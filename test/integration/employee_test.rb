@@ -99,8 +99,9 @@ class EmployeeTest < ActionDispatch::IntegrationTest
 
     click_link '주소록 찾기'
 
+    disable_confirm_box
+
     click_link '제거'
-    page.driver.browser.switch_to.alert.accept
 
     assert(!page.has_content?('wangsy@wangsy.com'))
   end
@@ -114,8 +115,9 @@ class EmployeeTest < ActionDispatch::IntegrationTest
 
     assert(page.has_content?('연락처 관리'))
 
+    disable_confirm_box
+
     click_link '삭제'
-    page.driver.browser.switch_to.alert.accept
 
     assert(!page.has_content?('왕 수용'))
   end

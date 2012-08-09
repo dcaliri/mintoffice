@@ -161,8 +161,9 @@ class BankTransactionTest < ActionDispatch::IntegrationTest
 
     find("tr.selectable").click
 
+    disable_confirm_box
+
     click_link '삭제'
-    page.driver.browser.switch_to.alert.accept
 
     assert(page.has_content?('입출금 내역이 없습니다'))
   end

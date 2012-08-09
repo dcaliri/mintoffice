@@ -59,7 +59,7 @@ class HolidayTest < ActionDispatch::IntegrationTest
     find("tr.selectable").click
 
     click_link '삭제하기'
-    page.driver.browser.switch_to.alert.accept
+    
 
     assert(!page.has_content?('광복절'))
   end

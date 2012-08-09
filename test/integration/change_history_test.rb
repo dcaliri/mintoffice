@@ -55,8 +55,9 @@ class ChangeHistoryTest < ActionDispatch::IntegrationTest
     click_link '변경사항 관리'
     find("tr.selectable").click
 
+    disable_confirm_box
+
     click_link '삭제하기'
-    page.driver.browser.switch_to.alert.accept
 
     visit '/'
     click_link '소액현금관리'
