@@ -42,7 +42,7 @@ class SectionEnrollment::EnrollmentsController < ApplicationController
 
   private
   def find_enrollment
-    @enrollment = current_person.enrollment
+    @enrollment = current_person.enrollment || current_person.create_enrollment!(company_id: current_company)
   end
 
   def find_apply_admin

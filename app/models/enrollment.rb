@@ -15,6 +15,7 @@ class Enrollment < ActiveRecord::Base
   end
 
   include Reportable
+
   def apply_status
     case report.status
     when :rollback
