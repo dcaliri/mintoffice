@@ -17,7 +17,7 @@ dl
       dd
         = link_to t('common.link.edit'), [:edit, contact]
         = " | "
-        = link_to t('contacts.item.remove'), [contact, email], :method => :delete, confirm: t("common.messages.delete_confirm")
+        = link_to t('contacts.item.remove'), [contact, email], :method => :delete, data: {confirm: t("common.messages.delete_confirm")}
   - contact.phone_numbers.each do |phone_number|
     dt
       = t('contacts.item.phonenumber')
@@ -28,7 +28,7 @@ dl
       dd
         = link_to t('common.link.edit'), [:edit, contact]
         = " | "
-        = link_to t('contacts.item.remove'), [contact, phone_number], :method => :delete, confirm: t("common.messages.delete_confirm")
+        = link_to t('contacts.item.remove'), [contact, phone_number], :method => :delete, data: {confirm: t("common.messages.delete_confirm")}
   - contact.addresses.each do |address|
     dt
       = t('contacts.item.address')
@@ -39,7 +39,7 @@ dl
       dd
         = link_to t('common.link.edit'), [:edit, contact]
         = " | "
-        = link_to t('contacts.item.remove'), [contact, address], :method => :delete, confirm: t("common.messages.delete_confirm")
+        = link_to t('contacts.item.remove'), [contact, address], :method => :delete, data: {confirm: t("common.messages.delete_confirm")}
   - contact.others.each do |other|
     dt
       = t('contacts.show.etc')
@@ -50,7 +50,7 @@ dl
       dd
         = link_to t('common.link.edit'), [:edit, contact]
         = " | "
-        = link_to t('contacts.item.remove'), [contact, other], :method => :delete, confirm: t("common.messages.delete_confirm")
+        = link_to t('contacts.item.remove'), [contact, other], :method => :delete, data: {confirm: t("common.messages.delete_confirm")}
   dt
     = Document.human_attribute_name("tags")
   dd

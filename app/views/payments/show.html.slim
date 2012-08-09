@@ -53,7 +53,7 @@ table#list-table
           td style="text-align:center;"
             = link_to t("common.link.edit"), [:edit, employee, payment]
             = " | "
-            = link_to t("common.link.destroy"), [employee, payment], :method => :delete, confirm: t("common.messages.delete_confirm")
+            = link_to t("common.link.destroy"), [employee, payment], :method => :delete, data: {confirm: t("common.messages.delete_confirm")}
       - show_sum = false
 
 - if current_person.admin?

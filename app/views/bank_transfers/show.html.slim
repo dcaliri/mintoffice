@@ -9,7 +9,7 @@
   = " | "
   = link_to t('common.link.edit'), edit_bank_transfer_path(bank_transfer, bank_account_id: bank_transfer.bank_account)
   = " | "
-  = link_to t('common.link.destroy'), bank_transfer, :method => :delete, confirm: t("common.messages.delete_confirm")
+  = link_to t('common.link.destroy'), bank_transfer, :method => :delete, data: {confirm: t("common.messages.delete_confirm")}
   = " | "
   = link_to t('common.title.back'), :bank_transfers
 

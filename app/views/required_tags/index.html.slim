@@ -15,4 +15,4 @@ h2
               - if rt.modelname == mn
                 li
                   = rt.tag.name + " "
-                  = link_to "[X]", rt, method: :delete, confirm: t("common.messages.delete_confirm")
+                  = link_to "[X]", rt, method: :delete, data: {confirm: t("common.messages.delete_confirm")}

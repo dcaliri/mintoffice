@@ -2,7 +2,7 @@
   - if contact.edit?(current_person)
     = link_to t('common.link.edit'), [:edit, contact]
     = " | "
-    = link_to t('common.link.destroy'), contact, :method => :delete, confirm: t("common.messages.delete_confirm")
+    = link_to t('common.link.destroy'), contact, :method => :delete, data: {confirm: t("common.messages.delete_confirm")}
     = " | "
   = link_to t('common.title.back'), :contacts
 

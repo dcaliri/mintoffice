@@ -13,7 +13,7 @@ h2= employee.fullname
         = " | "
         = link_to t('common.link.edit'), [:edit, employee, vacation]
         = " | "
-        = link_to t('common.link.destroy'), [employee, vacation], :method => :delete, confirm: t("common.messages.delete_confirm")
+        = link_to t('common.link.destroy'), [employee, vacation], :method => :delete, data: {confirm: t("common.messages.delete_confirm")}
     h3= "#{vacation.from} ~ #{vacation.to} : #{t('vacations.show.info', total: vacation.period, used: vacation.used.total, remain: vacation.remain)}"
 
     - unless vacation.used.empty?

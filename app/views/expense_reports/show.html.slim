@@ -11,7 +11,7 @@
   - unless expense_report.posting
     = link_to t('common.link.edit'), [:edit, expense_report]
     = " | "
-    = link_to t('common.link.destroy'), expense_report, :method => :delete, confirm: t("common.messages.delete_confirm")
+    = link_to t('common.link.destroy'), expense_report, :method => :delete, data: {confirm: t("common.messages.delete_confirm")}
     = " | "
   = link_to t('common.title.back'), :expense_reports
 

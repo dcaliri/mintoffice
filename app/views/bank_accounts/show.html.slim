@@ -5,7 +5,7 @@
   = " | "
   = link_to t('common.link.edit'), [:edit, bank_account]
   = " | "
-  = link_to t('common.link.destroy'), bank_account, :method => :delete, confirm: t("common.messages.delete_confirm")
+  = link_to t('common.link.destroy'), bank_account, :method => :delete, data: {confirm: t("common.messages.delete_confirm")}
   = " | "
   = link_to t('common.title.list'), :bank_accounts
 

@@ -4,7 +4,7 @@
   = " | "
   = link_to t("common.title.back"), projects_path
   = " | "
-  = link_to t(".completed"), {:action => "completed", :id => project}, {:confirm => t(".confirm_complete")}
+  = link_to t(".completed"), {:action => "completed", :id => project}, data: {data: {confirm: t(".confirm_complete")}}
 h2
   = t("common.title.edit")
 
