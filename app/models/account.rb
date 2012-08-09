@@ -76,16 +76,6 @@ class Account < ActiveRecord::Base
     account
   end
 
-  # def self.create_from_omniauth(auth)
-  #   create! do |account|
-  #     account.provider = auth["provider"]
-  #     account.uid = auth["uid"]
-  #     account.send(auth["provider"] + "_account=", auth["info"]["email"])
-  #     account.name = auth["info"]["nickname"] || auth["info"]["name"]
-  #     account.notify_email = auth["info"]["email"]
-  #   end
-  # end
-
   def self.create_from_omniauth(auth)
     create do |account|
       account.provider = auth["provider"]
@@ -202,7 +192,7 @@ class Account < ActiveRecord::Base
 
     def google_transporter
       current_company = Company.current_company
-      
+
       transporter = GoogleApps::Transport.new current_company.google_apps_domain
       transporter.authenticate current_company.google_apps_accountname, current_company.google_apps_password
       transporter
