@@ -107,13 +107,13 @@ class Employee < ActiveRecord::Base
   def firstname=(value)
     super
     contact_or_build.firstname = value
-    contact_or_build.save!
+    # contact_or_build.save!
   end
 
   def lastname=(value)
     super
     contact_or_build.lastname = value
-    contact_or_build.save!
+    # contact_or_build.save!
   end
 
   def position=(value)

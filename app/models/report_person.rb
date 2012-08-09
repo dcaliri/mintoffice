@@ -1,6 +1,4 @@
 class ReportPerson < ActiveRecord::Base
-  # belongs_to :account
-  # belongs_to :employee
   belongs_to :person
   belongs_to :report
 

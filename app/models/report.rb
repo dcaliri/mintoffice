@@ -1,6 +1,5 @@
 # encoding: UTF-8
 
-
 class Report < ActiveRecord::Base
   belongs_to :target, polymorphic: true
   has_many :reporters, class_name: "ReportPerson", dependent: :destroy
@@ -64,40 +63,28 @@ class Report < ActiveRecord::Base
     end
 
     self.status = :reporting
-    self.comments.build(owner: prev_reporter, description: "#{next_reporter.fullname}"+I18n.t('models.report.to_report'))
-    self.comments.build(owner: prev_reporter, description: comment) unless comment.blank?
 
     next_reporter.save!
     prev_reporter.save!
-
-    target_name = target.class.to_s.downcase
-    title = I18n.t("reports.report.title.#{target_name}", {
-      default: I18n.t("reports.report.title.default"),
-      prev: prev_reporter.fullname,
-      next: next_reporter.fullname
-    })
-
-    body = I18n.t("reports.report.body.#{target_name}", {
-      default: I18n.t("reports.report.body.default"),
-      prev: prev_reporter.fullname,
-      next: next_reporter.fullname,
-      url: report_url,
-    })
 
     permission person, :write
     permission prev_reporter.person, :read
 
     save!
 
-    Boxcar.send_to_boxcar_account(next_reporter.person, prev_reporter.fullname, title)
-    ReportMailer.report(target, prev_reporter.person, next_reporter.person, title, body)
+    self.comments.build(owner: prev_reporter, description: "#{next_reporter.fullname}"+I18n.t('models.report.to_report'))
+    self.comments.build(owner: prev_reporter, description: comment) unless comment.blank?
+
+    notify(:report, prev_reporter, next_reporter, report_url)
   end
 
   def approve!(comment)
     self.status = :reported
     Person.current_person.reporters.create!(report_id: id, owner: true) unless self.reporter
+
     self.comments.build(owner: self.reporter, description: "#{reporter.fullname}"+I18n.t('models.report.to_approve'))
     self.comments.build(owner: self.reporter, description: comment) unless comment.blank?
+
     save!
   end
 
@@ -115,30 +102,13 @@ class Report < ActiveRecord::Base
       permission next_reporter.person, :write
       permission prev_reporter.person, :read
     end
+
     self.comments.build(owner: prev_reporter, description: "#{prev_reporter.fullname}"+I18n.t('models.report.to_rollback'))
     self.comments.build(owner: prev_reporter, description: comment) unless comment.blank?
 
-    if next_reporter
-      target_name = target.class.to_s.downcase
-      title = I18n.t("reports.rollback.title.#{target_name}", {
-        default: I18n.t("reports.rollback.title.default"),
-        prev: prev_reporter.fullname,
-        next: next_reporter.fullname
-      })
-
-      body = I18n.t("reports.rollback.body.#{target_name}", {
-        default: I18n.t("reports.rollback.body.default"),
-        prev: prev_reporter.fullname,
-        next: next_reporter.fullname,
-        url: report_url,
-      })
-
-
-      Boxcar.send_to_boxcar_account(next_reporter.person, prev_reporter.fullname, title)
-      ReportMailer.report(target, prev_reporter.person, next_reporter.person, title, body)
-    end
-
     save!
+
+    notify(:rollback, prev_reporter, next_reporter, report_url)
   end
 
   def report?
@@ -151,5 +121,27 @@ class Report < ActiveRecord::Base
 
   def approve?
     self.status != :reported
+  end
+
+  private
+  def notify(action, from, to, url)
+    return if !from or !to
+
+    target_name = target.class.to_s.downcase
+      title = I18n.t("reports.#{action}.title.#{target_name}", {
+        default: I18n.t("reports.#{action}.title.default"),
+        prev: from.fullname,
+        next: to.fullname
+      })
+
+      body = I18n.t("reports.#{action}.body.#{target_name}", {
+        default: I18n.t("reports.#{action}.body.default"),
+        prev: from.fullname,
+        next: to.fullname,
+        url: url,
+      })
+
+      Boxcar.send_to_boxcar_account(to.person, from.fullname, title)
+      ReportMailer.report(target, from.person, to.person, title, body)
   end
 end
