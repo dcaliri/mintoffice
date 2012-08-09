@@ -26,7 +26,7 @@ normal:
   retired_on:
   person_id: 2
   position: 사원
-  companyno: 1
+  companyno: 2
   juminno: 123456-1234568
   listed: f
   department: 민트기술
@@ -43,7 +43,7 @@ card_bill_manager:
   retired_on:
   person_id: 3
   position: 관리자
-  companyno: 1
+  companyno: 3
   juminno: 123456-1234569
   listed: f
   department: 경리부
@@ -60,7 +60,7 @@ card_used_user:
   retired_on:
   person_id: 4
   position: 사원
-  companyno: 1
+  companyno: 4
   juminno: 123456-1234560
   listed: f
   department: 경리부
