@@ -17,6 +17,10 @@ class Person < ActiveRecord::Base
 
   cattr_accessor :current_person
 
+  def enrollment
+    Enrollment.find_by_person_id(id) || create_enrollment!(company_id: Company.current_company.id)
+  end
+
   def self.no_employee
     joins(:account).where('accounts.person_id == people.id') - joins(:employee).where('employees.person_id == people.id')
   end

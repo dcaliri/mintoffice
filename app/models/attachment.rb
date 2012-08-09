@@ -39,7 +39,7 @@ class Attachment < ActiveRecord::Base
     unless employee
       employee = Employee.find(1)
     end
-    self.employee = employee.employee
+    self.employee = employee
     self.save
   end
 
