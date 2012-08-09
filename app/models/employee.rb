@@ -27,6 +27,7 @@ class Employee < ActiveRecord::Base
 
   validates_format_of :juminno, :with => /^\d{6}-\d{7}$/, :message => I18n.t('employees.error.juminno_invalid')
   validates_uniqueness_of :juminno
+  validates_uniqueness_of :companyno
 
   attr_accessor :email, :phone_number, :address
 

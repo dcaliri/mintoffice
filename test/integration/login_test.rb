@@ -27,7 +27,7 @@ class LoginTest < ActionDispatch::IntegrationTest
 
     assert(page.has_content?('Mint Office'))
   end
-
+  
   test 'login fail' do
     clear_session
     
