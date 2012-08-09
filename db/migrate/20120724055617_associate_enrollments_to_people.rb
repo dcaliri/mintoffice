@@ -1,4 +1,16 @@
 class AssociateEnrollmentsToPeople < ActiveRecord::Migration
+  class ::User < ActiveRecord::Base
+    belongs_to :person
+  end
+
+  class ::Person < ActiveRecord::Base
+    has_one :user
+  end
+
+  class ::Enrollment < ActiveRecord::Base
+    belongs_to :person
+  end
+
   def up
     add_column :enrollments, :person_id, :integer
 

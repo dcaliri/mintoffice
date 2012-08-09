@@ -1,4 +1,12 @@
 class AssociateTaxmenToPeople < ActiveRecord::Migration
+  class ::Taxman < ActiveRecord::Base
+    belongs_to :person
+  end
+
+  class ::Person < ActiveRecord::Base
+    has_one :taxman
+  end
+
   def up
     add_column :taxmen, :person_id, :integer
 
