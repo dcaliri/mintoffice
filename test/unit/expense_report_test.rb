@@ -1,6 +1,8 @@
 require 'test_helper'
 
 class ExpenseReportTest < ActiveSupport::TestCase
+  fixtures :people
+  fixtures :employees
   fixtures :cardbills
   fixtures :projects
   fixtures :expense_reports
@@ -9,13 +11,13 @@ class ExpenseReportTest < ActiveSupport::TestCase
   fixtures :report_comments
 
   def setup
-    User.current_user = users(:card_user_account)
+    Person.current_person = people(:fixture)
   end
 
   test "user create expense_report" do
     expense_report = ExpenseReport.new
 
-    expense_report.hrinfo_id = current_target_user_hrinfos.id
+    expense_report.employee_id = current_target_user_employees.id
     expense_report.target_type = current_cardbill.class
     expense_report.target_id = current_cardbill.id
     expense_report.project_id = current_project.id
@@ -61,8 +63,6 @@ class ExpenseReportTest < ActiveSupport::TestCase
   end
 
   test "admin approve expense_report to user" do
-    User.current_user = users(:admin_account)
-
     prev_reporter = current_report.reporter
 
     current_report.status = :reported
@@ -78,11 +78,11 @@ class ExpenseReportTest < ActiveSupport::TestCase
   end
 
   def current_admin
-    @target_user ||= users(:admin_account)
+    @target_people ||= people(:fixture)
   end
 
-  def current_target_user_hrinfos
-    @hrinfo ||= hrinfos(:card_used_user)
+  def current_target_user_employees
+    @employee ||= employees(:card_used_user)
   end
 
   def current_project
