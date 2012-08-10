@@ -16,7 +16,7 @@ class VacationsController < ApplicationController
   end
 
   def show
-    if current_user.admin?
+    if current_person.admin?
       @vacations = vacations
     else
       @vacations = vacations.include_today
