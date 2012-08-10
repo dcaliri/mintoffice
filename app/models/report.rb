@@ -93,7 +93,7 @@ class Report < ActiveRecord::Base
       permission prev_reporter.person, :read
     end
 
-    self.comments.build(owner: prev_reporter, description: "#{prev_reporter.fullname}"+I18n.t('models.report.to_rollback'))
+    self.comments.build(owner: prev_reporter, description: "#{prev_reporter.person.fullname}"+I18n.t('models.report.to_rollback'))
     self.comments.build(owner: prev_reporter, description: comment) unless comment.blank?
 
     save!
