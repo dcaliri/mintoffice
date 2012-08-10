@@ -155,4 +155,27 @@ class VacationTest < ActionDispatch::IntegrationTest
 
     assert(page.has_content?('연차 관리'))
   end
+
+  test 'admin should show old user vacations' do
+    visit '/vacations/2'
+
+    assert(page.has_content?('김 개똥'))
+    assert(page.has_content?('사용한 연차 내역이 없습니다'))
+  end
+
+  test 'normal should show old user vacations' do
+    clear_session
+    
+    visit '/'
+
+    fill_in "사용자계정", with: "normal"
+    fill_in "비밀번호", with: "1234"
+
+    click_button '로그인'
+
+    visit '/'
+    click_link '연차 정보'
+
+    assert(page.has_content?('Empty'))
+  end
 end

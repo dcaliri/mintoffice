@@ -47,7 +47,6 @@ class ChangeHistoryTest < ActionDispatch::IntegrationTest
     click_link '소액현금관리'
     find("tr.selectable").click
 
-    save_and_open_page
     assert(page.has_content?('[소액현금] 수입금액: 50000.0 → 100000.0(admin)'))
   end
 

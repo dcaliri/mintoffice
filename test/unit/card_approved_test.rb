@@ -42,7 +42,19 @@ class CardApprovedTest < ActiveSupport::TestCase
 
     cardbill.report.permission current_owner, :write
   end
+  
+  test "check find_empty_cardbill" do
+    if Cardbill.all.empty?
+      card_approved_source = CardApprovedSource.where("")
+    else
+      card_approved_source = CardApprovedSource.where('approve_no not in (?)', Cardbill.all.map{|cardbill| cardbill.approveno})
+    end.no_canceled
 
+    card_approved_source = card_approved_source.order("used_at DESC")
+
+    assert card_approved_source.count == 1
+  end
+  
   private
   def current_owner
     @owner ||= users(:card_manager_account)
