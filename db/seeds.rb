@@ -13,37 +13,37 @@ unless Company.all.empty?
 end
 
 company = Company.find_by_name("mintech")
+Company.current_company = company
 
-unless User.exists?(name: "admin")
-  user = User.new
-  user.name = "admin"
-  user.password = "1234"
+unless Account.exists?(name: 'admin')
+  account = Account.create!(name: 'admin', password: '1234')
+  person = account.person
+  Person.current_person = person
 
-  user.permission.build(name: 'users')
-  user.permission.build(name: 'pettycashes')
-  user.permission.build(name: 'cardbills')
-  user.permission.build(name: 'projects')
-  user.permission.build(name: 'taxbills')
-  user.permission.build(name: 'namecards')
-  user.permission.build(name: 'bank_accounts')
-  user.permission.build(name: 'business_clients')
-  user.permission.build(name: 'commutes')
-  user.permission.build(name: 'ledger_accounts')
-  user.permission.build(name: 'postings')
+  employee = person.create_employee(juminno: '771122-1111111', joined_on: Date.today)
 
-  user.groups.build(name: 'admin')
-  user.companies << company
-  user.save!
+  employee.person.permissions.build(name: 'users')
+  employee.person.permissions.build(name: 'pettycashes')
+  employee.person.permissions.build(name: 'cardbills')
+  employee.person.permissions.build(name: 'projects')
+  employee.person.permissions.build(name: 'taxbills')
+  employee.person.permissions.build(name: 'namecards')
+  employee.person.permissions.build(name: 'bank_accounts')
+  employee.person.permissions.build(name: 'business_clients')
+  employee.person.permissions.build(name: 'commutes')
+  employee.person.permissions.build(name: 'ledger_accounts')
+  employee.person.permissions.build(name: 'postings')
+
+  employee.person.groups.build(name: 'admin')
+
+  employee.save!
+  employee.person.save!
 end
 
-unless User.exists?(name: "test")
-  user = User.new
-  user.name = "test"
-  user.password = "1234"
-
-  user.companies << company
-  user.save!
+unless Account.exists?(name: "test")
+  account = Account.create!(name: 'test', password: '1234')
 end
+
 
 if company.contact_address_tags.empty?
   company.contact_address_tags.create!(name: "집")

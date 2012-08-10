@@ -4,39 +4,39 @@ module Reportable
   def create_initial_report
     unless self.report
       report = build_report
-      report.reporters << User.current_user.reporters.build(report_id: report, owner: true)
+      report.reporters << Person.current_person.reporters.build(report_id: report, owner: true)
     end
   end
 
   def create_initial_accessor
-    report.permission User.current_user, :write
+    report.permission Person.current_person, :write
   end
 
   def create_if_no_report
     if report.nil?
       report = create_report
-      user = User.current_user
-      if user.ingroup?(:admin)
-        report.reporters << user.reporters.build(report_id: report, owner: true)
-        report.permission user, :write
+      person = Person.current_person
+      if person.admin?
+        report.reporters << person.reporters.build(report_id: report, owner: true)
+        report.permission person, :write
         report.save!
       end
     end
   end
 
   def localize_status
-    if self.class == Hrinfo
-      I18n.t("activerecord.attributes.hrinfo.localized_status.#{report.status}")
+    if self.class == Employee
+      I18n.t("activerecord.attributes.employee.localized_status.#{report.status}")
     else
       report.localize_status rescue I18n.t("activerecord.attributes.report.localized_status.not_reported")
     end
   end
 
-  def access?(user, permission_type = :read)
+  def access?(person, permission_type = :read)
     if report.present?
-      report.access?(user, permission_type)
+      report.access?(person, permission_type)
     else
-      user.ingroup?(:admin)
+      person.admin?
     end
   end
   delegate :report!, :approve!, :rollback!, :to => :report
@@ -50,8 +50,8 @@ module Reportable
       includes(:report => :accessors).merge(AccessPerson.no_permission)
     end
 
-    def access_list(user)
-      includes(:report => :accessors).merge(AccessPerson.access_list(user))
+    def access_list(person)
+      includes(:report => :accessors).merge(AccessPerson.access_list(person))
     end
 
     def report_status(status)

@@ -1,5 +1,5 @@
 class ReportPerson < ActiveRecord::Base
-  belongs_to :user
+  belongs_to :person
   belongs_to :report
 
   has_many :next, class_name: "ReportPerson"
@@ -8,8 +8,8 @@ class ReportPerson < ActiveRecord::Base
   has_many :comments, class_name: "ReportComment"
 
   class << self
-    def access_list(user)
-      where(user ? {user_id: user.id} : "0")
+    def access_list(account)
+      where(account ? {person_id: account.person.id} : "0")
     end
 
     def readers
@@ -21,11 +21,11 @@ class ReportPerson < ActiveRecord::Base
     end
 
     def by_me
-      where(user_id: User.current_user.id, owner: true)
+      where(person_id: Person.current_person.id, owner: true)
     end
   end
 
   def fullname
-    user.name rescue ""
+    person.name rescue ""
   end
 end

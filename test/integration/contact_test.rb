@@ -122,9 +122,11 @@ class ContactTest < ActionDispatch::IntegrationTest
     visit '/'
     click_link '연락처'
     find("tr.selectable").click
-    
+
+    disable_confirm_box
+
     click_link '삭제'
-    page.driver.browser.switch_to.alert.accept
+
 
     assert(!page.has_content?('왕 수용'))
   end
@@ -133,9 +135,10 @@ class ContactTest < ActionDispatch::IntegrationTest
     visit '/'
     click_link '연락처'
     find("tr.selectable").click
-    
+
+    disable_confirm_box
+
     click_link '제거'
-    page.driver.browser.switch_to.alert.accept
 
     assert(!page.has_content?('이메일'))
   end

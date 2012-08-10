@@ -10,20 +10,6 @@ class Taxbill < ActiveRecord::Base
   include Historiable
   include Attachmentable
 
-  def self.taxmen_list
-    Taxman.all.map do |taxman|
-      ["#{taxman.fullname} / #{taxman.business_client.name}", taxman.id]
-    end
-  end
-
-  def self.purchases
-    where(billtype: "purchase")
-  end
-
-  def self.sales
-    where(billtype: "sale")
-  end
-
   def self.oldest_at
     resource = order('transacted_at DESC').last
     if resource && resource.transacted_at
@@ -90,7 +76,10 @@ class Taxbill < ActiveRecord::Base
     end
 
     def search(params)
-      search_billtype(params[:billtype]).search_taxmen(params[:taxman_id]).search_by_transacted(params[:transacted_at]).text_search(params[:query])
+      search_billtype(params[:billtype]).
+      search_taxmen(params[:taxman_id]).
+      search_by_transacted(params[:transacted_at]).
+      text_search(params[:query])
     end
 
     def text_search(text)

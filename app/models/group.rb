@@ -1,8 +1,8 @@
 class Group < ActiveRecord::Base
-  has_and_belongs_to_many :users
+  has_and_belongs_to_many :people
   
-  def self.users_in_group(group)
-    self.where(:name => group)[0].users
+  def self.people_in_group(group)
+    self.where(:name => group).people
   end
 
   def self.admins

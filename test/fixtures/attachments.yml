@@ -10,7 +10,7 @@ fixture:
   owner_id: 1
   original_filename: Untitled.png
   seq:
-  user_id: 1
+  employee_id: 1
 
 seal:
   id: 2
@@ -19,9 +19,9 @@ seal:
   filepath: seal.png
   created_at: <%= Time.zone.now %>
   updated_at: <%= Time.zone.now %>
-  contenttype: application/vnd.ms-excel
+  contenttype: image/png
   owner_type: Company
   owner_id: 1
   original_filename: seal.png
   seq:
-  user_id: 1
+  employee_id: 2

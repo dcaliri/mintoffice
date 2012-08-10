@@ -8,4 +8,4 @@ description:
   created_at: <%= Time.zone.now %>
   updated_at: <%= Time.zone.now %>
   target: Pettycash
-  user_id: 1
+  employee_id: 1

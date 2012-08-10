@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class ExpenseReportsControllerTest < ActionController::TestCase
-  fixtures :cardbills, :expense_reports, :reports, :hrinfos, :projects
+  fixtures :cardbills, :expense_reports, :reports, :employees, :projects
 
   test "should see index page" do
     get :index

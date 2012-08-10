@@ -29,7 +29,7 @@ class GetEmploymentProofTest < ActionDispatch::IntegrationTest
     visit '/'
     click_link '인사정보관리 - 사원목록'
 
-    visit '/hrinfos/1'
+    visit '/employees/1'
     click_link '재직증명서'
 
     fill_in "용도", with: "test"
@@ -48,7 +48,8 @@ class GetEmploymentProofTest < ActionDispatch::IntegrationTest
     visit '/'
     click_link '인사정보관리 - 사원목록'
 
-    visit '/hrinfos/2'
+    visit '/employees/2'
+
     click_link '재직증명서'
 
 
@@ -75,7 +76,9 @@ class GetEmploymentProofTest < ActionDispatch::IntegrationTest
     click_button '로그인'
 
     click_link '인사정보관리 - 사원목록'
-    visit '/hrinfos/2'
+
+    visit '/employees/2'
+
     click_link '재직증명서'
 
     fill_in "용도", with: "test"
@@ -100,7 +103,8 @@ class GetEmploymentProofTest < ActionDispatch::IntegrationTest
 
     click_button '로그인'
     click_link '인사정보관리 - 사원목록'
-    visit '/hrinfos/1/employment_proof'
+
+    visit '/employees/1/employment_proof'
 
     assert(page.has_content?("You don't have to permission"))
   end

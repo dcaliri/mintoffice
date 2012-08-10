@@ -48,99 +48,61 @@ class Report < ActiveRecord::Base
     I18n.t("activerecord.attributes.report.localized_status.#{status}")
   end
 
-  def report!(user, comment, report_url)
+  def report!(person, comment, report_url)
     prev_reporter = self.reporter
-    prev_reporter.owner = false
-
-    collection = reporters.where(user_id: user.id)
-    if collection.empty?
-      next_reporter = user.reporters.build(owner: true)
-      next_reporter.prev = prev_reporter
-      self.reporters << next_reporter
-    else
-      next_reporter = collection.first
-      next_reporter.owner = true
-    end
+    next_reporter = change_owner(person)
 
     self.status = :reporting
+
     self.comments.build(owner: prev_reporter, description: "#{next_reporter.fullname}"+I18n.t('models.report.to_report'))
     self.comments.build(owner: prev_reporter, description: comment) unless comment.blank?
 
-    next_reporter.save!
-    prev_reporter.save!
-
-    target_name = target.class.to_s.downcase
-    title = I18n.t("reports.report.title.#{target_name}", {
-      default: I18n.t("reports.report.title.default"),
-      prev: prev_reporter.fullname,
-      next: next_reporter.fullname
-    })
-
-    body = I18n.t("reports.report.body.#{target_name}", {
-      default: I18n.t("reports.report.body.default"),
-      prev: prev_reporter.fullname,
-      next: next_reporter.fullname,
-      url: report_url,
-    })
-
-    Boxcar.send_to_boxcar_user(next_reporter.user, prev_reporter.fullname, title)
-    ReportMailer.report(target, prev_reporter.user, next_reporter.user, title, body)
-
-    permission user, :write
-    permission prev_reporter.user, :read
-
     save!
+
+    notify(:report, prev_reporter, next_reporter, report_url)
   end
 
-  def approve!(comment)
+  def approve!(person, comment)
     self.status = :reported
-    User.current_user.reporters.create!(report_id: id, owner: true) unless self.reporter
-    self.comments.build(owner: self.reporter, description: "#{reporter.fullname}"+I18n.t('models.report.to_approve'))
-    self.comments.build(owner: self.reporter, description: comment) unless comment.blank?
+
+    unless self.reporter
+      approved = Person.current_person.reporters.create!(report_id: id, owner: true)
+    else
+      approved = change_owner(person)
+    end
+
+    self.comments.build(owner: approved, description: "#{person.fullname}"+I18n.t('models.report.to_approve'))
+    self.comments.build(owner: approved, description: comment) unless comment.blank?
+
     save!
   end
 
   def rollback!(comment, report_url)
+    prev_status = self.status
     self.status = :rollback
     prev_reporter = self.reporter
     next_reporter = prev_reporter.prev if prev_reporter.prev
-    if next_reporter
+    if next_reporter and prev_status != :reported
       next_reporter.owner = true
       next_reporter.save!
 
       prev_reporter.owner = false
       prev_reporter.save!
 
-      permission next_reporter.user, :write
-      permission prev_reporter.user, :read
+      permission next_reporter.person, :write
+      permission prev_reporter.person, :read
     end
-    self.comments.build(owner: prev_reporter, description: "#{prev_reporter.fullname}"+I18n.t('models.report.to_rollback'))
+
+    self.comments.build(owner: prev_reporter, description: "#{prev_reporter.person.fullname}"+I18n.t('models.report.to_rollback'))
     self.comments.build(owner: prev_reporter, description: comment) unless comment.blank?
 
-    if next_reporter
-      target_name = target.class.to_s.downcase
-      title = I18n.t("reports.rollback.title.#{target_name}", {
-        default: I18n.t("reports.rollback.title.default"),
-        prev: prev_reporter.fullname,
-        next: next_reporter.fullname
-      })
-
-      body = I18n.t("reports.rollback.body.#{target_name}", {
-        default: I18n.t("reports.rollback.body.default"),
-        prev: prev_reporter.fullname,
-        next: next_reporter.fullname,
-        url: report_url,
-      })
-
-      Boxcar.send_to_boxcar_user(next_reporter.user, prev_reporter.fullname, title)
-      ReportMailer.report(target, prev_reporter.user, next_reporter.user, title, body)
-    end
-    
     save!
+
+    notify(:rollback, prev_reporter, next_reporter, report_url)
   end
 
   def report?
-    self.reporter.present? && self.reporter.user == User.current_user
+    self.reporter.present? && self.reporter.person == Person.current_person
   end
 
   def rollback?
@@ -149,5 +111,52 @@ class Report < ActiveRecord::Base
 
   def approve?
     self.status != :reported
+  end
+
+  private
+  def change_owner(person)
+    prev_reporter = self.reporter
+    return prev_reporter if person == prev_reporter.person
+
+    prev_reporter.owner = false
+
+    collection = reporters.where(person_id: person.id)
+    if collection.empty?
+      next_reporter = person.reporters.build(owner: true)
+      next_reporter.prev = prev_reporter
+      self.reporters << next_reporter
+    else
+      next_reporter = collection.first
+      next_reporter.owner = true
+    end
+
+    prev_reporter.save!
+    next_reporter.save!
+
+    permission person, :write
+    permission prev_reporter.person, :read
+
+    next_reporter
+  end
+
+  def notify(action, from, to, url)
+    return if !from or !to
+
+    target_name = target.class.to_s.downcase
+      title = I18n.t("reports.#{action}.title.#{target_name}", {
+        default: I18n.t("reports.#{action}.title.default"),
+        prev: from.fullname,
+        next: to.fullname
+      })
+
+      body = I18n.t("reports.#{action}.body.#{target_name}", {
+        default: I18n.t("reports.#{action}.body.default"),
+        prev: from.fullname,
+        next: to.fullname,
+        url: url,
+      })
+
+      Boxcar.send_to_boxcar_account(to.person, from.fullname, title)
+      ReportMailer.report(target, from.person, to.person, title, body)
   end
 end

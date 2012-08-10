@@ -7,7 +7,6 @@ class VacationTest < ActionDispatch::IntegrationTest
 
   test 'should visit vacations list for admin' do
     visit '/'
-    
     visit '/vacations'
 
 		assert(page.has_content?('연차 정보'))
@@ -15,7 +14,6 @@ class VacationTest < ActionDispatch::IntegrationTest
 
   test 'should visit vacations' do
     visit '/'
-    
     click_link '연차 정보'
 
     assert(page.has_content?('연차 관리'))
@@ -27,11 +25,11 @@ class VacationTest < ActionDispatch::IntegrationTest
     click_link '연차 정보'
     click_link '연차 할당'
 
-    fill_in "기간", with: "10"
+    fill_in "기간", with: "37"
 
     click_button '연차 만들기'
 
-    assert(page.has_content?('연차 관리'))
+    assert(page.has_content?('37'))
   end
 
   test 'should edit vacations priod' do
@@ -42,24 +40,26 @@ class VacationTest < ActionDispatch::IntegrationTest
 
     assert(page.has_content?('수정하기'))
 
-    fill_in "기간", with: "5"
+    fill_in "기간", with: "52"
 
     click_button '연차 수정하기'
 
-    assert(page.has_content?('연차 관리'))
+    assert(page.has_content?('52'))
   end
 
   test 'should destroy vacations priod' do
     visit '/'
-    
+
     click_link '연차 정보'
+
+    disable_confirm_box
+
     click_link '삭제'
-    page.driver.browser.switch_to.alert.accept
 
     assert(page.has_content?('연차 정보'))
   end
 
-  test 'should show hrinfo' do
+  test 'should show employee' do
     visit '/'
     
     click_link '연차 정보'
@@ -81,6 +81,8 @@ class VacationTest < ActionDispatch::IntegrationTest
     click_button '연차 사용 신청'
 
     assert(page.has_content?('연차를 신청하였습니다. 신청 후에는 결재를 올려주세요.'))
+
+    assert(page.has_content?('test'))
   end
 
   test 'should view used_vacation' do
@@ -138,7 +140,7 @@ class VacationTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('사용한 연차 정보'))
 
     click_link '삭제하기'
-    page.driver.browser.switch_to.alert.accept
+    
 
     assert(page.has_content?('연차 관리'))
   end

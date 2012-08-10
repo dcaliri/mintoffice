@@ -112,12 +112,14 @@ class CardApprovedSourcesTest < ActionDispatch::IntegrationTest
 
   test 'should destroy card_approved_sources' do
     visit '/'
+
     click_link '신용카드 관리'
     click_link '카드별 승인내역'
     find("tr.selectable").click
-    
+
+    disable_confirm_box
+
     click_link '삭제'
-    page.driver.browser.switch_to.alert.accept
 
     assert(page.has_content?('카드승인내역'))
   end

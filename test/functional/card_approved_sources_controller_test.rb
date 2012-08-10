@@ -30,7 +30,7 @@ class CardApprovedSourcesControllerTest < ActionController::TestCase
   end
 
   test "should see generate cardbills page" do
-    get :generate_cardbills, owner: current_user.id
+    get :generate_cardbills, owner: current_person.account.id
     assert_response :redirect
   end
 

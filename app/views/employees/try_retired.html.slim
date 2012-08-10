@@ -1,0 +1,37 @@
+- title t(".title")
+#show_command
+  = link_to t('common.title.back'), :action => :retire, :id => @employee
+h2
+  = t('.retire_date')
+
+= form_for @employee, url: retired_path(@employee), :html => {:class => "tabular"} do |f|
+  = f.hidden_field :retired_on
+  .box
+    h3
+      = t('employees.try_retired.remaining_salary_calculation')
+    table#list-table
+      tr
+        th
+          = t('.retired_at')
+        th
+          = t('.note')
+        th
+          = t('.before_retire')
+        th
+          = t('.after_retire')
+        th
+          = t('.retire_total')
+      = @employee.payments.pay_from(@employee.retired_on).find_each do |payment|
+        tr
+          td
+            = payment.pay_finish.strftime("%Y.%m")
+          td
+            = payment.note
+          td
+            = number_to_currency payment.amount
+          - retired_amount = payment.retired_amount(@employee.retired_on)
+          td
+            = number_to_currency retired_amount
+          td
+            = number_to_currency payment.amount + retired_amount
+  = f.submit t("common.button.update")

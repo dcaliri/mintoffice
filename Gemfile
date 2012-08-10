@@ -1,6 +1,6 @@
 source :rubygems
 
-gem 'rails', '3.2.5'
+gem 'rails', '3.2.7'
 gem 'jquery-rails'
 gem 'slim'
 gem 'dynamic_form'

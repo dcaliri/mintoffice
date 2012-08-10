@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class CardbillTest < ActiveSupport::TestCase
-  fixtures :users
+
   fixtures :reports
   fixtures :report_people
   fixtures :report_comments

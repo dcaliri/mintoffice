@@ -1,6 +1,6 @@
 bankTransfer:
     id: 1
-    hrinfo_id: 1
+    employee_id: 1
     target_id: 1
     target_type: "BankTransfer"
     project_id: 1
@@ -12,7 +12,7 @@ bankTransfer:
 
 cardbill:
     id: 2
-    hrinfo_id: 1
+    employee_id: 1
     target_id: 1
     target_type: "Cardbill"
     project_id: 1
@@ -24,7 +24,7 @@ cardbill:
 
 user_expense_report:
     id: 3
-    hrinfo_id: 4
+    employee_id: 4
     target_id: 3
     target_type: "Cardbill"
     project_id: 1

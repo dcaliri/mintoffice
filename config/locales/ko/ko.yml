@@ -127,13 +127,14 @@ ko:
             document: 문서
             expense_report: 지출 내역서
             holiday: 휴일관리
-            hrinfo: 인사정보
+            employee: 인사정보
             ledger_account: 원장 계정
             namecard: 명함정보
             pay_schedule: 기본급
             payroll_item: 급여 항목
             payroll_category: 급여구분
             payment: 연봉
+            permission: 권한
             pettycash: 소액현금
             posting: 전표
             project: 프로젝트
@@ -144,7 +145,7 @@ ko:
             taxbill_item: 항목
             used_vacation: 사용한 연차
             vacation: 연차
-            user: 사용자계정
+            account: 사용자계정
         attributes:
             access_person:
                 access_type: 권한
@@ -284,7 +285,7 @@ ko:
                 changable_type: 관계된 테이블 명
                 created_at: 생성 일자
                 fieldname: 필드명
-                user_id: 사용자 아이디
+                account_id: 사용자 아이디
             commute:
                 go: 출근
                 leave: 퇴근
@@ -298,10 +299,10 @@ ko:
                 pay_basic_date: 급여 기준일
                 payday: 급여 지급일
                 google_apps_domain: 구글앱스 도메인 이름
-                google_apps_username: 구글앱스 관리자 계정
+                google_apps_accountname: 구글앱스 관리자 계정
                 google_apps_password: 구글앱스 관리자 비밀번호
                 redmine_domain: 레드마인 도메인 이름
-                redmine_username: 레드마인 관리자 계정
+                redmine_accountname: 레드마인 관리자 계정
                 redmine_password: 레드마인 관리자 비밀번호
                 default_password: 기본 비밀번호
                 apply_admin_id: 입사지원서 담당자
@@ -376,7 +377,7 @@ ko:
                 juminno: 주민등록번호
             expense_report:
                 owner: 작성자
-                hrinfo_id: 작성자
+                employee_id: 작성자
                 target: 지출 대상
                 project: 프로젝트
                 project_id: 프로젝트
@@ -388,7 +389,7 @@ ko:
             holiday:
                 theday: 휴일날짜
                 dayname: 휴일명목
-            hrinfo:
+            employee:
                 juminno: 주민등록번호
                 retired_on: 퇴직일
                 companyno: 사번
@@ -400,7 +401,7 @@ ko:
                 position: 직급
                 purpose: 용도
                 fullname: 이름
-                username: 계정
+                person_id: 계정
                 phone_number: 핸드폰번호
                 joined_on: 입사일
                 email: 이메일
@@ -466,7 +467,7 @@ ko:
                 ended_on: 실제 종료일자
             required_tag:
                 modelname: 모델명
-            user:
+            account:
                 name: 사용자계정
                 password: 비밀번호
                 password_confirmation: 비밀번호 확인
@@ -525,7 +526,7 @@ ko:
                 to: 종료
                 period: 기간
                 note: 사유
-            user:
+            account:
                 name: 계정명
                 password: 비밀번호
                 password_confirmation: 비밀번호 확인
@@ -545,7 +546,7 @@ ko:
                 not_a_number: "은(는) 반드시 숫자여야 합니다."
                 taken: 은(는) 이미 사용중입니다.
             models:
-                user:
+                account:
                     attributes:
                         password:
                             confirmation: 가 서로 다릅니다.
@@ -573,7 +574,7 @@ ko:
             fail_read: 연락처를 읽어올 수 없었습니다.
         used_vacations:
             reports: 연차를 신청하였습니다. 신청 후에는 결재를 올려주세요.
-        users:
+        accounts:
             create_google: 성공적으로 구글 계정을 생성했습니다.
             fail_create_google: 계정 생성에 실패했습니다. 아마도 인사정보가 없습니다.
             remove_google: 성공적으로 구글 계정을 제거했습니다.
@@ -602,11 +603,12 @@ ko:
         expense_report:
             debit: 차변
             credit: 대변
-        hrinfo:
+        employee:
             join: 재직자
             retire: 퇴직자
             request: 수정 요청
-            approve: 승인 심사중
+            approving: 승인 심사중
+            approved: 승인 심사 완료
             representative: 대표
             code: "* 발급확인코드: "
         ledger_account:
@@ -631,7 +633,7 @@ ko:
             to_rollback: 님이 결재를 반려하였습니다.
         taxbill:
             etc: 기타
-        user:
+        account:
             no_name: 이름이 등록되어있지 않습니다.
             no_email: 이메일이 등록되어있지 않습니다.
             already_exist_email: 아마도 등록된 이메일이 있습니다.
@@ -701,7 +703,7 @@ ko:
             status: 상태
             report: 수정 후 재승인 요청
         try:
-            unknown_user: 등록되지 않은 사용자입니다. 입사지원시스템으로 이동하시겠습니까?
+            unknown_account: 등록되지 않은 사용자입니다. 입사지원시스템으로 이동하시겠습니까?
             ok_submit: 예
     bank_accounts:
         index:
@@ -926,7 +928,7 @@ ko:
             delete_confirm: 확실히 삭제하겠습니까?
             confirm: 확실히 수행하겠습니까?
             updated: "%{model}이(가) 성공적으로 업데이트 되었습니다."
-            no_such_user: 해당 사용자는 존재하지 않습니다.
+            no_such_account: 해당 사용자는 존재하지 않습니다.
             already_exist: 이미 존재합니다.
             destroyed: "%{model}이(가) 성공적으로 제거 되었습니다."
             no_entries: 항목이 없습니다.
@@ -1092,7 +1094,7 @@ ko:
             title: 새로운 문서 작성
         edit:
             title: 문서 정보 수정
-            adduser: 사용자 추가
+            addaccount: 사용자 추가
             addtag: 태그 추가
     expense_reports:
         title: 지출내역서
@@ -1105,7 +1107,7 @@ ko:
             detail_expense: 지출내역서 상세정보
     groups:
         title: 그룹관리
-    hrinfos:
+    employees:
         index:
             title: 인사정보관리 - 사원목록
             list_retired: 퇴직자 목록 조회
@@ -1135,7 +1137,7 @@ ko:
             calculation_remain_salary: 잔여 연봉 계산
         new:
             title: 새로운 인사정보 입력
-            users_blank: 인사정보와 연결할 사용자 계정이 없습니다.
+            accounts_blank: 인사정보와 연결할 사용자 계정이 없습니다.
         edit:
             picture: 증명사진
             title: 인사정보 수정
@@ -1249,7 +1251,7 @@ ko:
             title: New permission
         show:
             name: Name
-            user: Users
+            account: Users
             left_parenthesis: "["
             right_parenthesis: "]"
             none: None
@@ -1258,6 +1260,7 @@ ko:
             title: Editing permission
         title: 권한 관리
     pettycashes:
+        title: 소액현금관리
         balance: 잔액
         index:
             title: 소액현금관리
@@ -1298,7 +1301,7 @@ ko:
         show:
             title: 프로젝트 상세 내역
             allocation_ratio: 할당비율 조정
-            users: Users
+            accounts: Users
         new:
             title: 새 프로젝트 작성
         edit:
@@ -1319,17 +1322,17 @@ ko:
         report:
             title:
                 default: "%{prev}님이 %{next}님에게 결재를 요청하였습니다"
-                hrinfo: "%{next}님에게 새로운 입사지원이 들어왔습니다."
+                employee: "%{next}님에게 새로운 입사지원이 들어왔습니다."
             body:
                 default: "%{prev}님이 %{next}님에게 결재를 요청하였습니다. \n %{url}"
-                hrinfo: "아래 링크를 통해서 확인 가능합니다. \n %{url}"
+                employee: "아래 링크를 통해서 확인 가능합니다. \n %{url}"
         rollback:
             title:
                 default: "%{prev}님이 %{next}님에게 결재를 반려하였습니다"
-                hrinfo: "%{next}님에게 입사지원 수정요청이 들어왔습니다"
+                employee: "%{next}님에게 입사지원 수정요청이 들어왔습니다"
             body:
                 default: "%{prev}님이 %{next}님에게 결재를 반려하였습니다. \n %{url}"
-                hrinfo: "아래 링크를 통해서 확인 가능합니다. \n %{url}"
+                employee: "아래 링크를 통해서 확인 가능합니다. \n %{url}"
     required_tags:
         index:
             title: 필수 태그 목록
@@ -1403,7 +1406,7 @@ ko:
         approval_completed: 승인 완료
         approval_waiting : 승인 대기
         vacation: "휴가 : "
-    users:
+    accounts:
         title: 사용자 리스트
         new:
             title: 새 사용자 계정 만들기
@@ -1428,7 +1431,7 @@ ko:
             title: 사용자 계정 편집
         index:
             title: 사용자 계정 목록
-            newuser: 새로운 사용자 등록
+            newaccount: 새로운 사용자 등록
             google: 구글 앱스 계정이 등록된 사용자들 보기
         login:
             title: 로그인
@@ -1440,13 +1443,15 @@ ko:
             successfully_signed_in: 로그인에 성공하였습니다.
         changepw:
             title: 비밀번호 변경
+            oldpassword_wrong: 이전 비밀번호가 틀렸습니다.
+            password_confirm_wrong: 비밀번호와 비밀번호 확인이 일치하지 않습니다.
+            successfully_changed: 성공적으로 변경하였습니다.
+        changepw_form:
+            title: 비밀번호 변경
             subtitle: 변경
             password: 비밀번호
             password_again: 비밀번호 확인
             oldpassword: 이전 비밀번호
-            oldpassword_wrong: 이전 비밀번호가 틀렸습니다.
-            password_confirm_wrong: 비밀번호와 비밀번호 확인이 일치하지 않습니다.
-            successfully_changed: 성공적으로 변경하였습니다.
         google:
             create: 구글 앱스 계정 생성하기
             destroy: 구글 앱스 계정 제거하기

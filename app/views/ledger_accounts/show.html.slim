@@ -1,7 +1,7 @@
 #show_command
   = link_to t('common.title.edit'), [:edit, ledger_account]
   = " | "
-  = link_to t('common.title.destroy'), ledger_account, :method => :delete, :confirm => t("common.messages.delete_confirm")
+  = link_to t('common.title.destroy'), ledger_account, :method => :delete, data: {data: {confirm: t("common.messages.delete_confirm")}}
   = " | "
   = link_to t('common.title.list'), :ledger_accounts
 
@@ -23,5 +23,5 @@ h2= t('.title')
         tr
           td= item.posting.posted_at.strftime("%Y.%m.%d") rescue ""
           td= number_to_currency item.amount
-        
+
   .clear

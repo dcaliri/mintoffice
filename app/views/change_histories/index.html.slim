@@ -8,14 +8,14 @@ table#list-table
     th= ChangeHistory.human_attribute_name('before_value')
     th= ChangeHistory.human_attribute_name('after_value')
     th= ChangeHistory.human_attribute_name('created_at')
-    th= ChangeHistory.human_attribute_name('user_id')
+    th= ChangeHistory.human_attribute_name('account_id')
   - @histories.each do |history|
     tr.selectable onclick="location.href='#{change_history_path(history)}'"
       td=h history.fieldname
       td=h history.before_value
       td=h history.after_value
       td=h history.created_at
-      td=h history.user.name rescue ""
+      td=h history.employee.fullname rescue ""
 br
 center
   = will_paginate @histories

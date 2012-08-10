@@ -81,7 +81,7 @@ class BankTransactionTest < ActionDispatch::IntegrationTest
     uncheck('상대 계좌번호')
     uncheck('수표 어음금액')
     uncheck('CMS 코드')
-    
+
     click_button '태그 만들기'
 
     alert = page.driver.browser.switch_to.alert
@@ -158,11 +158,12 @@ class BankTransactionTest < ActionDispatch::IntegrationTest
     visit '/'
     click_link '은행계좌 목록'
     click_link '입출금내역 보기'
-    
+
     find("tr.selectable").click
 
+    disable_confirm_box
+
     click_link '삭제'
-    page.driver.browser.switch_to.alert.accept
 
     assert(page.has_content?('입출금 내역이 없습니다'))
   end
@@ -173,7 +174,7 @@ class BankTransactionTest < ActionDispatch::IntegrationTest
     visit '/'
     click_link '은행계좌 목록'
     click_link '입출금내역 보기'
-   
+
     click_link '엑셀 파일로 올리기'
     path = File.join(::Rails.root, "test/fixtures/excels/bank_transaction_fixture.xls") 
     attach_file("upload_file", path)

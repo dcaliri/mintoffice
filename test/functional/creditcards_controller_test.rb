@@ -3,10 +3,6 @@ require 'test_helper'
 class CreditcardsControllerTest < ActionController::TestCase
   fixtures :creditcards
 
-  def setup
-    current_user.permission.create!(name: 'creditcards')
-  end
-
   test "should see list page" do
     get :index
     assert_response :success

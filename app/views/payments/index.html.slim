@@ -8,7 +8,7 @@ h2= t('common.title.list')
 
 table#list-table.payment-table
   tr
-    th= Hrinfo.human_attribute_name("fullname")
+    th= Employee.human_attribute_name("fullname")
     - period = Time.zone.parse("#{to.year}-#{to.month}-01 00:00:00")
     - while from < period
     - th_class = (period.month == Time.zone.now.month ? :today : '')
@@ -16,15 +16,14 @@ table#list-table.payment-table
         = period.month.to_s + " " + t('datetime.prompts.month')
       - period -= 1.month
 
-    - @hrinfos.each do |hrinfo|
-      - user = hrinfo.user
+    - @employees.each do |employee|
       - period = Time.zone.parse("#{to.year}-#{to.month}-01 00:00:00")
-      tr.selectable onclick="location.href='#{payment_path(user)}'"
-        td=h hrinfo.fullname
+      tr.selectable onclick="location.href='#{payment_path(employee)}'"
+        td=h employee.fullname
         - while from < period
           - td_class = (period.month == Time.zone.now.month ? :today : '')
           td.numrow[class=td_class]
-            = number_to_currency user.payments.by_month(period.to_date).total
+            = number_to_currency employee.payments.by_month(period.to_date).total
           - period -= 1.month
   tr
     td
@@ -41,7 +40,7 @@ table#list-table.payment-table
 br
 
 center
-  = will_paginate @hrinfos
+  = will_paginate @employees
 
 #show_command
   - if params[:with_no_payment]

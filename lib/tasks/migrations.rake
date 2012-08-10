@@ -1,13 +1,13 @@
 namespace :db do
   namespace :report do
     task :reset => :environment do
-      user = User.where(name: ENV['username']).first
+      account = Account.where(name: ENV['accountname']).first
 
       Report.find_each do |report|
-        puts "reset report: id = #{report.id}, status = #{report.status}, user = #{report.reporter.user.fullname}"
+        puts "reset report: id = #{report.id}, status = #{report.status}, account = #{report.reporter.account.fullname}"
 
         report.status = :not_reported
-        report.reporter.user = user
+        report.reporter.account = account
 
         report.save!
         report.reporter.save!
@@ -31,11 +31,11 @@ namespace :db do
 
   namespace :cardbill do
     task :reset => :environment do
-      user = User.where(name: ENV['username']).first
+      account = Account.where(name: ENV['accountname']).first
       Cardbill.find_each do |cardbill|
         cardbill.accessors.destroy_all
-        accessor = cardbill.accessors.create!(user_id: user.id, access_type: "write")
-        puts "reset cardbill's permission: id = #{cardbill.id}, permission = #{accessor.access_type}, user = #{accessor.user.name}"
+        accessor = cardbill.accessors.create!(account_id: account.id, access_type: "write")
+        puts "reset cardbill's permission: id = #{cardbill.id}, permission = #{accessor.access_type}, account = #{accessor.account.name}"
       end
     end
   end

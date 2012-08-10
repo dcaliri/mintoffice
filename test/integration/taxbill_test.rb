@@ -57,8 +57,10 @@ class TaxBillTest < ActionDispatch::IntegrationTest
     click_link '세금계산서 관리'
     find("tr.selectable").click
 
+    disable_confirm_box
+
     click_link '삭제하기'
-    page.driver.browser.switch_to.alert.accept
+
 
     assert(page.has_content?('세금계산서이(가) 성공적으로 제거 되었습니다.'))
   end  
@@ -124,8 +126,9 @@ class TaxBillTest < ActionDispatch::IntegrationTest
     click_link '세금계산서 관리'
     find("tr.selectable").click
 
+    disable_confirm_box
+
     click_link '삭제'
-    page.driver.browser.switch_to.alert.accept
 
     assert(page.has_content?('항목이(가) 성공적으로 제거 되었습니다.'))
   end

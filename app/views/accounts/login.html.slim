@@ -1,0 +1,15 @@
+- title t("accounts.login.title")
+
+= render 'oauth_login'
+
+
+#login-form
+  = form_tag [:authenticate, :accounts] do
+    .box
+      p
+        = label_tag :name, t(".name")
+        = text_field_tag :name, params[:name]
+      p
+        = label_tag :password, t(".password")
+        = password_field_tag :password, params[:password]
+      = submit_tag t('.login')

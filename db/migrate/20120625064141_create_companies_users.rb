@@ -7,9 +7,9 @@ class CreateCompaniesUsers < ActiveRecord::Migration
       t.references :user
     end
 
-    User.find_each do |user|
-      user.companies << company
-      user.save!
-    end
+    # User.find_each do |user|
+    #   user.companies << company
+    #   user.save!
+    # end
   end
 end

@@ -3,10 +3,6 @@ require 'test_helper'
 class ContactsControllerTest < ActionController::TestCase
   fixtures :contacts
 
-  def setup
-    current_user.permission.create!(name: 'contacts')
-  end
-
   test "should see index page" do
     get :index
     assert_response :success

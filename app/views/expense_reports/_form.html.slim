@@ -13,7 +13,7 @@ h2= t("common.title.#{action_name}")
       = f.hidden_field :target_id, value: target_id
       p
         = f.label :project_id
-        = f.select :project_id, options_for_select(Project.inprogress.assign_list(current_user).map{|project| [project.name, project.id]}, expense_report.project_id)
+        = f.select :project_id, options_for_select(Project.inprogress.assign_list(current_employee).map{|project| [project.name, project.id]}, expense_report.project_id)
       p
         = f.label :description
         = f.text_area :description

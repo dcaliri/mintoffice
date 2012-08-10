@@ -8,18 +8,20 @@ h2= t('common.title.list')
 - unless commutes_everyone.values.empty?
   table#list-table
     tr
-      th= Hrinfo.human_attribute_name("fullname")
-      - commutes_everyone.values.first.keys.sort.first.to_date.step(commutes_everyone.values.first.keys.sort.last.to_date, 1.day).each do |day|
+      th= Employee.human_attribute_name("fullname")
+      - sorted_keys = commutes_everyone.values.first.keys.sort
+      - sorted_keys.first.to_date.step(sorted_keys.last.to_date, 1).each do |day|
         th= l day, format: :compact_long
-    - commutes_everyone.keys.sort.each do |user_id|
-      - commutes_for_user = commutes_everyone[user_id]
-      - user = User.find(user_id)
-      tr.selectable onclick="location.href='#{commute_path(user)}'"
+    - commutes_everyone.keys.sort.each do |employee_id|
+      - commutes_for_employee = commutes_everyone[employee_id]
+
+      - employee = Employee.find(employee_id)
+      tr.selectable onclick="location.href='#{commute_path(employee)}'"
         td
           nobr
-            = user.fullname
-        - commutes_for_user.keys.sort.each do |day|
-          - commute = commutes_for_user[day]
+            = employee.fullname
+        - commutes_for_employee.keys.sort.each do |day|
+          - commute = commutes_for_employee[day]
           - unless commute.nil?
             td valign="top"
               = t("commutes.arrive_at_work") + " : " + (l commute.go, format: :time)

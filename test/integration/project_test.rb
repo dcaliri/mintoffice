@@ -28,6 +28,9 @@ class ProjectTest < ActionDispatch::IntegrationTest
     click_button '만들기'
 
     assert(page.has_content?('프로젝트이(가) 성공적으로 생성되었습니다.'))
+
+    assert(page.has_content?('프로젝트명 입력 테스트'))
+    assert(page.has_content?('1,000,000'))
   end
 
   test 'should edit project' do
@@ -48,6 +51,9 @@ class ProjectTest < ActionDispatch::IntegrationTest
     click_button '갱신하기'
 
     assert(page.has_content?('프로젝트이(가) 성공적으로 업데이트 되었습니다.'))
+
+    assert(page.has_content?('프로젝트명 수정 테스트'))
+    assert(page.has_content?('2,000,000'))
   end  
 
   test 'should add/delete accounts' do
@@ -74,7 +80,7 @@ class ProjectTest < ActionDispatch::IntegrationTest
 
     click_link '수정하기'
     click_link '프로젝트 완료'
-    page.driver.browser.switch_to.alert.accept
+    
 
     click_link '프로젝트 관리 - 완료'
 

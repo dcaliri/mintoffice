@@ -1,10 +1,8 @@
 require 'test_helper'
 
 class ExpenseReportTest < ActiveSupport::TestCase
-  fixtures :users
   fixtures :cardbills
   fixtures :projects
-  fixtures :hrinfos
   fixtures :expense_reports
   fixtures :reports
   fixtures :report_people

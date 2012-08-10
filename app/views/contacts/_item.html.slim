@@ -3,51 +3,54 @@ dl
   = dtdd contact, "company_name"
   = dtdd contact, "department"
   = dtdd contact, "position"
-  = dtdd contact, "owner_name"
+  dt
+    = Contact.human_attribute_name("owner")
+  dd
+    = contact.owner_name
   - contact.emails.each do |email|
     dt
       = t('contacts.item.email')
       = "#{email.target_view}"
     dd
       = email.email
-    - if menu && contact.edit?(current_user)
+    - if menu && contact.edit?(current_person)
       dd
         = link_to t('common.link.edit'), [:edit, contact]
         = " | "
-        = link_to t('contacts.item.remove'), [contact, email], :method => :delete, confirm: t("common.messages.delete_confirm")
+        = link_to t('contacts.item.remove'), [contact, email], :method => :delete, data: {confirm: t("common.messages.delete_confirm")}
   - contact.phone_numbers.each do |phone_number|
     dt
       = t('contacts.item.phonenumber')
       = "#{phone_number.target_view}"
     dd
       = phone_number.number
-    - if menu && contact.edit?(current_user)
+    - if menu && contact.edit?(current_person)
       dd
         = link_to t('common.link.edit'), [:edit, contact]
         = " | "
-        = link_to t('contacts.item.remove'), [contact, phone_number], :method => :delete, confirm: t("common.messages.delete_confirm")
+        = link_to t('contacts.item.remove'), [contact, phone_number], :method => :delete, data: {confirm: t("common.messages.delete_confirm")}
   - contact.addresses.each do |address|
     dt
       = t('contacts.item.address')
       = "#{address.target_view}"
     dd
       = "#{address.country} #{address.province} #{address.city} #{address.other1} #{address.other2} #{address.postal_code}"
-    - if menu && contact.edit?(current_user)
+    - if menu && contact.edit?(current_person)
       dd
         = link_to t('common.link.edit'), [:edit, contact]
         = " | "
-        = link_to t('contacts.item.remove'), [contact, address], :method => :delete, confirm: t("common.messages.delete_confirm")
+        = link_to t('contacts.item.remove'), [contact, address], :method => :delete, data: {confirm: t("common.messages.delete_confirm")}
   - contact.others.each do |other|
     dt
       = t('contacts.show.etc')
       = "#{other.target_view}"
     dd
       = other.description
-    - if menu && contact.edit?(current_user)
+    - if menu && contact.edit?(current_person)
       dd
         = link_to t('common.link.edit'), [:edit, contact]
         = " | "
-        = link_to t('contacts.item.remove'), [contact, other], :method => :delete, confirm: t("common.messages.delete_confirm")
+        = link_to t('contacts.item.remove'), [contact, other], :method => :delete, data: {confirm: t("common.messages.delete_confirm")}
   dt
     = Document.human_attribute_name("tags")
   dd

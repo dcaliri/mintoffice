@@ -1,0 +1,82 @@
+- title t('.title')
+
+#show_command
+  - if current_person.admin? or @employee == current_employee
+    - if @employee.joined?
+      = link_to t('employees.show.pdf'), [:employment_proof, @employee]
+      = " | "
+  - if current_person.admin? and !@employee.retired_on
+    - if @employee.joined?
+      = link_to t('employees.retire.title'), :action => :retire, :id => @employee
+      = " | "
+    = link_to t('common.title.edit'), edit_employee_path(@employee)
+    = " | "
+  = link_to t('common.title.back'), employees_path
+
+h2
+  = @employee.fullname
+.box
+  #descr
+    dl
+      dt
+        = Employee.human_attribute_name('companyno')
+      dd
+        = @employee.companyno
+      = dtdd @employee, "position"
+      dt
+        = Employee.human_attribute_name('person_id')
+      dd
+        = @employee.person.account.name
+      - if current_person.admin? || @employee == current_employee
+        = dtdd @employee, "juminno"
+      = dtdd @employee, "joined_on"
+      - if @employee.retired_on
+        = dtdd @employee, "retired_on"
+      - if @employee.person.contact
+        #show_command
+          = link_to t('employees.show.find_address'), @employee.person.contact
+        h3
+          = t("contacts.show.title")
+        ul
+          = render 'contacts/item_for_employee', contact: @employee.person.contact,menu: false
+      - if current_person.admin? || @employee == current_employee
+        - if current_person.admin?
+          #show_command
+            = link_to t('required_tags.new.title'), :controller => "required_tags",  :action => "new", :modelname => Employee.name, :returnurl => request.url
+        h3
+          = t('.related_documents')
+        ul
+          - if !@required_tagnames.blank?
+            - for rtn in @required_tagnames
+              li
+                = rtn
+                = " "
+                - if @required_documents[rtn]
+                  = link_to @required_documents[rtn].title, :controller => "documents", :action => "show", :id => @required_documents[rtn]
+                - else
+                  = link_to " Register", :controller => "documents", :action => "new", :tag => [rtn, Employee.model_name.human, @employee.person.account.name].join(',')
+          - if !@unrequired_documents.blank?
+            - for d in @unrequired_documents
+              li
+                = link_to d.title, :controller => "documents", :action => "show", :id => d
+
+        - if @employee.joined?
+          h3
+            = t(".related_admin_actions")
+          ul
+            - if current_person.admin? || @employee == current_employee
+              li
+                = link_to t('payments.title'), payment_path(@employee)
+              li
+                = link_to t('vacations.show.link'), vacation_path(@employee)
+  #attach
+    = render "shared/attachments/detail", :target => @employee
+  .clear
+
+
+- if current_person.admin?
+  = render 'changelog', target: @employee
+
+
+
+

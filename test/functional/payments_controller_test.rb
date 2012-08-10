@@ -1,44 +1,40 @@
 require 'test_helper'
 
 class PaymentsControllerTest < ActionController::TestCase
-  fixtures :users, :hrinfos, :payments
-
-  def setup
-    current_user.permission.create!(name: 'payments')
-  end
+  fixtures :accounts, :employees, :payments
 
   test "should see index page" do
-    get :index, user_id: 1
+    get :index, employee_id: 1
     assert_response :success
   end
 
   test "should see new page" do
-    get :new, user_id: 1
+    get :new, employee_id: 1
     assert_response :success
   end
 
   test "should see show page" do
-    get :show, user_id: 1, :id => current_payment.id
+    get :show, employee_id: 1, :id => current_payment.id
     assert_response :success
   end
 
   test "should see edit page" do
-    get :edit, user_id: 1, :id => current_payment.id
+    get :edit, employee_id: 1, :id => current_payment.id
     assert_response :success
   end
 
   # test "should see yearly page" do
-  #   get :yearly, user_id: 1
+  #   get :yearly, account_id: 1
   #   assert_response :success
   # end
   #
   # test "should see new yearly page" do
-  #   get :new_yearly, user_id: 1
+  #   get :new_yearly, account_id: 1
   #   assert_response :success
   # end
   #
   # test "should see new yearly page" do
-  #   get :bonus, user_id: 1
+  #   get :bonus, account_id: 1
   #   assert_response :success
   # end
 

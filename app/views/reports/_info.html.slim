@@ -1,20 +1,21 @@
 - target.create_if_no_report
 - report = target.report
-- reporter_list ||= User.all.delete_if{|user| user == current_user or user.disabled?}
+- reporter_list ||= Person.with_account.delete_if{|person| person == current_person}
+
 h3
   = t('reports.info.approval')
 p
   = t('reports.info.status')
   = " - #{target.localize_status}"
 
-- if target.access?(current_user, :write)
-  - unless current_user.ingroup?(:admin)
+- if target.access?(current_person, :write)
+  - unless current_person.admin?
     = form_tag :report do
       = hidden_field_tag :target_type, target.class
       = hidden_field_tag :target_id, target.id
       p
         = label_tag :reporter, t('activerecord.attributes.report.reporter')
-        = select_tag :reporter, options_for_select(reporter_list.map{|user| [user.fullname, user.id]}, (report.reporter.id if report.reporter))
+        = select_tag :reporter, options_for_select(reporter_list.map{|person| [person.fullname, person.id]}, (report.reporter.id if report.reporter))
       p
         = label_tag :comment, t('activerecord.attributes.report.comment')
         = text_field_tag :comment
@@ -38,7 +39,7 @@ p
 
   = render 'reports/log', target: target
 
-- if current_user.admin?
+- if current_person.admin?
   = render 'accessors/info', access_target: report
 
 br

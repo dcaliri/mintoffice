@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class CardApprovedTest < ActiveSupport::TestCase
-  fixtures :users
+  fixtures :people
   fixtures :cardbills
   fixtures :creditcards
   fixtures :card_approved_sources
@@ -11,10 +11,9 @@ class CardApprovedTest < ActiveSupport::TestCase
   fixtures :report_people
   fixtures :report_comments
   fixtures :permissions
-  fixtures :permissions_users
 
   def setup
-    User.current_user = users(:admin_account)
+    Person.current_person = people(:fixture)
   end
 
   test "admin generate cardbill to manager" do
@@ -45,7 +44,7 @@ class CardApprovedTest < ActiveSupport::TestCase
 
   private
   def current_owner
-    @owner ||= users(:card_manager_account)
+    @owner ||= people(:card_manager_account)
   end
 
   def current_creditcard

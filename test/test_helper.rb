@@ -7,7 +7,8 @@ require 'capybara/rails'
 
 class ActionDispatch::IntegrationTest
   include Capybara::DSL
-  fixtures :users, :companies, :companies_users, :permissions_users, :permissions, :hrinfos, :groups_users, :groups
+  fixtures :accounts, :people, :companies, :companies_people, :people_permissions, :permissions, :employees, :groups_people, :groups
+
   setup :global_setup
   teardown :global_teardown
 
@@ -25,6 +26,10 @@ class ActionDispatch::IntegrationTest
     simple_authenticate
   end
 
+  def disable_confirm_box
+    page.evaluate_script('window.confirm = function() { return true; }')
+  end
+
   private
   def global_setup
     simple_authenticate
@@ -37,7 +42,7 @@ class ActionDispatch::IntegrationTest
   end
 
   def simple_authenticate
-    visit '/test/sessions?user_id=1'
+    visit '/test/sessions?person_id=1'
   end
 
   def clear_session
@@ -49,16 +54,16 @@ class ActionController::TestCase
   setup :global_setup
   teardown :global_teardown
 
-  fixtures :users, :companies, :companies_users, :groups, :groups_users
+  fixtures :accounts, :people, :employees, :companies_people, :groups_people, :groups, :companies
 
   def global_setup
     DatabaseCleaner.strategy = :truncation
     DatabaseCleaner.start
 
-    session[:user_id] = current_user.id
+    session[:person_id] = current_person.id
     session[:company_id] = current_company.id
 
-    User.current_user = current_user
+    Person.current_person = current_person
     Company.current_company = current_company
   end
 
@@ -66,15 +71,29 @@ class ActionController::TestCase
     DatabaseCleaner.clean
   end
 
-  def current_user
-    unless @user
-      @user = users(:admin_account)
-      @user.groups.create!(name: "admin")
+  def current_person
+    unless @person
+      @person = people(:fixture)
+      @person.groups.create!(name: "admin")
     end
-    @user
+    @person
   end
 
   def current_company
     @company ||= companies(:fixture)
+  end
+end
+
+class ActiveSupport::TestCase
+  setup :global_setup
+  teardown :global_teardown
+
+  DatabaseCleaner.strategy = :truncation
+  def global_setup
+    DatabaseCleaner.start
+  end
+
+  def global_teardown
+    DatabaseCleaner.clean
   end
 end

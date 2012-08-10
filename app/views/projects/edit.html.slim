@@ -4,7 +4,7 @@
   = " | "
   = link_to t("common.title.back"), projects_path
   = " | "
-  = link_to t(".completed"), {:action => "completed", :id => project}, {:confirm => t(".confirm_complete")}
+  = link_to t(".completed"), {:action => "completed", :id => project}, data: {data: {confirm: t(".confirm_complete")}}
 h2
   = t("common.title.edit")
 
@@ -24,13 +24,13 @@ h2
       = f.label :revenue, Project.human_attribute_name("revenue")
       = f.text_field :revenue
   = f.submit t('common.button.update')
-= form_tag({:action => "add_user", :id => project, }, {:class => "tabular"}) do
+= form_tag(employee_project_path(project), {:class => "tabular"}) do
   .box
     p
-      = label_tag :username, User.human_attribute_name("name")
-      - for user in project.users
-        = user.name 
-        = link_to t("common.title.destroy"), :action => "del_user", :id => project, :uid => user.id
+      = label_tag :accountname, Account.human_attribute_name("name")
+      - for employee in project.employees
+        = employee.fullname
+        = link_to t("common.title.destroy"), employee_project_path(project, employee_id: employee), method: :delete
         br
-      = text_field_tag :username
+      = text_field_tag :accountname
       = submit_tag t("common.button.add")

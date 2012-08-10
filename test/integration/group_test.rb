@@ -24,7 +24,8 @@ class GroupTest < ActionDispatch::IntegrationTest
     click_link '신규 작성'
 
     fill_in "그룹명", with: "그룹명 입력 테스트"
-    check('group_user_ids_')
+
+    check('group_person_ids_')
 
     click_button 'Group 만들기'
 

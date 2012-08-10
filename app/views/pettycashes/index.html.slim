@@ -1,10 +1,10 @@
 - title t('.title')
 
-- content_for :search do 
+- content_for :search do
   = form_tag :pettycashes, :method => :get do
     = t("common.title.search")
     '  :
-    = search_field_tag 'q', params[:q]
+    = search_field_tag 'query', params[:query]
 
 #show_command
   = link_to t('pettycashes.new.title'), new_pettycash_path
@@ -20,6 +20,7 @@ table#list-table
     th= Pettycash.human_attribute_name('inmoney')
     th= Pettycash.human_attribute_name('outmoney')
     th= Pettycash.human_attribute_name('description')
+
   - @pettycashes.each do |pettycash|
     tr.selectable onclick="location.href='#{pettycash_path(pettycash)}'"
       td= pettycash.transdate.strftime("%Y.%m.%d %H:%M:%S %p")

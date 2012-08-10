@@ -4,15 +4,16 @@ class ProvidersController < ApplicationController
   def create
     auth = request.env["omniauth.auth"]
 
-    user = User.find_by_omniauth(auth)
-    user = User.create_from_omniauth(auth) unless user
+    @account = Account.find_by_omniauth(auth)
+    @account = Account.create_from_omniauth(auth) unless @account
+    raise @account.errors.inspect if @account.invalid?
 
-    session[:user_id] = user.id
+    session[:person_id] = @account.person.id
 
-    if user.joined?
-      redirect_to :root, :notice => I18n.t("users.login.successfully_signed_in")
-    else
+    if @account.needs_apply?
       redirect_to [:dashboard, :enrollments]
+    else
+      redirect_to :root, :notice => I18n.t("accounts.login.successfully_signed_in")
     end
   end
 end

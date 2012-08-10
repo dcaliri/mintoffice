@@ -18,7 +18,7 @@ module ApplicationHelper
       str.strip.empty? ? '&nbsp;' : str
     elsif str.instance_of? Date or str.instance_of? ActiveSupport::TimeWithZone
       l str
-    elsif str.instance_of? BigDecimal or str.instance_of? Fixnum
+    elsif str.instance_of? BigDecimal
       number_to_currency str
     else
       str

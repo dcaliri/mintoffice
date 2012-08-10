@@ -2,7 +2,6 @@
 require 'test_helper'
 
 class CommuteTest < ActionDispatch::IntegrationTest
-
   test 'should visit my commute' do
     visit '/'
     click_link '출퇴근 관리'

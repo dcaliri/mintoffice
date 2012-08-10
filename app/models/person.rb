@@ -15,8 +15,18 @@ class Person < ActiveRecord::Base
   has_many :reporters, class_name: 'ReportPerson'
   has_many :accessors, class_name: 'AccessPerson'
 
+  cattr_accessor :current_person
+
+  def enrollment
+    Enrollment.find_by_person_id(id) || create_enrollment!(company_id: Company.current_company.id)
+  end
+
   def self.no_employee
     joins(:account).where('accounts.person_id == people.id') - joins(:employee).where('employees.person_id == people.id')
+  end
+
+  def self.with_account
+    joins(:account).where('accounts.person_id == people.id')
   end
 
   def permission?(name)
@@ -26,7 +36,7 @@ class Person < ActiveRecord::Base
   def ingroup?(name)
     self.groups.where(name: name).present?
   end
-  
+
   def admin?
     self.ingroup?("admin")
   end
@@ -35,11 +45,19 @@ class Person < ActiveRecord::Base
     account.name
   end
 
+  def fullname
+    account.fullname
+  end
+
   def joined?
     companies.exists?
   end
 
   def not_joined?
     not joined?
+  end
+
+  def has_payment_info
+    not (employee and employee.payments.empty?)
   end
 end

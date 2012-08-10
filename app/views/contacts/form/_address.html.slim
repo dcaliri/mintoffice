@@ -3,11 +3,12 @@
 h3
   = t('contacts_form.address.title')
 = contact_form.fields_for :addresses do |address_field|
+
   .address-form
     p
       = address_field.label :target
       = address_field.select :target, options_for_select(current_company.contact_address_tags.map{|tag| tag.name}, address_field.object.target)
-      - if current_user.present? and current_user.admin?
+      - if current_person.present? and current_person.admin?
         = link_to t('contacts_form.make_new_one'), [:new, :contact_address_tag]
     p
       = address_field.label :country

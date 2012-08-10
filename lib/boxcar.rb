@@ -2,6 +2,7 @@ require 'net/http'
 
 class Boxcar
   def self.add_to_boxcar(email)
+    return unless email.blank?
     Rails.logger.info "Boxcar = #{email}"
     
     uri = URI('http://boxcar.io/devices/providers/i7pThv4s27chmnqFz2FJ/notifications/subscribe')
@@ -26,19 +27,20 @@ class Boxcar
   end
 
   def self.send_to_boxcar_group(groupname, from, msg)
-    Group.users_in_group(groupname).each do |u|
-      unless u.boxcar_account.nil?
-        unless u.boxcar_account.empty?
-          Boxcar.send_to_boxcar(u.boxcar_account, from, msg)
+    Group.accounts_in_group(groupname).each do |account|
+      unless account.boxcar_account.nil?
+        unless account.boxcar_account.empty?
+          Boxcar.send_to_boxcar(account.boxcar_account, from, msg)
         end
       end
     end
   end
 
-  def self.send_to_boxcar_user(user, from, msg)
-    unless user.boxcar_account.nil?
-      unless user.boxcar_account.empty?
-        Boxcar.send_to_boxcar(user.boxcar_account, from, msg)
+  def self.send_to_boxcar_account(person, from, msg)
+    account = person.account
+    unless account.boxcar_account.nil?
+      unless account.boxcar_account.empty?
+        Boxcar.send_to_boxcar(account.boxcar_account, from, msg)
       end
     end
   end

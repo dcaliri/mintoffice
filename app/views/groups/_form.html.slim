@@ -1,5 +1,5 @@
 #show_command
-  = link_to t('common.title.back'), groups_path
+  = link_to t('common.title.back'), :groups
 
 h2= t("common.title.#{action_name}")
 
@@ -10,10 +10,11 @@ h2= t("common.title.#{action_name}")
       = f.label :name
       = f.text_field :name
     p
-      = f.label :users
-      - User.enabled.each do |u|
-          = check_box_tag "group[user_ids][]", u.id, group.users.include?(u)
-          = u.fullname
-          br
+      = f.label :employees
+      - Person.joins(:employee).where('employees.person_id = people.id').each do |person|
+        - if person.account.present?
+          = check_box_tag "group[person_ids][]", person.id, group.people.include?(person)
+          = person.name
+        br
   p
     = f.submit

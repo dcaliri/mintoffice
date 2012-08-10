@@ -16,15 +16,15 @@ class PermissionTest < ActionDispatch::IntegrationTest
     click_link 'Show'
 
     assert(page.has_content?('Add User:'))
-  end  
+  end
 
   test 'should add people_permission in show' do
     visit '/'
     click_link '권한 관리'
     click_link 'Show'
 
-    find_field('username').set("normal")
-    find_field('username').native.send_key(:enter)
+    find_field('accountname').set("normal")
+    find_field('accountname').native.send_key(:enter)
 
     assert(page.has_content?('성공적으로 사용자를 등록했습니다.'))
     assert(page.has_content?('normal'))
@@ -35,12 +35,13 @@ class PermissionTest < ActionDispatch::IntegrationTest
     click_link '권한 관리'
     click_link 'Show'
     click_link 'Edit'
-    
-    find(:css, "#permission_user_ids_[value='2']").set(true)
+
+    find(:css, "#permission_person_ids_[value='2']").set(true)
 
     click_button 'Update'
 
-    assert(page.has_content?('Permission was successfully updated.'))
+    assert(page.has_content?('권한이(가) 성공적으로 업데이트 되었습니다.'))
+
   end
 
   test 'should create a new permission' do
@@ -52,7 +53,8 @@ class PermissionTest < ActionDispatch::IntegrationTest
 
     click_button 'Create'
 
-    assert(page.has_content?('Permission was successfully created.'))
+    assert(page.has_content?('권한이(가) 성공적으로 생성되었습니다.'))
+
   end
 
   test 'should edit permission' do
@@ -61,21 +63,23 @@ class PermissionTest < ActionDispatch::IntegrationTest
     click_link 'Edit'
 
     fill_in "Name", with: "test 수정"
-    find(:css, "#permission_user_ids_[value='1']").set(true)
-    find(:css, "#permission_user_ids_[value='2']").set(true)
-    
+
+    find(:css, "#permission_person_ids_[value='1']").set(true)
+    find(:css, "#permission_person_ids_[value='2']").set(true)
+
     click_button 'Update'
 
-    assert(page.has_content?('Permission was successfully updated.'))
+    assert(page.has_content?('권한이(가) 성공적으로 업데이트 되었습니다.'))
   end
 
   test 'should destroy page' do
     visit '/'
     click_link '권한 관리'
 
+    disable_confirm_box
+
     click_link 'Destroy'
-    page.driver.browser.switch_to.alert.accept
-    
+
     assert(!page.has_content?('accessors'))
   end
 end

@@ -4,23 +4,23 @@ module MigrationHelpers
       belongs_to :target, polymorphic: true
       has_one :reporter, class_name: "ReportPerson"
     end
-    class User < ActiveRecord::Base
-      has_one :hrinfo
+    class Account < ActiveRecord::Base
+      has_one :employee
     end
     class Group < ActiveRecord::Base
-      has_and_belongs_to_many :users
+      has_and_belongs_to_many :accounts
     end
-    class Hrinfo < ActiveRecord::Base
-      belongs_to :user
+    class Employee < ActiveRecord::Base
+      belongs_to :account
       has_many :reporters, class_name: 'ReportPerson'
     end
     class ReportPerson < ActiveRecord::Base
-      belongs_to :hrinfo
+      belongs_to :employee
       belongs_to :report
     end
 
     def up_report(class_name)
-      user = Group.where(name: "admin").first.users.first
+      account = Group.where(name: "admin").first.accounts.first
       class_name.constantize.find_each do |target|
         report = Report.new
         report.target_type = class_name
@@ -28,7 +28,7 @@ module MigrationHelpers
         report.status = :reported
         report.save!
 
-        reporter = ReportPerson.new(report_id: report.id, hrinfo_id: user.hrinfo.id)
+        reporter = ReportPerson.new(report_id: report.id, employee_id: account.employee.id)
         reporter.save!
 
         target.save!

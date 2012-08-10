@@ -8,7 +8,7 @@ Mintoffice::Application.routes.draw do
   end
 
   namespace :api do
-    match 'login', controller: :users, action: :login
+    match 'login', controller: :accounts, action: :login
 
     resources :commutes do
       collection do
@@ -78,7 +78,13 @@ Mintoffice::Application.routes.draw do
   end
 
   resources :documents
-  resources :projects, except: [:destroy]
+  resources :projects, except: [:destroy] do
+    member do
+      post :employee, action: 'add_employee'
+      delete :employee, action: 'remove_employee'
+    end
+  end
+
   resources :pettycashes
   resources :permissions
   resources :cardbills
@@ -90,14 +96,41 @@ Mintoffice::Application.routes.draw do
   resources :payroll_items
   resources :holidays
 
-  post '/hrinfos/retired/:id', :controller => "hrinfos", :action => "retired", as: :retired
-  post '/hrinfos/try_retired/:id', :controller => "hrinfos", :action => "try_retired", as: :try_retired
+  post '/employees/retired/:id', :controller => "employees", :action => "retired", as: :retired
+  post '/employees/try_retired/:id', :controller => "employees", :action => "try_retired", as: :try_retired
 
-  resources :hrinfos do
+  resources :employees do
 
     member do
-    get 'employment_proof', action: :new_employment_proof, as: :employment_proof
-    post 'employment_proof', as: :employment_proof
+      get 'employment_proof', action: :new_employment_proof, as: :employment_proof
+      post 'employment_proof', as: :employment_proof
+    end
+
+    resources :commutes do
+      member do
+        get 'detail'
+      end
+    end
+
+    resources :vacations
+
+    resources :projects do
+      collection do
+        get 'assign'
+        post 'assign', action: 'assign_projects'
+      end
+    end
+
+    resources :payments do
+      collection do
+        get 'yearly'
+        post 'yearly', :action => 'create_yearly'
+
+        get 'new_yearly'
+        post 'calculate'
+        post 'new_yearly', :action => 'create_new_yearly'
+        get 'bonus'
+      end
     end
   end
 
@@ -105,21 +138,30 @@ Mintoffice::Application.routes.draw do
     member do
       get 'picture', action: :picture, as: :picture
     end
+
+    collection do
+      post 'save', action: :save, as: :save
+    end
   end
 
-  match '/users/changepw/:user_id', :controller => 'users', :action => 'changepw'
-  match '/users/login', :controller => 'users', :action => 'login'
-  match '/users/logout', :controller => 'users', :action => 'logout', :conditions => { :method => :get}
-  match '/users/my', :controller => "users", :action => "my"
+  get '/accounts/changepw/:account_id', :controller => 'accounts', :action => 'changepw_form'
+  post '/accounts/changepw/:account_id', :controller => 'accounts', :action => 'changepw'
 
   resources :groups
-
-  resources :users do
+  resources :accounts do
     collection do
+      get 'login', as: :login
+      get 'logout', as: :logout
+      get 'my', as: :my
+
       get 'google_apps', as: :google_apps
+      post 'authenticate', as: :authenticate
     end
 
     member do
+      get 'changepw', action: :changepw_form
+      post 'changepw'
+
       post 'create_google_apps', as: :google_apps, path: 'google_apps'
       post 'create_redmine', as: :redmine, path: 'redmine'
 
@@ -136,28 +178,6 @@ Mintoffice::Application.routes.draw do
         post 'calculate'
         post 'new_yearly', :action => 'create_new_yearly'
         get 'bonus'
-      end
-    end
-
-    resources :commutes do
-      collection do
-        get 'go'
-        post 'go', :action => 'go!'
-      end
-
-      member do
-        get 'detail'
-        get 'leave'
-        put 'leave', :action => 'leave!'
-      end
-    end
-
-    resources :vacations
-
-    resources :projects do
-      collection do
-        get 'assign'
-        post 'assign', action: 'assign_projects'
       end
     end
   end
@@ -235,9 +255,8 @@ Mintoffice::Application.routes.draw do
   resources :companies do
     post :switch, on: :collection
   end
-  resources :expense_reports, path: 'expenses' do
-    get 'no_permission', as: :no_permission, on: :collection
-  end
+
+  resources :expense_reports, path: 'expenses'
 
   match 'report' => 'reports#report', as: :report
 

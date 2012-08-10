@@ -7,7 +7,8 @@ class PostingsController < ApplicationController
 
   def new
     unless params[:report].blank?
-      @posting = ExpenseReport.find(params[:report]).make_posting
+      @expense_report = ExpenseReport.find(params[:report])
+      @posting = @expense_report.make_posting
     else
       @posting = Posting.new
     end
@@ -18,19 +19,19 @@ class PostingsController < ApplicationController
   end
 
   def create
-    posting.save!
-    redirect_to posting
+    @posting = Posting.new(params[:posting])
+    @posting.save!
+    redirect_to @posting
   rescue ActiveRecord::RecordInvalid
-    @posting = posting
     render 'new'
   end
 
   def update
-    posting.save!
-    redirect_to posting
+    @posting = Posting.find(params[:id])
+    @posting.update_attributes!(params[:posting])
+    redirect_to @posting
   rescue ActiveRecord::RecordInvalid
-    @posting = posting
-    render 'new'
+    render 'edit'
   end
 
   def destroy
