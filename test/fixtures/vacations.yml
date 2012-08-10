@@ -10,7 +10,7 @@ fixture:
 
 old_user_vacation:
   id: 2
-  user_id: 2
+  employee_id: 2
   from: 2011-07-18
   to: 2012-07-17
   period: 10
