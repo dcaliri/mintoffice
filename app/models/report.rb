@@ -50,25 +50,9 @@ class Report < ActiveRecord::Base
 
   def report!(person, comment, report_url)
     prev_reporter = self.reporter
-    prev_reporter.owner = false
-
-    collection = reporters.where(person_id: person.id)
-    if collection.empty?
-      next_reporter = person.reporters.build(owner: true)
-      next_reporter.prev = prev_reporter
-      self.reporters << next_reporter
-    else
-      next_reporter = collection.first
-      next_reporter.owner = true
-    end
+    next_reporter = change_owner(person)
 
     self.status = :reporting
-
-    next_reporter.save!
-    prev_reporter.save!
-
-    permission person, :write
-    permission prev_reporter.person, :read
 
     self.comments.build(owner: prev_reporter, description: "#{next_reporter.fullname}"+I18n.t('models.report.to_report'))
     self.comments.build(owner: prev_reporter, description: comment) unless comment.blank?
@@ -78,21 +62,27 @@ class Report < ActiveRecord::Base
     notify(:report, prev_reporter, next_reporter, report_url)
   end
 
-  def approve!(comment)
+  def approve!(person, comment)
     self.status = :reported
-    Person.current_person.reporters.create!(report_id: id, owner: true) unless self.reporter
 
-    self.comments.build(owner: self.reporter, description: "#{reporter.fullname}"+I18n.t('models.report.to_approve'))
-    self.comments.build(owner: self.reporter, description: comment) unless comment.blank?
+    unless self.reporter
+      approved = Person.current_person.reporters.create!(report_id: id, owner: true)
+    else
+      approved = change_owner(person)
+    end
+
+    self.comments.build(owner: approved, description: "#{person.fullname}"+I18n.t('models.report.to_approve'))
+    self.comments.build(owner: approved, description: comment) unless comment.blank?
 
     save!
   end
 
   def rollback!(comment, report_url)
+    prev_status = self.status
     self.status = :rollback
     prev_reporter = self.reporter
     next_reporter = prev_reporter.prev if prev_reporter.prev
-    if next_reporter
+    if next_reporter and prev_status != :reported
       next_reporter.owner = true
       next_reporter.save!
 
@@ -124,6 +114,31 @@ class Report < ActiveRecord::Base
   end
 
   private
+  def change_owner(person)
+    prev_reporter = self.reporter
+    return prev_reporter if person == prev_reporter.person
+
+    prev_reporter.owner = false
+
+    collection = reporters.where(person_id: person.id)
+    if collection.empty?
+      next_reporter = person.reporters.build(owner: true)
+      next_reporter.prev = prev_reporter
+      self.reporters << next_reporter
+    else
+      next_reporter = collection.first
+      next_reporter.owner = true
+    end
+
+    prev_reporter.save!
+    next_reporter.save!
+
+    permission person, :write
+    permission prev_reporter.person, :read
+
+    next_reporter
+  end
+
   def notify(action, from, to, url)
     return if !from or !to
 

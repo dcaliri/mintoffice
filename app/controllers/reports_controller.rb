@@ -12,7 +12,8 @@ class ReportsController < ApplicationController
       person = Person.find(params[:reporter]) if params[:reporter]
       report_target.report!(person, params[:comment], report_url)
     elsif params[:approve]
-      report_target.approve!(params[:comment])
+      person = current_person
+      report_target.approve!(person, params[:comment])
     elsif params[:rollback]
       report_target.rollback!(params[:comment], report_url)
     else
