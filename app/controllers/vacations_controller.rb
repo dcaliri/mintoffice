@@ -8,7 +8,7 @@ class VacationsController < ApplicationController
   expose(:vacations) { employee.vacations.latest }
   expose(:vacation)
 
-  before_filter {|controller| controller.redirect_unless_me(employee)}
+  #before_filter {|controller| controller.redirect_unless_me(employee)}
   before_filter :only_admin_access_vacation, :except => [:index, :show]
 
   def index
