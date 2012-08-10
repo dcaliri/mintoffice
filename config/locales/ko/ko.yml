@@ -152,7 +152,7 @@ ko:
                 accessor: 대상
             attachment:
                 comments: 주석
-                content_type: 파일형식
+                contenttype: 파일형식
                 file: 파일
                 filepath: 저장된 파일명
                 original_filename: 원 파일명
