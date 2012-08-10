@@ -69,3 +69,9 @@ ledger_accounts:
   name: "ledger_accounts"
   created_at: 2012-07-18 16:08:13.066854
   updated_at: 2012-07-18 16:08:13.066854
+
+vacations:
+  id: 13
+  name: "vacations"
+  created_at: 2012-07-18 16:08:13.066854
+  updated_at: 2012-07-18 16:08:13.066854

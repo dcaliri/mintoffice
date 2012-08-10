@@ -80,6 +80,6 @@ class PermissionTest < ActionDispatch::IntegrationTest
 
     click_link 'Destroy'
 
-    assert(!page.has_content?('accessors'))
+    assert(page.has_content?('권한이(가) 성공적으로 제거 되었습니다.'))
   end
 end

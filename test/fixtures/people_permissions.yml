@@ -61,3 +61,11 @@ postings:
 ledger_accounts:
   permission_id: 12
   person_id: 1
+
+vacations:
+  permission_id: 13
+  person_id: 1
+
+vacations_normal:
+  permission_id: 13
+  person_id: 2
