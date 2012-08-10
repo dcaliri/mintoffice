@@ -21,14 +21,14 @@ card_used_user_registe_project:
 
 cardbill_manager_registe_project:
   id: 2
-  user_id: 3
+  employee_id: 3
   project_id: 1
   created_at: <%= Time.zone.now %>
   updated_at: <%= Time.zone.now %>
 
 card_used_user_registe_project:
   id: 3
-  user_id: 4
+  employee_id: 4
   project_id: 1
   created_at: <%= Time.zone.now %>
   updated_at: <%= Time.zone.now %>

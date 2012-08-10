@@ -23,7 +23,7 @@ class CardBillProcessTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('card_manager 이(가) 총 1개의 카드영수증을 생성했습니다.'))
 
     clear_session
-    
+
     visit '/'
 
     fill_in "사용자계정", with: "card_manager"
@@ -61,7 +61,7 @@ class CardBillProcessTest < ActionDispatch::IntegrationTest
     path = File.join(::Rails.root, "test/fixtures/images/cardbill.png") 
     attach_file('cardbill_attachments_attributes_0_uploaded_file', path)
 
-    click_button '갱신하기'
+    click_button '카드 영수증 수정하기'
 
     click_link '지출내역서 만들기'
 

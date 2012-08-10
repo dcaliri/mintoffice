@@ -20,7 +20,7 @@ class ExpenseReport < ActiveRecord::Base
 
   def report!(person, comment, report_url)
     if target_type == "Cardbill"
-      target.report.permission user, :read
+      target.report.permission person, :read
     end
     super
   end
