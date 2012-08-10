@@ -48,6 +48,7 @@ class ChangeHistoryTest < ActionDispatch::IntegrationTest
     find("tr.selectable").click
 
     assert(page.has_content?('[소액현금] 수입금액: 50000.0 → 100000.0(왕 수용)'))
+    # assert(page.has_content?('[소액현금] 수입금액: 50000.0 → 100000.0(admin)'))
   end
 
   test 'should destroy chage_history' do
