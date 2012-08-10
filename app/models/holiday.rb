@@ -13,7 +13,7 @@ class Holiday < ActiveRecord::Base
     end
     return holiday_count
   end
-  
+
   def self.working_days(from,to)
     count = 0
     holidays = []

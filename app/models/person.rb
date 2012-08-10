@@ -22,11 +22,11 @@ class Person < ActiveRecord::Base
   end
 
   def self.no_employee
-    joins(:account).where('accounts.person_id == people.id') - joins(:employee).where('employees.person_id == people.id')
+    joins(:account).where('accounts.person_id = people.id') - joins(:employee).where('employees.person_id = people.id')
   end
 
   def self.with_account
-    joins(:account).where('accounts.person_id == people.id')
+    joins(:account).where('accounts.person_id = people.id')
   end
 
   def permission?(name)
