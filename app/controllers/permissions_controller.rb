@@ -58,5 +58,6 @@ class PermissionsController < ApplicationController
   def destroy
     @permission = Permission.find(params[:id])
     @permission.destroy
+    redirect_to @permission, notice: t('common.messages.destroyed', :model => Permission.model_name.human)
   end
 end
