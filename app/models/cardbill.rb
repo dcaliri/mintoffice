@@ -39,12 +39,11 @@ class Cardbill < ActiveRecord::Base
   class << self
     def search(params)
       result = search_by_text(params[:query]).search_by_creditcard(params[:creditcard_id])
-      result = if params[:empty_permission] == 'true'
-                result.no_permission
-              else
-                result.access_list(params[:person])
-              end
-      result
+      if params[:empty_permission] == 'true'
+        result.no_permission
+      else
+        result.access_list(params[:person])
+      end
     end
 
     def search_by_text(query)
