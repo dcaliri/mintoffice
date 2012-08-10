@@ -15,7 +15,7 @@ class CardBillTest < ActionDispatch::IntegrationTest
     click_link '카드 영수증 목록'
 
     assert(page.has_content?('카드영수증 관리'))
-    assert(page.has_content?('Total: 2'))
+    assert(page.has_content?('Total: 3'))
   end
 
   test 'should show has_permission_cardbills' do
@@ -30,6 +30,7 @@ class CardBillTest < ActionDispatch::IntegrationTest
     visit '/'
     click_link '카드 영수증 목록'
     select('권한을 알 수 없는 내역 보기', :from => 'empty_permission')
+    assert(page.has_content?('Total: 1'))
     
     find("tr.selectable").click
 
