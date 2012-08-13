@@ -1,6 +1,6 @@
 
 - content_for :search do
-  = form_tag({:action => "find"}, :method => :get ) do
+  = form_tag([:find, :contacts], :method => :get ) do
     = hidden_field_tag 'target_class', params[:target_class]
     = hidden_field_tag 'target', params[:target]
     = hidden_field_tag 'parent_class', params[:parent_class]
