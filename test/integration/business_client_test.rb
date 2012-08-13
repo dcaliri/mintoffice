@@ -80,13 +80,7 @@ class BusinessClientTest < ActionDispatch::IntegrationTest
 
     click_link '담당자 추가하기'
 
-    # popup = page.driver.browser.window_handles.last
-    # page.driver.browser.switch_to.window(popup)
-
     find("tr.selectable").click
-
-    # popup = page.driver.browser.window_handles.last
-    # page.driver.browser.switch_to.window(popup)
 
     assert(page.has_content?('왕 수용'))
   end

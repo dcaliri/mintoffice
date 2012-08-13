@@ -24,6 +24,7 @@ class TaxmenController < ApplicationController
   def update_contact
     @taxman = @business_client.taxmen.find(params[:id])
     @taxman.person.contact = Contact.find(params[:contact])
+    @taxman.person.save!
     @taxman.save!
     redirect_to @business_client
   rescue ActiveRecord::RecordInvalid

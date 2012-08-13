@@ -20,6 +20,7 @@ h2
       = render 'shared/attachments/form', form: f
     p
       = f.label :owners, Document.human_attribute_name('owner')
+
       - if !document.employees.blank?
         - for employee in document.employees
           =h employee.fullname

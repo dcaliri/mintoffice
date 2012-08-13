@@ -30,6 +30,6 @@ module Historiable
 
   included do
     has_many(:change_histories, :as => :changable)
-    before_save :make_histories
+    after_save :make_histories
   end
 end

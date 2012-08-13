@@ -2,7 +2,7 @@
 require 'test_helper'
 
 class AttachmentTest < ActionDispatch::IntegrationTest
-	fixtures :documents
+  fixtures :documents
 
   test 'should visit attachment list' do
     visit '/'
