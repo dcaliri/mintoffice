@@ -28,6 +28,11 @@ class EmployeesControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "should see find_contact page" do
+    get :find_contact
+    assert_response :success
+  end
+
   test "should see employment proof page" do
     get :new_employment_proof, :id => current_employee.id
     assert_response :success

@@ -7,10 +7,6 @@ class EmployeesController < ApplicationController
   before_filter :retired_employee_can_access_only_admin, except: [:index, :new, :create, :find_contact]
   before_filter :account_only_access_my_employment, only: [:new_employment_proof]
 
-  def find_contact
-    @contacts = Contact.search(params[:query])
-  end
-
   def index
     params[:search_type] ||= :join
     @employees = Employee.search(current_person, params[:search_type], params[:q])
@@ -90,6 +86,10 @@ class EmployeesController < ApplicationController
     render 'edit'
   end
 
+  def find_contact
+    @contacts = Contact.search(params[:query])
+  end
+  
   def new_employment_proof
     @employee = Employee.find(params[:id])
     if current_company.seal.empty?
