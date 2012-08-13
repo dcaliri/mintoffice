@@ -100,9 +100,8 @@ Mintoffice::Application.routes.draw do
   post '/employees/try_retired/:id', :controller => "employees", :action => "try_retired", as: :try_retired
 
   resources :employees do
-
     collection do
-      get 'find'
+      get 'find_contact'
     end
 
     member do
@@ -243,7 +242,17 @@ Mintoffice::Application.routes.draw do
   resources :required_tags
   resources :namecards
   resources :business_clients do
-    resources :taxmen, :except => :index
+    resources :taxmen, :except => :index do
+      collection do
+        get 'find_contact'
+        match 'select_contact'
+      end
+
+      member do
+        get 'edit_contact'
+        match 'update_contact'
+      end
+    end
   end
 
   resources :taxbills do

@@ -4,10 +4,10 @@ class EmployeesController < ApplicationController
     c.save_attachment_id @employee
   end
 
-  before_filter :retired_employee_can_access_only_admin, except: [:index, :new, :create, :find]
+  before_filter :retired_employee_can_access_only_admin, except: [:index, :new, :create, :find_contact]
   before_filter :account_only_access_my_employment, only: [:new_employment_proof]
 
-  def find
+  def find_contact
     @contacts = Contact.search(params[:query])
   end
 

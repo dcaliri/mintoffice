@@ -1,5 +1,5 @@
 - content_for :search do
-  = form_tag({:action => "find"}, :method => :get ) do
+  = form_tag({:action => "find_contact"}, :method => :get ) do
     = hidden_field_tag 'target_class', params[:target_class]
     = hidden_field_tag 'target', params[:target]
     = hidden_field_tag 'parent_class', params[:parent_class]
@@ -9,7 +9,7 @@
     = text_field_tag 'query', params[:query]
 
 #show_command
-  = link_to "새로운 연락처 만들기", new_contact_path(subject: subject)
+  = link_to "새로운 연락처 만들기", new_contact_path(redirect_to_subject: redirect_to_subject)
 
 h2 인사정보에 이용될 연락처 찾기
 
@@ -21,7 +21,7 @@ h2 인사정보에 이용될 연락처 찾기
       th= Contact.human_attribute_name(:department)
       th= Contact.human_attribute_name(:position)
     - @contacts.each do |contact|
-      tr.selectable onclick="location.href='#{redirect_path.call(contact: contact)}'"
+      tr.selectable onclick="location.href='#{redirect_path.call(contact)}'"
         td= contact.name
         td= contact.company_name
         td= contact.department

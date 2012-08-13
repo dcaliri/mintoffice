@@ -5,6 +5,7 @@ h2= t("common.title.#{action_name}")
 
 = form_for @contact, html: {multipart: true} do |f|
   = hidden_field_tag :subject, params[:subject]
+  = hidden_field_tag :redirect_to_subject, params[:redirect_to_subject]
   .box
     = f.error_messages
     p
