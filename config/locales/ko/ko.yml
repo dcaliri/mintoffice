@@ -1386,6 +1386,7 @@ ko:
             title: 새로운 내역
         title: 세금계산서 내역
     taxmen:
+        title: 거래처 담당자
         empty: 담당자가 없습니다.
         new:
             title: 새로운 담당자 입력
