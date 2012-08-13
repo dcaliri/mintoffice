@@ -1,0 +1,30 @@
+- content_for :search do
+  = form_tag({:action => "find"}, :method => :get ) do
+    = hidden_field_tag 'target_class', params[:target_class]
+    = hidden_field_tag 'target', params[:target]
+    = hidden_field_tag 'parent_class', params[:parent_class]
+    = hidden_field_tag 'parent', params[:parent]
+    = t("common.title.search")
+    = " : "
+    = text_field_tag 'query', params[:query]
+
+#show_command
+  = link_to "새로운 연락처 만들기", new_contact_path(subject: subject)
+
+h2 인사정보에 이용될 연락처 찾기
+
+- unless @contacts.empty?
+  table#list-table
+    tr
+      th= Contact.human_attribute_name(:name)
+      th= Contact.human_attribute_name(:company_name)
+      th= Contact.human_attribute_name(:department)
+      th= Contact.human_attribute_name(:position)
+    - @contacts.each do |contact|
+      tr.selectable onclick="location.href='#{redirect_path.call(contact: contact)}'"
+        td= contact.name
+        td= contact.company_name
+        td= contact.department
+        td= contact.position
+- else
+  h4= t('.empty')

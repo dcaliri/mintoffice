@@ -14,18 +14,6 @@ h2
         = f.label :companyno, Employee.human_attribute_name('companyno')
         = f.text_field :companyno
       p
-        = f.label :lastname, Employee.human_attribute_name('lastname')
-        = f.text_field :lastname
-      p
-        = f.label :firstname, Employee.human_attribute_name('firstname')
-        = f.text_field :firstname
-      p
-        = f.label :department, Employee.human_attribute_name('department')
-        = f.text_field :department
-      p
-        = f.label :position, Employee.human_attribute_name('position')
-        = f.text_field :position
-      p
         = f.label :joined_on, Employee.human_attribute_name('joined_on')
         = f.date_select :joined_on, :order => [:year, :month, :day]
       p
@@ -34,15 +22,6 @@ h2
     p
       = f.label :juminno, Employee.human_attribute_name('juminno')
       = f.text_field :juminno
-    p
-      = f.label :email, Employee.human_attribute_name('email')
-      = f.text_field :email
-    p
-      = f.label :phone_number, Employee.human_attribute_name('phone_number')
-      = f.text_field :phone_number
-    p
-      = f.label :address, Employee.human_attribute_name('address')
-      = f.text_field :address
     - if current_person.admin?
       p
         = render 'shared/attachments/form', form: f

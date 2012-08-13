@@ -70,7 +70,7 @@ class ContactsController < ApplicationController
   def create
     @contact = contacts.where(owner_id: current_person.id).build(params[:contact])
     @contact.save!
-    redirect_to @contact
+    redirect_to redirect_url_if_subject
   rescue ActiveRecord::RecordInvalid
     render 'new'
   end
@@ -98,4 +98,16 @@ class ContactsController < ApplicationController
     force_redirect unless @contact.edit?(current_person)
   end
 
+  def url_options
+    super.merge(subject: params[:subject])
+  end
+
+  def redirect_url_if_subject
+    if params[:subject].blank?
+      @contact
+    else
+      [:find, params[:subject].downcase.pluralize]
+    end
+  end
+  helper_method :redirect_url_if_subject
 end

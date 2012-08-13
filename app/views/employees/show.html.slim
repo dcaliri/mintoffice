@@ -38,7 +38,7 @@ h2
         h3
           = t("contacts.show.title")
         ul
-          = render 'contacts/item_for_employee', contact: @employee.person.contact,menu: false
+          = render 'contacts/item_for_employee', contact: @employee.person.contact, menu: false
       - if current_person.admin? || @employee == current_employee
         - if current_person.admin?
           #show_command

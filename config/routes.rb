@@ -101,6 +101,10 @@ Mintoffice::Application.routes.draw do
 
   resources :employees do
 
+    collection do
+      get 'find'
+    end
+
     member do
       get 'employment_proof', action: :new_employment_proof, as: :employment_proof
       post 'employment_proof', as: :employment_proof

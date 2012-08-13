@@ -29,7 +29,16 @@ class Employee < ActiveRecord::Base
   validates_uniqueness_of :juminno
   validates_uniqueness_of :companyno
 
-  attr_accessor :email, :phone_number, :address
+  attr_accessor :email, :phone_number, :address, :contact_id
+
+  before_save :find_contact
+  def find_contact
+    if self.contact_id
+      contact = Contact.find(self.contact_id.to_i)
+      self.person.contact = contact
+      contact.save!
+    end
+  end
 
   SEARCH_TYPE = {
     I18n.t('models.employee.join') => :join,
@@ -69,8 +78,8 @@ class Employee < ActiveRecord::Base
     end
 
     def enabled
-    joins(:person => :account).merge(Account.enabled)
-  end
+      joins(:person => :account).merge(Account.enabled)
+    end
   end
 
   def admin?
@@ -87,61 +96,6 @@ class Employee < ActiveRecord::Base
 
   def retired?
     retired_on?
-  end
-
-  def contact_or_build
-    self.person.contact || person.create_contact
-  end
-
-  def firstname=(value)
-    super
-    contact_or_build.firstname = value
-    contact_or_build.save!
-  end
-
-  def lastname=(value)
-    super
-    contact_or_build.lastname = value
-    contact_or_build.save!
-  end
-
-  def position=(value)
-    super
-    contact_or_build.position = value
-    contact_or_build.save!
-  end
-
-  def department=(value)
-    super
-    contact_or_build.department = value
-    contact_or_build.save!
-  end
-
-  def owner_id=(value)
-    super
-    contact_or_build.owner_id = value
-    contact_or_build.save!
-  end
-
-  def email=(email)
-    contact = contact_or_build
-    contact_email = contact.emails.empty? ? contact.emails.build : contact.emails.first
-    contact_email.email = email
-    contact_email.save!
-  end
-
-  def phone_number=(number)
-    contact = contact_or_build
-    contact_phone_number = contact.phone_numbers.empty? ? contact.phone_numbers.build : contact.phone_numbers.first
-    contact_phone_number.number = number
-    contact_phone_number.save!
-  end
-
-  def address=(address_info)
-    contact = contact_or_build
-    contact_address = contact.addresses.empty? ? contact.addresses.build : contact.addresses.first
-    contact_address.other1 = address_info
-    contact_address.save!
   end
 
   def fullname
