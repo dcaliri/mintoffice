@@ -66,7 +66,7 @@ class Employee < ActiveRecord::Base
 
     def search_by_text(text)
       text = "%#{text}%"
-      joins(:person => :account).where('accounts.name LIKE ? OR accounts.notify_email LIKE ? OR employees.firstname like ? OR employees.lastname LIKE ? OR employees.position LIKE ?', text, text, text, text, text)
+      joins(:person => :account).where('accounts.name LIKE ? OR accounts.notify_email LIKE ? OR employees.position LIKE ?', text, text, text)
     end
 
     def payment_in?(from, to)
@@ -98,20 +98,36 @@ class Employee < ActiveRecord::Base
     retired_on?
   end
 
+  def position
+    person.contact.position rescue ""
+  end
+
+  def department
+    person.contact.department rescue ""
+  end
+
+  def firstname
+    person.contact.firstname rescue ""
+  end
+
+  def lastname
+    person.contact.lastname rescue ""
+  end
+
   def fullname
     lastname + " " + firstname rescue ""
   end
 
   def email
-    contact.emails.first.email rescue ""
+    person.contact.emails.first.email rescue ""
   end
 
   def phone_number
-    contact.phone_numbers.first.number rescue " "
+    person.contact.phone_numbers.first.number rescue " "
   end
 
   def address
-    contact.addresses.first.info rescue ""
+    person.contact.addresses.first.info rescue ""
   end
 
   def retire!
