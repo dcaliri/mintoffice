@@ -1,4 +1,4 @@
-# encoding: UTF-8
+  # encoding: UTF-8
 require 'test_helper'
 
 class EmployeeTest < ActionDispatch::IntegrationTest
@@ -41,24 +41,13 @@ class EmployeeTest < ActionDispatch::IntegrationTest
     click_link '인사정보관리 - 사원목록'
 
     click_link '새로운 인사정보 입력'
+    find("tr.selectable").click
 
-    fill_in "성", with: "손"
-    fill_in "이름", with: "어지리"
     fill_in "주민등록번호", with: "123456-7654321"
-    fill_in "이메일", with: "test@test.com"
-    fill_in "핸드폰번호", with: "010-1234-3214"
-    fill_in "주소", with: "금천구 가산동"
-    fill_in "부서", with: "기술개발팀"
-    fill_in "직급", with: "인턴"
 
     click_button '만들기'
 
-    assert(page.has_content?('손 어지리'))
     assert(page.has_content?('123456-7654321'))
-    assert(page.has_content?('test@test.com'))
-    assert(page.has_content?('010-1234-3214'))
-    assert(page.has_content?('금천구 가산동'))
-    assert(page.has_content?('인턴'))
   end
 
   test 'should visit employees to find contact' do
@@ -232,18 +221,12 @@ class EmployeeTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('인사정보 수정'))
 
     fill_in "주민등록번호", with: "123456-0123456"
-    fill_in "이메일", with: "zzilssun@test.com"
-    fill_in "핸드폰번호", with: "010-5678-5678"
-    fill_in "주소", with: "수정된 주소"
 
     click_button '갱신하기'
 
     assert(page.has_content?('인사정보이(가) 성공적으로 업데이트 되었습니다.'))
 
     assert(page.has_content?('123456-0123456'))
-    assert(page.has_content?('zzilssun@test.com'))
-    assert(page.has_content?('010-5678-5678'))
-    assert(page.has_content?('수정된 주소'))
   end
 
   test 'should back' do

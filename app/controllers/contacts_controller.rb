@@ -103,7 +103,8 @@ class ContactsController < ApplicationController
   end
 
   def redirect_url_if_subject
-    params[:redirect_to_subject] || @contact
+    path = params[:redirect_to_subject]
+    path.blank? ? @contact : path
   end
   helper_method :redirect_url_if_subject
 end
