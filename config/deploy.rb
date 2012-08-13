@@ -30,7 +30,7 @@ set :unicorn_env, :production
 require "capistrano-unicorn"
 
 namespace :deploy do
-  task :create_socket_directory, :roles => :app do 
+  task :relink_directories, :roles => :app do 
     run "mkdir -p #{release_path}/tmp/sockets"
     run "if [ -e #{deploy_to}/shared/database.yml ]; then cp #{deploy_to}/shared/database.yml #{release_path}/config/; fi"
     run "if [ -e #{deploy_to}/shared/oauth_key.yml ]; then cp #{deploy_to}/shared/oauth_key.yml #{release_path}/config/; fi"
@@ -38,6 +38,8 @@ namespace :deploy do
     run "if [ -e #{deploy_to}/shared/mail_configure.rb ]; then cp #{deploy_to}/shared/mail_configure.rb #{release_path}/config/initializers/; fi"
     run "ln -sf #{deploy_to}/shared/files #{release_path}/"
   end
+
+  after 'deploy:create_symlink', 'deploy:relink_directories'
 end
 
 namespace :unicorn do
@@ -47,4 +49,3 @@ namespace :unicorn do
   end
 end
 
-after 'deploy:finalize_update', 'deploy:create_socket_directory'
