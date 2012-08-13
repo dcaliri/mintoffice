@@ -7,8 +7,13 @@
 
 h2= t('common.title.show')
 
-ul
-  li= Dayworker.human_attribute_name('juminno') + " : " + dayworker.juminno.to_s
+.box
+  #descr
+    ul
+      li= Dayworker.human_attribute_name('juminno') + " : " + dayworker.juminno.to_s
+
+  = render "shared/attachments/detail", :target => dayworker
+  .clear
 
 div#show_command
   = link_to t('dayworkers.find_address'), [:find_contact, dayworker]

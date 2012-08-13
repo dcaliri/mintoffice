@@ -2,6 +2,8 @@ class DayworkersController < ApplicationController
   expose (:dayworkers) { Dayworker.all }
   expose (:dayworker)
 
+  before_filter :only => [:show] {|c| c.save_attachment_id dayworker}
+
   def find_contact
     @contacts = Contact.search(params[:query])
   end
