@@ -7,6 +7,7 @@ class Person < ActiveRecord::Base
   has_one :employee
   has_one :enrollment
   has_one :taxman
+  has_one :dayworker
 
   has_one :contact#, dependent: :destroy
   accepts_nested_attributes_for :contact, :allow_destroy => :true, :reject_if => :all_blank

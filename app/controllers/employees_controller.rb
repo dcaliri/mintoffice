@@ -69,7 +69,6 @@ class EmployeesController < ApplicationController
   end
 
   def create
-    # raise params[:employee].inspect
     @employee = Employee.new(params[:employee])
     @people = Person.no_employee
     @employee.save!
