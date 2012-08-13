@@ -23,11 +23,6 @@ class ContactsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should see find page" do
-    get :find
-    assert_response :success
-  end
-
   private
   def current_contact
     @contact ||= contacts(:fixture)
