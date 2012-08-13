@@ -195,13 +195,11 @@ Mintoffice::Application.routes.draw do
 
   resources :contacts do
     collection do
-      get 'find'
       get 'save', action: :save_form
       get 'load', action: :load_form
       post 'save'
       post 'load'
     end
-    get 'select', :action => :select, :on => :member
 
     resources :contact_emails, :path => 'emails', :only => :destroy
     resources :contact_phone_numbers, :path => 'phones', :only => :destroy

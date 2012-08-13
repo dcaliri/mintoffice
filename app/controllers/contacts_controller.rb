@@ -14,33 +14,6 @@ class ContactsController < ApplicationController
     @paginated = @contacts.paginate(:page => params[:page], :per_page => 20)
   end
 
-  def find
-    @contacts = contacts.search(params[:query])
-  end
-
-  def select
-    @contact = contacts.find(params[:id])
-
-    target_class = params[:parent_class].blank? ? params[:target_class] : params[:parent_class]
-    target_id = params[:parent].blank? ? params[:target] : params[:parent]
-
-    @target = target_class.constantize.find(target_id)
-
-    unless params[:parent_class].blank?
-      collections = @target.send(params[:target_class].downcase.pluralize)
-      unless params[:target].blank?
-        @target = collections.find(params[:target])
-      else
-        # @target = collections.build
-        @target = collections.create!
-        @target.build_person
-      end
-    end
-
-    @target.person.contact = @contact
-    @target.save!
-  end
-
   def save
     contact = OpenApi::GoogleContact.new(id: params[:id], password: params[:password])
     current_person.contacts.save_to(contact)
