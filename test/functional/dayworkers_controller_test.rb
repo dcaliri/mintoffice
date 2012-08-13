@@ -13,6 +13,11 @@ class DayworkersControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "should see find_contact page" do
+    get :find_contact, :id => current_dayworker.id
+    assert_response :success
+  end
+
   test "should see show page" do
     get :show, :id => current_dayworker.id
     assert_response :success
