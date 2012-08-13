@@ -11,7 +11,8 @@ ul
   li= Dayworker.human_attribute_name('juminno') + " : " + dayworker.juminno.to_s
 
 div#show_command
-  = link_to t('dayworkers.find_address'), find_contacts_path(target_class: dayworker.class, target: dayworker), :class => 'popup'
+  = link_to t('dayworkers.find_address'), [:find_contact, dayworker]
+
 h3= '...'
 - unless dayworker.contact.nil?
   = render 'contacts/item_for_employee', contact: dayworker.contact, menu: false

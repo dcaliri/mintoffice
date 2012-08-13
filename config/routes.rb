@@ -63,7 +63,13 @@ Mintoffice::Application.routes.draw do
       post 'excel', :action => 'upload'
     end
   end
-  resources :dayworkers
+  resources :dayworkers do
+    member do
+      get 'find_contact'
+      match 'select_contact'
+    end
+  end
+
   resources :dayworker_taxes
   resources :card_used_sources do
     post 'export', on: :collection
