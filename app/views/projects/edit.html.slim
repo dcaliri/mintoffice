@@ -30,6 +30,12 @@ h2
       = label_tag :accountname, Account.human_attribute_name("name")
       - for employee in project.employees
         = employee.fullname
+        = " "
+        - if employee.project_owner?(project)
+          = "-프로젝트 관리자- "
+        - else
+          = link_to t("projects.edit.owner"), change_owner_project_path(employee_id: employee), method: :put
+        = " | "
         = link_to t("common.title.destroy"), employee_project_path(project, employee_id: employee), method: :delete
         br
       = text_field_tag :accountname

@@ -88,6 +88,7 @@ Mintoffice::Application.routes.draw do
     member do
       post :employee, action: 'add_employee'
       delete :employee, action: 'remove_employee'
+      put :change_owner
     end
   end
 
