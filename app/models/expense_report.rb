@@ -30,7 +30,7 @@ class ExpenseReport < ActiveRecord::Base
   end
 
   def approve?(person)
-    project.owner.person == person or super
+    (project.owner and project.owner.person == person) or super
   end
 
   def access?(person, access_type = :read)
