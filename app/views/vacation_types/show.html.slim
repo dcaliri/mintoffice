@@ -1,0 +1,15 @@
+#show_command
+  = link_to t('common.title.edit'), [:edit, @vacation_type]
+  = " | "
+  = link_to t('common.title.destroy'), @vacation_type, :method => :delete, data: {confirm: t("common.messages.delete_confirm")}
+  = " | "
+  = link_to t('common.title.list'), :vacation_types
+
+h3= "연차 항목"
+
+.box
+  dl
+    dt
+      = VacationType.human_attribute_name(:title)
+    dd
+      = @vacation_type.title

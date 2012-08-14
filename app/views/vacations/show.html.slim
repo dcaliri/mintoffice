@@ -22,6 +22,7 @@ h2= employee.fullname
           th= Vacation.human_attribute_name(:from)
           th= Vacation.human_attribute_name(:to)
           th= Vacation.human_attribute_name(:period)
+          th= UsedVacation.human_attribute_name(:type_title)
           th= Vacation.human_attribute_name(:note)
           th= Report.human_attribute_name('status')
         - vacation.used.each do |used|
@@ -32,6 +33,8 @@ h2= employee.fullname
               = used.to
             td
               = "#{used.period} #{t('datetime.prompts.day')}"
+            td
+              = used.type_title
             td
               = used.note
             td

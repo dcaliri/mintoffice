@@ -220,6 +220,8 @@ Mintoffice::Application.routes.draw do
     end
   end
 
+  resources :vacation_types
+
   resources :bank_accounts, path: 'banks' do
     get 'total', :on => :collection
   end
