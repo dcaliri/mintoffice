@@ -284,7 +284,7 @@ class Account < ActiveRecord::Base
   end
 
   def needs_apply?
-    not employee
+    not person.employee
   end
 
   def joined?
