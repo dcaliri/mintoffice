@@ -1,0 +1,12 @@
+- title t(".title")
+#show_command
+  = link_to t('common.title.back'), :action => :show, :id => @employee
+h2
+  = t('.retire_date')
+
+= form_for @employee, url: try_retired_path(@employee), :html => {:class => "tabular"} do |f|
+  .box
+    p
+      = f.label :retired_on, Employee.human_attribute_name("retired_on")
+      = f.date_select :retired_on, :order => [:year, :month, :day]
+  = f.submit t("common.button.update")

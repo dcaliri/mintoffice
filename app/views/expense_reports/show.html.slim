@@ -3,15 +3,15 @@
     - if expense_report.posting
       = link_to t("postings.show.link"), expense_report.posting
     - else
-      - if @user.permission? :postings
+      - if current_person.permission? :postings
         = link_to t("postings.new.link"), new_posting_path(report: expense_report)
-        = " | "
+    = " | "
   = link_to t("activerecord.models.#{expense_report.target_type.tableize.singularize}") + " " + t('expense_reports.show.view'), expense_report.target
   = " | "
   - unless expense_report.posting
     = link_to t('common.link.edit'), [:edit, expense_report]
     = " | "
-    = link_to t('common.link.destroy'), expense_report, :method => :delete, confirm: t("common.messages.delete_confirm")
+    = link_to t('common.link.destroy'), expense_report, :method => :delete, data: {confirm: t("common.messages.delete_confirm")}
     = " | "
   = link_to t('common.title.back'), :expense_reports
 
@@ -23,7 +23,7 @@ h2
     dl
       dt
         = expense_report.class.human_attribute_name(:owner)
-      dd = expense_report.hrinfo.fullname
+      dd = expense_report.employee.fullname
       dt
         = expense_report.class.human_attribute_name(:target)
       dd

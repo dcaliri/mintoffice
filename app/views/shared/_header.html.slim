@@ -2,9 +2,9 @@
   #account
     ul
       li
-        = link_to t("users.my.title")+(@user != nil ? "(#{@user.name})" : ""), users_my_path
+        = link_to t("accounts.my.title")+(current_person != nil ? "(#{current_person.name})" : ""), my_accounts_path
       li
-        = link_to t("common.link.logout"), users_logout_path
+        = link_to t("common.link.logout"), logout_accounts_path
   ul
     li
       = link_to t("common.title.main"), :controller => "/main", :action => "index"

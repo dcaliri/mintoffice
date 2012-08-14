@@ -4,10 +4,6 @@ class DayworkerTaxesControllerTest < ActionController::TestCase
   set_fixture_class :dayworker_taxes => 'DayworkerTax'
   fixtures :dayworkers, :dayworker_taxes
 
-  def setup
-    current_user.permission.create!(name: 'dayworker_taxes')
-  end
-
   test "should see index page" do
     get :index
     assert_response :success

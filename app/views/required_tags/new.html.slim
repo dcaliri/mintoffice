@@ -15,4 +15,4 @@ h2
 			p
 			  = tag.label :name, t('.tagname')
 			  = tag.text_field :name
-	= f.submit t('common.button.create'), :disable_with => 'Createing...'
+	= f.submit t('common.button.create'), data: {disable_with: 'Createing...'}

@@ -1,11 +1,11 @@
 - title t("payments.yearly.title")
 
 #show_command
-  = link_to t('common.title.back'), payment_path(user)
+  = link_to t('common.title.back'), payment_path(employee)
 
 h2= t("common.title.new")
 
-= form_tag [:yearly, user, payment] do
+= form_tag [:yearly, employee, payment] do
   #box
     - payment_step do |before, after, amount|
       - before = before.strftime("%Y.%m.%d")

@@ -4,10 +4,6 @@ class CardApprovedSourcesControllerTest < ActionController::TestCase
   fixtures :creditcards
   fixtures :card_approved_sources
 
-  def setup
-    current_user.permission.create!(name: 'card_approved_sources')
-  end
-
   test "should see list of card approved sourcepage" do
     get :index
     assert_response :success
@@ -34,7 +30,7 @@ class CardApprovedSourcesControllerTest < ActionController::TestCase
   end
 
   test "should see generate cardbills page" do
-    get :generate_cardbills, owner: current_user.id
+    get :generate_cardbills, owner: current_person.account.id
     assert_response :redirect
   end
 
@@ -45,10 +41,10 @@ class CardApprovedSourcesControllerTest < ActionController::TestCase
 
   private
   def current_creditcard
-    @creditcard ||= creditcards(:fixture)
+    @creditcard ||= creditcards(:shinhan_card)
   end
 
   def current_card_approved_source
-    @card_approved_source ||= card_approved_sources(:fixture)
+    @card_approved_source ||= card_approved_sources(:exist_cardbill)
   end
 end

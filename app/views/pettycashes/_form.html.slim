@@ -1,0 +1,24 @@
+#show_command
+  = link_to t("common.title.back"), pettycashes_path
+
+h2= t("common.title.#{action_name}")
+
+= form_for(@pettycash, :html => { :class => "tabular", :multipart => true } ) do |f|
+  = f.error_messages
+  .box
+    p
+      = f.label :transdate, Pettycash.human_attribute_name('transdate')
+      = f.datetime_select :transdate, :order => [:year, :month, :day]
+    p
+      = f.label :inmoney, Pettycash.human_attribute_name('inmoney')
+      = f.text_field :inmoney
+    p
+      = f.label :outmoney, Pettycash.human_attribute_name('outmoney')
+      = f.text_field :outmoney
+    p
+      = f.label :description, Pettycash.human_attribute_name('description')
+      = f.text_area :description
+    p
+      = render 'shared/attachments/form', form: f
+  p
+    = f.submit

@@ -1,0 +1,20 @@
+fixture:
+  id: 1
+
+normal:
+  id: 2
+
+card_manager_account:
+  id: 3
+
+card_user_account:
+  id: 4
+
+no_employee:
+  id: 5
+
+has_google_apps_account:
+  id: 6
+
+google_account_user:
+  id: 7

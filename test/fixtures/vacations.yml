@@ -1,3 +1,17 @@
 fixture:
-    id: 1
-    user_id: 1
+  id: 1
+  employee_id: 1
+  from: 2012-07-18
+  to: 2013-07-17
+  period: 10
+  created_at: 2012-07-18 17:03:27.833767
+  updated_at: 2012-07-18 17:03:27.833767
+
+old_user_vacation:
+  id: 2
+  employee_id: 2
+  from: 2011-07-18
+  to: 2012-07-17
+  period: 10
+  created_at: 2011-07-18 17:03:27.833767
+  updated_at: 2011-07-18 17:03:27.833767

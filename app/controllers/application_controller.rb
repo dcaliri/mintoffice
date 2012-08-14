@@ -3,16 +3,12 @@
 # Likewise, all the methods added will be available for all controllers.
 
 class ApplicationController < ActionController::Base
-  helper :all # include all helpers, all the time
-  protect_from_forgery # See ActionController::RequestForgeryProtection for details
-  before_filter :authorize, :except => [:login, :logout]
-  before_filter :set_global_current_user_and_company
-  helper_method :title
-  # Scrub sensitive parameters from your log
-  # filter_parameter_logging :password
+  helper :all
+  protect_from_forgery
+  before_filter :set_global_current_person_and_company
 
-  def set_global_current_user_and_company
-    User.current_user = current_user
+  def set_global_current_person_and_company
+    Person.current_person = current_person
     Company.current_company = current_company
   end
 
@@ -20,71 +16,30 @@ class ApplicationController < ActionController::Base
     if session[:company_id].nil?
       session[:company_id] = Company.find_by_name("mintech") || Company.first
     end
-    Company.find(session[:company_id]) unless session[:company_id].nil?
+    @current_company ||= Company.find(session[:company_id]) unless session[:company_id].nil?
   end
   helper_method :current_company
 
-  def current_user
-    User.find(session[:user_id]) unless session[:user_id].nil?
+  def current_person
+    @current_person ||= Person.find(session[:person_id]) unless session[:person_id].nil?
   end
-  helper_method :current_user
+  helper_method :current_person
 
-
-  before_filter :modify_query_parameter
-  def modify_query_parameter
-    [:q, :query].each do |query|
-      params[query] = "#{params[query] ? params[query].strip : ""}" unless params[query].blank?
-    end
+  def current_employee
+    current_person.employee if current_person
   end
+  helper_method :current_employee
+
+  include ActionController::Extensions::Parameter
+  include ActionController::Extensions::Title
+  include ActionController::Extensions::AuthorizeAndAccess
 
   protected
-  def authorize
-    @user = User.find(session[:user_id]) if session[:user_id]
-    if @user.nil? or @user.not_joined?
-      redirect_to users_login_path
-      return
-    end
-    if @user.ingroup? "admin"
-      return
-    end
-
-    redirect_unless_permission
-  end
-
-  def redirect_unless_permission
-    unless Permission.can_access? @user, controller_name, action_name
-      force_redirect
-    end
-  end
-
-  def redirect_unless_admin
-    force_redirect unless @user.ingroup? "admin"
-  end
-
-  def redirect_unless_me(user)
-    unless @user.ingroup? "admin"
-      force_redirect unless @user == user
-    end
-  end
-
-  def force_redirect
-    flash[:notice] = "You don't have to permission"
-    redirect_to :root
-  end
-
-  def User(permission)
-    if permission == :protedted && @user.ingroup?(:admin) == false
-      User.where(name: @user.name)
+  def Employee(permission)
+    if permission == :protedted and current_employee.admin? == false
+      Employee.where(id: current_employee.id)
     else
-      User
-    end
-  end
-
-  def title(text="")
-    unless text.blank?
-      @title = text
-    else
-      @title || t("#{controller_name}.title")
+      Employee.scoped
     end
   end
 
@@ -92,11 +47,5 @@ class ApplicationController < ActionController::Base
     @attachment_ids ||= []
     resource.attachments.each { |at| @attachment_ids << at.id }
     session[:attachments] = @attachment_ids
-  end
-
-  def access_check
-    model_name = (controller_name.singularize.classify).constantize
-    model = model_name.find(params[:id])
-    force_redirect unless model.access?(current_user)
   end
 end

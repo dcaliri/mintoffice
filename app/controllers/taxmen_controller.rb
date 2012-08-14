@@ -1,6 +1,37 @@
 class TaxmenController < ApplicationController
   before_filter :find_business_client
 
+  def find_contact
+    @contacts = Contact.search(params[:query])
+  end
+
+  def select_contact
+    @taxman = @business_client.taxmen.build
+    @taxman.build_person
+    @taxman.person.contact = Contact.find(params[:contact])
+    @taxman.save!
+    redirect_to @business_client
+  rescue ActiveRecord::RecordInvalid
+    @contacts = Contact.search(params[:query])
+    render 'find_contact'
+  end
+
+  def edit_contact
+    @taxman = @business_client.taxmen.find(params[:id])
+    @contacts = Contact.search(params[:query])
+  end
+
+  def update_contact
+    @taxman = @business_client.taxmen.find(params[:id])
+    @taxman.person.contact = Contact.find(params[:contact])
+    @taxman.person.save!
+    @taxman.save!
+    redirect_to @business_client
+  rescue ActiveRecord::RecordInvalid
+    @contacts = Contact.search(params[:query])
+    render 'edit_contact'
+  end
+
   def create
     @taxman = @business_client.taxmen.build(params[:taxman])
     @taxman.save!

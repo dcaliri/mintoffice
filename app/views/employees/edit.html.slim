@@ -1,0 +1,28 @@
+- title t('.title')
+#show_command
+  = link_to t('common.title.show'), @employee
+  = " | "
+  = link_to t('common.title.back'), employees_path
+h2
+  = t('common.title.edit')
+= form_for(@employee, :html => {:class => "tabular", :multipart => true}) do |f|
+  .box
+    = f.error_messages
+
+    - if current_person.admin?
+      p
+        = f.label :companyno, Employee.human_attribute_name('companyno')
+        = f.text_field :companyno
+      p
+        = f.label :joined_on, Employee.human_attribute_name('joined_on')
+        = f.date_select :joined_on, :order => [:year, :month, :day]
+      p
+        = f.label :listed, Employee.human_attribute_name('listed')
+        = f.check_box :listed
+    p
+      = f.label :juminno, Employee.human_attribute_name('juminno')
+      = f.text_field :juminno
+    - if current_person.admin?
+      p
+        = render 'shared/attachments/form', form: f
+  = f.submit t("common.button.update")

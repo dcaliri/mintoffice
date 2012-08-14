@@ -1,18 +1,17 @@
 h3
   = t('accessors.info.permissions')
+
 ul
-  - access_target.accessors.each do |accessor| 
+  - access_target.accessors.each do |accessor|
     li
       = accessor.fullname
       = "("
       = accessor.write? ? t('accessors.info.read_write') : t('accessors.info.read')
       = ")"
-      - unless accessor.user.admin? 
+      - unless accessor.person.admin?
         = link_to "[x]", accessors_path(accessor_id: accessor.id), :method => :delete
 
-
-
-- if access_target.access?(current_user, :write)
+- if access_target.access?(current_person, :write)
   h3
     = t('accessors.info.change_permissions')
   = form_tag :accessors do
@@ -23,6 +22,6 @@ ul
       = select_tag :access_type, options_for_select([[t('accessors.info.read'), "read"], [t('accessors.info.write'), "write"]])
     p
       = label_tag :accessor, t('activerecord.attributes.access_person.accessor')
-      = select_tag :accessor, options_for_select(User.enabled.no_admins.map{|user| [user.name, user.id]})
+      = select_tag :accessor, options_for_select(Person.with_account.map{|person| [person.fullname, person.id]})
     p
       = submit_tag

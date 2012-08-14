@@ -14,10 +14,10 @@ h2
     - if project.completed?
       = dtdd project, "ended_on"
       dt
-        = t('projects.show.users')
+        = t('projects.show.accounts')
       dd
-        - for user in project.users
-          = user.name
-          = link_to t('projects.show.allocation_ratio'), [:assign, user, :projects]
+        - for employee in project.employees
+          = employee.fullname
+          = link_to t('projects.show.allocation_ratio'), [:assign, employee, :projects]
           br
 = render 'expense'

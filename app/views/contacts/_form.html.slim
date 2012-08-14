@@ -1,9 +1,11 @@
 #show_command
-  = link_to t('common.title.back'), @contact
+  = link_to t('common.title.back'), redirect_url_if_subject
 
 h2= t("common.title.#{action_name}")
 
 = form_for @contact, html: {multipart: true} do |f|
+  = hidden_field_tag :subject, params[:subject]
+  = hidden_field_tag :redirect_to_subject, params[:redirect_to_subject]
   .box
     = f.error_messages
     p
@@ -21,11 +23,11 @@ h2= t("common.title.#{action_name}")
     p
       = f.label :position
       = f.text_field :position
-    - if !@contact.new_record? && current_user.admin?
+    - if !@contact.new_record? && current_person.admin?
       p
         = f.label :owner
-        = f.select :owner_id, options_from_collection_for_select(User.enabled, 'id', 'fullname', @contact.owner_id)
-    - if @contact.new_record? || @contact.owner?(current_user)
+        = f.select :owner_id, options_from_collection_for_select(Person.with_account, 'id', 'fullname', @contact.owner_id)
+    - if @contact.new_record? || @contact.owner?(current_person)
       p
         = f.label :isprivate
         = f.check_box :isprivate

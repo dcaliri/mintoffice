@@ -1,0 +1,15 @@
+fixture:
+  company_id: 1
+  person_id: 1
+
+normal:
+  company_id: 1
+  person_id: 2
+
+card_manager:
+  company_id: 1
+  person_id: 3
+
+card_user:
+  company_id: 1
+  person_id: 4

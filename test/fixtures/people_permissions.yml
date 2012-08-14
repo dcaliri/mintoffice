@@ -1,0 +1,71 @@
+fixture:
+  permission_id: 1
+  person_id: 1
+
+commutes:
+  permission_id: 2
+  person_id: 1
+
+pettycashes:
+  permission_id: 3
+  person_id: 1
+
+cardbills:
+  permission_id: 4
+  person_id: 1
+
+cardbills_manager:
+  permission_id: 4
+  person_id: 3
+
+cardbills_user:
+  permission_id: 4
+  person_id: 4
+
+expenses:
+  permission_id: 5
+  person_id: 1
+
+expenses_manager:
+  permission_id: 5
+  person_id: 3
+
+expenses_user:
+  permission_id: 5
+  person_id: 4
+
+bank_transactions:
+  permission_id: 6
+  person_id: 1
+  
+bank_transfers:
+  permission_id: 7
+  person_id: 1
+
+projects:
+  permission_id: 8
+  person_id: 1
+
+business_clients:
+  permission_id: 9
+  person_id: 1
+
+taxbills:
+  permission_id: 10
+  person_id: 1
+
+postings:
+  permission_id: 11
+  person_id: 1
+
+ledger_accounts:
+  permission_id: 12
+  person_id: 1
+
+vacations:
+  permission_id: 13
+  person_id: 1
+
+vacations_normal:
+  permission_id: 13
+  person_id: 2

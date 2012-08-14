@@ -1,11 +1,11 @@
 #show_command
-  = link_to t('common.title.back'), payment_path(user)
+  = link_to t('common.title.back'), payment_path(employee)
 
 h2= t("common.title.new")
 
 / 입사일,급여지급일,계약기간,기본급
 
-= form_tag [:calculate, user, payment] do
+= form_tag [:calculate, employee, payment] do
   .box
     p
       = label_tag :join_at, t('activerecord.attributes.payment.pay_start')

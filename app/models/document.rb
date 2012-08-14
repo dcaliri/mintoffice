@@ -3,9 +3,7 @@ class Document < ActiveRecord::Base
 
   belongs_to :project
   has_many :document_owners
-  has_many :users, :through => :document_owners, :source => :user
-
-  validates_presence_of :title
+  has_many :employees, :through => :document_owners, :source => :employee
 
   include Attachmentable
   include Taggable
@@ -14,12 +12,12 @@ class Document < ActiveRecord::Base
   self.per_page = 20
 
   class << self
-    def filter_by_params(params)
-      result = report_status(params[:report_status]).search(params[:query])
+    def search(params)
+      result = report_status(params[:report_status]).search_by_text(params[:query])
       result = if params[:empty_permission] == 'true'
                 result.no_permission
               else
-                result.access_list(params[:user])
+                result.access_list(params[:person])
               end
       result
     end
@@ -36,13 +34,13 @@ class Document < ActiveRecord::Base
     end
   end
 
-  def user_for_tag(tag_name)
+  def account_for_tag(tag_name)
     tag_names = self.tags.index_by {|t1| t1.name }
-    all_user = User.all.index_by {|u| u.name}
-    target_user = tag_names.keys & all_user.keys
+    all_account = Account.all.index_by {|u| u.name}
+    target_account = tag_names.keys & all_account.keys
 
-    if (tag_names.keys.include? (tag_name)) && target_user.size == 1
-      User.find_by_name(target_user[0])
+    if (tag_names.keys.include? (tag_name)) && target_account.size == 1
+      Account.find_by_name(target_account[0])
     else
       nil
     end
@@ -52,7 +50,7 @@ class Document < ActiveRecord::Base
     if project then project.name else "none" end
   end
 
-  def self.search(query)
+  def self.search_by_text(query)
     query = "%#{query}%"
     includes(:project).includes(:tags).where('title like ? OR projects.name like ? OR tags.name LIKE ?', query, query, query)
   end

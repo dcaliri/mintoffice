@@ -9,9 +9,12 @@ class Company < ActiveRecord::Base
   has_many :contact_phone_number_tags
   has_many :contact_other_tags
   has_many :tags
-  has_and_belongs_to_many :users
 
-  belongs_to :apply_admin, class_name: 'User'
+  # has_and_belongs_to_many :accounts
+  has_and_belongs_to_many :people
+
+  # belongs_to :apply_admin, class_name: 'Account'
+  belongs_to :apply_admin, class_name: 'Person'
 
   cattr_accessor :current_company
 

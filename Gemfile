@@ -1,6 +1,6 @@
 source :rubygems
 
-gem 'rails', '3.2.5'
+gem 'rails', '3.2.7'
 gem 'jquery-rails'
 gem 'slim'
 gem 'dynamic_form'
@@ -39,16 +39,16 @@ group :development do
 end
 
 group :test do
-  gem 'guard-livereload'
   gem 'growl'
   gem 'database_cleaner'
   gem 'test-unit'
 end
 
+
 group :development, :test do
+  gem "capybara", "~> 1.1.2"
   gem 'sqlite3'
   gem 'mysql2'
-  gem 'capybara'
 end
 
 group :production do

@@ -1,0 +1,34 @@
+admin_regist_project_one:
+  id: 1
+  employee_id: 1
+  project_id: 1
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
+
+cardbill_manager_registe_project:
+  id: 2
+  employee_id: 3
+  project_id: 1
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
+
+card_used_user_registe_project:
+  id: 3
+  employee_id: 4
+  project_id: 1
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
+
+cardbill_manager_registe_project:
+  id: 2
+  employee_id: 3
+  project_id: 1
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
+
+card_used_user_registe_project:
+  id: 3
+  employee_id: 4
+  project_id: 1
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>

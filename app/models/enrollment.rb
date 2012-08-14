@@ -2,23 +2,28 @@
 
 class Enrollment < ActiveRecord::Base
   belongs_to :company
-  belongs_to :user
-  has_one :contact, :as => :target
+  belongs_to :person
+  accepts_nested_attributes_for :person, :allow_destroy => :true
 
   has_many :items, class_name: 'EnrollmentItem', dependent: :destroy
 
-  accepts_nested_attributes_for :contact, :allow_destroy => :true
-
-  validates_format_of :juminno, :with => /^\d{6}-\d{7}$/, :message => I18n.t('hrinfos.error.juminno_invalid'), on: :update
+  validates_format_of :juminno, :with => /^\d{6}-\d{7}$/, :message => I18n.t('employees.error.juminno_invalid'), on: :update
   validates_uniqueness_of :juminno, on: :update
 
+  def contact
+    person.contact
+  end
+
   include Reportable
+
   def apply_status
     case report.status
     when :rollback
-      I18n.t('models.hrinfo.request')
+      I18n.t('models.employee.request')
+    when :reported
+      I18n.t('models.employee.approved')
     else
-      I18n.t('models.hrinfo.approve')
+      I18n.t('models.employee.approving')
     end
   end
 
@@ -28,9 +33,13 @@ class Enrollment < ActiveRecord::Base
     end
   end
 
+  def account
+    person.account
+  end
+
   include Rails.application.routes.url_helpers
   def redirect_when_reported
-    if user == User.current_user
+    if person == Person.current_person
       [:dashboard, :enrollments]
     else
       enroll_report_path(self)
@@ -42,15 +51,15 @@ class Enrollment < ActiveRecord::Base
   end
 
   def email
-    contact.emails.first.email
+    contact.emails.first.email rescue ""
   end
 
   def phone_number
-    contact.phone_numbers.first.number
+    contact.phone_numbers.first.number rescue ""
   end
 
   def address
-    contact.addresses.first.info
+    contact.addresses.first.info rescue ""
   end
 
   def find_or_create_item_by_name(name)
@@ -87,6 +96,7 @@ class Enrollment < ActiveRecord::Base
   end
 
   def required_items
-    company.enrollment_items.split(',')
+    items = company.enrollment_items || ""
+    items.split(',')
   end
 end

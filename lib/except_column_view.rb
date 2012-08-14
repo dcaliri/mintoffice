@@ -47,7 +47,7 @@ module ExceptColumnView
   end
 
   def except?(column)
-    columns = current_user.except_columns.where(model_name: model_name.to_s.classify).default
+    columns = current_employee.except_columns.where(model_name: model_name.to_s.classify).default
     unless columns.empty?
       !columns.first.columns[column.to_s]
     else

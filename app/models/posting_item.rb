@@ -4,8 +4,6 @@ class PostingItem < ActiveRecord::Base
   belongs_to :posting
   belongs_to :ledger_account
 
-  # debit side - 차변
-  # credit side - 대변
   validates_presence_of :ledger_account_id
 
   class << self

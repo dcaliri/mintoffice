@@ -1,29 +1,25 @@
 require 'test_helper'
 
 class VacationsControllerTest < ActionController::TestCase
-  fixtures :hrinfos, :vacations
-
-  def setup
-    current_user.permission.create!(name: 'vacations')
-  end
-
+  fixtures :employees, :vacations
+  
   test "should see index page" do
-    get :index, user_id: 1
+    get :index, employee_id: 1
     assert_response :success
   end
 
   test "should see new page" do
-    get :new, user_id: 1
+    get :new, employee_id: 1
     assert_response :success
   end
 
   test "should see show page" do
-    get :show, user_id: 1, :id => current_vacation.id
+    get :show, employee_id: 1, :id => current_vacation.id
     assert_response :success
   end
 
   test "should see edit page" do
-    get :edit, user_id: 1, :id => current_vacation.id
+    get :edit, employee_id: 1, :id => current_vacation.id
     assert_response :success
   end
 

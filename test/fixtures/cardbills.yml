@@ -1,2 +1,47 @@
-fixture:
+has_permission_cardbill:
   id: 1
+  cardno:
+  transdate: <%= Time.zone.now %>
+  amount: 5800
+  vat: 1000
+  servicecharge: 300
+  totalamount: 4500
+  storename: GS25
+  storeaddr: sk트윈타워 A동
+  approveno: 1
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
+  attachment_id:
+  creditcard_id: 1
+
+has_not_permission_cardbill:
+  id: 2
+  cardno:
+  transdate: <%= Time.zone.now %>
+  amount: 5800
+  vat: 1000
+  servicecharge: 300
+  totalamount: 4500
+  storename: 훼미리마트
+  storeaddr: sk트윈타워 B동
+  approveno: 2
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
+  attachment_id:
+  creditcard_id: 1
+
+manager_has_cardbill:
+  id: 3
+  cardno:
+  transdate: <%= Time.zone.now %>
+  amount: 6200
+  vat: 500
+  servicecharge: 300
+  totalamount: 5400
+  storename: GS25
+  storeaddr: sk트윈타워 A동
+  approveno: 4
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
+  attachment_id:
+  creditcard_id: 1

@@ -3,10 +3,6 @@ require 'test_helper'
 class PettycashesControllerTest < ActionController::TestCase
   fixtures :pettycashes
 
-  def setup
-    current_user.permission.create!(name: 'pettycashes')
-  end
-
   test "should see index page" do
     get :index
     assert_response :success

@@ -1,0 +1,11 @@
+#show_command
+	= link_to t('employees.new_employment.back'), @employee
+h3= t('employees.show.pdf')
+
+= form_tag([:employment_proof, @employee]) do
+  p
+    = label_tag :purpose, t('activerecord.attributes.employee.purpose')
+    = text_field_tag :purpose
+  p
+    = submit_tag t('employees.new_employment.print')
+    

@@ -30,8 +30,8 @@ h2= t("common.title.#{action_name}")
       = f.label :google_apps_domain
       = f.text_field :google_apps_domain
     p
-      = f.label :google_apps_username
-      = f.text_field :google_apps_username
+      = f.label :google_apps_accountname
+      = f.text_field :google_apps_accountname
     p
       = f.label :google_apps_password
       = f.text_field :google_apps_password
@@ -39,8 +39,8 @@ h2= t("common.title.#{action_name}")
       = f.label :redmine_domain
       = f.text_field :redmine_domain
     p
-      = f.label :redmine_username
-      = f.text_field :redmine_username
+      = f.label :redmine_accountname
+      = f.text_field :redmine_accountname
     p
       = f.label :redmine_password
       = f.text_field :redmine_password
@@ -49,7 +49,7 @@ h2= t("common.title.#{action_name}")
       = f.text_field :default_password
     p
       = f.label :apply_admin_id
-      = f.select :apply_admin_id, options_from_collection_for_select(User.enabled, 'id', 'fullname', company.apply_admin_id)
+      = f.select :apply_admin_id, options_from_collection_for_select(Employee.enabled.not_retired, 'id', 'fullname', company.apply_admin_id)
     p
       = f.label :enrollment_items
       = f.text_field :enrollment_items

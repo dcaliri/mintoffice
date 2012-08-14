@@ -1,0 +1,17 @@
+item1:
+  id: 1
+  posting_id: 1
+  ledger_account_id: 1
+  item_type: 0
+  amount: 1000000
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
+
+item2:
+  id: 2
+  posting_id: 1
+  ledger_account_id: 1
+  item_type: 1
+  amount: 1000000
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>

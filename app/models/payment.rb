@@ -1,7 +1,8 @@
 #encoding: UTF-8
 
 class Payment < ActiveRecord::Base
-  belongs_to :user
+  belongs_to :employee
+
   before_save :modify_bonus_date
   def modify_bonus_date
     self.pay_start = self.pay_finish if self.payment_type == 'bonus'
@@ -15,8 +16,6 @@ class Payment < ActiveRecord::Base
   end
 
   def self.payment_in?(from, to)
-#    where('pay_finish ? AND amount > ?', from..to, 0)
-#    where('sum(amount) > 0 AND pay_finish BETWEEN ? AND ?', from, to).group("date(pay_finish)")
     where(pay_finish: from..to)
   end
   def self.total_bonus(bonuses)

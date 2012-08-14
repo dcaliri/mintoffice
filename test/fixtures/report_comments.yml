@@ -1,0 +1,7 @@
+fixture:
+  id: 1
+  report_id: 9
+  owner_id: 9
+  description: test님에게 결재를 요청하였습니다.
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>

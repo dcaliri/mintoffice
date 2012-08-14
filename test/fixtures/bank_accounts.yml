@@ -1,5 +1,17 @@
-fixture:
-    id: 1
-    name: "회사 은행계좌"
-    number: "111-11-1111111"
-    note: "주요 은행계좌"
+shinhan_bank:
+  id: 1
+  name: shinhan
+  number: "321-123-123456"
+  note: "주요 은행 계좌"
+
+ibk_bank:
+  id: 2
+  name: ibk
+  number: "274-062855-01-012"
+  note: "직원 봉급 계좌"
+
+hsbc_bank:
+  id: 3
+  name: hsbc
+  number: "123-321-3211234"
+  note: "주 거래처 계좌"

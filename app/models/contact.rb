@@ -2,8 +2,8 @@
 
 class Contact < ActiveRecord::Base
   belongs_to :company
-  belongs_to :target, :polymorphic => true
-  belongs_to :owner, class_name: 'User'
+  belongs_to :person
+  belongs_to :owner, class_name: 'Person'
 
   REJECT_IF_EMPTY = proc do |attrs|
     attrs.all? {|k, v| ["target", "created_at", "updated_at"].include?(k) or v.blank?}
@@ -29,32 +29,32 @@ class Contact < ActiveRecord::Base
 
   validate :validate_if_apply
   def validate_if_apply
-    if target.class == Enrollment
+    if person.class == Enrollment
       errors.add(:address, I18n.t('models.contact.one_more_need_ga')) if addresses.length == 0
       errors.add(:email, I18n.t('models.contact.one_more_need_i')) if emails.length == 0
       errors.add(:number, I18n.t('models.contact.one_more_need_ga')) if phone_numbers.length == 0
     end
   end
 
-  def access?(user)
-    isprivate == false || owner == user
+  def access?(person)
+    isprivate == false || owner == person
   end
 
-  def owner?(user)
-    owner == user
+  def owner?(person)
+    owner == person
   end
 
-  def edit?(user)
-    user.admin? || owner?(user)
+  def edit?(person)
+    person.admin? || owner?(person)
   end
 
   def owner_name
-    owner.hrinfo.fullname rescue ""
+    owner.employee.fullname rescue ""
   end
 
   class << self
-    def isprivate(current_user)
-      where("isprivate = ? OR owner_id = ?", false, current_user.id)
+    def isprivate(person)
+      where("isprivate = ? OR owner_id = ?", false, person.id)
     end
 
     def search(query)

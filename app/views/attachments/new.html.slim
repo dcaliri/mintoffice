@@ -3,7 +3,7 @@
   = link_to t("common.title.back"), attachments_path
 h2
   = t("common.title.new")
-= form_for(:attachment, :url => {:action => 'save'}, :html => { :class => "tabular", :multipart => true } ) do |f|
+= form_for(:attachment, :url => [:save, :attachments], :html => { :class => "tabular", :multipart => true } ) do |f|
   = f.error_messages
   .box
     p

@@ -1,3 +1,59 @@
 fixture:
-    id: 1
-    owner_id: 1
+  id: 1
+  firstname: 수용
+  lastname: 왕
+  company_name:
+  position: 사장
+  email_list:
+  person_id: 1
+  migrated_data: f
+  owner_id:
+  isprivate: f
+  company_id: 1
+  google_id:
+  google_etag:
+
+normal:
+  id: 2
+  firstname: 개똥
+  lastname: 김
+  company_name:
+  position: 사원
+  department: 민트기술
+  person_id: 2
+  migrated_data: f
+  owner_id:
+  isprivate: f
+  company_id: 1
+  google_id:
+  google_etag: 
+
+card_bill_manager:
+  id: 3
+  firstname: 매니저
+  lastname: 카드영수증
+  company_name:
+  position: 관리자
+  department: 경리부
+  person_id: 3
+  migrated_data: f
+  owner_id:
+  isprivate: f
+  company_id: 1
+  google_id:
+  google_etag: 
+
+card_used_user:
+  id: 4
+  firstname: 사용자
+  lastname: 카드
+  company_name:
+  position: 사원
+  department: 경리부
+  person_id: 4
+  migrated_data: f
+  owner_id:
+  isprivate: f
+  company_id: 1
+  google_id:
+  google_etag: 

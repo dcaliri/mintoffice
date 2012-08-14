@@ -3,7 +3,7 @@
 #show_command
   = link_to t('common.title.edit'), [:edit, business_client]
   = " | "
-  = link_to t('common.title.destroy'), business_client, :method => :delete, confirm: t("common.messages.delete_confirm")
+  = link_to t('common.title.destroy'), business_client, :method => :delete, data: {confirm: t("common.messages.delete_confirm")}
   = " | "
   = link_to t('common.title.list'), :business_clients
 h2
@@ -23,14 +23,14 @@ h2
         - business_client.taxmen.map do |taxman|
           dd
             = taxman.fullname
-            = link_to t('business_clients.show.modify'), find_contacts_path(:target_class => Taxman, target: taxman, parent_class: business_client.class, parent: business_client), :class => 'popup'
+            = link_to t('business_clients.show.modify'), [:edit_contact, business_client, taxman]
             br
       - else
         dd
           p
             = t('taxmen.empty')
       dd
-        = link_to t('business_clients.show.add_contact'), find_contacts_path(:target_class => Taxman, parent_class: business_client.class, parent: business_client), :class => 'popup'
+        = link_to t('business_clients.show.add_contact'), [:find_contact, business_client, :taxmen]
   = render "shared/attachments/detail", :target => business_client
   .clear
 = render 'changelog', target: business_client

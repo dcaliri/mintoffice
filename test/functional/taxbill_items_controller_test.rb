@@ -3,10 +3,6 @@ require 'test_helper'
 class TaxbillItemsControllerTest < ActionController::TestCase
   fixtures :taxbills, :taxbill_items
 
-  def setup
-    current_user.permission.create!(name: 'taxbills')
-  end
-
   test "should see new page" do
     get :new, taxbill_id: 1
     assert_response :success
@@ -19,6 +15,6 @@ class TaxbillItemsControllerTest < ActionController::TestCase
 
   private
   def current_taxbill_item
-    @taxbill_item ||= taxbill_items(:fixture)
+    @taxbill_item ||= taxbill_items(:purchase_item)
   end
 end

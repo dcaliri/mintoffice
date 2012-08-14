@@ -1,0 +1,55 @@
+= t('accounts.add.add_pay_schedule')
+
+= form_tag(:action => "add_pay_schedule") do
+  p
+  	= t('accounts.add.yearly')
+  	' :
+  	br
+		= text_field_tag :yearly_payment
+  p
+		= t('accounts.add.start_date')
+		' :
+		br
+		= text_field_tag :start_date_year, nil, :size => 4
+		' - 
+		= text_field_tag :start_date_month, nil, :size => 2
+		' -
+		= text_field_tag :start_date_day, nil, :size => 2
+	p
+		= t('accounts.add.monthly_pay')
+		' :
+		br
+		= text_field_tag :monthly_payment, nil, :size => 3
+		' %
+	p
+		= t('accounts.add.bonus1')
+		' :
+		br
+		= text_field_tag :bonus_1_percent, nil, :size => 3
+		' % to month
+		= text_field_tag :bonus_1_month, nil, :size => 3
+	p
+		= t('accounts.add.bonus2')
+		' :
+		br
+		= text_field_tag :bonus_2_percent, nil, :size => 3
+		' % to month
+		= text_field_tag :bonus_2_month, nil, :size => 3
+	p
+		= t('accounts.add.bonus3')
+		' :
+		br
+		= text_field_tag :bonus_3_percent, nil, :size => 3
+		' % to month
+		= text_field_tag :bonus_3_month, nil, :size => 3
+	p
+		= t('accounts.add.bonus4')
+		' :
+		br
+		= text_field_tag :bonus_4_percent, nil, :size => 3
+		' % to month
+		= text_field_tag :bonus_4_month, nil, :size => 3
+
+	p
+		= submit_tag "Add"
+		= link_to "Back", :action => "show", :id => current_person.account

@@ -1,17 +1,18 @@
 class Permission < ActiveRecord::Base
-  has_and_belongs_to_many :user
+  has_and_belongs_to_many :people
 
   validates :name, presence: true, uniqueness: true
 
-  def self.can_access? (user, controller_name, action_name)
+  def self.can_access? (person, controller_name, action_name)
     exception_list = [
         "attachments.picture", "attachments.download",
         "documents.*",
-        "hrinfos.index", "hrinfos.show", "hrinfos.new_employment_proof", "hrinfos.employment_proof",
+        "employees.index", "employees.show", "employees.new_employment_proof", "employees.employment_proof",
         "main.*",
-        "users.my", "users.changepw", "users.edit", "users.update", "users.google_apps",
+        "accounts.my", "accounts.changepw", "accounts.edit", "accounts.update", "accounts.google_apps",
         "reports.*",
         "expense_reports.*", "cardbills.*", "documents.*",
+        "except_columns.*",
         "accessors.*",
         "contacts.*"
       ]
@@ -23,7 +24,10 @@ class Permission < ActiveRecord::Base
       return true
     end
 
-    if user.permission.any? { |perm| perm.name == controller_name }
+    return false unless person and person.employee
+    return true if person and person.admin?
+
+    if person.permissions.any? { |perm| perm.name == controller_name }
       return true
     else
       return false

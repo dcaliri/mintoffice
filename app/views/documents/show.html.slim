@@ -3,7 +3,7 @@
 #show_command
   = link_to t('common.title.edit'), edit_document_path(document)
   = " | "
-  = link_to t('common.title.destroy'), document, :method => :delete, confirm: t("common.messages.delete_confirm")
+  = link_to t('common.title.destroy'), document, :method => :delete, data: {confirm: t("common.messages.delete_confirm")}
   = " | "
   = link_to t('common.title.list'), documents_path
 h2
@@ -18,9 +18,9 @@ h2
       dt
         = Document.human_attribute_name("owner")
       dd
-        - if !document.users.blank?
-          - user_names = document.users.index_by {|u| u.name }
-          = user_names.keys.sort.join ", "
+        - if !document.employees.blank?
+          - names = document.employees.index_by {|employee| employee.fullname }
+          = names.keys.sort.join ", "
       dt
         = Document.human_attribute_name("tags")
       dd
@@ -28,9 +28,9 @@ h2
     h3
       = t(".backlink")
     ul
-      - u = document.user_for_tag(Hrinfo.model_name.human)
+      - u = document.account_for_tag(Employee.model_name.human)
       - if u
-        li= link_to Hrinfo.model_name.human, :controller => "hrinfos", :action => "show", :id => u.hrinfo
+        li= link_to Employee.model_name.human, :controller => "employees", :action => "show", :id => u.employee
   = render "shared/attachments/detail", :target => document
   .clear
 = render 'reports/info', target: document

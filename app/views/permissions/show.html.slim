@@ -5,20 +5,20 @@ p
   =h @permission.name
 hr
 h2
-  = t('permissions.show.user')
-- if !@permission.user.blank?
+  = t('permissions.show.account')
+- if !@permission.people.blank?
   ul
-    - for user in @permission.user
+    - @permission.people.each do |person|
       li
-  		  = user.name + " "
-  		  = link_to "[X]", :action => 'removeuser', :id => @permission,:user_id => user
+  		  = person.name + " "
+  		  = link_to "[X]", :action => 'removeaccount', :id => @permission, :person_id => person
 - else
   = t('permissions.show.none')
 
-= form_tag(:action => "adduser") do
+= form_tag(:action => "addaccount") do
   = t('permissions.show.add')
   ' :
-  = text_field_tag :username, params[:username]
+  = text_field_tag :accountname, params[:accountname]
   = hidden_field_tag :id, @permission.id
 
 hr

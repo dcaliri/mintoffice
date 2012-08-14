@@ -1,0 +1,19 @@
+- title t(".title")
+#show_command
+	- if current_person.admin?
+  	= link_to t("common.title.back"), :action => 'index'
+	- else
+  	= link_to t("common.title.back"), accounts_my_path()
+h2
+	= t('.subtitle')
+
+= form_tag :html => { :class => 'tabular' } do
+	= hidden_field_tag :account_id, params[:account_id]
+	.box
+		p
+		  = label_tag :password, t('.password')
+		  = password_field_tag :password, params[:password]
+		p
+		  = label_tag :password_confirmation, t('.password_again')
+		  = password_field_tag :password_confirmation, params[:password_confirmation]
+	= submit_tag t('common.button.change')

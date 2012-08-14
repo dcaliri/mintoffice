@@ -1,7 +1,7 @@
 #show_command
   = link_to t('common.title.edit'), [:edit, change_history]
   = " | "
-  = link_to t('common.title.destroy'), change_history, :method => :delete, confirm: t("common.messages.delete_confirm")
+  = link_to t('common.title.destroy'), change_history, :method => :delete, data: {confirm: t("common.messages.delete_confirm")}
   = " | "
   = link_to t('common.title.list'), :change_histories
 
@@ -13,9 +13,9 @@ h2= t("common.title.show")
       = dtdd change_history, "before_value"
       = dtdd change_history, "after_value"
       dt
-        = ChangeHistory.human_attribute_name('user_id')
+        = ChangeHistory.human_attribute_name('account_id')
       dd
-        = change_history.user.name rescue ""
+        = change_history.employee.fullname rescue ""
       = dtdd change_history, "changable_type"
       = dtdd change_history, "changable_id"
   .clear

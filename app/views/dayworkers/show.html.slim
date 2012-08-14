@@ -7,11 +7,17 @@
 
 h2= t('common.title.show')
 
-ul
-  li= Dayworker.human_attribute_name('juminno') + " : " + dayworker.juminno.to_s
+.box
+  #descr
+    ul
+      li= Dayworker.human_attribute_name('juminno') + " : " + dayworker.juminno.to_s
+
+  = render "shared/attachments/detail", :target => dayworker
+  .clear
 
 div#show_command
-  = link_to t('dayworkers.find_address'), find_contacts_path(target_class: dayworker.class, target: dayworker), :class => 'popup'
+  = link_to t('dayworkers.find_address'), [:find_contact, dayworker]
+
 h3= '...'
-- unless dayworker.contact.nil?
-  = render 'contacts/item_for_hrinfo', contact: dayworker.contact, menu: false
+- unless dayworker.person.contact.nil?
+  = render 'contacts/item_for_employee', contact: dayworker.person.contact, menu: false

@@ -14,7 +14,7 @@
         = history.before_value
         == " &rarr; "
         = history.after_value
-        - if history.user
+        - if history.employee
           = "("
-          = history.user.name
+          = history.employee.fullname
           = ")"

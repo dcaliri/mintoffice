@@ -7,10 +7,10 @@ h2 ...
   table#list-table
     tr
       th= Payroll.human_attribute_name("payday")
-      th= Hrinfo.human_attribute_name("fullname")
+      th= Employee.human_attribute_name("fullname")
     - payrolls.each do |payroll|
       tr.selectable onclick="location.href='#{payroll_path(payroll)}'"
         td= payroll.payday
-        td= payroll.user.hrinfo.fullname
+        td= payroll.employee.fullname
 - else
   = "empty"

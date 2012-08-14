@@ -1,4 +1,4 @@
-- if current_user.permission?(:tags)
+- if current_person.permission?(:tags)
   - unless target.new_record?
     .box
       h3= Tag.model_name.human

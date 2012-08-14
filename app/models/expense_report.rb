@@ -1,7 +1,7 @@
 # encoding: UTF-8
 
 class ExpenseReport < ActiveRecord::Base
-  belongs_to :hrinfo
+  belongs_to :employee
   belongs_to :target, polymorphic: true
   belongs_to :project
 
@@ -18,14 +18,14 @@ class ExpenseReport < ActiveRecord::Base
     end
   end
 
-  def report!(user, comment, report_url)
+  def report!(person, comment, report_url)
     if target_type == "Cardbill"
-      target.report.permission user, :read
+      target.report.permission person, :read
     end
     super
   end
 
-  def access?(user, access_type = :read)
+  def access?(person, access_type = :read)
     return false if access_type == :write and posting
     super
   end
@@ -36,7 +36,7 @@ class ExpenseReport < ActiveRecord::Base
       result = if params[:empty_permission] == 'true'
                 result.no_permission
               else
-                result.access_list(params[:user])
+                result.access_list(params[:person])
               end
       result
     end

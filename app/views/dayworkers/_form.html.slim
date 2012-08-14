@@ -11,4 +11,6 @@ h2= t("common.title.#{form_type}")
     p
       = f.label :juminno
       = f.text_field :juminno
+    p
+      = render 'shared/attachments/form', form: f
   = f.submit t("dayworkers.#{form_type}.submit")
