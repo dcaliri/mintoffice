@@ -466,6 +466,7 @@ ko:
                 started_on: 시작일자
                 ending_on: 종료예정일자
                 ended_on: 실제 종료일자
+                owner_name: 프로젝트 관리자
             required_tag:
                 modelname: 모델명
             account:
@@ -1313,6 +1314,7 @@ ko:
             title: 프로젝트 수정
             completed: 프로젝트 완료
             confirm_complete: 프로젝트를 종료하시겠습니까?
+            owner: (관리자 변경하기)
         assign:
             title: 할당 비율 조정
             not_hundred: 할당 비율이 100%가 아닙니다.

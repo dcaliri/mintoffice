@@ -19,6 +19,7 @@ class ExpenseReportsController < ApplicationController
   def create
     expense_report.employee = current_employee
     expense_report.save!
+    expense_report.add_permission_of_project_owner
     redirect_to expense_report
   end
 

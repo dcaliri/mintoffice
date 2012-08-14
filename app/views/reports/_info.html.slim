@@ -9,7 +9,7 @@ p
   = " - #{target.localize_status}"
 
 - if target.access?(current_person, :write)
-  - unless current_person.admin?
+  - unless target.approve?(current_person)
     = form_tag :report do
       = hidden_field_tag :target_type, target.class
       = hidden_field_tag :target_id, target.id

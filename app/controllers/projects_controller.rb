@@ -31,6 +31,11 @@ class ProjectsController < ApplicationController
     render 'edit'
   end
 
+  def change_owner
+    project.change_owner!(params[:employee_id])
+    redirect_to :back
+  end
+
   def completed
     project.ended_on = Time.now
     project.save!
