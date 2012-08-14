@@ -39,7 +39,7 @@ namespace :deploy do
     run "ln -sf #{deploy_to}/shared/files #{release_path}/"
   end
 
-  after 'deploy:create_symlink', 'deploy:relink_directories'
+  before 'deploy:finalize_update', 'deploy:relink_directories'
 end
 
 namespace :unicorn do
