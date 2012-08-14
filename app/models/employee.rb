@@ -67,7 +67,7 @@ class Employee < ActiveRecord::Base
 
     def search_by_text(text)
       text = "%#{text}%"
-      joins(:person => :account).where('accounts.name LIKE ? OR accounts.notify_email LIKE ? OR employees.position LIKE ?', text, text, text)
+      joins(:person => :account).where('accounts.name LIKE ? OR accounts.notify_email LIKE ?', text, text)
     end
 
     def payment_in?(from, to)
