@@ -38,7 +38,7 @@ class CardApprovedSource < ActiveRecord::Base
   end
 
   def will_be_paied_at_strftime
-    will_be_paied_at.strftime("%H:%M:%S") rescue ""
+    will_be_paied_at.strftime("%Y %m.%d") rescue ""
   end
   ################################
 
