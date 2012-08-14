@@ -145,6 +145,7 @@ ko:
             taxbill_item: 항목
             used_vacation: 사용한 연차
             vacation: 연차
+            vacation_type: 항목
             account: 사용자계정
         attributes:
             access_person:
@@ -528,6 +529,8 @@ ko:
                 note: 사유
                 type_: 항목
                 type_title: 항목
+            vacation_type:
+                title: 항목
             account:
                 name: 계정명
                 password: 비밀번호
@@ -1484,3 +1487,5 @@ ko:
             approve: 승인
             cancel: 승인 취소
         title: "연차 관리"
+    vacation_types:
+        title: 연차 항목

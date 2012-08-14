@@ -1,0 +1,13 @@
+#show_command
+  = link_to t("common.title.back"), @vacation_type
+
+h2= t("common.title.#{action_name}")
+
+= form_for @vacation_type, html: {class: "tabular"} do |f|
+  = f.error_messages
+  .box
+    p
+      = f.label :title
+      = f.text_field :title
+  p
+    = f.submit

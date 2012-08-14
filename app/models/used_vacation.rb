@@ -48,7 +48,7 @@ class UsedVacation < ActiveRecord::Base
   end
 
   def type_title
-    type.title
+    type.title rescue ""
   end
 
   def type_id
