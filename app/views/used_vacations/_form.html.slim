@@ -7,6 +7,9 @@ h2= t("common.title.#{action_name}")
   = f.error_messages
   .box
     p
+      = f.label :type_
+      = f.select :type_, vacation_type_select_list(used_vacation.type_id)
+    p
       = f.label :from
       = f.date_select :from, :order => [:year, :month, :day], :default => Time.zone.now
     p

@@ -2,7 +2,21 @@
 
 class UsedVacation < ActiveRecord::Base
   belongs_to :vacation
+
+  has_many :vacation_type_infos
+  has_many :vacation_types, through: :vacation_type_infos
+
   validate :valid_period
+
+  attr_accessor :type_
+  before_save :save_vacation_type
+  def save_vacation_type
+    if type_
+      type = VacationType.find(type_)
+      self.vacation_types.clear
+      self.vacation_types << type
+    end
+  end
 
   include Historiable
   def history_parent
@@ -27,6 +41,18 @@ class UsedVacation < ActiveRecord::Base
           (`used_vacations`.`to` > ? AND `used_vacations`.`to` < ? ) OR \
           (`used_vacations`.`from` < ? AND `used_vacations`.`to` > ?)",
       range.begin.to_date, range.end.to_date, range.begin.to_date, range.end.to_date, range.begin.to_date, range.end.to_date)
+  end
+
+  def type
+    vacation_types.first
+  end
+
+  def type_title
+    type.title
+  end
+
+  def type_id
+    type.id rescue nil
   end
 
   def in? (day)
