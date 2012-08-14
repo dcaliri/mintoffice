@@ -28,10 +28,13 @@ class Project < ActiveRecord::Base
     end
   end
 
-  def owner_name
-    self.assign_infos.find_by_owner(true).employee.fullname rescue "없음"
+  def owner
+    self.assign_infos.find_by_owner(true).employee rescue nil
   end
 
+  def owner_name
+    owner.fullname rescue "없음"
+  end
 
   def completed?
     ! self.ended_on.nil?
