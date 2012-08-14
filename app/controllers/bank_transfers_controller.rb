@@ -6,7 +6,7 @@ class BankTransfersController < ApplicationController
   def index
     params[:bank_account_id] ||= BankAccount.first.id
     transfers = bank_account ? bank_account.bank_transfers : BankTransfer
-    @bank_transfers = transfers.latest.page(params[:page])
+    @bank_transfers = transfers.search(params[:query]).latest.page(params[:page])
   end
 
   def total
