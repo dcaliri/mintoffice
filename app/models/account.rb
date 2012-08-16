@@ -230,9 +230,9 @@ class Account < ActiveRecord::Base
   def get_remine_account
     current_company = Company.current_company
 
-    RedmineAccount.element_name = "account"
+    RedmineAccount.element_name = "user"
     RedmineAccount.site = current_company.redmine_domain
-    RedmineAccount.account = current_company.redmine_accountname
+    RedmineAccount.user = current_company.redmine_accountname
     RedmineAccount.password = current_company.redmine_password
     RedmineAccount
   end
@@ -244,8 +244,8 @@ class Account < ActiveRecord::Base
     redmine_account.new(
       login: self.name,
       password: current_company.default_password,
-      firstname: (employee.firstname rescue nil),
-      lastname: (employee.lastname rescue nil),
+      firstname: (person.employee.firstname rescue nil),
+      lastname: (person.employee.lastname rescue nil),
       mail: notify_email
     )
   end
@@ -254,15 +254,15 @@ class Account < ActiveRecord::Base
     current_company = Company.current_company
     redmine_account = get_remine_account
 
-    raise ArgumentError, I18n.t('models.account.no_name') if employee and employee.firstname.blank?
-    raise ArgumentError, I18n.t('models.account.no_name') if employee and employee.lastname.blank?
+    raise ArgumentError, I18n.t('models.account.no_name') if person.employee and person.employee.firstname.blank?
+    raise ArgumentError, I18n.t('models.account.no_name') if person.employee and person.employee.lastname.blank?
     raise ArgumentError, I18n.t('models.account.no_email') if notify_email.blank?
 
     redmine = redmine_account.new(
       login: self.name,
       password: current_company.default_password,
-      firstname: (employee.firstname rescue nil),
-      lastname: (employee.lastname rescue nil),
+      firstname: (person.employee.firstname rescue nil),
+      lastname: (person.employee.lastname rescue nil),
       mail: notify_email
     )
 
