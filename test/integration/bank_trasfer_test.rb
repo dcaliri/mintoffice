@@ -15,6 +15,7 @@ class BankTransferTest < ActionDispatch::IntegrationTest
     
     assert(page.has_content?('외부 내용'))
     assert(page.has_content?('임의 내용'))
+    assert(page.has_content?('적금 만기'))
   end
 
   test "should create except_columns" do
@@ -139,7 +140,8 @@ class BankTransferTest < ActionDispatch::IntegrationTest
     click_link '삭제'
 
     assert(page.has_content?('외부 내용'))
-    assert(!page.has_content?('임의 내용'))
+    assert(page.has_content?('임의 내용'))
+    assert(!page.has_content?('적금 만기'))
   end
 
   test "should create/show expense_report" do
@@ -192,11 +194,20 @@ class BankTransferTest < ActionDispatch::IntegrationTest
 
     assert(page.has_content?('매니저'))
     assert(!page.has_content?('임의 내용'))
+    assert(!page.has_content?('적금 만기'))
 
     find_field('query').set("임의 내용")
     find_field('query').native.send_key(:enter)
 
     assert(!page.has_content?('매니저'))
     assert(page.has_content?('임의 내용'))
+    assert(!page.has_content?('적금 만기'))
+
+    find_field('query').set("적금 만기")
+    find_field('query').native.send_key(:enter)
+
+    assert(!page.has_content?('매니저'))
+    assert(!page.has_content?('임의 내용'))
+    assert(page.has_content?('적금 만기'))
   end
 end

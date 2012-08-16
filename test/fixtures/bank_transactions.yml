@@ -37,7 +37,7 @@ shinhan:
 kiup:
     id: 3
     bank_account_id: 1
-    transacted_at: 2012-04-17 10:57:18.000000
+    transacted_at: 2012-04-18 10:57:18.000000
     transaction_type: 이자
     in: 0
     out: 160
