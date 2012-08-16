@@ -4,7 +4,7 @@ module Api
     respond_to :json
 
     def login
-      @account = Account.authenticate(params[:account], params[:password])
+      @account = Account.authenticate(params[:user], params[:password])
       if @account
         @account.create_api_key(params[:account], params[:password])
         render :json => {:status => :ok, :account => @account}
