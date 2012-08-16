@@ -11,6 +11,11 @@ class ExpenseReport < ActiveRecord::Base
 
   include Reportable
 
+  before_validation :check_total_amount
+  def check_total_amount
+    errors.add(:amount, "이 너무 많습니다") if target.expense_reports.total_amount + self.amount > target.totalamount
+  end
+
   def add_permission_of_project_owner
     report.permission project.owner.person, :write
   end

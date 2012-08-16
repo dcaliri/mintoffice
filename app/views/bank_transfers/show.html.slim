@@ -2,11 +2,9 @@
   - if bank_transfer.transaction
     = link_to t('bank_transfers.show.to_bank_transaction'), bank_transfer.transaction
     = " | "
-  - if bank_transfer.expense_report
-    = link_to t('bank_transfers.show.view_expense'), bank_transfer.expense_report
-  - else
-    = link_to t('bank_transfers.show.create_expense'), new_expense_report_path(target_type: bank_transfer.class, target_id: bank_transfer.id, expensed_at: bank_transfer.transfered_at, amount: bank_transfer.money)
-  = " | "
+  - if bank_transfer.remain_amount_for_expense_report != 0
+    = link_to t('bank_transfers.show.create_expense'), new_expense_report_path(target_type: bank_transfer.class, target_id: bank_transfer.id, expensed_at: bank_transfer.transfered_at, amount: bank_transfer.remain_amount_for_expense_report)
+    = " | "
   = link_to t('common.link.edit'), edit_bank_transfer_path(bank_transfer, bank_account_id: bank_transfer.bank_account)
   = " | "
   = link_to t('common.link.destroy'), bank_transfer, :method => :delete, data: {confirm: t("common.messages.delete_confirm")}
@@ -18,3 +16,8 @@ h2 #{bank_transfer.bank_account.name}: #{bank_transfer.bank_account.number}
 
 .box
   = render 'detail', target: bank_transfer
+  - unless bank_transfer.expense_reports.empty?
+      h3 지출내역서
+      ul
+      - bank_transfer.expense_reports.each do |expense_report|
+        li= link_to expense_report.project.name, expense_report
