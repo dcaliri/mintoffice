@@ -1,0 +1,17 @@
+vacation:
+  id: 1
+  title: 휴가
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
+
+treatment:
+  id: 2
+  title: 병원 치료
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
+
+etc:
+  id: 3
+  title: 기타
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>

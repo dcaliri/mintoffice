@@ -1,0 +1,6 @@
+admin_used_vacation:
+  id:
+  used_vacation_id: 1
+  vacation_type_id: 1
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
