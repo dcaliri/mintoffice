@@ -1023,6 +1023,8 @@ ko:
             title: 연락처 수정하기
         find:
             title: 연락처 찾기
+            new: 새로운 연락처 만들기
+            find_contact: 인사정보에 이용될 연락처 찾기
         save:
             link: 구글 연락처에 저장하기
         save_form:
