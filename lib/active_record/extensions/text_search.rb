@@ -10,7 +10,7 @@ module ActiveRecord
           arel = self.arel_table
           query = self.column_names.map do |column|
             type = self.columns_hash[column.to_s].type
-            if type == :integer or type == :string
+            if type == :text or type == :string
               arel[column].matches(text)
             end
           end
