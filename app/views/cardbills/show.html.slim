@@ -5,10 +5,7 @@
     = link_to t('cardbills.show.to_use'), @cardbill.used
     = " | "
   -  if @cardbill.status == 'verified'
-    - if @cardbill.expense_report
-      = link_to t('cardbills.show.view_expense'), @cardbill.expense_report
-    - else
-      = link_to t('cardbills.show.create_expense'), new_expense_report_path(target_type: @cardbill.class, target_id: @cardbill.id, expensed_at: @cardbill.transdate, amount: @cardbill.totalamount)
+    = link_to t('cardbills.show.create_expense'), new_expense_report_path(target_type: @cardbill.class, target_id: @cardbill.id, expensed_at: @cardbill.transdate, amount: @cardbill.totalamount)
     = " | "
   - if @cardbill.approved and current_person.permission? :card_approved_sources
     = link_to t('.to_approved'), @cardbill.approved
@@ -32,6 +29,12 @@ h2
       = number_to_currency @cardbill.totalamount
 
     = render 'detail', target: @cardbill
+    - unless @cardbill.expense_reports.empty?
+      h3 지출내역서
+      ul
+      - @cardbill.expense_reports.each do |expense_report|
+        li= link_to expense_report.project.name, expense_report
+
   = render "shared/attachments/detail", :target => @cardbill
   .clear
 
