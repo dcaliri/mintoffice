@@ -23,7 +23,7 @@ class ChangeHistoryTest < ActionDispatch::IntegrationTest
 
     click_button '소액현금 수정하기'
 
-    assert(page.has_content?('[소액현금] 사용처 상세내역: test → 변경 후 description(왕 수용)'))
+    assert(page.has_content?('[소액현금] 사용처 상세내역: test → 변경 후 description(김 관리)'))
 
     visit '/'
     click_link '변경사항 관리'
@@ -47,8 +47,7 @@ class ChangeHistoryTest < ActionDispatch::IntegrationTest
     click_link '소액현금관리'
     find("tr.selectable").click
 
-    assert(page.has_content?('[소액현금] 수입금액: 50000.0 → 100000.0(왕 수용)'))
-    # assert(page.has_content?('[소액현금] 수입금액: 50000.0 → 100000.0(admin)'))
+    assert(page.has_content?('[소액현금] 수입금액: 50000.0 → 100000.0(김 관리)'))
   end
 
   test 'should destroy chage_history' do
@@ -64,6 +63,6 @@ class ChangeHistoryTest < ActionDispatch::IntegrationTest
     click_link '소액현금관리'
     find("tr.selectable").click
 
-    assert(!page.has_content?('[소액현금] 사용처 상세내역: 변경 전 description → test(왕 수용)'))
+    assert(!page.has_content?('[소액현금] 사용처 상세내역: 변경 전 description → test(김 관리)'))
   end
 end

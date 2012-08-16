@@ -82,6 +82,6 @@ class BusinessClientTest < ActionDispatch::IntegrationTest
 
     find("tr.selectable").click
 
-    assert(page.has_content?('왕 수용'))
+    assert(page.has_content?('김 관리'))
   end
 end

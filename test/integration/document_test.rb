@@ -115,12 +115,12 @@ class DocumentTest < ActionDispatch::IntegrationTest
     click_button '승인'
 
     assert(page.has_content?('admin: 승인 테스트'))
-    assert(page.has_content?('admin: 왕 수용님이 결재를 승인하였습니다.'))
+    assert(page.has_content?('admin: 김 관리님이 결재를 승인하였습니다.'))
 
     fill_in "코멘트", with: "반려 테스트"
     click_button '반려'
 
     assert(page.has_content?('admin: 반려 테스트'))
-    assert(page.has_content?('admin: 왕 수용님이 결재를 반려하였습니다.'))
+    assert(page.has_content?('admin: 김 관리님이 결재를 반려하였습니다.'))
   end
 end
