@@ -87,10 +87,30 @@ class ProjectTest < ActionDispatch::IntegrationTest
     click_link '수정하기'
     click_link '프로젝트 완료'
     
-
     click_link '프로젝트 관리 - 완료'
 
     assert(page.has_content?('테스트 프로젝트'))
+  end  
+
+  test 'should show project assign rate' do
+    visit '/'
+    click_link '프로젝트 관리'
+    find("tr.selectable").click
+
+    click_link '수정하기'
+
+    fill_in "계정명", with: "admin"
+    click_button '추가하기'
+    
+    click_link '프로젝트 완료'
+    
+    click_link '프로젝트 관리 - 완료'
+
+    find("tr.selectable").click
+    save_and_open_page
+    click_link '할당비율 조정'
+
+    assert(page.has_content?('할당 비율 조정'))
   end  
 
   test 'should back project' do
