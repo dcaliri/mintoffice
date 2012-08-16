@@ -53,6 +53,14 @@ class BankTransfer < ActiveRecord::Base
   end
   ################################
 
+  def totalamount
+    self.money
+  end
+
+  def remain_amount_for_expense_report
+    self.totalamount - expense_reports.total_amount
+  end
+
   def self.search(text)
     search_by_text(text)
   end

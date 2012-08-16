@@ -90,6 +90,10 @@ class Cardbill < ActiveRecord::Base
     end
   end
 
+  def remain_amount_for_expense_report
+    totalamount - expense_reports.total_amount
+  end
+
   def approved_mismatch
     mismatch?(:totalamount) || mismatch?(:transdate)
   end
