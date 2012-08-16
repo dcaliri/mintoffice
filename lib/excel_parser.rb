@@ -32,7 +32,7 @@ class ExcelParser
   end
 
   def valid?(sheet)
-    return true unless @options[:validate]
+    return true #unless @options[:validate]
     position = @options[:position]
     column_keys.each_with_index do |column, i|
       column_name = sheet.cell(position[:start][:x] - 1, i + position[:start][:y])
@@ -59,7 +59,7 @@ class ExcelParser
       query = {}
       @keys.each do |key, value|
         if value == :time
-          query[key] = Time.zone.parse(params[key])
+          query[key] = Time.parse(params[key])
         else
           query[key] = params[key]
         end
