@@ -36,6 +36,8 @@ class BankTransaction < ActiveRecord::Base
     config.period_subtitle :transacted_at
   end
 
+  include ActiveRecord::Extensions::TextSearch
+
   attr_accessor :no_verify
 
   before_save :verify_with_prev_transaction, unless: :no_verify
@@ -56,6 +58,10 @@ class BankTransaction < ActiveRecord::Base
         latest = transaction
       end
       nil
+    end
+
+    def search(text)
+      search_by_text(text)
     end
   end
   extend ClassMethods

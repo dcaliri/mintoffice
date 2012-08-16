@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class Project < ActiveRecord::Base
   belongs_to :company
 
@@ -11,6 +13,28 @@ class Project < ActiveRecord::Base
 
   validates_uniqueness_of :name, scope: :company_id
   validates_numericality_of :revenue
+
+  def change_owner!(employee_id)
+    transaction do
+      before_owner = self.assign_infos.find_by_owner(true)
+      if before_owner
+        before_owner.owner = false
+        before_owner.save!
+      end
+
+      after_owner = self.assign_infos.find_by_employee_id(employee_id)
+      after_owner.owner = true
+      after_owner.save!
+    end
+  end
+
+  def owner
+    self.assign_infos.find_by_owner(true).employee rescue nil
+  end
+
+  def owner_name
+    owner.fullname rescue "없음"
+  end
 
   def completed?
     ! self.ended_on.nil?

@@ -88,6 +88,7 @@ Mintoffice::Application.routes.draw do
     member do
       post :employee, action: 'add_employee'
       delete :employee, action: 'remove_employee'
+      put :change_owner
     end
   end
 
@@ -219,6 +220,8 @@ Mintoffice::Application.routes.draw do
       put 'approve'
     end
   end
+
+  resources :vacation_types
 
   resources :bank_accounts, path: 'banks' do
     get 'total', :on => :collection

@@ -17,6 +17,7 @@ class Employee < ActiveRecord::Base
   has_many :documents, :through => :document_owners, :source => :document
 
   has_many :project_infos, class_name: "ProjectAssignInfo"
+
   has_many :projects, through: :project_infos
 
   serialize :employment_proof_hash, Array
@@ -66,7 +67,7 @@ class Employee < ActiveRecord::Base
 
     def search_by_text(text)
       text = "%#{text}%"
-      joins(:person => :account).where('accounts.name LIKE ? OR accounts.notify_email LIKE ? OR employees.position LIKE ?', text, text, text)
+      joins(:person => :account).where('accounts.name LIKE ? OR accounts.notify_email LIKE ?', text, text)
     end
 
     def payment_in?(from, to)
@@ -145,6 +146,10 @@ class Employee < ActiveRecord::Base
 
   def work_to
     retired_on || Time.zone.now
+  end
+
+  def project_owner?(project)
+    self.project_infos.find_by_project_id(project).owner
   end
 
   def apply_status

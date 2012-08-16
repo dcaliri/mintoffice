@@ -1,4 +1,4 @@
-fixture:
+hana:
     id: 1
     bank_account_id: 1
     transacted_at: 2012-04-16 10:57:18.000000
@@ -15,3 +15,39 @@ fixture:
     promissory_check_amount:
     cms_code:
     transact_order: 0
+
+shinhan:
+    id: 2
+    bank_account_id: 1
+    transacted_at: 2012-04-17 10:57:18.000000
+    transaction_type: 이자
+    in: 500
+    out: 0
+    note: 적금만기
+    remain: 665
+    branchname: 
+    created_at: <%= Time.zone.now %>
+    updated_at: <%= Time.zone.now %>
+    out_bank_account:
+    out_bank_name: 신한 은행
+    promissory_check_amount:
+    cms_code:
+    transact_order: 1
+
+kiup:
+    id: 3
+    bank_account_id: 1
+    transacted_at: 2012-04-18 10:57:18.000000
+    transaction_type: 이자
+    in: 0
+    out: 160
+    note: e만기
+    remain: 505
+    branchname: 
+    created_at: <%= Time.zone.now %>
+    updated_at: <%= Time.zone.now %>
+    out_bank_account:
+    out_bank_name: 기업 은행
+    promissory_check_amount:
+    cms_code:
+    transact_order: 2

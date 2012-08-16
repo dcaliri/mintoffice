@@ -40,6 +40,6 @@ class BankTransfersControllerTest < ActionController::TestCase
   end
 
   def current_bank_transfer
-    @bank_transfer ||= bank_transfers(:fixture)
+    @bank_transfer ||= bank_transfers(:shinhan)
   end
 end

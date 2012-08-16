@@ -34,7 +34,7 @@ class CardUsedSourcesTest < ActionDispatch::IntegrationTest
     fill_in "카드번호", with: "321-321-1234"
     fill_in "결제계좌번호", with: "123-321-1234"
     fill_in "결제은행명", with: "신한 은행"
-    fill_in "카드소유자명", with: "손어지리"
+    fill_in "카드소유자명", with: "소유자"
     fill_in "사용구분", with: "사용구분 입력 테스트"
     fill_in "승인번호", with: "2138"
     select('2011', :from => 'card_used_source_approved_at_1i')
@@ -65,7 +65,7 @@ class CardUsedSourcesTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('321-321-1234'))
     assert(page.has_content?('123-321-1234'))
     assert(page.has_content?('신한 은행'))
-    assert(page.has_content?('손어지리'))
+    assert(page.has_content?('소유자'))
     assert(page.has_content?('사용구분 입력 테스트'))
     assert(page.has_content?('2138'))
     assert(page.has_content?('123'))
@@ -92,7 +92,7 @@ class CardUsedSourcesTest < ActionDispatch::IntegrationTest
     fill_in "카드번호", with: "321-321-1234"
     fill_in "결제계좌번호", with: "321-123-4321"
     fill_in "결제은행명", with: "기업 은행"
-    fill_in "카드소유자명", with: "손어지리 수정"
+    fill_in "카드소유자명", with: "소유자 수정"
     fill_in "사용구분", with: "사용구분 수정 테스트"
     fill_in "승인번호", with: "1138"
     select('2012', :from => 'card_used_source_approved_at_1i')
@@ -128,7 +128,7 @@ class CardUsedSourcesTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('321-321-1234'))
     assert(page.has_content?('321-123-4321'))
     assert(page.has_content?('기업 은행'))
-    assert(page.has_content?('손어지리 수정'))
+    assert(page.has_content?('소유자 수정'))
     assert(page.has_content?('사용구분 수정 테스트'))
     assert(page.has_content?('1138'))
     assert(page.has_content?('321'))

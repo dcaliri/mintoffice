@@ -16,7 +16,7 @@ class PaymentTest < ActionDispatch::IntegrationTest
     visit '/payments'
     click_link '전체 보기'
 
-    assert(page.has_content?('왕 수용'))
+    assert(page.has_content?('김 관리'))
 
     click_link '지급이 있는 사람들만 보기'
 
@@ -93,7 +93,7 @@ class PaymentTest < ActionDispatch::IntegrationTest
     click_link '연봉 관리'
     click_link '인사정보'
 
-    assert(page.has_content?('왕 수용'))
+    assert(page.has_content?('김 관리'))
     assert(page.has_content?('사장'))
   end
 end

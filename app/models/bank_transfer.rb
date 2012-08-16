@@ -42,6 +42,8 @@ class BankTransfer < ActiveRecord::Base
     config.krw [:money, :transfer_fee, :error_money]
   end
 
+  include ActiveRecord::Extensions::TextSearch
+
   ###### DECORATOR ###############
   def transfered_at_strftime
     transfered_at.strftime("%Y-%m-%d %H.%M") rescue ""
@@ -50,6 +52,10 @@ class BankTransfer < ActiveRecord::Base
     registered_at.strftime("%Y-%m-%d %H.%M") rescue ""
   end
   ################################
+
+  def self.search(text)
+    search_by_text(text)
+  end
 
   def self.excel_parser(type)
     if type == :shinhan

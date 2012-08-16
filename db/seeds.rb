@@ -72,3 +72,10 @@ if LedgerAccount.all.empty?
   LedgerAccount.create!(title: "현금", category: "자본")
   LedgerAccount.create!(title: "신용카드", category: "부채")
 end
+
+if VacationType.all.empty?
+  VacationType.create!(title: "여행")
+  VacationType.create!(title: "예비군")
+end
+
+

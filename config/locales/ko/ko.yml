@@ -145,6 +145,7 @@ ko:
             taxbill_item: 항목
             used_vacation: 사용한 연차
             vacation: 연차
+            vacation_type: 항목
             account: 사용자계정
         attributes:
             access_person:
@@ -465,6 +466,7 @@ ko:
                 started_on: 시작일자
                 ending_on: 종료예정일자
                 ended_on: 실제 종료일자
+                owner_name: 프로젝트 관리자
             required_tag:
                 modelname: 모델명
             account:
@@ -526,6 +528,10 @@ ko:
                 to: 종료
                 period: 기간
                 note: 사유
+                type_: 항목
+                type_title: 항목
+            vacation_type:
+                title: 항목
             account:
                 name: 계정명
                 password: 비밀번호
@@ -1017,6 +1023,8 @@ ko:
             title: 연락처 수정하기
         find:
             title: 연락처 찾기
+            new: 새로운 연락처 만들기
+            find_contact: 인사정보에 이용될 연락처 찾기
         save:
             link: 구글 연락처에 저장하기
         save_form:
@@ -1308,6 +1316,7 @@ ko:
             title: 프로젝트 수정
             completed: 프로젝트 완료
             confirm_complete: 프로젝트를 종료하시겠습니까?
+            owner: (관리자 변경하기)
         assign:
             title: 할당 비율 조정
             not_hundred: 할당 비율이 100%가 아닙니다.
@@ -1482,3 +1491,5 @@ ko:
             approve: 승인
             cancel: 승인 취소
         title: "연차 관리"
+    vacation_types:
+        title: 연차 항목

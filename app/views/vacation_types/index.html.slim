@@ -1,0 +1,11 @@
+#show_command
+  = link_to t("common.title.new"), [:new, :vacation_type]
+
+h2 ..
+
+table#list-table
+  tr
+    th= VacationType.human_attribute_name("title")
+  - @types.each do |type|
+    tr.selectable onclick="location.href='#{vacation_type_path(type)}'"
+      td= type.title

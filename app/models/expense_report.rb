@@ -11,6 +11,10 @@ class ExpenseReport < ActiveRecord::Base
 
   include Reportable
 
+  def add_permission_of_project_owner
+    report.permission project.owner.person, :write
+  end
+
   def make_posting
     build_posting(posted_at: expensed_at).tap do |posting|
       posting.items.build(item_type: I18n.t('models.expense_report.debit'), amount: amount)
@@ -23,6 +27,10 @@ class ExpenseReport < ActiveRecord::Base
       target.report.permission person, :read
     end
     super
+  end
+
+  def approve?(person)
+    (project.owner and project.owner.person == person) or super
   end
 
   def access?(person, access_type = :read)

@@ -1,5 +1,8 @@
 - content_for :search do
   = form_tag :bank_transactions, :method => :get do
+    = t("common.title.search")
+    = " : "
+    = text_field_tag 'query', params[:query]
     = select_tag :bank_account_id,
       bank_account_select_list(params[:bank_account_id]),
       "onchange" => "this.form.submit()"

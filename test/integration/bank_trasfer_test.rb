@@ -13,7 +13,9 @@ class BankTransferTest < ActionDispatch::IntegrationTest
     click_link '은행계좌 목록'
     click_link '이체내역 보기'
     
-    assert(page.has_content?('이체 내역'))
+    assert(page.has_content?('외부 내용'))
+    assert(page.has_content?('임의 내용'))
+    assert(page.has_content?('적금 만기'))
   end
 
   test "should create except_columns" do
@@ -137,7 +139,9 @@ class BankTransferTest < ActionDispatch::IntegrationTest
 
     click_link '삭제'
 
-    assert(page.has_content?('이체 내역이 없습니다'))
+    assert(page.has_content?('외부 내용'))
+    assert(page.has_content?('임의 내용'))
+    assert(!page.has_content?('적금 만기'))
   end
 
   test "should create/show expense_report" do
@@ -178,5 +182,32 @@ class BankTransferTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('321-123-123456'))
     assert(page.has_content?('기업은행'))
     assert(page.has_content?('28505013648'))
+  end
+
+  test "should search transfer data" do
+    visit '/'
+    click_link '은행계좌 목록'
+    click_link '이체내역 보기'
+
+    find_field('query').set("매니저")
+    find_field('query').native.send_key(:enter)
+
+    assert(page.has_content?('매니저'))
+    assert(!page.has_content?('임의 내용'))
+    assert(!page.has_content?('적금 만기'))
+
+    find_field('query').set("임의 내용")
+    find_field('query').native.send_key(:enter)
+
+    assert(!page.has_content?('매니저'))
+    assert(page.has_content?('임의 내용'))
+    assert(!page.has_content?('적금 만기'))
+
+    find_field('query').set("적금 만기")
+    find_field('query').native.send_key(:enter)
+
+    assert(!page.has_content?('매니저'))
+    assert(!page.has_content?('임의 내용'))
+    assert(page.has_content?('적금 만기'))
   end
 end

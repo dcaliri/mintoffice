@@ -41,6 +41,10 @@ module Reportable
   end
   delegate :report!, :approve!, :rollback!, :to => :report
 
+  def approve?(person)
+    person.admin?
+  end
+
   def redirect_when_reported
     self
   end
