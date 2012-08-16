@@ -98,8 +98,14 @@ class BankTransaction < ActiveRecord::Base
   def self.excel_parser(type)
     if type == :shinhan
       shinhan_bank_transaction_parser
-    else
+    elsif type == :ibk
       ibk_bank_transaction_parser
+    elsif type == :hsbc
+      hsbc_bank_transaction_parser
+    elsif type == :nonghyup
+      hsbc_bank_transaction_parser
+    else
+      raise "Cannot find excel parser. type = #{type}"
     end
   end
 
