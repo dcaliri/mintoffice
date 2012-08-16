@@ -8,17 +8,20 @@ h2
   = project.name
 .box
   dl
-    = dtdd project, "revenue"
+    - if current_person.admin? or project.owner.id == current_person.employee.id
+      = dtdd project, "revenue"
     = dtdd project, "started_on"
     = dtdd project, "ending_on"
     = dtdd project, "owner_name"
+    dt
+      = t('projects.show.accounts')
+    dd
+      - for employee in project.employees
+        = employee.fullname
+        - if project.completed?
+          = link_to t('projects.show.allocation_ratio'), [:assign, employee, :projects]
+        br
     - if project.completed?
       = dtdd project, "ended_on"
-      dt
-        = t('projects.show.accounts')
-      dd
-        - for employee in project.employees
-          = employee.fullname
-          = link_to t('projects.show.allocation_ratio'), [:assign, employee, :projects]
-          br
-= render 'expense'
+- if current_person.admin? or project.owner.id == current_person.employee.id
+  = render 'expense'

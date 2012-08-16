@@ -57,3 +57,18 @@ card_used_user:
   company_id: 1
   google_id:
   google_etag: 
+
+retired_user:
+  id: 5
+  firstname: 직자
+  lastname: 퇴
+  company_name:
+  position: 사원
+  department: 경리부
+  person_id: 10
+  migrated_data: f
+  owner_id:
+  isprivate: f
+  company_id: 1
+  google_id:
+  google_etag: 

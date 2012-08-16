@@ -44,4 +44,27 @@ class GroupTest < ActionDispatch::IntegrationTest
 
     assert(page.has_content?("그룹명 수정 테스트"))
   end
+
+  test 'should not show retired_user in new' do
+    visit '/'
+    click_link '그룹관리'
+    click_link '신규 작성'
+
+    assert(page.has_content?("normal"))
+    assert(page.has_content?("card_manager"))
+    assert(page.has_content?("card_user"))
+    assert(!page.has_content?("retired_user"))
+  end
+
+  test 'should not show retired_user in edit' do
+    visit '/'
+    click_link '그룹관리'
+    find("tr.selectable").click
+    click_link '수정하기'
+
+    assert(page.has_content?("normal"))
+    assert(page.has_content?("card_manager"))
+    assert(page.has_content?("card_user"))
+    assert(!page.has_content?("retired_user"))
+  end
 end
