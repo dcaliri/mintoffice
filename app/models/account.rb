@@ -129,10 +129,10 @@ class Account < ActiveRecord::Base
     super(options.merge(:only => [:name, :google_account, :boxcar_account, :notify_email, :api_key]))
   end
 
-  def create_api_key(name, password)
+  def create_api_key!(name, password)
     unless api_key
       self.api_key = Digest::SHA1.hexdigest(name + "--api--" + password)
-      save
+      save!
     end
   end
 
