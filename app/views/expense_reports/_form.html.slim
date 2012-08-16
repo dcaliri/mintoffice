@@ -9,6 +9,7 @@ h2= t("common.title.#{action_name}")
 .box
   #descr
     = form_for expense_report, html: {class: "tabular"} do |f|
+      = f.error_messages
       = f.hidden_field :target_type, value: target_type
       = f.hidden_field :target_id, value: target_id
       p

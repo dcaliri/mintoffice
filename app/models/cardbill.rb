@@ -4,7 +4,7 @@ class Cardbill < ActiveRecord::Base
   default_scope order('transdate desc')
 
   belongs_to :creditcard
-  has_one :expense_report, as: :target
+  has_many :expense_reports, as: :target
 
   include Historiable
   include Attachmentable
@@ -88,6 +88,10 @@ class Cardbill < ActiveRecord::Base
     else
       cardno
     end
+  end
+
+  def remain_amount_for_expense_report
+    totalamount - expense_reports.total_amount
   end
 
   def approved_mismatch

@@ -21,11 +21,15 @@ class ExpenseReportsController < ApplicationController
     expense_report.save!
     expense_report.add_permission_of_project_owner
     redirect_to expense_report
+  rescue ActiveRecord::RecordInvalid
+    render 'new'
   end
 
   def update
     expense_report.save!
     redirect_to expense_report
+  rescue ActiveRecord::RecordInvalid
+    render 'edit'
   end
 
   def destroy

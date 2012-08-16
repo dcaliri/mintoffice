@@ -2,7 +2,7 @@
 
 class BankTransfer < ActiveRecord::Base
   belongs_to :bank_account
-  has_one :expense_report, as: :target
+  has_many :expense_reports, as: :target
 
   self.per_page = 20
 
@@ -52,6 +52,14 @@ class BankTransfer < ActiveRecord::Base
     registered_at.strftime("%Y-%m-%d %H.%M") rescue ""
   end
   ################################
+
+  def totalamount
+    self.money
+  end
+
+  def remain_amount_for_expense_report
+    self.totalamount - expense_reports.total_amount
+  end
 
   def self.search(text)
     search_by_text(text)
