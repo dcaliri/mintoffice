@@ -56,21 +56,27 @@ class ProjectTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('2,000,000'))
   end  
 
-  test 'should add/delete accounts' do
+  test 'should add/delete accounts and assign manager' do
     visit '/'
     click_link '프로젝트 관리'
     find("tr.selectable").click
-
     click_link '수정하기'
 
     fill_in "계정명", with: "admin"
     click_button '추가하기'
 
-    assert(page.has_content?('admin'))
+    fill_in "계정명", with: "normal"
+    click_button '추가하기'
+
+    assert(page.has_content?('김 개똥'))
+
+    click_link '관리자 변경하기'
+
+    assert(page.has_content?('김 관리 -프로젝트 관리자-'))
 
     click_link '삭제하기'
 
-    assert(!page.has_content?('삭제하기'))
+    assert(!page.has_content?('김 관리'))
   end
 
   test 'should complete project' do

@@ -28,7 +28,7 @@ class AttachmentTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('첨부파일 제목 입력 테스트'))
     assert(page.has_content?('첨부파일 주석 입력 테스트'))
     assert(page.has_content?('attachment_test_file.png'))
-    assert(page.has_content?('왕 수용'))
+    assert(page.has_content?('김 관리'))
   end
 
 	test 'should edit attachment' do
@@ -84,7 +84,7 @@ class AttachmentTest < ActionDispatch::IntegrationTest
 
     assert(page.has_content?('attachment_test_file.png'))
     assert(page.has_content?('image/png'))
-    assert(page.has_content?('왕 수용'))
+    assert(page.has_content?('김 관리'))
   end
 
   test 'should check attachment_excel in document attachment' do
@@ -100,6 +100,6 @@ class AttachmentTest < ActionDispatch::IntegrationTest
 
     assert(page.has_content?('bank_transfer_fixture.xls'))
     assert(page.has_content?('application/vnd.ms-excel'))
-    assert(page.has_content?('왕 수용'))
+    assert(page.has_content?('김 관리'))
   end
 end

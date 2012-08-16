@@ -108,7 +108,7 @@ class EmployeeTest < ActionDispatch::IntegrationTest
 
     click_link '삭제'
 
-    assert(!page.has_content?('왕 수용'))
+    assert(!page.has_content?('김 관리'))
   end
 
   test 'should create required tag.' do
@@ -180,7 +180,7 @@ class EmployeeTest < ActionDispatch::IntegrationTest
 
     click_button '출력'
 
-    assert_equal(page.response_headers['Content-Disposition'], "attachment; filename=\"왕 수용_employment_proof.pdf\"")
+    assert_equal(page.response_headers['Content-Disposition'], "attachment; filename=\"김 관리_employment_proof.pdf\"")
   end
 
   test 'should fail to get employment_proof' do

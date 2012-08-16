@@ -70,7 +70,7 @@ class CardBillProcessTest < ActionDispatch::IntegrationTest
 
     click_button '지출 내역서 만들기'
 
-    select '왕 수용', from: 'reporter'
+    select '김 관리', from: 'reporter'
     fill_in '코멘트', with: 'admin에게 상신'
 
     click_button '상신'
@@ -82,7 +82,7 @@ class CardBillProcessTest < ActionDispatch::IntegrationTest
     click_link '카드 영수증 목록'
     find("tr.selectable").click
 
-    select '왕 수용', from: 'reporter'
+    select '김 관리', from: 'reporter'
     fill_in '코멘트', with: 'admin에게 상신'
 
     click_button '상신'
