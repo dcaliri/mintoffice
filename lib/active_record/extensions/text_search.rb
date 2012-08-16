@@ -9,10 +9,14 @@ module ActiveRecord
 
           arel = self.arel_table
           query = self.column_names.map do |column|
-            unless self.columns_hash[column.to_s].type == :integer
+            type = self.columns_hash[column.to_s].type
+            if type == :integer or type == :string
               arel[column].matches(text)
             end
           end
+
+          query.delete(nil)
+
           query = query.inject do |result, query|
             result ? result.or(query) : query
           end
