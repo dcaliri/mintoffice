@@ -7,14 +7,17 @@ module ActiveRecord
         def search_by_text(text)
           text = "%#{text}%"
 
+          arel = self.arel_table
           query = self.column_names.map do |column|
-            "`#{self.to_s.tableize.pluralize}`.`#{column}` like ?"
+            unless self.columns_hash[column.to_s].type == :integer
+              arel[column].matches(text)
+            end
+          end
+          query = query.inject do |result, query|
+            result ? result.or(query) : query
           end
 
-          query = query.join(" OR ")
-          parameters = [text] * self.column_names.count
-
-          where(query, *parameters)
+          where(query)
         end
       end
 

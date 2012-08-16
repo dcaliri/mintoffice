@@ -11,7 +11,9 @@ class BankTransactionTest < ActionDispatch::IntegrationTest
     click_link '은행계좌 목록'
     click_link '입출금내역 보기'
 
-    assert(page.has_content?('입출금 내역'))
+    assert(page.has_content?('2012년결산'))
+    assert(page.has_content?('적금만기'))
+    assert(page.has_content?('e만기'))
   end
 
   test "should velified bank_transactions" do
@@ -38,16 +40,11 @@ class BankTransactionTest < ActionDispatch::IntegrationTest
     click_link '돌아가기'
     click_link '입출금 내역 올리기'
 
-    select('2011', :from => 'bank_transaction_transacted_at_1i')
-    select('1월', :from => 'bank_transaction_transacted_at_2i')
-    select('26', :from => 'bank_transaction_transacted_at_3i')
-    select('11', :from => 'bank_transaction_transacted_at_4i')
-    select('11', :from => 'bank_transaction_transacted_at_5i')
     fill_in "적요", with: "적요 입력 테스트"
     fill_in "입금액", with: "0"
-    fill_in "출금액", with: "160"
+    fill_in "출금액", with: "55"
     fill_in "내용", with: "내용 입력 테스트"
-    fill_in "잔액", with: "5"
+    fill_in "잔액", with: "450"
     fill_in "거래점명", with: "GS25"
     fill_in "상대 계좌번호", with: "123-321-1234"
     fill_in "상대 은행", with: "기업은행"
@@ -59,6 +56,8 @@ class BankTransactionTest < ActionDispatch::IntegrationTest
     click_link '수정'
 
     fill_in "잔액", with: "50"
+
+    click_button '입출금 내역 수정하기'    
 
     click_link '돌아가기'
     click_link '검증하기'
@@ -107,9 +106,9 @@ class BankTransactionTest < ActionDispatch::IntegrationTest
     select('11', :from => 'bank_transaction_transacted_at_5i')
     fill_in "적요", with: "적요 입력 테스트"
     fill_in "입금액", with: "0"
-    fill_in "출금액", with: "160"
+    fill_in "출금액", with: "55"
     fill_in "내용", with: "내용 입력 테스트"
-    fill_in "잔액", with: "5"
+    fill_in "잔액", with: "450"
     fill_in "거래점명", with: "GS25"
     fill_in "상대 계좌번호", with: "123-321-1234"
     fill_in "상대 은행", with: "기업은행"
@@ -117,7 +116,7 @@ class BankTransactionTest < ActionDispatch::IntegrationTest
     click_button '입출금 내역 만들기'
 
     assert(page.has_content?('적요 입력 테스트'))
-    assert(page.has_content?('160'))
+    assert(page.has_content?('55'))
     assert(page.has_content?('내용 입력 테스트'))
     assert(page.has_content?('GS25'))
     assert(page.has_content?('123-321-1234'))
@@ -138,9 +137,9 @@ class BankTransactionTest < ActionDispatch::IntegrationTest
     select('12', :from => 'bank_transaction_transacted_at_5i')
     fill_in "적요", with: "적요 수정 테스트"
     fill_in "입금액", with: "0"
-    fill_in "출금액", with: "160"
+    fill_in "출금액", with: "55"
     fill_in "내용", with: "내용 수정 테스트"
-    fill_in "잔액", with: "5"
+    fill_in "잔액", with: "450"
     fill_in "거래점명", with: "수정된 거래점명"
     fill_in "상대 계좌번호", with: "123-321-1234"
     fill_in "상대 은행", with: "수정된 상대 은행"
@@ -148,7 +147,7 @@ class BankTransactionTest < ActionDispatch::IntegrationTest
     click_button '입출금 내역 수정하기'
 
     assert(page.has_content?('적요 수정 테스트'))
-    assert(page.has_content?('160'))
+    assert(page.has_content?('55'))
     assert(page.has_content?('내용 수정 테스트'))
     assert(page.has_content?('수정된 거래점명'))
     assert(page.has_content?('수정된 상대 은행'))
@@ -165,7 +164,9 @@ class BankTransactionTest < ActionDispatch::IntegrationTest
 
     click_link '삭제'
 
-    assert(page.has_content?('입출금 내역이 없습니다'))
+    assert(page.has_content?('2012년결산'))
+    assert(page.has_content?('적금만기'))
+    assert(!page.has_content?('e만기'))
   end
 
   test "should upload an excel file" do
@@ -185,5 +186,32 @@ class BankTransactionTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('e_만기'))
     assert(page.has_content?('₩30,360,000'))
     assert(page.has_content?('엘지전자(주)'))
+  end
+
+  test "should search transaction data" do
+    visit '/'
+    click_link '은행계좌 목록'
+    click_link '입출금내역 보기'
+
+    find_field('query').set("2012년결산")
+    find_field('query').native.send_key(:enter)
+
+    assert(page.has_content?('2012년결산'))
+    assert(!page.has_content?('적금만기'))
+    assert(!page.has_content?('e만기'))
+
+    find_field('query').set("적금만기")
+    find_field('query').native.send_key(:enter)
+
+    assert(!page.has_content?('2012년결산'))
+    assert(page.has_content?('적금만기'))
+    assert(!page.has_content?('e만기'))
+
+    find_field('query').set("e만기")
+    find_field('query').native.send_key(:enter)
+
+    assert(!page.has_content?('2012년결산'))
+    assert(!page.has_content?('적금만기'))
+    assert(page.has_content?('e만기'))
   end
 end

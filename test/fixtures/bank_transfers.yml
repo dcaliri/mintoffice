@@ -1,8 +1,8 @@
-fixture:
+shinhan:
     id: 1
     bank_account_id: 1
     transfer_type: 타행이체
-    transfered_at: <%= Time.zone.now %>
+    transfered_at: 2012-04-16 10:57:18.000000
     result: 거래완료
     out_bank_account: 274-062855-01-012
     in_bank_name: 신한은행
@@ -14,8 +14,52 @@ fixture:
     error_code:
     transfer_note:
     incode:
-    out_account_note: "(주) 민트기술"
-    in_account_note: "(주) 민트기술"
-    in_person_name: "(주) 민트기술"
+    out_account_note: "외부 내용"
+    in_account_note: "내부 내용"
+    in_person_name: "매니저"
+    cms_code: 
+    currency_code: KRW
+
+kiup:
+    id: 2
+    bank_account_id: 1
+    transfer_type: 타행이체
+    transfered_at: 2012-04-17 10:57:18.000000
+    result: 거래완료
+    out_bank_account: 274-062855-01-012
+    in_bank_name: 기업은행
+    in_bank_account: 28505013648
+    money: 5854000
+    transfer_fee: 5300
+    error_money: 0
+    registered_at: <%= Time.zone.now %>
+    error_code:
+    transfer_note:
+    incode:
+    out_account_note: "임의 내용"
+    in_account_note: "임의 기록"
+    in_person_name: "김개똥"
+    cms_code: 
+    currency_code: KRW
+
+hana:
+    id: 3
+    bank_account_id: 1
+    transfer_type: 타행이체
+    transfered_at: 2012-04-18 10:57:18.000000
+    result: 거래완료
+    out_bank_account: 274-062855-01-012
+    in_bank_name: 하나은행
+    in_bank_account: 28505013648
+    money: 5854000
+    transfer_fee: 5300
+    error_money: 0
+    registered_at: <%= Time.zone.now %>
+    error_code:
+    transfer_note:
+    incode:
+    out_account_note: "적금 만기"
+    in_account_note: "임의 기록"
+    in_person_name: "김개똥"
     cms_code: 
     currency_code: KRW
