@@ -99,7 +99,6 @@ class PaymentTest < ActionDispatch::IntegrationTest
 
   test 'should show a new payment in 9 month' do
     visit '/payments/2'
-    click_link '연봉 관리'
     click_link '기본급 작성'
 
     select "#{Time.zone.now.year}", from: 'payments_join_at_1i'
