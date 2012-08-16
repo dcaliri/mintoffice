@@ -30,7 +30,7 @@ class ContactTest < ActionDispatch::IntegrationTest
     click_link '연락처'
     find("tr.selectable").click
 
-    assert(page.has_content?('전체 공개 : 왕 수용'))
+    assert(page.has_content?('전체 공개 : 김 관리'))
   end
 
   test 'should save google contact' do
@@ -128,7 +128,7 @@ class ContactTest < ActionDispatch::IntegrationTest
     click_link '삭제'
 
 
-    assert(!page.has_content?('왕 수용'))
+    assert(!page.has_content?('김 관리'))
   end
 
   test 'should delete contact' do

@@ -38,7 +38,7 @@ class CardApprovedSourcesTest < ActionDispatch::IntegrationTest
     select('11', :from => 'card_approved_source_used_at_5i')
     fill_in "승인번호", with: "2146"
     fill_in "이용카드", with: "식대카드"
-    fill_in "이용자명", with: "손어지리"
+    fill_in "이용자명", with: "이용자"
     fill_in "가맹점", with: "가맹점 입력 테스트"
     fill_in "이용금액", with: "50000"
     fill_in "이용구분", with: "4500"
@@ -58,7 +58,7 @@ class CardApprovedSourcesTest < ActionDispatch::IntegrationTest
 
     assert(page.has_content?('2146'))
     assert(page.has_content?('식대카드'))
-    assert(page.has_content?('손어지리'))
+    assert(page.has_content?('이용자'))
     assert(page.has_content?('가맹점 입력 테스트'))
     assert(page.has_content?('50,000'))
     assert(page.has_content?('4500'))
@@ -81,7 +81,7 @@ class CardApprovedSourcesTest < ActionDispatch::IntegrationTest
     select('12', :from => 'card_approved_source_used_at_5i')
     fill_in "승인번호", with: "1345"
     fill_in "이용카드", with: "식대카드 수정"
-    fill_in "이용자명", with: "손어지리 수정"
+    fill_in "이용자명", with: "이용자 수정"
     fill_in "가맹점", with: "가맹점 수정 테스트"
     fill_in "이용금액", with: "60000"
     fill_in "이용구분", with: "4700"
@@ -101,7 +101,7 @@ class CardApprovedSourcesTest < ActionDispatch::IntegrationTest
 
     assert(page.has_content?('1345'))
     assert(page.has_content?('식대카드 수정'))
-    assert(page.has_content?('손어지리 수정'))
+    assert(page.has_content?('이용자 수정'))
     assert(page.has_content?('가맹점 수정 테스트'))
     assert(page.has_content?('60,000'))
     assert(page.has_content?('4700'))
