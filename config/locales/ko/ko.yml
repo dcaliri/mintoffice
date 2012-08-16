@@ -1346,7 +1346,7 @@ ko:
         required_tags: RequiredTags
     shared:
         footer:
-            mint: mint office - m17.3
+            mint: mint office - m17.3hotfix1
         show_attachment:
             download: "다운로드"
         attachments:
