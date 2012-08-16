@@ -49,3 +49,16 @@ card_used_user:
   juminno: 123456-1234560
   listed: f
   employment_proof_hash: 
+
+retired_user:
+  id: 5
+  picture_id: 
+  created_at: 2012-07-18 16:17:56.775700
+  updated_at: 2012-07-20 13:36:03.201237
+  joined_on: 2012-07-18
+  retired_on: 2012-07-20
+  person_id: 10
+  companyno: 5
+  juminno: 123456-3214234
+  listed: f
+  employment_proof_hash: 

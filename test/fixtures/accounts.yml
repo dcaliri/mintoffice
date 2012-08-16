@@ -70,3 +70,9 @@ nate_account_user:
     notify_email: nate_account_user@lycos.co.kr
     nate_account: nate_account_user@lycos.co.kr
 
+retired_user:
+    id: 10
+    name: "retired_user"
+    person_id: 10
+    hashed_password: "96043f0adf13e8d440a0e90ec7a2b7757a16bc2c"
+    salt: "21757029800.1164294613723833"
