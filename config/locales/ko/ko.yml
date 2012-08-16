@@ -627,6 +627,8 @@ ko:
             debit: 차변
             credit: 대변
             incorrect: 의 합계가 맞지 않습니다.
+        project:
+            not: 없음
         report:
             all: 전체
             default: 결재전 + 나의 결재 요청 전
@@ -1317,6 +1319,7 @@ ko:
             completed: 프로젝트 완료
             confirm_complete: 프로젝트를 종료하시겠습니까?
             owner: (관리자 변경하기)
+            manager: "-프로젝트 관리자- "
         assign:
             title: 할당 비율 조정
             not_hundred: 할당 비율이 100%가 아닙니다.
@@ -1479,6 +1482,7 @@ ko:
             approved: 승인완료
             not_approved: 미승인
             empty: 연차 내역이 없습니다
+            day: 일
         show:
             link: 연차 관리
             info: "할당 연차: %{total}일, 사용 연차: %{used}일, 잔여 연차: %{remain}일"

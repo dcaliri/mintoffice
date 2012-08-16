@@ -17,9 +17,9 @@ table#list-table
         - vacation = employee.vacations.last
         - if vacation
           td= "#{vacation.from} ~ #{vacation.to}"
-          td= "#{vacation.period} 일"
-          td= "#{vacation.used.total} 일"
-          td= "#{vacation.remain} 일"
+          td= "#{vacation.period}"+" "+t('vacations.index.day')
+          td= "#{vacation.used.total}"+" "+t('vacations.index.day')
+          td= "#{vacation.remain}"+" "+t('vacations.index.day')
         - else
           td
           td
