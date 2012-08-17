@@ -23,7 +23,15 @@ class Person < ActiveRecord::Base
   end
 
   def self.no_employee
-    joins(:account).where('accounts.person_id = people.id') - joins(:employee).where('employees.person_id = people.id')
+    with_account - with_employee
+  end
+
+  def self.with_employee
+    joins(:employee).where('employees.person_id = people.id')
+  end
+
+  def self.without_retired
+    joins(:employee).merge(Employee.not_retired)
   end
 
   def self.with_account

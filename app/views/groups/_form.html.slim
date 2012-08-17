@@ -11,7 +11,7 @@ h2= t("common.title.#{action_name}")
       = f.text_field :name
     p
       = f.label :employees
-      - Person.joins(:employee).where('employees.person_id = people.id').each do |person|
+      - Person.with_employee.without_retired.each do |person|
         - if person.account.present?
           = check_box_tag "group[person_ids][]", person.id, group.people.include?(person)
           = person.name
