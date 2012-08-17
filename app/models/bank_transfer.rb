@@ -33,6 +33,7 @@ class BankTransfer < ActiveRecord::Base
   include SpreadsheetParsable
   include Excels::BankTransfers::Shinhan
   include Excels::BankTransfers::Ibk
+  include Excels::BankTransfers::Nonghyup
 
   include ResourceExportable
   resource_exportable_configure do |config|
@@ -65,7 +66,7 @@ class BankTransfer < ActiveRecord::Base
     elsif type == :hsbc
       hsbc_bank_transaction_parser
     elsif type == :nonghyup
-      hsbc_bank_transaction_parser
+      nonghyup_bank_transaction_parser
     else
       raise "Cannot find excel parser. type = #{type}"
     end
