@@ -31,7 +31,7 @@ class NUUsedVacationTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('사용한 연차 내역이 없습니다'))
   end
 
-  test 'should create a new used_vacation and commit report' do
+  test 'should create a new used_vacation and report admin' do
     visit '/'
     visit '/vacations/2'
 
