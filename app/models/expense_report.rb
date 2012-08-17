@@ -13,7 +13,8 @@ class ExpenseReport < ActiveRecord::Base
 
   before_validation :check_total_amount
   def check_total_amount
-    if target.expense_reports.total_amount + self.amount > target.totalamount
+    except_me = target.expense_reports.where('id IS NOT ?', id)
+    if except_me.total_amount + self.amount > target.totalamount
       errors.add(:amount, "이 너무 많습니다")
     end
   end

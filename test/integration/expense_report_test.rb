@@ -32,6 +32,7 @@ class ExpenseReportTest < ActionDispatch::IntegrationTest
 
   test 'should edit expense' do
     visit '/'
+
     click_link '지출내역서 관리'
     find("tr.selectable").click
 
@@ -42,7 +43,7 @@ class ExpenseReportTest < ActionDispatch::IntegrationTest
     click_button '지출 내역서 수정하기'
 
     save_and_open_page
-    assert(!page.has_content?('금액 이 너무 많습니다'))
+
     assert(page.has_content?('지출내역서 내역 수정 테스트'))
   end
 
@@ -74,11 +75,11 @@ class ExpenseReportTest < ActionDispatch::IntegrationTest
     click_link '지출내역서 관리'
     visit '/expenses/2'
     click_link '카드 영수증 보기'
-    
-    assert(page.has_content?('10,908'))
-    assert(page.has_content?('12,000'))
+
+    assert(page.has_content?('5,800'))
+    assert(page.has_content?('6,000'))
     assert(page.has_content?('버터플라이'))
-    assert(page.has_content?('서울 금천구 가산동'))
+    assert(page.has_content?('sk트윈타워 A동'))
   end
 
   test 'should approve expense and create postings' do
