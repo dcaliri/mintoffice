@@ -15,11 +15,11 @@ h2= t("common.title.list")
         th.link_button_area
     tbody
       - @postings.each do |posting|
-        tr.selectable onclick="location.href='#{posting_path(posting)}'"
+        tr.selectable.link_to*{"data-url" => posting_path(posting)}
           td= posting.posted_at
           td= posting.description
           td= number_to_currency posting.total_amount
           td.link_button_area
-            = link_to '상세보기', posting, class: 'btn btn-primary link_to_show_page'
+            = link_to '상세보기', posting, class: 'btn btn-primary'
 - else
   h3= t('.empty')

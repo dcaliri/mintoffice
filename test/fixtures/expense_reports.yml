@@ -5,7 +5,7 @@ bankTransfer:
     target_type: "BankTransfer"
     project_id: 1
     description: 이체내역 지출내역서
-    amount: 1000000
+    amount: 50000
     created_at: <%= Time.zone.now %>
     updated_at: <%= Time.zone.now %>
     expensed_at: <%= Time.zone.now %>
@@ -17,7 +17,7 @@ cardbill:
     target_type: "Cardbill"
     project_id: 1
     description: 카드영수증 지출내역서
-    amount: 5800
+    amount: 10908
     created_at: <%= Time.zone.now %>
     updated_at: <%= Time.zone.now %>
     expensed_at: <%= Time.zone.now %>
@@ -29,7 +29,7 @@ user_expense_report:
     target_type: "Cardbill"
     project_id: 1
     description: 카드영수증 지출내역서
-    amount: 6200
+    amount: 8908
     created_at: <%= Time.zone.now %>
     updated_at: <%= Time.zone.now %>
     expensed_at: <%= Time.zone.now %>
