@@ -63,4 +63,24 @@ class NUUsedVacationTest < ActionDispatch::IntegrationTest
 
     assert(page.has_content?('상태 - 결재 대기 중'))
   end
+
+  test 'should show employee data' do
+    visit '/'
+    visit '/vacations/2'
+
+    click_link '연차 할당'
+
+    fill_in "기간", with: "37"
+
+    click_button '연차 만들기'
+
+    normal_user_access
+
+    visit '/'
+
+    click_link '연차 정보'
+    click_link '인사정보'
+
+    assert(page.has_content?('김 개똥'))
+  end
 end
