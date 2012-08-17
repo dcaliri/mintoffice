@@ -140,4 +140,30 @@ class NUCardBillTest < ActionDispatch::IntegrationTest
 
     assert(page.has_content?('상태 - 결재 대기 중'))
   end
+
+  test 'should search data' do
+    visit '/'
+    click_link '신용카드 관리'
+    click_link '카드별 승인내역'
+    click_link '신용카드 영수증 생성'
+
+    select('normal', from: 'owner')
+
+    click_button '카드영수증 생성'
+
+    normal_user_access
+
+    visit '/'
+    click_link '카드 영수증 목록'
+    
+    find_field('query').set("버터플라이")
+    find_field('query').native.send_key(:enter)
+
+    assert(!page.has_content?('버터플라이'))
+
+    find_field('query').set("GS25")
+    find_field('query').native.send_key(:enter)
+
+    assert(page.has_content?('GS25'))
+  end
 end
