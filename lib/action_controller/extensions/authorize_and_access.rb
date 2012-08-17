@@ -46,7 +46,7 @@ module ActionController
       end
 
       included do
-        #before_filter :authorize
+        before_filter :authorize
       end
     end
   end
