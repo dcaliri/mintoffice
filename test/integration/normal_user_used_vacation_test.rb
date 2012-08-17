@@ -7,6 +7,11 @@ class NUUsedVacationTest < ActionDispatch::IntegrationTest
   fixtures :vacation_types
   fixtures :vacation_type_infos
 
+  class ::ReportMailer
+    def self.report(target, from, to, subject, message)
+    end
+  end
+
   test 'should view used_vacation' do
     visit '/'
     visit '/vacations/2'
@@ -20,7 +25,7 @@ class NUUsedVacationTest < ActionDispatch::IntegrationTest
     normal_user_access
 
     visit '/'
-    
+
     click_link '연차 정보'
 
     assert(page.has_content?('사용한 연차 내역이 없습니다'))
@@ -39,7 +44,7 @@ class NUUsedVacationTest < ActionDispatch::IntegrationTest
     normal_user_access
 
     visit '/'
-    
+
     click_link '연차 정보'
     click_link '연차 사용 신청'
 
