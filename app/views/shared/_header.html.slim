@@ -1,6 +1,11 @@
 div#main_nav.navbar.navbar-fixed-top
   div.navbar-inner
     div.container
+      button.btn.btn-navbar*{"data-target"=>".nav-collapse", "data-toggle"=>"collapse", "type"=>"button"}
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+
       = link_to 'MintTech', :root, class: 'brand'
       div.nav-collapse
         - if current_employee
