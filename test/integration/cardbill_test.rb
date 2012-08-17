@@ -65,9 +65,9 @@ class CardBillTest < ActionDispatch::IntegrationTest
     click_link '카드 영수증 목록'
     find("tr.selectable").click
 
-    click_link '지출내역서 보기'
+    click_link '테스트 프로젝트'
 
-    assert(page.has_content?('지출내역서 상세정보'))
+    assert(page.has_content?('테스트 프로젝트'))
   end
 
   test 'should show approved_sources' do

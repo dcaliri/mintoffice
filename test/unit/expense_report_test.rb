@@ -23,7 +23,7 @@ class ExpenseReportTest < ActiveSupport::TestCase
     expense_report.project_id = current_project.id
     expense_report.description = "test"
     expense_report.expensed_at = current_cardbill.transdate
-    expense_report.amount = current_cardbill.totalamount
+    expense_report.amount = current_cardbill.amount
 
     assert expense_report.save!
   end
@@ -74,7 +74,7 @@ class ExpenseReportTest < ActiveSupport::TestCase
 
   private
   def current_cardbill
-    @cardbill ||= cardbills(:has_permission_cardbill)
+    @cardbill ||= cardbills(:manager_has_cardbill)
   end
 
   def current_admin

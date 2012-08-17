@@ -107,7 +107,6 @@ class ProjectTest < ActionDispatch::IntegrationTest
     click_link '프로젝트 관리 - 완료'
 
     find("tr.selectable").click
-    save_and_open_page
     click_link '할당비율 조정'
 
     assert(page.has_content?('할당 비율 조정'))

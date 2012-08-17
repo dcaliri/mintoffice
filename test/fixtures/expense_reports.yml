@@ -17,7 +17,7 @@ cardbill:
     target_type: "Cardbill"
     project_id: 1
     description: 카드영수증 지출내역서
-    amount: 4500
+    amount: 5800
     created_at: <%= Time.zone.now %>
     updated_at: <%= Time.zone.now %>
     expensed_at: <%= Time.zone.now %>
@@ -29,7 +29,7 @@ user_expense_report:
     target_type: "Cardbill"
     project_id: 1
     description: 카드영수증 지출내역서
-    amount: 4500
+    amount: 6200
     created_at: <%= Time.zone.now %>
     updated_at: <%= Time.zone.now %>
     expensed_at: <%= Time.zone.now %>
