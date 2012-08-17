@@ -1327,7 +1327,7 @@ ko:
         show:
             title: 프로젝트 상세 내역
             allocation_ratio: 할당비율 조정
-            accounts: Users
+            employees: 참여자
         new:
             title: 새 프로젝트 작성
         edit:
