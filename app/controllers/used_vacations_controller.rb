@@ -1,7 +1,7 @@
 # encoding: UTF-8
 
 class UsedVacationsController < ApplicationController
-  skip_before_filter :redirect_unless_permission
+  def redirect_unless_permission; end
 
   expose(:vacation)
   expose(:used_vacations) { vacation.used }

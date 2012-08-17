@@ -1,5 +1,5 @@
 class PaymentsController < ApplicationController
-  skip_before_filter :redirect_unless_permission
+  def redirect_unless_permission; end
 
   expose(:employees) { Employee(:protected) }
   expose(:employee)
