@@ -59,7 +59,7 @@ class ExcelParser
       query = {}
       @keys.each do |key, value|
         if value == :time
-          query[key] = Time.zone.parse(params[key])
+          query[key] = Time.parse(params[key])
         else
           query[key] = params[key]
         end

@@ -11,7 +11,8 @@ class BankAccount < ActiveRecord::Base
   BANK_LIST = [
     [I18n.t('models.bank_account.shinhan'), :shinhan],
     [I18n.t('models.bank_account.ibk'), :ibk],
-    ["HSBC", :hsbc]
+    [I18n.t('models.bank_account.hsbc'), :hsbc],
+    [I18n.t('models.bank_account.nonghyup'), :nonghyup],
   ]
 
   def name
