@@ -16,8 +16,8 @@ class BankTransfersController < ApplicationController
 
   def preview
     @bank_transfers = BankTransfer.preview_stylesheet(params[:bank_type], params[:upload])
-  rescue => error
-    redirect_to [:excel, :bank_transfers], alert: error.message
+  # rescue => error
+  #   redirect_to [:excel, :bank_transfers], alert: error.message
   end
 
   def upload

@@ -1,6 +1,8 @@
 # encoding: UTF-8
 
 class CardApprovedSource < ActiveRecord::Base
+  attr_accessor :used_time
+
   belongs_to :creditcard
 
   self.per_page = 20
@@ -20,7 +22,11 @@ class CardApprovedSource < ActiveRecord::Base
                      :money_foreign,
                      :money_type,
                      :money_type_info,
-                     :money_dollar
+                     :money_dollar,
+                     :money_us,
+                     :nation,
+                     :nation_statement,
+                     :refuse_reason
                      ]
 
   def self.default_columns
