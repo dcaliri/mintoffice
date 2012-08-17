@@ -239,6 +239,10 @@ ko:
                 will_be_paied_at: 결제예정일
                 canceled_at_strftime: 취소일자
                 will_be_paied_at_strftime: 결제예정일
+                money_us: 승인금액($)
+                nation: 국가명
+                nation_statement: 국내외
+                refuse_reason: 거절사유
             card_used_source:
                 card_no: 카드번호
                 bank_account: 결제계좌번호
@@ -616,7 +620,8 @@ ko:
             used_detail: 이용내역
             used_hyundai_detail: 이용내역(현대카드)
             approved_detail: 승인내역
-            foreign_detail: 해외승인내역
+            approved_hyundai: 승인내역(현대카드)
+            foreign_detail: 승인내역(해외)
         expense_report:
             debit: 차변
             credit: 대변

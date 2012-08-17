@@ -17,16 +17,24 @@ class Creditcard < ActiveRecord::Base
   include Historiable
   include Attachmentable
 
-  CARD_LIST = [:card_used_sources, :card_used_sources_hyundai, :card_approved_sources, :card_approved_sources_oversea]
+  CARD_LIST = [
+    :card_used_sources,
+    :card_used_sources_hyundai,
+    :card_approved_sources,
+    :card_approved_sources_hyundai,
+    :card_approved_sources_oversea
+  ]
   CARD_LIST_FOR_SELECT = [[I18n.t('models.creditcard.used_detail'), CARD_LIST[0]],
                          [I18n.t('models.creditcard.used_hyundai_detail'), CARD_LIST[1]],
                          [I18n.t('models.creditcard.approved_detail'), CARD_LIST[2]],
-                         [I18n.t('models.creditcard.foreign_detail'), CARD_LIST[3]],]
+                         [I18n.t('models.creditcard.approved_hyundai'), CARD_LIST[3]],
+                         [I18n.t('models.creditcard.foreign_detail'), CARD_LIST[4]],]
 
   include SpreadsheetParsable
   include Excels::CardUsedSourcesInfo
   include Excels::CardUsedSourcesHyundaiInfo
   include Excels::CardApprovedSourcesInfo
+  include Excels::CardApprovedSourcesHyundaiInfo
   include Excels::CardApprovedSourcesOverseaInfo
 
   def self.excel_parser(type)
@@ -38,6 +46,8 @@ class Creditcard < ActiveRecord::Base
       approved_sources_parser
     elsif type == :card_approved_sources_oversea
       approved_sources_oversea_parser
+    elsif type == :card_approved_sources_hyundai
+      approved_sources_hyundai_parser
     else
       raise "형식을 알 수 없습니다. type = #{type}"
     end
