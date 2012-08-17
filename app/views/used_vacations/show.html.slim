@@ -2,7 +2,7 @@
   - if current_person.admin?
     = link_to t('common.title.edit'), [:edit, vacation, used_vacation]
     = " | "
-    = link_to t('common.title.destroy'), [vacation, used_vacation], :method => :delete, data: {data: {confirm: t("common.messages.delete_confirm")}}
+    = link_to t('common.title.destroy'), [vacation, used_vacation], :method => :delete, data: {confirm: t("common.messages.delete_confirm")}
     = " | "
   = link_to t('common.title.list'), vacation_path(vacation.employee)
 
