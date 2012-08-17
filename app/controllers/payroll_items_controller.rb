@@ -1,5 +1,5 @@
 class PayrollItemsController < ApplicationController
-  skip_before_filter :redirect_unless_permission
+  def redirect_unless_permission; end
 
   expose (:payroll_item)
   expose (:payroll)
