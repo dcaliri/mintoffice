@@ -8,6 +8,8 @@ class UsedVacationTest < ActionDispatch::IntegrationTest
   fixtures :vacation_type_infos
 
   test 'should view used_vacation' do
+    normal_user_access
+    
     visit '/'
     
     click_link '연차 정보'

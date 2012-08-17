@@ -4,6 +4,7 @@ admin_account:
     person_id: 1
     hashed_password: "96043f0adf13e8d440a0e90ec7a2b7757a16bc2c"
     salt: "21757029800.1164294613723833"
+    notify_email: admin@wangsy.com
 
 normal_account:
     id: 2
@@ -11,6 +12,7 @@ normal_account:
     person_id: 2
     hashed_password: "96043f0adf13e8d440a0e90ec7a2b7757a16bc2c"
     salt: "21757029800.1164294613723833"
+    notify_email: normal@wangsy.com
 
 card_manager_account:
     id: 3

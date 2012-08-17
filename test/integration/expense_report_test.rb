@@ -75,10 +75,10 @@ class ExpenseReportTest < ActionDispatch::IntegrationTest
     visit '/expenses/2'
     click_link '카드 영수증 보기'
     
-    assert(page.has_content?('5,800'))
-    assert(page.has_content?('7,100'))
-    assert(page.has_content?('GS25'))
-    assert(page.has_content?('sk트윈타워 A동'))
+    assert(page.has_content?('10,908'))
+    assert(page.has_content?('12,000'))
+    assert(page.has_content?('버터플라이'))
+    assert(page.has_content?('서울 금천구 가산동'))
   end
 
   test 'should approve expense and create postings' do

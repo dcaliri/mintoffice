@@ -74,7 +74,7 @@ class ExpenseReportTest < ActiveSupport::TestCase
 
   private
   def current_cardbill
-    @cardbill ||= cardbills(:manager_has_cardbill)
+    @cardbill ||= cardbills(:has_permission_cardbill)
   end
 
   def current_admin
