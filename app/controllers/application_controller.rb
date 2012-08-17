@@ -7,6 +7,11 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :set_global_current_person_and_company
 
+  def version
+    File.open('version.txt', &:read)
+  end
+  helper_method :version
+
   def set_global_current_person_and_company
     Person.current_person = current_person
     Company.current_company = current_company
