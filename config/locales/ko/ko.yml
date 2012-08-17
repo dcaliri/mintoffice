@@ -239,6 +239,10 @@ ko:
                 will_be_paied_at: 결제예정일
                 canceled_at_strftime: 취소일자
                 will_be_paied_at_strftime: 결제예정일
+                money_us: 승인금액($)
+                nation: 국가명
+                nation_statement: 국내외
+                refuse_reason: 거절사유
             card_used_source:
                 card_no: 카드번호
                 bank_account: 결제계좌번호
@@ -268,6 +272,14 @@ ko:
                 store_tel: 가맹점전화번호
                 approved_at_strftime: 승인일자
                 approved_time_strftime: 승인시간
+                used_at: 이용일자
+                tax_type: 과세유형
+                sales_statement: 전표구분
+                nation_statement: 국내외구분
+                prepayment_statement: 선납구분
+                accepted_at: 접수일자
+                apply_sales_statement: 전표신청
+                purchase_statement: 구매여부
             cardbill:
                 cardno: "카드 번호"
                 creditcard_id: 카드
@@ -593,6 +605,8 @@ ko:
         bank_account:
             shinhan: 신한 은행
             ibk: 기업 은행
+            hsbc: HSBC
+            nonghyup: 농협
         bank_transaction:
             fail: 에 실패했습니다. 입력 값을 다시 확인해주세요.
         card_approved_source:
@@ -604,8 +618,10 @@ ko:
             one_more_need_i: 이 적어도 하나 이상 필요합니다.
         creditcard:
             used_detail: 이용내역
+            used_hyundai_detail: 이용내역(현대카드)
             approved_detail: 승인내역
-            foreign_detail: 해외승인내역
+            approved_hyundai: 승인내역(현대카드)
+            foreign_detail: 승인내역(해외)
         expense_report:
             debit: 차변
             credit: 대변

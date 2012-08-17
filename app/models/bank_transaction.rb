@@ -24,6 +24,7 @@ class BankTransaction < ActiveRecord::Base
   include SpreadsheetParsable
   include Excels::BankTransactions::Shinhan
   include Excels::BankTransactions::Ibk
+  include Excels::BankTransactions::Nonghyup
 
   include ResourceExportable
   resource_exportable_configure do |config|
@@ -38,7 +39,7 @@ class BankTransaction < ActiveRecord::Base
 
   include ActiveRecord::Extensions::TextSearch
 
-  attr_accessor :no_verify
+  attr_accessor :no_verify  
 
   before_save :verify_with_prev_transaction, unless: :no_verify
   before_create :set_transact_order
@@ -98,8 +99,14 @@ class BankTransaction < ActiveRecord::Base
   def self.excel_parser(type)
     if type == :shinhan
       shinhan_bank_transaction_parser
-    else
+    elsif type == :ibk
       ibk_bank_transaction_parser
+    elsif type == :hsbc
+      hsbc_bank_transaction_parser
+    elsif type == :nonghyup
+      nonghyup_bank_transaction_parser
+    else
+      raise "Cannot find excel parser. type = #{type}"
     end
   end
 
@@ -109,6 +116,13 @@ class BankTransaction < ActiveRecord::Base
   end
   ################################
 
+  def self.revise_excel_data(params)
+    unless params[:transacted_time].blank?
+      seconds_of_today = (params[:transacted_time] * 24 * 60 * 60)
+      params[:transacted_at] = Time.at(Time.parse(params[:transacted_at]) + seconds_of_today)
+      params.delete(:transacted_time)
+    end
+  end
 
   def self.preview_stylesheet(account, type, upload)
     raise ArgumentError, I18n.t('common.upload.empty') unless upload
@@ -117,7 +131,11 @@ class BankTransaction < ActiveRecord::Base
 
     create_file(path, upload['file'])
     previews = []
-    parser.parse(path) {|class_name, query, params| previews << account.send(class_name.to_s.tableize).build(params)}
+    parser.parse(path) do |class_name, query, params|
+      revise_excel_data(params)
+
+      previews << account.send(class_name.to_s.tableize).build(params)
+    end
 
     old_transaction = previews[-1]
     new_transaction = previews[0]
@@ -143,6 +161,8 @@ class BankTransaction < ActiveRecord::Base
     parser = excel_parser(type.to_sym)
 
     parser.parse(path) do |class_name, query, params|
+      revise_excel_data(params)
+
       collections = account.send(class_name.to_s.tableize).where(query)
       if collections.empty?
         resource = collections.build(params)

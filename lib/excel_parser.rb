@@ -27,7 +27,9 @@ class ExcelParser
 
   def preview(file)
     previews = []
-    parse(file) {|class_name, query, params| previews << class_name.new(params)}
+    parse(file) do |class_name, query, params|
+      previews << class_name.new(params)
+    end
     previews
   end
 
@@ -59,7 +61,7 @@ class ExcelParser
       query = {}
       @keys.each do |key, value|
         if value == :time
-          query[key] = Time.zone.parse(params[key])
+          query[key] = Time.parse(params[key])
         else
           query[key] = params[key]
         end
