@@ -22,7 +22,7 @@ card_used_user_registe_project:
   updated_at: <%= Time.zone.now %>
   owner: f
 
-card_used_user_registe_project:
+normal_user_registe_project:
   id: 4
   employee_id: 2
   project_id: 1
