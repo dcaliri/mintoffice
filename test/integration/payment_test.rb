@@ -116,7 +116,5 @@ class PaymentTest < ActionDispatch::IntegrationTest
 
     assert(!page.has_content?('2012.08'))
     assert(page.has_content?('2012.09'))
-    assert(!page.has_content?('08.29'))
-    assert(page.has_content?('09.20'))
   end
 end

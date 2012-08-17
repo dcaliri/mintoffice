@@ -10,7 +10,7 @@ class NUUsedVacationTest < ActionDispatch::IntegrationTest
   class ::ReportMailer
     def self.report(target, from, to, subject, message)
     end
-  end
+  end 
 
   test 'should view used_vacation' do
     visit '/'
