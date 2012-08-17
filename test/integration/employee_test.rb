@@ -36,18 +36,69 @@ class EmployeeTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('인사정보'))
   end
 
-  test 'should create a new employee' do
+  test 'should create a new employee with contact' do
     visit '/'
     click_link '인사정보관리 - 사원목록'
 
     click_link '새로운 인사정보 입력'
-    find("tr.selectable").click
+    find("tr[7]").click
 
     fill_in "주민등록번호", with: "123456-7654321"
 
     click_button '만들기'
 
+    assert(page.has_content?('새로운 직원'))
+    assert(page.has_content?('no employee'))
+    assert(page.has_content?('알바'))
     assert(page.has_content?('123456-7654321'))
+    assert(page.has_content?('new_employee@test.com'))
+    assert(page.has_content?('010-4321-4321'))
+    assert(page.has_content?('경기도 남양주시'))
+  end
+
+  test 'should create a new contact and create a new employee' do
+    visit '/'
+    click_link '인사정보관리 - 사원목록'
+    click_link '새로운 인사정보 입력'
+    click_link '새로운 연락처 만들기'
+
+    fill_in '성', with: '홍'
+    fill_in '이름', with: '길동'
+    fill_in '회사', with: 'Mintech'
+    fill_in '부서', with: '민트기술'
+    fill_in '직위', with: '기술직'
+
+    fill_in '국가', with: '대한민국'
+    fill_in '주', with: ''
+    fill_in '도시', with: '서울시'
+    fill_in '군/구', with: '금천구'
+    fill_in '나머지', with: '가산동'
+    fill_in '우편번호', with: '123-321'
+
+    fill_in '이메일', with: 'test@test.com'
+
+    fill_in '전화번호', with: '010-9080-8090'
+
+    fill_in '내용', with: '홈페이지'
+
+    click_button '연락처 만들기'
+
+    assert(page.has_content?('홍 길동'))
+    assert(page.has_content?('기술직'))
+
+    find("tr[8]").click
+
+    fill_in "주민등록번호", with: "222222-2222222"
+
+    click_button '만들기'
+
+    assert(page.has_content?('홍 길동'))
+    assert(page.has_content?('no employee'))
+    assert(page.has_content?('기술직'))
+    assert(page.has_content?('222222-2222222'))
+    assert(page.has_content?('test@test.com'))
+    assert(page.has_content?('010-9080-8090'))
+    assert(page.has_content?('대한민국 서울시 금천구 가산동 123-321'))
   end
 
   test 'should visit employees to find contact' do

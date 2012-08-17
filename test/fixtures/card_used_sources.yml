@@ -7,7 +7,7 @@ exist_cardbill:
     card_holder_name: 손어지리
     used_area:
     approve_no: 1
-    approved_time:
+    approved_time: <%= Time.zone.now %>
     sales_type:
     money_krw:
     money_foreign:
@@ -35,7 +35,7 @@ not_exist_cardbill:
     card_holder_name: 손어지리
     used_area:
     approve_no: 3
-    approved_time:
+    approved_time: <%= Time.zone.now %>
     sales_type:
     money_krw:
     money_foreign:
@@ -63,7 +63,7 @@ manager_cardbill:
     card_holder_name: 손어지리
     used_area:
     approve_no: 4
-    approved_time:
+    approved_time: <%= Time.zone.now %>
     sales_type:
     money_krw:
     money_foreign:

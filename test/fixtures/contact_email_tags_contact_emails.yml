@@ -1,3 +1,7 @@
 fixture:
   contact_email_tag_id: 1
   contact_email_id: 1
+
+new_employee:
+  contact_email_tag_id: 2
+  contact_email_id: 2

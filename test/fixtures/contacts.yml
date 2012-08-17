@@ -72,3 +72,18 @@ retired_user:
   company_id: 1
   google_id:
   google_etag: 
+
+new_employee:
+  id: 6
+  firstname: 직원
+  lastname: 새로운
+  company_name: Mintech
+  position: 알바
+  department: 민트기술
+  person_id:
+  migrated_data: f
+  owner_id: 1
+  isprivate: f
+  company_id: 1
+  google_id:
+  google_etag: 

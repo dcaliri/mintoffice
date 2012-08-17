@@ -5,7 +5,7 @@ has_permission_cardbill:
   amount: 5800
   vat: 1000
   servicecharge: 300
-  totalamount: 4500
+  totalamount: 7100
   storename: GS25
   storeaddr: sk트윈타워 A동
   approveno: 1
@@ -21,7 +21,7 @@ has_not_permission_cardbill:
   amount: 5800
   vat: 1000
   servicecharge: 300
-  totalamount: 4500
+  totalamount: 7100
   storename: 훼미리마트
   storeaddr: sk트윈타워 B동
   approveno: 2
@@ -35,9 +35,9 @@ manager_has_cardbill:
   cardno:
   transdate: <%= Time.zone.now %>
   amount: 6200
-  vat: 500
+  vat: 0
   servicecharge: 300
-  totalamount: 5400
+  totalamount: 6500
   storename: GS25
   storeaddr: sk트윈타워 A동
   approveno: 4

@@ -63,6 +63,7 @@ class BankTransferTest < ActionDispatch::IntegrationTest
     fill_in "출금계좌", with: "123-321-1234"
     fill_in "입금은행", with: "테스트 은행"
     fill_in "입금계좌", with: "321-123-4321"
+    fill_in "처리금액", with: "50000"
     fill_in "수수료", with: "1200"
     fill_in "오류금액", with: "0"
     select('2011', :from => 'bank_transfer_registered_at_1i')
@@ -160,9 +161,9 @@ class BankTransferTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('지출내역서 내역 입력 테스트'))
 
     click_link '이체 내역 보기'
-    click_link '지출내역서 보기'
+    click_link '테스트 프로젝트'
 
-    assert(page.has_content?('지출내역서 상세정보'))
+    assert(page.has_content?('테스트 프로젝트'))
   end
 
   test "should upload an excel file" do
