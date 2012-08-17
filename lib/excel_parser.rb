@@ -27,7 +27,9 @@ class ExcelParser
 
   def preview(file)
     previews = []
-    parse(file) {|class_name, query, params| previews << class_name.new(params)}
+    parse(file) do |class_name, query, params|
+      previews << class_name.new(params)
+    end
     previews
   end
 
