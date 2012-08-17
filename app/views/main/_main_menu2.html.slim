@@ -7,7 +7,7 @@ div class={current_person.admin? ? "admin" : ""}
           li= link_to t("employees.index.title"), :controller => "employees"
           li= link_to t("vacations.index.title"), vacation_path(current_employee)
           - if current_person.permission? 'commutes'
-          li= link_to t("commutes.index.title"), commute_path(current_employee)
+            li= link_to t("commutes.index.title"), commute_path(current_employee)
           - if current_person.has_payment_info
             li= link_to t("payments.title"), payment_path(current_employee)
 
