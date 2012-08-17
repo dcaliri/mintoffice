@@ -1,5 +1,7 @@
-tr.selectable onclick="location.href='#{account_path(account)}'"
+tr.selectable.link_to*{"data-url" => account_path(account)}
   td= account.name
   td= account.google_account
   td= account.notify_email
   td= account.boxcar_account
+  td.link_button_area
+  	= link_to '상세보기', account, class: 'btn btn-primary'

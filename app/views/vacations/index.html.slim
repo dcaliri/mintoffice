@@ -11,8 +11,9 @@ table#list-table
     th= Vacation.human_attribute_name("total")
     th= Vacation.human_attribute_name("used")
     th= Vacation.human_attribute_name("remain")
+    th.link_button_area
     - @employees.each do |employee|
-      tr.selectable onclick="location.href='#{vacation_path(employee)}'"
+      tr.selectable.selectable.link_to*{"data-url" => vacation_path(employee)}
         td=h employee.fullname
         - vacation = employee.vacations.last
         - if vacation
@@ -20,7 +21,10 @@ table#list-table
           td= "#{vacation.period}"+" "+t('vacations.index.day')
           td= "#{vacation.used.total}"+" "+t('vacations.index.day')
           td= "#{vacation.remain}"+" "+t('vacations.index.day')
+          td.link_button_area
+            = link_to '상세보기', vacation, class: 'btn btn-primary'
         - else
+          td
           td
           td
           td

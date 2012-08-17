@@ -7,8 +7,11 @@ table#list-table
     th= PayrollCategory.human_attribute_name("prtype")
     th= PayrollCategory.human_attribute_name("code")
     th= PayrollCategory.human_attribute_name("title")
+    th.link_button_area
   - PayrollCategory.all.each do |payroll_category|
-    tr.selectable onclick="location.href='#{payroll_category_path(payroll_category)}'"
+    tr.selectable.link_to*{"data-url" => payroll_category_path(payroll_category)}
       td= t("payroll_categories.#{PayrollCategory::PAYROLL_TYPE.rassoc(payroll_category.prtype)[0]}")
       td= t("payroll_categories.#{PayrollCategory::PAYROLL_CODE.rassoc(payroll_category.code)[0]}")
       td= payroll_category.title
+      td.link_button_area
+        = link_to '상세보기', payroll_category, class: 'btn btn-primary'      

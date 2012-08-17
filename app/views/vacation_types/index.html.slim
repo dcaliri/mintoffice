@@ -6,6 +6,9 @@ h2 ..
 table#list-table
   tr
     th= VacationType.human_attribute_name("title")
+    th.link_button_area
   - @types.each do |type|
-    tr.selectable onclick="location.href='#{vacation_type_path(type)}'"
+    tr.selectable.link_to*{"data-url" => vacation_type_path(type)}
       td= type.title
+      td.link_button_area
+        = link_to '상세보기', type, class: 'btn btn-primary'

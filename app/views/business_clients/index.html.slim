@@ -24,8 +24,9 @@
           = BusinessClient.human_attribute_name('business_status')
         th
           = BusinessClient.human_attribute_name('owner')
+        th.link_button_area
       - @business_clients.each do |client|
-        tr.selectable onclick="location.href='#{business_client_path(client)}'"
+        tr.selectable.link_to*{"data-url" => business_client_path(client)}
           td
             span
               =h client.name
@@ -35,6 +36,8 @@
             =h client.business_status
           td
             =h client.owner
+          td.link_button_area
+            = link_to '상세보기', client, class: 'btn btn-primary'
     br
     center
       = will_paginate @business_clients

@@ -21,9 +21,10 @@ table#list-table
       = Attachment.human_attribute_name("original_filename")
     th
       = Attachment.human_attribute_name("filepath")
+    th.link_button_area
 
   - @attachments.each do |attachment|
-    tr.selectable onclick="location.href='#{attachment_path(attachment)}'"
+    tr.selectable.link_to*{"data-url" => attachment_path(attachment)}
       td
         =h attachment.id
       - if attachment.employee then
@@ -41,5 +42,7 @@ table#list-table
         =h attachment.original_filename
       td
         =h attachment.filepath
+      td.link_button_area
+        = link_to '상세보기', attachment, class: 'btn btn-primary'
 center
   = will_paginate @cardbills

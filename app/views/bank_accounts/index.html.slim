@@ -23,12 +23,15 @@ h2
       th= BankAccount.human_attribute_name(:number)
       th= BankAccount.human_attribute_name(:note)
       th= BankAccount.human_attribute_name(:remain)
+      th.link_button_area
     - bank_accounts.each do |account|
-      tr.selectable onclick="location.href='#{bank_account_path(account)}'"
+      tr.selectable.link_to*{"data-url" => bank_account_path(account)}
         td= account.name
         td= account.number
         td= account.note
         td.numrow
           = number_to_currency account.remain
+        td.link_button_area
+            = link_to '상세보기', account, class: 'btn btn-primary'
 - else
   h4= t('.empty')

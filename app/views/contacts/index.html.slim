@@ -24,6 +24,7 @@ h2 Total : #{@contacts.count}
       th= contact.class.human_attribute_name(:position)
       th= ContactEmail.human_attribute_name(:email)
       th= ContactPhoneNumber.human_attribute_name(:number)
+      th.link_button_area
     - @paginated.each do |address|
       tr.selectable*{'class'=> address.isprivate ? "private-contact" : "", 'onclick' => "location.href='#{contact_path(address)}'"}
         td= address.name
@@ -32,6 +33,8 @@ h2 Total : #{@contacts.count}
         td= address.position
         td= address.emails.empty? ? "" : "#{address.emails.first.target_view} #{address.emails.first.email} "
         td= address.phone_numbers.empty? ? "" : "#{address.phone_numbers.first.target_view} #{address.phone_numbers.first.number}"
+        td.link_button_area
+          = link_to '상세보기', address, class: 'btn btn-primary'
   center
     br
     = will_paginate @paginated

@@ -27,9 +27,10 @@ table#list-table
       = Document.human_attribute_name("tags")
     th
       = Report.human_attribute_name('status')
+    th.link_button_area
 
   - @documents.each do |document|
-      tr.selectable onclick="location.href='#{document_path(document)}'"
+      tr.selectable.link_to*{"data-url" => document_path(document)}
         td
           =h document.id
         td
@@ -44,6 +45,8 @@ table#list-table
           =h document.tag_list
         td
           =h document.localize_status
+        td.link_button_area
+          = link_to '상세보기', document, class: 'btn btn-primary'
 br
 center
   = will_paginate @cardbills

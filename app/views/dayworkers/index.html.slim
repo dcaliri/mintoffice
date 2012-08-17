@@ -9,6 +9,9 @@ h2= t('common.title.list')
 table#list-table
   tr
     th= Dayworker.human_attribute_name('juminno')
+    th.link_button_area
     - dayworkers.each do |dayworker|
-      tr.selectable onclick="location.href='#{dayworker_path(dayworker)}'"
+      tr.selectable.link_to*{"data-url" => dayworker_path(dayworker)}
         td=h dayworker.juminno
+        td.link_button_area
+          = link_to '상세보기', dayworker, class: 'btn btn-primary'

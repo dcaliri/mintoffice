@@ -15,16 +15,18 @@ table#list-table.payment-table
       th[class=th_class]
         = period.month.to_s + " " + t('datetime.prompts.month')
       - period -= 1.month
-
+    th.link_button_area
     - @employees.each do |employee|
       - period = Time.zone.parse("#{to.year}-#{to.month}-01 00:00:00")
-      tr.selectable onclick="location.href='#{payment_path(employee)}'"
+      tr.selectable.link_to*{"data-url" => payment_path(employee)}
         td=h employee.fullname
         - while from < period
           - td_class = (period.month == Time.zone.now.month ? :today : '')
           td.numrow[class=td_class]
             = number_to_currency employee.payments.by_month(period.to_date).total
           - period -= 1.month
+        td.link_button_area
+          = link_to '상세보기', employee, class: 'btn btn-primary'
   tr
     td
     - period = Time.zone.parse("#{to.year}-#{to.month}-01 00:00:00")

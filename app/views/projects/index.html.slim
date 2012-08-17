@@ -17,9 +17,9 @@ table#list-table
     - if params[:st] == "completed"
       th
         = Project.human_attribute_name("ended_on")
-
+    th.link_button_area
   - @projects.each do |project|
-    tr.selectable onclick="location.href='#{project_path(project)}'"
+    tr.selectable.link_to*{"data-url" => project_path(project)}
       td
         = project.name
       td.money
@@ -31,5 +31,7 @@ table#list-table
       - if params[:st] == "completed"
         td
           = project.ended_on
+      td.link_button_area
+        = link_to '상세보기', project, class: 'btn btn-primary'
 #show_command
   = link_to t('.title') + ' - ' + @status_other, :controller => "projects", :action => "index", :st => @st_other

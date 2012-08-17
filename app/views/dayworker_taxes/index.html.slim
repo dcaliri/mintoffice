@@ -16,11 +16,14 @@ table#list-table
     th= DayworkerTax.human_attribute_name('amount')
     th= DayworkerTax.human_attribute_name('tax_amount')
     th= DayworkerTax.human_attribute_name('pay_amount')
+    th.link_button_area
     - dayworker_taxes.each do |dayworker_tax|
-      tr.selectable onclick="location.href='#{dayworker_taxis_path(dayworker_tax)}'"
+      tr.selectable.link_to*{"data-url" => dayworker_taxis_path(dayworker_tax)}
         td=h dayworker_tax.dayworker.juminno
         td=h dayworker_tax.apply_day
         td=h dayworker_tax.reason
         td.numrow= number_to_currency dayworker_tax.amount
         td.numrow= number_to_currency dayworker_tax.tax_amount
         td.numrow= number_to_currency dayworker_tax.pay_amount
+        td.link_button_area
+          = link_to '상세보기', dayworker_tax, class: 'btn btn-primary'

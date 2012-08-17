@@ -8,9 +8,12 @@ h2 ...
     tr
       th= Payroll.human_attribute_name("payday")
       th= Employee.human_attribute_name("fullname")
+      th.link_button_area
     - payrolls.each do |payroll|
-      tr.selectable onclick="location.href='#{payroll_path(payroll)}'"
+      tr.selectable.link_to*{"data-url" => payroll_path(payroll)}
         td= payroll.payday
         td= payroll.employee.fullname
+        td.link_button_area
+          = link_to '상세보기', payroll, class: 'btn btn-primary'
 - else
   = "empty"

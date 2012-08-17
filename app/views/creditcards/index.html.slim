@@ -28,9 +28,10 @@ table#list-table
       = Creditcard.human_attribute_name('issuer')
     th
       = Creditcard.human_attribute_name('cardholder')
+    th.link_button_area
 
   - @creditcards.each do |creditcard|
-    tr.selectable onclick="location.href='#{creditcard_path(creditcard)}'"
+    tr.selectable.link_to*{"data-url" => creditcard_path(creditcard)}
       td
         =h creditcard.cardno
       td
@@ -45,3 +46,5 @@ table#list-table
         =h creditcard.issuer
       td
         =h creditcard.cardholder
+      td.link_button_area
+        = link_to '상세보기', creditcard, class: 'btn btn-primary'
