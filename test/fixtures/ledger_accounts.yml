@@ -1,13 +1,13 @@
 cash:
     id: 1
-    title: 현금
+    title: 현금(원장)
     category: 0
     created_at: <%= Time.zone.now %>
     updated_at: <%= Time.zone.now %>
 
 card:
     id: 2
-    title: 신용카드
+    title: 신용카드(원장)
     category: 2
     created_at: <%= Time.zone.now %>
     updated_at: <%= Time.zone.now %>

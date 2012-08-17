@@ -30,7 +30,7 @@ module Excels
       }
 
       module ClassMethods
-        def nonghyup_bank_transaction_parser
+        def nonghyup_bank_transfer_parser
           parser = ExcelParser.new
           parser.class_name BankTransfer
           parser.column NONGHYUP[:columns]
