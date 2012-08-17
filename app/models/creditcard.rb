@@ -17,23 +17,29 @@ class Creditcard < ActiveRecord::Base
   include Historiable
   include Attachmentable
 
-  CARD_LIST = [:card_used_sources, :card_approved_sources, :card_approved_sources_oversea]
+  CARD_LIST = [:card_used_sources, :card_used_sources_hyundai, :card_approved_sources, :card_approved_sources_oversea]
   CARD_LIST_FOR_SELECT = [[I18n.t('models.creditcard.used_detail'), CARD_LIST[0]],
-                         [I18n.t('models.creditcard.approved_detail'), CARD_LIST[1]], 
-                         [I18n.t('models.creditcard.foreign_detail'), CARD_LIST[2]]]
+                         [I18n.t('models.creditcard.used_hyundai_detail'), CARD_LIST[1]],
+                         [I18n.t('models.creditcard.approved_detail'), CARD_LIST[2]],
+                         [I18n.t('models.creditcard.foreign_detail'), CARD_LIST[3]],]
 
   include SpreadsheetParsable
   include Excels::CardUsedSourcesInfo
+  include Excels::CardUsedSourcesHyundaiInfo
   include Excels::CardApprovedSourcesInfo
   include Excels::CardApprovedSourcesOverseaInfo
 
   def self.excel_parser(type)
     if type == :card_used_sources
       used_sources_parser
+    elsif type == :card_used_sources_hyundai
+      hyundai_used_sources_parser
     elsif type == :card_approved_sources
       approved_sources_parser
-    else
+    elsif type == :card_approved_sources_oversea
       approved_sources_oversea_parser
+    else
+      raise "형식을 알 수 없습니다. type = #{type}"
     end
   end
 
@@ -76,7 +82,6 @@ class Creditcard < ActiveRecord::Base
   end
 
   class << self
-
     def approved_per_period(query)
       collection = CardApprovedSource.where('will_be_paied_at IS NOT NULL').order(query)
       if collection.empty?

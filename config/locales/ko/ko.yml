@@ -268,6 +268,14 @@ ko:
                 store_tel: 가맹점전화번호
                 approved_at_strftime: 승인일자
                 approved_time_strftime: 승인시간
+                used_at: 이용일자
+                tax_type: 과세유형
+                sales_statement: 전표구분
+                nation_statement: 국내외구분
+                prepayment_statement: 선납구분
+                accepted_at: 접수일자
+                apply_sales_statement: 전표신청
+                purchase_statement: 구매여부
             cardbill:
                 cardno: "카드 번호"
                 creditcard_id: 카드
@@ -606,6 +614,7 @@ ko:
             one_more_need_i: 이 적어도 하나 이상 필요합니다.
         creditcard:
             used_detail: 이용내역
+            used_hyundai_detail: 이용내역(현대카드)
             approved_detail: 승인내역
             foreign_detail: 해외승인내역
         expense_report:
