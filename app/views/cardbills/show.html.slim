@@ -1,14 +1,8 @@
 - title t('.title')
 
 #show_command
-  - if @cardbill.used and current_person.permission? :card_used_sources
-    = link_to t('cardbills.show.to_use'), @cardbill.used
-    = " | "
   -  if @cardbill.status == 'verified' and @cardbill.remain_amount_for_expense_report != 0
     = link_to t('cardbills.show.create_expense'), new_expense_report_path(target_type: @cardbill.class, target_id: @cardbill.id, expensed_at: @cardbill.transdate, amount: @cardbill.remain_amount_for_expense_report)
-    = " | "
-  - if @cardbill.approved and current_person.permission? :card_approved_sources
-    = link_to t('.to_approved'), @cardbill.approved
     = " | "
   = link_to t('common.title.edit'), edit_cardbill_path(@cardbill)
   = " | "

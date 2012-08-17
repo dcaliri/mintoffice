@@ -1,5 +1,12 @@
+#show_command
+  - if @cardbill.used and current_person.permission? :card_used_sources
+    = link_to t('cardbills.show.to_use'), @cardbill.used
+    = " | "
+  - if @cardbill.approved and current_person.permission? :card_approved_sources
+    = link_to t('cardbills.show..to_approved'), @cardbill.approved
 h3
   = t('cardbills.detail.title')
+
 dl
   = dtdd target, "amount"
   = dtdd target, "vat"
