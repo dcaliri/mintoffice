@@ -15,6 +15,16 @@ class Payment < ActiveRecord::Base
     end.flatten]
   end
 
+  def self.group_by_month(payday)
+    all.group_by do |payment|
+      finish = payment.pay_finish.dup
+      if finish.day > payday
+        finish += 1.month
+      end
+      finish.strftime("%Y.%m")
+    end
+  end
+
   def self.payment_in?(from, to)
     where(pay_finish: from..to)
   end

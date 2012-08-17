@@ -28,7 +28,7 @@ table#list-table
     - if current_person.admin?
       th
   - current_bg = '#e6e6e6'
-  - payments.latest.group_by{|payment| payment.pay_finish.strftime("%Y.%m")}.each do |month, payments|
+  - payments.latest.group_by_month(current_company.payday).each do |month, payments|
     - show_sum = true
     - payments.each do |payment|
       - if show_sum
