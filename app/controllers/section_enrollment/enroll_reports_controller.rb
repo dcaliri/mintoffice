@@ -1,6 +1,7 @@
 # encoding: UTF-8
 
 class SectionEnrollment::EnrollReportsController < ApplicationController
+# class SectionEnrollment::EnrollReportsController < ActionController::Base
   before_filter :redirect_unless_enroll_permission
 
   def index
