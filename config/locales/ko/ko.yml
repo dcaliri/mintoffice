@@ -761,7 +761,7 @@ ko:
             total: 합계
         title: 은행계좌 관리
     bankbooks:
-        title: 통장 정보
+        title: 통장 관리
     bank_transactions:
         title: 입출금 내역
         index:
