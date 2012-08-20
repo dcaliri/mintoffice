@@ -1,5 +1,15 @@
+# encoding: UTF-8
+
 class TaxmenController < ApplicationController
   before_filter :find_business_client
+  before_filter :check_contact_exist, only: [:select_contact, :update_contact]
+
+  def check_contact_exist
+    @contact = Contact.find(params[:contact])
+    unless @business_client.taxmen.person_exist?(@contact.person)
+      redirect_to @business_client, notice: "이미 존재합니다"
+    end
+  end
 
   def find_contact
     @contacts = Contact.search(params[:query])
@@ -7,8 +17,15 @@ class TaxmenController < ApplicationController
 
   def select_contact
     @taxman = @business_client.taxmen.build
-    @taxman.build_person
-    @taxman.person.contact = Contact.find(params[:contact])
+    @contact = Contact.find(params[:contact])
+
+    if @contact.person
+      @taxman.person = @contact.person
+    else
+      @taxman.build_person
+      @taxman.person.contact = @contact
+    end
+
     @taxman.save!
     redirect_to @business_client
   rescue ActiveRecord::RecordInvalid
@@ -23,7 +40,8 @@ class TaxmenController < ApplicationController
 
   def update_contact
     @taxman = @business_client.taxmen.find(params[:id])
-    @taxman.person.contact = Contact.find(params[:contact])
+    # @taxman.person.contact = Contact.find(params[:contact])
+    @taxman.person = Contact.find(params[:contact]).person
     @taxman.person.save!
     @taxman.save!
     redirect_to @business_client

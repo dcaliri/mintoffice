@@ -8,6 +8,10 @@ class Taxman < ActiveRecord::Base
     person.contact
   end
 
+  def self.person_exist?(person)
+    joins(:person).where('people.id = ?', person.id).empty?
+  end
+
   include Historiable
   def history_parent
     business_client
