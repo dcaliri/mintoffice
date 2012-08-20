@@ -408,6 +408,7 @@ ko:
                 expensed_at: 지출 날짜
             group:
                 name: 그룹명
+                parent: 부모
             holiday:
                 theday: 휴일날짜
                 dayname: 휴일명목

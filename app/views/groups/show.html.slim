@@ -5,10 +5,17 @@
   '  |
   = link_to t('common.title.list'), :groups
 
-h2= t('common.title.show')
+h2= group.name
 
-= group.name
+h3 부모
+= group.parent_name
 
+h3 서브그룹
+ul
+  - group.subgroups.each do |subgroup|
+    li= subgroup.name
+
+h3 소속 맴버
 ul
   - group.people.each do |person|
     li= person.name
