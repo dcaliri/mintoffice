@@ -12,5 +12,8 @@ h2= t("common.title.#{form_type}")
       = f.label :juminno
       = f.text_field :juminno
     p
+      = f.label :bankbook_id
+      = f.select :bankbook_id, options_for_bankbooks_select(dayworker.bankbook)
+    p
       = render 'shared/attachments/form', form: f
   = f.submit t("dayworkers.#{form_type}.submit")

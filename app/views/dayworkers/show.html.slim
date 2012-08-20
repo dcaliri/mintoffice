@@ -11,6 +11,7 @@ h2= t('common.title.show')
   #descr
     ul
       li= Dayworker.human_attribute_name('juminno') + " : " + dayworker.juminno.to_s
+      li= Dayworker.human_attribute_name('bankbook') + " : " + dayworker.bankbook.name rescue ""
 
   = render "shared/attachments/detail", :target => dayworker
   .clear

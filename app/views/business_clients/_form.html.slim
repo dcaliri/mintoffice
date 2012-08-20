@@ -14,7 +14,7 @@ h2
       = f.text_field :registration_number
     p
       = f.label :bankbook_id
-      = f.select :bankbook_id, bankbooks_select
+      = f.select :bankbook_id, options_for_bankbooks_select(business_client.bankbook)
     p
       = f.label :category
       = f.text_field :category

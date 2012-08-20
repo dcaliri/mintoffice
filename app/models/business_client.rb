@@ -15,12 +15,14 @@ class BusinessClient < ActiveRecord::Base
 
   attr_accessor :bankbook_id
   before_save :save_bankook
-  def save_bankook
-    self.bankbook = Bankbook.find(bankbook_id) if bankbook_id
-  end
 
   def self.search(text)
     text = "%#{text}%"
     where('name like ? OR registration_number like ? OR category like ? OR business_status like ? OR address like ? or owner like ?', text, text, text, text, text, text)
+  end
+
+private
+  def save_bankook
+    self.bankbook = Bankbook.find(bankbook_id) if bankbook_id
   end
 end
