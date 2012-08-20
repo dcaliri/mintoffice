@@ -14,7 +14,8 @@
 		</script>
 	</head>
 	<body>
-		<%= render(:partial => "shared/header") %>
+		<%= render "header" %>
+		<%#= render(:partial => "shared/header") %>
 		<div class='container'>
 			<% if flash[:notice] %>
 				<div class="flash notice">

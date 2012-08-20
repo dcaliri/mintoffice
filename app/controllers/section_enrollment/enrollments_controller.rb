@@ -2,6 +2,7 @@
 
 class SectionEnrollment::EnrollmentsController < ApplicationController
   layout "login", :only => :index
+  # layout :nil
 
   skip_before_filter :authorize
   before_filter :find_apply_admin, :except => :index
