@@ -10,6 +10,10 @@ class Taxbill < ActiveRecord::Base
   include Historiable
   include Attachmentable
 
+  def self.no_taxman_and_client
+    Taxman.count and BusinessClient.count
+  end
+
   def self.oldest_at
     resource = order('transacted_at DESC').last
     if resource && resource.transacted_at
@@ -34,7 +38,8 @@ class Taxbill < ActiveRecord::Base
   class << self
     def taxmen_list
       Taxman.all.map do |taxman|
-        ["#{taxman.fullname} / #{taxman.business_client.name}", taxman.id]
+        title = "#{taxman.fullname} / #{taxman.business_client.name}" rescue ""
+        [title, taxman.id]
       end
     end
 
