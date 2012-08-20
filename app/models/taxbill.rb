@@ -11,7 +11,7 @@ class Taxbill < ActiveRecord::Base
   include Attachmentable
 
   def self.no_taxman_and_client
-    Taxman.count and BusinessClient.count
+    Taxman.count == 0 and BusinessClient.count == 0
   end
 
   def self.oldest_at
