@@ -1,0 +1,12 @@
+#show_command
+  = link_to t('common.title.back'), :payment_records
+
+h2= t("common.title.#{action_name}")
+
+= form_for @payment_record, html: {multipart: true, class: "tabular"} do |f|
+  = f.error_messages
+  .box
+    p
+      = f.label :name
+      = f.text_field :name
+  = f.submit
