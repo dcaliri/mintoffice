@@ -4,6 +4,7 @@ fixture:
   lastname: 김
   company_name:
   position: 사장
+  department: 민트기술
   email_list:
   person_id: 1
   migrated_data: f
