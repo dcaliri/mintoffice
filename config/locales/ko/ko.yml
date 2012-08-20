@@ -469,6 +469,8 @@ ko:
                 after: "%{month}개월 후"
             payment_record:
                 name: 이름
+                bankbook: 통장
+                bankbook_id: 통장
             pettycash:
                 description: 사용처 상세내역
                 transdate: 사용일자
