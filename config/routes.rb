@@ -71,6 +71,8 @@ Mintoffice::Application.routes.draw do
     end
   end
 
+  resources :payment_records
+
   resources :dayworker_taxes
   resources :card_used_sources do
     post 'export', on: :collection

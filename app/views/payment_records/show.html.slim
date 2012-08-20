@@ -1,0 +1,13 @@
+#show_command
+  = link_to t('common.title.edit'), [:edit, @payment_record]
+  = " | "
+  = link_to t('common.title.destroy'), @payment_record, method: :delete, data: {confirm: t("common.messages.delete_confirm")}
+  = " | "
+  = link_to t('common.title.list'), :payment_records
+
+h2= t('common.title.show')
+
+dl
+  =dtdd @payment_record, "name"
+  dt= @payment_record.class.human_attribute_name(:bankbook)
+  dd= @payment_record.bankbook.name rescue ""
