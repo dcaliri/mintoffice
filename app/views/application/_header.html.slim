@@ -33,6 +33,8 @@ div#main_nav.navbar.navbar-fixed-top
               li= link_to t("cardbills.index.title"), :cardbills
               - if current_person.permission? 'bank_accounts'
                 li= link_to t("bank_accounts.index.title"), :bank_accounts
+              - if current_person.permission? 'bankbooks'
+                li= link_to t("bankbooks.title"), :bankbooks
               - if current_person.permission? 'taxbills'
                 li= link_to t("taxbills.index.title"), :taxbills
               li= link_to t("expense_reports.index.title"), :expense_reports

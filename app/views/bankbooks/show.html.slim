@@ -1,0 +1,18 @@
+#show_command
+  = link_to t('common.title.edit'), [:edit, @bankbook]
+  = " | "
+  = link_to t('common.title.destroy'), @bankbook, :method => :delete, data: {confirm: t("common.messages.delete_confirm")}
+  = " | "
+  = link_to t('common.title.list'), :bankbooks
+
+h3= @bankbook.name
+.box
+  dl
+    dt
+      = Bankbook.human_attribute_name(:number)
+    dd
+      = @bankbook.number
+    dt
+      = Bankbook.human_attribute_name(:account_holder)
+    dd
+      = @bankbook.account_holder

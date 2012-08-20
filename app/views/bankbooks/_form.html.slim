@@ -1,0 +1,21 @@
+#show_command
+  = link_to t("common.title.back"), :bankbooks
+
+h2= t("common.title.#{action_name}")
+
+= form_for(@bankbook, :html => { :class => "tabular", :multipart => true } ) do |f|
+  = f.error_messages
+  .box
+    p
+      = f.label :name
+      = f.text_field :name
+    p
+      = f.label :number
+      = f.text_field :number
+    p
+      = f.label :account_holder
+      = f.text_field :account_holder
+    p
+      = render 'shared/attachments/form', form: f
+  p
+    = f.submit
