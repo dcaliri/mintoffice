@@ -15,7 +15,7 @@ div#main_nav.navbar.navbar-fixed-top
                 = t("main.index.human_resources")
                 b.caret
               ul.dropdown-menu
-                li= link_to t("employees.index.title"), :controller => "employees"
+                li= link_to t("employees.index.title"), :employees
                 li= link_to t("vacations.index.title"), vacation_path(current_employee)
                 - if current_person.permission? 'commutes'
                   li= link_to t("commutes.index.title"), commute_path(current_employee)
@@ -29,8 +29,8 @@ div#main_nav.navbar.navbar-fixed-top
               b.caret
             ul.dropdown-menu
               - if current_person.permission? 'pettycashes'
-                li= link_to t("pettycashes.index.title"), :controller => "pettycashes"
-              li= link_to t("cardbills.index.title"), :controller => "cardbills"
+                li= link_to t("pettycashes.index.title"), :pettycashes
+              li= link_to t("cardbills.index.title"), :cardbills
               - if current_person.permission? 'bank_accounts'
                 li= link_to t("bank_accounts.index.title"), :bank_accounts
               - if current_person.permission? 'taxbills'
@@ -48,7 +48,7 @@ div#main_nav.navbar.navbar-fixed-top
               b.caret
             ul.dropdown-menu
               - if current_person.permission? 'projects'
-                li= link_to t("projects.index.title"), :controller => "projects"
+                li= link_to t("projects.index.title"), :projects
 
         ul.nav
           li.dropdown
@@ -56,7 +56,7 @@ div#main_nav.navbar.navbar-fixed-top
               = t("main.index.document")
               b.caret
             ul.dropdown-menu
-              li= link_to t("documents.index.title"), :controller => "documents"
+              li= link_to t("documents.index.title"), :documents
               - if current_person.permission? 'business_clients'
                 li= link_to t("business_clients.index.title"), :business_clients
               li= link_to t("contacts.index.title"), :contacts
@@ -71,16 +71,16 @@ div#main_nav.navbar.navbar-fixed-top
               li= link_to t("vacations.index.title"), :vacations
               li= link_to t("vacation_types.title"), :vacation_types
               li= link_to t("payments.title"), :payments
-              li= link_to t("accounts.index.title"), :controller => "accounts"
-              li= link_to t("groups.title"), :controller => "groups"
-              li= link_to t("payroll_categories.title"), :controller => "payroll_categories"
-              li= link_to t("payrolls.title"), :controller => "payrolls"
+              li= link_to t("accounts.index.title"), :accounts
+              li= link_to t("groups.title"), :groups
+              li= link_to t("payroll_categories.title"), :payroll_categories
+              li= link_to t("payrolls.title"), :payrolls
               li= link_to t("creditcards.title"), :creditcards
-              li= link_to t("attachments.title"), :controller => "attachments"
-              li= link_to t("permissions.title"), :controller => "permissions"
-              li= link_to t("change_histories.title"), :controller => "change_histories"
-              li= link_to t("holidays.title"), :controller => "holidays"
-              li= link_to t("dayworker_taxes.title"), :controller => "dayworker_taxes"
+              li= link_to t("attachments.title"), :attachments
+              li= link_to t("permissions.title"), :permissions
+              li= link_to t("change_histories.title"), :change_histories
+              li= link_to t("holidays.title"), :holidays
+              li= link_to t("dayworker_taxes.title"), :dayworker_taxes
               li= link_to t("enrollments.title"), :enroll_reports
               li= link_to t("companies.title"), current_company
 
