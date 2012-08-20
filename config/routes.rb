@@ -253,7 +253,7 @@ Mintoffice::Application.routes.draw do
 
   resources :required_tags
   resources :namecards
-  resources :business_clients do
+  resources :business_clients, except: [:destroy] do
     resources :taxmen, :except => :index do
       collection do
         get 'find_contact'
