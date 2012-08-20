@@ -101,6 +101,7 @@ ko:
         models:
             attachment: 첨부파일
             bank_account: 은행계좌
+            bankbook: 통장
             bank_transaction: 입출금 내역
             bank_transfer: 이체 내역
             bonus: 상여금
@@ -168,6 +169,10 @@ ko:
                 total_out: 출금 총액
                 margin: 입출금 차액
                 remain: 잔고
+            bankbook:
+                name: 통장명
+                number: 통장번호
+                account_holder: 예금주
             bank_transaction:
                 account: 은행계좌
                 bank_account_name: 은행계좌
@@ -753,6 +758,8 @@ ko:
             outmoney: 출금액역
             total: 합계
         title: 은행계좌 관리
+    bankbooks:
+        title: 통장 정보
     bank_transactions:
         title: 입출금 내역
         index:

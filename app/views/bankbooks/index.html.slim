@@ -1,0 +1,17 @@
+#show_command
+  = link_to t("common.title.new"), [:new, :bankbook]
+h2 ...
+
+table#list-table
+  tr
+    th= Bankbook.human_attribute_name("name")
+    th= Bankbook.human_attribute_name("number")
+    th= Bankbook.human_attribute_name("account_holder")
+    th.link_button_area
+  - @bankbook.each do |bankbook|
+    tr.selectable.link_to*{"data-url" => bankbook_path(bankbook)}
+      td= bankbook.name
+      td= bankbook.number
+      td= bankbook.account_holder
+      td.link_button_area
+        = link_to '상세보기', bankbook, class: 'btn btn-primary'
