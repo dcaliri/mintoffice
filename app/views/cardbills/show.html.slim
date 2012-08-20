@@ -23,14 +23,14 @@ h2
       = number_to_currency @cardbill.totalamount
 
     = render 'detail', target: @cardbill
-    - unless @cardbill.expense_reports.empty?
-      h3 지출내역서
-      ul
-      - @cardbill.expense_reports.each do |expense_report|
-        li= link_to expense_report.project.name, expense_report
-
   = render "shared/attachments/detail", :target => @cardbill
   .clear
-
+  
+- unless @cardbill.expense_reports.empty?
+  h3 지출내역서
+  ul
+  - @cardbill.expense_reports.each do |expense_report|
+    li= link_to expense_report.project.name, expense_report
+br
 = render 'changelog', target: @cardbill
 = render 'reports/info', target: @cardbill

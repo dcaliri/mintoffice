@@ -16,8 +16,8 @@ h2 #{bank_transfer.bank_account.name}: #{bank_transfer.bank_account.number}
 
 .box
   = render 'detail', target: bank_transfer
-  - unless bank_transfer.expense_reports.empty?
-      h3 지출내역서
-      ul
-      - bank_transfer.expense_reports.each do |expense_report|
-        li= link_to expense_report.project.name, expense_report
+- unless bank_transfer.expense_reports.empty?
+  h3 지출내역서
+  ul
+  - bank_transfer.expense_reports.each do |expense_report|
+    li= link_to expense_report.project.name, expense_report
