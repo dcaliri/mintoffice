@@ -65,7 +65,6 @@ class CardBillProcessTest < ActionDispatch::IntegrationTest
 
     click_link '지출내역서 만들기'
 
-    save_and_open_page
     select '테스트 프로젝트', from: 'expense_report_project_id'
     fill_in "내역", with: "지출내역서 상세 내역"
 

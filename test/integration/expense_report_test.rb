@@ -42,8 +42,6 @@ class ExpenseReportTest < ActionDispatch::IntegrationTest
 
     click_button '지출 내역서 수정하기'
 
-    save_and_open_page
-
     assert(page.has_content?('지출내역서 내역 수정 테스트'))
   end
 
