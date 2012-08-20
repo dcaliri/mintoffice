@@ -15,7 +15,6 @@
 	</head>
 	<body>
 		<%= render "header" %>
-		<%#= render(:partial => "shared/header") %>
 		<div class='container'>
 			<% if flash[:notice] %>
 				<div class="flash notice">
@@ -24,7 +23,7 @@
 			<% end %>
 			<%= yield %>
 
-			<%= render(:partial => "shared/footer") %>
+			<%= render "footer" %>
 		</div>
 	</body>
 </html>
