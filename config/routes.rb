@@ -34,7 +34,6 @@ Mintoffice::Application.routes.draw do
     namespace :card_approved_sources do
       post 'export'
     end
-    
   end
 
   scope nil, :module => 'section_enrollment' do
