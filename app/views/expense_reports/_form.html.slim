@@ -27,7 +27,8 @@ h2= t("common.title.#{action_name}")
         = f.text_field :amount, value: expense_report.amount || params[:amount].to_i
       p
         = f.submit
+    = render 'tags/form', target: expense_report
   #reference
     - target = target_type.constantize.find(target_id)
-    = render "#{target_type.tableize}/detail", target: target
+    = render "#{target_type.tableize}/detail", target: target 
   .clear
