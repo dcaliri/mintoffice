@@ -4,12 +4,20 @@ class BusinessClient < ActiveRecord::Base
   has_many :taxmen
   accepts_nested_attributes_for :taxmen, :allow_destroy => :true, :reject_if => proc { |attrs| attrs.all? { |k, v| v.blank? } }
 
+  has_one :bankbook, as: :holder
+
   validates_presence_of :name
 
   include Historiable
   include Attachmentable
 
   self.per_page = 20
+
+  attr_accessor :bankbook_id
+  before_save :save_bankook
+  def save_bankook
+    self.bankbook = Bankbook.find(bankbook_id) if bankbook_id
+  end
 
   def self.search(text)
     text = "%#{text}%"

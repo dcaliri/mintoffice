@@ -13,6 +13,9 @@ h2
       = f.label :registration_number
       = f.text_field :registration_number
     p
+      = f.label :bankbook_id
+      = f.select :bankbook_id, bankbooks_select
+    p
       = f.label :category
       = f.text_field :category
     p

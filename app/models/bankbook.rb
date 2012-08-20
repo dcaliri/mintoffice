@@ -1,4 +1,5 @@
 class Bankbook < ActiveRecord::Base
-  include Attachmentable
+  belongs_to :holder, polymorphic: true
 
+  include Attachmentable
 end

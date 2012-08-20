@@ -223,6 +223,8 @@ ko:
                 category: 업종
                 business_status: 업태
                 address: 주소
+                bankbook: 통장
+                bankbook_id: 통장
                 owner: 대표자
             card_approved_source:
                 used_at: 이용일시
