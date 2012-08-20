@@ -90,7 +90,7 @@ class Taxbill < ActiveRecord::Base
     def text_search(text)
       unless text.blank?
         text = "%#{text}%"
-        joins(:taxman => [:contact, :business_client]).merge(where("#{Contact.search_by_name_query} OR name like ?", text, text))
+        joins(:taxman => :business_client).merge(where("name like ?", text))
       else
         where("")
       end

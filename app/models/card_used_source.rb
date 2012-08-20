@@ -72,7 +72,7 @@ class CardUsedSource < ActiveRecord::Base
 
     def group_by_name_anx_tax
       all.group_by{|cards| cards.bank_name }.map do |name, cards|
-        {name: name, tax: cards.sum{|card| card.tax}}
+        {name: name, tax: cards.sum{|card| card.tax || 0}}
       end
     end
 
