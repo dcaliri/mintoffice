@@ -1,5 +1,11 @@
 - title t('.title') + " - " + @status_me
+
 #show_command
+  - if action_name == "index"
+    = link_to t("projects.me.title"), [:me, :projects]
+  - else
+    = link_to t("projects.index.title"), :projects
+  = "|"
   = link_to t("projects.new.title"), new_project_path
 
 h2

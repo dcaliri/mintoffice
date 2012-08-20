@@ -1313,6 +1313,8 @@ ko:
         form:
             list: 항목
     projects:
+        me:
+            title: 내가 속한 프로젝트만 보기
         expense:
             title: 지출내역
             detail: 내역
