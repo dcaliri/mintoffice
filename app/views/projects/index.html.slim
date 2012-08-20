@@ -28,8 +28,11 @@ table#list-table
     tr.selectable.link_to*{"data-url" => project_path(project)}
       td
         = project.name
-      td.money
-        = number_to_currency project.revenue
+      - if current_employee.admin? or project.owner == current_employee
+        td.money
+          = number_to_currency project.revenue
+      - else
+        td
       td
         = project.started_on
       td
