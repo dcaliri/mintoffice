@@ -21,7 +21,7 @@ class NUExpenseReportTest < ActionDispatch::IntegrationTest
   class ::ReportMailer
     def self.report(target, from, to, subject, message)
     end
-  end 
+  end
 
   test 'should visit expense list' do
     visit '/'
