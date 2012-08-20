@@ -410,6 +410,7 @@ ko:
             group:
                 name: 그룹명
                 parent: 부모
+                parent_id: 부모
             holiday:
                 theday: 휴일날짜
                 dayname: 휴일명목
