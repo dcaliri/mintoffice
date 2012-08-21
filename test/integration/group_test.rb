@@ -15,7 +15,9 @@ class GroupTest < ActionDispatch::IntegrationTest
     click_link '그룹관리'
     find("tr.selectable").click
 
-    assert(page.has_content?('내용 보기'))
+    assert(page.has_content?('부모'))
+    assert(page.has_content?('서브그룹'))
+    assert(page.has_content?('소속 맴버'))
   end
 
   test 'should create a new group' do
