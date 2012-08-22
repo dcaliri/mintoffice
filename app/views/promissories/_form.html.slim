@@ -1,0 +1,19 @@
+#show_command
+  = link_to t("common.title.back"), :promissories
+
+h2= t("common.title.#{action_name}")
+
+= form_for @promissory, html: {class: "tabular"} do |f|
+  = f.error_messages
+  .box
+    p
+      = f.label :expired_at
+      = f.date_select :expired_at, :order => [:year, :month, :day]
+    p
+      = f.label :published_at
+      = f.date_select :published_at, :order => [:year, :month, :day]
+    p
+      = f.label :amount
+      = f.text_field :amount
+  p
+    = f.submit

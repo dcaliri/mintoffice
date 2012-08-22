@@ -140,6 +140,7 @@ ko:
             pettycash: 소액현금
             posting: 전표
             project: 프로젝트
+            promissory: 어음
             required_tag: 필수 태그 항목
             tag: 태그
             taxman: 담당자
@@ -495,6 +496,10 @@ ko:
                 ending_on: 종료예정일자
                 ended_on: 실제 종료일자
                 owner_name: 프로젝트 관리자
+            promissory:
+                expired_at: 만기일
+                published_at: 발행일
+                amount: 금액
             required_tag:
                 modelname: 모델명
             account:
@@ -1361,6 +1366,8 @@ ko:
         assign:
             title: 할당 비율 조정
             not_hundred: 할당 비율이 100%가 아닙니다.
+    promissories:
+        title: 어음 관리
     reports:
         info:
             approval: 결재
