@@ -21,12 +21,6 @@ h2
     p
       = f.label :owners, Document.human_attribute_name('owner')
 
-      - if !document.employees.blank?
-        - for employee in document.employees
-          =h employee.fullname
-          = link_to t('common.title.destroy'), :action => :remove_owner, :id => document, :uid => employee.id
-          - unless employee == document.employees.last
-            br
   = f.submit t('common.button.update')
 
 = form_tag({:action => :add_owner, :id => document},{:class => 'tabular'}) do
