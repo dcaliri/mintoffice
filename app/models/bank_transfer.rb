@@ -2,7 +2,7 @@
 
 class BankTransfer < ActiveRecord::Base
   belongs_to :bank_account
-  has_one :expense_report, as: :target
+  has_many :expense_reports, as: :target
 
   self.per_page = 20
 
@@ -33,6 +33,7 @@ class BankTransfer < ActiveRecord::Base
   include SpreadsheetParsable
   include Excels::BankTransfers::Shinhan
   include Excels::BankTransfers::Ibk
+  include Excels::BankTransfers::Nonghyup
 
   include ResourceExportable
   resource_exportable_configure do |config|
@@ -53,6 +54,14 @@ class BankTransfer < ActiveRecord::Base
   end
   ################################
 
+  def totalamount
+    self.money
+  end
+
+  def remain_amount_for_expense_report
+    self.totalamount - expense_reports.total_amount
+  end
+
   def self.search(text)
     search_by_text(text)
   end
@@ -60,8 +69,14 @@ class BankTransfer < ActiveRecord::Base
   def self.excel_parser(type)
     if type == :shinhan
       shinhan_bank_transfer_parser
-    else
+    elsif type == :ibk
       ibk_bank_transfer_parser
+    elsif type == :hsbc
+      hsbc_bank_transfer_parser
+    elsif type == :nonghyup
+      nonghyup_bank_transfer_parser
+    else
+      raise "Cannot find excel parser. type = #{type}"
     end
   end
 

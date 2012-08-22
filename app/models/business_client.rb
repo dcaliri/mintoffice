@@ -1,7 +1,7 @@
 class BusinessClient < ActiveRecord::Base
   belongs_to :company
 
-  has_many :taxmen
+  has_many :taxmen, dependent: :destroy
   accepts_nested_attributes_for :taxmen, :allow_destroy => :true, :reject_if => proc { |attrs| attrs.all? { |k, v| v.blank? } }
 
   validates_presence_of :name

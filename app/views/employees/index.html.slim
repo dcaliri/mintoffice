@@ -26,9 +26,10 @@ table#list-table
       = Employee.human_attribute_name('account.name')
     th
       = Employee.human_attribute_name('joined_on')
+    th.link_button_area
 
   - @employees.each do |employee|
-    tr.selectable onclick="location.href='#{employee_path(employee)}'"
+    tr.selectable.link_to*{"data-url" => employee_path(employee)}
       td align="right"
         =h employee.companyno
       td
@@ -39,3 +40,5 @@ table#list-table
         =h employee.person.account.name
       td
         =h employee.joined_on
+      td.link_button_area
+            = link_to '상세보기', employee, class: 'btn btn-primary'

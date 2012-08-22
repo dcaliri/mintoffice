@@ -27,7 +27,15 @@ class CardUsedSource < ActiveRecord::Base
                      :store_zipcode,
                      :store_addr1,
                      :store_addr2,
-                     :store_tel
+                     :store_tel,
+                     :used_at,
+                     :tax_type,
+                     :sales_statement,
+                     :nation_statement,
+                     :prepayment_statement,
+                     :accepted_at,
+                     :apply_sales_statement,
+                     :purchase_statement,
                      ]
   def self.default_columns
     DEFAULT_COLUMNS
@@ -64,7 +72,7 @@ class CardUsedSource < ActiveRecord::Base
 
     def group_by_name_anx_tax
       all.group_by{|cards| cards.bank_name }.map do |name, cards|
-        {name: name, tax: cards.sum{|card| card.tax}}
+        {name: name, tax: cards.sum{|card| card.tax || 0}}
       end
     end
 

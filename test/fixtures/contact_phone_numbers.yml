@@ -3,3 +3,9 @@ fixture:
   contact_id: 1
   target:
   number: 010-1234-1234
+
+new_employee:
+  id: 2
+  contact_id: 6
+  target:
+  number: 010-4321-4321

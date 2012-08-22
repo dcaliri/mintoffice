@@ -48,6 +48,10 @@ class ActionDispatch::IntegrationTest
   def clear_session
     visit '/test/sessions/clear'
   end
+
+  def normal_user_access
+    visit '/test/sessions?person_id=2'
+  end
 end
 
 class ActionController::TestCase

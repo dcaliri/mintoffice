@@ -4,6 +4,7 @@ fixture:
   lastname: 김
   company_name:
   position: 사장
+  department: 민트기술
   email_list:
   person_id: 1
   migrated_data: f
@@ -53,6 +54,36 @@ card_used_user:
   person_id: 4
   migrated_data: f
   owner_id:
+  isprivate: f
+  company_id: 1
+  google_id:
+  google_etag: 
+
+retired_user:
+  id: 5
+  firstname: 직자
+  lastname: 퇴
+  company_name:
+  position: 사원
+  department: 경리부
+  person_id: 10
+  migrated_data: f
+  owner_id:
+  isprivate: f
+  company_id: 1
+  google_id:
+  google_etag: 
+
+new_employee:
+  id: 6
+  firstname: 직원
+  lastname: 새로운
+  company_name: Mintech
+  position: 알바
+  department: 민트기술
+  person_id:
+  migrated_data: f
+  owner_id: 1
   isprivate: f
   company_id: 1
   google_id:

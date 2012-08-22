@@ -45,7 +45,7 @@ class AccountTest < ActionDispatch::IntegrationTest
 
     assert(page.has_content?('사용자계정이(가) 성공적으로 생성되었습니다.'))
 
-    visit '/accounts/10'
+    visit '/accounts/12'
 
     assert(page.has_content?('test_account'))
     assert(page.has_content?('test@test.com'))

@@ -12,7 +12,8 @@
   <%= csrf_meta_tag %>
 </head>
 <body>
-<%= render(:partial => "shared/header") %><div id="wrapper">
+<%= render "header" %>
+<div class='container'>
   <div id="header">
     <div id="quick-search">
       <%= yield :search %>
@@ -28,6 +29,6 @@
     <%= yield %>
   </div>
 </div>
-<%= render(:partial => "shared/footer") %>
+<%= render "footer" %>
 </body>
 </html>

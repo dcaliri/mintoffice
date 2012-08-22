@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require bootstrap
 //= require_tree .
 
 
@@ -19,4 +20,6 @@ $(function() {
 	$(document).on("click", ".link_to", function() {
 		location.href = $(this).data('url');
 	});
+
+	$(".link_button_area").hide();
 });

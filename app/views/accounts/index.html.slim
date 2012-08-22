@@ -20,6 +20,7 @@ table#list-table
     th= Account.human_attribute_name('google_account')
     th= Account.human_attribute_name('notify_email')
     th= Account.human_attribute_name('boxcar_account')
+    th.link_button_area
   = render partial: "account", collection: @accounts
 
 #show_command

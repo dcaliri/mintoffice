@@ -33,7 +33,7 @@ class Project < ActiveRecord::Base
   end
 
   def owner_name
-    owner.fullname rescue "없음"
+    owner.fullname rescue I18n.t('models.project.not')
   end
 
   def completed?

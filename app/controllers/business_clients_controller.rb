@@ -21,9 +21,4 @@ class BusinessClientsController < ApplicationController
   rescue ActiveRecord::RecordInvalid
     render 'edit'
   end
-
-  def destroy
-    business_client.destroy
-    redirect_to :business_clients, notice: I18n.t("common.messages.destroyed", :model => BusinessClient.model_name.human)
-  end
 end

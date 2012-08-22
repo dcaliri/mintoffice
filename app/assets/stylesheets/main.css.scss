@@ -3,54 +3,32 @@ body {
   font-size: 12px;
   color: #484848;
   margin: 0;
-  padding: 0;
-/*  min-width: 900px;
-*/}
-
-#top-menu {
-  background: black;
-  color: #fff;
-  height: 1.8em;
-  font-size: 0.8em;
-  padding: 2px 2px 0px 6px;
 }
 
-#wrapper {
-  margin: 0;
+/* Twitter boostraped css */
+
+#list-table {
+  @extend .table;
+  @extend .table-striped;
+  tr.selectable { cursor: pointer;}
+  tr.selectable:hover {background-color: lightgrey;}
+  td.selectable {cursor: pointer;}
 }
 
-#top-menu ul {
-  margin: 0;
-  padding: 0;
-}
-
-#top-menu li {
-  float: left;
-  list-style-type: none;
-  margin: 0px 0px 0px 0px;
-  padding: 0px 0px 0px 0px;
-  white-space: nowrap;
-}
-
-#top-menu a {
-  color: #fff;
-  margin-right: 8px;
-  font-weight: bold;
-}
-
-#top-menu #loggedas {
+#show_command {
   float: right;
-  margin-right: 0.5em;
-  color: #fff;
+  a { 
+    @extend .btn;
+    @extend .btn-primary;
+  }
+  a[data-method=delete] { 
+    @extend .btn-danger;
+  }
 }
 
-#account {
-  float: right;
-}
 
-#company {
-  float: right;
-}
+
+/* legacy css */
 
 #header h1 a.ancestor { font-size: 80%; }
 #header {
@@ -62,15 +40,15 @@ body {
 
 /***** Links *****/
 
-a, a:link, a:visited {
-  color: #2A5685;
-  text-decoration: none;
-}
+// a, a:link, a:visited {
+//   color: #2A5685;
+//   text-decoration: none;
+// }
 
-a:hover, a:active {
-  color: #c61a1a;
-  text-decoration: underline;
-}
+// a:hover, a:active {
+//   color: #c61a1a;
+//   text-decoration: underline;
+// }
 
 a img {
   border: 0;
@@ -228,57 +206,11 @@ div.flash.alert {
   margin-left: 100px;
 }
 
-#show_command {
-  float: right;
-}
-
 .currency {
   text-align: right;
   width: 100%;
 }
 
-
-#list-table
-{
-  font-size: 12px;
-  width: 100%;
-  text-align: left;
-  border-collapse: collapse;
-}
-#list-table th
-{
-  padding: 8px 2px;
-  font-weight: normal;
-  font-size: 14px;
-  border-bottom: 2px solid #6678b1;
-  border-right: 30px solid #fff;
-  border-left: 30px solid #fff;
-  color: #039;
-  text-align: left;
-}
-
-#list-table tr.selectable {
-  cursor: pointer;
-}
-#list-table tr.selectable:hover {
-  background-color: lightgrey;
-}
-
-#list-table td.selectable {
-  cursor: pointer;
-}
-
-#list-table td.selectable:hover {
-  background-color: lightgrey;
-}
-
-#list-table td
-{
-  padding: 12px 2px 0px 2px;
-  border-right: 30px solid #fff;
-  border-left: 30px solid #fff;
-  color: #669;
-}
 .numrow
 {
   text-align: right;
@@ -594,3 +526,6 @@ ul#css3menu li.sublast>a{
 .today {
 	background-color: yellow;
 }
+
+
+

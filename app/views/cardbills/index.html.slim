@@ -21,9 +21,10 @@ table#list-table
     th= Cardbill.human_attribute_name('storename')
     th= Cardbill.human_attribute_name('storeaddr')
     th= Cardbill.human_attribute_name('approveno')
+    th.link_button_area
 
   - @cardbills.each do |cardbill|
-      tr.selectable onclick="location.href='#{cardbill_path(cardbill)}'"
+      tr.selectable.link_to*{"data-url" => cardbill_path(cardbill)}
         td 
           span
             =h cardbill.cardno_long
@@ -37,6 +38,8 @@ table#list-table
           =h cardbill.storeaddr
         td
           =h cardbill.approveno
+        td.link_button_area
+          = link_to '상세보기', cardbill, class: 'btn btn-primary'
 br
 center
   = will_paginate @cardbills

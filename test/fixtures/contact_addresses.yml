@@ -10,3 +10,16 @@ fixture:
   postal_code:
   created_at: 2012-07-18 16:17:56.759405
   updated_at: 2012-07-18 16:17:56.759405
+
+new_employee:
+  id: 2
+  contact_id: 6
+  target:
+  country:
+  province:
+  city:
+  other1: 경기도 남양주시
+  other2:
+  postal_code:
+  created_at: 2012-07-18 16:17:56.759405
+  updated_at: 2012-07-18 16:17:56.759405

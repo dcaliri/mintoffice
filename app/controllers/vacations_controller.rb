@@ -13,7 +13,7 @@ class VacationsController < ApplicationController
   before_filter :only_admin_access_vacation, :except => [:index, :show]
 
   def index
-    @employees = Employee(:protected).enabled.page(params[:page])
+    @employees = Employee(:protected).enabled.not_retired.page(params[:page])
   end
 
   def show

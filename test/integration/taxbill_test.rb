@@ -17,12 +17,22 @@ class TaxBillTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('세금계산서 관리'))
   end
 
-  test 'should show total taxbills' do
+  test 'should show total taxbills and link test' do
     visit '/'
     click_link '세금계산서 관리'
     click_link '합계표 보기'
 
-    assert(page.has_content?('매입처별 합계'))
+    click_link '테스트 거래처1'
+
+    assert(page.has_content?('테스트 거래처1'))
+
+    visit '/'
+    click_link '세금계산서 관리'
+    click_link '합계표 보기'
+
+    click_link '테스트 거래처2'
+
+    assert(page.has_content?('테스트 거래처2'))
   end
 
   test 'should create a new taxbill' do
@@ -34,7 +44,6 @@ class TaxBillTest < ActionDispatch::IntegrationTest
 
     assert(page.has_content?('세금계산서이(가) 성공적으로 생성되었습니다.'))
   end
-
 
   test 'should edit taxbill' do
     visit '/'
@@ -60,7 +69,6 @@ class TaxBillTest < ActionDispatch::IntegrationTest
     disable_confirm_box
 
     click_link '삭제하기'
-
 
     assert(page.has_content?('세금계산서이(가) 성공적으로 제거 되었습니다.'))
   end  

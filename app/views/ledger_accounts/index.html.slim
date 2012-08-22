@@ -11,10 +11,13 @@ h2= t("common.title.list")
       tr
         th= LedgerAccount.human_attribute_name("title")
         th= LedgerAccount.human_attribute_name("category")
+        th.link_button_area
     tbody
       - @accounts.find_each do |account|
-        tr.selectable onclick="location.href='#{ledger_account_path(account)}'"
+        tr.selectable.link_to*{"data-url" => ledger_account_path(account)}
           td= account.title
           td= account.category
+          td.link_button_area
+            = link_to '상세보기', account, class: 'btn btn-primary'
 - else
   h3= t('.empty')

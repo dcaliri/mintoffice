@@ -2,19 +2,19 @@ exist_cardbill:
     id: 1
     creditcard_id: 1
     used_at: <%= Time.zone.now %>
-    approve_no: 1
-    card_holder_name: 손어지리
-    store_name: GS25
-    money: 4500
-    used_type: test
-    monthly_duration: 3
-    card_type: test
+    approve_no: 27001012
+    card_holder_name: 민트기술
+    store_name: 버터플라이
+    money: 12000
+    used_type: 사무용품 구입
+    monthly_duration: 0
+    card_type: 영업용
     canceled_at: <%= Time.zone.now %>
-    status: test
+    status: 구매
     will_be_paied_at: <%= Time.zone.now %>
     created_at: <%= Time.zone.now %>
     updated_at: <%= Time.zone.now %>
-    card_no: 1
+    card_no: 영업용
     money_foreign:
     money_type:
     money_type_info:
@@ -25,11 +25,11 @@ not_exist_cardbill:
     creditcard_id: 1
     used_at: <%= Time.zone.now %>
     approve_no: 3
-    card_holder_name: 손어지리
+    card_holder_name: 소유자
     store_name: GS25
-    money: 4500
+    money: 6000
     used_type: test
-    monthly_duration: 3
+    monthly_duration: 0
     card_type: test
     canceled_at: <%= Time.zone.now %>
     status: test
@@ -47,18 +47,18 @@ manager_cardbill:
     creditcard_id: 1
     used_at: <%= Time.zone.now %>
     approve_no: 4
-    card_holder_name: 손어지리
-    store_name: GS25
-    money: 4500
-    used_type: test
-    monthly_duration: 3
-    card_type: test
+    card_holder_name: 민트기술
+    store_name: 버터플라이
+    money: 10000
+    used_type: 사무용품 구입
+    monthly_duration: 0
+    card_type: 영업용
     canceled_at: <%= Time.zone.now %>
-    status: test
+    status: 구매
     will_be_paied_at: <%= Time.zone.now %>
     created_at: <%= Time.zone.now %>
     updated_at: <%= Time.zone.now %>
-    card_no: 1
+    card_no: 영업용
     money_foreign:
     money_type:
     money_type_info:

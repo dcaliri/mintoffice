@@ -15,9 +15,10 @@ table#list-table
       = Employee.human_attribute_name('phone_number')
     th
       = Employee.human_attribute_name('address')
+    th.link_button_area
 
   - @enrollments.each do |enrollment|
-    tr.selectable onclick="location.href='#{enroll_report_path(enrollment)}'"
+    tr.selectable.link_to*{"data-url" => enroll_report_path(enrollment)}
       td
         =h enrollment.name
       td
@@ -26,3 +27,5 @@ table#list-table
         =h enrollment.phone_number
       td
         =h enrollment.address
+      td.link_button_area
+        = link_to '상세보기', enrollment, class: 'btn btn-primary'

@@ -20,14 +20,15 @@ table#list-table
     th= Pettycash.human_attribute_name('inmoney')
     th= Pettycash.human_attribute_name('outmoney')
     th= Pettycash.human_attribute_name('description')
-
+    th.link_button_area
   - @pettycashes.each do |pettycash|
-    tr.selectable onclick="location.href='#{pettycash_path(pettycash)}'"
+    tr.selectable.link_to*{"data-url" => pettycash_path(pettycash)}
       td= pettycash.transdate.strftime("%Y.%m.%d %H:%M:%S %p")
       td.numrow= number_to_currency pettycash.inmoney
       td.numrow= number_to_currency pettycash.outmoney
       td= truncate(pettycash.description, :length => 20)
-
+      td.link_button_area
+        = link_to '상세보기', pettycash, class: 'btn btn-primary'
 br
 center
   = will_paginate @cardbills

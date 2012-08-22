@@ -7,7 +7,7 @@ shinhan:
     out_bank_account: 274-062855-01-012
     in_bank_name: 신한은행
     in_bank_account: 28505013648
-    money: 1000000
+    money: 50000
     transfer_fee: 500
     error_money: 0
     registered_at: <%= Time.zone.now %>

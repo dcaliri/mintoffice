@@ -9,7 +9,11 @@ class VacationTest < ActionDispatch::IntegrationTest
     visit '/'
     visit '/vacations'
 
-		assert(page.has_content?('연차 정보'))
+		assert(page.has_content?('김 관리'))
+    assert(page.has_content?('김 개똥'))
+    assert(page.has_content?('카드영수증 매니저'))
+    assert(page.has_content?('카드 사용자'))
+    assert(!page.has_content?('퇴 직자'))
   end
 
   test 'should visit vacations' do

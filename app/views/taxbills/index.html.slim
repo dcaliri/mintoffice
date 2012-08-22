@@ -24,7 +24,10 @@
 #show_command
     = link_to t('taxbills.total.link'), [:total, :taxbills]
     = " | "
-    = link_to t('common.title.new'), [:new, :taxbill]
+    - unless Taxbill.no_taxman_and_client
+      = link_to t('common.title.new'), [:new, :taxbill]
+    - else
+      = link_to t('common.title.new'), "#", class: 'no-taxman-and-client'
 
 - unless @taxbills.empty?
     h2
@@ -38,8 +41,9 @@
         th= BusinessClient.human_attribute_name('name')
         th= BusinessClient.human_attribute_name('owner')
         th= Taxbill.human_attribute_name('total')
+        th.link_button_area
       - @taxbills.each do |taxbill|
-        tr.selectable onclick="location.href='#{taxbill_path(taxbill)}'"
+        tr.selectable.link_to*{"data-url" => taxbill_path(taxbill)}
           td=h taxbill.billtype == 'purchase' ? t('taxbills.purchase_bill') : t('taxbills.sales_bill')
           - if taxbill.transacted_at
             td=h taxbill.transacted_at.strftime("%Y-%m-%d")
@@ -57,10 +61,17 @@
               td
           td class="numrow"
             =h number_to_currency taxbill.total
+          td.link_button_area
+            = link_to '상세보기', taxbill, class: 'btn btn-primary'
     br
     center
       = will_paginate @taxbills
 - else
   h3
     = t 'taxbills.index.empty'
+
+coffee:
+  $(".no-taxman-and-client").click (event)->
+    event.preventDefault();
+    alert("거래처(Taxman)와 거래처 담당자(BusinessClient)를 먼저 생성해주세요");
 

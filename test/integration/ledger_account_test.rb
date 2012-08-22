@@ -40,11 +40,14 @@ class LedgerAccountTest < ActionDispatch::IntegrationTest
 
   test 'should destroy ledger' do
     visit '/'
+
     click_link '원장 관리'
     find("tr.selectable").click
 
+    disable_confirm_box
+
     click_link '삭제하기'
 
-    assert(!page.has_content?('현금'))
+    assert(!page.has_content?('현금(원장)'))
   end
 end

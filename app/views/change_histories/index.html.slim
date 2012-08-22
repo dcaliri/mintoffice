@@ -9,13 +9,17 @@ table#list-table
     th= ChangeHistory.human_attribute_name('after_value')
     th= ChangeHistory.human_attribute_name('created_at')
     th= ChangeHistory.human_attribute_name('account_id')
+    th.link_button_area
+
   - @histories.each do |history|
-    tr.selectable onclick="location.href='#{change_history_path(history)}'"
+    tr.selectable.link_to*{"data-url" => change_history_path(history)}
       td=h history.fieldname
       td=h history.before_value
       td=h history.after_value
       td=h history.created_at
       td=h history.employee.fullname rescue ""
+      td.link_button_area
+        = link_to '상세보기', history, class: 'btn btn-primary'
 br
 center
   = will_paginate @histories

@@ -34,7 +34,6 @@ Mintoffice::Application.routes.draw do
     namespace :card_approved_sources do
       post 'export'
     end
-    
   end
 
   scope nil, :module => 'section_enrollment' do
@@ -85,6 +84,10 @@ Mintoffice::Application.routes.draw do
 
   resources :documents
   resources :projects, except: [:destroy] do
+    collection do
+      get 'me'
+    end
+
     member do
       post :employee, action: 'add_employee'
       delete :employee, action: 'remove_employee'
@@ -248,7 +251,7 @@ Mintoffice::Application.routes.draw do
 
   resources :required_tags
   resources :namecards
-  resources :business_clients do
+  resources :business_clients, except: [:destroy] do
     resources :taxmen, :except => :index do
       collection do
         get 'find_contact'

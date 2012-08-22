@@ -63,6 +63,7 @@ class BankTransferTest < ActionDispatch::IntegrationTest
     fill_in "출금계좌", with: "123-321-1234"
     fill_in "입금은행", with: "테스트 은행"
     fill_in "입금계좌", with: "321-123-4321"
+    fill_in "처리금액", with: "50000"
     fill_in "수수료", with: "1200"
     fill_in "오류금액", with: "0"
     select('2011', :from => 'bank_transfer_registered_at_1i')
@@ -153,16 +154,17 @@ class BankTransferTest < ActionDispatch::IntegrationTest
 
     click_link '지출내역서 만들기'
 
-    fill_in "내역", with: "지출내역서 내역 입력 테스트"
+    fill_in "내역", with: "은행 이체 지출내역서"
 
     click_button '지출 내역서 만들기'
 
-    assert(page.has_content?('지출내역서 내역 입력 테스트'))
+    assert(page.has_content?('은행 이체 지출내역서'))
 
     click_link '이체 내역 보기'
-    click_link '지출내역서 보기'
+    click_link '테스트 프로젝트'
 
-    assert(page.has_content?('지출내역서 상세정보'))
+    assert(page.has_content?('테스트 프로젝트'))
+    assert(page.has_content?('은행 이체 지출내역서'))
   end
 
   test "should upload an excel file" do
@@ -171,8 +173,8 @@ class BankTransferTest < ActionDispatch::IntegrationTest
     visit '/'
     click_link '은행계좌 목록'
     click_link '이체내역 보기'
-   
     click_link '엑셀 파일로 올리기'
+
     path = File.join(::Rails.root, "test/fixtures/excels/bank_transfer_fixture.xls") 
     attach_file("upload_file", path)
 
@@ -182,6 +184,29 @@ class BankTransferTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('321-123-123456'))
     assert(page.has_content?('기업은행'))
     assert(page.has_content?('28505013648'))
+  end
+
+  test "should upload an nonghyup transfer excel file" do
+    BankTransfer.destroy_all
+
+    visit '/'
+    click_link '은행계좌 목록'
+    click_link '이체내역 보기'
+    click_link '엑셀 파일로 올리기'
+
+    select '농협', from: 'bank_type'
+
+    path = File.join(::Rails.root, "test/fixtures/excels/nonghyup_bank_transfer_fixture.xlsx") 
+    attach_file("upload_file", path)
+
+    click_button '미리보기'
+    click_button '엑셀 파일'
+
+    select "농협 : 301-0111-7655-01"
+
+    assert(page.has_content?('301-0111-7655-01'))
+    assert(page.has_content?('신한(조흥)'))
+    assert(page.has_content?('28505013648.0'))
   end
 
   test "should search transfer data" do

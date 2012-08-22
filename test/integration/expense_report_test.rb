@@ -6,6 +6,7 @@ class ExpenseReportTest < ActionDispatch::IntegrationTest
   fixtures :postings
   fixtures :ledger_accounts
   fixtures :projects
+  fixtures :project_assign_infos
   fixtures :reports
   fixtures :report_people
   fixtures :report_comments
@@ -31,6 +32,7 @@ class ExpenseReportTest < ActionDispatch::IntegrationTest
 
   test 'should edit expense' do
     visit '/'
+
     click_link '지출내역서 관리'
     find("tr.selectable").click
 
@@ -71,10 +73,10 @@ class ExpenseReportTest < ActionDispatch::IntegrationTest
     click_link '지출내역서 관리'
     visit '/expenses/2'
     click_link '카드 영수증 보기'
-    
+
     assert(page.has_content?('5,800'))
-    assert(page.has_content?('4,500'))
-    assert(page.has_content?('GS25'))
+    assert(page.has_content?('6,000'))
+    assert(page.has_content?('버터플라이'))
     assert(page.has_content?('sk트윈타워 A동'))
   end
 

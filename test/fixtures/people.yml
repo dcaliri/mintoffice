@@ -18,3 +18,15 @@ has_google_apps_account:
 
 google_account_user:
   id: 7
+
+daum_account_user:
+  id: 8
+
+nate_account_user:
+  id: 9
+
+retired_user:
+  id: 10
+
+unusable_account:
+  id: 11

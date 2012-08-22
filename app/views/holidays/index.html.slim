@@ -13,7 +13,10 @@ table#list-table
   tr
     th= Holiday.human_attribute_name("theday")
     th= Holiday.human_attribute_name("dayname")
+    th.link_button_area
     - holidays.each do |holiday|
-      tr.selectable onclick="location.href='#{holiday_path(holiday)}'"
+      tr.selectable.link_to*{"data-url" => holiday_path(holiday)}
         td=h holiday.theday
         td=h holiday.dayname
+        td.link_button_area
+          = link_to '상세보기', holiday, class: 'btn btn-primary'

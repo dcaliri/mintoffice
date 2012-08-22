@@ -22,8 +22,9 @@ table#list-table
       = Namecard.human_attribute_name("department")
     th
       = Namecard.human_attribute_name("jobtitle")
+    th.link_button_area
   - @namecards.each do |namecard|
-    tr.selectable onclick="location.href='#{namecard_path(namecard)}'"
+    tr.selectable.link_to*{"data-url" => namecard_path(namecard)}
       td
         =h namecard.name
       td
@@ -32,6 +33,8 @@ table#list-table
         =h namecard.department
       td
         =h namecard.jobtitle
+      td.link_button_area
+        = link_to '상세보기', namecard, class: 'btn btn-primary'
 br
 center
   = will_paginate @namecards

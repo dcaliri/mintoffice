@@ -32,7 +32,7 @@ h2
         = employee.fullname
         = " "
         - if employee.project_owner?(project)
-          = "-프로젝트 관리자- "
+          = t('projects.edit.manager')
         - else
           = link_to t("projects.edit.owner"), change_owner_project_path(employee_id: employee), method: :put
         = " | "

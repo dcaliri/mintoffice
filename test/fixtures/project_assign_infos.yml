@@ -21,3 +21,11 @@ card_used_user_registe_project:
   created_at: <%= Time.zone.now %>
   updated_at: <%= Time.zone.now %>
   owner: f
+
+normal_user_registe_project:
+  id: 4
+  employee_id: 2
+  project_id: 1
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
+  owner: f

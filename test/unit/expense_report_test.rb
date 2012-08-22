@@ -18,12 +18,12 @@ class ExpenseReportTest < ActiveSupport::TestCase
     expense_report = ExpenseReport.new
 
     expense_report.employee_id = current_target_user_employees.id
-    expense_report.target_type = current_cardbill.class
+    expense_report.target_type = current_cardbill.class.to_s
     expense_report.target_id = current_cardbill.id
     expense_report.project_id = current_project.id
     expense_report.description = "test"
     expense_report.expensed_at = current_cardbill.transdate
-    expense_report.amount = current_cardbill.totalamount
+    expense_report.amount = current_cardbill.amount
 
     assert expense_report.save!
   end

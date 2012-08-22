@@ -11,6 +11,14 @@ class ExpenseReport < ActiveRecord::Base
 
   include Reportable
 
+  before_validation :check_total_amount
+  def check_total_amount
+    except_me = target.expense_reports.where('id IS NOT ?', id)
+    if except_me.total_amount + self.amount > target.totalamount
+      errors.add(:amount, "이 너무 많습니다")
+    end
+  end
+
   def add_permission_of_project_owner
     report.permission project.owner.person, :write
   end

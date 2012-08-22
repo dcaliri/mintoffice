@@ -15,3 +15,9 @@ hsbc_bank:
   name: hsbc
   number: "123-321-3211234"
   note: "주 거래처 계좌"
+
+nonghyup_bank:
+  id: 4
+  name: nonghyup
+  number: "301-0111-7655-01"
+  note: "농협 은행"

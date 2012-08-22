@@ -239,6 +239,10 @@ ko:
                 will_be_paied_at: 결제예정일
                 canceled_at_strftime: 취소일자
                 will_be_paied_at_strftime: 결제예정일
+                money_us: 승인금액($)
+                nation: 국가명
+                nation_statement: 국내외
+                refuse_reason: 거절사유
             card_used_source:
                 card_no: 카드번호
                 bank_account: 결제계좌번호
@@ -268,6 +272,14 @@ ko:
                 store_tel: 가맹점전화번호
                 approved_at_strftime: 승인일자
                 approved_time_strftime: 승인시간
+                used_at: 이용일자
+                tax_type: 과세유형
+                sales_statement: 전표구분
+                nation_statement: 국내외구분
+                prepayment_statement: 선납구분
+                accepted_at: 접수일자
+                apply_sales_statement: 전표신청
+                purchase_statement: 구매여부
             cardbill:
                 cardno: "카드 번호"
                 creditcard_id: 카드
@@ -593,6 +605,8 @@ ko:
         bank_account:
             shinhan: 신한 은행
             ibk: 기업 은행
+            hsbc: HSBC
+            nonghyup: 농협
         bank_transaction:
             fail: 에 실패했습니다. 입력 값을 다시 확인해주세요.
         card_approved_source:
@@ -604,8 +618,10 @@ ko:
             one_more_need_i: 이 적어도 하나 이상 필요합니다.
         creditcard:
             used_detail: 이용내역
+            used_hyundai_detail: 이용내역(현대카드)
             approved_detail: 승인내역
-            foreign_detail: 해외승인내역
+            approved_hyundai: 승인내역(현대카드)
+            foreign_detail: 승인내역(해외)
         expense_report:
             debit: 차변
             credit: 대변
@@ -627,6 +643,8 @@ ko:
             debit: 차변
             credit: 대변
             incorrect: 의 합계가 맞지 않습니다.
+        project:
+            not: 없음
         report:
             all: 전체
             default: 결재전 + 나의 결재 요청 전
@@ -1295,6 +1313,8 @@ ko:
         form:
             list: 항목
     projects:
+        me:
+            title: 내가 속한 프로젝트만 보기
         expense:
             title: 지출내역
             detail: 내역
@@ -1309,7 +1329,7 @@ ko:
         show:
             title: 프로젝트 상세 내역
             allocation_ratio: 할당비율 조정
-            accounts: Users
+            employees: 참여자
         new:
             title: 새 프로젝트 작성
         edit:
@@ -1317,6 +1337,7 @@ ko:
             completed: 프로젝트 완료
             confirm_complete: 프로젝트를 종료하시겠습니까?
             owner: (관리자 변경하기)
+            manager: "-프로젝트 관리자- "
         assign:
             title: 할당 비율 조정
             not_hundred: 할당 비율이 100%가 아닙니다.
@@ -1354,8 +1375,6 @@ ko:
             new: New
         required_tags: RequiredTags
     shared:
-        footer:
-            mint: mint office - m17.3hotfix1
         show_attachment:
             download: "다운로드"
         attachments:
@@ -1479,6 +1498,7 @@ ko:
             approved: 승인완료
             not_approved: 미승인
             empty: 연차 내역이 없습니다
+            day: 일
         show:
             link: 연차 관리
             info: "할당 연차: %{total}일, 사용 연차: %{used}일, 잔여 연차: %{remain}일"
