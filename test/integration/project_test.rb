@@ -65,6 +65,13 @@ class ProjectTest < ActionDispatch::IntegrationTest
     fill_in "계정명", with: "admin"
     click_button '추가하기'
 
+    click_link '내용 보기'
+
+    assert(page.has_content?('없음'))
+    assert(page.has_content?('김 관리'))
+
+    click_link '수정하기'
+
     fill_in "계정명", with: "normal"
     click_button '추가하기'
 
@@ -74,9 +81,22 @@ class ProjectTest < ActionDispatch::IntegrationTest
 
     assert(page.has_content?('김 관리 -프로젝트 관리자-'))
 
+    click_link '내용 보기'
+
+    assert(!page.has_content?('없음'))
+    assert(page.has_content?('김 관리'))
+    assert(page.has_content?('김 개똥'))
+
+    click_link '수정하기'
     click_link '삭제하기'
 
     assert(!page.has_content?('김 관리'))
+
+    click_link '내용 보기'
+
+    assert(page.has_content?('없음'))
+    assert(!page.has_content?('김 관리'))
+    assert(page.has_content?('김 개똥'))
   end
 
   test 'should complete project' do
