@@ -37,3 +37,7 @@ nate_account_user:
 retired_user:
   company_id: 1
   person_id: 10
+
+unusable_account:
+  company_id: 1
+  person_id: 11

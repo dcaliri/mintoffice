@@ -27,6 +27,12 @@ class GroupTest < ActionDispatch::IntegrationTest
 
     check('group_person_ids_')
 
+    assert(page.has_content?('normal'))
+    assert(page.has_content?('card_manager'))
+    assert(page.has_content?('card_user'))
+    assert(!page.has_content?('retired_user'))
+    assert(!page.has_content?('[X] unusable_account'))
+
     click_button 'Group 만들기'
 
     assert(page.has_content?('그룹명 입력 테스트'))
@@ -39,6 +45,12 @@ class GroupTest < ActionDispatch::IntegrationTest
     click_link '수정하기'
 
     fill_in "그룹명", with: "그룹명 수정 테스트"
+
+    assert(page.has_content?('normal'))
+    assert(page.has_content?('card_manager'))
+    assert(page.has_content?('card_user'))
+    assert(!page.has_content?('retired_user'))
+    assert(!page.has_content?('[X] unusable_account'))
 
     click_button 'Group 수정하기'
 
