@@ -186,6 +186,27 @@ class BankTransferTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('28505013648'))
   end
 
+  test "should upload an nonghyup transfer excel file" do
+    BankTransfer.destroy_all
+
+    visit '/'
+    click_link '은행계좌 목록'
+    click_link '이체내역 보기'
+    click_link '엑셀 파일로 올리기'
+
+    select '농협', from: 'bank_type'
+   
+    path = File.join(::Rails.root, "test/fixtures/excels/nonghyup_bank_transfer_fixture.xlsx") 
+    attach_file("upload_file", path)
+
+    click_button '미리보기'
+    click_button '엑셀 파일'
+
+    assert(page.has_content?('321-123-123456'))
+    assert(page.has_content?('기업은행'))
+    assert(page.has_content?('28505013648'))
+  end
+
   test "should search transfer data" do
     visit '/'
     click_link '은행계좌 목록'
