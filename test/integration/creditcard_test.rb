@@ -11,8 +11,10 @@ class CreditCardTest < ActionDispatch::IntegrationTest
     visit '/'
     click_link '신용카드 관리'
 
+    save_and_open_page
     assert(page.has_content?('식대카드'))
     assert(page.has_content?('법인카드'))
+    assert(page.has_content?('현대카드'))
   end
 
   test 'should show creditcard' do

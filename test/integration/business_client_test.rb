@@ -28,7 +28,6 @@ class BusinessClientTest < ActionDispatch::IntegrationTest
     click_button '거래처 만들기'
 
     assert(page.has_content?('거래처이(가) 성공적으로 생성되었습니다.'))
-
     assert(page.has_content?('거래처명 입력 테스트'))
     assert(page.has_content?('123-321-12345'))
     assert(page.has_content?('업종 입력 테스트'))
