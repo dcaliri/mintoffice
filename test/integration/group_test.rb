@@ -31,7 +31,6 @@ class GroupTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('card_manager'))
     assert(page.has_content?('card_user'))
     assert(!page.has_content?('retired_user'))
-    assert(!page.has_content?('[X] unusable_account'))
 
     click_button 'Group 만들기'
 
@@ -50,7 +49,6 @@ class GroupTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('card_manager'))
     assert(page.has_content?('card_user'))
     assert(!page.has_content?('retired_user'))
-    assert(!page.has_content?('[X] unusable_account'))
 
     click_button 'Group 수정하기'
 

@@ -31,7 +31,7 @@ class UsedVacationTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('test'))
 
     visit '/'
-    
+
     assert(page.has_content?('휴가 : 김 관리(기타)'))
   end
 

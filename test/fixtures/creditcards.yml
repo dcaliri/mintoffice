@@ -24,7 +24,7 @@ ibk_card:
   short_name: 결재용
   bank_account_id: 2
 
-ibk_card:
+nonghyup_card:
   id: 3
   cardno: 4210-0559-6403
   expireyear: 2013
