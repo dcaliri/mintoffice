@@ -57,8 +57,7 @@ class DocumentsController < ApplicationController
   private
 
   def project_list
-    @projects ||= projects.find(:all, :order => "name ASC")
+    @projects ||= current_employee.projects.find(:all, :order => "name ASC")
   end
-
   helper_method :project_list
 end
