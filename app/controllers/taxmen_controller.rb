@@ -40,8 +40,14 @@ class TaxmenController < ApplicationController
 
   def update_contact
     @taxman = @business_client.taxmen.find(params[:id])
-    # @taxman.person.contact = Contact.find(params[:contact])
-    @taxman.person = Contact.find(params[:contact]).person
+
+    if @contact.person
+      @taxman.person = Contact.find(params[:contact]).person
+    else
+      @taxman.build_person
+      @taxman.person.contact = Contact.find(params[:contact])
+    end
+
     @taxman.person.save!
     @taxman.save!
     redirect_to @business_client

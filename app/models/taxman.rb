@@ -9,7 +9,7 @@ class Taxman < ActiveRecord::Base
   end
 
   def self.person_exist?(person)
-    joins(:person).where('people.id = ?', person.id).empty?
+    !person or joins(:person).where('people.id = ?', person.id).empty?
   end
 
   include Historiable
