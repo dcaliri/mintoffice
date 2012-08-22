@@ -55,11 +55,11 @@ class CardBillTest < ActionDispatch::IntegrationTest
 
     click_link '지출내역서 만들기'
 
-    fill_in "내역", with: "내역 입력 테스트"
+    fill_in "내역", with: "카드 영수증 지출내역서"
 
     click_button '지출 내역서 만들기'
 
-    assert(page.has_content?('내역 입력 테스트'))
+    assert(page.has_content?('카드 영수증 지출내역서'))
 
     visit '/'
     click_link '카드 영수증 목록'
@@ -68,6 +68,7 @@ class CardBillTest < ActionDispatch::IntegrationTest
     click_link '테스트 프로젝트'
 
     assert(page.has_content?('테스트 프로젝트'))
+    assert(page.has_content?('카드 영수증 지출내역서'))
   end
 
   test 'should show approved_sources' do
