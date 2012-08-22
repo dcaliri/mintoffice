@@ -61,18 +61,6 @@ class BusinessClientTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('대표자 수정 테스트'))
   end
 
-  test 'should destroy business_client' do
-    visit '/'
-    click_link '거래처 관리'
-    find("tr.selectable").click
-
-    disable_confirm_box
-
-    click_link '삭제하기'
-
-    assert(page.has_content?('거래처이(가) 성공적으로 제거 되었습니다.'))
-  end
-
   test 'should add taxman' do
     visit '/'
     click_link '거래처 관리'
