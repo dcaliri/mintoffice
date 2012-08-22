@@ -186,14 +186,14 @@ class Account < ActiveRecord::Base
   end
 
   def create_google_app_account
-    return false unless employee
+    return false unless person.employee
 
     current_company = Company.current_company
     transporter = google_transporter
 
     # Creating a Account
     user = GoogleApps::Atom::User.new
-    user.set login: name, password: current_company.default_password, first_name: employee.firstname, last_name: employee.lastname
+    user.set login: name, password: current_company.default_password, first_name: person.employee.firstname, last_name: person.employee.lastname
     transporter.new_user user
 
     doc = Nokogiri::XML(transporter.response.body)
