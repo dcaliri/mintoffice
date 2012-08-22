@@ -34,5 +34,5 @@ nonghyup_card:
   cardholder: 민트기술
   created_at: <%= Time.zone.now %>
   updated_at: <%= Time.zone.now %>
-  short_name: 결재용
+  short_name: "****-4210-0559-6403"
   bank_account_id: 4
