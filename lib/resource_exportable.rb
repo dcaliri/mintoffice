@@ -52,6 +52,9 @@ module ResourceExportable
 
   module ClassMethods
     def make_filename(extension)
+      default_folder = "/tmp"
+      File.directory?(default_folder) || Dir.mkdir(default_folder)
+
       "#{Rails.root}/tmp/#{table_name}_#{Time.now.utc.strftime("%Y%m%d%H%M%S")}#{Person.current_person.id}.#{extension}"
       # "#{Rails.root}/tmp/#{table_name}.#{extension}"
     end
