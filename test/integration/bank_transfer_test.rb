@@ -195,16 +195,18 @@ class BankTransferTest < ActionDispatch::IntegrationTest
     click_link '엑셀 파일로 올리기'
 
     select '농협', from: 'bank_type'
-   
+
     path = File.join(::Rails.root, "test/fixtures/excels/nonghyup_bank_transfer_fixture.xlsx") 
     attach_file("upload_file", path)
 
     click_button '미리보기'
     click_button '엑셀 파일'
 
-    assert(page.has_content?('321-123-123456'))
-    assert(page.has_content?('기업은행'))
-    assert(page.has_content?('28505013648'))
+    select "농협 : 301-0111-7655-01"
+
+    assert(page.has_content?('301-0111-7655-01'))
+    assert(page.has_content?('신한(조흥)'))
+    assert(page.has_content?('28505013648.0'))
   end
 
   test "should search transfer data" do
