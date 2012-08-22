@@ -13,9 +13,6 @@ class Employee < ActiveRecord::Base
   has_many :except_columns
   has_many :change_histories
 
-  has_many :document_owners, :order => 'created_at DESC'
-  has_many :documents, :through => :document_owners, :source => :document
-
   has_many :project_infos, class_name: "ProjectAssignInfo"
 
   has_many :projects, through: :project_infos

@@ -26,8 +26,10 @@
     = " | "
     - unless Taxbill.no_taxman_and_client
       = link_to t('common.title.new'), [:new, :taxbill]
+      = link_to t('common.title.excel'), [:excel, :taxbill]
     - else
       = link_to t('common.title.new'), "#", class: 'no-taxman-and-client'
+      = link_to t('common.title.excel'), "#", class: 'no-taxman-and-client'
 
 - unless @taxbills.empty?
     h2

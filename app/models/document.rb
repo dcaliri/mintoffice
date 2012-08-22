@@ -4,8 +4,6 @@ class Document < ActiveRecord::Base
   belongs_to :company
 
   belongs_to :project
-  has_many :document_owners
-  has_many :employees, :through => :document_owners, :source => :employee
 
   include Attachmentable
   include Taggable

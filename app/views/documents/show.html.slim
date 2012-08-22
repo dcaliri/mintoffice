@@ -16,12 +16,6 @@ h2
       dd
         = document.project_name
       dt
-        = Document.human_attribute_name("owner")
-      dd
-        - if !document.employees.blank?
-          - names = document.employees.index_by {|employee| employee.fullname }
-          = names.keys.sort.join ", "
-      dt
         = Document.human_attribute_name("tags")
       dd
         = document.tag_list

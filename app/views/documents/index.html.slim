@@ -22,8 +22,6 @@ table#list-table
     th
       = Document.human_attribute_name("project")
     th
-      = Document.human_attribute_name("owner")
-    th
       = Document.human_attribute_name("tags")
     th
       = Report.human_attribute_name('status')
@@ -37,10 +35,6 @@ table#list-table
           =h document.title
         td
           =h document.project_name
-        td
-          - if !document.employees.blank?
-            - names = document.employees.index_by {|employee| employee.fullname }
-            = names.keys.sort.join(", ")
         td
           =h document.tag_list
         td
