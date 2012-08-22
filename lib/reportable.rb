@@ -49,6 +49,15 @@ module Reportable
     self
   end
 
+  def email_notify_title(action, from, to, url)
+  end
+
+  def boxcar_notify_title(action, from, to, url)
+  end
+
+  def email_notify_body(action, from, to, url, comment)
+  end
+
   module ClassMethods
     def no_permission
       includes(:report => :accessors).merge(AccessPerson.no_permission)

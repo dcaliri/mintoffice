@@ -59,7 +59,7 @@ class Report < ActiveRecord::Base
 
     save!
 
-    notify(:report, prev_reporter, next_reporter, report_url)
+    notify(:report, prev_reporter, next_reporter, report_url, comment)
   end
 
   def approve!(person, comment)
@@ -98,7 +98,7 @@ class Report < ActiveRecord::Base
 
     save!
 
-    notify(:rollback, prev_reporter, next_reporter, report_url)
+    notify(:rollback, prev_reporter, next_reporter, report_url, comment)
   end
 
   def report?
@@ -139,24 +139,29 @@ class Report < ActiveRecord::Base
     next_reporter
   end
 
-  def notify(action, from, to, url)
+  def notify(action, from, to, url, comment)
     return if !from or !to
 
     target_name = target.class.to_s.downcase
-      title = I18n.t("reports.#{action}.title.#{target_name}", {
-        default: I18n.t("reports.#{action}.title.default"),
-        prev: from.fullname,
-        next: to.fullname
-      })
+    title = I18n.t("reports.#{action}.title.#{target_name}", {
+      default: I18n.t("reports.#{action}.title.default"),
+      prev: from.fullname,
+      next: to.fullname
+    })
 
-      body = I18n.t("reports.#{action}.body.#{target_name}", {
-        default: I18n.t("reports.#{action}.body.default"),
-        prev: from.fullname,
-        next: to.fullname,
-        url: url,
-      })
+    email_title = target.email_notify_title(action, from, to, url) || title
+    boxcar_title = target.boxcar_notify_title(action, from, to, url) || title
 
-      Boxcar.send_to_boxcar_account(to.person, from.fullname, title)
-      ReportMailer.report(target, from.person, to.person, title, body)
+    body = I18n.t("reports.#{action}.body.#{target_name}", {
+      default: I18n.t("reports.#{action}.body.default"),
+      prev: from.fullname,
+      next: to.fullname,
+      url: url,
+    })
+
+    email_body = target.email_notify_body(action, from, to, url, comment) || body
+
+    Boxcar.send_to_boxcar_account(to.person, from.fullname, boxcar_title)
+    ReportMailer.report(target, from.person, to.person, email_title, email_body)
   end
 end
