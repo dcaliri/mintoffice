@@ -15,8 +15,6 @@ h2
       = dtdd business_client, "category"
       = dtdd business_client, "business_status"
       = dtdd business_client, "address"
-      dt= BusinessClient.human_attribute_name(:bankbook)
-      dd= business_client.bankbook.name rescue ""
       dt
         = Taxman.model_name.human
       - unless business_client.taxmen.empty?
