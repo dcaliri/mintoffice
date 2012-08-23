@@ -45,6 +45,37 @@ class ExpenseReportTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('지출내역서 내역 수정 테스트'))
   end
 
+  test 'should add expense tag' do
+    visit '/'
+
+    click_link '지출내역서 관리'
+    find("tr.selectable").click
+
+    click_link '수정'
+
+    fill_in '태그명', with: 'test tag'
+    click_button '추가하기'
+
+    assert(page.has_content?('test tag'))
+
+    fill_in '태그명', with: 'test tag'
+    click_button '추가하기'
+
+    assert(page.has_content?('Already exists'))
+
+    click_link '삭제하기'
+
+    assert(!page.has_content?('test tag'))
+
+    fill_in '태그명', with: 'test tag'
+    click_button '추가하기'
+
+    click_link '돌아가기'
+    find("tr.selectable").click
+
+    assert(page.has_content?('test tag'))
+  end
+
   test 'should destroy expense' do
     visit '/'
     click_link '지출내역서 관리'
