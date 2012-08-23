@@ -23,7 +23,7 @@ class ActionDispatch::IntegrationTest
   DatabaseCleaner.strategy = :truncation
 
   def click_link(locator)
-    if Capybara.default_driver == :selenium and locator == "상세보기"
+    if Capybara.current_driver == :selenium and locator == "상세보기"
       find("tr.selectable").click
     else
       super
@@ -31,7 +31,14 @@ class ActionDispatch::IntegrationTest
   end
 
   protected
+  def switch_to_selenium
+    Capybara.current_driver = :selenium
+    simple_authenticate
+  end
+
   def switch_to_rack_test
+    return if Capybara.current_driver == :rack_test
+
     browser = Capybara.current_session.driver.browser
     browser.manage.delete_all_cookies
 
