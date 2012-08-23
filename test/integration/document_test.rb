@@ -59,31 +59,6 @@ class DocumentTest < ActionDispatch::IntegrationTest
     assert(!page.has_content?('테스트 문서'))
   end
 
-  test 'should add owners' do
-    visit '/'
-    click_link '문서 관리'
-    find("tr.selectable").click
-
-    click_link '수정하기'
-
-    fill_in "사용자 추가", with: "normal"
-    click_button '추가하기'
-
-    assert(page.has_content?('김 개똥'))
-  end
-
-  test 'should delete owners' do
-    visit '/'
-    click_link '문서 관리'
-    find("tr.selectable").click
-
-    disable_confirm_box
-    
-    click_link '삭제하기'
-
-    assert(!page.has_content?('admin삭제하기'))
-  end
-
   test 'should create tags' do
     visit '/'
     click_link '문서 관리'

@@ -31,30 +31,7 @@ class DocumentsController < ApplicationController
     redirect_to :documents
   end
 
-  def add_owner
-    owner = Account.find_by_name(params[:accountname])
-    employee = owner.person.employee
-    if owner
-      if document.employees.exists?(employee)
-        flash[:notice] = 'Already exists'
-      else
-        document.employees << employee
-      end
-    else
-      flash[:notice] = 'No such account'
-    end
-
-    redirect_to [:edit, document]
-  end
-
-  def remove_owner
-    owner = Employee.find(params[:uid])
-    document.employees.delete(owner)
-    redirect_to [:edit, document]
-  end
-
-  private
-
+private
   def project_list
     @projects ||= current_employee.projects.find(:all, :order => "name ASC")
   end
