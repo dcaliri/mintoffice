@@ -77,7 +77,8 @@ class DocumentTest < ActionDispatch::IntegrationTest
     click_link '문서 관리'
     find("tr.selectable").click
 
-    click_link '수정하기'
+    disable_confirm_box
+    
     click_link '삭제하기'
 
     assert(!page.has_content?('admin삭제하기'))
