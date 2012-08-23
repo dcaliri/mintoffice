@@ -12,7 +12,6 @@ class DocumentsController < ApplicationController
   end
 
   def create
-    document.employees << current_employee
     document.add_tags(params[:tag])
     document.save!
     redirect_to document, notice: t('common.messages.created', :model => Document.model_name.human)
