@@ -7,4 +7,15 @@ fixture:
   revenue: 2000000
   created_at: <%= Time.zone.now %>
   updated_at: <%= Time.zone.now %>
-  company_id: 1  
+  company_id: 1
+
+no_user_project:
+  id: 2
+  name: "참여자 없는 프로젝트"
+  started_on: 2012-07-19
+  ending_on: 2012-07-19
+  ended_on:
+  revenue: 1000000
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
+  company_id: 1

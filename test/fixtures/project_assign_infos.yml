@@ -4,7 +4,7 @@ admin_regist_project:
   project_id: 1
   created_at: <%= Time.zone.now %>
   updated_at: <%= Time.zone.now %>
-  owner: t
+  owner: f
 
 cardbill_manager_registe_project:
   id: 2
@@ -12,7 +12,7 @@ cardbill_manager_registe_project:
   project_id: 1
   created_at: <%= Time.zone.now %>
   updated_at: <%= Time.zone.now %>
-  owner: f
+  owner: t
 
 card_used_user_registe_project:
   id: 3
