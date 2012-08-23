@@ -6,6 +6,7 @@
     = t("common.title.search")
     '  :
     = search_field_tag 'q', params[:q]
+    = submit_tag "검색"
 
 #show_command
   = link_to t('.google'), google_apps_accounts_path
@@ -21,6 +22,7 @@ table#list-table
     th= Account.human_attribute_name('notify_email')
     th= Account.human_attribute_name('boxcar_account')
     th.link_button_area
+
   = render partial: "account", collection: @accounts
 
 #show_command

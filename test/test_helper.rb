@@ -14,8 +14,21 @@ class ActionDispatch::IntegrationTest
 
   self.use_transactional_fixtures = false
 
-  Capybara.default_driver = :selenium
+
+  driver = ENV['driver']
+  if driver
+    Capybara.default_driver = driver.to_sym
+  end
+
   DatabaseCleaner.strategy = :truncation
+
+  def click_link(locator)
+    if Capybara.default_driver == :selenium and locator == "상세보기"
+      find("tr.selectable").click
+    else
+      super
+    end
+  end
 
   protected
   def switch_to_rack_test
@@ -27,7 +40,9 @@ class ActionDispatch::IntegrationTest
   end
 
   def disable_confirm_box
-    page.evaluate_script('window.confirm = function() { return true; }')
+    if Capybara.default_driver == :selenium
+      page.evaluate_script('window.confirm = function() { return true; }')
+    end
   end
 
   private
