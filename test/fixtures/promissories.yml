@@ -1,0 +1,7 @@
+fixture:
+  id: 1
+  expired_at: <%= Time.zone.now %>
+  published_at: <%= Time.zone.now %>
+  amount: 10000000
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
