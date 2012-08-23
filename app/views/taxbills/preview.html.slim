@@ -1,0 +1,20 @@
+#show_command
+  = link_to t('common.title.back'), :taxbills
+h2 ..
+
+= form_tag [:import, :taxbills], multipart: true, class: "tabular" do
+  .box
+    p
+      = label_tag :billtype
+      = select_tag :billtype, options_for_bill_type_select(params[:billtype])
+    p
+      = label_tag :file, t('.file')
+      = text_field_tag :upload, params[:upload][:file].original_filename
+    p
+      = submit_tag "import"
+
+br
+
+h3
+  = t('taxbills.preview.preview')
+  = render 'list'

@@ -10,6 +10,8 @@ class Taxbill < ActiveRecord::Base
   include Historiable
   include Attachmentable
 
+  include SpreadsheetParsable
+
   def self.no_taxman_and_client
     Taxman.count == 0 and BusinessClient.count == 0
   end
@@ -124,5 +126,90 @@ class Taxbill < ActiveRecord::Base
     def latest
       order("transacted_at DESC")
     end
+  end
+
+  PURCHASE = {
+    :name => :purchase,
+    :keys => {
+      :transfered_at => :time,
+    },
+    :columns => {
+      :uid => "번호",
+      :written_at => "작성일자",
+      :approve_no => "승인번호",
+      :transacted_at => "발급일자",
+      :transmit_at => "전송일자",
+      :seller_registration_number => "공급자사업자등록번호",
+      :sellers_minor_place_registration_number => "종사업장번호",
+      :sellers_company_name => "상호",
+      :sellers_representative => "대표자명",
+      :buyer_registration_number => "공급받는자사업자등록번호",
+      :buyers_minor_place_registration_number => "종사업장번호",
+      :buyers_company_name => "상호",
+      :buyerss_representative => "대표자명",
+      :total => "합계금액",
+      :supplied_value => "공급가액",
+      :tax => "세액",
+      :taxbill_classification => "전자세금계산서분류",
+      :taxbill_type => "전자세금계산서종류",
+      :issue_type => "발급유형",
+      :note => "비고",
+      :etc => "기타",
+      :bill_action_type => "영수/청구",
+      :section => "구분",
+      :seller => "공급자",
+      :seller_email => "이메일",
+      :buyer1 => "공급받는자",
+      :buyer1_email => "이메일1",
+      :buyer2 => "공급받는자",
+      :buyer2_email => "이메일2",
+      :item_date => "품목일자",
+      :item_name => "품목명",
+      :item_standard => "품목규격",
+      :quantity => "품목수량",
+      :unitprice => "품목단가",
+      :item_supply_price => "품목공급가액",
+      :item_tax => "품목세액",
+      :item_note => "품목비고",
+    },
+    :position => {
+      :start => {
+        x: 7,
+        y: 1,
+      },
+      :end => 0
+    }
+  }
+
+  def self.purchase_taxbill_parser
+    parser = ExcelParser.new
+    parser.class_name Taxbill
+    parser.column PURCHASE[:columns]
+    parser.key PURCHASE[:keys]
+    parser.option :position => PURCHASE[:position]
+    parser
+  end
+
+  def self.excel_parser(type)
+    if type == :purchase
+      purchase_taxbill_parser
+    elsif type == :sale
+      sale_taxbill_parser
+    else
+      raise "Cannot find excel parser. type = #{type}"
+    end
+  end
+
+  def self.preview_stylesheet(type, upload)
+    raise ArgumentError, I18n.t('common.upload.empty') unless upload
+    path = file_path(upload['file'].original_filename)
+    parser = excel_parser(type.to_sym)
+
+    create_file(path, upload['file'])
+    previews = []
+    parser.parse(path) do |class_name, query, params|
+      previews << Taxbill.build(params)
+    end
+    previews
   end
 end

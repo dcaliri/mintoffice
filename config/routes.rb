@@ -271,7 +271,13 @@ Mintoffice::Application.routes.draw do
   end
 
   resources :taxbills do
-    get 'total', :on => :collection
+    collection do
+      get 'excel'
+      post 'preview'
+      post 'import'
+
+      get 'total'
+    end
 
     resources :taxbill_items, :path => "items"
   end
