@@ -41,6 +41,10 @@ class ActionDispatch::IntegrationTest
     Capybara.use_default_driver
   end
 
+  def get_now_time
+    Time.zone.now.strftime("%Y-%m-%d")
+  end
+
   def simple_authenticate
     visit '/test/sessions?person_id=1'
   end

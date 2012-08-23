@@ -128,6 +128,7 @@ class CardApprovedSourcesTest < ActionDispatch::IntegrationTest
     visit '/'
     click_link '신용카드 관리'
     click_link '카드별 승인내역'
+    click_link '카드영수증이 없는 목록 보기'
     click_link '신용카드 영수증 생성'
 
     select('normal', from: 'owner')
