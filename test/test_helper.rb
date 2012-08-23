@@ -56,6 +56,10 @@ class ActionDispatch::IntegrationTest
   def normal_user_access
     visit '/test/sessions?person_id=2'
   end
+
+  def project_admin_access
+    visit '/test/sessions?person_id=3'
+  end
 end
 
 class ActionController::TestCase
