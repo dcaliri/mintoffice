@@ -1,0 +1,15 @@
+shinhan:
+  id: 1
+  name: 신한 통장
+  number: 321-123-123456
+  account_holder: 김 신한
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
+
+ibk:
+  id: 2
+  name: 기업 통장
+  number: 274-062855-01-012
+  account_holder: 김 기업
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
