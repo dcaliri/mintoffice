@@ -412,6 +412,7 @@ ko:
                 name: 그룹명
                 parent: 부모
                 parent_id: 부모
+                employees: 사원 선택
             holiday:
                 theday: 휴일날짜
                 dayname: 휴일명목

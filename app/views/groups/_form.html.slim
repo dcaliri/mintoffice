@@ -17,7 +17,10 @@ h2= t("common.title.#{action_name}")
       - Person.with_employee.without_retired.each do |person|
         - if person.account.present?
           = check_box_tag "group[person_ids][]", person.id, group.people.include?(person)
-          = person.name
+          - if person.employee
+            = "#{person.fullname}(#{person.name})"
+          - else
+            = person.name
         br
   p
     = f.submit
