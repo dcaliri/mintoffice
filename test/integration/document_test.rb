@@ -37,6 +37,8 @@ class DocumentTest < ActionDispatch::IntegrationTest
     click_link '문서 관리'
     click_link '새로운 문서 작성'
 
+    assert(!page.has_content?('소유자'))
+
     fill_in "문서제목", with: "문서제목 입력 테스트"
 
     click_button '만들기'
