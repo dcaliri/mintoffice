@@ -5,6 +5,7 @@ class BusinessClientTest < ActionDispatch::IntegrationTest
   fixtures :business_clients
   fixtures :contacts
   fixtures :taxmen
+  fixtures :bankbooks
 
   test 'should visit business_client list' do
     visit '/'
@@ -20,6 +21,7 @@ class BusinessClientTest < ActionDispatch::IntegrationTest
 
     fill_in "거래처명", with: "거래처명 입력 테스트"
     fill_in "사업자 등록번호", with: "123-321-12345"
+    select '신한 통장', from: 'business_client_bankbook_id'
     fill_in "업종", with: "업종 입력 테스트"
     fill_in "업태", with: "업태 입력 테스트"
     fill_in "주소", with: "주소 입력 테스트"
@@ -34,16 +36,18 @@ class BusinessClientTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('업종 입력 테스트'))
     assert(page.has_content?('업태 입력 테스트'))
     assert(page.has_content?('주소 입력 테스트'))
+    assert(page.has_content?('신한 통장'))
   end
 
   test 'should edit business_client' do
     visit '/'
     click_link '거래처 관리'
-    find("tr.selectable").click
+    click_link '상세보기'
     click_link '수정하기'
 
     fill_in "거래처명", with: "거래처명 수정 테스트"
     fill_in "사업자 등록번호", with: "321-123-54321"
+    select '기업 통장', from: 'business_client_bankbook_id'
     fill_in "업종", with: "업종 수정 테스트"
     fill_in "업태", with: "업태 수정 테스트"
     fill_in "주소", with: "주소 수정 테스트"
@@ -59,16 +63,17 @@ class BusinessClientTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('업태 수정 테스트'))
     assert(page.has_content?('주소 수정 테스트'))
     assert(page.has_content?('대표자 수정 테스트'))
+    assert(page.has_content?('기업 통장'))
   end
 
   test 'should add taxman' do
     visit '/'
     click_link '거래처 관리'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     click_link '담당자 추가하기'
 
-    find("tr.selectable").click
+    click_link '상세보기'
 
     assert(page.has_content?('김 관리'))
   end

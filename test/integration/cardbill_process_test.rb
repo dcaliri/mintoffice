@@ -33,7 +33,12 @@ class CardBillProcessTest < ActionDispatch::IntegrationTest
     click_button "로그인"
 
     click_link '카드 영수증 목록'
-    find("tr.selectable").click
+    click_link '상세보기'
+
+    assert(page.has_content?('김 관리'))
+    assert(page.has_content?('김 개똥'))
+    assert(page.has_content?('카드 사용자'))
+    assert(!page.has_content?('퇴 직자'))
 
     select '카드 사용자', from: 'reporter'
     fill_in "코멘트", with: "유저에게 상신"
@@ -52,7 +57,7 @@ class CardBillProcessTest < ActionDispatch::IntegrationTest
     click_button "로그인"
 
     click_link '카드 영수증 목록'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     assert(page.has_content?('card_manager: card_user님에게 결재를 요청하였습니다.'))
     assert(page.has_content?('유저에게 상신'))
@@ -81,7 +86,7 @@ class CardBillProcessTest < ActionDispatch::IntegrationTest
     visit '/'
 
     click_link '카드 영수증 목록'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     select '김 관리', from: 'reporter'
     fill_in '코멘트', with: 'admin에게 상신'
@@ -100,7 +105,7 @@ class CardBillProcessTest < ActionDispatch::IntegrationTest
     click_button "로그인"
 
     click_link '카드 영수증 목록'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     fill_in '코멘트', with: '카드영수증 내역 승인'
 
@@ -109,7 +114,7 @@ class CardBillProcessTest < ActionDispatch::IntegrationTest
     visit '/'
 
     click_link '지출내역서 관리'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     fill_in '코멘트', with: '카드영수증 내역 승인'
 

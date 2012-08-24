@@ -67,6 +67,14 @@ class ActionDispatch::IntegrationTest
     Time.zone.now.strftime("%Y-%m-%d")
   end
 
+  def get_payment_day
+    if Time.zone.now.month < 10
+      Time.zone.now.year.to_s + ".0" + Time.zone.now.month.to_s + ".25"
+    else
+      Time.zone.now.year.to_s + "." + Time.zone.now.month.to_s + ".25"
+    end
+  end
+
   def simple_authenticate
     visit '/test/sessions?person_id=1'
   end
@@ -77,6 +85,10 @@ class ActionDispatch::IntegrationTest
 
   def normal_user_access
     visit '/test/sessions?person_id=2'
+  end
+
+  def project_admin_access
+    visit '/test/sessions?person_id=3'
   end
 end
 

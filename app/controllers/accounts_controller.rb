@@ -4,7 +4,7 @@ class AccountsController < ApplicationController
   skip_before_filter :authorize, :only => [:authenticate, :login, :logout]
 
   layout "application", :except => [:login]
-  layout "login", only: [:login]
+  layout "login", only: [:login, :authenticate]
 
   before_filter :only => [:show] do |c|
     @account = Account.find(params[:id])

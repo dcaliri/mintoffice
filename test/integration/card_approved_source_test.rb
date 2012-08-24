@@ -17,6 +17,8 @@ class CardApprovedSourcesTest < ActionDispatch::IntegrationTest
   end
 
   test 'should show card_approved_sources' do
+    switch_to_selenium
+
     visit '/'
     click_link '신용카드 관리'
     click_link '카드별 승인내역'
@@ -68,6 +70,8 @@ class CardApprovedSourcesTest < ActionDispatch::IntegrationTest
   end
 
   test 'should edit card_approved_sources' do
+    switch_to_selenium
+
     visit '/'
     click_link '신용카드 관리'
     click_link '카드별 승인내역'
@@ -111,15 +115,16 @@ class CardApprovedSourcesTest < ActionDispatch::IntegrationTest
   end
 
   test 'should destroy card_approved_sources' do
+    switch_to_selenium
+
     visit '/'
 
     click_link '신용카드 관리'
     click_link '카드별 승인내역'
-    find("tr.selectable").click
-
-    disable_confirm_box
+    click_link '상세보기'
 
     click_link '삭제'
+    page.driver.browser.switch_to.alert.accept
 
     assert(page.has_content?('카드승인내역'))
   end
@@ -132,6 +137,13 @@ class CardApprovedSourcesTest < ActionDispatch::IntegrationTest
     click_link '신용카드 영수증 생성'
 
     select('normal', from: 'owner')
+
+    assert(page.has_content?('admin'))
+    assert(page.has_content?('normal'))
+    assert(page.has_content?('card_manager'))
+    assert(page.has_content?('card_user'))
+    assert(!page.has_content?('retired_user'))
+
     click_button '카드영수증 생성'
 
     assert(page.has_content?('normal 이(가) 총 1개의 카드영수증을 생성했습니다.'))
@@ -147,6 +159,8 @@ class CardApprovedSourcesTest < ActionDispatch::IntegrationTest
   end
 
   test 'should export excel' do
+    switch_to_selenium
+
     visit '/'
     click_link '신용카드 관리'
     click_link '카드별 승인내역'
@@ -155,6 +169,8 @@ class CardApprovedSourcesTest < ActionDispatch::IntegrationTest
   end
 
   test 'should export PDF' do
+    switch_to_selenium
+
     visit '/'
     click_link '신용카드 관리'
     click_link '카드별 승인내역'
