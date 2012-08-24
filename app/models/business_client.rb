@@ -23,6 +23,10 @@ class BusinessClient < ActiveRecord::Base
 
 private
   def save_bankook
-    self.bankbook = Bankbook.find(bankbook_id) if bankbook_id
+    unless bankbook_id.blank?
+      self.bankbook = Bankbook.find(bankbook_id)
+    else
+      self.bankbook = nil
+    end
   end
 end
