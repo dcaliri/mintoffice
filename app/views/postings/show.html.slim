@@ -1,8 +1,8 @@
 #show_command
   = link_to t('common.title.edit'), [:edit, posting]
-  = " | "
+  = " "
   = link_to t('common.title.destroy'), posting, method: :delete, data: {confirm: t("common.messages.delete_confirm")}
-  = " | "
+  = " "
   = link_to t('common.title.list'), :postings
 
 h2= t('.title')

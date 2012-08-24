@@ -14,14 +14,14 @@ class BusinessClientTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('거래처 관리'))
   end
 
-  test 'should create a new business_client' do
+  test 'should create a new business_client and check bug' do
     visit '/'
     click_link '거래처 관리'
     click_link '신규 작성'
 
     fill_in "거래처명", with: "거래처명 입력 테스트"
     fill_in "사업자 등록번호", with: "123-321-12345"
-    select '신한 통장', from: 'business_client_bankbook_id'
+    select '농협 통장', from: 'business_client_bankbook_id'
     fill_in "업종", with: "업종 입력 테스트"
     fill_in "업태", with: "업태 입력 테스트"
     fill_in "주소", with: "주소 입력 테스트"
@@ -36,7 +36,18 @@ class BusinessClientTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('업종 입력 테스트'))
     assert(page.has_content?('업태 입력 테스트'))
     assert(page.has_content?('주소 입력 테스트'))
-    assert(page.has_content?('신한 통장'))
+    assert(page.has_content?('농협 통장'))
+
+    visit '/'
+    click_link '지급 조서 목록'
+    click_link '신규 작성'
+
+    assert(page.has_content?('없음'))
+
+    visit '/dayworkers'
+    click_link '신규 작성'
+
+    assert(page.has_content?('없음'))
   end
 
   test 'should edit business_client' do
@@ -47,7 +58,7 @@ class BusinessClientTest < ActionDispatch::IntegrationTest
 
     fill_in "거래처명", with: "거래처명 수정 테스트"
     fill_in "사업자 등록번호", with: "321-123-54321"
-    select '기업 통장', from: 'business_client_bankbook_id'
+    select '농협 통장', from: 'business_client_bankbook_id'
     fill_in "업종", with: "업종 수정 테스트"
     fill_in "업태", with: "업태 수정 테스트"
     fill_in "주소", with: "주소 수정 테스트"
@@ -63,7 +74,7 @@ class BusinessClientTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('업태 수정 테스트'))
     assert(page.has_content?('주소 수정 테스트'))
     assert(page.has_content?('대표자 수정 테스트'))
-    assert(page.has_content?('기업 통장'))
+    assert(page.has_content?('농협 통장'))
   end
 
   test 'should add taxman' do

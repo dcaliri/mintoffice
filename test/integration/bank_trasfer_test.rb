@@ -130,16 +130,15 @@ class BankTransferTest < ActionDispatch::IntegrationTest
   end
 
   test "should destroy bank_transfer" do
-    switch_to_selenium
-
     visit '/'
     click_link '은행계좌 목록'
     click_link '이체내역 보기'
 
     click_link '상세보기'
 
+    disable_confirm_box
+
     click_link '삭제'
-    page.driver.browser.switch_to.alert.accept
 
     assert(page.has_content?('외부 내용'))
     assert(page.has_content?('임의 내용'))
