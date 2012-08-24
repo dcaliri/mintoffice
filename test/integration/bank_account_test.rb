@@ -53,14 +53,13 @@ class BankAccountTest < ActionDispatch::IntegrationTest
   end
 
   test "should destroy the document" do
-    switch_to_selenium
-
     visit '/'
     click_link '은행계좌 목록'
     click_link '상세보기'
 
+    disable_confirm_box
+
     click_link '삭제'
-    page.driver.browser.switch_to.alert.accept
 
     assert(!page.has_content?('신한 은행'))
   end
