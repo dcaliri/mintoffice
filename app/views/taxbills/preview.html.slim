@@ -25,9 +25,6 @@ table#list-table
     th= TaxbillItem.human_attribute_name(:quantity)
     th= TaxbillItem.human_attribute_name(:total)
     th= TaxbillItem.human_attribute_name(:tax)
-    th= TaxbillItem.human_attribute_name(:taxbill_id)
-    th= TaxbillItem.human_attribute_name(:created_at)
-    th= TaxbillItem.human_attribute_name(:updated_at)
     th= TaxbillItem.human_attribute_name(:uid)
     th= TaxbillItem.human_attribute_name(:written_at)
     th= TaxbillItem.human_attribute_name(:approve_no)
@@ -63,9 +60,6 @@ table#list-table
       td= item.quantity
       td= item.total
       td= item.tax
-      td= item.taxbill_id
-      td= item.created_at
-      td= item.updated_at
       td= item.uid
       td= item.written_at
       td= item.approve_no
