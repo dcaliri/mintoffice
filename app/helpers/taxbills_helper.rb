@@ -11,4 +11,8 @@ module TaxbillsHelper
 
     [purchase, sales, card].min.year
   end
+
+  def options_for_bill_type_select(billtype=nil)
+    options_for_select([t('taxbills.purchase_bill'),t('taxbills.sales_bill')].zip(Taxbill::BILL_TYPE), billtype)
+  end
 end

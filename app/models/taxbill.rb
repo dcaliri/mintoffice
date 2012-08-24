@@ -2,13 +2,17 @@
 
 class Taxbill < ActiveRecord::Base
   belongs_to :taxman
-  belongs_to :business_client
+  # belongs_to :business_client
   has_many :items, :class_name => 'TaxbillItem', :dependent => :destroy
 
   BILL_TYPE = [:purchase, :sale]
 
   include Historiable
   include Attachmentable
+
+  include SpreadsheetParsable
+  include Excels::Taxbills::Purchase
+  include Excels::Taxbills::Sale
 
   def self.no_taxman_and_client
     Taxman.count == 0 and BusinessClient.count == 0
@@ -124,5 +128,103 @@ class Taxbill < ActiveRecord::Base
     def latest
       order("transacted_at DESC")
     end
+  end
+
+  def self.excel_parser(type)
+    if type == :purchase
+      purchase_taxbill_parser
+    elsif type == :sale
+      sale_taxbill_parser
+    else
+      raise "Cannot find excel parser. type = #{type}"
+    end
+  end
+
+  def self.preview_stylesheet(type, upload)
+    raise ArgumentError, I18n.t('common.upload.empty') unless upload
+    path = file_path(upload['file'].original_filename)
+    parser = excel_parser(type.to_sym)
+
+    create_file(path, upload['file'])
+    previews = []
+    parser.parse(path) do |class_name, query, params|
+      previews << TaxbillItem.new(params)
+    end
+    previews
+  end
+
+  def self.create_with_stylesheet(type, name)
+    type = type.to_sym
+
+    path = file_path(name)
+    parser = excel_parser(type)
+
+    transaction do
+      parser.parse(path) do |class_name, query, params|
+        items = TaxbillItem.where(query)
+
+        if items.empty?
+          if type == :purchase
+            create_purchase_info(type, params)
+          else
+            create_sale_info(type, params)
+          end
+        else
+          resource = items.first
+          resource.update_attributes!(params)
+        end
+      end
+    end
+    File.delete(path)
+  end
+
+  def self.create_purchase_info(type, params)
+    create_taxbill_from_excel(type, {
+      name: params[:sellers_company_name],
+      registration_number: params[:sellers_registration_number],
+      email1: params[:seller_email],
+      email2: nil,
+    }, params)
+  end
+
+  def self.create_sale_info(type, params)
+    create_taxbill_from_excel(type, {
+      name: params[:buyers_company_name],
+      registration_number: params[:buyer_registration_number],
+      email1: params[:buyer1_email],
+      email2: params[:buyer2_email],
+    }, params)
+  end
+
+  def self.create_taxbill_from_excel(type, info, params)
+    taxbill = Taxbill.new(billtype: type, transacted_at: params[:transacted_at])
+    item = taxbill.items.build(params)
+
+    client = BusinessClient.find_by_registration_number(info[:registration_number])
+    unless client
+      client = BusinessClient.new({
+        name: info[:name],
+        registration_number: info[:registration_number]
+      })
+    end
+
+    taxman = client.taxmen.find_by_email([info[:email1], info[:email2]])
+    unless taxman
+      taxman = client.taxmen.build
+      person = taxman.build_person
+      contact = person.build_contact
+
+      contact.emails.build(email: info[:email1])
+      contact.emails.build(email: info[:email2])
+    end
+
+    client.save!
+    client.taxmen << taxman
+
+    Company.current_company.business_clients << client
+
+    taxbill.taxman = taxman
+
+    taxbill.save!
   end
 end

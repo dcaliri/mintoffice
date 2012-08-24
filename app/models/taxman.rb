@@ -12,6 +12,10 @@ class Taxman < ActiveRecord::Base
     !person or joins(:person).where('people.id = ?', person.id).empty?
   end
 
+  def self.find_by_email(email)
+    includes(:person => {:contact => :emails}).where('contact_emails.email' => email).first
+  end
+
   include Historiable
   def history_parent
     business_client
