@@ -13,7 +13,7 @@ class GroupTest < ActionDispatch::IntegrationTest
   test 'should show group_people' do
     visit '/'
     click_link '그룹관리'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     assert(page.has_content?('부모'))
     assert(page.has_content?('서브그룹'))
@@ -44,6 +44,9 @@ class GroupTest < ActionDispatch::IntegrationTest
     visit '/groups/2'
     click_link '수정하기'
 
+    assert(page.has_content?("사원 선택"))
+    assert(!page.has_content?("Employee"))
+
     fill_in "그룹명", with: "그룹명 수정 테스트"
     select 'another', from: 'group_parent_id'
     find(:css, "#group_person_ids_[value='1']").set(true)
@@ -70,7 +73,7 @@ class GroupTest < ActionDispatch::IntegrationTest
   test 'should not show retired_user in edit' do
     visit '/'
     click_link '그룹관리'
-    find("tr.selectable").click
+    click_link '상세보기'
     click_link '수정하기'
 
     assert(page.has_content?("normal"))

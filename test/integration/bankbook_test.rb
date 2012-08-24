@@ -15,7 +15,7 @@ class BankBookTest < ActionDispatch::IntegrationTest
   test 'should show bankbook' do
     visit '/'
     click_link '통장 관리'
-    find('tr.selectable').click
+    click_link '상세보기'
 
     assert(page.has_content?('신한 통장'))
     assert(page.has_content?('321-123-123456'))
@@ -39,11 +39,9 @@ class BankBookTest < ActionDispatch::IntegrationTest
   end
 
   test 'should edit bankbook' do
-  	switch_to_selenium
-
     visit '/'
     click_link '통장 관리'
-    find('tr.selectable').click
+    click_link '상세보기'
 
     click_link '수정하기'
 
@@ -63,7 +61,7 @@ class BankBookTest < ActionDispatch::IntegrationTest
 
     visit '/'
     click_link '통장 관리'
-    find('tr.selectable').click
+    click_link '상세보기'
 
     click_link '삭제하기'
     page.driver.browser.switch_to.alert.accept
