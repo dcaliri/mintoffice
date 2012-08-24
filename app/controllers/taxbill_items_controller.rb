@@ -3,6 +3,10 @@ class TaxbillItemsController < ApplicationController
   expose(:taxbill_items) { taxbill.items }
   expose(:taxbill_item)
 
+  def show
+    @item = taxbill.items.find(params[:id])
+  end
+
   def new
     @item = taxbill.items.where(transacted_at: taxbill.transacted_at).new
   end
