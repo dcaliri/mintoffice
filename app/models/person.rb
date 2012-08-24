@@ -51,7 +51,11 @@ class Person < ActiveRecord::Base
   end
 
   def name
-    account.name
+    if employee
+      "#{employee.fullname}(#{account.name})"
+    else
+      account.name
+    end
   end
 
   def fullname

@@ -28,10 +28,12 @@
       = link_to t('common.title.new'), [:new, :taxbill]
     - else
       = link_to t('common.title.new'), "#", class: 'no-taxman-and-client'
+    = " | "
+    = link_to t('common.title.excel'), [:excel, :taxbills]
 
 - unless @taxbills.empty?
     h2
-      = t('taxbills.index.total_eng') 
+      = t('taxbills.index.total_eng')
       ' :
       = @taxbills.size
     table#list-table

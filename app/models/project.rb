@@ -14,6 +14,10 @@ class Project < ActiveRecord::Base
   validates_uniqueness_of :name, scope: :company_id
   validates_numericality_of :revenue
 
+  def has_manager_permission?(employee)
+    employee.admin? or self.owner == employee
+  end
+
   def change_owner!(employee_id)
     transaction do
       before_owner = self.assign_infos.find_by_owner(true)
