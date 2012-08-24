@@ -10,11 +10,14 @@ h2= t("common.title.#{action_name}")
       = f.label :name
       = f.text_field :name
     p
+      = f.label :parent_id
+      = f.select :parent_id, options_for_groups_select(group, group.parent)
+    p
       = f.label :employees
       - Person.with_employee.without_retired.each do |person|
         - if person.account.present?
           = check_box_tag "group[person_ids][]", person.id, group.people.include?(person)
-          = person.name
+          = name_with_id(person)
         br
   p
     = f.submit

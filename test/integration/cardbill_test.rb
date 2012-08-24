@@ -21,19 +21,20 @@ class CardBillTest < ActionDispatch::IntegrationTest
   test 'should show has_permission_cardbills' do
     visit '/'
     click_link '카드 영수증 목록'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     assert(page.has_content?('카드 영수증 내역'))
   end
 
   test 'should show has_not_permission_cardbills' do
+    switch_to_selenium
+
     visit '/'
     click_link '카드 영수증 목록'
     select('권한을 알 수 없는 내역 보기', :from => 'empty_permission')
-
     assert(page.has_content?('Total: 1'))
 
-    find("tr.selectable").click
+    click_link '상세보기'
 
     assert(page.has_content?('카드 영수증 내역'))
   end
@@ -41,7 +42,7 @@ class CardBillTest < ActionDispatch::IntegrationTest
   test 'should show used_sources' do
     visit '/'
     click_link '카드 영수증 목록'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     click_link '사용 내역'
 
@@ -51,7 +52,7 @@ class CardBillTest < ActionDispatch::IntegrationTest
   test 'should create/show expense_reports' do
     visit '/'
     click_link '카드 영수증 목록'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     click_link '지출내역서 만들기'
 
@@ -63,7 +64,7 @@ class CardBillTest < ActionDispatch::IntegrationTest
 
     visit '/'
     click_link '카드 영수증 목록'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     click_link '테스트 프로젝트'
 
@@ -74,7 +75,7 @@ class CardBillTest < ActionDispatch::IntegrationTest
   test 'should show approved_sources' do
     visit '/'
     click_link '카드 영수증 목록'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     click_link '승인내역'
 
@@ -84,7 +85,7 @@ class CardBillTest < ActionDispatch::IntegrationTest
   test 'should edit cardbill' do
     visit '/'
     click_link '카드 영수증 목록'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     click_link '수정하기'
 
@@ -100,7 +101,7 @@ class CardBillTest < ActionDispatch::IntegrationTest
   test 'should add permission and delete permission' do
     visit '/'
     click_link '카드 영수증 목록'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     select('쓰기', :from => 'access_type')
     select('no employee', :from => 'accessor')
@@ -117,7 +118,7 @@ class CardBillTest < ActionDispatch::IntegrationTest
   test 'should back cardbill list' do
     visit '/'
     click_link '카드 영수증 목록'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     click_link '목록'
 

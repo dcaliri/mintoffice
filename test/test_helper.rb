@@ -14,11 +14,31 @@ class ActionDispatch::IntegrationTest
 
   self.use_transactional_fixtures = false
 
-  Capybara.default_driver = :selenium
+
+  driver = ENV['driver']
+  if driver
+    Capybara.default_driver = driver.to_sym
+  end
+
   DatabaseCleaner.strategy = :truncation
 
+  def click_link(locator)
+    if Capybara.current_driver == :selenium and locator == "상세보기"
+      find("tr.selectable").click
+    else
+      super
+    end
+  end
+
   protected
+  def switch_to_selenium
+    Capybara.current_driver = :selenium
+    simple_authenticate
+  end
+
   def switch_to_rack_test
+    return if Capybara.current_driver == :rack_test
+
     browser = Capybara.current_session.driver.browser
     browser.manage.delete_all_cookies
 
@@ -27,7 +47,9 @@ class ActionDispatch::IntegrationTest
   end
 
   def disable_confirm_box
-    page.evaluate_script('window.confirm = function() { return true; }')
+    if Capybara.default_driver == :selenium
+      page.evaluate_script('window.confirm = function() { return true; }')
+    end
   end
 
   private
@@ -41,6 +63,18 @@ class ActionDispatch::IntegrationTest
     Capybara.use_default_driver
   end
 
+  def get_now_time
+    Time.zone.now.strftime("%Y-%m-%d")
+  end
+
+  def get_payment_day
+    if Time.zone.now.month < 10
+      Time.zone.now.year.to_s + ".0" + Time.zone.now.month.to_s + ".25"
+    else
+      Time.zone.now.year.to_s + "." + Time.zone.now.month.to_s + ".25"
+    end
+  end
+
   def simple_authenticate
     visit '/test/sessions?person_id=1'
   end
@@ -51,6 +85,10 @@ class ActionDispatch::IntegrationTest
 
   def normal_user_access
     visit '/test/sessions?person_id=2'
+  end
+
+  def project_admin_access
+    visit '/test/sessions?person_id=3'
   end
 end
 

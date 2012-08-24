@@ -1,15 +1,15 @@
+# encoding: UTF-8
+
 class Document < ActiveRecord::Base
   belongs_to :company
 
   belongs_to :project
-  has_many :document_owners
-  has_many :employees, :through => :document_owners, :source => :employee
 
   include Attachmentable
   include Taggable
   include Reportable
 
-  self.per_page = 20
+  self.per_page = 1
 
   class << self
     def search(params)
@@ -53,6 +53,22 @@ class Document < ActiveRecord::Base
   def self.search_by_text(query)
     query = "%#{query}%"
     includes(:project).includes(:tags).where('title like ? OR projects.name like ? OR tags.name LIKE ?', query, query, query)
+  end
+
+  def email_notify_title(action, from, to, url)
+    "문서관리 - #{from.fullname}의 결재요청"
+  end
+
+  def boxcar_notify_title(action, from, to, url)
+    "문서관리 - #{from.fullname}의 결재요청 : #{self.title}"
+  end
+
+  def email_notify_body(action, from, to, url, comment)
+    <<-BODY
+      #{self.title}
+      #{comment}
+      #{url}
+    BODY
   end
 end
 

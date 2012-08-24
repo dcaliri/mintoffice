@@ -1,0 +1,15 @@
+#show_command
+  = link_to t('common.title.new'), [:new, :payment_record]
+
+h2= t('common.title.list')
+table#list-table
+  tr
+    th= PaymentRecord.human_attribute_name('name')
+    th= PaymentRecord.human_attribute_name('bankbook')
+    th.link_button_area
+    - @payment_records.each do |record|
+      tr.selectable.link_to*{"data-url" => payment_record_path(record)}
+        td=h record.name
+        td=h record.bankbook.name rescue ""
+        td.link_button_area
+          = link_to '상세보기', record, class: 'btn btn-primary'

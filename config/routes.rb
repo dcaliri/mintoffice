@@ -54,6 +54,9 @@ Mintoffice::Application.routes.draw do
     match ':company_name/recruit' => 'enrollments#index'
   end
 
+  resources :bankbooks
+  resources :promissories
+
   resources :creditcards do
     collection do
       get 'total'
@@ -68,6 +71,8 @@ Mintoffice::Application.routes.draw do
       match 'select_contact'
     end
   end
+
+  resources :payment_records
 
   resources :dayworker_taxes
   resources :card_used_sources do

@@ -16,7 +16,7 @@ class BankAccountTest < ActionDispatch::IntegrationTest
   test 'should visit the bank_account' do
     visit '/'
     click_link '은행계좌 목록'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     assert(page.has_content?('신한 은행'))
     assert(page.has_content?('321-123-123456'))
@@ -56,7 +56,7 @@ class BankAccountTest < ActionDispatch::IntegrationTest
   test 'should edit the exist bank_account' do
     visit '/'
     click_link '은행계좌 목록'
-    find("tr.selectable").click
+    click_link '상세보기'
     click_link '수정'
 
     fill_in "계정", with: "수정된 은행계좌"
@@ -69,13 +69,14 @@ class BankAccountTest < ActionDispatch::IntegrationTest
   end
 
   test "should destroy the bank_account" do
+    switch_to_selenium
+
     visit '/'
     click_link '은행계좌 목록'
-    find("tr.selectable").click
-
-    disable_confirm_box
+    click_link '상세보기'
 
     click_link '삭제'
+    page.driver.browser.switch_to.alert.accept
 
     assert(!page.has_content?('신한 은행'))
   end
@@ -107,7 +108,7 @@ class BankAccountTest < ActionDispatch::IntegrationTest
   test "should show bank_transactions in bank_account" do
     visit '/'
     click_link '은행계좌 목록'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     click_link '입출금 내역'
 
@@ -118,7 +119,7 @@ class BankAccountTest < ActionDispatch::IntegrationTest
   test "should show bank_transfers in bank_account" do
     visit '/'
     click_link '은행계좌 목록'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     click_link '이체 내역'
 

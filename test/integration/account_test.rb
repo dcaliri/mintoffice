@@ -16,7 +16,7 @@ class AccountTest < ActionDispatch::IntegrationTest
   test 'should view account' do
     visit '/'
     click_link '사용자 계정 목록'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     assert(page.has_content?('admin'))
   end
@@ -56,7 +56,7 @@ class AccountTest < ActionDispatch::IntegrationTest
   test 'should edit account' do
     visit '/'
     click_link '사용자 계정 목록'
-    find("tr.selectable").click
+    click_link '상세보기'
     click_link '수정하기'
 
     fill_in "계정명", with: "edit_account"
@@ -79,7 +79,7 @@ class AccountTest < ActionDispatch::IntegrationTest
   test 'should change password' do
     visit '/'
     click_link '사용자 계정 목록'
-    find("tr.selectable").click
+    click_link '상세보기'
     click_link '수정하기'
     click_link '비밀번호 변경'
 
@@ -95,8 +95,8 @@ class AccountTest < ActionDispatch::IntegrationTest
     visit '/'
     click_link '사용자 계정 목록'
 
-    find_field('q').set("normal")
-    find_field('q').native.send_key(:enter)
+    fill_in "q", with: "normal"
+    click_button "검색"
 
     assert(page.has_content?('normal'))
   end

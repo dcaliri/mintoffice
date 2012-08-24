@@ -20,9 +20,9 @@ class PaymentTest < ActionDispatch::IntegrationTest
 
     click_link '지급이 있는 사람들만 보기'
 
-    find("tr.selectable").click
+    click_link '상세보기'
 
-    assert(page.has_content?('연봉 관리'))
+    assert(page.has_content?('김 관리'))
   end
 
   test 'should visit my payment' do
@@ -43,6 +43,7 @@ class PaymentTest < ActionDispatch::IntegrationTest
     click_button '추가하기'
 
     assert(page.has_content?('1,500,000'))
+    assert(page.has_content?(get_payment_day))
   end
 
   test 'should edit payment' do
@@ -115,6 +116,6 @@ class PaymentTest < ActionDispatch::IntegrationTest
     click_button '추가하기'
 
     assert(!page.has_content?('2012.08'))
-    assert(page.has_content?('2012.09'))
+    assert(page.has_content?('2012.09.25'))
   end
 end

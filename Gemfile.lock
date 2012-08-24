@@ -32,6 +32,8 @@ GEM
     addressable (2.3.2)
     arel (3.0.2)
     bootstrap-sass (2.0.4.0)
+    bootstrap-will_paginate (0.0.7)
+      will_paginate
     builder (3.0.0)
     by_star (1.0.1)
       activerecord (>= 2.0.0)
@@ -250,6 +252,7 @@ PLATFORMS
 
 DEPENDENCIES
   bootstrap-sass
+  bootstrap-will_paginate
   by_star
   capistrano
   capistrano-unicorn

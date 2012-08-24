@@ -10,6 +10,7 @@ class ExpenseReport < ActiveRecord::Base
   by_star_field :expensed_at
 
   include Reportable
+  include Taggable
 
   before_validation :check_total_amount
   def check_total_amount

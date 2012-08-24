@@ -22,6 +22,6 @@ ul
       = select_tag :access_type, options_for_select([[t('accessors.info.read'), "read"], [t('accessors.info.write'), "write"]])
     p
       = label_tag :accessor, t('activerecord.attributes.access_person.accessor')
-      = select_tag :accessor, options_for_select(Person.with_account.map{|person| [person.fullname, person.id]})
+      = select_tag :accessor, options_for_select(Person.with_account.without_retired.map{|person| [person.fullname, person.id]})
     p
       = submit_tag

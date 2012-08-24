@@ -6,8 +6,7 @@
     = link_to t('bonuses.new.link'), [:bonus, employee, :payments]
     = " | "
   = link_to t('employees.show.title'), employee_path(employee)
-  = " | "
-  = link_to t('common.title.back'), :payments
+
 h2
   = employee.fullname
 
@@ -38,7 +37,7 @@ table#list-table
           - current_bg = 'white'
       tr style="background-color:#{ current_bg };"
         td
-          = show_sum ? month : ''
+          = show_sum ? "#{month}.#{current_company.payday}" : ''
         td
           = payment.pay_start.strftime("%m.%d")
         td

@@ -19,6 +19,8 @@ div class={current_person.admin? ? "admin" : ""}
         li= link_to t("cardbills.index.title"), :controller => "cardbills"
         - if current_person.permission? 'bank_accounts'
           li= link_to t("bank_accounts.index.title"), :bank_accounts
+        - if current_person.permission? 'bankbooks'
+          li= link_to t("bankbooks.title"), :bankbooks
         - if current_person.permission? 'taxbills'
           li= link_to t("taxbills.index.title"), :taxbills
         li= link_to t("expense_reports.index.title"), :expense_reports
@@ -59,6 +61,8 @@ div class={current_person.admin? ? "admin" : ""}
             li= link_to t("change_histories.title"), :controller => "change_histories"
             li= link_to t("holidays.title"), :controller => "holidays"
             li= link_to t("dayworker_taxes.title"), :controller => "dayworker_taxes"
+            li= link_to t("payment_records.title"), :payment_records
+            li= link_to t("promissories.title"), :promissories
             li= link_to t("enrollments.title"), :enroll_reports
             li= link_to t("companies.title"), current_company
     = render partial: "this_week"

@@ -1,0 +1,22 @@
+#show_command
+  = link_to t('common.title.edit'), [:edit, @promissory]
+  = " | "
+  = link_to t('common.title.destroy'), @promissory, :method => :delete, data: {confirm: t("common.messages.delete_confirm")}
+  = " | "
+  = link_to t('common.title.list'), :promissories
+
+h3= "Promissory"
+.box
+  dl
+    dt
+      = Promissory.human_attribute_name(:expired_at)
+    dd
+      = @promissory.expired_at
+    dt
+      = Promissory.human_attribute_name(:published_at)
+    dd
+      = @promissory.published_at
+    dt
+      = Promissory.human_attribute_name(:amount)
+    dd
+      = number_to_currency @promissory.amount

@@ -213,7 +213,7 @@ div.flash.alert {
 
 .numrow
 {
-  text-align: right;
+  text-align: right !important;
 }
 
 .tabular label {
@@ -410,14 +410,14 @@ ul#css3menu li.sublast>a{
   width: 900px;
 }
 .menubar_item {
-  width: 140px;
+  width: 130px;
   float: left;
   margin-right: 10px;
   display: block;
   /*border: 1px solid black;*/
 }
 .this_week {
-  width: 150px;
+  width: 180px;
   float: left;
   margin-right: 0px;
   display: block;	
@@ -432,6 +432,7 @@ ul#css3menu li.sublast>a{
   color: #A5A4A4;
   letter-spacing: -1px;
   word-spacing: 3px;
+  margin-left: 25px;
   border: none;
 }
 .menubar ul {

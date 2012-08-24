@@ -101,6 +101,7 @@ ko:
         models:
             attachment: 첨부파일
             bank_account: 은행계좌
+            bankbook: 통장
             bank_transaction: 입출금 내역
             bank_transfer: 이체 내역
             bonus: 상여금
@@ -134,10 +135,12 @@ ko:
             payroll_item: 급여 항목
             payroll_category: 급여구분
             payment: 연봉
+            payment_record: 지급조서
             permission: 권한
             pettycash: 소액현금
             posting: 전표
             project: 프로젝트
+            promissory: 어음
             required_tag: 필수 태그 항목
             tag: 태그
             taxman: 담당자
@@ -168,6 +171,10 @@ ko:
                 total_out: 출금 총액
                 margin: 입출금 차액
                 remain: 잔고
+            bankbook:
+                name: 통장명
+                number: 통장번호
+                account_holder: 예금주
             bank_transaction:
                 account: 은행계좌
                 bank_account_name: 은행계좌
@@ -218,6 +225,8 @@ ko:
                 category: 업종
                 business_status: 업태
                 address: 주소
+                bankbook: 통장
+                bankbook_id: 통장
                 owner: 대표자
             card_approved_source:
                 used_at: 이용일시
@@ -369,6 +378,8 @@ ko:
                 bank_account_id: 결제은행
             dayworker:
                 juminno: 주민등록번호
+                bankbook: 통장
+                bankbook_id: 통장
             dayworker_tax:
                 dayworker: 원천징수 대상자
                 reason: 사유
@@ -399,6 +410,9 @@ ko:
                 expensed_at: 지출 날짜
             group:
                 name: 그룹명
+                parent: 부모
+                parent_id: 부모
+                employees: 사원 선택
             holiday:
                 theday: 휴일날짜
                 dayname: 휴일명목
@@ -456,6 +470,10 @@ ko:
                 pay_finish: 지급 기준 종료일
                 total: 총액
                 after: "%{month}개월 후"
+            payment_record:
+                name: 이름
+                bankbook: 통장
+                bankbook_id: 통장
             pettycash:
                 description: 사용처 상세내역
                 transdate: 사용일자
@@ -479,6 +497,10 @@ ko:
                 ending_on: 종료예정일자
                 ended_on: 실제 종료일자
                 owner_name: 프로젝트 관리자
+            promissory:
+                expired_at: 만기일
+                published_at: 발행일
+                amount: 금액
             required_tag:
                 modelname: 모델명
             account:
@@ -753,6 +775,8 @@ ko:
             outmoney: 출금액역
             total: 합계
         title: 은행계좌 관리
+    bankbooks:
+        title: 통장 관리
     bank_transactions:
         title: 입출금 내역
         index:
@@ -1238,6 +1262,8 @@ ko:
         bonus:
             title: 특별상여금 작성
         title: 연봉 관리
+    payment_records:
+        title: 지급 조서 목록
     payrolls:
         title: 급여대장
     payroll_categories:
@@ -1341,6 +1367,8 @@ ko:
         assign:
             title: 할당 비율 조정
             not_hundred: 할당 비율이 100%가 아닙니다.
+    promissories:
+        title: 어음 관리
     reports:
         info:
             approval: 결재

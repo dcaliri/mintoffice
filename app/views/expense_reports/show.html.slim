@@ -35,6 +35,10 @@ h2
       = dtdd expense_report, "description"
       = dtdd expense_report, "expensed_at"
       = dtdd expense_report, "amount"
+      dt
+        = ExpenseReport.human_attribute_name("tags")
+      dd
+        = expense_report.tag_list
   - if expense_report.target.respond_to?(:attachments)
     = render "shared/attachments/detail", :target => expense_report.target
   .clear
