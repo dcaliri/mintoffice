@@ -56,11 +56,19 @@ class Document < ActiveRecord::Base
   end
 
   def email_notify_title(action, from, to, url)
-    "문서관리 - #{from.fullname}의 결재요청"
+    if action == :rollback
+      "문서관리 - #{self.title} - #{from.fullname}님에 의해서 반려되었습니다."
+    else
+      "문서관리 - #{from.fullname}의 결재요청"
+    end
   end
 
   def boxcar_notify_title(action, from, to, url)
-    "문서관리 - #{from.fullname}의 결재요청 : #{self.title}"
+    if action == :rollback
+      "문서관리 - #{self.title} - #{from.fullname}님에 의해서 반려되었습니다."
+    else
+      "문서관리 - #{from.fullname}의 결재요청 : #{self.title}"
+    end
   end
 
   def email_notify_body(action, from, to, url, comment)
