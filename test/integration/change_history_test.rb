@@ -16,7 +16,7 @@ class ChangeHistoryTest < ActionDispatch::IntegrationTest
   test 'should create a new chage_history' do
     visit '/'
     click_link '소액현금관리'
-    find("tr.selectable").click
+    click_link '상세보기'
     click_link '수정하기'
 
     fill_in "사용처 상세내역", with: "변경 후 description"
@@ -34,7 +34,7 @@ class ChangeHistoryTest < ActionDispatch::IntegrationTest
   test 'should edit chage_history' do
     visit '/'
     click_link '변경사항 관리'
-    find("tr.selectable").click
+    click_link '상세보기'
     click_link '수정하기'
 
     fill_in "필드명", with: "inmoney"
@@ -45,7 +45,7 @@ class ChangeHistoryTest < ActionDispatch::IntegrationTest
 
     visit '/'
     click_link '소액현금관리'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     assert(page.has_content?('[소액현금] 수입금액: 50000.0 → 100000.0(김 관리)'))
   end
@@ -53,7 +53,7 @@ class ChangeHistoryTest < ActionDispatch::IntegrationTest
   test 'should destroy chage_history' do
     visit '/'
     click_link '변경사항 관리'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     disable_confirm_box
 
@@ -61,7 +61,7 @@ class ChangeHistoryTest < ActionDispatch::IntegrationTest
 
     visit '/'
     click_link '소액현금관리'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     assert(!page.has_content?('[소액현금] 사용처 상세내역: 변경 전 description → test(김 관리)'))
   end

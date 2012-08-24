@@ -14,7 +14,7 @@ class PettyCashTest < ActionDispatch::IntegrationTest
   test 'should show pettycash' do
     visit '/'
     click_link '소액현금관리'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     assert(page.has_content?('소액현금 내역'))
   end
@@ -22,7 +22,7 @@ class PettyCashTest < ActionDispatch::IntegrationTest
   test 'should back pettycash list' do
     visit '/'
     click_link '소액현금관리'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     click_link '돌아가기'    
 
@@ -54,7 +54,7 @@ class PettyCashTest < ActionDispatch::IntegrationTest
   test 'should edit pettycash' do
     visit '/'
     click_link '소액현금관리'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     click_link '수정하기'
 
@@ -77,7 +77,7 @@ class PettyCashTest < ActionDispatch::IntegrationTest
   test 'should back pettycash list while editing' do
     visit '/'
     click_link '소액현금관리'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     click_link '수정하기'
     click_link '돌아가기'    

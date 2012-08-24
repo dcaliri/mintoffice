@@ -18,11 +18,11 @@ class CardApprovedSourcesTest < ActionDispatch::IntegrationTest
 
   test 'should show card_approved_sources' do
     switch_to_selenium
-
+    
     visit '/'
     click_link '신용카드 관리'
     click_link '카드별 승인내역'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     assert(page.has_content?('카드승인내역'))
   end
@@ -75,7 +75,7 @@ class CardApprovedSourcesTest < ActionDispatch::IntegrationTest
     visit '/'
     click_link '신용카드 관리'
     click_link '카드별 승인내역'
-    find("tr.selectable").click
+    click_link '상세보기'
     click_link '수정'
 
     select('2012', :from => 'card_approved_source_used_at_1i')

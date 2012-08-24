@@ -38,7 +38,7 @@ class NUEmployeeTest < ActionDispatch::IntegrationTest
     visit '/'
     click_link '인사정보관리 - 사원목록'
 
-    find('tr[3]').click
+    find('tr[3]').click_link('상세보기')
 
     assert(page.has_content?('김 개똥'))
     assert(page.has_content?('사원'))
@@ -51,7 +51,7 @@ class NUEmployeeTest < ActionDispatch::IntegrationTest
     visit '/'
     click_link '인사정보관리 - 사원목록'
 
-    find('tr[3]').click
+    find('tr[3]').click_link('상세보기')
 
     click_link '주소록 찾기'
 
@@ -66,23 +66,23 @@ class NUEmployeeTest < ActionDispatch::IntegrationTest
     visit '/'
     click_link '인사정보관리 - 사원목록'
 
-    find_field('q').set("admin")
-    find_field('q').native.send_key(:enter)
+    fill_in "q", with: "admin"
+    click_button "검색"
 
     assert(page.has_content?('김 관리'))
 
-    find_field('q').set("normal")
-    find_field('q').native.send_key(:enter)
+    fill_in "q", with: "normal"
+    click_button "검색"
 
     assert(page.has_content?('김 개똥'))
 
-    find_field('q').set("admin@wangsy.com")
-    find_field('q').native.send_key(:enter)
+    fill_in "q", with: "admin@wangsy.com"
+    click_button "검색"
 
     assert(page.has_content?('김 관리'))
 
-    find_field('q').set("normal@wangsy.com")
-    find_field('q').native.send_key(:enter)
+    fill_in "q", with: "normal@wangsy.com"
+    click_button "검색"
 
     assert(page.has_content?('김 개똥'))
   end

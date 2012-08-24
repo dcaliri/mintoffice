@@ -103,7 +103,7 @@ class CardBillTest < ActionDispatch::IntegrationTest
     click_link '상세보기'
 
     select('쓰기', :from => 'access_type')
-    select('no employee', :from => 'accessor')
+    select('김 개똥', :from => 'accessor')
 
     click_button 'Save changes'
 

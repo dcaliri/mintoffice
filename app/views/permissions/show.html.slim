@@ -18,7 +18,8 @@ h2
 = form_tag(:action => "addaccount") do
   = t('permissions.show.add')
   ' :
-  = text_field_tag :accountname, params[:accountname]
+  = search_field_tag 'accountname', params[:accountname]
+  = submit_tag "추가"
   = hidden_field_tag :id, @permission.id
 
 hr

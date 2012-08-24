@@ -39,7 +39,7 @@ class TaxBillTest < ActionDispatch::IntegrationTest
   test 'should edit taxbill' do
     visit '/'
     click_link '세금계산서 관리'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     click_link '수정하기'
 
@@ -55,7 +55,7 @@ class TaxBillTest < ActionDispatch::IntegrationTest
   test 'should destroy taxbill' do
     visit '/'
     click_link '세금계산서 관리'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     disable_confirm_box
 
@@ -84,7 +84,7 @@ class TaxBillTest < ActionDispatch::IntegrationTest
   test 'should create a new taxbill item' do
     visit '/'
     click_link '세금계산서 관리'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     click_link '새로운 내역'
 
@@ -104,7 +104,7 @@ class TaxBillTest < ActionDispatch::IntegrationTest
   test 'should edit taxbill item' do
     visit '/'
     click_link '세금계산서 관리'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     click_link '수정'
 
@@ -124,7 +124,7 @@ class TaxBillTest < ActionDispatch::IntegrationTest
   test 'should destroy taxbill item' do
     visit '/'
     click_link '세금계산서 관리'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     disable_confirm_box
 

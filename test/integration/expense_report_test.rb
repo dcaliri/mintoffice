@@ -25,7 +25,7 @@ class ExpenseReportTest < ActionDispatch::IntegrationTest
   test 'should show expense' do
     visit '/'
     click_link '지출내역서 관리'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     assert(page.has_content?('지출내역서 상세정보'))
   end
@@ -34,7 +34,7 @@ class ExpenseReportTest < ActionDispatch::IntegrationTest
     visit '/'
 
     click_link '지출내역서 관리'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     click_link '수정'
 
@@ -49,7 +49,7 @@ class ExpenseReportTest < ActionDispatch::IntegrationTest
     visit '/'
 
     click_link '지출내역서 관리'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     click_link '수정'
 
@@ -71,7 +71,7 @@ class ExpenseReportTest < ActionDispatch::IntegrationTest
     click_button '추가하기'
 
     click_link '돌아가기'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     assert(page.has_content?('test tag'))
   end
@@ -79,7 +79,7 @@ class ExpenseReportTest < ActionDispatch::IntegrationTest
   test 'should destroy expense' do
     visit '/'
     click_link '지출내역서 관리'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     disable_confirm_box
 
@@ -114,7 +114,7 @@ class ExpenseReportTest < ActionDispatch::IntegrationTest
   test 'should approve expense and create postings' do
     visit '/'
     click_link '지출내역서 관리'
-    find("tr.selectable").click
+    click_link '상세보기'
     
     click_button '승인'
     click_link '전표 만들기'

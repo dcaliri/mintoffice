@@ -20,6 +20,8 @@ class GetEmploymentProofTest < ActionDispatch::IntegrationTest
   fixtures :companies
 
   test 'admin should get his proof' do
+    switch_to_selenium
+
     class ::Company < ActiveRecord::Base
       def seal
         "#{Rails.root}/test/fixtures/images/120731092154_Untitled.png"
@@ -39,6 +41,8 @@ class GetEmploymentProofTest < ActionDispatch::IntegrationTest
   end
 
   test 'admin should get another employee proof' do
+    switch_to_selenium
+
     class ::Company < ActiveRecord::Base
       def seal
         "#{Rails.root}/test/fixtures/images/120731092154_Untitled.png"
@@ -60,20 +64,15 @@ class GetEmploymentProofTest < ActionDispatch::IntegrationTest
   end  
 
   test 'normal user should get his proof' do
+    switch_to_selenium
+
     class ::Company < ActiveRecord::Base
       def seal
         "#{Rails.root}/test/fixtures/images/120731092154_Untitled.png"
       end
     end
     
-    clear_session
-
-    visit '/'
-
-    fill_in "사용자계정", with: "normal"
-    fill_in "비밀번호", with: "1234"
-
-    click_button '로그인'
+    normal_user_access
 
     click_link '인사정보관리 - 사원목록'
 
@@ -94,14 +93,8 @@ class GetEmploymentProofTest < ActionDispatch::IntegrationTest
       end
     end
     
-    clear_session
+    normal_user_access
 
-    visit '/'
-
-    fill_in "사용자계정", with: "normal"
-    fill_in "비밀번호", with: "1234"
-
-    click_button '로그인'
     click_link '인사정보관리 - 사원목록'
 
     visit '/employees/1/employment_proof'

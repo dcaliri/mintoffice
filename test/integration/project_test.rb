@@ -17,7 +17,7 @@ class ProjectTest < ActionDispatch::IntegrationTest
     visit '/'
     click_link '프로젝트 관리'
 
-    find("tr.selectable").click
+    click_link '상세보기'
 
     assert(page.has_content?('2,000,000'))
     assert(page.has_content?('지출내역'))
@@ -39,7 +39,7 @@ class ProjectTest < ActionDispatch::IntegrationTest
     visit '/'
     click_link '프로젝트 관리'
 
-    find("tr.selectable").click
+    click_link '상세보기'
 
     assert(!page.has_content?('2,000,000'))
     assert(!page.has_content?('내역 금액'))
@@ -63,7 +63,7 @@ class ProjectTest < ActionDispatch::IntegrationTest
     visit '/'
     click_link '프로젝트 관리'
 
-    find("tr.selectable").click
+    click_link '상세보기'
 
     assert(page.has_content?('2,000,000'))
     assert(page.has_content?('지출내역'))
@@ -106,7 +106,7 @@ class ProjectTest < ActionDispatch::IntegrationTest
   test 'should edit project' do
     visit '/'
     click_link '프로젝트 관리'
-    find("tr.selectable").click
+    click_link '상세보기'
     click_link '수정하기'
 
     fill_in "프로젝트명", with: "프로젝트명 수정 테스트"
@@ -129,7 +129,7 @@ class ProjectTest < ActionDispatch::IntegrationTest
   test 'should add/delete accounts and assign manager' do
     visit '/'
     click_link '프로젝트 관리'
-    find("tr.selectable").click
+    click_link '상세보기'
     click_link '수정하기'
 
     fill_in "계정명", with: "admin"
@@ -149,7 +149,7 @@ class ProjectTest < ActionDispatch::IntegrationTest
 
     click_link '돌아가기'    
 
-    find("tr.selectable").click
+    click_link '상세보기'
 
     assert(page.has_content?('없음'))
     assert(page.has_content?('김 관리'))
@@ -186,7 +186,7 @@ class ProjectTest < ActionDispatch::IntegrationTest
   test 'should complete project' do
     visit '/'
     click_link '프로젝트 관리'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     click_link '수정하기'
     click_link '프로젝트 완료'
@@ -199,7 +199,7 @@ class ProjectTest < ActionDispatch::IntegrationTest
   test 'should show project assign rate' do
     visit '/'
     click_link '프로젝트 관리'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     click_link '수정하기'
 
@@ -210,7 +210,7 @@ class ProjectTest < ActionDispatch::IntegrationTest
     
     click_link '프로젝트 관리 - 완료'
 
-    find("tr.selectable").click
+    click_link '상세보기'
     click_link '할당비율 조정'
 
     assert(page.has_content?('할당 비율 조정'))
@@ -219,7 +219,7 @@ class ProjectTest < ActionDispatch::IntegrationTest
   test 'should back project' do
     visit '/'
     click_link '프로젝트 관리'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     click_link '수정하기'
     click_link '내용 보기'
@@ -230,7 +230,7 @@ class ProjectTest < ActionDispatch::IntegrationTest
   test 'should back project list' do
     visit '/'
     click_link '프로젝트 관리'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     click_link '수정하기'
     click_link '돌아가기'
