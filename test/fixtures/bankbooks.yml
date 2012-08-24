@@ -27,3 +27,11 @@ hsbc:
   updated_at: <%= Time.zone.now %>
   holder_type: Dayworker
   holder_id: 1
+
+nonghyup:
+  id: 4
+  name: 농협 통장
+  number: 274-062855-01-012
+  account_holder: 김 기업
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
