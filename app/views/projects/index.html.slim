@@ -14,8 +14,9 @@ table#list-table
   tr
     th
       = Project.human_attribute_name("name")
-    th
-      = Project.human_attribute_name("revenue")
+    - if current_employee.admin? or project.owner == current_employee
+      th
+        = Project.human_attribute_name("revenue")
     th
       = Project.human_attribute_name("started_on")
     th
@@ -31,8 +32,6 @@ table#list-table
       - if current_employee.admin? or project.owner == current_employee
         td.money
           = number_to_currency project.revenue
-      - else
-        td
       td
         = project.started_on
       td

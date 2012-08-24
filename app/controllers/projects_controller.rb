@@ -3,12 +3,24 @@ class ProjectsController < ApplicationController
   expose(:project)
 
   def index
-    find_projects(projects)
-  end
+    if current_employee.admin?
+      project_list = projects
+    else
+      project_list = current_employee.projects
+    end
 
-  def me
-    find_projects(current_employee.projects)
-    render 'index'
+    status = params[:st] || "in_progress"
+    if status == 'in_progress'
+      @projects = project_list.inprogress
+      @status_me = I18n.t("projects.index.in_progress")
+      @status_other = I18n.t("projects.index.completed")
+      @st_other = 'completed'
+    else
+      @projects = project_list.completed
+      @status_me = I18n.t("projects.index.completed")
+      @status_other = I18n.t("projects.index.in_progress")
+      @st_other = 'in_progress'
+    end
   end
 
   def create
