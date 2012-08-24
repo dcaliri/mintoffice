@@ -1,4 +1,6 @@
 class ProjectsController < ApplicationController
+  before_filter :redirect_unless_my_project, except: :index
+
   expose(:projects) { current_company.projects }
   expose(:project)
 
@@ -99,5 +101,9 @@ private
       @status_other = I18n.t("projects.index.in_progress")
       @st_other = 'in_progress'
     end
+  end
+
+  def redirect_unless_my_project
+    force_redirect unless (current_employee.admin? or current_employee.projects.exists?(project.id))
   end
 end

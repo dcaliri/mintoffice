@@ -1,11 +1,6 @@
 - title t('.title') + " - " + @status_me
 
 #show_command
-  - if action_name == "index"
-    = link_to t("projects.me.title"), [:me, :projects]
-  - else
-    = link_to t("projects.index.title"), :projects
-  = "|"
   = link_to t("projects.new.title"), new_project_path
 
 h2
@@ -14,7 +9,7 @@ table#list-table
   tr
     th
       = Project.human_attribute_name("name")
-    - if current_employee.admin? or project.owner == current_employee
+    - if project.has_manager_permission?(current_employee)
       th
         = Project.human_attribute_name("revenue")
     th
@@ -29,7 +24,7 @@ table#list-table
     tr.selectable.link_to*{"data-url" => project_path(project)}
       td
         = project.name
-      - if current_employee.admin? or project.owner == current_employee
+      - if project.has_manager_permission?(current_employee)
         td.money
           = number_to_currency project.revenue
       td

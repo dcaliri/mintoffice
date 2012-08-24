@@ -13,7 +13,7 @@ class Permission < ActiveRecord::Base
         "reports.*",
         "expense_reports.*", "cardbills.*", "documents.*",
         "except_columns.*",
-        "projects.index",
+        "projects.*",
         "accessors.*",
         "contacts.*"
       ]
