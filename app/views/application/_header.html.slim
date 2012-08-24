@@ -6,7 +6,7 @@ div#main_nav.navbar.navbar-fixed-top
         span.icon-bar
         span.icon-bar
 
-      = link_to 'MintTech', :root, class: 'brand'
+      = link_to 'Mint Office', :root, class: 'brand'
       div.nav-collapse
         - if current_employee
           ul.nav
@@ -91,6 +91,6 @@ div#main_nav.navbar.navbar-fixed-top
 
         ul.nav.pull-right
           li.divider-vertical
-          li = link_to t("accounts.my.title")+(current_person != nil ? "(#{current_person.name})" : ""), my_accounts_path
+          li = link_to current_person != nil ? "#{current_person.name}" : "", my_accounts_path
           li = link_to t("common.link.logout"), logout_accounts_path
 
