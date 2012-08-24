@@ -131,7 +131,8 @@ class Taxbill < ActiveRecord::Base
   PURCHASE = {
     :name => :purchase,
     :keys => {
-      :transfered_at => :time,
+      :transacted_at => :time,
+      :approve_no => :integer
     },
     :columns => {
       :uid => "번호",
@@ -208,8 +209,27 @@ class Taxbill < ActiveRecord::Base
     create_file(path, upload['file'])
     previews = []
     parser.parse(path) do |class_name, query, params|
-      previews << Taxbill.build(params)
+      previews << TaxbillItem.new(params)
     end
     previews
+  end
+
+  def self.create_with_stylesheet(type, name)
+    path = file_path(name)
+    parser = excel_parser(type.to_sym)
+
+    parser.parse(path) do |class_name, query, params|
+      items = TaxbillItem.where(query)
+
+      if items.empty?
+        taxbill = Taxbill.new(billtype: type, transacted_at: params[:transacted_at])
+        item = taxbill.items.build(items)
+        taxbill.save!
+      else
+        resource = items.first
+        resource.update_attributes!(params)
+      end
+    end
+    File.delete(path)
   end
 end

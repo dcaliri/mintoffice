@@ -35,12 +35,12 @@ class TaxbillsController < ApplicationController
   end
 
   def preview
-    @taxbills = Taxbill.preview_stylesheet(params[:billtype], params[:upload])
+    @taxbill_items = Taxbill.preview_stylesheet(params[:billtype], params[:upload])
     # @taxbills = Taxbill.all
   end
 
   def import
-    # BankTransfer.create_with_stylesheet(params[:bank_type], params[:upload])
+    Taxbill.create_with_stylesheet(params[:billtype], params[:upload])
     redirect_to :taxbills
   end
 
