@@ -38,13 +38,17 @@ class DocumentTest < ActionDispatch::IntegrationTest
     click_link '새로운 문서 작성'
 
     assert(!page.has_content?('소유자'))
+    assert(!page.has_content?('참여자 없는 프로젝트'))
+    assert(page.has_content?('테스트 프로젝트'))
 
+    select '테스트 프로젝트', from: 'document_project_id'
     fill_in "문서제목", with: "문서제목 입력 테스트"
 
     click_button '만들기'
 
     assert(page.has_content?('문서이(가) 성공적으로 생성되었습니다.'))
     assert(page.has_content?('문서제목 입력 테스트'))
+    assert(page.has_content?('테스트 프로젝트'))
   end
 
   test 'should edit document' do
@@ -56,7 +60,10 @@ class DocumentTest < ActionDispatch::IntegrationTest
     click_link '수정하기'
 
     assert(!page.has_content?('소유자'))
+    assert(!page.has_content?('참여자 없는 프로젝트'))
+    assert(page.has_content?('테스트 프로젝트'))
 
+    select '테스트 프로젝트', from: 'document_project_id'
     fill_in "문서제목", with: "문서제목 수정 테스트"
 
     click_button '갱신하기'
