@@ -65,8 +65,13 @@ class Document < ActiveRecord::Base
 
   def email_notify_body(action, from, to, url, comment)
     <<-BODY
+      문서제목 :
       #{self.title}
+
+      코멘트:
       #{comment}
+
+      링크:
       #{url}
     BODY
   end
