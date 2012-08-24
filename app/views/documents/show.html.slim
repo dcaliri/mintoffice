@@ -2,9 +2,9 @@
 
 #show_command
   = link_to t('common.title.edit'), edit_document_path(document)
-  = " | "
+  = " "
   = link_to t('common.title.destroy'), document, :method => :delete, data: {confirm: t("common.messages.delete_confirm")}
-  = " | "
+  = " "
   = link_to t('common.title.list'), documents_path
 h2
   =h document.title

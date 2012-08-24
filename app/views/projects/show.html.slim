@@ -2,7 +2,7 @@
 #show_command
   - unless project.completed?
     = link_to t('common.title.edit'), edit_project_path(project)
-    = " | "
+    = " "
   = link_to t('common.title.back'), projects_path
 h2
   = project.name

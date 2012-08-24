@@ -1,7 +1,7 @@
 #show_command
   - if current_person.admin?
     = link_to t('vacations.new.link'), [:new, employee, :vacation]
-    = " | "
+    = " "
   = link_to t('employees.show.title'), employee_path(employee)
 h2= employee.fullname
 
@@ -10,9 +10,9 @@ h2= employee.fullname
     div style="float: right;"
       = link_to t('used_vacations.new.link'), [:new, vacation, :used_vacation]
       - if current_person.admin?
-        = " | "
+        = " "
         = link_to t('common.link.edit'), [:edit, employee, vacation]
-        = " | "
+        = " "
         = link_to t('common.link.destroy'), [employee, vacation], :method => :delete, data: {confirm: t("common.messages.delete_confirm")}
     h3= "#{vacation.from} ~ #{vacation.to} : #{t('vacations.show.info', total: vacation.period, used: vacation.used.total, remain: vacation.remain)}"
 

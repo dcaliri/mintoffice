@@ -4,13 +4,13 @@
   - if current_person.admin? or @employee == current_employee
     - if @employee.joined?
       = link_to t('employees.show.pdf'), [:employment_proof, @employee]
-      = " | "
+      = " "
   - if current_person.admin? and !@employee.retired_on
     - if @employee.joined?
       = link_to t('employees.retire.title'), :action => :retire, :id => @employee
-      = " | "
+      = " "
     = link_to t('common.title.edit'), edit_employee_path(@employee)
-    = " | "
+    = " "
   = link_to t('common.title.back'), employees_path
 
 h2

@@ -1,14 +1,14 @@
 #show_command
   - if bank_transfer.transaction
     = link_to t('bank_transfers.show.to_bank_transaction'), bank_transfer.transaction
-    = " | "
+    = " "
   - if bank_transfer.remain_amount_for_expense_report != 0
     = link_to t('bank_transfers.show.create_expense'), new_expense_report_path(target_type: bank_transfer.class, target_id: bank_transfer.id, expensed_at: bank_transfer.transfered_at, amount: bank_transfer.remain_amount_for_expense_report)
-    = " | "
+    = " "
   = link_to t('common.link.edit'), edit_bank_transfer_path(bank_transfer, bank_account_id: bank_transfer.bank_account)
-  = " | "
+  = " "
   = link_to t('common.link.destroy'), bank_transfer, :method => :delete, data: {confirm: t("common.messages.delete_confirm")}
-  = " | "
+  = " "
   = link_to t('common.title.back'), :bank_transfers
 
 
