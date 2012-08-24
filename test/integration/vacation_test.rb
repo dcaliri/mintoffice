@@ -8,9 +8,8 @@ class VacationTest < ActionDispatch::IntegrationTest
   test 'should visit vacations list for admin' do
     visit '/'
     visit '/vacations'
-
+    
 		assert(page.has_content?('연차 정보'))
-    assert(!page.has_content?('돌아가기'))
   end
 
   test 'should visit vacations' do
@@ -73,7 +72,7 @@ class VacationTest < ActionDispatch::IntegrationTest
     visit '/'
     
     click_link '연차 정보'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     assert(page.has_content?('사용한 연차 정보'))
 

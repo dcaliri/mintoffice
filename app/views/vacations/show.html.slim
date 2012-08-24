@@ -25,8 +25,9 @@ h2= employee.fullname
           th= UsedVacation.human_attribute_name(:type_title)
           th= Vacation.human_attribute_name(:note)
           th= Report.human_attribute_name('status')
+          th.link_button_area
         - vacation.used.each do |used|
-          tr.selectable onclick="location.href='#{vacation_used_vacation_path(vacation, used)}'"
+          tr.selectable.selectable.link_to*{"data-url" => vacation_used_vacation_path(vacation, used)}
             td
               = used.from
             td
@@ -39,6 +40,8 @@ h2= employee.fullname
               = used.note
             td
               = used.localize_status
+            td.link_button_area
+              = link_to '상세보기', vacation_used_vacation_path(vacation, used), class: 'btn btn-primary'
 
       br
     - else

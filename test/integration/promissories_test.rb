@@ -15,7 +15,7 @@ class PromissoryTest < ActionDispatch::IntegrationTest
   test 'should show Promissory' do
     visit '/'
     click_link '어음 관리'
-    find('tr.selectable').click
+    click_link '상세보기'
 
     assert(page.has_content?('₩10,000,000'))
     assert(page.has_content?(get_now_time))
@@ -46,7 +46,7 @@ class PromissoryTest < ActionDispatch::IntegrationTest
   test 'should edit Promissory' do
     visit '/'
     click_link '어음 관리'
-    find('tr.selectable').click
+    click_link '상세보기'
     click_link '수정하기'
     
     select '2014', from: 'promissory_expired_at_1i'
@@ -69,7 +69,7 @@ class PromissoryTest < ActionDispatch::IntegrationTest
   test 'should destroy Promissory' do
     visit '/'
     click_link '어음 관리'
-    find('tr.selectable').click
+    click_link '상세보기'
 
     disable_confirm_box
 

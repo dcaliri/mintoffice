@@ -38,7 +38,7 @@ class NUExpenseReportTest < ActionDispatch::IntegrationTest
 
     visit '/'
     click_link '카드 영수증 목록'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     click_link '지출내역서 만들기'
 
@@ -68,7 +68,7 @@ class NUExpenseReportTest < ActionDispatch::IntegrationTest
 
     visit '/'
     click_link '카드 영수증 목록'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     click_link '지출내역서 만들기'
 
@@ -78,7 +78,7 @@ class NUExpenseReportTest < ActionDispatch::IntegrationTest
 
     visit '/'
     click_link '지출내역서 관리'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     assert(page.has_content?('김 개똥'))
     assert(page.has_content?('테스트 프로젝트'))
@@ -99,7 +99,7 @@ class NUExpenseReportTest < ActionDispatch::IntegrationTest
 
     visit '/'
     click_link '카드 영수증 목록'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     click_link '지출내역서 만들기'
 
@@ -109,7 +109,7 @@ class NUExpenseReportTest < ActionDispatch::IntegrationTest
 
     visit '/'
     click_link '지출내역서 관리'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     select '김 관리', from: 'reporter'
     fill_in "코멘트", with: "연차 사용 신청"
@@ -134,7 +134,7 @@ class NUExpenseReportTest < ActionDispatch::IntegrationTest
 
     visit '/'
     click_link '카드 영수증 목록'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     click_link '지출내역서 만들기'
 
@@ -144,7 +144,7 @@ class NUExpenseReportTest < ActionDispatch::IntegrationTest
 
     visit '/'
     click_link '지출내역서 관리'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     click_link '수정'
 
@@ -170,7 +170,7 @@ class NUExpenseReportTest < ActionDispatch::IntegrationTest
 
     visit '/'
     click_link '카드 영수증 목록'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     click_link '지출내역서 만들기'
 
@@ -180,7 +180,7 @@ class NUExpenseReportTest < ActionDispatch::IntegrationTest
 
     visit '/'
     click_link '지출내역서 관리'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     disable_confirm_box
 

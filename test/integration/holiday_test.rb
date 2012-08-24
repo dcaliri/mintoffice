@@ -14,7 +14,7 @@ class HolidayTest < ActionDispatch::IntegrationTest
   test 'should show holiday' do
     visit '/'
     click_link '휴일 관리'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     assert(page.has_content?('광복절'))
   end
@@ -56,7 +56,7 @@ class HolidayTest < ActionDispatch::IntegrationTest
   test 'should destroy holiday' do
     visit '/'
     click_link '휴일 관리'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     click_link '삭제하기'
 

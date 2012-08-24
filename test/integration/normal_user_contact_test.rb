@@ -37,7 +37,7 @@ class NUContactTest < ActionDispatch::IntegrationTest
 
     visit '/'
     click_link '연락처'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     assert(page.has_content?('전체 공개 : 김 관리'))
   end
@@ -112,35 +112,35 @@ class NUContactTest < ActionDispatch::IntegrationTest
     visit '/'
     click_link '연락처'
 
-    find_field('query').set("김")
-    find_field('query').native.send_key(:enter)
+    fill_in "query", with: "김"
+    click_button "검색"
 
     assert(page.has_content?('김 관리'))
     assert(page.has_content?('김 개똥'))
 
-    find_field('query').set("관리")
-    find_field('query').native.send_key(:enter)
+    fill_in "query", with: "관리"
+    click_button "검색"
 
     assert(page.has_content?('관리'))
 
-    find_field('query').set("민트기술")
-    find_field('query').native.send_key(:enter)
+    fill_in "query", with: "민트기술"
+    click_button "검색"
 
     assert(page.has_content?('김 관리'))
     assert(page.has_content?('김 개똥'))
 
-    find_field('query').set("사장")
-    find_field('query').native.send_key(:enter)
+    fill_in "query", with: "사장"
+    click_button "검색"
 
     assert(page.has_content?('김 관리'))
 
-    find_field('query').set("test@test.com")
-    find_field('query').native.send_key(:enter)
+    fill_in "query", with: "test@test.com"
+    click_button "검색"
 
     assert(page.has_content?('김 관리'))
 
-    find_field('query').set("010-4321-4321")
-    find_field('query').native.send_key(:enter)
+    fill_in "query", with: "010-4321-4321"
+    click_button "검색"
 
     assert(page.has_content?('새로운 직원'))
   end

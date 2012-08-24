@@ -56,7 +56,7 @@ class NUDocumentTest < ActionDispatch::IntegrationTest
     visit '/'
     click_link '문서 관리'
     select('전체', :from => 'report_status')
-    find("tr.selectable").click
+    click_link '상세보기'
 
     click_link '수정하기'
 
@@ -80,7 +80,7 @@ class NUDocumentTest < ActionDispatch::IntegrationTest
 
     visit '/'
     click_link '문서 관리'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     disable_confirm_box
 
@@ -102,7 +102,7 @@ class NUDocumentTest < ActionDispatch::IntegrationTest
 
     visit '/'
     click_link '문서 관리'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     select '김 관리', from: 'reporter'
     fill_in "코멘트", with: "연차 사용 신청"
@@ -126,13 +126,13 @@ class NUDocumentTest < ActionDispatch::IntegrationTest
     visit '/'
     click_link '문서 관리'
     
-    find_field('query').set("문서제목 입력 테스트")
-    find_field('query').native.send_key(:enter)
+    fill_in "query", with: "문서제목 입력 테스트"
+    click_button "검색"
 
     assert(page.has_content?('문서제목 입력 테스트'))
 
-    find_field('query').set("테스트 프로젝트")
-    find_field('query').native.send_key(:enter)
+    fill_in "query", with: "테스트 프로젝트"
+    click_button "검색"
 
     assert(page.has_content?('테스트 프로젝트'))
   end

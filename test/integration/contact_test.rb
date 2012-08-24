@@ -28,7 +28,7 @@ class ContactTest < ActionDispatch::IntegrationTest
   test 'should visit contact' do
     visit '/'
     click_link '연락처'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     assert(page.has_content?('전체 공개 : 김 관리'))
   end
@@ -91,7 +91,7 @@ class ContactTest < ActionDispatch::IntegrationTest
   test 'should edit contact' do
     visit '/'
     click_link '연락처'
-    find("tr.selectable").click
+    click_link '상세보기'
     click_link '수정'
 
     fill_in "성", with: "성"
@@ -121,12 +121,11 @@ class ContactTest < ActionDispatch::IntegrationTest
   test 'should destroy contact' do
     visit '/'
     click_link '연락처'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     disable_confirm_box
 
     click_link '삭제'
-
 
     assert(!page.has_content?('김 관리'))
   end
@@ -134,9 +133,7 @@ class ContactTest < ActionDispatch::IntegrationTest
   test 'should delete contact' do
     visit '/'
     click_link '연락처'
-    find("tr.selectable").click
-
-    disable_confirm_box
+    click_link '상세보기'
 
     click_link '제거'
 

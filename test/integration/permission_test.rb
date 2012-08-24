@@ -23,8 +23,8 @@ class PermissionTest < ActionDispatch::IntegrationTest
     click_link '권한 관리'
     click_link 'Show'
 
-    find_field('accountname').set("normal")
-    find_field('accountname').native.send_key(:enter)
+    fill_in "accountname", with: "normal"
+    click_button "추가"
 
     assert(page.has_content?('성공적으로 사용자를 등록했습니다.'))
     assert(page.has_content?('normal'))
