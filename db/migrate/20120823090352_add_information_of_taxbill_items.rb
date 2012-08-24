@@ -18,12 +18,8 @@ class AddInformationOfTaxbillItems < ActiveRecord::Migration
     add_column :taxbill_items, :issue_type, :string
     add_column :taxbill_items, :etc, :string
     add_column :taxbill_items, :bill_action_type, :string
-    add_column :taxbill_items, :section, :string
-    add_column :taxbill_items, :seller, :string
     add_column :taxbill_items, :seller_email, :string
-    add_column :taxbill_items, :buyer1, :string
     add_column :taxbill_items, :buyer1_email, :string
-    add_column :taxbill_items, :buyer2, :string
     add_column :taxbill_items, :buyer2_email, :string
     add_column :taxbill_items, :item_date, :date
     add_column :taxbill_items, :item_name, :string

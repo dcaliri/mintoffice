@@ -2,7 +2,7 @@
 
 class Taxbill < ActiveRecord::Base
   belongs_to :taxman
-  belongs_to :business_client
+  # belongs_to :business_client
   has_many :items, :class_name => 'TaxbillItem', :dependent => :destroy
 
   BILL_TYPE = [:purchase, :sale]
@@ -11,6 +11,8 @@ class Taxbill < ActiveRecord::Base
   include Attachmentable
 
   include SpreadsheetParsable
+  include Excels::Taxbills::Purchase
+  include Excels::Taxbills::Sale
 
   def self.no_taxman_and_client
     Taxman.count == 0 and BusinessClient.count == 0
@@ -128,69 +130,6 @@ class Taxbill < ActiveRecord::Base
     end
   end
 
-  PURCHASE = {
-    :name => :purchase,
-    :keys => {
-      :transacted_at => :time,
-      :approve_no => :integer
-    },
-    :columns => {
-      :uid => "번호",
-      :written_at => "작성일자",
-      :approve_no => "승인번호",
-      :transacted_at => "발급일자",
-      :transmit_at => "전송일자",
-      :seller_registration_number => "공급자사업자등록번호",
-      :sellers_minor_place_registration_number => "종사업장번호",
-      :sellers_company_name => "상호",
-      :sellers_representative => "대표자명",
-      :buyer_registration_number => "공급받는자사업자등록번호",
-      :buyers_minor_place_registration_number => "종사업장번호",
-      :buyers_company_name => "상호",
-      :buyerss_representative => "대표자명",
-      :total => "합계금액",
-      :supplied_value => "공급가액",
-      :tax => "세액",
-      :taxbill_classification => "전자세금계산서분류",
-      :taxbill_type => "전자세금계산서종류",
-      :issue_type => "발급유형",
-      :note => "비고",
-      :etc => "기타",
-      :bill_action_type => "영수/청구",
-      :section => "구분",
-      :seller => "공급자",
-      :seller_email => "이메일",
-      :buyer1 => "공급받는자",
-      :buyer1_email => "이메일1",
-      :buyer2 => "공급받는자",
-      :buyer2_email => "이메일2",
-      :item_date => "품목일자",
-      :item_name => "품목명",
-      :item_standard => "품목규격",
-      :quantity => "품목수량",
-      :unitprice => "품목단가",
-      :item_supply_price => "품목공급가액",
-      :item_tax => "품목세액",
-      :item_note => "품목비고",
-    },
-    :position => {
-      :start => {
-        x: 7,
-        y: 1,
-      },
-      :end => 0
-    }
-  }
-
-  def self.purchase_taxbill_parser
-    parser = ExcelParser.new
-    parser.class_name Taxbill
-    parser.column PURCHASE[:columns]
-    parser.key PURCHASE[:keys]
-    parser.option :position => PURCHASE[:position]
-    parser
-  end
-
   def self.excel_parser(type)
     if type == :purchase
       purchase_taxbill_parser
@@ -215,21 +154,77 @@ class Taxbill < ActiveRecord::Base
   end
 
   def self.create_with_stylesheet(type, name)
+    type = type.to_sym
+
     path = file_path(name)
-    parser = excel_parser(type.to_sym)
+    parser = excel_parser(type)
 
-    parser.parse(path) do |class_name, query, params|
-      items = TaxbillItem.where(query)
+    transaction do
+      parser.parse(path) do |class_name, query, params|
+        items = TaxbillItem.where(query)
 
-      if items.empty?
-        taxbill = Taxbill.new(billtype: type, transacted_at: params[:transacted_at])
-        item = taxbill.items.build(items)
-        taxbill.save!
-      else
-        resource = items.first
-        resource.update_attributes!(params)
+        if items.empty?
+          if type == :purchase
+            create_purchase_info(type, params)
+          else
+            create_sale_info(type, params)
+          end
+        else
+          resource = items.first
+          resource.update_attributes!(params)
+        end
       end
     end
     File.delete(path)
+  end
+
+  def self.create_purchase_info(type, params)
+    create_taxbill_from_excel(type, {
+      name: params[:sellers_company_name],
+      registration_number: params[:sellers_registration_number],
+      email1: params[:seller_email],
+      email2: nil,
+    }, params)
+  end
+
+  def self.create_sale_info(type, params)
+    create_taxbill_from_excel(type, {
+      name: params[:buyers_company_name],
+      registration_number: params[:buyer_registration_number],
+      email1: params[:buyer1_email],
+      email2: params[:buyer2_email],
+    }, params)
+  end
+
+  def self.create_taxbill_from_excel(type, info, params)
+    taxbill = Taxbill.new(billtype: type, transacted_at: params[:transacted_at])
+    item = taxbill.items.build(params)
+
+    client = BusinessClient.find_by_registration_number(info[:registration_number])
+    unless client
+      client = BusinessClient.new({
+        name: info[:name],
+        registration_number: info[:registration_number]
+      })
+    end
+
+    taxman = client.taxmen.find_by_email([info[:email1], info[:email2]])
+    unless taxman
+      taxman = client.taxmen.build
+      person = taxman.build_person
+      contact = person.build_contact
+
+      contact.emails.build(email: info[:email1])
+      contact.emails.build(email: info[:email2])
+    end
+
+    client.save!
+    client.taxmen << taxman
+
+    Company.current_company.business_clients << client
+
+    taxbill.taxman = taxman
+
+    taxbill.save!
   end
 end

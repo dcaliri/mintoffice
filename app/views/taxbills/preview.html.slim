@@ -46,12 +46,8 @@ table#list-table
     th= TaxbillItem.human_attribute_name(:issue_type)
     th= TaxbillItem.human_attribute_name(:etc)
     th= TaxbillItem.human_attribute_name(:bill_action_type)
-    th= TaxbillItem.human_attribute_name(:section)
-    th= TaxbillItem.human_attribute_name(:seller)
     th= TaxbillItem.human_attribute_name(:seller_email)
-    th= TaxbillItem.human_attribute_name(:buyer1)
     th= TaxbillItem.human_attribute_name(:buyer1_email)
-    th= TaxbillItem.human_attribute_name(:buyer2)
     th= TaxbillItem.human_attribute_name(:buyer2_email)
     th= TaxbillItem.human_attribute_name(:item_date)
     th= TaxbillItem.human_attribute_name(:item_name)
@@ -88,12 +84,8 @@ table#list-table
       td= item.issue_type
       td= item.etc
       td= item.bill_action_type
-      td= item.section
-      td= item.seller
       td= item.seller_email
-      td= item.buyer1
       td= item.buyer1_email
-      td= item.buyer2
       td= item.buyer2_email
       td= item.item_date
       td= item.item_name
