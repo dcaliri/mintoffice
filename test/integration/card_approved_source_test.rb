@@ -146,7 +146,7 @@ class CardApprovedSourcesTest < ActionDispatch::IntegrationTest
 
     click_button '카드영수증 생성'
 
-    assert(page.has_content?('normal 이(가) 총 1개의 카드영수증을 생성했습니다.'))
+    assert(page.has_content?('김개똥(normal) 이(가) 총 1개의 카드영수증을 생성했습니다.'))
   end
 
   test 'should show list without cardbill' do

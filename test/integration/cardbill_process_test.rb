@@ -21,7 +21,7 @@ class CardBillProcessTest < ActionDispatch::IntegrationTest
 
     click_button '카드영수증 생성'
 
-    assert(page.has_content?('card_manager 이(가) 총 1개의 카드영수증을 생성했습니다.'))
+    assert(page.has_content?('카드영수증 매니저(card_manager) 이(가) 총 1개의 카드영수증을 생성했습니다.'))
 
     clear_session
 
@@ -48,7 +48,7 @@ class CardBillProcessTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('상태 - 결재 대기 중'))
 
     clear_session
-    
+
     visit '/'
 
     fill_in "사용자계정", with: "card_user"
@@ -59,7 +59,7 @@ class CardBillProcessTest < ActionDispatch::IntegrationTest
     click_link '카드 영수증 목록'
     click_link '상세보기'
 
-    assert(page.has_content?('card_manager: card_user님에게 결재를 요청하였습니다.'))
+    assert(page.has_content?('카드영수증 매니저(card_manager): 카드 사용자(card_user)님에게 결재를 요청하였습니다.'))
     assert(page.has_content?('유저에게 상신'))
 
     click_link '수정하기'
@@ -96,7 +96,7 @@ class CardBillProcessTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('상태 - 결재 대기 중'))
 
     clear_session
-    
+
     visit '/'
 
     fill_in "사용자계정", with: "admin"
