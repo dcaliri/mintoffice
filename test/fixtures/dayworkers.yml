@@ -1,3 +1,6 @@
 fixture:
     id: 1
+    juminno: 111111-1111111
+    created_at: <%= Time.zone.now %>
+    updated_at: <%= Time.zone.now %>
     person_id: 1

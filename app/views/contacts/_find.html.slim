@@ -21,11 +21,14 @@ h2
       th= Contact.human_attribute_name(:company_name)
       th= Contact.human_attribute_name(:department)
       th= Contact.human_attribute_name(:position)
+      th.link_button_area
     - @contacts.each do |contact|
-      tr.selectable onclick="location.href='#{redirect_path.call(contact)}'"
+      tr.selectable.link_to*{"data-url" => redirect_path.call(contact)}
         td= contact.name
         td= contact.company_name
         td= contact.department
         td= contact.position
+        td.link_button_area
+          = link_to '상세보기', redirect_path.call(contact), class: 'btn btn-primary'
 - else
   h4= t('.empty')

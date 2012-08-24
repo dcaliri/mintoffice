@@ -24,7 +24,7 @@ class BankTransactionTest < ActionDispatch::IntegrationTest
 
     assert(page.has_content?('입출금 내역 검증'))
 
-    find("tr.selectable").click
+    click_link '상세보기'
 
     assert(page.has_content?('입출금 내역'))
   end
@@ -127,7 +127,7 @@ class BankTransactionTest < ActionDispatch::IntegrationTest
     visit '/'
     click_link '은행계좌 목록'
     click_link '입출금내역 보기'
-    find("tr.selectable").click
+    click_link '상세보기'
     click_link '수정'
 
     select('2012', :from => 'bank_transaction_transacted_at_1i')
@@ -154,15 +154,16 @@ class BankTransactionTest < ActionDispatch::IntegrationTest
   end
 
   test "should destroy bank_transaction" do
+    switch_to_selenium
+
     visit '/'
     click_link '은행계좌 목록'
     click_link '입출금내역 보기'
 
-    find("tr.selectable").click
-
-    disable_confirm_box
+    click_link '상세보기'
 
     click_link '삭제'
+    page.driver.browser.switch_to.alert.accept
 
     assert(page.has_content?('2012년결산'))
     assert(page.has_content?('적금만기'))

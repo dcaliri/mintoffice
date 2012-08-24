@@ -31,7 +31,7 @@ class EmployeeTest < ActionDispatch::IntegrationTest
   test 'should visit employees' do
     visit '/'
     click_link '인사정보관리 - 사원목록'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     assert(page.has_content?('인사정보'))
   end
@@ -41,7 +41,8 @@ class EmployeeTest < ActionDispatch::IntegrationTest
     click_link '인사정보관리 - 사원목록'
 
     click_link '새로운 인사정보 입력'
-    find("tr[7]").click
+
+    find("tr[7]").click_link('상세보기')
 
     fill_in "주민등록번호", with: "123456-7654321"
 
@@ -86,7 +87,7 @@ class EmployeeTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('홍 길동'))
     assert(page.has_content?('기술직'))
 
-    find("tr[8]").click
+    find("tr[8]").click_link('상세보기')
 
     fill_in "주민등록번호", with: "222222-2222222"
 
@@ -104,7 +105,7 @@ class EmployeeTest < ActionDispatch::IntegrationTest
   test 'should visit employees to find contact' do
     visit '/'
     click_link '인사정보관리 - 사원목록'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     click_link '주소록 찾기'
 
@@ -115,7 +116,7 @@ class EmployeeTest < ActionDispatch::IntegrationTest
   test 'should visit employees to edit contact' do
     visit '/'
     click_link '인사정보관리 - 사원목록'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     click_link '주소록 찾기'
 
@@ -135,7 +136,7 @@ class EmployeeTest < ActionDispatch::IntegrationTest
   test 'should visit employees to destroy contact items' do
     visit '/'
     click_link '인사정보관리 - 사원목록'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     click_link '주소록 찾기'
 
@@ -149,7 +150,7 @@ class EmployeeTest < ActionDispatch::IntegrationTest
   test 'should visit employees to destroy contact' do
     visit '/'
     click_link '인사정보관리 - 사원목록'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     click_link '주소록 찾기'
 
@@ -165,7 +166,7 @@ class EmployeeTest < ActionDispatch::IntegrationTest
   test 'should create required tag.' do
     visit '/'
     click_link '인사정보관리 - 사원목록'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     click_link '필수 태그 신규 작성'
 
@@ -173,16 +174,36 @@ class EmployeeTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('모델명'))
     assert(page.has_content?('태그명'))
 
-    fill_in "태그", with: "test2"
+    fill_in "태그", with: "employee_tag"
 
     click_button '만들기'
+
     assert(page.has_content?('Required Tag was successfully created.'))
+    assert(page.has_content?('employee_tag'))
+
+    click_link 'Register'
+
+    fill_in "문서제목", with: "employee_document"
+
+    assert(page.has_content?('employee_tag,인사정보,admin'))
+
+    click_button '만들기'
+
+    assert(page.has_content?('문서이(가) 성공적으로 생성되었습니다.'))
+    assert(page.has_content?('employee_document'))
+    assert(page.has_content?('employee_tag, 인사정보, admin'))
+
+    visit '/employees/1'
+    click_link 'employee_document'
+
+    assert(page.has_content?('employee_document'))
+    assert(page.has_content?('employee_tag, 인사정보, admin'))
   end
 
   test 'should not create same required tag.' do
     visit '/'
     click_link '인사정보관리 - 사원목록'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     click_link '필수 태그 신규 작성'
 
@@ -199,7 +220,7 @@ class EmployeeTest < ActionDispatch::IntegrationTest
   test 'should visit employees to find payments' do
     visit '/'
     click_link '인사정보관리 - 사원목록'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     click_link '연봉 관리'
 
@@ -209,7 +230,7 @@ class EmployeeTest < ActionDispatch::IntegrationTest
   test 'should visit employees to find vacations' do
     visit '/'
     click_link '인사정보관리 - 사원목록'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     click_link '연차 관리'
 
@@ -219,7 +240,7 @@ class EmployeeTest < ActionDispatch::IntegrationTest
   test 'should fail to get employment_proof' do
     visit '/'
     click_link '인사정보관리 - 사원목록'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     click_link '재직증명서'
 
@@ -229,7 +250,7 @@ class EmployeeTest < ActionDispatch::IntegrationTest
   test 'should visit employees to retire' do
     visit '/'
     click_link '인사정보관리 - 사원목록'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     click_link '퇴직 처리'
 
@@ -247,7 +268,7 @@ class EmployeeTest < ActionDispatch::IntegrationTest
   test 'should edit the exist employee' do
     visit '/'
     click_link '인사정보관리 - 사원목록'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     click_link '수정하기'
 
@@ -265,9 +286,20 @@ class EmployeeTest < ActionDispatch::IntegrationTest
   test 'should back' do
     visit '/'
     click_link '인사정보관리 - 사원목록'
-    find("tr.selectable").click
+    click_link '상세보기'
     click_link '돌아가기'
 
     assert(page.has_content?('인사정보관리'))
+  end
+
+  test 'should show retired employee' do
+    switch_to_selenium
+    
+    visit '/'
+    click_link '인사정보관리 - 사원목록'
+    
+    select '퇴직자', from: 'search_type'
+
+    assert(page.has_content?('퇴 직자'))
   end
 end

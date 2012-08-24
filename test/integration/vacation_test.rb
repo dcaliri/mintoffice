@@ -10,6 +10,7 @@ class VacationTest < ActionDispatch::IntegrationTest
     visit '/vacations'
 
 		assert(page.has_content?('연차 정보'))
+    assert(!page.has_content?('돌아가기'))
   end
 
   test 'should visit vacations' do
