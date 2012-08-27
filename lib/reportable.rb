@@ -4,6 +4,7 @@ module Reportable
   def create_initial_report
     unless self.report
       report = build_report
+      report.reporters << Person.current_person.reporters.build(report_id: report.id, owner: true)
     end
   end
 
