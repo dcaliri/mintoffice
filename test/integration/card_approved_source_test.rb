@@ -136,13 +136,13 @@ class CardApprovedSourcesTest < ActionDispatch::IntegrationTest
     click_link '카드영수증이 없는 목록 보기'
     click_link '신용카드 영수증 생성'
 
-    select('김 개똥(normal)', from: 'owner')
+    select('[개인] 김 개똥', from: 'owner')
 
-    assert(page.has_content?('admin'))
-    assert(page.has_content?('normal'))
-    assert(page.has_content?('card_manager'))
-    assert(page.has_content?('card_user'))
-    assert(!page.has_content?('retired_user'))
+    assert(page.has_content?('[개인] 김 관리'))
+    assert(page.has_content?('[개인] 김 개똥'))
+    assert(page.has_content?('[개인] 카드영수증 매니저'))
+    assert(page.has_content?('[개인] 카드 사용자'))
+    assert(!page.has_content?('[개인] retired_user'))
 
     click_button '카드영수증 생성'
 
