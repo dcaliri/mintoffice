@@ -126,4 +126,37 @@ class DocumentTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('김 관리(admin): 반려 테스트'))
     assert(page.has_content?('김 관리(admin): 김 관리님이 결재를 반려하였습니다.'))
   end
+
+  test 'create documents and check them' do
+    Document.destroy_all
+
+    (1..40).each do |i|
+      visit '/'
+      click_link '문서 관리'
+      click_link '새로운 문서 작성'
+
+      select "테스트 프로젝트", from: 'document_project_id'
+      fill_in "문서제목", with: "테스트 문서#{i}"
+
+      click_button '만들기'
+    end
+
+    visit '/'
+    click_link '문서 관리'
+    assert(page.has_content?('총합: 40'))
+
+    click_link '1'
+    
+    (21..40).each do |i|
+      assert(page.has_content?("테스트 문서#{i}"))
+    end
+    assert(!page.has_content?("테스트 문서20"))
+
+    click_link '2'
+    
+    (1..20).each do |i|
+      assert(page.has_content?("테스트 문서#{i}"))
+    end
+    assert(!page.has_content?("테스트 문서21"))
+  end
 end
