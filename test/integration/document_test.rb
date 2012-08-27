@@ -130,19 +130,24 @@ class DocumentTest < ActionDispatch::IntegrationTest
   test 'create documents and check them' do
     Document.destroy_all
 
+    visit '/'
+    click_link '문서 관리'
+
     (1..40).each do |i|
-      visit '/'
-      click_link '문서 관리'
       click_link '새로운 문서 작성'
 
       select "테스트 프로젝트", from: 'document_project_id'
       fill_in "문서제목", with: "테스트 문서#{i}"
 
       click_button '만들기'
+
+      click_link '목록'
     end
 
-    visit '/'
-    click_link '문서 관리'
+    select '전체', from: 'report_status'
+    fill_in "query", with: "테스트 문서"
+    click_button "검색"
+
     assert(page.has_content?('총합: 40'))
 
     click_link '1'
@@ -158,5 +163,46 @@ class DocumentTest < ActionDispatch::IntegrationTest
       assert(page.has_content?("테스트 문서#{i}"))
     end
     assert(!page.has_content?("테스트 문서21"))
+  end
+
+  test 'group member should view document' do
+    visit '/'
+    click_link '문서 관리'
+    click_link '새로운 문서 작성'
+
+    select "테스트 프로젝트", from: 'document_project_id'
+    fill_in "문서제목", with: "no_admin 문서"
+
+    click_button '만들기'
+
+    select '[그룹] no_admin', from: 'accessor'
+
+    click_button 'Save changes'
+
+    normal_user_access
+
+    visit '/'
+    click_link '문서 관리'
+
+    select '전체', from: 'report_status'
+    fill_in "query", with: "no_admin 문서"
+    click_button "검색"
+
+    click_link '상세보기'
+
+    assert(page.has_content?("no_admin 문서"))
+
+    project_admin_access
+
+    visit '/'
+    click_link '문서 관리'
+
+    select '전체', from: 'report_status'
+    fill_in "query", with: "no_admin 문서"
+    click_button "검색"
+
+    click_link '상세보기'
+
+    assert(page.has_content?("no_admin 문서"))
   end
 end
