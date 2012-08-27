@@ -29,20 +29,12 @@ class DocumentTest < ActiveSupport::TestCase
   end
 
   test "check report text" do
-    def email_notify_title(action, doc, from)
-      if action == :rollback
-        "문서관리 - #{doc.title} - #{from.fullname}님에 의해서 반려되었습니다."
-      else
-        "문서관리 - #{from.fullname}의 결재요청"
-    end
+    def email_notify_title(from)
+      "문서관리 - #{from.fullname}의 결재요청"
     end
 
-    def boxcar_notify_title(action, doc, from)
-      if action == :rollback
-        "문서관리 - #{doc.title} - #{from.fullname}님에 의해서 반려되었습니다."
-      else
-        "문서관리 - #{from.fullname}의 결재요청 : #{doc.title}"
-    end
+    def boxcar_notify_title(from, doc)
+      "문서관리 - #{from.fullname}의 결재요청 : #{doc.title}"
     end
 
     def email_notify_body(doc, url, comment)
@@ -58,17 +50,11 @@ class DocumentTest < ActiveSupport::TestCase
       BODY
     end
 
-    report_comment_email = "문서관리 - #{current_employee.fullname}의 결재요청"
-    assert_equal(report_comment_email, email_notify_title(:report, current_document, current_employee))
+    comment_email = "문서관리 - #{current_employee.fullname}의 결재요청"
+    assert_equal(comment_email, email_notify_title(current_employee))
 
-    rollback_comment_email = "문서관리 - #{current_document.title} - #{current_employee.fullname}님에 의해서 반려되었습니다."
-    assert_equal(rollback_comment_email, email_notify_title(:rollback, current_document, current_employee))
-
-    report_comment_boxcar = "문서관리 - #{current_employee.fullname}의 결재요청 : #{current_document.title}"
-    assert_equal(report_comment_boxcar, boxcar_notify_title(:report, current_document, current_employee))
-
-    rollback_comment_boxcar = "문서관리 - #{current_document.title} - #{current_employee.fullname}님에 의해서 반려되었습니다."
-    assert_equal(rollback_comment_boxcar, boxcar_notify_title(:rollback, current_document, current_employee))
+    comment_boxcar = "문서관리 - #{current_employee.fullname}의 결재요청 : #{current_document.title}"
+    assert_equal(comment_boxcar, boxcar_notify_title(current_employee, current_document))
 
     comment_email_body = "        문서제목 :\n        테스트 문서\n\n        코멘트:\n        test\n\n        링크:\n        /\n"
     assert_equal(comment_email_body, email_notify_body(current_document, '/', 'test'))
