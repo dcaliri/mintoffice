@@ -1,5 +1,7 @@
+# encoding: UTF-8
+
 class AccessPerson < ActiveRecord::Base
-  belongs_to :person
+  belongs_to :owner, polymorphic: true
   belongs_to :access_target, polymorphic: true
 
   class << self
@@ -7,28 +9,28 @@ class AccessPerson < ActiveRecord::Base
       group(:access_target_id).having('count(access_people.access_target_id) = 0')
     end
 
-    def access_list(person)
-      if person.admin?
+    def access_list(owner)
+      if owner.admin?
         where("1")
-      elsif person.nil?
+      elsif owner.nil?
         where("0")
       else
-        if person.class == Account
-          where(person_id: person.person.id)
-        else
-          where(person_id: person.id)
-        end
+        arel = self.arel_table
+        query = arel[:owner_type].eq("Person").and(arel[:owner_id].eq(owner.id))
+                .or(arel[:owner_type].eq("Group").and(arel[:owner_id].eq(owner.groups.first.id)))
+        where(query)
       end
     end
 
-    def access?(person, access_type)
-      return true if person.admin?
+    def access?(owner, access_type)
+      return true if owner.admin?
       access_query = access_type == :write ? {access_type: :write} : {}
-      if person.class == Account
-        where(access_query).exists?(person_id: person.person.id)
-      else
-        where(access_query).exists?(person_id: person.id)
-      end
+
+      collection = where(access_query)
+      exist_person = collection.where(owner_type: "Person").exists?(owner_id: owner.id)
+      exist_group = collection.where(owner_type: "Group").exists?(owner_id: owner.groups.map(&:id))
+
+      exist_person or exist_group
     end
 
     def readers
@@ -39,20 +41,24 @@ class AccessPerson < ActiveRecord::Base
       where(access_type: :write)
     end
 
-    def permission(person, access_type)
-      collection = where(person_id: person.id)
+    def permission(owner, access_type)
+      collection = where(owner_type: owner.class.to_s, owner_id: owner.id)
       unless collection.empty?
         accessor = collection.first
         accessor.access_type = access_type
         accessor.save!
       else
-        create!(person_id: person.id, access_type: access_type)
+        create!(owner_type: owner.class.to_s, owner_id: owner.id, access_type: access_type)
       end
     end
   end
 
   def fullname
-    person.account.fullname rescue ""
+    if self.owner_type == "Person"
+      "[개인] " + owner.account.fullname rescue ""
+    elsif owner.class == Group
+      "[그룹] " + owner.name
+    end
   end
 
   def read?

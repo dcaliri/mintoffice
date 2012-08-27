@@ -6,8 +6,8 @@ module Permissionable
       includes(:accessors).merge(AccessPerson.no_permission)
     end
 
-    def access_list(person)
-      joins(:accessors).merge(AccessPerson.access_list(person))
+    def access_list(owner)
+      joins(:accessors).merge(AccessPerson.access_list(owner))
     end
   end
 
@@ -21,8 +21,8 @@ module Permissionable
     end
   end
 
-  def permission(person, access_type)
-    accessors.permission(person, access_type)
+  def permission(owner, access_type)
+    accessors.permission(owner, access_type)
   end
 
   included do
