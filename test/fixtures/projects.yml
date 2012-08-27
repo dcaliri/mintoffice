@@ -19,3 +19,14 @@ no_user_project:
   created_at: <%= Time.zone.now %>
   updated_at: <%= Time.zone.now %>
   company_id: 1
+
+ended_project:
+  id: 3
+  name: "완료된 프로젝트"
+  started_on: 2012-07-20
+  ending_on: 2012-07-20
+  ended_on: 2012-07-28
+  revenue: 1000000
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
+  company_id: 1

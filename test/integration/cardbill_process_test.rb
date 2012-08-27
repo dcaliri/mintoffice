@@ -17,7 +17,7 @@ class CardBillProcessTest < ActionDispatch::IntegrationTest
     click_link '카드영수증이 없는 목록 보기'
     click_link '신용카드 영수증 생성'
 
-    select('card_manager', from: 'owner')
+    select('카드영수증 매니저(card_manager)', from: 'owner')
 
     click_button '카드영수증 생성'
 

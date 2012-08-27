@@ -35,7 +35,13 @@ class NUDocumentTest < ActionDispatch::IntegrationTest
     click_link '문서 관리'
     click_link '새로운 문서 작성'
 
+    assert(!page.has_content?('소유자'))
+    assert(!page.has_content?('참여자 없는 프로젝트'))
+    assert(!page.has_content?('완료된 프로젝트'))
+    assert(page.has_content?('테스트 프로젝트'))
+
     fill_in "문서제목", with: "문서제목 입력 테스트"
+
 
     click_button '만들기'
 
@@ -59,6 +65,11 @@ class NUDocumentTest < ActionDispatch::IntegrationTest
     click_link '상세보기'
 
     click_link '수정하기'
+
+    assert(!page.has_content?('소유자'))
+    assert(!page.has_content?('참여자 없는 프로젝트'))
+    assert(!page.has_content?('완료된 프로젝트'))
+    assert(page.has_content?('테스트 프로젝트'))
 
     fill_in "문서제목", with: "문서제목 수정 테스트"
 

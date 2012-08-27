@@ -39,6 +39,7 @@ class DocumentTest < ActionDispatch::IntegrationTest
 
     assert(!page.has_content?('소유자'))
     assert(!page.has_content?('참여자 없는 프로젝트'))
+    assert(!page.has_content?('완료된 프로젝트'))
     assert(page.has_content?('테스트 프로젝트'))
 
     select '테스트 프로젝트', from: 'document_project_id'
@@ -61,6 +62,7 @@ class DocumentTest < ActionDispatch::IntegrationTest
 
     assert(!page.has_content?('소유자'))
     assert(!page.has_content?('참여자 없는 프로젝트'))
+    assert(!page.has_content?('완료된 프로젝트'))
     assert(page.has_content?('테스트 프로젝트'))
 
     select '테스트 프로젝트', from: 'document_project_id'
@@ -115,13 +117,13 @@ class DocumentTest < ActionDispatch::IntegrationTest
     fill_in "코멘트", with: "승인 테스트"
     click_button '승인'
 
-    assert(page.has_content?('admin: 승인 테스트'))
-    assert(page.has_content?('admin: 김 관리님이 결재를 승인하였습니다.'))
+    assert(page.has_content?('김 관리(admin): 승인 테스트'))
+    assert(page.has_content?('김 관리(admin): 김 관리님이 결재를 승인하였습니다.'))
 
     fill_in "코멘트", with: "반려 테스트"
     click_button '반려'
 
-    assert(page.has_content?('admin: 반려 테스트'))
-    assert(page.has_content?('admin: 김 관리님이 결재를 반려하였습니다.'))
+    assert(page.has_content?('김 관리(admin): 반려 테스트'))
+    assert(page.has_content?('김 관리(admin): 김 관리님이 결재를 반려하였습니다.'))
   end
 end
