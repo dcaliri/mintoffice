@@ -2,9 +2,11 @@
 
 class AccessorsController < ApplicationController
   def create
-    person = Person.find(params[:accessor])
+    class_name, id = params[:accessor].split('-')
+
+    owner = class_name.classify.constantize.find(id)
     resource = params[:resources_type].constantize.find(params[:resources_id])
-    resource.accessors.permission(person, params[:access_type])
+    resource.accessors.permission(owner, params[:access_type])
     redirect_to :back, notice: t('controllers.accessors.set_permission')
   end
 

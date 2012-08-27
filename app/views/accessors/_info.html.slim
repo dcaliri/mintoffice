@@ -8,7 +8,7 @@ ul
       = "("
       = accessor.write? ? t('accessors.info.read_write') : t('accessors.info.read')
       = ")"
-      - unless accessor.person.admin?
+      - unless accessor.owner.admin?
         = link_to "[x]", accessors_path(accessor_id: accessor.id), :method => :delete
 
 - if access_target.access?(current_person, :write)
@@ -22,6 +22,6 @@ ul
       = select_tag :access_type, options_for_select([[t('accessors.info.read'), "read"], [t('accessors.info.write'), "write"]])
     p
       = label_tag :accessor, t('activerecord.attributes.access_person.accessor')
-      = select_tag :accessor, options_for_select(Person.with_account.without_retired.map{|person| [person.fullname, person.id]})
+      = select_tag :accessor, options_for_access_people_select
     p
       = submit_tag
