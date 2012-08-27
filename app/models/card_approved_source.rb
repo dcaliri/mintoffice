@@ -112,8 +112,10 @@ class CardApprovedSource < ActiveRecord::Base
 
         cardbill = approved_source.creditcard.cardbills.build(
           amount: used_source.price,
-          servicecharge: used_source.tax,
-          vat: used_source.tip,
+          # servicecharge: used_source.tax,
+          # vat: used_source.tip,
+          servicecharge: 0,
+          vat: 0,
           approveno: approved_source.approve_no,
           totalamount: approved_source.money,
           transdate: approved_source.used_at,
@@ -122,12 +124,12 @@ class CardApprovedSource < ActiveRecord::Base
         )
 
         report = cardbill.build_report
-        report.reporters << owner.reporters.build(report_id: report, owner: true)
 
         raise cardbill.errors.inspect if cardbill.invalid?
 
         cardbill.save!
 
+        cardbill.report.accessors.destroy_all
         cardbill.report.permission owner, :write
 
         total_count += 1
