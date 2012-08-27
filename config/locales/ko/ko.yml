@@ -128,6 +128,8 @@ ko:
             document: 문서
             expense_report: 지출 내역서
             holiday: 휴일관리
+            investment: 투자자산
+            investment_estimation: 투자자산 평가액
             employee: 인사정보
             ledger_account: 원장 계정
             namecard: 명함정보
@@ -416,6 +418,14 @@ ko:
             holiday:
                 theday: 휴일날짜
                 dayname: 휴일명목
+            investment:
+                title: 자산명
+                description: 상세정보
+                current_estimation: 현재 평가액
+                initial_estimation: 과거 평가액
+            investment_estimation:
+                amount: 평가액
+                estimated_at: 평가일자
             employee:
                 juminno: 주민등록번호
                 retired_on: 퇴직일
@@ -1032,6 +1042,7 @@ ko:
             excel: 엑셀 파일 올리기
             upload: 업로드하기
             update: 수정
+            menu: 메뉴
         link:
             show: 내용 보기
             logout: "로그아웃"
@@ -1244,6 +1255,8 @@ ko:
         index:
             this_years_working_days: "년의 근무일수 : "
             month_and_count: "%{m}월: %{c}일"
+    investments:
+        title: 투자자산 관리
     ledger_accounts:
         title: 원장 관리
         index:
