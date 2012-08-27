@@ -108,5 +108,19 @@ class BankAccountTest < ActionDispatch::IntegrationTest
 
     assert(page.has_content?('이체 내역'))
     assert(page.has_content?('신한 은행 : 321-123-123456'))
-  end  
+  end
+
+  test "should show bank_transfers and bank_transactions without bank_account" do
+    BankAccount.destroy_all
+
+    visit '/'
+    click_link '은행계좌 목록'
+    click_link '입출금내역 보기'
+    assert(page.has_content?('입출금 내역이 없습니다'))
+    
+    visit '/'
+    click_link '은행계좌 목록'
+    click_link '이체내역 보기'
+    assert(page.has_content?('이체 내역이 없습니다'))
+  end
 end
