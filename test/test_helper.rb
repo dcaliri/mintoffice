@@ -121,6 +121,21 @@ class ActionController::TestCase
     @person
   end
 
+  def switch_to_normal
+    DatabaseCleaner.strategy = :truncation
+    DatabaseCleaner.start
+
+    session[:person_id] = normal_person.id
+    session[:company_id] = current_company.id
+
+    Person.current_person = normal_person
+    Company.current_company = current_company
+  end
+
+  def normal_person
+    @person = people(:normal)
+  end
+
   def current_company
     @company ||= companies(:fixture)
   end
