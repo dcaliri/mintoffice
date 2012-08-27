@@ -22,7 +22,7 @@ class NUCardBillTest < ActionDispatch::IntegrationTest
     click_link '카드영수증이 없는 목록 보기'
     click_link '신용카드 영수증 생성'
 
-    select('normal', from: 'owner')
+    select('[개인] 김 개똥', from: 'owner')
 
     click_button '카드영수증 생성'
 
@@ -42,7 +42,7 @@ class NUCardBillTest < ActionDispatch::IntegrationTest
     click_link '카드영수증이 없는 목록 보기'
     click_link '신용카드 영수증 생성'
 
-    select('normal', from: 'owner')
+    select('[개인] 김 개똥', from: 'owner')
 
     click_button '카드영수증 생성'
 
@@ -66,7 +66,7 @@ class NUCardBillTest < ActionDispatch::IntegrationTest
     click_link '카드영수증이 없는 목록 보기'
     click_link '신용카드 영수증 생성'
 
-    select('normal', from: 'owner')
+    select('[개인] 김 개똥', from: 'owner')
 
     click_button '카드영수증 생성'
 
@@ -94,7 +94,7 @@ class NUCardBillTest < ActionDispatch::IntegrationTest
     click_link '카드영수증이 없는 목록 보기'
     click_link '신용카드 영수증 생성'
 
-    select('normal', from: 'owner')
+    select('[개인] 김 개똥', from: 'owner')
 
     click_button '카드영수증 생성'
 
@@ -128,7 +128,7 @@ class NUCardBillTest < ActionDispatch::IntegrationTest
     click_link '카드영수증이 없는 목록 보기'
     click_link '신용카드 영수증 생성'
 
-    select('normal', from: 'owner')
+    select('[개인] 김 개똥', from: 'owner')
 
     click_button '카드영수증 생성'
 
@@ -155,7 +155,7 @@ class NUCardBillTest < ActionDispatch::IntegrationTest
     click_link '카드영수증이 없는 목록 보기'
     click_link '신용카드 영수증 생성'
 
-    select('normal', from: 'owner')
+    select('[개인] 김 개똥', from: 'owner')
 
     click_button '카드영수증 생성'
 
