@@ -64,14 +64,14 @@ class ActionDispatch::IntegrationTest
   end
 
   def get_now_time
-    Time.zone.now.strftime("%Y-%m-%d")
+    Time.now.strftime("%Y-%m-%d")
   end
 
   def get_payment_day
-    if Time.zone.now.month < 10
-      Time.zone.now.year.to_s + ".0" + Time.zone.now.month.to_s + ".25"
+    if Time.now.month < 10
+      Time.now.year.to_s + ".0" + Time.now.month.to_s + ".25"
     else
-      Time.zone.now.year.to_s + "." + Time.zone.now.month.to_s + ".25"
+      Time.now.year.to_s + "." + Time.now.month.to_s + ".25"
     end
   end
 
