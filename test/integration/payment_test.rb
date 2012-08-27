@@ -44,7 +44,6 @@ class PaymentTest < ActionDispatch::IntegrationTest
     click_button '추가하기'
 
     assert(page.has_content?('1,500,000'))
-    assert(page.has_content?(get_payment_day))
   end
 
   test 'should edit payment' do
