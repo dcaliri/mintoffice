@@ -88,17 +88,16 @@ class TaxBillTest < ActionDispatch::IntegrationTest
 
     click_link '새로운 내역'
 
-    fill_in "단가", with: "10000"
-    fill_in "수량", with: "10"
-    fill_in "내역", with: "내역 입력 테스트"
+    fill_in "품목단가", with: "10000"
+    fill_in "품목수량", with: "32"
+    fill_in "비고", with: "비고 입력 테스트"
 
     click_button '항목 만들기'
 
     assert(page.has_content?('항목이(가) 성공적으로 생성되었습니다.'))
 
     assert(page.has_content?('10,000'))
-    assert(page.has_content?('10'))
-    assert(page.has_content?('내역 입력 테스트'))
+    assert(page.has_content?('32'))
   end
 
   test 'should edit taxbill item' do
@@ -106,19 +105,19 @@ class TaxBillTest < ActionDispatch::IntegrationTest
     click_link '세금계산서 관리'
     click_link '상세보기'
 
+    click_link '내용 보기'
     click_link '수정'
 
-    fill_in "단가", with: "1000"
-    fill_in "수량", with: "5"
-    fill_in "내역", with: "내역 수정 테스트"
+    fill_in "품목단가", with: "1000"
+    fill_in "품목수량", with: "51"
+    fill_in "비고", with: "비고 수정 테스트"
 
     click_button '항목 수정하기'
 
     assert(page.has_content?('항목이(가) 성공적으로 생성되었습니다.'))
 
     assert(page.has_content?('1,000'))
-    assert(page.has_content?('5'))
-    assert(page.has_content?('내역 수정 테스트'))
+    assert(page.has_content?('51'))
   end
 
   test 'should destroy taxbill item' do
@@ -126,10 +125,34 @@ class TaxBillTest < ActionDispatch::IntegrationTest
     click_link '세금계산서 관리'
     click_link '상세보기'
 
-    disable_confirm_box
+    click_link '내용 보기'
 
+    disable_confirm_box
     click_link '삭제'
 
     assert(page.has_content?('항목이(가) 성공적으로 제거 되었습니다.'))
+  end
+
+  test "should upload an excel file" do
+    switch_to_selenium
+
+    visit '/'
+    click_link '세금계산서 관리'
+
+    click_link '엑셀 파일 올리기'
+    path = File.join(::Rails.root, "test/fixtures/excels/taxbill_fixture.xls") 
+    attach_file("upload_file", path)
+
+    click_button '미리보기'
+    click_button '엑셀파일'
+
+    assert(page.has_content?('매입 세금계산서'))
+    assert(page.has_content?('2012-08-20'))
+    assert(page.has_content?('Walk'))
+    assert(page.has_content?('₩11,000,000'))
+
+    visit '/business_clients'
+
+    assert(page.has_content?('Walk'))
   end
 end

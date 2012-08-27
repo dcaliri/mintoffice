@@ -11,7 +11,7 @@ h2 ..
       = label_tag :file, t('.file')
       = text_field_tag :upload, params[:upload][:file].original_filename
     p
-      = submit_tag "import"
+      = submit_tag t('taxbills.preview.import')
 
 br
 

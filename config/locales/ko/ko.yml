@@ -1468,6 +1468,10 @@ ko:
             card: 신용카드 합계
             list: 분기 목록
             quarter: "%{year}년도 %{quarter} 분기"
+        excel: 
+            preview: 미리보기
+        preview: 
+            import: 엑셀파일
         purchase_bill: 매입 세금계산서
         sales_bill: 매출 세금계산서
         purchase_sales_bill: 매입/매출 세금계산서
