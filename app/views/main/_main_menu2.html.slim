@@ -32,8 +32,7 @@ div class={current_person.admin? ? "admin" : ""}
     .menubar_item.item3
       h2= t("main.index.project")
       ul
-        - if current_person.permission? 'projects'
-          li= link_to t("projects.index.title"), :controller => "projects"
+        li= link_to t("projects.index.title"), :controller => "projects"
 
     .menubar_item.item4
       h2= t("main.index.document")

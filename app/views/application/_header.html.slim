@@ -49,8 +49,7 @@ div#main_nav.navbar.navbar-fixed-top
               = t("main.index.project")
               b.caret
             ul.dropdown-menu
-              - if current_person.permission? 'projects'
-                li= link_to t("projects.index.title"), :projects
+              li= link_to t("projects.index.title"), :projects
 
         ul.nav
           li.dropdown
