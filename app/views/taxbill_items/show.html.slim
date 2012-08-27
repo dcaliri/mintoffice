@@ -15,16 +15,16 @@ h3= "상세정보"
     dd= @item.note
 
     dt= TaxbillItem.human_attribute_name(:unitprice)
-    dd= @item.unitprice
+    dd= number_to_currency @item.unitprice
 
     dt= TaxbillItem.human_attribute_name(:quantity)
     dd= @item.quantity
 
     dt= TaxbillItem.human_attribute_name(:total)
-    dd= @item.total
+    dd= number_to_currency @item.total
 
     dt= TaxbillItem.human_attribute_name(:tax)
-    dd= @item.tax
+    dd= number_to_currency @item.tax
 
     dt= TaxbillItem.human_attribute_name(:uid)
     dd= @item.uid
@@ -63,7 +63,7 @@ h3= "상세정보"
     dd= @item.buyerss_representative
 
     dt= TaxbillItem.human_attribute_name(:supplied_value)
-    dd= @item.supplied_value
+    dd= number_to_currency @item.supplied_value
 
     dt= TaxbillItem.human_attribute_name(:taxbill_classification)
     dd= @item.taxbill_classification
@@ -99,10 +99,10 @@ h3= "상세정보"
     dd= @item.item_standard
 
     dt= TaxbillItem.human_attribute_name(:item_supply_price)
-    dd= @item.item_supply_price
+    dd= number_to_currency @item.item_supply_price
 
     dt= TaxbillItem.human_attribute_name(:item_tax)
-    dd= @item.item_tax
+    dd= number_to_currency @item.item_tax
 
     dt= TaxbillItem.human_attribute_name(:item_note)
     dd= @item.item_note
