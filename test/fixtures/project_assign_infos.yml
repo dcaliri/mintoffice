@@ -29,3 +29,35 @@ normal_user_registe_project:
   created_at: <%= Time.zone.now %>
   updated_at: <%= Time.zone.now %>
   owner: f
+
+admin_regist_end_project:
+  id: 5
+  employee_id: 1
+  project_id: 3
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
+  owner: f
+
+cardbill_manager_registe_end_project:
+  id: 6
+  employee_id: 3
+  project_id: 3
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
+  owner: t
+
+card_used_user_registe_end_project:
+  id: 7
+  employee_id: 4
+  project_id: 3
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
+  owner: f
+
+normal_user_registe_end_project:
+  id: 8
+  employee_id: 2
+  project_id: 3
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
+  owner: f
