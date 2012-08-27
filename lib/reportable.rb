@@ -4,7 +4,6 @@ module Reportable
   def create_initial_report
     unless self.report
       report = build_report
-      report.reporters << Person.current_person.reporters.build(report_id: report, owner: true)
     end
   end
 
@@ -39,7 +38,7 @@ module Reportable
       person.admin?
     end
   end
-  delegate :report!, :approve!, :rollback!, :to => :report
+  delegate :report?, :report!, :approve!, :rollback!, :to => :report
 
   def approve?(person)
     person.admin?
