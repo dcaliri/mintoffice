@@ -281,7 +281,6 @@ Mintoffice::Application.routes.draw do
   resources :change_histories, path: 'histories'
 
   resources :investments do
-    # resources :investment_estimations, as: :estimations, path: 'estimations'
     resources :investment_estimations, path: 'estimations'
   end
 
