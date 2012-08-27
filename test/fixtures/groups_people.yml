@@ -2,6 +2,14 @@ admin_in_admin:
   group_id: 1
   person_id: 1
 
-no_admin_in_no_admin:
+normal_in_no_admin:
   group_id: 2
   person_id: 2
+
+card_manager_in_no_admin:
+  group_id: 2
+  person_id: 3
+
+card_user_in_no_admin:
+  group_id: 2
+  person_id: 4
