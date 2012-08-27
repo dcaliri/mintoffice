@@ -280,6 +280,10 @@ Mintoffice::Application.routes.draw do
 
   resources :change_histories, path: 'histories'
 
+  resources :investments do
+    resources :investment_estimations, as: :estimations, path: 'estimations'
+  end
+
   resources :tags, only: [:create, :destroy]
 
   resources :companies do
