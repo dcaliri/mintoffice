@@ -16,6 +16,6 @@ h2 ...
         td= payroll.payday
         td= payroll.employee.fullname
         td.link_button_area
-          = link_to '상세보기', payroll, class: 'btn btn-primary'
+          = link_to t('common.button.detail_veiw'), payroll, class: 'btn btn-primary'
 - else
   = "empty"

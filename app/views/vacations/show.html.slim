@@ -41,7 +41,7 @@ h2= employee.fullname
             td
               = used.localize_status
             td.link_button_area
-              = link_to '상세보기', vacation_used_vacation_path(vacation, used), class: 'btn btn-primary'
+              = link_to t('common.button.detail_veiw'), vacation_used_vacation_path(vacation, used), class: 'btn btn-primary'
 
       br
     - else

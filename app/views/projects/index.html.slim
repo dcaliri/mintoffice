@@ -35,6 +35,6 @@ table#list-table
         td
           = project.ended_on
       td.link_button_area
-        = link_to '상세보기', project, class: 'btn btn-primary'
+        = link_to t('common.button.detail_veiw'), project, class: 'btn btn-primary'
 #show_command
   = link_to t('.title') + ' - ' + @status_other, :controller => "projects", :action => "index", :st => @st_other

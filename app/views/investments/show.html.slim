@@ -5,7 +5,8 @@
   = " "
   = link_to t('common.title.list'), :investments
 
-h3 투자자산 기본정보
+h3
+  = t('investments.show.basic')
 .box
   dl
     dt= Investment.human_attribute_name(:title)
@@ -16,7 +17,8 @@ h3 투자자산 기본정보
 #show_command
   = link_to t("common.title.new"), [:new, @investment, :investment_estimation]
 
-h3 투자자산 내역
+h3
+  = t('investments.show.title')
 .box
   table#list-table
     tr

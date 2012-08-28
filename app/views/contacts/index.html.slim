@@ -3,7 +3,7 @@
     = t("common.title.search")
     = " : "
     = search_field_tag 'query', params[:query]
-    = submit_tag "검색"
+    = submit_tag t('common.button.search')
 
 #show_command
   = link_to t('contacts.save.link'), [:save, :contacts]
@@ -35,7 +35,7 @@ h2 Total : #{@contacts.count}
         td= address.emails.empty? ? "" : "#{address.emails.first.target_view} #{address.emails.first.email} "
         td= address.phone_numbers.empty? ? "" : "#{address.phone_numbers.first.target_view} #{address.phone_numbers.first.number}"
         td.link_button_area
-          = link_to '상세보기', address, class: 'btn btn-primary'
+          = link_to t('common.button.detail_veiw'), address, class: 'btn btn-primary'
   center
     br
     = will_paginate @paginated

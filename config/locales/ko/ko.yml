@@ -901,6 +901,7 @@ ko:
             to_bank_transaction: 입출금 내역
             view_expense: 지출내역서 보기
             create_expense: 지출내역서 만들기
+            expense_report: 지출내역서
     bonuses:
         new:
             title: 새로운 특별 상여금 입력
@@ -950,6 +951,7 @@ ko:
         find_empty_cardbills:
             link: 카드영수증이 없는 목록 보기
             title: 카드영수증이 없는 승인내역 리스트
+            count: 개
         generate:
             title: 신용카드 영수증 생성
             link: 신용카드 영수증 생성
@@ -993,6 +995,7 @@ ko:
             to_use: 사용 내역
             view_expense: 지출내역서 보기
             create_expense: 지출내역서 만들기
+            expense_report: 지출내역서
         edit:
             title: "카드 영수증 내용 수정"
         index:
@@ -1015,6 +1018,8 @@ ko:
             add: 추가하기
             prev: 이전
             next: 다음
+            detail_veiw: 상세보기
+            search: 검색
         messages:
             created: "%{model}이(가) 성공적으로 생성되었습니다."
             not_allowed: 접근할 수 없습니다.
@@ -1203,6 +1208,10 @@ ko:
             detail_expense: 지출내역서 상세정보
     groups:
         title: 그룹관리
+        show:
+            parent: 부모
+            sub_group: 서브그룹
+            member: 소속 맴버
     employees:
         index:
             title: 인사정보관리 - 사원목록
@@ -1257,6 +1266,9 @@ ko:
             month_and_count: "%{m}월: %{c}일"
     investments:
         title: 투자자산 관리
+        show:
+            title: 투자자산 내역
+            basic: 투자자산 기본정보
     ledger_accounts:
         title: 원장 관리
         index:
@@ -1493,6 +1505,8 @@ ko:
         new:
             title: 새로운 내역
         title: 세금계산서 내역
+        show:
+            detail: 상세정보
     taxmen:
         title: 거래처 담당자
         empty: 담당자가 없습니다.

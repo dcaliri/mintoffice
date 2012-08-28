@@ -32,7 +32,7 @@ h2 Total : #{@expenses.length}
         td= number_to_currency report.amount
         td= report.localize_status
         td.link_button_area
-          = link_to '상세보기', report, class: 'btn btn-primary'
+          = link_to t('common.button.detail_veiw'), report, class: 'btn btn-primary'
   center
     = will_paginate @expenses
 - else

@@ -2,20 +2,23 @@
 
 #show_command
   = link_to t('common.title.edit'), [:edit, group]
-  '  |
+  = " "
   = link_to t('common.title.list'), :groups
 
 h2= group.name
 
-h3 부모
+h3 
+	= t('groups.show.parent')
 = group.parent_name
 
-h3 서브그룹
+h3
+	= t('groups.show.sub_group')
 ul
   - group.subgroups.each do |subgroup|
     li= subgroup.name
 
-h3 소속 맴버
+h3
+	= t('groups.show.member')
 ul
   - group.people.each do |person|
     li= name_with_id(person)

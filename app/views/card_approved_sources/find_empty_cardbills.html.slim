@@ -7,7 +7,7 @@ h2
   = t('card_approved_sources.find_empty_cardbills.title')
   = " - "
   = @card_approved_sources.count
-  = "개"
+  = t('card_approved_sources.find_empty_cardbills.count')
 
 - unless @card_approved_sources.empty?
   = render 'list', card_approved_sources: @card_approved_sources

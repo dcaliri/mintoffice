@@ -43,6 +43,6 @@ center
   '  &laquo;
   = link_to t(".prevweek"), commutes_path(page: (page+1))
   - if page > 0
-    '  | 
+    = " | " 
     = link_to t(".nextweek"), commutes_path(page: (page-1))
     '  &raquo;

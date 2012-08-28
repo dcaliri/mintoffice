@@ -1,0 +1,17 @@
+#show_command
+  = link_to t("common.title.new"), [:new, :promissory]
+h2 ...
+
+table#list-table
+  tr
+    th= Promissory.human_attribute_name("expired_at")
+    th= Promissory.human_attribute_name("published_at")
+    th= Promissory.human_attribute_name("amount")
+    th.link_button_area
+  - @promissories.each do |promissory|
+    tr.selectable.link_to*{"data-url" => promissory_path(promissory)}
+      td= promissory.expired_at
+      td= promissory.published_at
+      td= number_to_currency promissory.amount
+      td.link_button_area
+        = link_to t('common.button.detail_veiw'), promissory, class: 'btn btn-primary'

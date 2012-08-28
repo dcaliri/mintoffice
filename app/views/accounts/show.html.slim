@@ -3,13 +3,13 @@
 #show_command
   - if current_person.admin? && @account.enabled?
     =link_to t('.loginas'), :action => "loginas", :id => @account
-    '  |
+    = " "
     =link_to t('.disable'), :action => "disable", :id => @account
-    '  |
+    = " "
     =link_to t('.change_password'), changepw_account_path(@account)
-    '  |
+    = " "
   =link_to t('common.title.edit'), edit_account_path(@account)
-  '  |
+  = " "
   =link_to t('common.title.list'), accounts_path
 
 = render 'detail', :account => @account
