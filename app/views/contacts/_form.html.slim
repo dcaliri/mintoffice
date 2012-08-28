@@ -26,7 +26,7 @@ h2= t("common.title.#{action_name}")
     - if !@contact.new_record? && current_person.admin?
       p
         = f.label :owner
-        = f.select :owner_id, options_from_collection_for_select(Person.with_account, 'id', 'fullname', @contact.owner_id)
+        = f.select :owner_id, options_from_collection_for_select(Person.with_account.without_retired, 'id', 'name', @contact.owner_id)
     - if @contact.new_record? || @contact.owner?(current_person)
       p
         = f.label :isprivate
