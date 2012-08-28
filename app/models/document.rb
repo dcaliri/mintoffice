@@ -60,7 +60,7 @@ class Document < ActiveRecord::Base
     if action == :rollback
       "문서관리 - #{self.title} - #{from.fullname}님에 의해서 반려되었습니다."
     else
-      "문서관리 - #{from.fullname}의 결재요청"
+      "문서관리 - #{from.fullname}님이 #{self.title} 문서를 상신하였습니다."
     end
   end
 
