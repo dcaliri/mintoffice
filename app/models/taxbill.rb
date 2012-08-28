@@ -9,7 +9,8 @@ class Taxbill < ActiveRecord::Base
   BILL_TYPE = [:purchase, :sale]
 
   include Historiable
-  include Attachmentable
+  include Historiable
+  include Reportable
 
   include SpreadsheetParsable
   include Excels::Taxbills::Purchase
