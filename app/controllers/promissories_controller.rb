@@ -1,8 +1,4 @@
 class PromissoriesController < ApplicationController
-  def index
-    @promissories = Promissory.all
-  end
-
   def show
     @promissory = Promissory.find(params[:id])
   end

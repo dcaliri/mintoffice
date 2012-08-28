@@ -55,7 +55,7 @@ Mintoffice::Application.routes.draw do
   end
 
   resources :bankbooks
-  resources :promissories
+  resources :promissories, except: :index
 
   resources :creditcards do
     collection do
