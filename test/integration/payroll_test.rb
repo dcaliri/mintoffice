@@ -58,8 +58,8 @@ class PayrollTest < ActionDispatch::IntegrationTest
     select '기타', from: 'payroll_item_payroll_category_id'
     fill_in '금액', with: '300000'
 
-    #click_button '급여 항목 수정하기'
+    click_button '급여 항목 수정하기'
 
-    #assert(page.has_content?('₩300,000'))
+    assert(page.has_content?('₩300,000'))
   end
 end
