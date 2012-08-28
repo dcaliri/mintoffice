@@ -3,7 +3,8 @@
     = t("common.title.search")
     = " : "
     = search_field_tag 'query', params[:query]
-    = submit_tag "검색"
+    .link_button_area
+      = submit_tag "검색"
     = select_tag :bank_account_id,
       bank_account_select_list(params[:bank_account_id]),
       "onchange" => "this.form.submit()"

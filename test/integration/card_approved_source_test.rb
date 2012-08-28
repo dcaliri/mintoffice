@@ -158,12 +158,6 @@ class CardApprovedSourcesTest < ActionDispatch::IntegrationTest
 
     select('[그룹] no_admin', from: 'owner')
 
-    assert(page.has_content?('[개인] 김 관리'))
-    assert(page.has_content?('[개인] 김 개똥'))
-    assert(page.has_content?('[개인] 카드영수증 매니저'))
-    assert(page.has_content?('[개인] 카드 사용자'))
-    assert(!page.has_content?('[개인] retired_user'))
-
     click_button '카드영수증 생성'
     assert(page.has_content?('no_admin 이(가) 총 1개의 카드영수증을 생성했습니다.'))
   end

@@ -6,7 +6,8 @@
     = t("common.title.search")
     ' :
     = search_field_tag 'query', params[:query]
-    = submit_tag "검색"
+    .link_button_area
+      = submit_tag "검색"
     = render 'accessors/search_form'
 #show_command
   = link_to t('documents.new.title'), new_document_path
