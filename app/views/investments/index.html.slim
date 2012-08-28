@@ -15,4 +15,4 @@ table#list-table
       td= number_to_currency investment.current_estimation.amount rescue ""
       td= number_to_currency investment.initial_estimation.amount rescue ""
       td.link_button_area
-        = link_to '상세보기', investment, class: 'btn btn-primary'
+        = link_to t('common.button.detail_veiw'), investment, class: 'btn btn-primary'

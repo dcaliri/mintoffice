@@ -22,7 +22,7 @@ table#list-table
           td= "#{vacation.used.total}"+" "+t('vacations.index.day')
           td= "#{vacation.remain}"+" "+t('vacations.index.day')
           td.link_button_area
-            = link_to '상세보기', vacation, class: 'btn btn-primary'
+            = link_to t('common.button.detail_veiw'), vacation, class: 'btn btn-primary'
         - else
           td
           td

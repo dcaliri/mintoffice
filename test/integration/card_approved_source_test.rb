@@ -149,6 +149,19 @@ class CardApprovedSourcesTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('김 개똥(normal) 이(가) 총 1개의 카드영수증을 생성했습니다.'))
   end
 
+  test 'should create group cardbill' do
+    visit '/'
+    click_link '신용카드 관리'
+    click_link '카드별 승인내역'
+    click_link '카드영수증이 없는 목록 보기'
+    click_link '신용카드 영수증 생성'
+
+    select('[그룹] no_admin', from: 'owner')
+
+    click_button '카드영수증 생성'
+    assert(page.has_content?('no_admin 이(가) 총 1개의 카드영수증을 생성했습니다.'))
+  end
+
   test 'should show list without cardbill' do
     visit '/'
     click_link '신용카드 관리'

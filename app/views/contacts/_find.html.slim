@@ -29,6 +29,6 @@ h2
         td= contact.department
         td= contact.position
         td.link_button_area
-          = link_to '상세보기', redirect_path.call(contact), class: 'btn btn-primary'
+          = link_to t('common.button.detail_veiw'), redirect_path.call(contact), class: 'btn btn-primary'
 - else
   h4= t('.empty')

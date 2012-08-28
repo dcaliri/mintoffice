@@ -14,4 +14,4 @@ table#list-table
       td= t("payroll_categories.#{PayrollCategory::PAYROLL_CODE.rassoc(payroll_category.code)[0]}")
       td= payroll_category.title
       td.link_button_area
-        = link_to '상세보기', payroll_category, class: 'btn btn-primary'      
+        = link_to t('common.button.detail_veiw'), payroll_category, class: 'btn btn-primary'      

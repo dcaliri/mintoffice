@@ -18,6 +18,6 @@ div.this_week
   center
     '  &laquo;
     = link_to t("main.index.prevweek"), root_path(page: @page - 1)
-    '  | 
+    = " | " 
     = link_to t("main.index.nextweek"), root_path(page: @page + 1)
     '  &raquo;

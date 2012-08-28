@@ -43,6 +43,6 @@ table#list-table
       td
         =h attachment.filepath
       td.link_button_area
-        = link_to '상세보기', attachment, class: 'btn btn-primary'
+        = link_to t('common.button.detail_veiw'), attachment, class: 'btn btn-primary'
 center
   = will_paginate @cardbills

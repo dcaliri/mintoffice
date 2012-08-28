@@ -20,6 +20,6 @@ h2= t("common.title.list")
           td= posting.description
           td= number_to_currency posting.total_amount
           td.link_button_area
-            = link_to '상세보기', posting, class: 'btn btn-primary'
+            = link_to t('common.button.detail_veiw'), posting, class: 'btn btn-primary'
 - else
   h3= t('.empty')

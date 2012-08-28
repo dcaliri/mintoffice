@@ -19,7 +19,7 @@ table#list-table
       td=h history.created_at
       td=h history.employee.fullname rescue ""
       td.link_button_area
-        = link_to '상세보기', history, class: 'btn btn-primary'
+        = link_to t('common.button.detail_veiw'), history, class: 'btn btn-primary'
 br
 center
   = will_paginate @histories

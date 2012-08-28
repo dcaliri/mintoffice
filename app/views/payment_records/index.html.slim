@@ -12,4 +12,4 @@ table#list-table
         td=h record.name
         td=h record.bankbook.name rescue ""
         td.link_button_area
-          = link_to '상세보기', record, class: 'btn btn-primary'
+          = link_to t('common.button.detail_veiw'), record, class: 'btn btn-primary'
