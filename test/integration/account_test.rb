@@ -35,8 +35,6 @@ class AccountTest < ActionDispatch::IntegrationTest
     click_link '새로운 사용자 등록'
 
     fill_in "계정명", with: "test_account"
-    fill_in "비밀번호", with: "1234"
-    fill_in "비밀번호 확인", with: "1234"
     fill_in "이메일", with: "test@test.com"
     fill_in "Boxcar 계정", with: "test@boxcar.com"
     fill_in "Redmine 계정", with: "redmine_test"
@@ -60,8 +58,6 @@ class AccountTest < ActionDispatch::IntegrationTest
     click_link '수정하기'
 
     fill_in "계정명", with: "edit_account"
-    fill_in "비밀번호", with: "1234"
-    fill_in "비밀번호 확인", with: "1234"
     fill_in "이메일", with: "edit_test@test.com"
     fill_in "Boxcar 계정", with: "edit_test@boxcar.com"
     fill_in "Redmine 계정", with: "edit_test"
