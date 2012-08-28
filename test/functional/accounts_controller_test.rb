@@ -16,6 +16,19 @@ class AccountsControllerTest < ActionController::TestCase
   test "should see show page" do
     get :show, :id => current_account.id
     assert_response :success
+
+    assert_select '#google_account', 1
+    assert_select '#redmine_account', 1
+  end
+
+  test "normal should not see google/redmine button" do
+    switch_to_normal
+
+    get :my, :id => normal_account.id
+    assert_response :success
+
+    assert_select '#google_account', 0
+    assert_select '#redmine_account', 0
   end
 
   test "should see edit page" do
@@ -42,5 +55,9 @@ class AccountsControllerTest < ActionController::TestCase
   private
   def current_account
     @account ||= accounts(:admin_account)
+  end
+
+  def normal_account
+    @normal ||= accounts(:normal_account)
   end
 end
