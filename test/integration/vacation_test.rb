@@ -9,12 +9,12 @@ class VacationTest < ActionDispatch::IntegrationTest
     visit '/'
     visit '/vacations'
     
-		assert(page.has_content?('연차 정보'))
+		assert(page.has_content?('연차 내역'))
   end
 
   test 'should visit vacations' do
     visit '/'
-    click_link '연차 정보'
+    click_link '연차 내역'
 
     assert(page.has_content?('연차 관리'))
   end
@@ -22,7 +22,7 @@ class VacationTest < ActionDispatch::IntegrationTest
   test 'should create a new vacations priod' do
     visit '/'
     
-    click_link '연차 정보'
+    click_link '연차 내역'
     click_link '연차 할당'
 
     fill_in "기간", with: "37"
@@ -35,7 +35,7 @@ class VacationTest < ActionDispatch::IntegrationTest
   test 'should edit vacations priod' do
     visit '/'
     
-    click_link '연차 정보'
+    click_link '연차 내역'
     click_link '수정'
 
     assert(page.has_content?('수정하기'))
@@ -50,19 +50,19 @@ class VacationTest < ActionDispatch::IntegrationTest
   test 'should destroy vacations priod' do
     visit '/'
 
-    click_link '연차 정보'
+    click_link '연차 내역'
 
     disable_confirm_box
 
     click_link '삭제'
 
-    assert(page.has_content?('연차 정보'))
+    assert(page.has_content?('연차 내역'))
   end
 
   test 'should show employee' do
     visit '/'
     
-    click_link '연차 정보'
+    click_link '연차 내역'
     click_link '인사정보'
 
     assert(page.has_content?('인사정보'))
@@ -71,7 +71,7 @@ class VacationTest < ActionDispatch::IntegrationTest
   test 'should return to list' do
     visit '/'
     
-    click_link '연차 정보'
+    click_link '연차 내역'
     click_link '상세보기'
 
     assert(page.has_content?('사용한 연차 정보'))
@@ -99,7 +99,7 @@ class VacationTest < ActionDispatch::IntegrationTest
     click_button '로그인'
 
     visit '/'
-    click_link '연차 정보'
+    click_link '연차 내역'
 
     assert(page.has_content?('Empty'))
   end
