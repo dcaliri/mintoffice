@@ -102,7 +102,6 @@ class Report < ActiveRecord::Base
   end
 
   def report?
-    # self.reporter.present? && self.reporter.person == Person.current_person
     not self.reporter.present? or self.reporter.person == Person.current_person
   end
 
