@@ -1594,6 +1594,7 @@ ko:
             empty: 연차 내역이 없습니다
             day: 일
         show:
+            title: 연차 내역
             link: 연차 관리
             info: "할당 연차: %{total}일, 사용 연차: %{used}일, 잔여 연차: %{remain}일"
         new:
