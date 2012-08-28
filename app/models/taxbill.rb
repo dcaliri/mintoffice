@@ -1,8 +1,9 @@
 # encoding: UTF-8
 
 class Taxbill < ActiveRecord::Base
+  has_one :document, as: :owner
+
   belongs_to :taxman
-  # belongs_to :business_client
   has_many :items, :class_name => 'TaxbillItem', :dependent => :destroy
 
   BILL_TYPE = [:purchase, :sale]
