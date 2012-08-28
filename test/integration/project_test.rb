@@ -132,7 +132,7 @@ class ProjectTest < ActionDispatch::IntegrationTest
 
     click_link '관리자 변경하기'
 
-    assert(page.has_content?('김 관리 -프로젝트 관리자-'))
+    assert(page.has_content?('김 관리(admin) -프로젝트 관리자-'))
 
     click_link '내용 보기'
 
