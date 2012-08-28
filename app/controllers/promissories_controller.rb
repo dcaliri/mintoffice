@@ -30,6 +30,6 @@ class PromissoriesController < ApplicationController
   def destroy
     @promissory = Promissory.find(params[:id])
     @promissory.destroy
-    redirect_to :promissories
+    redirect_to :bank_accounts
   end
 end
