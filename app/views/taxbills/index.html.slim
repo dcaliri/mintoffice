@@ -64,7 +64,7 @@
           td class="numrow"
             =h number_to_currency taxbill.total
           td.link_button_area
-            = link_to '상세보기', taxbill, class: 'btn btn-primary'
+            = link_to t('common.button.detail_veiw'), taxbill, class: 'btn btn-primary'
     br
     center
       = will_paginate @taxbills

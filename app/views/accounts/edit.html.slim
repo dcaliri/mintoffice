@@ -2,9 +2,9 @@
 #show_command
   -if current_person.admin?
     = link_to t('common.title.show'), @account
-    '  |
+    = " "
   = link_to t('accounts.changepw.title'), changepw_account_path(@account)
-  '  |
+  = " "
   = link_to t('common.title.back'), :back 
 
 = render "form"

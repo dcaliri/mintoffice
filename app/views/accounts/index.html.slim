@@ -6,7 +6,7 @@
     = t("common.title.search")
     '  :
     = search_field_tag 'q', params[:q]
-    = submit_tag "검색"
+    = submit_tag t('common.button.search')
 
 #show_command
   = link_to t('.google'), google_apps_accounts_path

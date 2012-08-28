@@ -32,6 +32,6 @@ h2
         td.numrow
           = number_to_currency account.remain
         td.link_button_area
-            = link_to '상세보기', account, class: 'btn btn-primary'
+            = link_to t('common.button.detail_veiw'), account, class: 'btn btn-primary'
 - else
   h4= t('.empty')

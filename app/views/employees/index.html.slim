@@ -4,7 +4,7 @@
     = t("common.title.search")
     ' :
     = search_field_tag 'q', params[:q]
-    = submit_tag "검색"
+    = submit_tag t('common.button.search')
     - if current_person.admin?
       = select_tag :search_type, options_for_select(Employee::SEARCH_TYPE, params[:search_type]), "onchange" => "this.form.submit()"
 
@@ -42,4 +42,4 @@ table#list-table
       td
         =h employee.joined_on
       td.link_button_area
-            = link_to '상세보기', employee, class: 'btn btn-primary'
+            = link_to t('common.button.detail_veiw'), employee, class: 'btn btn-primary'

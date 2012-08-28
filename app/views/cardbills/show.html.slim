@@ -27,7 +27,8 @@ h2
   .clear
   
 - unless @cardbill.expense_reports.empty?
-  h3 지출내역서
+  h3 
+    = t('cardbills.show.expense_report')
   ul
   - @cardbill.expense_reports.each do |expense_report|
     li= link_to expense_report.project.name, expense_report
