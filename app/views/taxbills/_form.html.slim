@@ -6,6 +6,7 @@ h2
 
 = form_for taxbill, html: {multipart: true, class: "tabular"} do |f|
   = f.error_messages
+  = f.hidden_field :document_id, value: params[:document]
   .box
     p
       = f.label :billtype

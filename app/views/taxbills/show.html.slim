@@ -24,14 +24,22 @@ h2
         = taxbill.taxman.fullname
       = dtdd taxbill.taxman, "email"
       = dtdd taxbill.taxman, "phonenumber"
-  = render "shared/attachments/detail", :target => taxbill
+    - if taxbill.document
+      div
+        h3 관련 문서
+        ul
+          li
+            = "세금계산서 "
+            = link_to taxbill.document.title, taxbill.document
+  - if taxbill.document
+    = render "shared/attachments/detail", :target => taxbill.document
   .clear
 
   div
     h3
       = taxbill.billtype == 'purchase' ? t('taxbills.purchase_bill') : t('taxbills.sales_bill')
       = taxbill.transacted_at.strftime("%Y-%m-%d") rescue ""
-      
+
     = render "taxbills/error", :target => taxbill
 = render 'changelog', target: taxbill
 

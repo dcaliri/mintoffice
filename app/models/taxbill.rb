@@ -1,8 +1,9 @@
 # encoding: UTF-8
 
 class Taxbill < ActiveRecord::Base
+  has_one :document, as: :owner
+
   belongs_to :taxman
-  # belongs_to :business_client
   has_many :items, :class_name => 'TaxbillItem', :dependent => :destroy
 
   BILL_TYPE = [:purchase, :sale]
@@ -13,6 +14,9 @@ class Taxbill < ActiveRecord::Base
   include SpreadsheetParsable
   include Excels::Taxbills::Purchase
   include Excels::Taxbills::Sale
+
+  attr_accessor :document_id
+  before_save :find_document_and_save
 
   def self.no_taxman_and_client
     Taxman.count == 0 and BusinessClient.count == 0
@@ -226,5 +230,10 @@ class Taxbill < ActiveRecord::Base
     taxbill.taxman = taxman
 
     taxbill.save!
+  end
+
+private
+  def find_document_and_save
+    self.document = Document.find(self.document_id) unless self.document_id.blank?
   end
 end

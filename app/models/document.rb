@@ -1,6 +1,7 @@
 # encoding: UTF-8
 
 class Document < ActiveRecord::Base
+  belongs_to :owner, polymorphic: true
   belongs_to :company
 
   belongs_to :project
