@@ -2,3 +2,6 @@ fixture:
     id: 1
     payroll_id: 1
     payroll_category_id: 1
+    amount: 100000
+    created_at: <%= Time.zone.now %>
+    updated_at: <%= Time.zone.now %>

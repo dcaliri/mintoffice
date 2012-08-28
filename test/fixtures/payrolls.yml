@@ -1,3 +1,6 @@
 fixture:
     id: 1
+    payday: 2012-08-21
     employee_id: 1
+    created_at: <%= Time.zone.now %>
+    updated_at: <%= Time.zone.now %>
