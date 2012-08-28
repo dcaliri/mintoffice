@@ -7,10 +7,11 @@
     = link_to "세금계산서 만들기", new_taxbill_path(document: document)
   = " "
 
-  = link_to t('common.title.edit'), edit_document_path(document)
-  = " "
-  = link_to t('common.title.destroy'), document, :method => :delete, data: {confirm: t("common.messages.delete_confirm")}
-  = " "
+  - if document.access?(current_person, :write)
+    = link_to t('common.title.edit'), edit_document_path(document)
+    = " "
+    = link_to t('common.title.destroy'), document, :method => :delete, data: {confirm: t("common.messages.delete_confirm")}
+    = " "
   = link_to t('common.title.list'), documents_path
 h2
   =h document.title
