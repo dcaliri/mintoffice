@@ -1,11 +1,17 @@
 h2= t("common.title.#{action_name}")
 
-= form_for @account do |f|
+= form_for @this_account do |f|
   = f.error_messages
   .box
     p
       = f.label :name, Account.human_attribute_name("name")
       = f.text_field :name, :size => 40
+    p
+      = f.label :password, Account.human_attribute_name("password")
+      = f.password_field :password, :size => 40
+    p
+      = f.label :password_confirmation, Account.human_attribute_name("password_confirmation")
+      = f.password_field :password_confirmation, :size => 40
     p
       = f.label :google_account, Account.human_attribute_name("google_account")
       = f.email_field :google_account, :size => 40
