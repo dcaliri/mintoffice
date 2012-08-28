@@ -1,5 +1,7 @@
 #show_command
-  = link_to t('common.title.new'), new_payroll_path
+  = link_to t("payroll_categories.title"), :payroll_categories
+  = " "
+  = link_to t('common.title.new'), [:new, :payroll]
 
 h2 ...
 
