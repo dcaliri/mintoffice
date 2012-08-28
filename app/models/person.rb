@@ -14,7 +14,7 @@ class Person < ActiveRecord::Base
   has_many :contacts, foreign_key: 'owner_id'
 
   has_many :reporters, class_name: 'ReportPerson'
-  has_many :accessors, class_name: 'AccessPerson'
+  has_many :accessors, class_name: 'AccessPerson', as: 'owner'
 
   cattr_accessor :current_person
 
@@ -51,7 +51,11 @@ class Person < ActiveRecord::Base
   end
 
   def name
-    account.name
+    if employee
+      "#{employee.fullname}(#{account.name})"
+    else
+      account.name
+    end
   end
 
   def fullname

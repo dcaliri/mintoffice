@@ -24,9 +24,7 @@
               <td class="numrow"><%= number_to_currency item.tax %></td>
               <td class="numrow"><%= number_to_currency item.total %></td>
               <td style="text-align: center">
-                <%= link_to t("common.link.edit"), [:edit, taxbill, item] %>
-                |
-                <%= link_to t("common.link.destroy"), [taxbill, item], :method => :delete, data: {confirm: t("common.messages.delete_confirm")} %>
+                <%= link_to t("common.link.show"), [taxbill, item] %>
               </td>
             </td>
           <% end %>

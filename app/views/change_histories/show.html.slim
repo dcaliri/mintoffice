@@ -1,8 +1,8 @@
 #show_command
   = link_to t('common.title.edit'), [:edit, change_history]
-  = " | "
+  = " "
   = link_to t('common.title.destroy'), change_history, :method => :delete, data: {confirm: t("common.messages.delete_confirm")}
-  = " | "
+  = " "
   = link_to t('common.title.list'), :change_histories
 
 h2= t("common.title.show")

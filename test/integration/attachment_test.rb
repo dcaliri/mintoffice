@@ -31,7 +31,7 @@ class AttachmentTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('김 관리'))
   end
 
-	test 'should edit attachment' do
+  test 'should edit attachment' do
     visit '/'
     click_link '첨부파일 관리'
     click_link '새로운 첨부 올리기'
@@ -44,7 +44,7 @@ class AttachmentTest < ActionDispatch::IntegrationTest
 
     click_button '만들기'
 
-    find('tr.selectable').click
+    click_link '상세보기'
     click_link '수정하기'
 
     fill_in '제목', with: '첨부파일 제목 수정 테스트'

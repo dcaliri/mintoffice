@@ -1,10 +1,13 @@
 # encoding: UTF-8
 
 class AccessorsController < ApplicationController
+  include AccessorsHelper
+
   def create
-    person = Person.find(params[:accessor])
+    owner = find_access_owner(params[:accessor])
+
     resource = params[:resources_type].constantize.find(params[:resources_id])
-    resource.accessors.permission(person, params[:access_type])
+    resource.accessors.permission(owner, params[:access_type])
     redirect_to :back, notice: t('controllers.accessors.set_permission')
   end
 

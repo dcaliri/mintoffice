@@ -28,7 +28,7 @@ table#list-table
       td.numrow= number_to_currency pettycash.outmoney
       td= truncate(pettycash.description, :length => 20)
       td.link_button_area
-        = link_to '상세보기', pettycash, class: 'btn btn-primary'
+        = link_to t('common.button.detail_veiw'), pettycash, class: 'btn btn-primary'
 br
 center
   = will_paginate @cardbills

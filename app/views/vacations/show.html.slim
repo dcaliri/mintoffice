@@ -1,7 +1,7 @@
 #show_command
   - if current_person.admin?
     = link_to t('vacations.new.link'), [:new, employee, :vacation]
-    = " | "
+    = " "
   = link_to t('employees.show.title'), employee_path(employee)
 h2= employee.fullname
 
@@ -10,9 +10,9 @@ h2= employee.fullname
     div style="float: right;"
       = link_to t('used_vacations.new.link'), [:new, vacation, :used_vacation]
       - if current_person.admin?
-        = " | "
+        = " "
         = link_to t('common.link.edit'), [:edit, employee, vacation]
-        = " | "
+        = " "
         = link_to t('common.link.destroy'), [employee, vacation], :method => :delete, data: {confirm: t("common.messages.delete_confirm")}
     h3= "#{vacation.from} ~ #{vacation.to} : #{t('vacations.show.info', total: vacation.period, used: vacation.used.total, remain: vacation.remain)}"
 
@@ -25,8 +25,9 @@ h2= employee.fullname
           th= UsedVacation.human_attribute_name(:type_title)
           th= Vacation.human_attribute_name(:note)
           th= Report.human_attribute_name('status')
+          th.link_button_area
         - vacation.used.each do |used|
-          tr.selectable onclick="location.href='#{vacation_used_vacation_path(vacation, used)}'"
+          tr.selectable.selectable.link_to*{"data-url" => vacation_used_vacation_path(vacation, used)}
             td
               = used.from
             td
@@ -39,6 +40,8 @@ h2= employee.fullname
               = used.note
             td
               = used.localize_status
+            td.link_button_area
+              = link_to t('common.button.detail_veiw'), vacation_used_vacation_path(vacation, used), class: 'btn btn-primary'
 
       br
     - else

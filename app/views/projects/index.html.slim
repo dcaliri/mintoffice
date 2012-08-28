@@ -1,11 +1,6 @@
 - title t('.title') + " - " + @status_me
 
 #show_command
-  - if action_name == "index"
-    = link_to t("projects.me.title"), [:me, :projects]
-  - else
-    = link_to t("projects.index.title"), :projects
-  = "|"
   = link_to t("projects.new.title"), new_project_path
 
 h2
@@ -14,8 +9,9 @@ table#list-table
   tr
     th
       = Project.human_attribute_name("name")
-    th
-      = Project.human_attribute_name("revenue")
+    - if project.has_manager_permission?(current_employee)
+      th
+        = Project.human_attribute_name("revenue")
     th
       = Project.human_attribute_name("started_on")
     th
@@ -28,11 +24,9 @@ table#list-table
     tr.selectable.link_to*{"data-url" => project_path(project)}
       td
         = project.name
-      - if current_employee.admin? or project.owner == current_employee
+      - if project.has_manager_permission?(current_employee)
         td.money
           = number_to_currency project.revenue
-      - else
-        td
       td
         = project.started_on
       td
@@ -41,6 +35,6 @@ table#list-table
         td
           = project.ended_on
       td.link_button_area
-        = link_to '상세보기', project, class: 'btn btn-primary'
+        = link_to t('common.button.detail_veiw'), project, class: 'btn btn-primary'
 #show_command
   = link_to t('.title') + ' - ' + @status_other, :controller => "projects", :action => "index", :st => @st_other

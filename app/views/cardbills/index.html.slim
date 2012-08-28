@@ -4,7 +4,8 @@
   = form_tag :cardbills, :method => :get do
     = t("common.title.search")
     ' : 
-    = text_field_tag 'query', params[:query]
+    = search_field_tag 'query', params[:query]
+    = submit_tag t('common.button.search')
     = select_tag :creditcard_id, options_from_collection_for_select([Creditcard.new(:cardno => "all")]+Creditcard.all, :id, :cardno_long, params[:creditcard_id]), "onchange" => "this.form.submit()"
     = render 'accessors/search_form'
 
@@ -39,7 +40,7 @@ table#list-table
         td
           =h cardbill.approveno
         td.link_button_area
-          = link_to '상세보기', cardbill, class: 'btn btn-primary'
+          = link_to t('common.button.detail_veiw'), cardbill, class: 'btn btn-primary'
 br
 center
   = will_paginate @cardbills

@@ -31,7 +31,7 @@ class PostingTest < ActionDispatch::IntegrationTest
   test 'should edit posting' do
     visit '/'
     click_link '전표 관리'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     click_link '수정하기'
 
@@ -47,7 +47,7 @@ class PostingTest < ActionDispatch::IntegrationTest
   test 'should destroy posting' do
     visit '/'
     click_link '전표 관리'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     disable_confirm_box
 

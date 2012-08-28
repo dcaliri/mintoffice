@@ -11,7 +11,7 @@ class UsedVacationTest < ActionDispatch::IntegrationTest
     visit '/'
     
     click_link '연차 정보'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     assert(page.has_content?('사용한 연차 정보'))
   end
@@ -39,7 +39,7 @@ class UsedVacationTest < ActionDispatch::IntegrationTest
     visit '/'
     
     click_link '연차 정보'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     fill_in "코멘트", with: "test"
 
@@ -52,7 +52,7 @@ class UsedVacationTest < ActionDispatch::IntegrationTest
     visit '/'
     
     click_link '연차 정보'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     select '읽기', from: 'access_type'
     select '김 개똥', from: 'accessor'
@@ -70,7 +70,7 @@ class UsedVacationTest < ActionDispatch::IntegrationTest
     visit '/'
     
     click_link '연차 정보'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     click_link '수정하기'
 
@@ -86,7 +86,7 @@ class UsedVacationTest < ActionDispatch::IntegrationTest
     visit '/'
 
     click_link '연차 정보'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     disable_confirm_box
 

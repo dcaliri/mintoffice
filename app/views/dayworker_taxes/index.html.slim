@@ -2,9 +2,9 @@
 
 #show_command
   = link_to t("dayworkers.title"), :controller => "dayworkers"
-  = " | "
+  = " "
   = link_to t('common.title.new'), new_dayworker_taxis_path
-  = " | "
+  = " "
   = link_to t('common.title.back'), :root
 
 h2= t('common.title.list')
@@ -26,4 +26,4 @@ table#list-table
         td.numrow= number_to_currency dayworker_tax.tax_amount
         td.numrow= number_to_currency dayworker_tax.pay_amount
         td.link_button_area
-          = link_to '상세보기', dayworker_tax, class: 'btn btn-primary'
+          = link_to t('common.button.detail_veiw'), dayworker_tax, class: 'btn btn-primary'

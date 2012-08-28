@@ -1,0 +1,6 @@
+fixture:
+  id: 1
+  title: 금융투자
+  description: 주식거래
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>

@@ -8,7 +8,7 @@ dl
     - if menu && contact.edit?(current_person)
       dd
         = link_to t('common.link.edit'), [:edit, contact]
-        = " | "
+        = " "
         = link_to t('contacts.item.remove'), [contact, email], :method => :delete, data: {confirm: t("common.messages.delete_confirm")}
   - contact.phone_numbers.each do |phone_number|
     dt
@@ -19,7 +19,7 @@ dl
     - if menu && contact.edit?(current_person)
       dd
         = link_to t('common.link.edit'), [:edit, contact]
-        = " | "
+        = " "
         = link_to t('contacts.item.remove'), [contact, email], :method => :delete, data: {confirm: t("common.messages.delete_confirm")}
   - contact.addresses.each do |address|
     dt
@@ -30,7 +30,7 @@ dl
     - if menu && contact.edit?(current_person)
       dd
         = link_to t('common.link.edit'), [:edit, contact]
-        = " | "
+        = " "
         = link_to t('contacts.item.remove'), [contact, email], :method => :delete, data: {confirm: t("common.messages.delete_confirm")}
   dt
     = Document.human_attribute_name("tags")

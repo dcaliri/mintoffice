@@ -18,11 +18,11 @@ class CardApprovedSourcesTest < ActionDispatch::IntegrationTest
 
   test 'should show card_approved_sources' do
     switch_to_selenium
-
+    
     visit '/'
     click_link '신용카드 관리'
     click_link '카드별 승인내역'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     assert(page.has_content?('카드승인내역'))
   end
@@ -75,7 +75,7 @@ class CardApprovedSourcesTest < ActionDispatch::IntegrationTest
     visit '/'
     click_link '신용카드 관리'
     click_link '카드별 승인내역'
-    find("tr.selectable").click
+    click_link '상세보기'
     click_link '수정'
 
     select('2012', :from => 'card_approved_source_used_at_1i')
@@ -136,17 +136,30 @@ class CardApprovedSourcesTest < ActionDispatch::IntegrationTest
     click_link '카드영수증이 없는 목록 보기'
     click_link '신용카드 영수증 생성'
 
-    select('normal', from: 'owner')
+    select('[개인] 김 개똥', from: 'owner')
 
-    assert(page.has_content?('admin'))
-    assert(page.has_content?('normal'))
-    assert(page.has_content?('card_manager'))
-    assert(page.has_content?('card_user'))
-    assert(!page.has_content?('retired_user'))
+    assert(page.has_content?('[개인] 김 관리'))
+    assert(page.has_content?('[개인] 김 개똥'))
+    assert(page.has_content?('[개인] 카드영수증 매니저'))
+    assert(page.has_content?('[개인] 카드 사용자'))
+    assert(!page.has_content?('[개인] retired_user'))
 
     click_button '카드영수증 생성'
 
-    assert(page.has_content?('normal 이(가) 총 1개의 카드영수증을 생성했습니다.'))
+    assert(page.has_content?('김 개똥(normal) 이(가) 총 1개의 카드영수증을 생성했습니다.'))
+  end
+
+  test 'should create group cardbill' do
+    visit '/'
+    click_link '신용카드 관리'
+    click_link '카드별 승인내역'
+    click_link '카드영수증이 없는 목록 보기'
+    click_link '신용카드 영수증 생성'
+
+    select('[그룹] no_admin', from: 'owner')
+
+    click_button '카드영수증 생성'
+    assert(page.has_content?('no_admin 이(가) 총 1개의 카드영수증을 생성했습니다.'))
   end
 
   test 'should show list without cardbill' do

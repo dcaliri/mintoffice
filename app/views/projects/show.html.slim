@@ -1,14 +1,14 @@
 - title t('.title')
 #show_command
-  - unless project.completed?
+  - if project.has_manager_permission?(current_employee) and !project.completed?
     = link_to t('common.title.edit'), edit_project_path(project)
-    = " | "
+    = " "
   = link_to t('common.title.back'), projects_path
 h2
   = project.name
 .box
   dl
-    - if current_person.admin? or project.owner == current_person.employee
+    - if project.has_manager_permission?(current_employee)
       = dtdd project, "revenue"
     = dtdd project, "started_on"
     = dtdd project, "ending_on"
@@ -23,5 +23,5 @@ h2
         br
     - if project.completed?
       = dtdd project, "ended_on"
-- if current_person.admin? or project.owner == current_person.employee
+- if project.has_manager_permission?(current_employee)
   = render 'expense'

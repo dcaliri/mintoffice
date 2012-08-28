@@ -2,18 +2,19 @@
   = form_tag :bank_transfers, :method => :get do
     = t("common.title.search")
     = " : "
-    = text_field_tag 'query', params[:query]
+    = search_field_tag 'query', params[:query]
+    = submit_tag t('common.button.search')
     = select_tag :bank_account_id,
       bank_account_select_list(params[:bank_account_id]),
       "onchange" => "this.form.submit()"
 
 #show_command
   = link_to t('common.link.except_column'), except_columns_path(class_name: BankTransfer), id: :select_except_columns, remote: true
-  = " | "
+  = " "
   = link_to t('bank_transfers.new.link'), [:new, :bank_transfer]
-  = " | "
+  = " "
   = link_to t('bank_transfers.excel.link'), [:excel, :bank_transfers]
-  = " | "
+  = " "
   = link_to t('common.title.back'), :bank_accounts
 
 h2
@@ -31,7 +32,7 @@ h2
   #export-menu
     = t('common.export') + " : "
     = link_to t('bank_transfers.export.excel'), export_bank_transfers_path(forward_params.merge(to: :xls)), method: :post
-    = " | "
+    = " "
     = link_to t('bank_transfers.export.pdf'), export_bank_transfers_path(forward_params.merge(to: :pdf)), method: :post
 - else
   h4= t('.empty')

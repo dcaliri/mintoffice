@@ -1,9 +1,9 @@
 - title t(".title")
 #show_command
   = link_to t("common.title.show"), project
-  = " | "
+  = " "
   = link_to t("common.title.back"), projects_path
-  = " | "
+  = " "
   = link_to t(".completed"), {:action => "completed", :id => project}, data: {data: {confirm: t(".confirm_complete")}}
 h2
   = t("common.title.edit")
@@ -35,7 +35,7 @@ h2
           = t('projects.edit.manager')
         - else
           = link_to t("projects.edit.owner"), change_owner_project_path(employee_id: employee), method: :put
-        = " | "
+        = " "
         = link_to t("common.title.destroy"), employee_project_path(project, employee_id: employee), method: :delete
         br
       = text_field_tag :accountname

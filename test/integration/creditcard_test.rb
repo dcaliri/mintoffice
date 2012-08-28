@@ -19,7 +19,7 @@ class CreditCardTest < ActionDispatch::IntegrationTest
   test 'should show creditcard' do
     visit '/'
     click_link '신용카드 관리'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     assert(page.has_content?('321-321-1234'))
   end
@@ -46,7 +46,7 @@ class CreditCardTest < ActionDispatch::IntegrationTest
   test 'should edit creditcard' do
     visit '/'
     click_link '신용카드 관리'
-    find("tr.selectable").click
+    click_link '상세보기'
     click_link '수정하기'
 
     fill_in "카드번호", with: "432-234-2345"
@@ -66,7 +66,7 @@ class CreditCardTest < ActionDispatch::IntegrationTest
   test 'should show card_used_sources' do
     visit '/'
     click_link '신용카드 관리'
-    find("tr.selectable").click
+    click_link '상세보기'
     click_link '카드별 이용내역'
 
     assert(page.has_content?('신용카드 이용내역'))
@@ -75,7 +75,7 @@ class CreditCardTest < ActionDispatch::IntegrationTest
   test 'should show card_approved_sources' do
     visit '/'
     click_link '신용카드 관리'
-    find("tr.selectable").click
+    click_link '상세보기'
     click_link '카드별 승인내역'
 
     assert(page.has_content?('카드승인내역'))

@@ -1,0 +1,18 @@
+- title t('investments.title')
+
+#show_command
+  = link_to t("common.title.back"),  @investment
+
+h2= t("common.title.#{action_name}")
+
+= form_for [@investment, @estimation], html: {class: "tabular"} do |f|
+  = f.error_messages
+  .box
+    p
+      = f.label :amount
+      = f.text_field :amount
+    p
+      = f.label :estimated_at
+      = f.date_select :estimated_at, order: [:year, :month, :day]
+  p
+    = f.submit

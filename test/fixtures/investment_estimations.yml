@@ -1,0 +1,15 @@
+fixture:
+  id: 1
+  investment_id: 1
+  amount: 1000000
+  estimated_at: <%= Time.zone.now %>
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
+
+old_estimation:
+  id: 2
+  investment_id: 1
+  amount: 500000
+  estimated_at: 2011-02-11
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>

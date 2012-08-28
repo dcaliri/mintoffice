@@ -2,15 +2,16 @@
   = form_tag :contacts, :method => :get do
     = t("common.title.search")
     = " : "
-    = text_field_tag 'query', params[:query]
+    = search_field_tag 'query', params[:query]
+    = submit_tag t('common.button.search')
 
 #show_command
   = link_to t('contacts.save.link'), [:save, :contacts]
-  = " | "
+  = " "
   = link_to t('contacts.load.link'), [:load, :contacts]
-  = " | "
+  = " "
   = link_to t('contacts.new.link'), [:new, :contact]
-  = " | "
+  = " "
   = link_to t('common.title.back'), :root
 
 h2 Total : #{@contacts.count}
@@ -34,7 +35,7 @@ h2 Total : #{@contacts.count}
         td= address.emails.empty? ? "" : "#{address.emails.first.target_view} #{address.emails.first.email} "
         td= address.phone_numbers.empty? ? "" : "#{address.phone_numbers.first.target_view} #{address.phone_numbers.first.number}"
         td.link_button_area
-          = link_to '상세보기', address, class: 'btn btn-primary'
+          = link_to t('common.button.detail_veiw'), address, class: 'btn btn-primary'
   center
     br
     = will_paginate @paginated

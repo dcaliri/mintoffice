@@ -9,11 +9,11 @@
 
 #show_command
   = link_to t('common.link.except_column'), except_columns_path(class_name: CardApprovedSource), id: :select_except_columns, remote: true
-  = " | "
+  = " "
   = link_to t('card_approved_sources.find_empty_cardbills.link'), [:find_empty_cardbills, :card_approved_sources]
-  = " | "
+  = " "
   = link_to t('card_approved_sources.new.link'), [:new, :card_approved_source]
-  = " | "
+  = " "
   = link_to t('common.title.back'), :creditcards
 
 h2
@@ -31,7 +31,7 @@ h2
   #export-menu
     = t('common.export') + " : "
     = link_to t('card_approved_sources.export.excel'), export_card_approved_sources_path(forward_params.merge(to: :xls)), method: :post
-    = " | "
+    = " "
     = link_to t('card_approved_sources.export.pdf'), export_card_approved_sources_path(forward_params.merge(to: :pdf)), method: :post
 
 - else

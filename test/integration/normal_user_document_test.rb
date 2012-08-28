@@ -35,7 +35,13 @@ class NUDocumentTest < ActionDispatch::IntegrationTest
     click_link '문서 관리'
     click_link '새로운 문서 작성'
 
+    assert(!page.has_content?('소유자'))
+    assert(!page.has_content?('참여자 없는 프로젝트'))
+    assert(!page.has_content?('완료된 프로젝트'))
+    assert(page.has_content?('테스트 프로젝트'))
+
     fill_in "문서제목", with: "문서제목 입력 테스트"
+
 
     click_button '만들기'
 
@@ -56,9 +62,14 @@ class NUDocumentTest < ActionDispatch::IntegrationTest
     visit '/'
     click_link '문서 관리'
     select('전체', :from => 'report_status')
-    find("tr.selectable").click
+    click_link '상세보기'
 
     click_link '수정하기'
+
+    assert(!page.has_content?('소유자'))
+    assert(!page.has_content?('참여자 없는 프로젝트'))
+    assert(!page.has_content?('완료된 프로젝트'))
+    assert(page.has_content?('테스트 프로젝트'))
 
     fill_in "문서제목", with: "문서제목 수정 테스트"
 
@@ -80,7 +91,7 @@ class NUDocumentTest < ActionDispatch::IntegrationTest
 
     visit '/'
     click_link '문서 관리'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     disable_confirm_box
 
@@ -102,7 +113,7 @@ class NUDocumentTest < ActionDispatch::IntegrationTest
 
     visit '/'
     click_link '문서 관리'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     select '김 관리', from: 'reporter'
     fill_in "코멘트", with: "연차 사용 신청"
@@ -126,13 +137,13 @@ class NUDocumentTest < ActionDispatch::IntegrationTest
     visit '/'
     click_link '문서 관리'
     
-    find_field('query').set("문서제목 입력 테스트")
-    find_field('query').native.send_key(:enter)
+    fill_in "query", with: "문서제목 입력 테스트"
+    click_button "검색"
 
     assert(page.has_content?('문서제목 입력 테스트'))
 
-    find_field('query').set("테스트 프로젝트")
-    find_field('query').native.send_key(:enter)
+    fill_in "query", with: "테스트 프로젝트"
+    click_button "검색"
 
     assert(page.has_content?('테스트 프로젝트'))
   end

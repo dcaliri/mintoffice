@@ -24,12 +24,12 @@ class DayWorkerTest < ActionDispatch::IntegrationTest
     click_link '신규 작성'
 
     fill_in '주민등록번호', with: '222222-2222222'
-    select '신한 통장', from: 'dayworker_bankbook_id'
+    select '농협 통장', from: 'dayworker_bankbook_id'
 
     click_button '생성'
 
     assert(page.has_content?('222222-2222222'))
-    assert(page.has_content?('신한 통장'))
+    assert(page.has_content?('농협 통장'))
   end  
 
   test 'should edit dayworker' do
@@ -38,11 +38,11 @@ class DayWorkerTest < ActionDispatch::IntegrationTest
     click_link '수정하기'
 
     fill_in '주민등록번호', with: '222222-2222222'
-    select '신한 통장', from: 'dayworker_bankbook_id'
+    select '농협 통장', from: 'dayworker_bankbook_id'
 
     click_button '수정'
 
     assert(page.has_content?('222222-2222222'))
-    assert(page.has_content?('신한 통장'))
+    assert(page.has_content?('농협 통장'))
   end  
 end

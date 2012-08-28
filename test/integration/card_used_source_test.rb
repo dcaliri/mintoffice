@@ -16,10 +16,12 @@ class CardUsedSourcesTest < ActionDispatch::IntegrationTest
   end
 
   test 'should show card_used_sources' do
+    switch_to_selenium
+
     visit '/'
     click_link '신용카드 관리'
     click_link '카드별 이용내역'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     assert(page.has_content?('카드번호'))
     assert(page.has_content?('321-321-1234'))
@@ -83,10 +85,12 @@ class CardUsedSourcesTest < ActionDispatch::IntegrationTest
   end  
 
   test 'should edit card_used_sources' do
+    switch_to_selenium
+
     visit '/'
     click_link '신용카드 관리'
     click_link '카드별 이용내역'
-    find("tr.selectable").click
+    click_link '상세보기'
     click_link '수정'
 
     fill_in "카드번호", with: "321-321-1234"
@@ -146,19 +150,22 @@ class CardUsedSourcesTest < ActionDispatch::IntegrationTest
   end  
 
   test 'should destroy card_used_sources' do
+    switch_to_selenium
+
     visit '/'
     click_link '신용카드 관리'
     click_link '카드별 이용내역'
-    find("tr.selectable").click
-
-    disable_confirm_box
+    click_link '상세보기'
 
     click_link '삭제'
+    page.driver.browser.switch_to.alert.accept
 
     assert(page.has_content?('신용카드 이용내역'))
   end
 
   test 'should export excel' do
+    switch_to_selenium
+
     visit '/'
     click_link '신용카드 관리'
     click_link '카드별 이용내역'
@@ -167,6 +174,8 @@ class CardUsedSourcesTest < ActionDispatch::IntegrationTest
   end
 
   test 'should export PDF' do
+    switch_to_selenium
+
     visit '/'
     click_link '신용카드 관리'
     click_link '카드별 이용내역'

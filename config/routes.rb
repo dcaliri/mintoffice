@@ -89,10 +89,6 @@ Mintoffice::Application.routes.draw do
 
   resources :documents
   resources :projects, except: [:destroy] do
-    collection do
-      get 'me'
-    end
-
     member do
       post :employee, action: 'add_employee'
       delete :employee, action: 'remove_employee'
@@ -271,12 +267,22 @@ Mintoffice::Application.routes.draw do
   end
 
   resources :taxbills do
-    get 'total', :on => :collection
+    collection do
+      get 'excel'
+      post 'preview'
+      post 'import'
+
+      get 'total'
+    end
 
     resources :taxbill_items, :path => "items"
   end
 
   resources :change_histories, path: 'histories'
+
+  resources :investments do
+    resources :investment_estimations, path: 'estimations'
+  end
 
   resources :tags, only: [:create, :destroy]
 

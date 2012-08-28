@@ -2,7 +2,8 @@
   = form_tag :bank_transactions, :method => :get do
     = t("common.title.search")
     = " : "
-    = text_field_tag 'query', params[:query]
+    = search_field_tag 'query', params[:query]
+    = submit_tag t('common.button.search')
     = select_tag :bank_account_id,
       bank_account_select_list(params[:bank_account_id]),
       "onchange" => "this.form.submit()"
@@ -10,13 +11,13 @@
 #show_command
   - unless params[:bank_account_id].blank?
     = link_to t('bank_transactions.verify.link'), verify_bank_transactions_path(bank_account_id: params[:bank_account_id])
-    = " | "
+    = " "
   = link_to t('common.link.except_column'), except_columns_path(class_name: BankTransaction), id: :select_except_columns, remote: true
-  = " | "
+  = " "
   = link_to t('bank_transactions.new.link'), [:new, :bank_transaction]
-  = " | "
+  = " "
   = link_to t('bank_transactions.excel.link'), excel_bank_transactions_path(bank_account: params[:bank_account_id])
-  = " | "
+  = " "
   = link_to t('common.title.back'), :bank_accounts
 
 h2
@@ -34,7 +35,7 @@ h2
   #export-menu
     = t('common.export') + " : "
     = link_to t('bank_transactions.export.excel'), export_bank_transactions_path(forward_params.merge(to: :xls)), method: :post
-    = " | "
+    = " "
     = link_to t('bank_transactions.export.pdf'), export_bank_transactions_path(forward_params.merge(to: :pdf)), method: :post
 - else
   h4= t('.empty')

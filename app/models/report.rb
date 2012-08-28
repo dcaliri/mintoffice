@@ -102,7 +102,7 @@ class Report < ActiveRecord::Base
   end
 
   def report?
-    self.reporter.present? && self.reporter.person == Person.current_person
+    not self.reporter.present? or self.reporter.person == Person.current_person
   end
 
   def rollback?
@@ -115,6 +115,10 @@ class Report < ActiveRecord::Base
 
   private
   def change_owner(person)
+    unless self.reporter
+      self.reporters << Person.current_person.reporters.build(report_id: id, owner: true)
+    end
+
     prev_reporter = self.reporter
     return prev_reporter if person == prev_reporter.person
 

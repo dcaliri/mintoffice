@@ -3,9 +3,9 @@
 #show_command
   -  if @cardbill.status == 'verified' and @cardbill.remain_amount_for_expense_report != 0
     = link_to t('cardbills.show.create_expense'), new_expense_report_path(target_type: @cardbill.class, target_id: @cardbill.id, expensed_at: @cardbill.transdate, amount: @cardbill.remain_amount_for_expense_report)
-    = " | "
+    = " "
   = link_to t('common.title.edit'), edit_cardbill_path(@cardbill)
-  = " | "
+  = " "
   = link_to t('common.title.list'), cardbills_path
 
 h2
@@ -27,7 +27,8 @@ h2
   .clear
   
 - unless @cardbill.expense_reports.empty?
-  h3 지출내역서
+  h3 
+    = t('cardbills.show.expense_report')
   ul
   - @cardbill.expense_reports.each do |expense_report|
     li= link_to expense_report.project.name, expense_report

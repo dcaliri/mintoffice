@@ -30,7 +30,7 @@ class UsedVacationTest < ActionDispatch::IntegrationTest
   test 'should edit vacation_type' do
     visit '/'
     click_link '연차 항목'
-    find('tr.selectable').click
+    click_link '상세보기'
     click_link '수정하기'
 
     fill_in '항목', with: '항목 수정하기'
@@ -44,7 +44,7 @@ class UsedVacationTest < ActionDispatch::IntegrationTest
   test 'should destroy vacation_type' do
     visit '/'
     click_link '연차 항목'
-    find('tr.selectable').click
+    click_link '상세보기'
 
     disable_confirm_box
 

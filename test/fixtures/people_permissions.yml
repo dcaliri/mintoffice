@@ -42,17 +42,17 @@ bank_transfers:
   permission_id: 7
   person_id: 1
 
-projects:
-  permission_id: 8
-  person_id: 1
+#projects:
+#  permission_id: 8
+#  person_id: 1
 
-projects_normal:
-  permission_id: 8
-  person_id: 2
+#projects_normal:
+#  permission_id: 8
+#  person_id: 2
 
-projects_manager:
-  permission_id: 8
-  person_id: 3
+#projects_project_admin:
+#  permission_id: 8
+#  person_id: 3
 
 business_clients:
   permission_id: 9

@@ -1,13 +1,13 @@
 #show_command
   = link_to t('card_approved_sources.generate.link'), [:generate_cardbills, :card_approved_sources]
-  = " | "
+  = " "
   = link_to t('common.title.back'), :card_approved_sources
 
 h2
   = t('card_approved_sources.find_empty_cardbills.title')
   = " - "
   = @card_approved_sources.count
-  = "개"
+  = t('card_approved_sources.find_empty_cardbills.count')
 
 - unless @card_approved_sources.empty?
   = render 'list', card_approved_sources: @card_approved_sources

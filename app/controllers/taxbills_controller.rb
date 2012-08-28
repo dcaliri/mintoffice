@@ -34,6 +34,16 @@ class TaxbillsController < ApplicationController
     redirect_to :taxbills, notice: I18n.t("common.messages.destroyed", :model => Taxbill.model_name.human)
   end
 
+  def preview
+    @taxbill_items = Taxbill.preview_stylesheet(params[:billtype], params[:upload])
+    # @taxbills = Taxbill.all
+  end
+
+  def import
+    Taxbill.create_with_stylesheet(params[:billtype], params[:upload])
+    redirect_to :taxbills
+  end
+
   private
   def manage_search_option
     options = [:billtype, :taxman_id]

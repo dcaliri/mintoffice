@@ -2,7 +2,7 @@
 
 #show_command
   = link_to t('common.title.new'), new_dayworker_path
-  = " | "
+  = " "
   = link_to t('dayworker_taxes.title') + ' ' + t('common.title.back'), dayworker_taxes_path
 
 h2= t('common.title.list')
@@ -14,4 +14,4 @@ table#list-table
       tr.selectable.link_to*{"data-url" => dayworker_path(dayworker)}
         td=h dayworker.juminno
         td.link_button_area
-          = link_to '상세보기', dayworker, class: 'btn btn-primary'
+          = link_to t('common.button.detail_veiw'), dayworker, class: 'btn btn-primary'

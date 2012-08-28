@@ -2,7 +2,7 @@
 
 #show_command
   = link_to t("common.title.new"), [:new, :group]
-  '  |
+  = " "
   = link_to t('common.title.back'), :root
 
 h2= t('common.title.list')
@@ -16,4 +16,4 @@ table#list-table
       td= group.name
       td= group.parent_name
       td.link_button_area
-      	= link_to '상세보기', group, class: 'btn btn-primary'
+      	= link_to t('common.button.detail_veiw'), group, class: 'btn btn-primary'

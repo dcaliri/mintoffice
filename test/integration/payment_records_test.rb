@@ -28,12 +28,12 @@ class PaymentRecordTest < ActionDispatch::IntegrationTest
     click_link '신규 작성'
 
     fill_in '이름', with: '지급 조서 목록 입력'
-    select '신한 통장', from: 'payment_record_bankbook_id'
+    select '농협 통장', from: 'payment_record_bankbook_id'
 
     click_button '지급조서 만들기'
 
     assert(page.has_content?('지급 조서 목록 입력'))
-    assert(page.has_content?('신한 통장'))
+    assert(page.has_content?('농협 통장'))
   end
 
   test 'should edit PaymentRecord' do
@@ -44,23 +44,22 @@ class PaymentRecordTest < ActionDispatch::IntegrationTest
     click_link '수정하기'
 
     fill_in '이름', with: '지급 조서 목록 수정'
-    select '신한 통장', from: 'payment_record_bankbook_id'
+    select '농협 통장', from: 'payment_record_bankbook_id'
 
     click_button '지급조서 수정하기'
 
     assert(page.has_content?('지급 조서 목록 수정'))
-    assert(page.has_content?('신한 통장'))
+    assert(page.has_content?('농협 통장'))
   end
 
   test 'should destroy PaymentRecord' do
-    switch_to_selenium
-
     visit '/'
     click_link '지급 조서 목록'
     click_link '상세보기'
 
+    disable_confirm_box
+
     click_link '삭제하기'
-    page.driver.browser.switch_to.alert.accept
 
     assert(!page.has_content?('월급 지급'))
   end

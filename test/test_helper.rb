@@ -64,14 +64,14 @@ class ActionDispatch::IntegrationTest
   end
 
   def get_now_time
-    Time.zone.now.strftime("%Y-%m-%d")
+    Time.now.strftime("%Y-%m-%d")
   end
 
   def get_payment_day
-    if Time.zone.now.month < 10
-      Time.zone.now.year.to_s + ".0" + Time.zone.now.month.to_s + ".25"
+    if Time.now.month < 10
+      Time.now.year.to_s + ".0" + Time.now.month.to_s + ".25"
     else
-      Time.zone.now.year.to_s + "." + Time.zone.now.month.to_s + ".25"
+      Time.now.year.to_s + "." + Time.now.month.to_s + ".25"
     end
   end
 
@@ -119,6 +119,21 @@ class ActionController::TestCase
       @person.groups.create!(name: "admin")
     end
     @person
+  end
+
+  def switch_to_normal
+    DatabaseCleaner.strategy = :truncation
+    DatabaseCleaner.start
+
+    session[:person_id] = normal_person.id
+    session[:company_id] = current_company.id
+
+    Person.current_person = normal_person
+    Company.current_company = current_company
+  end
+
+  def normal_person
+    @person = people(:normal)
   end
 
   def current_company

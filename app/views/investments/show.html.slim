@@ -1,0 +1,35 @@
+#show_command
+  = link_to t('common.title.edit'), [:edit, @investment]
+  = " "
+  = link_to t('common.title.destroy'), @investment, :method => :delete, data: {confirm: t("common.messages.delete_confirm")}
+  = " "
+  = link_to t('common.title.list'), :investments
+
+h3
+  = t('investments.show.basic')
+.box
+  dl
+    dt= Investment.human_attribute_name(:title)
+    dd= @investment.title
+    dt= Investment.human_attribute_name(:description)
+    dd= @investment.description
+
+#show_command
+  = link_to t("common.title.new"), [:new, @investment, :investment_estimation]
+
+h3
+  = t('investments.show.title')
+.box
+  table#list-table
+    tr
+      th= InvestmentEstimation.human_attribute_name(:amount)
+      th= InvestmentEstimation.human_attribute_name(:estimated_at)
+      th= t('common.title.menu')
+    - @investment.estimations.each do |estimation|
+      tr
+        td= number_to_currency estimation.amount
+        td= estimation.estimated_at
+        td
+          = link_to t('common.title.edit'), [:edit, @investment, estimation], class: 'btn btn-primary'
+          = " "
+          = link_to t('common.title.destroy'), [@investment, estimation], :method => :delete, data: {confirm: t("common.messages.delete_confirm")}, class: 'btn btn-danger'

@@ -27,7 +27,7 @@ class LedgerAccountTest < ActionDispatch::IntegrationTest
   test 'should edit ledger' do
     visit '/'
     click_link '원장 관리'
-    find("tr.selectable").click
+    click_link '상세보기'
     click_link '수정하기'
 
     fill_in "이름", with: "수정된 체크카드"
@@ -42,7 +42,7 @@ class LedgerAccountTest < ActionDispatch::IntegrationTest
     visit '/'
 
     click_link '원장 관리'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     disable_confirm_box
 

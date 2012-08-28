@@ -21,8 +21,9 @@ class PaymentTest < ActionDispatch::IntegrationTest
     click_link '지급이 있는 사람들만 보기'
 
     click_link '상세보기'
-
+    
     assert(page.has_content?('김 관리'))
+    assert(!page.has_content?('돌아가기'))
   end
 
   test 'should visit my payment' do
@@ -43,7 +44,6 @@ class PaymentTest < ActionDispatch::IntegrationTest
     click_button '추가하기'
 
     assert(page.has_content?('1,500,000'))
-    assert(page.has_content?(get_payment_day))
   end
 
   test 'should edit payment' do

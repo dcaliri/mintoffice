@@ -128,6 +128,8 @@ ko:
             document: 문서
             expense_report: 지출 내역서
             holiday: 휴일관리
+            investment: 투자자산
+            investment_estimation: 투자자산 평가액
             employee: 인사정보
             ledger_account: 원장 계정
             namecard: 명함정보
@@ -416,6 +418,14 @@ ko:
             holiday:
                 theday: 휴일날짜
                 dayname: 휴일명목
+            investment:
+                title: 자산명
+                description: 상세정보
+                current_estimation: 현재 평가액
+                initial_estimation: 과거 평가액
+            investment_estimation:
+                amount: 평가액
+                estimated_at: 평가일자
             employee:
                 juminno: 주민등록번호
                 retired_on: 퇴직일
@@ -528,6 +538,41 @@ ko:
               total: 합계액
               note: 내역
               transacted_at: 거래날짜
+
+              uid: 번호
+              written_at: 작성일자
+              approve_no: 승인번호
+              transacted_at: 발급일자
+              transmit_at: 전송일자
+              seller_registration_number: 공급자사업자등록번호
+              sellers_minor_place_registration_number: 종사업장번호
+              sellers_company_name: 상호
+              sellers_representative: 대표자명
+              buyer_registration_number: 공급받는자사업자등록번호
+              buyers_minor_place_registration_number: 종사업장번호
+              buyers_company_name: 상호
+              buyerss_representative: 대표자명
+              total: 합계금액
+              supplied_value: 공급가액
+              tax: 세액
+              taxbill_classification: 전자세금계산서분류
+              taxbill_type: 전자세금계산서종류
+              issue_type: 발급유형
+              note: 비고
+              etc: 기타
+              bill_action_type: 영수/청구 구분
+              seller_email: 공급자 이메일
+              buyer1_email: 공급받는자 이메일1
+              buyer2_email: 공급받는자 이메일2
+              item_date: 품목일자
+              item_name: 품목명
+              item_standard: 품목규격
+              quantity: 품목수량
+              unitprice: 품목단가
+              item_supply_price: 품목공급가액
+              item_tax: 품목세액
+              item_note: 품목비고
+
             pay_schedule:
                 started_at: 시작일
                 income: 총 연봉 금액
@@ -856,6 +901,7 @@ ko:
             to_bank_transaction: 입출금 내역
             view_expense: 지출내역서 보기
             create_expense: 지출내역서 만들기
+            expense_report: 지출내역서
     bonuses:
         new:
             title: 새로운 특별 상여금 입력
@@ -905,6 +951,7 @@ ko:
         find_empty_cardbills:
             link: 카드영수증이 없는 목록 보기
             title: 카드영수증이 없는 승인내역 리스트
+            count: 개
         generate:
             title: 신용카드 영수증 생성
             link: 신용카드 영수증 생성
@@ -948,6 +995,7 @@ ko:
             to_use: 사용 내역
             view_expense: 지출내역서 보기
             create_expense: 지출내역서 만들기
+            expense_report: 지출내역서
         edit:
             title: "카드 영수증 내용 수정"
         index:
@@ -970,6 +1018,8 @@ ko:
             add: 추가하기
             prev: 이전
             next: 다음
+            detail_veiw: 상세보기
+            search: 검색
         messages:
             created: "%{model}이(가) 성공적으로 생성되었습니다."
             not_allowed: 접근할 수 없습니다.
@@ -997,6 +1047,7 @@ ko:
             excel: 엑셀 파일 올리기
             upload: 업로드하기
             update: 수정
+            menu: 메뉴
         link:
             show: 내용 보기
             logout: "로그아웃"
@@ -1157,6 +1208,10 @@ ko:
             detail_expense: 지출내역서 상세정보
     groups:
         title: 그룹관리
+        show:
+            parent: 부모
+            sub_group: 서브그룹
+            member: 소속 맴버
     employees:
         index:
             title: 인사정보관리 - 사원목록
@@ -1209,6 +1264,11 @@ ko:
         index:
             this_years_working_days: "년의 근무일수 : "
             month_and_count: "%{m}월: %{c}일"
+    investments:
+        title: 투자자산 관리
+        show:
+            title: 투자자산 내역
+            basic: 투자자산 기본정보
     ledger_accounts:
         title: 원장 관리
         index:
@@ -1433,6 +1493,10 @@ ko:
             card: 신용카드 합계
             list: 분기 목록
             quarter: "%{year}년도 %{quarter} 분기"
+        excel: 
+            preview: 미리보기
+        preview: 
+            import: 엑셀파일
         purchase_bill: 매입 세금계산서
         sales_bill: 매출 세금계산서
         purchase_sales_bill: 매입/매출 세금계산서
@@ -1441,6 +1505,8 @@ ko:
         new:
             title: 새로운 내역
         title: 세금계산서 내역
+        show:
+            detail: 상세정보
     taxmen:
         title: 거래처 담당자
         empty: 담당자가 없습니다.

@@ -22,7 +22,7 @@ class NUCardBillTest < ActionDispatch::IntegrationTest
     click_link '카드영수증이 없는 목록 보기'
     click_link '신용카드 영수증 생성'
 
-    select('normal', from: 'owner')
+    select('[개인] 김 개똥', from: 'owner')
 
     click_button '카드영수증 생성'
 
@@ -42,7 +42,7 @@ class NUCardBillTest < ActionDispatch::IntegrationTest
     click_link '카드영수증이 없는 목록 보기'
     click_link '신용카드 영수증 생성'
 
-    select('normal', from: 'owner')
+    select('[개인] 김 개똥', from: 'owner')
 
     click_button '카드영수증 생성'
 
@@ -50,7 +50,7 @@ class NUCardBillTest < ActionDispatch::IntegrationTest
 
     visit '/'
     click_link '카드 영수증 목록'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     assert(page.has_content?('GS25'))
     assert(page.has_content?('6,000'))
@@ -66,7 +66,7 @@ class NUCardBillTest < ActionDispatch::IntegrationTest
     click_link '카드영수증이 없는 목록 보기'
     click_link '신용카드 영수증 생성'
 
-    select('normal', from: 'owner')
+    select('[개인] 김 개똥', from: 'owner')
 
     click_button '카드영수증 생성'
 
@@ -74,7 +74,7 @@ class NUCardBillTest < ActionDispatch::IntegrationTest
 
     visit '/'
     click_link '카드 영수증 목록'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     click_link '수정하기'
 
@@ -94,7 +94,7 @@ class NUCardBillTest < ActionDispatch::IntegrationTest
     click_link '카드영수증이 없는 목록 보기'
     click_link '신용카드 영수증 생성'
 
-    select('normal', from: 'owner')
+    select('[개인] 김 개똥', from: 'owner')
 
     click_button '카드영수증 생성'
 
@@ -102,7 +102,7 @@ class NUCardBillTest < ActionDispatch::IntegrationTest
 
     visit '/'
     click_link '카드 영수증 목록'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     click_link '지출내역서 만들기'
 
@@ -114,7 +114,7 @@ class NUCardBillTest < ActionDispatch::IntegrationTest
 
     visit '/'
     click_link '카드 영수증 목록'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     click_link '테스트 프로젝트'
 
@@ -128,7 +128,7 @@ class NUCardBillTest < ActionDispatch::IntegrationTest
     click_link '카드영수증이 없는 목록 보기'
     click_link '신용카드 영수증 생성'
 
-    select('normal', from: 'owner')
+    select('[개인] 김 개똥', from: 'owner')
 
     click_button '카드영수증 생성'
 
@@ -136,7 +136,7 @@ class NUCardBillTest < ActionDispatch::IntegrationTest
 
     visit '/'
     click_link '카드 영수증 목록'
-    find("tr.selectable").click
+    click_link '상세보기'
 
     select '김 관리', from: 'reporter'
     fill_in "코멘트", with: "연차 사용 신청"
@@ -147,13 +147,15 @@ class NUCardBillTest < ActionDispatch::IntegrationTest
   end
 
   test 'should search data' do
+    switch_to_selenium
+
     visit '/'
     click_link '신용카드 관리'
     click_link '카드별 승인내역'
     click_link '카드영수증이 없는 목록 보기'
     click_link '신용카드 영수증 생성'
 
-    select('normal', from: 'owner')
+    select('[개인] 김 개똥', from: 'owner')
 
     click_button '카드영수증 생성'
 
@@ -161,14 +163,14 @@ class NUCardBillTest < ActionDispatch::IntegrationTest
 
     visit '/'
     click_link '카드 영수증 목록'
-    
-    find_field('query').set("버터플라이")
-    find_field('query').native.send_key(:enter)
+
+    fill_in "query", with: "버터플라이"
+    click_button "검색"
 
     assert(!page.has_content?('버터플라이'))
 
-    find_field('query').set("GS25")
-    find_field('query').native.send_key(:enter)
+    fill_in "query", with: "GS25"
+    click_button "검색"
 
     assert(page.has_content?('GS25'))
   end

@@ -1,6 +1,7 @@
 admin_write_access_cardbill:
   id: 1
-  person_id: 1
+  owner_type: "Person"
+  owner_id: 1
   access_target_id: 1
   access_target_type: Cardbill
   access_type: write
@@ -9,7 +10,8 @@ admin_write_access_cardbill:
 
 admin_write_manager_cardbill:
   id: 2
-  person_id: 3
+  owner_type: "Person"
+  owner_id: 1
   access_target_id: 1
   access_target_type: Cardbill
   access_type: write
@@ -18,7 +20,8 @@ admin_write_manager_cardbill:
 
 admin_write_access_document:
   id: 3
-  person_id: 1
+  owner_type: "Person"
+  owner_id: 1
   access_target_id: 1
   access_target_type: Document
   access_type: write

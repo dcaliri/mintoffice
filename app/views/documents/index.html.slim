@@ -5,14 +5,15 @@
     = render 'reports/search_form'
     = t("common.title.search")
     ' :
-    = text_field_tag 'query', params[:query]
+    = search_field_tag 'query', params[:query]
+    = submit_tag t('common.button.search')
     = render 'accessors/search_form'
 #show_command
   = link_to t('documents.new.title'), new_document_path
 h2
   = t("common.title.total")
   ' :
-  = @documents.length
+  = @documents.count
 table#list-table
   tr
     th
@@ -40,7 +41,7 @@ table#list-table
         td
           =h document.localize_status
         td.link_button_area
-          = link_to '상세보기', document, class: 'btn btn-primary'
+          = link_to t('common.button.detail_veiw'), document, class: 'btn btn-primary'
 br
 div.clear
 center

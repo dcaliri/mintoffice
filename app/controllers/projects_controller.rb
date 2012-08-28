@@ -1,14 +1,28 @@
 class ProjectsController < ApplicationController
+  before_filter :redirect_unless_my_project, except: :index
+
   expose(:projects) { current_company.projects }
   expose(:project)
 
   def index
-    find_projects(projects)
-  end
+    if current_employee.admin?
+      project_list = projects
+    else
+      project_list = current_employee.projects
+    end
 
-  def me
-    find_projects(current_employee.projects)
-    render 'index'
+    status = params[:st] || "in_progress"
+    if status == 'in_progress'
+      @projects = project_list.inprogress
+      @status_me = I18n.t("projects.index.in_progress")
+      @status_other = I18n.t("projects.index.completed")
+      @st_other = 'completed'
+    else
+      @projects = project_list.completed
+      @status_me = I18n.t("projects.index.completed")
+      @status_other = I18n.t("projects.index.in_progress")
+      @st_other = 'in_progress'
+    end
   end
 
   def create
@@ -87,5 +101,9 @@ private
       @status_other = I18n.t("projects.index.in_progress")
       @st_other = 'in_progress'
     end
+  end
+
+  def redirect_unless_my_project
+    force_redirect unless (current_employee.admin? or current_employee.projects.exists?(project.id))
   end
 end

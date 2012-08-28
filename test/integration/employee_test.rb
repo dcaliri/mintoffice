@@ -247,7 +247,7 @@ class EmployeeTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('Check company attachment.'))
   end
   
-  test 'should visit employees to retire' do
+  test 'should create retired employees' do
     visit '/'
     click_link '인사정보관리 - 사원목록'
     click_link '상세보기'

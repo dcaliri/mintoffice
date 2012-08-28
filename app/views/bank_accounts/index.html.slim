@@ -1,13 +1,13 @@
 
 #show_command
   = link_to t('bank_accounts.index.total_view'), [:total, :bank_accounts]
-  = " | "
+  = " "
   = link_to t('bank_accounts.index.view_cashier'), :bank_transactions
-  = " | "
+  = " "
   = link_to t('bank_accounts.index.view_transfer'), :bank_transfers
-  = " | "
+  = " "
   = link_to t('bank_accounts.index.create_bank_accounts'), [:new, :bank_account]
-  = " | "
+  = " "
   = link_to t('common.title.back'), :root
 
 h2
@@ -32,6 +32,6 @@ h2
         td.numrow
           = number_to_currency account.remain
         td.link_button_area
-            = link_to '상세보기', account, class: 'btn btn-primary'
+            = link_to t('common.button.detail_veiw'), account, class: 'btn btn-primary'
 - else
   h4= t('.empty')

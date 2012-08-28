@@ -34,7 +34,7 @@ table#list-table
       td
         =h namecard.jobtitle
       td.link_button_area
-        = link_to '상세보기', namecard, class: 'btn btn-primary'
+        = link_to t('common.button.detail_veiw'), namecard, class: 'btn btn-primary'
 br
 center
   = will_paginate @namecards

@@ -1,7 +1,7 @@
 #show_command
   - if target.used and current_person.permission? :card_used_sources
     = link_to t('cardbills.show.to_use'), target.used
-    = " | "
+    = " "
   - if target.approved and current_person.permission? :card_approved_sources
     = link_to t('cardbills.show..to_approved'), target.approved
 h3

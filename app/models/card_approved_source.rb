@@ -118,13 +118,16 @@ class CardApprovedSource < ActiveRecord::Base
           totalamount: approved_source.money,
           transdate: approved_source.used_at,
           storename: approved_source.store_name,
-          storeaddr: used_source.store_addr1 + " " + used_source.store_addr2,
+          storeaddr: "#{used_source.store_addr1} #{used_source.store_addr2}",
         )
 
         report = cardbill.build_report
-        report.reporters << owner.reporters.build(report_id: report, owner: true)
+
+        raise cardbill.errors.inspect if cardbill.invalid?
+
         cardbill.save!
 
+        cardbill.report.accessors.destroy_all
         cardbill.report.permission owner, :write
 
         total_count += 1

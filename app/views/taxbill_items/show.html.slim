@@ -1,0 +1,108 @@
+#show_command
+  = link_to t("common.link.edit"), [:edit, taxbill, @item]
+  = " "
+  = link_to t("common.link.destroy"), [taxbill, @item], :method => :delete, data: {confirm: t("common.messages.delete_confirm")}
+  = " "
+  = link_to t('common.title.list'), taxbill
+
+h3= t('taxbill_items.show.detail')
+.box
+  dl
+    dt= TaxbillItem.human_attribute_name(:transacted_at)
+    dd= @item.transacted_at
+
+    dt= TaxbillItem.human_attribute_name(:note)
+    dd= @item.note
+
+    dt= TaxbillItem.human_attribute_name(:unitprice)
+    dd= number_to_currency @item.unitprice
+
+    dt= TaxbillItem.human_attribute_name(:quantity)
+    dd= @item.quantity
+
+    dt= TaxbillItem.human_attribute_name(:total)
+    dd= number_to_currency @item.total
+
+    dt= TaxbillItem.human_attribute_name(:tax)
+    dd= number_to_currency @item.tax
+
+    dt= TaxbillItem.human_attribute_name(:uid)
+    dd= @item.uid
+
+    dt= TaxbillItem.human_attribute_name(:written_at)
+    dd= @item.written_at
+
+    dt= TaxbillItem.human_attribute_name(:approve_no)
+    dd= @item.approve_no
+
+    dt= TaxbillItem.human_attribute_name(:transmit_at)
+    dd= @item.transmit_at
+
+    dt= TaxbillItem.human_attribute_name(:seller_registration_number)
+    dd= @item.seller_registration_number
+
+    dt= TaxbillItem.human_attribute_name(:sellers_minor_place_registration_number)
+    dd= @item.sellers_minor_place_registration_number
+
+    dt= TaxbillItem.human_attribute_name(:sellers_company_name)
+    dd= @item.sellers_company_name
+
+    dt= TaxbillItem.human_attribute_name(:sellers_representative)
+    dd= @item.sellers_representative
+
+    dt= TaxbillItem.human_attribute_name(:buyer_registration_number)
+    dd= @item.buyer_registration_number
+
+    dt= TaxbillItem.human_attribute_name(:buyers_minor_place_registration_number)
+    dd= @item.buyers_minor_place_registration_number
+
+    dt= TaxbillItem.human_attribute_name(:buyers_company_name)
+    dd= @item.buyers_company_name
+
+    dt= TaxbillItem.human_attribute_name(:buyerss_representative)
+    dd= @item.buyerss_representative
+
+    dt= TaxbillItem.human_attribute_name(:supplied_value)
+    dd= number_to_currency @item.supplied_value
+
+    dt= TaxbillItem.human_attribute_name(:taxbill_classification)
+    dd= @item.taxbill_classification
+
+    dt= TaxbillItem.human_attribute_name(:taxbill_type)
+    dd= @item.taxbill_type
+
+    dt= TaxbillItem.human_attribute_name(:issue_type)
+    dd= @item.issue_type
+
+    dt= TaxbillItem.human_attribute_name(:etc)
+    dd= @item.etc
+
+    dt= TaxbillItem.human_attribute_name(:bill_action_type)
+    dd= @item.bill_action_type
+
+    dt= TaxbillItem.human_attribute_name(:seller_email)
+    dd= @item.seller_email
+
+    dt= TaxbillItem.human_attribute_name(:buyer1_email)
+    dd= @item.buyer1_email
+
+    dt= TaxbillItem.human_attribute_name(:buyer2_email)
+    dd= @item.buyer2_email
+
+    dt= TaxbillItem.human_attribute_name(:item_date)
+    dd= @item.item_date
+
+    dt= TaxbillItem.human_attribute_name(:item_name)
+    dd= @item.item_name
+
+    dt= TaxbillItem.human_attribute_name(:item_standard)
+    dd= @item.item_standard
+
+    dt= TaxbillItem.human_attribute_name(:item_supply_price)
+    dd= number_to_currency @item.item_supply_price
+
+    dt= TaxbillItem.human_attribute_name(:item_tax)
+    dd= number_to_currency @item.item_tax
+
+    dt= TaxbillItem.human_attribute_name(:item_note)
+    dd= @item.item_note

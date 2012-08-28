@@ -1,0 +1,15 @@
+#show_command
+  = link_to t('common.title.back'), :taxbills
+
+h2= t("common.title.#{action_name}")
+
+= form_tag [:preview, :taxbills], multipart: true, class: "tabular" do
+  .box
+    p
+      = label_tag :billtype
+      = select_tag :billtype, options_for_bill_type_select
+    p
+      = label_tag :file, t('.file')
+      = file_field :upload, :file
+    p
+      = submit_tag t('taxbills.excel.preview')

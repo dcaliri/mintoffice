@@ -17,6 +17,8 @@ class BankTransactionTest < ActionDispatch::IntegrationTest
   end
 
   test "should velified bank_transactions" do
+    switch_to_selenium
+    
     visit '/'
     click_link '은행계좌 목록'
     click_link '입출금내역 보기'
@@ -66,13 +68,16 @@ class BankTransactionTest < ActionDispatch::IntegrationTest
   end
 
   test "should create except_columns" do
+    switch_to_selenium
+
     visit '/'
     click_link '은행계좌 목록'
     click_link '입출금내역 보기'
-    click_link '컬럼 선택하기'
-
+    
     assert(page.has_content?('이자'))
     assert(page.has_content?('하나 은행'))
+
+    click_link '컬럼 선택하기'
 
     uncheck('적요')
     uncheck('상대 은행')
@@ -124,6 +129,8 @@ class BankTransactionTest < ActionDispatch::IntegrationTest
   end
 
   test "should edit bank_transaction" do
+    switch_to_selenium
+
     visit '/'
     click_link '은행계좌 목록'
     click_link '입출금내역 보기'
@@ -171,6 +178,8 @@ class BankTransactionTest < ActionDispatch::IntegrationTest
   end
 
   test "should upload an excel file" do
+    switch_to_selenium
+
     BankTransaction.destroy_all
 
     visit '/'
@@ -216,22 +225,22 @@ class BankTransactionTest < ActionDispatch::IntegrationTest
     click_link '은행계좌 목록'
     click_link '입출금내역 보기'
 
-    find_field('query').set("2012년결산")
-    find_field('query').native.send_key(:enter)
+    fill_in "query", with: "2012년결산"
+    click_button "검색"
 
     assert(page.has_content?('2012년결산'))
     assert(!page.has_content?('적금만기'))
     assert(!page.has_content?('e만기'))
 
-    find_field('query').set("적금만기")
-    find_field('query').native.send_key(:enter)
+    fill_in "query", with: "적금만기"
+    click_button "검색"
 
     assert(!page.has_content?('2012년결산'))
     assert(page.has_content?('적금만기'))
     assert(!page.has_content?('e만기'))
 
-    find_field('query').set("e만기")
-    find_field('query').native.send_key(:enter)
+    fill_in "query", with: "e만기"
+    click_button "검색"
 
     assert(!page.has_content?('2012년결산'))
     assert(!page.has_content?('적금만기'))
