@@ -25,6 +25,8 @@ class GroupTest < ActionDispatch::IntegrationTest
     visit '/'
     click_link '그룹관리'
     click_link '신규 작성'
+    
+    assert(!page.has_content?('김 관리김 관리(admin)'))
 
     fill_in "그룹명", with: "그룹명 입력 테스트"
     select 'admin', from: 'group_parent_id'
@@ -36,6 +38,7 @@ class GroupTest < ActionDispatch::IntegrationTest
 
     assert(page.has_content?('그룹명 입력 테스트'))
     assert(page.has_content?('김 관리(admin)'))
+    assert(!page.has_content?('김 관리김 관리(admin)'))
   end
 
   test 'should create a new group without parent_group' do
