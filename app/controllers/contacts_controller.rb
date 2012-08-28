@@ -71,7 +71,7 @@ class ContactsController < ApplicationController
     force_redirect unless @contact.edit?(current_person)
   end
 
-  def url_options
+  def default_url_options
     super.merge(subject: params[:subject])
   end
 
