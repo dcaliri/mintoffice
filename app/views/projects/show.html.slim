@@ -17,7 +17,7 @@ h2
       = t('projects.show.employees')
     dd
       - for employee in project.employees
-        = employee.fullname
+        = employee.person.name
         - if project.completed?
           = link_to t('projects.show.allocation_ratio'), [:assign, employee, :projects]
         br

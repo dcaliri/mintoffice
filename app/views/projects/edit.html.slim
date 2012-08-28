@@ -29,7 +29,7 @@ h2
     p
       = label_tag :accountname, Account.human_attribute_name("name")
       - for employee in project.employees
-        = employee.fullname
+        = employee.person.name
         = " "
         - if employee.project_owner?(project)
           = t('projects.edit.manager')
