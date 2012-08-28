@@ -7,6 +7,7 @@ class UsedVacationTest < ActionDispatch::IntegrationTest
 
   test 'should show vacation_types list' do
     visit '/'
+    click_link '연차 정보'
     click_link '연차 항목'
 
     assert(page.has_content?('휴가'))
@@ -16,6 +17,7 @@ class UsedVacationTest < ActionDispatch::IntegrationTest
 
   test 'should create a new vacation_type' do
     visit '/'
+    click_link '연차 정보'
     click_link '연차 항목'
     click_link '신규 작성'
 
@@ -29,6 +31,7 @@ class UsedVacationTest < ActionDispatch::IntegrationTest
 
   test 'should edit vacation_type' do
     visit '/'
+    click_link '연차 정보'
     click_link '연차 항목'
     click_link '상세보기'
     click_link '수정하기'
@@ -43,6 +46,7 @@ class UsedVacationTest < ActionDispatch::IntegrationTest
 
   test 'should destroy vacation_type' do
     visit '/'
+    click_link '연차 정보'
     click_link '연차 항목'
     click_link '상세보기'
 
