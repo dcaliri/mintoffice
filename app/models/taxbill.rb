@@ -15,6 +15,9 @@ class Taxbill < ActiveRecord::Base
   include Excels::Taxbills::Purchase
   include Excels::Taxbills::Sale
 
+  attr_accessor :document_id
+  before_save :find_document_and_save
+
   def self.no_taxman_and_client
     Taxman.count == 0 and BusinessClient.count == 0
   end
@@ -227,5 +230,10 @@ class Taxbill < ActiveRecord::Base
     taxbill.taxman = taxman
 
     taxbill.save!
+  end
+
+private
+  def find_document_and_save
+    self.document = Document.find(self.document_id) unless self.document_id.blank?
   end
 end

@@ -1,7 +1,10 @@
 - title t('.title')
 
 #show_command
-  = link_to "세금계산서 만들기", new_taxbill_path(document: document)
+  - if document.owner
+    = link_to "세금계산서 보기", document.owner
+  - else
+    = link_to "세금계산서 만들기", new_taxbill_path(document: document)
   = " "
 
   = link_to t('common.title.edit'), edit_document_path(document)

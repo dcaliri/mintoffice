@@ -1,6 +1,6 @@
 class TaxbillsController < ApplicationController
   before_filter :manage_search_option, :only => :index
-  before_filter :only => [:show] { |c| c.save_attachment_id taxbill }
+  before_filter :only => [:show] { |c| c.save_attachment_id taxbill.document if taxbill.document }
 
   expose(:taxbills) { Taxbill.all }
   expose(:taxbill)
@@ -16,6 +16,7 @@ class TaxbillsController < ApplicationController
   end
 
   def create
+    taxbill.document = @document
     taxbill.save!
     redirect_to taxbill, notice: I18n.t("common.messages.created", :model => Taxbill.model_name.human)
   rescue ActiveRecord::RecordInvalid
