@@ -10,3 +10,16 @@ fixture:
     updated_at: <%= Time.zone.now %>
     attachment_id:
     company_id: 1
+
+normal_business_client:
+    id: 2
+    name: 김 개똥 거래처
+    registration_number: 123-321-1234
+    category: 테스트
+    business_status: 테스트 모듈
+    address: MAC OS
+    owner: MINT
+    created_at: <%= Time.zone.now %>
+    updated_at: <%= Time.zone.now %>
+    attachment_id:
+    company_id: 1
