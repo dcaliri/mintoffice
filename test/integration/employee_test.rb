@@ -25,7 +25,6 @@ class EmployeeTest < ActionDispatch::IntegrationTest
 
     assert(page.has_content?('인사정보관리'))
     assert(page.has_content?('계정'))
-    assert(page.has_content?('admin'))
   end
 
   test 'should visit employees' do

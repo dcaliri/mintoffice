@@ -35,6 +35,7 @@ class DocumentTest < ActionDispatch::IntegrationTest
     assert(!page.has_content?('소유자'))
     assert(page.has_content?('테스트 문서'))
     assert(page.has_content?('테스트 프로젝트'))
+    assert(page.has_content?('인사정보: 김 관리'))
   end
 
   test 'should create a new document' do
@@ -266,5 +267,28 @@ class DocumentTest < ActionDispatch::IntegrationTest
     assert(page.has_content?("수정/삭제 불가 문서"))
     assert(!find('#show_command a').has_content?('수정하기'))
     assert(!find('#show_command a').has_content?('삭제하기'))
+  end
+
+  test 'should connect to employee' do
+    visit '/'
+    click_link '문서 관리'
+    click_link '새로운 문서 작성'
+
+    select "테스트 프로젝트", from: 'document_project_id'
+    fill_in "문서제목", with: "수정/삭제 불가 문서"
+
+    click_button '만들기'
+
+    click_link '인사정보와 연결하기'
+    click_link '연결하기'
+
+    assert(page.has_content?('연결고리'))
+    assert(page.has_content?('인사정보: 김 관리'))
+
+    find('#descr ul li').click_link('김 관리')
+
+    assert(page.has_content?('사장'))
+    assert(page.has_content?('123456-1234567'))
+    assert(page.has_content?('test@test.com'))
   end
 end
