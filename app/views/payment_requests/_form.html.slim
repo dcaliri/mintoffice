@@ -1,0 +1,22 @@
+#show_command
+  = link_to t("common.title.back"), :payment_requests
+
+h2= t("common.title.#{action_name}")
+
+= form_for @payment_request, html: {class: "tabular"} do |f|
+  = f.error_messages
+  .box
+    p
+      = f.label :bank_name
+      = f.text_field :bank_name
+    p
+      = f.label :account_number
+      = f.text_field :account_number
+    p
+      = f.label :account_holder
+      = f.text_field :account_holder
+    p
+      = f.label :amount
+      = f.text_field :amount
+  p
+    = f.submit
