@@ -30,11 +30,12 @@ h2
         = document.tag_list
     h3
       = t(".backlink")
-    ul
-      li
-        = Employee.model_name.human
-        = ": "
-        = link_to document.employee.fullname, document.employee
+    - if document.employee
+      ul
+        li
+          = Employee.model_name.human
+          = ": "
+          = link_to document.employee.fullname, document.employee
     ul
       - account = document.account_for_tag(Employee.model_name.human)
       - if account
