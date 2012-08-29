@@ -3,6 +3,7 @@
 class Document < ActiveRecord::Base
   belongs_to :owner, polymorphic: true
   belongs_to :company
+  belongs_to :employee
 
   belongs_to :project
 

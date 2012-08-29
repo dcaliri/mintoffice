@@ -1,0 +1,27 @@
+#show_command
+  = link_to t('common.title.back'), @document
+
+h2
+  = t('employees.index.total')
+  ' :
+  = @employees.size
+
+table#list-table
+  tr
+    th= Employee.human_attribute_name('companyno')
+    th= Employee.human_attribute_name('fullname')
+    th= Employee.human_attribute_name('position')
+    th= Employee.human_attribute_name('account.name')
+    th= Employee.human_attribute_name('joined_on')
+    th.link_button_area
+
+  - @employees.each do |employee|
+    tr.selectable.link_to*{"data-url" => link_employee_document_path(document, employee: employee)}
+      td align="right"
+        =h employee.companyno
+      td=h employee.fullname
+      td=h employee.position
+      td=h employee.person.account.name
+      td=h employee.joined_on
+      td.link_button_area
+        = link_to "연결하기", link_employee_document_path(document, employee: employee), class: 'btn btn-primary'
