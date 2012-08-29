@@ -19,6 +19,11 @@ class DocumentTest < ActionDispatch::IntegrationTest
   fixtures :contact_phone_numbers
   fixtures :contact_emails
 
+  class ::ReportMailer
+    def self.report(target, from, to, subject, message)
+    end
+  end 
+
   test 'should visit document list' do
     visit '/'
     click_link '문서 관리'
@@ -235,6 +240,57 @@ class DocumentTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('세금 계산서 문서'))
     assert(page.has_content?('테스트 프로젝트'))
     assert(page.has_content?('[개인] 김 관리(읽기/쓰기)'))
+  end
+
+  test 'normal should create a linked_taxbill' do
+    Document.destroy_all
+    Taxbill.destroy_all
+
+    normal_user_access
+
+    visit '/'
+    click_link '문서 관리'
+    click_link '새로운 문서 작성'
+
+    select "테스트 프로젝트", from: 'document_project_id'
+    fill_in "문서제목", with: "세금 계산서 문서"
+
+    click_button '만들기'
+
+    click_link '세금계산서 만들기'
+
+    select '김 개똥 / 김 개똥 거래처', from: 'taxbill_taxman_id'
+
+    click_button '세금계산서 만들기'
+
+    select '김 관리', from: 'reporter'
+    fill_in '코멘트', with: '세금계산서 상신'
+    click_button '상신'
+
+    assert(page.has_content?('상태 - 결재 대기 중'))
+
+    simple_authenticate
+
+    visit '/'
+    click_link '세금계산서 관리'
+    click_link '상세보기'
+
+    assert(page.has_content?('김 개똥(normal): 세금계산서 상신'))
+    assert(page.has_content?('김 개똥(normal): 김 관리(admin)님에게 결재를 요청하였습니다.'))
+
+    fill_in '코멘트', with: '세금계산서 승인'
+    click_button '승인'
+
+    assert(page.has_content?('상태 - 결재 완료'))
+    assert(page.has_content?('김 관리(admin): 세금계산서 승인'))
+    assert(page.has_content?('김 관리(admin): 김 관리님이 결재를 승인하였습니다.'))
+
+    fill_in '코멘트', with: '세금계산서 반려'
+    click_button '반려'
+
+    assert(page.has_content?('상태 - 반려'))
+    assert(page.has_content?('김 관리(admin): 세금계산서 반려'))
+    assert(page.has_content?('김 관리(admin): 김 관리님이 결재를 반려하였습니다.'))
   end
 
   test 'normal should not edit/delete admin document' do
