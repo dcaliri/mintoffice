@@ -19,7 +19,7 @@ class TaxbillsControllerTest < ActionController::TestCase
   end
 
   test "should see show page" do
-    get :show, :id => current_taxbill .id
+    get :show, :id => current_taxbill.id
     assert_response :success
   end
 
