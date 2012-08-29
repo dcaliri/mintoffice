@@ -5,4 +5,5 @@ fixture:
   created_at: <%= Time.zone.now %>
   updated_at: <%= Time.zone.now %>
   company_id: 1
+  employee_id: 1
   
