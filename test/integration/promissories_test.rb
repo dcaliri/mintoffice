@@ -24,7 +24,7 @@ class PromissoryTest < ActionDispatch::IntegrationTest
   test 'should create a new Promissory' do
     visit '/'
     click_link '은행계좌 목록'
-    click_link '신규 작성'
+    find_by_id('promissories').click_link '신규 작성'
 
     select '2013', from: 'promissory_expired_at_1i'
     select '1월', from: 'promissory_expired_at_2i'

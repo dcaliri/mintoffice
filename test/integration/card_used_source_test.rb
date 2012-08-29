@@ -200,7 +200,7 @@ class CardUsedSourcesTest < ActionDispatch::IntegrationTest
     click_link '카드별 이용내역'
     
     assert(page.has_content?('00993527'))
-    assert(page.has_content?('86100.0'))
+    assert(page.has_content?('₩86,100'))
     assert(page.has_content?('씨제이푸드빌（주）가로수길직영점'))
   end
 

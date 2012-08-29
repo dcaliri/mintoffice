@@ -12,42 +12,43 @@ h2
   ' :
   = number_to_currency @total_amount
 
-#show_command
-  = link_to t("common.title.new"), [:new, :bank_account]
+#bank_accounts
+  #show_command
+    = link_to t("common.title.new"), [:new, :bank_account]
 
-h3
-  = "당좌 계좌"
-  ' :
-  = number_to_currency bank_accounts.remain
+  h3
+    = "당좌 계좌"
+    ' :
+    = number_to_currency bank_accounts.remain
 
-- unless bank_accounts.empty?
-  table#list-table
-    tr
-      th= BankAccount.human_attribute_name(:name)
-      th= BankAccount.human_attribute_name(:number)
-      th= BankAccount.human_attribute_name(:note)
-      th= BankAccount.human_attribute_name(:remain)
-      th.link_button_area
-    - bank_accounts.each do |account|
-      tr.selectable.link_to*{"data-url" => bank_account_path(account)}
-        td= account.name
-        td= account.number
-        td= account.note
-        td.numrow
-          = number_to_currency account.remain
-        td.link_button_area
-            = link_to t('common.button.detail_veiw'), account, class: 'btn btn-primary'
-- else
-  h4= t('.empty')
-
-#show_command
-  = link_to t("common.title.new"), [:new, :promissory]
-h3
-  = "어음"
-  ' :
-  = number_to_currency @promissories.total_amount
+  - unless bank_accounts.empty?
+    table#list-table
+      tr
+        th= BankAccount.human_attribute_name(:name)
+        th= BankAccount.human_attribute_name(:number)
+        th= BankAccount.human_attribute_name(:note)
+        th= BankAccount.human_attribute_name(:remain)
+        th.link_button_area
+      - bank_accounts.each do |account|
+        tr.selectable.link_to*{"data-url" => bank_account_path(account)}
+          td= account.name
+          td= account.number
+          td= account.note
+          td.numrow
+            = number_to_currency account.remain
+          td.link_button_area
+              = link_to t('common.button.detail_veiw'), account, class: 'btn btn-primary'
+  - else
+    h4= t('.empty')
 
 #promissories
+  #show_command
+    = link_to t("common.title.new"), [:new, :promissory]
+  h3
+    = "어음"
+    ' :
+    = number_to_currency @promissories.total_amount
+
   table#list-table
     tr
       th= Promissory.human_attribute_name("expired_at")
@@ -62,14 +63,14 @@ h3
         td.link_button_area
           = link_to t('common.button.detail_veiw'), promissory, class: 'btn btn-primary'
 
-#show_command
-  = link_to t("common.title.new"), [:new, :investment]
-h3
-  = "투자자산"
-  ' :
-  = number_to_currency @investments.total_amount
-
 #investments
+  #show_command
+    = link_to t("common.title.new"), [:new, :investment]
+  h3
+    = "투자자산"
+    ' :
+    = number_to_currency @investments.total_amount
+
   table#list-table
     tr
       th= Investment.human_attribute_name(:title)
