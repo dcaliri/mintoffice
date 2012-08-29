@@ -1,4 +1,7 @@
 #show_command
+  - unless @payment_request.complete?
+    = link_to "지급 완료", [:complete, @payment_request], method: :put
+    = " "
   = link_to t('common.title.edit'), [:edit, @payment_request]
   = " "
   = link_to t('common.title.destroy'), @payment_request, :method => :delete, data: {confirm: t("common.messages.delete_confirm")}

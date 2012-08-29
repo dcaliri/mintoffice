@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class PaymentRequest < ActiveRecord::Base
 
   DEFAULT_COLUMNS = [:bank_name,
@@ -12,11 +14,13 @@ class PaymentRequest < ActiveRecord::Base
   include ResourceExportable
   resource_exportable_configure do |config|
     config.krw [:amount]
-    # config.include_column :bank_account_name
-    # config.except_column :bank_account_id
-    # config.except_column :out_bank_account
-    # config.except_column :out_bank_name
-    # config.except_column :promissory_check_amount
-    # config.period_subtitle :transacted_at
+  end
+
+  def request_status
+    self.complete ? "완료" : "미완료"
+  end
+
+  def complete!
+    self.update_column(:complete, true)
   end
 end

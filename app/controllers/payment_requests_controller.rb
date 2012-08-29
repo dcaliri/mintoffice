@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class PaymentRequestsController < ApplicationController
   def index
     @payment_requests = PaymentRequest.page(params[:page])
@@ -40,5 +42,11 @@ class PaymentRequestsController < ApplicationController
   def export
     @payment_requests = PaymentRequest.scoped
     send_file @payment_requests.export(:xls)
+  end
+
+  def complete
+    @payment_request = PaymentRequest.find(params[:id])
+    @payment_request.complete!
+    redirect_to @payment_request, notice: "지급을 완료하였습니다."
   end
 end
