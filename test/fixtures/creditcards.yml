@@ -5,7 +5,7 @@ shinhan_card:
   expiremonth: 07
   nickname: 식대카드
   issuer: 신한은행
-  cardholder: 손어지리
+  cardholder: 김 관리
   created_at: <%= Time.zone.now %>
   updated_at: <%= Time.zone.now %>
   short_name: 결재용
@@ -18,8 +18,21 @@ ibk_card:
   expiremonth: 07
   nickname: 법인카드
   issuer: 기업은행
-  cardholder: 손어지리
+  cardholder: 김 관리
   created_at: <%= Time.zone.now %>
   updated_at: <%= Time.zone.now %>
   short_name: 결재용
   bank_account_id: 2
+
+hyundai_card:
+  id: 3
+  cardno: 1111-4210-0559-6403
+  expireyear: 2013
+  expiremonth: 07
+  nickname: 현대카드
+  issuer: 기업은행
+  cardholder: 김 관리
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
+  short_name: "****-4210-0559-6403"
+  bank_account_id: 4

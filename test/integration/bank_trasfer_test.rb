@@ -213,11 +213,30 @@ class BankTransferTest < ActionDispatch::IntegrationTest
     click_button '미리보기'
     click_button '엑셀 파일'
 
-    select "농협 : 301-0111-7655-01"
-
+    select '농협 : 301-0111-7655-01', from:'bank_account_id'
+    
     assert(page.has_content?('301-0111-7655-01'))
     assert(page.has_content?('신한(조흥)'))
     assert(page.has_content?('28505013648.0'))
+  end
+
+  test "should fail to upload an excel file" do
+    switch_to_selenium
+
+    BankTransfer.destroy_all
+
+    visit '/'
+    click_link '은행계좌 목록'
+    click_link '이체내역 보기'
+    click_link '엑셀 파일로 올리기'
+
+    path = File.join(::Rails.root, "test/fixtures/excels/taxbill_fixture.xls") 
+    attach_file("upload_file", path)
+
+    click_button '미리보기'
+
+    assert(page.has_content?('잘못된 형식의 엑셀파일입니다.'))
+    assert(page.has_content?('이체 내역'))
   end
 
   test "should search transfer data" do

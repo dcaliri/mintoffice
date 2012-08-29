@@ -33,7 +33,7 @@ class DocumentTest < ActiveSupport::TestCase
       if action == :rollback
         "문서관리 - #{doc.title} - #{from.fullname}님에 의해서 반려되었습니다."
       else
-        "문서관리 - #{from.fullname}의 결재요청"
+        "문서관리 - #{from.fullname}님이 #{doc.title} 문서를 상신하였습니다."
     end
     end
 
@@ -58,7 +58,7 @@ class DocumentTest < ActiveSupport::TestCase
       BODY
     end
 
-    report_comment_email = "문서관리 - #{current_employee.fullname}의 결재요청"
+    report_comment_email = "문서관리 - #{current_employee.fullname}님이 #{current_document.title} 문서를 상신하였습니다."
     assert_equal(report_comment_email, email_notify_title(:report, current_document, current_employee))
 
     rollback_comment_email = "문서관리 - #{current_document.title} - #{current_employee.fullname}님에 의해서 반려되었습니다."

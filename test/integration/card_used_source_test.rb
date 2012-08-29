@@ -182,4 +182,42 @@ class CardUsedSourcesTest < ActionDispatch::IntegrationTest
     click_link 'PDF'
     assert(page.has_content?('신용카드 이용내역'))
   end
+
+  test "should upload an excel file with hyundai card_used_sources" do
+    switch_to_selenium
+
+    visit '/'
+    click_link '신용카드 관리'
+    click_link '엑셀 파일로 올리기'
+
+    select '이용내역(현대카드)', from: 'card_type'
+    path = File.join(::Rails.root, "test/fixtures/excels/hyundai-card_used_source_fixture.xlsx") 
+    attach_file("upload_file", path)
+
+    click_button '미리보기'
+    click_button '엑셀 파일 올리기'
+    
+    click_link '카드별 이용내역'
+    
+    assert(page.has_content?('00993527'))
+    assert(page.has_content?('86100.0'))
+    assert(page.has_content?('씨제이푸드빌（주）가로수길직영점'))
+  end
+
+  test "should fail to upload an excel file" do
+    switch_to_selenium
+
+    visit '/'
+    click_link '신용카드 관리'
+    click_link '엑셀 파일로 올리기'
+
+    select '이용내역(현대카드)', from: 'card_type'
+    path = File.join(::Rails.root, "test/fixtures/excels/taxbill_fixture.xls") 
+    attach_file("upload_file", path)
+
+    click_button '미리보기'
+
+    assert(page.has_content?('잘못된 형식의 엑셀파일입니다.'))
+    assert(page.has_content?('신용카드 관리'))
+  end
 end
