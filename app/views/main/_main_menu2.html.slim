@@ -61,5 +61,6 @@ div class={current_person.admin? ? "admin" : ""}
             li= link_to t("payment_records.title"), :payment_records
             li= link_to t("enrollments.title"), :enroll_reports
             li= link_to t("investments.title"), :investments
+            li= link_to t("payment_requests.title"), :payment_requests
             li= link_to t("companies.title"), current_company
     = render partial: "this_week"

@@ -1,0 +1,22 @@
+#show_command
+  = link_to t("common.title.new"), [:new, :payment_request]
+
+h2 ...
+
+table#list-table
+  tr
+    th= PaymentRequest.human_attribute_name(:bank_name)
+    th= PaymentRequest.human_attribute_name(:account_number)
+    th= PaymentRequest.human_attribute_name(:account_holder)
+    th= PaymentRequest.human_attribute_name(:amount)
+    th= PaymentRequest.human_attribute_name(:request_status)
+    th.link_button_area
+  - @payment_requests.each do |payment_request|
+    tr.selectable.link_to*{"data-url" => payment_request_path(payment_request)}
+      td= payment_request.bank_name
+      td= payment_request.account_number
+      td= payment_request.account_holder
+      td= number_to_currency payment_request.amount
+      td= payment_request.request_status
+      td.link_button_area
+        = link_to t('common.button.detail_veiw'), payment_request, class: 'btn btn-primary'

@@ -138,6 +138,7 @@ ko:
             payroll_category: 급여구분
             payment: 연봉
             payment_record: 지급조서
+            payment_request: 지급 청구
             permission: 권한
             pettycash: 소액현금
             posting: 전표
@@ -485,6 +486,12 @@ ko:
                 name: 이름
                 bankbook: 통장
                 bankbook_id: 통장
+            payment_request:
+                bank_name: 은행명
+                account_number: 계좌번호
+                account_holder: 예금주
+                amount: 금액
+                request_status: 상태
             pettycash:
                 description: 사용처 상세내역
                 transdate: 사용일자
@@ -1325,6 +1332,8 @@ ko:
         title: 연봉 관리
     payment_records:
         title: 지급 조서 목록
+    payment_requests:
+        title: 지급 청구 목록
     payrolls:
         title: 급여대장
     payroll_categories:

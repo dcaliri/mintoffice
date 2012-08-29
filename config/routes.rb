@@ -298,6 +298,8 @@ Mintoffice::Application.routes.draw do
 
   resources :expense_reports, path: 'expenses'
 
+  resources :payment_requests
+
   match 'report' => 'reports#report', as: :report
 
   resources :ledger_accounts, path: 'ledgers'

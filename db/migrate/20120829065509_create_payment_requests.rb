@@ -4,7 +4,7 @@ class CreatePaymentRequests < ActiveRecord::Migration
       t.string :bank_name
       t.string :account_number
       t.string :account_holder
-      t.decimal :acmount
+      t.decimal :amount
       t.string :request_status
       t.timestamps
     end
