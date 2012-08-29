@@ -13,6 +13,11 @@ class DocumentTest < ActionDispatch::IntegrationTest
   fixtures :report_people
   fixtures :report_comments
   fixtures :access_people
+  fixtures :business_clients
+  fixtures :taxmen
+  fixtures :contacts
+  fixtures :contact_phone_numbers
+  fixtures :contact_emails
 
   test 'should visit document list' do
     visit '/'
@@ -204,5 +209,30 @@ class DocumentTest < ActionDispatch::IntegrationTest
     click_link '상세보기'
 
     assert(page.has_content?("no_admin 문서"))
+  end
+
+  test 'should create a linked_taxbill' do
+    visit '/'
+    click_link '문서 관리'
+    click_link '새로운 문서 작성'
+
+    select "테스트 프로젝트", from: 'document_project_id'
+    fill_in "문서제목", with: "세금 계산서 문서"
+
+    click_button '만들기'
+
+    click_link '세금계산서 만들기'
+
+    select '김 관리 / 테스트 거래처', from: 'taxbill_taxman_id'
+
+    click_button '세금계산서 만들기'
+
+    assert(page.has_content?('거래처명 : 테스트 거래처 ( 123-321-1234 ) - MINT'))
+
+    click_link '세금 계산서 문서'
+
+    assert(page.has_content?('세금 계산서 문서'))
+    assert(page.has_content?('테스트 프로젝트'))
+    assert(page.has_content?('[개인] 김 관리(읽기/쓰기)'))
   end
 end
