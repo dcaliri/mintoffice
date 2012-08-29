@@ -30,6 +30,6 @@ class InvestmentsController < ApplicationController
   def destroy
     @investment = Investment.find(params[:id])
     @investment.destroy
-    redirect_to :investments
+    redirect_to :bank_accounts
   end
 end
