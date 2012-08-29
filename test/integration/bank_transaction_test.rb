@@ -185,8 +185,8 @@ class BankTransactionTest < ActionDispatch::IntegrationTest
     visit '/'
     click_link '은행계좌 목록'
     click_link '입출금내역 보기'
-
     click_link '엑셀 파일로 올리기'
+
     path = File.join(::Rails.root, "test/fixtures/excels/bank_transaction_fixture.xls") 
     attach_file("upload_file", path)
 
@@ -196,6 +196,50 @@ class BankTransactionTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('e_만기'))
     assert(page.has_content?('₩30,360,000'))
     assert(page.has_content?('엘지전자(주)'))
+  end
+
+  test "should upload an nonghyup transaction excel file" do
+    switch_to_selenium
+
+    BankTransaction.destroy_all
+
+    visit '/'
+    click_link '은행계좌 목록'
+    click_link '입출금내역 보기'
+    click_link '엑셀 파일로 올리기'
+
+    select '농협-301-0111-7655-01-농협 계좌', from: 'bank_account'
+
+    path = File.join(::Rails.root, "test/fixtures/excels/nonghyup_bank_transaction_fixture.xls") 
+    attach_file("upload_file", path)
+
+    click_button '미리보기'
+    click_button '엑셀 파일'
+
+    select '농협 : 301-0111-7655-01', from:'bank_account_id'
+
+    assert(page.has_content?('G-신한은행'))
+    assert(page.has_content?('E-기업은행'))
+    assert(page.has_content?('₩10,000,000'))
+  end
+
+  test "should fail to upload an excel file" do
+    switch_to_selenium
+
+    BankTransaction.destroy_all
+
+    visit '/'
+    click_link '은행계좌 목록'
+    click_link '입출금내역 보기'
+    click_link '엑셀 파일로 올리기'
+
+    path = File.join(::Rails.root, "test/fixtures/excels/taxbill_fixture.xls") 
+    attach_file("upload_file", path)
+
+    click_button '미리보기'
+
+    assert(page.has_content?('잘못된 형식의 엑셀파일입니다.'))
+    assert(page.has_content?('입출금 내역'))
   end
 
   test "should search transaction data" do
