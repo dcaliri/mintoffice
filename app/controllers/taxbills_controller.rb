@@ -2,6 +2,8 @@ class TaxbillsController < ApplicationController
   before_filter :manage_search_option, :only => :index
   before_filter :only => [:show] { |c| c.save_attachment_id taxbill.document if taxbill.document }
 
+  before_filter :access_check, except: [:index, :new, :create]
+
   expose(:taxbills) { Taxbill.all }
   expose(:taxbill)
 
@@ -12,7 +14,7 @@ class TaxbillsController < ApplicationController
   end
 
   def index
-    @taxbills = Taxbill.search(params).latest.page(params[:page])
+    @taxbills = Taxbill.access_list(current_person).search(params).latest.page(params[:page])
   end
 
   def create

@@ -1,8 +1,9 @@
 #show_command
-  = link_to t("common.link.edit"), [:edit, taxbill, @item]
-  = " "
-  = link_to t("common.link.destroy"), [taxbill, @item], :method => :delete, data: {confirm: t("common.messages.delete_confirm")}
-  = " "
+  - if taxbill.access?(current_person, :write)
+    = link_to t("common.link.edit"), [:edit, taxbill, @item]
+    = " "
+    = link_to t("common.link.destroy"), [taxbill, @item], :method => :delete, data: {confirm: t("common.messages.delete_confirm")}
+    = " "
   = link_to t('common.title.list'), taxbill
 
 h3= t('taxbill_items.show.detail')
