@@ -14,8 +14,9 @@ class Employee < ActiveRecord::Base
   has_many :change_histories
 
   has_many :project_infos, class_name: "ProjectAssignInfo"
-
   has_many :projects, through: :project_infos
+
+  has_many :documents
 
   serialize :employment_proof_hash, Array
 

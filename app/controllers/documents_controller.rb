@@ -26,6 +26,21 @@ class DocumentsController < ApplicationController
     render :action => "edit"
   end
 
+  def find_employee
+    @document = Document.find(params[:id])
+    @employees = Employee.not_retired
+  end
+
+  def link_employee
+    @document = Document.find(params[:id])
+    @employee = Employee.find(params[:employee])
+
+    @document.employee = @employee
+    @document.save!
+
+    redirect_to @document
+  end
+
   def destroy
     document.destroy
     redirect_to :documents

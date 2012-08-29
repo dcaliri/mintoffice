@@ -87,7 +87,13 @@ Mintoffice::Application.routes.draw do
     end
   end
 
-  resources :documents
+  resources :documents do
+    member do
+      get 'find_employee'
+      get 'link_employee'
+    end
+  end
+
   resources :projects, except: [:destroy] do
     member do
       post :employee, action: 'add_employee'
