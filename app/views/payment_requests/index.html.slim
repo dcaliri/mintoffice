@@ -20,3 +20,9 @@ table#list-table
       td= payment_request.request_status
       td.link_button_area
         = link_to t('common.button.detail_veiw'), payment_request, class: 'btn btn-primary'
+
+center
+  = will_paginate @payment_requests
+#export-menu
+  = t('common.export') + " : "
+  = link_to t('bank_transfers.export.excel'), [:export, :payment_requests], method: :post

@@ -1,6 +1,6 @@
 class PaymentRequestsController < ApplicationController
   def index
-    @payment_requests = PaymentRequest.scoped
+    @payment_requests = PaymentRequest.page(params[:page])
   end
 
   def show
@@ -35,5 +35,10 @@ class PaymentRequestsController < ApplicationController
     @payment_request = PaymentRequest.find(params[:id])
     @payment_request.destroy
     redirect_to :payment_requests
+  end
+
+  def export
+    @payment_requests = PaymentRequest.scoped
+    send_file @payment_requests.export(:xls)
   end
 end
