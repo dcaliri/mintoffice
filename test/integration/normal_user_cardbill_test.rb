@@ -52,6 +52,7 @@ class NUCardBillTest < ActionDispatch::IntegrationTest
     click_link '카드 영수증 목록'
     click_link '상세보기'
 
+    save_and_open_page
     assert(page.has_content?('GS25'))
     assert(page.has_content?('6,000'))
     assert(page.has_content?('5,800'))

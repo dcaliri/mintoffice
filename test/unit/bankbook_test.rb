@@ -6,7 +6,8 @@ class BankBookTest < ActiveSupport::TestCase
     @valid_attributes = {
       name: "기본 통장",
       number: "100-100-100010",
-      account_holder: "김 개똥"
+      account_holder: "김 개똥",
+      bankname: "기본 은행"
     }
   end
 
@@ -27,5 +28,9 @@ class BankBookTest < ActiveSupport::TestCase
     bankbook = Bankbook.new(@valid_attributes)
     bankbook.account_holder = nil
     assert bankbook.invalid?
+
+    bankbook = Bankbook.new(@valid_attributes)
+    bankbook.bankname = nil
+    assert bankbook.valid?
   end
 end

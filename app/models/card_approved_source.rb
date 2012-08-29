@@ -107,7 +107,7 @@ class CardApprovedSource < ActiveRecord::Base
         next if Cardbill.exists?(approveno: approved_source.approve_no)
 
         used_sources = CardUsedSource.where(approve_no: approved_source.approve_no)
-        next if used_sources.empty?
+        next if use_sources.empty?
         used_source = used_sources.first
 
         cardbill = approved_source.creditcard.cardbills.build(
