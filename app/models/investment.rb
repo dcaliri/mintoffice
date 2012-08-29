@@ -9,4 +9,10 @@ class Investment < ActiveRecord::Base
   def initial_estimation
     self.estimations.last
   end
+
+  def self.total_amount
+    result = self.all.map{|investment| investment.current_estimation.amount if investment.current_estimation}
+    result.delete_if {|amount| amount == nil}
+    result.sum
+  end
 end
