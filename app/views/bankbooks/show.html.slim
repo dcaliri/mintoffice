@@ -13,6 +13,10 @@ h3= @bankbook.name
     dd
       = @bankbook.number
     dt
+      = Bankbook.human_attribute_name(:bankname)
+    dd
+      = @bankbook.bankname
+    dt
       = Bankbook.human_attribute_name(:account_holder)
     dd
       = @bankbook.account_holder
