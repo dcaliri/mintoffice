@@ -23,8 +23,8 @@ class BankTransactionsController < ApplicationController
   def preview
     bank_account = BankAccount.find(params[:bank_account])
     @bank_transactions = BankTransaction.preview_stylesheet(bank_account, bank_account.name_, params[:upload])
-  # rescue => error
-  #   redirect_to [:excel, :bank_transactions], alert: error.message
+  rescue => error
+    redirect_to [:excel, :bank_transactions], alert: error.message
   end
 
   def upload
