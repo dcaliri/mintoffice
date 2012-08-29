@@ -42,7 +42,6 @@ class DayWorkerTest < ActionDispatch::IntegrationTest
     click_button '생성'
 
     assert(page.has_content?('222222-2222222'))
-    assert(page.has_content?('없음'))
   end
 
   test 'should edit dayworker' do

@@ -235,4 +235,36 @@ class DocumentTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('테스트 프로젝트'))
     assert(page.has_content?('[개인] 김 관리(읽기/쓰기)'))
   end
+
+  test 'normal should not edit/delete admin document' do
+    Document.destroy_all
+
+    visit '/'
+    click_link '문서 관리'
+    click_link '새로운 문서 작성'
+
+    select "테스트 프로젝트", from: 'document_project_id'
+    fill_in "문서제목", with: "수정/삭제 불가 문서"
+
+    click_button '만들기'
+
+    select '[개인] 김 개똥(normal)', from: 'accessor'
+
+    click_button 'Save changes'
+
+    normal_user_access
+
+    visit '/'
+    click_link '문서 관리'
+
+    select '전체', from: 'report_status'
+    fill_in "query", with: "수정/삭제 불가 문서"
+    click_button "검색"
+    
+    click_link '상세보기'
+
+    assert(page.has_content?("수정/삭제 불가 문서"))
+    assert(!find('#show_command a').has_content?('수정하기'))
+    assert(!find('#show_command a').has_content?('삭제하기'))
+  end
 end
