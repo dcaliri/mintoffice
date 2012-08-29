@@ -1,4 +1,5 @@
 class PaymentRecord < ActiveRecord::Base
+  has_one :payment_request, as: :basis
   has_one :bankbook, as: :holder
 
   attr_accessor :bankbook_id

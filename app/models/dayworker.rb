@@ -1,4 +1,6 @@
 class Dayworker < ActiveRecord::Base
+  has_one :payment_request, as: :basis
+
   belongs_to :person
   has_one :bankbook, as: :holder
 

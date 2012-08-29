@@ -46,6 +46,11 @@ class TaxbillsController < ApplicationController
     redirect_to :taxbills
   end
 
+  def payment_request
+    @payment_request = taxbill.generate_payment_request
+    render 'payment_requests/new'
+  end
+
   private
   def manage_search_option
     options = [:billtype, :taxman_id]
