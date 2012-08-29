@@ -31,6 +31,7 @@ class ContactTest < ActionDispatch::IntegrationTest
     click_link '상세보기'
 
     assert(page.has_content?('전체 공개 : 김 관리'))
+    assert(!page.has_content?('태그목록'))
     assert(!find('#descr dl dd a').has_content?('수정'))
   end
 
