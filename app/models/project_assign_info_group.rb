@@ -1,1 +1,0 @@
-project_assign_info_group.rb
