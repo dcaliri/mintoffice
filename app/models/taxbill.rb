@@ -1,6 +1,7 @@
 # encoding: UTF-8
 
 class Taxbill < ActiveRecord::Base
+  has_one :payment_request, as: :basis
   has_one :document, as: :owner
 
   belongs_to :taxman
@@ -231,6 +232,19 @@ class Taxbill < ActiveRecord::Base
     taxbill.taxman = taxman
 
     taxbill.save!
+  end
+
+  def generate_payment_request
+    bankbook = self.taxman.business_client.bankbook rescue nil
+    PaymentRequest.new do |payment_request|
+      if bankbook
+        payment_request.bank_name = bankbook.number
+        payment_request.account_number = bankbook.number
+        payment_request.account_holder = bankbook.account_holder
+      end
+      payment_request.amount = self.total
+      payment_request.basis = self
+    end
   end
 
 private

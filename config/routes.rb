@@ -72,9 +72,17 @@ Mintoffice::Application.routes.draw do
     end
   end
 
-  resources :payment_records
+  resources :payment_records do
+    member do
+      get 'payment_request'
+    end
+  end
 
-  resources :dayworker_taxes
+  resources :dayworker_taxes do
+    member do
+      get 'payment_request'
+    end
+  end
   resources :card_used_sources do
     post 'export', on: :collection
   end
@@ -279,6 +287,10 @@ Mintoffice::Application.routes.draw do
       post 'import'
 
       get 'total'
+    end
+
+    member do
+      get 'payment_request'
     end
 
     resources :taxbill_items, :path => "items"

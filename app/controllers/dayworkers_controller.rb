@@ -22,6 +22,10 @@ class DayworkersController < ApplicationController
   def update
     dayworker.save!
     redirect_to dayworker
-    end
+  end
 
+  def payment_request
+    @payment_request = dayworker.generate_payment_request
+    render 'payment_requests/new'
+  end
 end

@@ -1,6 +1,7 @@
 # encoding: UTF-8
 
 class PaymentRequest < ActiveRecord::Base
+  belongs_to :basis, polymorphic: true
 
   DEFAULT_COLUMNS = [:bank_name,
                      :account_number,

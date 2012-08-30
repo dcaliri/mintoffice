@@ -1,4 +1,7 @@
 #show_command
+  - if @payment_request.basis
+    = link_to "지급 근거", @payment_request.basis
+    = " "
   - unless @payment_request.complete?
     = link_to "지급 완료", [:complete, @payment_request], method: :put
     = " "
