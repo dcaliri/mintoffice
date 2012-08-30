@@ -10,7 +10,7 @@ hana:
     branchname: 
     created_at: <%= Time.zone.now %>
     updated_at: <%= Time.zone.now %>
-    out_bank_account:
+    out_bank_account: 
     out_bank_name: 하나 은행
     promissory_check_amount:
     cms_code:
@@ -46,7 +46,7 @@ kiup:
     branchname: 
     created_at: <%= Time.zone.now %>
     updated_at: <%= Time.zone.now %>
-    out_bank_account:
+    out_bank_account: 321-123-123456
     out_bank_name: 기업 은행
     promissory_check_amount:
     cms_code:

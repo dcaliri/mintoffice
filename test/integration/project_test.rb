@@ -4,6 +4,7 @@ require 'test_helper'
 class ProjectTest < ActionDispatch::IntegrationTest
   fixtures :projects
   fixtures :project_assign_infos
+  fixtures :project_assign_rates
 
   test 'admin should show poject' do
     visit '/'
@@ -40,7 +41,7 @@ class ProjectTest < ActionDispatch::IntegrationTest
 
     visit '/'
     click_link '프로젝트 관리'
-
+    
     assert(page.has_content?('테스트 프로젝트'))
     assert(page.has_content?('2,000,000'))
     assert(!page.has_content?('참여자 없는 프로젝트'))
@@ -96,59 +97,90 @@ class ProjectTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('2,000,000'))
   end  
 
-  test 'should add/delete accounts and assign manager' do
+  test 'should add/delete employee accounts and assign manager' do
+    ProjectAssignInfo.destroy_all
+
     visit '/'
     click_link '프로젝트 관리'
     click_link '상세보기'
     click_link '수정하기'
 
+    select '사용자', from: 'participant_type'
     fill_in "계정명", with: "admin"
     click_button '추가하기'
 
-    click_link '내용 보기'
-
-    click_link '수정하기'
-
-    click_link '삭제하기'
-    click_link '삭제하기'
-    click_link '삭제하기'
-    click_link '삭제하기'
-
-    fill_in "계정명", with: "admin"
-    click_button '추가하기'
-
-    click_link '돌아가기'    
+    click_link '돌아가기'
 
     click_link '상세보기'
 
     assert(page.has_content?('없음'))
+    assert(page.has_content?('[사용자] 김 관리(admin)'))
 
     click_link '수정하기'
 
+    select '사용자', from: 'participant_type'
     fill_in "계정명", with: "normal"
     click_button '추가하기'
 
-    assert(page.has_content?('김 개똥'))
+    assert(page.has_content?('[사용자] 김 개똥(normal)'))
 
-    click_link '관리자 변경하기'
+    click_link '(관리자 변경하기)'
 
-    assert(page.has_content?('김 관리(admin) -프로젝트 관리자-'))
+    assert(page.has_content?('[사용자] 김 관리(admin) -프로젝트 관리자-'))
 
     click_link '내용 보기'
 
     assert(!page.has_content?('없음'))
-    assert(page.has_content?('김 개똥'))
+    assert(page.has_content?('[사용자] 김 관리(admin)'))
+    assert(page.has_content?('[사용자] 김 개똥(normal)'))
 
     click_link '수정하기'
     click_link '삭제하기'
 
-    assert(!page.has_content?('김 관리 -프로젝트 관리자-'))
+    assert(!page.has_content?('[사용자] 김 관리(admin) -프로젝트 관리자-'))
 
     click_link '내용 보기'
 
     assert(page.has_content?('없음'))
-    assert(page.has_content?('김 개똥'))
+    assert(page.has_content?('[사용자] 김 개똥(normal)'))
+
+    normal_user_access
+
+    visit '/'
+    click_link '프로젝트 관리'
+    click_link '상세보기'
+
+    assert(page.has_content?('없음'))
+    assert(page.has_content?('[사용자] 김 개똥(normal)'))
   end
+
+  test 'should add/delete group accounts and assign manager' do
+    ProjectAssignInfo.destroy_all
+
+    visit '/'
+    click_link '프로젝트 관리'
+    click_link '상세보기'
+    click_link '수정하기'
+
+    select '그룹', from: 'participant_type'
+    fill_in "계정명", with: "no_admin"
+    click_button '추가하기'
+
+    click_link '내용 보기'
+
+    assert(page.has_content?('없음'))
+    assert(page.has_content?('[그룹] no_admin'))
+
+    normal_user_access
+
+    visit '/'
+    click_link '프로젝트 관리'
+    click_link '상세보기'
+
+    assert(page.has_content?('없음'))
+    assert(page.has_content?('[그룹] no_admin'))
+  end
+
 
   test 'should complete project' do
     visit '/'
