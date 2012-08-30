@@ -21,7 +21,7 @@ class ExpenseReport < ActiveRecord::Base
   end
 
   def add_permission_of_project_owner
-    report.permission project.owner.person, :write
+    report.permission project.owner.person, :write if project.owner
   end
 
   def make_posting

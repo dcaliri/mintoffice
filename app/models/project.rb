@@ -75,7 +75,8 @@ class Project < ActiveRecord::Base
   end
 
   def self.assign_list(employee)
-    joins(:assign_infos).where('project_assign_infos.employee_id = ?', employee.id)
+    joins(:assign_infos).merge(ProjectAssignInfo.projects_by_participants(:employees, employee))
+    # joins(:assign_infos).where('project_assign_infos.employee_id = ?', employee.id)
   end
 
   def self.progress_period(year, month)
