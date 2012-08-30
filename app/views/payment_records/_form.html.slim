@@ -10,6 +10,9 @@ h2= t("common.title.#{action_name}")
       = f.label :name
       = f.text_field :name
     p
+      = f.label :amount
+      = f.text_field :amount
+    p
       = f.label :bankbook_id
       = f.select :bankbook_id, options_for_bankbooks_select(@payment_record.bankbook)
   = f.submit
