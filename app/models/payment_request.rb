@@ -33,7 +33,7 @@ class PaymentRequest < ActiveRecord::Base
     bankbook = basis.bankbook
     new do |request|
       if bankbook
-        request.bank_name = bankbook.number
+        request.bank_name = bankbook.bankname
         request.account_number = bankbook.number
         request.account_holder = bankbook.account_holder
       end
