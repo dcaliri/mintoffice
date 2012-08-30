@@ -52,9 +52,13 @@ class Project < ActiveRecord::Base
         before_owner.save!
       end
 
-      after_owner = self.assign_infos.find_by_employee_id(employee_id)
-      after_owner.owner = true
-      after_owner.save!
+      # after_owner = self.assign_infos.find_by_employee_id(employee_id)
+      after_owners = self.assign_infos.where(participant_type: "Employee", participant_id: employee_id)
+      unless after_owners.empty?
+        after_owner = after_owners.first
+        after_owner.owner = true
+        after_owner.save!
+      end
     end
   end
 
