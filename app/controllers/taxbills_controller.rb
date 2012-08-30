@@ -1,6 +1,8 @@
 class TaxbillsController < ApplicationController
   before_filter :manage_search_option, :only => :index
-  before_filter :only => [:show] { |c| c.save_attachment_id taxbill }
+  before_filter :only => [:show] { |c| c.save_attachment_id taxbill.document if taxbill.document }
+
+  before_filter :access_check, except: [:index, :new, :create, :total, :excel, :preview, :import]
 
   expose(:taxbills) { Taxbill.all }
   expose(:taxbill)
@@ -12,10 +14,11 @@ class TaxbillsController < ApplicationController
   end
 
   def index
-    @taxbills = Taxbill.search(params).latest.page(params[:page])
+    @taxbills = Taxbill.access_list(current_person).search(params).latest.page(params[:page])
   end
 
   def create
+    taxbill.document = @document
     taxbill.save!
     redirect_to taxbill, notice: I18n.t("common.messages.created", :model => Taxbill.model_name.human)
   rescue ActiveRecord::RecordInvalid
@@ -36,12 +39,16 @@ class TaxbillsController < ApplicationController
 
   def preview
     @taxbill_items = Taxbill.preview_stylesheet(params[:billtype], params[:upload])
-    # @taxbills = Taxbill.all
   end
 
   def import
     Taxbill.create_with_stylesheet(params[:billtype], params[:upload])
     redirect_to :taxbills
+  end
+
+  def payment_request
+    @payment_request = taxbill.generate_payment_request
+    render 'payment_requests/new'
   end
 
   private

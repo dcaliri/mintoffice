@@ -31,6 +31,8 @@ class ContactTest < ActionDispatch::IntegrationTest
     click_link '상세보기'
 
     assert(page.has_content?('전체 공개 : 김 관리'))
+    assert(!page.has_content?('태그목록'))
+    assert(!find('#descr dl dd a').has_content?('수정'))
   end
 
   test 'should save google contact' do
@@ -94,11 +96,17 @@ class ContactTest < ActionDispatch::IntegrationTest
     click_link '상세보기'
     click_link '수정'
 
+    assert(page.has_content?('김 개똥(normal)'))
+    assert(page.has_content?('카드영수증 매니저(card_manager)'))
+    assert(page.has_content?('카드 사용자(card_user)'))
+    assert(!page.has_content?('퇴 직자(retired_user)'))
+
     fill_in "성", with: "성"
     fill_in "이름", with: "이름"
     fill_in "회사", with: "회사 수정 테스트"
     fill_in "부서", with: "부서 수정 테스트"
     fill_in "직위", with: "직위 수정 테스트"
+    select '김 개똥(normal)', from: 'contact_owner_id'
     
     fill_in "국가", with: "국가 수정 테스트"
     fill_in "주", with: "주 수정 테스트"

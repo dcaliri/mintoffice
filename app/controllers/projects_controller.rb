@@ -8,7 +8,7 @@ class ProjectsController < ApplicationController
     if current_employee.admin?
       project_list = projects
     else
-      project_list = current_employee.projects
+      project_list = current_employee.related_projects
     end
 
     status = params[:st] || "in_progress"
@@ -65,25 +65,37 @@ class ProjectsController < ApplicationController
   end
 
 
-  def add_employee
-    employees = Employee.find_by_account_name(params[:accountname])
-    unless employees.empty?
-      employee  = employees.first
-      if project.employees.include? employee
-        flash[:notice] = I18n.t "common.messages.already_exist"
-      else
-        project.employees << employee
-      end
-    else
-      flash[:notice] = I18n.t "common.messages.no_such_account"
-    end
+  def add_participant
+    participant_type = params[:participant_type].to_sym
 
-    redirect_to [:edit, project]
+    if participant_type == :user
+      employee = Employee.find_by_account_name(params[:accountname])
+      if employee
+        unless project.add_employee(employee)
+          flash[:notice] = I18n.t "common.messages.already_exist"
+        end
+      else
+        flash[:notice] = I18n.t "common.messages.no_such_account"
+      end
+
+      redirect_to [:edit, project]
+    else
+      group = Group.find_by_name(params[:accountname])
+      if group
+        unless project.add_group(group)
+          flash[:notice] = I18n.t "common.messages.already_exist"
+        end
+      else
+        flash[:notice] = I18n.t "common.messages.no_such_account"
+      end
+
+      redirect_to [:edit, project]
+    end
   end
 
-  def remove_employee
-    employee = Employee.find(params[:employee_id])
-    project.employees.delete(employee)
+  def remove_participant
+    info = ProjectAssignInfo.where(project_id: project.id, participant_type: params[:participant_type], participant_id: params[:participant_id])
+    info.destroy_all
     redirect_to [:edit, project]
   end
 
@@ -104,6 +116,6 @@ private
   end
 
   def redirect_unless_my_project
-    force_redirect unless (current_employee.admin? or current_employee.projects.exists?(project.id))
+    force_redirect unless (current_employee.admin? or current_employee.related_projects.exists?(project.id))
   end
 end

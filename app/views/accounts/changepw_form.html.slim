@@ -3,7 +3,7 @@
 	- if current_person.admin?
   	= link_to t("common.title.back"), :action => 'index'
 	- else
-  	= link_to t("common.title.back"), accounts_my_path()
+  	= link_to t("common.title.back"), [:my, :accounts]
 h2
 	= t('.subtitle')
 

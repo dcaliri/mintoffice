@@ -2,7 +2,6 @@
 
 class SectionEnrollment::EnrollmentsController < ApplicationController
   layout "login", :only => :index
-  # layout :nil
 
   skip_before_filter :authorize
   before_filter :find_apply_admin, :except => :index
@@ -16,7 +15,7 @@ class SectionEnrollment::EnrollmentsController < ApplicationController
     if @enrollment.update_attributes(params[:enrollment])
       redirect_to [:dashboard, :enrollments], notice: '입사지원서가 저장되었습니다.'
     else
-      @child_contact = @enrollment.contact
+      @contact = @enrollment.contact
       render "edit"
     end
   end

@@ -11,14 +11,14 @@ fixture:
     attachment_id:
     company_id: 1
 
-fixture2:
+normal_business_client:
     id: 2
-    name: 테스트 거래처2
-    registration_number: 321-321-1234
-    category: 테스트2
-    business_status: 테스트 모듈2
-    address: MAC OS2
-    owner: MINT2
+    name: 김 개똥 거래처
+    registration_number: 123-321-1234
+    category: 테스트
+    business_status: 테스트 모듈
+    address: MAC OS
+    owner: MINT
     created_at: <%= Time.zone.now %>
     updated_at: <%= Time.zone.now %>
     attachment_id:

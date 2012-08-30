@@ -30,7 +30,19 @@ class DayWorkerTest < ActionDispatch::IntegrationTest
 
     assert(page.has_content?('222222-2222222'))
     assert(page.has_content?('농협 통장'))
-  end  
+  end
+
+  test 'should create a new dayworker with empty bankbook' do
+    visit '/dayworkers'
+    click_link '신규 작성'
+
+    fill_in '주민등록번호', with: '222222-2222222'
+    select '없음', from: 'dayworker_bankbook_id'
+
+    click_button '생성'
+
+    assert(page.has_content?('222222-2222222'))
+  end
 
   test 'should edit dayworker' do
     visit '/dayworkers'

@@ -1,4 +1,10 @@
 #show_command
+  - if @payment_record.payment_request
+    = link_to "지급청구 보기", @payment_record.payment_request
+  - else
+    = link_to "지급청구 생성", [:payment_request, @payment_record]
+  = " "
+
   = link_to t('common.title.edit'), [:edit, @payment_record]
   = " "
   = link_to t('common.title.destroy'), @payment_record, method: :delete, data: {confirm: t("common.messages.delete_confirm")}
@@ -9,5 +15,6 @@ h2= t('common.title.show')
 
 dl
   =dtdd @payment_record, "name"
+  =dtdd @payment_record, "amount"
   dt= @payment_record.class.human_attribute_name(:bankbook)
   dd= @payment_record.bankbook.name rescue ""

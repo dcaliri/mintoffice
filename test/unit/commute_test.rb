@@ -1,7 +1,15 @@
 require 'test_helper'
 
 class CommuteTest < ActiveSupport::TestCase
-  fixtures :accounts, :people, :employees
+  fixtures :accounts, :people, :employees, :commutes
+
+  setup do
+    @valid_attributes = {
+      go: "2012-07-18 10:02:13.117074",
+      leave: "2012-07-18 18:08:13.117074",
+      employee_id: 1
+    }
+  end
 
   test "Commute can duplicated from yesterday to today" do
     employee = Employee.first
@@ -28,4 +36,15 @@ class CommuteTest < ActiveSupport::TestCase
     before.save!
     assert after.invalid?
   end
+
+  test "Commute should create commute with valid attributes" do
+    commute = Commute.new(@valid_attributes)
+    assert commute.valid?
+  end
+
+  #test "should check to validate unique date" do
+  #  commute = Commute.new(@valid_attributes)
+  #  commute.leave = nil
+  #  assert commute.invalid?
+  #end
 end

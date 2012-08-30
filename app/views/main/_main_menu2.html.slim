@@ -5,7 +5,7 @@ div class={current_person.admin? ? "admin" : ""}
       - if current_employee
         ul
           li= link_to t("employees.index.title"), :controller => "employees"
-          li= link_to t("vacations.index.title"), vacation_path(current_employee)
+          li= link_to t("vacations.show.title"), vacation_path(current_employee)
           - if current_person.permission? 'commutes'
             li= link_to t("commutes.index.title"), commute_path(current_employee)
           - if current_person.has_payment_info
@@ -48,11 +48,9 @@ div class={current_person.admin? ? "admin" : ""}
           ul
             li= link_to t("commutes.index.title"), :commutes
             li= link_to t("vacations.index.title"), :vacations
-            li= link_to t("vacation_types.title"), :vacation_types
             li= link_to t("payments.title"), :payments
             li= link_to t("accounts.index.title"), :controller => "accounts"
             li= link_to t("groups.title"), :controller => "groups"
-            li= link_to t("payroll_categories.title"), :controller => "payroll_categories"
             li= link_to t("payrolls.title"), :controller => "payrolls"
             li= link_to t("creditcards.title"), :creditcards
             li= link_to t("attachments.title"), :controller => "attachments"
@@ -61,8 +59,7 @@ div class={current_person.admin? ? "admin" : ""}
             li= link_to t("holidays.title"), :controller => "holidays"
             li= link_to t("dayworker_taxes.title"), :controller => "dayworker_taxes"
             li= link_to t("payment_records.title"), :payment_records
-            li= link_to t("promissories.title"), :promissories
             li= link_to t("enrollments.title"), :enroll_reports
-            li= link_to t("investments.title"), :investments
+            li= link_to t("payment_requests.title"), :payment_requests
             li= link_to t("companies.title"), current_company
     = render partial: "this_week"

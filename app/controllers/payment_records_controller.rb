@@ -32,4 +32,11 @@ class PaymentRecordsController < ApplicationController
     @payment_record.destroy
     redirect_to :payment_records
   end
+
+  def payment_request
+    @payment_record = PaymentRecord.find(params[:id])
+    @payment_request = @payment_record.generate_payment_request
+    render 'payment_requests/new'
+  end
+
 end

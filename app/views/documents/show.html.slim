@@ -1,10 +1,19 @@
 - title t('.title')
 
 #show_command
-  = link_to t('common.title.edit'), edit_document_path(document)
+  = link_to "인사정보와 연결하기", [:find_employee, document]
   = " "
-  = link_to t('common.title.destroy'), document, :method => :delete, data: {confirm: t("common.messages.delete_confirm")}
+  - if document.owner
+    = link_to "세금계산서 보기", document.owner
+  - else
+    = link_to "세금계산서 만들기", new_taxbill_path(document: document)
   = " "
+
+  - if document.access?(current_person, :write)
+    = link_to t('common.title.edit'), edit_document_path(document)
+    = " "
+    = link_to t('common.title.destroy'), document, :method => :delete, data: {confirm: t("common.messages.delete_confirm")}
+    = " "
   = link_to t('common.title.list'), documents_path
 h2
   =h document.title
@@ -21,6 +30,12 @@ h2
         = document.tag_list
     h3
       = t(".backlink")
+    - if document.employee
+      ul
+        li
+          = Employee.model_name.human
+          = ": "
+          = link_to document.employee.fullname, document.employee
     ul
       - account = document.account_for_tag(Employee.model_name.human)
       - if account

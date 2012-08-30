@@ -6,6 +6,7 @@ h2
 
 = form_for taxbill, html: {multipart: true, class: "tabular"} do |f|
   = f.error_messages
+  = f.hidden_field :document_id, value: params[:document]
   .box
     p
       = f.label :billtype
@@ -16,7 +17,5 @@ h2
     p
       = f.label :taxman_id
       = f.select :taxman_id, options_for_select(Taxbill.taxmen_list, taxbill.taxman_id)
-    p
-      = render 'shared/attachments/form', form: f
   p
     = f.submit

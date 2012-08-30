@@ -138,6 +138,7 @@ ko:
             payroll_category: 급여구분
             payment: 연봉
             payment_record: 지급조서
+            payment_request: 지급 청구
             permission: 권한
             pettycash: 소액현금
             posting: 전표
@@ -176,6 +177,7 @@ ko:
             bankbook:
                 name: 통장명
                 number: 통장번호
+                bankname: 은행명
                 account_holder: 예금주
             bank_transaction:
                 account: 은행계좌
@@ -482,8 +484,15 @@ ko:
                 after: "%{month}개월 후"
             payment_record:
                 name: 이름
+                amount: 금액
                 bankbook: 통장
                 bankbook_id: 통장
+            payment_request:
+                bank_name: 은행명
+                account_number: 계좌번호
+                account_holder: 예금주
+                amount: 금액
+                request_status: 상태
             pettycash:
                 description: 사용처 상세내역
                 transdate: 사용일자
@@ -1324,6 +1333,8 @@ ko:
         title: 연봉 관리
     payment_records:
         title: 지급 조서 목록
+    payment_requests:
+        title: 지급 청구 목록
     payrolls:
         title: 급여대장
     payroll_categories:
@@ -1594,6 +1605,7 @@ ko:
             empty: 연차 내역이 없습니다
             day: 일
         show:
+            title: 연차 내역
             link: 연차 관리
             info: "할당 연차: %{total}일, 사용 연차: %{used}일, 잔여 연차: %{remain}일"
         new:

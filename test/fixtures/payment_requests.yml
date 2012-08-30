@@ -1,0 +1,11 @@
+fixture:
+  id: 1
+  bank_name: 테스트 은행
+  account_number: 1111-111-111111
+  account_holder: test holder
+  amount: 11000
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
+  complete:
+  basis_type:
+  basis_id:

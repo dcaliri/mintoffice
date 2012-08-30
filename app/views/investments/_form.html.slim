@@ -1,5 +1,5 @@
 #show_command
-  = link_to t("common.title.back"), @investment || :investments
+  = link_to t("common.title.back"), !@investment.new_record? ? @investment : :bank_accounts
 
 h2= t("common.title.#{action_name}")
 

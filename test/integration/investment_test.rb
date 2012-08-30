@@ -7,7 +7,7 @@ class InvestmentTest < ActionDispatch::IntegrationTest
 
   test 'should visit investment list' do
     visit '/'
-    click_link '투자자산 관리'
+    click_link '은행계좌 목록'
 
     assert(page.has_content?('금융투자'))
     assert(page.has_content?('₩1,000,000'))
@@ -16,8 +16,8 @@ class InvestmentTest < ActionDispatch::IntegrationTest
 
   test 'should show investment' do
     visit '/'
-    click_link '투자자산 관리'
-    click_link '상세보기'
+    click_link '은행계좌 목록'
+    find_by_id('investments').click_link('상세보기')
 
     assert(page.has_content?('금융투자'))
     assert(page.has_content?('주식거래'))
@@ -25,8 +25,8 @@ class InvestmentTest < ActionDispatch::IntegrationTest
 
   test 'should create a new investment' do
     visit '/'
-    click_link '투자자산 관리'
-    click_link '신규 작성'
+    click_link '은행계좌 목록'
+    find_by_id('investments').click_link('신규 작성')
 
     fill_in '자산명', with: '자산명 입력 테스트'
     fill_in '상세정보', with: '상세정보 입력 테스트'
@@ -39,8 +39,8 @@ class InvestmentTest < ActionDispatch::IntegrationTest
 
   test 'should edit investment' do
     visit '/'
-    click_link '투자자산 관리'
-    click_link '상세보기'
+    click_link '은행계좌 목록'
+    find_by_id('investments').click_link('상세보기')
     click_link '수정하기'
 
     fill_in '자산명', with: '자산명 수정 테스트'
@@ -54,8 +54,8 @@ class InvestmentTest < ActionDispatch::IntegrationTest
 
   test 'should destroy investment' do
     visit '/'
-    click_link '투자자산 관리'
-    click_link '상세보기'
+    click_link '은행계좌 목록'
+    find_by_id('investments').click_link('상세보기')
 
     disable_confirm_box
 
@@ -66,8 +66,8 @@ class InvestmentTest < ActionDispatch::IntegrationTest
 
   test 'should create a new estimation' do
     visit '/'
-    click_link '투자자산 관리'
-    click_link '상세보기'
+    click_link '은행계좌 목록'
+    find_by_id('investments').click_link('상세보기')
     click_link '신규 작성'
 
     fill_in '평가액', with: '3000000'
@@ -84,8 +84,8 @@ class InvestmentTest < ActionDispatch::IntegrationTest
 
   test 'should edit estimation' do
     visit '/'
-    click_link '투자자산 관리'
-    click_link '상세보기'
+    click_link '은행계좌 목록'
+    find_by_id('investments').click_link('상세보기')
     find('#list-table').click_link('수정하기')
 
     fill_in '평가액', with: '500000'
@@ -101,12 +101,13 @@ class InvestmentTest < ActionDispatch::IntegrationTest
 
   test 'should destroy estimation' do
     visit '/'
-    click_link '투자자산 관리'
-    click_link '상세보기'
+    click_link '은행계좌 목록'
+    find_by_id('investments').click_link('상세보기')
 
     disable_confirm_box
 
     find('#list-table').click_link('삭제하기')
+    
     assert(!page.has_content?('₩1,000,000'))
     assert(page.has_content?('₩500,000'))
   end

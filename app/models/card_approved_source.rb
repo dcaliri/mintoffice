@@ -127,6 +127,7 @@ class CardApprovedSource < ActiveRecord::Base
 
         cardbill.save!
 
+        cardbill.report.reporters.destroy_all
         cardbill.report.accessors.destroy_all
         cardbill.report.permission owner, :write
 

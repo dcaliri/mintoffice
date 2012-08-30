@@ -2,18 +2,18 @@ fixture:
     id: 1
     business_client_id: 1
     fullname: 김 관리
-    email: admin@test.com
+    email: test@test.com
     phonenumber: 010-123-1234
     created_at: <%= Time.zone.now %>
     updated_at: <%= Time.zone.now %>
     person_id: 1
 
-fixture2:
+normal_taxman:
     id: 2
     business_client_id: 2
     fullname: 김 개똥
     email: normal@test.com
-    phonenumber: 010-123-1236
+    phonenumber: 010-123-1234
     created_at: <%= Time.zone.now %>
     updated_at: <%= Time.zone.now %>
     person_id: 2

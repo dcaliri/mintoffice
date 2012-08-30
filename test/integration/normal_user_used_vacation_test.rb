@@ -26,7 +26,7 @@ class NUUsedVacationTest < ActionDispatch::IntegrationTest
 
     visit '/'
 
-    click_link '연차 정보'
+    click_link '연차 내역'
 
     assert(page.has_content?('사용한 연차 내역이 없습니다'))
   end
@@ -45,7 +45,7 @@ class NUUsedVacationTest < ActionDispatch::IntegrationTest
 
     visit '/'
 
-    click_link '연차 정보'
+    click_link '연차 내역'
     click_link '연차 사용 신청'
 
     select '기타', from: 'used_vacation_type_'
@@ -82,7 +82,7 @@ class NUUsedVacationTest < ActionDispatch::IntegrationTest
 
     visit '/'
 
-    click_link '연차 정보'
+    click_link '연차 내역'
     click_link '인사정보'
 
     assert(page.has_content?('김 개똥'))

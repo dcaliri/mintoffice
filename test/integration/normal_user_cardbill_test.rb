@@ -147,8 +147,6 @@ class NUCardBillTest < ActionDispatch::IntegrationTest
   end
 
   test 'should search data' do
-    switch_to_selenium
-
     visit '/'
     click_link '신용카드 관리'
     click_link '카드별 승인내역'

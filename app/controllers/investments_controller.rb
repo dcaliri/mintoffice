@@ -1,8 +1,4 @@
 class InvestmentsController < ApplicationController
-  def index
-    @investments = Investment.all
-  end
-
   def show
     @investment = Investment.find(params[:id])
   end
@@ -34,6 +30,6 @@ class InvestmentsController < ApplicationController
   def destroy
     @investment = Investment.find(params[:id])
     @investment.destroy
-    redirect_to :investments
+    redirect_to :bank_accounts
   end
 end

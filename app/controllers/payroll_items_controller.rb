@@ -11,4 +11,10 @@ class PayrollItemsController < ApplicationController
     redirect_to payroll_path(payroll)
   end
 
+  def update
+    # payroll_item.payroll = payroll
+    payroll_item.save!
+    redirect_to payroll_path(payroll)
+  end
+
 end

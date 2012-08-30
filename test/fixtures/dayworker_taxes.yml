@@ -1,5 +1,10 @@
 fixture:
     id: 1
     dayworker_id: 1
+    apply_day: <%= Time.zone.now %>
+    reason: payment
+    amount: 30000
+    tax_amount: 990
+    pay_amount: 29010
     created_at: <%= Time.zone.now %>
     updated_at: <%= Time.zone.now %>

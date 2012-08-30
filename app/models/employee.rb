@@ -1,5 +1,4 @@
 # encoding: UTF-8
-
 class Employee < ActiveRecord::Base
   belongs_to :person
 
@@ -13,9 +12,10 @@ class Employee < ActiveRecord::Base
   has_many :except_columns
   has_many :change_histories
 
-  has_many :project_infos, class_name: "ProjectAssignInfo"
-
+  has_many :project_infos, class_name: "ProjectAssignInfo", as: :participant
   has_many :projects, through: :project_infos
+
+  has_many :documents
 
   serialize :employment_proof_hash, Array
 
@@ -45,7 +45,7 @@ class Employee < ActiveRecord::Base
 
   class << self
     def find_by_account_name(account_name)
-      joins(:person => :account).merge(Account.where(name: account_name))
+      joins(:person => :account).merge(Account.where(name: account_name)).first
     end
 
     def search(person, type, text)
@@ -78,6 +78,15 @@ class Employee < ActiveRecord::Base
     def enabled
       joins(:person => :account).merge(Account.enabled)
     end
+  end
+
+  def related_projects
+    types = [:employees, :groups]
+    groups = [self.id] + person.groups.map{|group| group.id}
+
+    Project
+      .includes(:assign_infos)
+      .merge(ProjectAssignInfo.projects_by_participant([:employees, :groups], [self.id] + person.groups.map{|group| group.id}))
   end
 
   def admin?

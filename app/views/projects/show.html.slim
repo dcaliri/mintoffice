@@ -17,11 +17,17 @@ h2
       = t('projects.show.employees')
     dd
       - for employee in project.employees
-        = employee.fullname
+        = "[사용자] " + employee.person.name
         - if project.completed?
           = link_to t('projects.show.allocation_ratio'), [:assign, employee, :projects]
         br
+      - for group in project.groups
+        = "[그룹] " + group.name
+        - if project.completed?
+          = link_to t('projects.show.allocation_ratio'), [:assign, group, :projects]
+        br
     - if project.completed?
       = dtdd project, "ended_on"
+
 - if project.has_manager_permission?(current_employee)
   = render 'expense'

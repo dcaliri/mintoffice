@@ -55,7 +55,7 @@ Mintoffice::Application.routes.draw do
   end
 
   resources :bankbooks
-  resources :promissories
+  resources :promissories, except: :index
 
   resources :creditcards do
     collection do
@@ -72,9 +72,17 @@ Mintoffice::Application.routes.draw do
     end
   end
 
-  resources :payment_records
+  resources :payment_records do
+    member do
+      get 'payment_request'
+    end
+  end
 
-  resources :dayworker_taxes
+  resources :dayworker_taxes do
+    member do
+      get 'payment_request'
+    end
+  end
   resources :card_used_sources do
     post 'export', on: :collection
   end
@@ -87,11 +95,17 @@ Mintoffice::Application.routes.draw do
     end
   end
 
-  resources :documents
+  resources :documents do
+    member do
+      get 'find_employee'
+      get 'link_employee'
+    end
+  end
+
   resources :projects, except: [:destroy] do
     member do
-      post :employee, action: 'add_employee'
-      delete :employee, action: 'remove_employee'
+      post :participant, action: 'add_participant'
+      delete :participant, action: 'remove_participant'
       put :change_owner
     end
   end
@@ -275,12 +289,16 @@ Mintoffice::Application.routes.draw do
       get 'total'
     end
 
+    member do
+      get 'payment_request'
+    end
+
     resources :taxbill_items, :path => "items"
   end
 
   resources :change_histories, path: 'histories'
 
-  resources :investments do
+  resources :investments, except: :index do
     resources :investment_estimations, path: 'estimations'
   end
 
@@ -291,6 +309,16 @@ Mintoffice::Application.routes.draw do
   end
 
   resources :expense_reports, path: 'expenses'
+
+  resources :payment_requests do
+    member do
+      put 'complete'
+    end
+
+    collection do
+      post 'export'
+    end
+  end
 
   match 'report' => 'reports#report', as: :report
 

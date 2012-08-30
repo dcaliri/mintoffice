@@ -10,7 +10,7 @@ class UsedVacationTest < ActionDispatch::IntegrationTest
   test 'should view used_vacation' do
     visit '/'
     
-    click_link '연차 정보'
+    click_link '연차 내역'
     click_link '상세보기'
 
     assert(page.has_content?('사용한 연차 정보'))
@@ -19,7 +19,7 @@ class UsedVacationTest < ActionDispatch::IntegrationTest
   test 'should create a new used_vacation' do
     visit '/'
     
-    click_link '연차 정보'
+    click_link '연차 내역'
     click_link '연차 사용 신청'
 
     select '기타', from: 'used_vacation_type_'
@@ -38,7 +38,7 @@ class UsedVacationTest < ActionDispatch::IntegrationTest
   test 'should commit report' do
     visit '/'
     
-    click_link '연차 정보'
+    click_link '연차 내역'
     click_link '상세보기'
 
     fill_in "코멘트", with: "test"
@@ -51,7 +51,7 @@ class UsedVacationTest < ActionDispatch::IntegrationTest
   test 'should create/destroy permission' do
     visit '/'
     
-    click_link '연차 정보'
+    click_link '연차 내역'
     click_link '상세보기'
 
     select '읽기', from: 'access_type'
@@ -69,7 +69,7 @@ class UsedVacationTest < ActionDispatch::IntegrationTest
   test 'should edit used_vacation' do
     visit '/'
     
-    click_link '연차 정보'
+    click_link '연차 내역'
     click_link '상세보기'
 
     click_link '수정하기'
@@ -85,7 +85,7 @@ class UsedVacationTest < ActionDispatch::IntegrationTest
   test 'should destroy used_vacation' do
     visit '/'
 
-    click_link '연차 정보'
+    click_link '연차 내역'
     click_link '상세보기'
 
     disable_confirm_box

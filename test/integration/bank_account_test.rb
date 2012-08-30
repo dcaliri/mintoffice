@@ -5,18 +5,24 @@ class BankAccountTest < ActionDispatch::IntegrationTest
   fixtures :bank_accounts
   fixtures :bank_transactions
   fixtures :bank_transfers
+  fixtures :promissories
+  fixtures :investments
+  fixtures :investment_estimations
 
   test 'should visit bank_account list' do
     visit '/'
     click_link '은행계좌 목록'
 
-    assert(page.has_content?('은행계좌 관리'))
+    assert(page.has_content?('은행계좌 관리: ₩11,000,505'))
+    assert(page.has_content?('당좌 계좌: ₩505'))
+    assert(page.has_content?('어음: ₩10,000,000'))
+    assert(page.has_content?('투자자산: ₩1,000,000'))
   end
 
   test 'should visit the bank_account' do
     visit '/'
     click_link '은행계좌 목록'
-    click_link '상세보기'
+    find_by_id('bank_accounts').click_link('상세보기')
 
     assert(page.has_content?('신한 은행'))
     assert(page.has_content?('321-123-123456'))
@@ -26,7 +32,7 @@ class BankAccountTest < ActionDispatch::IntegrationTest
   test 'should create a new bank_account' do
     visit '/'
     click_link '은행계좌 목록'
-    click_link '은행계좌 만들기'
+    find_by_id('bank_accounts').click_link('신규 작성')
 
     fill_in "계정", with: "개인 은행계좌"
     fill_in "설명", with: "개인 은행계좌입니다."
@@ -56,7 +62,7 @@ class BankAccountTest < ActionDispatch::IntegrationTest
   test 'should edit the exist bank_account' do
     visit '/'
     click_link '은행계좌 목록'
-    click_link '상세보기'
+    find_by_id('bank_accounts').click_link('상세보기')
     click_link '수정'
 
     fill_in "계정", with: "수정된 은행계좌"
@@ -71,7 +77,7 @@ class BankAccountTest < ActionDispatch::IntegrationTest
   test "should destroy the bank_account" do
     visit '/'
     click_link '은행계좌 목록'
-    click_link '상세보기'
+    find_by_id('bank_accounts').click_link('상세보기')
 
     disable_confirm_box
 
@@ -107,7 +113,7 @@ class BankAccountTest < ActionDispatch::IntegrationTest
   test "should show bank_transactions in bank_account" do
     visit '/'
     click_link '은행계좌 목록'
-    click_link '상세보기'
+    find_by_id('bank_accounts').click_link('상세보기')
 
     click_link '입출금 내역'
 
@@ -118,7 +124,7 @@ class BankAccountTest < ActionDispatch::IntegrationTest
   test "should show bank_transfers in bank_account" do
     visit '/'
     click_link '은행계좌 목록'
-    click_link '상세보기'
+    find_by_id('bank_accounts').click_link('상세보기')
 
     click_link '이체 내역'
 

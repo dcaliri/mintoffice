@@ -5,14 +5,40 @@ class Project < ActiveRecord::Base
 
   has_many :documents
   has_many :expense_reports
+
   has_many :assign_infos, class_name: "ProjectAssignInfo"
-  has_many :employees, through: :assign_infos
 
   scope :completed, :conditions =>['ended_on is not null'], :order => "started_on ASC"
   scope :inprogress, :conditions =>['ended_on is null'], :order => "started_on ASC"
 
   validates_uniqueness_of :name, scope: :company_id
   validates_numericality_of :revenue
+
+  def employees
+    Employee.joins(:project_infos).merge(ProjectAssignInfo.participants_by_project(:employees, self.id))
+  end
+
+  def add_employee(employee)
+    unless employees.include?(employee)
+      ProjectAssignInfo.create!(project_id: id, participant_type: "Employee", participant_id: employee.id)
+      true
+    else
+      false
+    end
+  end
+
+  def groups
+    Group.joins(:project_infos).merge(ProjectAssignInfo.participants_by_project(:groups, self.id))
+  end
+
+  def add_group(group)
+    unless groups.include?(group)
+      ProjectAssignInfo.create!(project_id: id, participant_type: "Group", participant_id: group.id)
+      true
+    else
+      false
+    end
+  end
 
   def has_manager_permission?(employee)
     employee.admin? or self.owner == employee
@@ -26,14 +52,18 @@ class Project < ActiveRecord::Base
         before_owner.save!
       end
 
-      after_owner = self.assign_infos.find_by_employee_id(employee_id)
-      after_owner.owner = true
-      after_owner.save!
+      # after_owner = self.assign_infos.find_by_employee_id(employee_id)
+      after_owners = self.assign_infos.where(participant_type: "Employee", participant_id: employee_id)
+      unless after_owners.empty?
+        after_owner = after_owners.first
+        after_owner.owner = true
+        after_owner.save!
+      end
     end
   end
 
   def owner
-    self.assign_infos.find_by_owner(true).employee rescue nil
+    self.assign_infos.find_by_owner(true).participant rescue nil
   end
 
   def owner_name
@@ -45,7 +75,7 @@ class Project < ActiveRecord::Base
   end
 
   def self.assign_list(employee)
-    joins(:assign_infos).where('project_assign_infos.employee_id = ?', employee.id)
+    joins(:assign_infos).merge(ProjectAssignInfo.projects_by_participant(:employees, employee.id))
   end
 
   def self.progress_period(year, month)

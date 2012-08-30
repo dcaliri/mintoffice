@@ -9,7 +9,7 @@ class Permission < ActiveRecord::Base
         "documents.*",
         "employees.index", "employees.show", "employees.new_employment_proof", "employees.employment_proof",
         "main.*",
-        "accounts.my", "accounts.changepw", "accounts.edit", "accounts.update", "accounts.google_apps",
+        "accounts.my", "accounts.changepw", "accounts.changepw_form", "accounts.edit", "accounts.update", "accounts.google_apps",
         "reports.*",
         "expense_reports.*", "cardbills.*", "documents.*",
         "except_columns.*",

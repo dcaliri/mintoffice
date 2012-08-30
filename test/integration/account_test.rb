@@ -60,8 +60,6 @@ class AccountTest < ActionDispatch::IntegrationTest
     click_link '수정하기'
 
     fill_in "계정명", with: "edit_account"
-    fill_in "비밀번호", with: "1234"
-    fill_in "비밀번호 확인", with: "1234"
     fill_in "이메일", with: "edit_test@test.com"
     fill_in "Boxcar 계정", with: "edit_test@boxcar.com"
     fill_in "Redmine 계정", with: "edit_test"
@@ -99,5 +97,39 @@ class AccountTest < ActionDispatch::IntegrationTest
     click_button "검색"
 
     assert(page.has_content?('normal'))
+  end
+
+  test 'normal should change password' do
+    normal_user_access
+
+    visit '/'
+    click_link '김 개똥(normal)'
+
+    click_link '비밀번호 변경'
+
+    fill_in '비밀번호', with: '2345'
+    fill_in '비밀번호 확인', with: '2345'
+
+    click_button '변경하기'
+
+    assert(page.has_content?('성공적으로 변경하였습니다.'))
+
+    clear_session
+    
+    visit '/'
+
+    fill_in "사용자계정", with: "normal"
+    fill_in "비밀번호", with: "1234"
+
+    click_button "로그인"
+
+    assert(page.has_content?('아이디 혹은 비밀번호가 잘못되었습니다.'))
+
+    fill_in "사용자계정", with: "normal"
+    fill_in "비밀번호", with: "2345"
+
+    click_button "로그인"
+
+    assert(page.has_content?('Mint Office'))
   end
 end

@@ -3,11 +3,6 @@ require 'test_helper'
 class PromissoriesControllerTest < ActionController::TestCase
   fixtures :promissories
 
-  test "should see index page" do
-    get :index
-    assert_response :success
-  end
-
   test "should see new page" do
     get :new
     assert_response :success

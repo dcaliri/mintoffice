@@ -1,4 +1,3 @@
-
 #show_command
   = link_to t('bank_accounts.index.total_view'), [:total, :bank_accounts]
   = " "
@@ -6,32 +5,82 @@
   = " "
   = link_to t('bank_accounts.index.view_transfer'), :bank_transfers
   = " "
-  = link_to t('bank_accounts.index.create_bank_accounts'), [:new, :bank_account]
-  = " "
   = link_to t('common.title.back'), :root
 
 h2
-  = t('bank_accounts.index.bank_accounts_list')
+  = "은행계좌 관리"
   ' :
-  = t('bank_accounts.index.balance') 
-  = number_to_currency BankAccount.remain
+  = number_to_currency @total_amount
 
-- unless bank_accounts.empty?
+#bank_accounts
+  #show_command
+    = link_to t("common.title.new"), [:new, :bank_account]
+
+  h3
+    = "당좌 계좌"
+    ' :
+    = number_to_currency bank_accounts.remain
+
+  - unless bank_accounts.empty?
+    table#list-table
+      tr
+        th= BankAccount.human_attribute_name(:name)
+        th= BankAccount.human_attribute_name(:number)
+        th= BankAccount.human_attribute_name(:note)
+        th= BankAccount.human_attribute_name(:remain)
+        th.link_button_area
+      - bank_accounts.each do |account|
+        tr.selectable.link_to*{"data-url" => bank_account_path(account)}
+          td= account.name
+          td= account.number
+          td= account.note
+          td.numrow
+            = number_to_currency account.remain
+          td.link_button_area
+              = link_to t('common.button.detail_veiw'), account, class: 'btn btn-primary'
+  - else
+    h4= t('.empty')
+
+#promissories
+  #show_command
+    = link_to t("common.title.new"), [:new, :promissory]
+  h3
+    = "어음"
+    ' :
+    = number_to_currency @promissories.total_amount
+
   table#list-table
     tr
-      th= BankAccount.human_attribute_name(:name)
-      th= BankAccount.human_attribute_name(:number)
-      th= BankAccount.human_attribute_name(:note)
-      th= BankAccount.human_attribute_name(:remain)
+      th= Promissory.human_attribute_name("expired_at")
+      th= Promissory.human_attribute_name("published_at")
+      th= Promissory.human_attribute_name("amount")
       th.link_button_area
-    - bank_accounts.each do |account|
-      tr.selectable.link_to*{"data-url" => bank_account_path(account)}
-        td= account.name
-        td= account.number
-        td= account.note
-        td.numrow
-          = number_to_currency account.remain
+    - @promissories.each do |promissory|
+      tr.selectable.link_to*{"data-url" => promissory_path(promissory)}
+        td= promissory.expired_at
+        td= promissory.published_at
+        td= number_to_currency promissory.amount
         td.link_button_area
-            = link_to t('common.button.detail_veiw'), account, class: 'btn btn-primary'
-- else
-  h4= t('.empty')
+          = link_to t('common.button.detail_veiw'), promissory, class: 'btn btn-primary'
+
+#investments
+  #show_command
+    = link_to t("common.title.new"), [:new, :investment]
+  h3
+    = "투자자산"
+    ' :
+    = number_to_currency @investments.total_amount
+
+  table#list-table
+    tr
+      th= Investment.human_attribute_name(:title)
+      th= Investment.human_attribute_name(:current_estimation)
+      th= Investment.human_attribute_name(:initial_estimation)
+      th.link_button_area
+    - @investments.each do |investment|
+      tr.selectable.link_to*{"data-url" => investment_path(investment)}
+        td= investment.title
+        td= number_to_currency investment.current_estimation.amount rescue ""
+        td= number_to_currency investment.initial_estimation.amount rescue ""
+        td.link_button_area
+          = link_to t('common.button.detail_veiw'), investment, class: 'btn btn-primary'

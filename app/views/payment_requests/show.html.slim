@@ -1,0 +1,40 @@
+#show_command
+  - if @payment_request.bank_transaction
+    = link_to "거래내역", @payment_request.bank_transaction
+    = " "
+
+  - if @payment_request.basis
+    = link_to "지급 근거", @payment_request.basis
+    = " "
+  - unless @payment_request.complete?
+    = link_to "지급 완료", [:complete, @payment_request], method: :put
+    = " "
+  = link_to t('common.title.edit'), [:edit, @payment_request]
+  = " "
+  = link_to t('common.title.destroy'), @payment_request, :method => :delete, data: {confirm: t("common.messages.delete_confirm")}
+  = " "
+  = link_to t('common.title.list'), :payment_requests
+
+h3= "지급 청구"
+.box
+  dl
+    dt
+      = PaymentRequest.human_attribute_name(:bank_name)
+    dd
+      = @payment_request.bank_name
+    dt
+      = PaymentRequest.human_attribute_name(:account_number)
+    dd
+      = @payment_request.account_number
+    dt
+      = PaymentRequest.human_attribute_name(:account_holder)
+    dd
+      = @payment_request.account_holder
+    dt
+      = PaymentRequest.human_attribute_name(:amount)
+    dd
+      = number_to_currency @payment_request.amount
+    dt
+      = PaymentRequest.human_attribute_name(:request_status)
+    dd
+      = @payment_request.request_status
