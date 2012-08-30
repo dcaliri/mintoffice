@@ -24,4 +24,22 @@ class PaymentRequest < ActiveRecord::Base
   def complete!
     self.update_column(:complete, true)
   end
+
+  def bank_transaction
+    BankTransaction.where(out_bank_account: account_number, out: amount).first
+  end
+
+  def self.generate_payment_request(basis, amount)
+    bankbook = basis.bankbook
+    new do |request|
+      if bankbook
+        request.bank_name = bankbook.number
+        request.account_number = bankbook.number
+        request.account_holder = bankbook.account_holder
+      end
+
+      request.amount = amount
+      request.basis = basis
+    end
+  end
 end

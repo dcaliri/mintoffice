@@ -234,17 +234,12 @@ class Taxbill < ActiveRecord::Base
     taxbill.save!
   end
 
+  def bankbook
+    taxman.business_client.bankbook rescue nil
+  end
+
   def generate_payment_request
-    bankbook = self.taxman.business_client.bankbook rescue nil
-    PaymentRequest.new do |payment_request|
-      if bankbook
-        payment_request.bank_name = bankbook.number
-        payment_request.account_number = bankbook.number
-        payment_request.account_holder = bankbook.account_holder
-      end
-      payment_request.amount = self.total
-      payment_request.basis = self
-    end
+    PaymentRequest.generate_payment_request(self, total)
   end
 
 private

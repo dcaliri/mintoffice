@@ -1,4 +1,8 @@
 #show_command
+  - if @payment_request.bank_transaction
+    = link_to "거래내역", @payment_request.bank_transaction
+    = " "
+
   - if @payment_request.basis
     = link_to "지급 근거", @payment_request.basis
     = " "

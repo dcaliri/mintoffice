@@ -6,16 +6,7 @@ class PaymentRecord < ActiveRecord::Base
   before_save :save_bankook
 
   def generate_payment_request
-    bankbook = self.bankbook rescue nil
-    PaymentRequest.new do |payment_request|
-      if bankbook
-        payment_request.bank_name = bankbook.number
-        payment_request.account_number = bankbook.number
-        payment_request.account_holder = bankbook.account_holder
-      end
-      # payment_request.amount = self.total
-      payment_request.basis = self
-    end
+    PaymentRequest.generate_payment_request(self, 0) # self.total)
   end
 
 private
