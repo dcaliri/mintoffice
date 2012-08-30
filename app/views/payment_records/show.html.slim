@@ -15,5 +15,6 @@ h2= t('common.title.show')
 
 dl
   =dtdd @payment_record, "name"
+  =dtdd @payment_record, "amount"
   dt= @payment_record.class.human_attribute_name(:bankbook)
   dd= @payment_record.bankbook.name rescue ""
