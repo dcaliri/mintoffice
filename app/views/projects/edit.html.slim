@@ -24,19 +24,29 @@ h2
       = f.label :revenue, Project.human_attribute_name("revenue")
       = f.text_field :revenue
   = f.submit t('common.button.update')
-= form_tag(employee_project_path(project), {:class => "tabular"}) do
+
+= form_tag(participant_project_path(project), {:class => "tabular"}) do
   .box
-    p
-      = label_tag :accountname, Account.human_attribute_name("name")
-      - for employee in project.employees
-        = employee.person.name
+    - for employee in project.employees
+      p
+        = "[사용자] " + employee.person.name
         = " "
         - if employee.project_owner?(project)
           = t('projects.edit.manager')
         - else
           = link_to t("projects.edit.owner"), change_owner_project_path(employee_id: employee), method: :put
         = " "
-        = link_to t("common.title.destroy"), employee_project_path(project, employee_id: employee), method: :delete
-        br
+        = link_to t("common.title.destroy"), participant_project_path(project, participant_type: "Employee", participant_id: employee), method: :delete
+    - for group in project.groups
+      p
+        = "[그룹] " + group.name
+        = " "
+        = link_to t("common.title.destroy"), participant_project_path(project, participant_type: "Group", participant_id: group), method: :delete
+    br
+    p
+      = label_tag :participant_type
+      = select_tag :participant_type, options_for_select([["사용자", :user], ["그룹", :group]])
+    p
+      = label_tag :accountname, Account.human_attribute_name("name")
       = text_field_tag :accountname
       = submit_tag t("common.button.add")

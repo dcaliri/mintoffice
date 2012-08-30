@@ -1,5 +1,4 @@
 # encoding: UTF-8
-
 class Employee < ActiveRecord::Base
   belongs_to :person
 
@@ -13,7 +12,7 @@ class Employee < ActiveRecord::Base
   has_many :except_columns
   has_many :change_histories
 
-  has_many :project_infos, class_name: "ProjectAssignInfo"
+  has_many :project_infos, class_name: "ProjectAssignInfo", as: :participant
   has_many :projects, through: :project_infos
 
   has_many :documents
@@ -46,7 +45,7 @@ class Employee < ActiveRecord::Base
 
   class << self
     def find_by_account_name(account_name)
-      joins(:person => :account).merge(Account.where(name: account_name))
+      joins(:person => :account).merge(Account.where(name: account_name)).first
     end
 
     def search(person, type, text)

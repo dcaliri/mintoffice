@@ -4,6 +4,9 @@ class Group < ActiveRecord::Base
   has_many :subgroups, class_name: 'Group', foreign_key: 'parent_id'
   belongs_to :parent, class_name: 'Group', foreign_key: 'parent_id'
 
+  has_many :project_infos, class_name: "ProjectAssignInfo", as: :participant
+  has_many :projects, through: :project_infos
+
   has_many :accessors, class_name: 'AccessPerson', as: 'owner'
 
   def self.people_in_group(group)

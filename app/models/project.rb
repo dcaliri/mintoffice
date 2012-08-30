@@ -5,14 +5,40 @@ class Project < ActiveRecord::Base
 
   has_many :documents
   has_many :expense_reports
+
   has_many :assign_infos, class_name: "ProjectAssignInfo"
-  has_many :employees, through: :assign_infos
 
   scope :completed, :conditions =>['ended_on is not null'], :order => "started_on ASC"
   scope :inprogress, :conditions =>['ended_on is null'], :order => "started_on ASC"
 
   validates_uniqueness_of :name, scope: :company_id
   validates_numericality_of :revenue
+
+  def employees
+    Employee.joins(:project_infos).merge(ProjectAssignInfo.participants_by_project(:employees, self))
+  end
+
+  def add_employee(employee)
+    unless employees.include?(employee)
+      ProjectAssignInfo.create!(project_id: id, participant_type: "Employee", participant_id: employee.id)
+      true
+    else
+      false
+    end
+  end
+
+  def groups
+    Group.joins(:project_infos).merge(ProjectAssignInfo.participants_by_project(:groups, self))
+  end
+
+  def add_group(group)
+    unless groups.include?(group)
+      ProjectAssignInfo.create!(project_id: id, participant_type: "Group", participant_id: group.id)
+      true
+    else
+      false
+    end
+  end
 
   def has_manager_permission?(employee)
     employee.admin? or self.owner == employee
