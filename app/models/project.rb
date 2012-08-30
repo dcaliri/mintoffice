@@ -63,7 +63,7 @@ class Project < ActiveRecord::Base
   end
 
   def owner
-    self.assign_infos.find_by_owner(true).employee rescue nil
+    self.assign_infos.find_by_owner(true).participant rescue nil
   end
 
   def owner_name

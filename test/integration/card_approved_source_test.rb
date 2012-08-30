@@ -199,7 +199,7 @@ class CardApprovedSourcesTest < ActionDispatch::IntegrationTest
     click_link '엑셀 파일로 올리기'
 
     select '승인내역(현대카드)', from: 'card_type'
-    path = File.join(::Rails.root, "test/fixtures/excels/hyundai-card_approved_source_fixture.xlsx") 
+    path = File.join(::Rails.root, "test/fixtures/excels/hyundai-card_approved_source_fixture.xlsx")
     attach_file("upload_file", path)
 
     click_button '미리보기'
