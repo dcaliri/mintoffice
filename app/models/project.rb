@@ -15,7 +15,7 @@ class Project < ActiveRecord::Base
   validates_numericality_of :revenue
 
   def employees
-    Employee.joins(:project_infos).merge(ProjectAssignInfo.participants_by_project(:employees, self))
+    Employee.joins(:project_infos).merge(ProjectAssignInfo.participants_by_project(:employees, self.id))
   end
 
   def add_employee(employee)
@@ -28,7 +28,7 @@ class Project < ActiveRecord::Base
   end
 
   def groups
-    Group.joins(:project_infos).merge(ProjectAssignInfo.participants_by_project(:groups, self))
+    Group.joins(:project_infos).merge(ProjectAssignInfo.participants_by_project(:groups, self.id))
   end
 
   def add_group(group)
@@ -75,8 +75,7 @@ class Project < ActiveRecord::Base
   end
 
   def self.assign_list(employee)
-    joins(:assign_infos).merge(ProjectAssignInfo.projects_by_participants(:employees, employee))
-    # joins(:assign_infos).where('project_assign_infos.employee_id = ?', employee.id)
+    joins(:assign_infos).merge(ProjectAssignInfo.projects_by_participant(:employees, employee.id))
   end
 
   def self.progress_period(year, month)

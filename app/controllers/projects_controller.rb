@@ -8,7 +8,7 @@ class ProjectsController < ApplicationController
     if current_employee.admin?
       project_list = projects
     else
-      project_list = current_employee.projects
+      project_list = current_employee.related_projects
     end
 
     status = params[:st] || "in_progress"
@@ -116,6 +116,6 @@ private
   end
 
   def redirect_unless_my_project
-    force_redirect unless (current_employee.admin? or current_employee.projects.exists?(project.id))
+    force_redirect unless (current_employee.admin? or current_employee.related_projects.exists?(project.id))
   end
 end

@@ -80,6 +80,15 @@ class Employee < ActiveRecord::Base
     end
   end
 
+  def related_projects
+    types = [:employees, :groups]
+    groups = [self.id] + person.groups.map{|group| group.id}
+
+    Project
+      .includes(:assign_infos)
+      .merge(ProjectAssignInfo.projects_by_participant([:employees, :groups], [self.id] + person.groups.map{|group| group.id}))
+  end
+
   def admin?
     person.admin?
   end
