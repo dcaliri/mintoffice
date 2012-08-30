@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 require 'test_helper'
 
 class CardbillTest < ActiveSupport::TestCase
@@ -7,6 +9,20 @@ class CardbillTest < ActiveSupport::TestCase
   fixtures :report_people
   fixtures :report_comments
   fixtures :cardbills
+
+  setup do
+    @valid_attributes = {
+      transdate: Time.now,
+      amount: 10908,
+      vat: 0,
+      servicecharge: 1092,
+      totalamount: 12000,
+      storename: "버터플라이",
+      storeaddr: "서울 금천구 가산동",
+      approveno: 27001012,
+      creditcard_id: 1
+    }
+  end
 
   test "manager report to person" do
     Person.current_person = people(:card_manager_account)
@@ -88,6 +104,39 @@ class CardbillTest < ActiveSupport::TestCase
     assert current_report.comments.build(owner: prev_reporter, description: "#{prev_reporter.fullname}"+I18n.t('models.report.to_approve'))
     assert current_report.comments.build(owner: prev_reporter, description: "test")
     assert current_report.save!
+  end
+
+  test "Cardbill should create cardbill with valid attributes" do
+    cardbill = Cardbill.new(@valid_attributes)
+    assert cardbill.valid?
+  end
+
+  test "check to validate presence of attributes" do
+    cardbill = Cardbill.new(@valid_attributes)
+    cardbill.totalamount = nil
+    assert cardbill.invalid?
+
+    cardbill = Cardbill.new(@valid_attributes)
+    cardbill.approveno = nil
+    assert cardbill.invalid?
+  end
+
+  test "check to validate numericality of attributes" do
+    cardbill = Cardbill.new(@valid_attributes)
+    cardbill.totalamount = "test"
+    assert cardbill.invalid?
+
+    cardbill = Cardbill.new(@valid_attributes)
+    cardbill.amount = "test"
+    assert cardbill.invalid?
+
+    cardbill = Cardbill.new(@valid_attributes)
+    cardbill.servicecharge = "test"
+    assert cardbill.invalid?
+
+    cardbill = Cardbill.new(@valid_attributes)
+    cardbill.vat = "test"
+    assert cardbill.invalid?
   end
 
   private

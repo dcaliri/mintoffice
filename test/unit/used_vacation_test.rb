@@ -2,6 +2,28 @@ require 'test_helper'
 
 class UsedVacationTest < ActiveSupport::TestCase
   fixtures :accounts#, :groups_accounts, :groups
+  fixtures :used_vacations
+
+  setup do
+    @valid_attributes = {
+      vacation_id: 1,
+      from: "#{Time.zone.now}",
+      to: "#{Time.zone.now}",
+      note: "test",
+      period: 1
+    }
+  end
+
+  test "UsedVacation should create used_vacation with valid attributes" do
+    used_vacation = UsedVacation.new(@valid_attributes)
+    assert used_vacation.valid?
+  end
+
+  test "UsedVacation shouldn't create used_vacation with invalid attributes" do
+    used_vacation = UsedVacation.new(@valid_attributes)
+    used_vacation.period = 0.4
+    assert used_vacation.invalid?
+  end
 
   test "UsedVacation during should retreive correct vacation list" do
     Person.current_person = Person.first
@@ -25,4 +47,6 @@ class UsedVacationTest < ActiveSupport::TestCase
 
     assert_equal(UsedVacation.during(startDate..endDate), [before_and_between, between_and_after, between_and_between2, before_and_after])
   end
+
+
 end

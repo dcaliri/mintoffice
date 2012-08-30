@@ -220,7 +220,7 @@ class TaxBillTest < ActionDispatch::IntegrationTest
     click_link '세금계산서 관리'
 
     assert(page.has_content?('매입 세금계산서'))
-    #assert(!page.has_content?('매출 세금계산서'))
+    assert(!find('#list-table').has_content?('매출 세금계산서'))
 
     click_link '상세보기'
     

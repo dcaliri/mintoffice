@@ -47,7 +47,3 @@ dl
         = link_to t('common.link.edit'), [:edit, contact]
         = " "
         = link_to t('contacts.item.remove'), [contact, other], :method => :delete, data: {confirm: t("common.messages.delete_confirm")}
-  dt
-    = Document.human_attribute_name("tags")
-  dd
-    = contact.tag_list
