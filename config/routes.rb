@@ -72,7 +72,11 @@ Mintoffice::Application.routes.draw do
     end
   end
 
-  resources :payment_records
+  resources :payment_records do
+    member do
+      get 'payment_request'
+    end
+  end
 
   resources :dayworker_taxes do
     member do

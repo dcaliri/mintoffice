@@ -10,7 +10,11 @@ class Dayworker < ActiveRecord::Base
   before_save :save_bankook
 private
   def save_bankook
-    self.bankbook = Bankbook.find(bankbook_id) unless bankbook_id.blank?
+    unless bankbook_id.blank?
+      self.bankbook = Bankbook.find(bankbook_id)
+    else
+      self.bankbook = nil
+    end
   end
 
   def create_person_if_not
