@@ -7,7 +7,7 @@ class MigrateTaxbillAttachmentToDocument < ActiveRecord::Migration
       FROM taxbills;
     SQL
 
-    Attachment.where(owner_type: "Taxbill").find_each do |attachment|
+    Attachment.where(owner_type: "Taxbill").each do |attachment|
       taxbill = Taxbill.find_by_id(attachment.owner_id)
       if taxbill
         document = taxbill.document
@@ -37,7 +37,7 @@ class MigrateTaxbillAttachmentToDocument < ActiveRecord::Migration
     #   WHERE attachments.owner_type = "Document"
     # SQL
 
-    Attachment.where(owner_type: "Document").find_each do |attachment|
+    Attachment.where(owner_type: "Document").each do |attachment|
       document = Document.find_by_id(attachment.owner_id)
 
       if document
