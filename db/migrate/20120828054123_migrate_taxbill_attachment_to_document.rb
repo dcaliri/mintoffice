@@ -18,25 +18,9 @@ class MigrateTaxbillAttachmentToDocument < ActiveRecord::Migration
         end
       end
     end
-
-    # execute <<-SQL
-    #   UPDATE attachments
-    #   SET owner_type = "Document", owner_id = (SELECT id
-    #   FROM documents
-    #   WHERE documents.owner_type = "Taxbill")
-    #   WHERE attachments.owner_type = "Taxbill"
-    # SQL
   end
 
   def down
-    # execute <<-SQL
-    #   UPDATE attachments
-    #   SET owner_type = "Taxbill", owner_id = (SELECT owner_id
-    #   FROM documents
-    #   WHERE documents.owner_type = "Taxbill")
-    #   WHERE attachments.owner_type = "Document"
-    # SQL
-
     Attachment.where(owner_type: "Document").each do |attachment|
       document = Document.find_by_id(attachment.owner_id)
 
