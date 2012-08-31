@@ -21,6 +21,27 @@ module SpreadsheetParsable
     rescue NoMethodError
       raise "Cannot find excel parser. parser_name = #{parser_name}"
     end
+
+    def preview_stylesheet(type, upload)
+      raise ArgumentError, I18n.t('common.upload.empty') unless upload
+      path = file_path(upload['file'].original_filename)
+      create_file(path, upload['file'])
+
+      parser = excel_parser(type.to_sym)
+      parser.parse(path) do |class_name, query, params|
+        yield class_name, query, params
+      end
+    end
+
+    def create_with_stylesheet(type, name)
+      path = file_path(name)
+
+      parser = excel_parser(type.to_sym)
+      parser.parse(path) do |class_name, query, params|
+        yield class_name, query, params
+      end
+      File.delete(path)
+    end
   end
 
   included do

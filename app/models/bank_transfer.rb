@@ -30,11 +30,6 @@ class BankTransfer < ActiveRecord::Base
     DEFAULT_COLUMNS
   end
 
-  include SpreadsheetParsable
-  include SpreadsheetParsable::BankTransfers::Shinhan
-  include SpreadsheetParsable::BankTransfers::Ibk
-  include SpreadsheetParsable::BankTransfers::Nonghyup
-
   include ResourceExportable
   resource_exportable_configure do |config|
     config.include_column :bank_account_name
@@ -66,43 +61,6 @@ class BankTransfer < ActiveRecord::Base
     search_by_text(text)
   end
 
-  def self.preview_stylesheet(type, upload)
-    raise ArgumentError, I18n.t('common.upload.empty') unless upload
-    path = file_path(upload['file'].original_filename)
-    parser = excel_parser(type.to_sym)
-
-    create_file(path, upload['file'])
-    previews = []
-    parser.parse(path) do |class_name, query, params|
-      accounts = BankAccount.where(:number => params[:out_bank_account])
-      unless accounts.empty?
-        previews << accounts.first.send(class_name.to_s.tableize).build(params)
-      end
-    end
-    previews
-  end
-
-  def self.create_with_stylesheet(type, name)
-    path = file_path(name)
-    parser = excel_parser(type.to_sym)
-
-    parser.parse(path) do |class_name, query, params|
-      accounts = BankAccount.where(:number => params[:out_bank_account])
-
-      unless accounts.empty?
-        account = accounts.first
-        collections = account.send(class_name.to_s.tableize).where(query)
-        if collections.empty?
-          collections.create!(params)
-        else
-          resource = collections.first
-          resource.update_attributes!(params)
-        end
-      end
-    end
-    File.delete(path)
-  end
-
   def self.latest
     order("transfered_at DESC")
   end
@@ -122,6 +80,39 @@ class BankTransfer < ActiveRecord::Base
       collection.first
     else
       nil
+    end
+  end
+
+  include SpreadsheetParsable
+  include SpreadsheetParsable::BankTransfers::Shinhan
+  include SpreadsheetParsable::BankTransfers::Ibk
+  include SpreadsheetParsable::BankTransfers::Nonghyup
+
+  def self.preview_stylesheet(type, upload)
+    previews = []
+    super(type, upload) do |class_name, query, params|
+      accounts = BankAccount.where(:number => params[:out_bank_account])
+      unless accounts.empty?
+        previews << accounts.first.send(class_name.to_s.tableize).build(params)
+      end
+    end
+    previews
+  end
+
+  def self.create_with_stylesheet(type, name)
+    super(type, name) do |class_name, query, params|
+      accounts = BankAccount.where(:number => params[:out_bank_account])
+
+      unless accounts.empty?
+        account = accounts.first
+        collections = account.send(class_name.to_s.tableize).where(query)
+        if collections.empty?
+          collections.create!(params)
+        else
+          resource = collections.first
+          resource.update_attributes!(params)
+        end
+      end
     end
   end
 end

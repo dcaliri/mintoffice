@@ -31,48 +31,6 @@ class Creditcard < ActiveRecord::Base
                          [I18n.t('models.creditcard.approved_hyundai'), CARD_LIST[3]],
                          [I18n.t('models.creditcard.foreign_detail'), CARD_LIST[4]],]
 
-  include SpreadsheetParsable
-  include SpreadsheetParsable::CardUsedSources::Default
-  include SpreadsheetParsable::CardUsedSources::Hyundai
-  include SpreadsheetParsable::CardApprovedSources::Default
-  include SpreadsheetParsable::CardApprovedSources::Hyundai
-  include SpreadsheetParsable::CardApprovedSources::Oversea
-
-  def self.excel_parser(type)
-    parser_name = "#{type}_parser"
-    send(parser_name)
-  end
-
-  def self.preview_stylesheet(type, upload)
-    raise ArgumentError, I18n.t('common.upload.empty') unless upload
-    path = file_path(upload['file'].original_filename)
-    parser = excel_parser(type.to_sym)
-
-    create_file(path, upload['file'])
-    parser.preview(path)
-  end
-
-  def self.create_with_stylesheet(type, name)
-    path = file_path(name)
-    parser = excel_parser(type.to_sym)
-
-    parser.parse(path) do |class_name, query, params|
-      creditcards = Creditcard.where(:short_name => params[:card_no])
-
-      unless creditcards.empty?
-        creditcard = creditcards.first
-        collections = creditcard.send(class_name.to_s.tableize).where(query)
-        if collections.empty?
-          collections.create!(params)
-        else
-          resource = collections.first
-          resource.update_attributes!(params)
-        end
-      end
-    end
-    File.delete(path)
-  end
-
   def cardno_long
     if self.nickname == nil
       self.cardno
@@ -97,6 +55,43 @@ class Creditcard < ActiveRecord::Base
 
     def oldest_approved_source
       approved_per_period('will_be_paied_at ASC') - 1.month
+    end
+  end
+
+  include SpreadsheetParsable
+  include SpreadsheetParsable::CardUsedSources::Default
+  include SpreadsheetParsable::CardUsedSources::Hyundai
+  include SpreadsheetParsable::CardApprovedSources::Default
+  include SpreadsheetParsable::CardApprovedSources::Hyundai
+  include SpreadsheetParsable::CardApprovedSources::Oversea
+
+  def self.excel_parser(type)
+    parser_name = "#{type}_parser"
+    send(parser_name)
+  end
+
+  def self.preview_stylesheet(type, upload)
+    previews = []
+    super(type, upload) do |class_name, query, params|
+      previews << class_name.new(params)
+    end
+    previews
+  end
+
+  def self.create_with_stylesheet(type, name)
+    super(type, name) do |class_name, query, params|
+      creditcards = Creditcard.where(:short_name => params[:card_no])
+
+      unless creditcards.empty?
+        creditcard = creditcards.first
+        collections = creditcard.send(class_name.to_s.tableize).where(query)
+        if collections.empty?
+          collections.create!(params)
+        else
+          resource = collections.first
+          resource.update_attributes!(params)
+        end
+      end
     end
   end
 end

@@ -12,10 +12,6 @@ class Taxbill < ActiveRecord::Base
   include Historiable
   include Reportable
 
-  include SpreadsheetParsable
-  include SpreadsheetParsable::Taxbills::Purchase
-  include SpreadsheetParsable::Taxbills::Sale
-
   attr_accessor :document_id
   before_save :find_document_and_save
 
@@ -135,27 +131,29 @@ class Taxbill < ActiveRecord::Base
     end
   end
 
-  def self.preview_stylesheet(type, upload)
-    raise ArgumentError, I18n.t('common.upload.empty') unless upload
-    path = file_path(upload['file'].original_filename)
-    parser = excel_parser(type.to_sym)
+  def bankbook
+    taxman.business_client.bankbook rescue nil
+  end
 
-    create_file(path, upload['file'])
+  def generate_payment_request
+    PaymentRequest.generate_payment_request(self, total)
+  end
+
+  include SpreadsheetParsable
+  include SpreadsheetParsable::Taxbills::Purchase
+  include SpreadsheetParsable::Taxbills::Sale
+
+  def self.preview_stylesheet(type, upload)
     previews = []
-    parser.parse(path) do |class_name, query, params|
+    super(type, upload) do |class_name, query, params|
       previews << TaxbillItem.new(params)
     end
     previews
   end
 
   def self.create_with_stylesheet(type, name)
-    type = type.to_sym
-
-    path = file_path(name)
-    parser = excel_parser(type)
-
     transaction do
-      parser.parse(path) do |class_name, query, params|
+      super(type, name) do |class_name, query, params|
         items = TaxbillItem.where(query)
 
         if items.empty?
@@ -170,7 +168,6 @@ class Taxbill < ActiveRecord::Base
         end
       end
     end
-    File.delete(path)
   end
 
   def self.create_purchase_info(type, params)
@@ -222,15 +219,6 @@ class Taxbill < ActiveRecord::Base
 
     taxbill.save!
   end
-
-  def bankbook
-    taxman.business_client.bankbook rescue nil
-  end
-
-  def generate_payment_request
-    PaymentRequest.generate_payment_request(self, total)
-  end
-
 private
   def find_document_and_save
     self.document = Document.find(self.document_id) unless self.document_id.blank?
