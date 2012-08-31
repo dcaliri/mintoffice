@@ -8,7 +8,7 @@ class EmployeeTest < ActiveSupport::TestCase
     @valid_attributes = {
       joined_on: "2012-07-18",
       person_id: 1,
-      companyno: 6,
+      companyno: 7,
       juminno: "121211-1234567",
       listed: false
     }
