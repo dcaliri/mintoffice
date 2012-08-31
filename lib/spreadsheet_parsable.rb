@@ -7,14 +7,6 @@ module SpreadsheetParsable
       File.join(directory, name)
     end
 
-    def create_file(path, file)
-      File.open(path, "wb") { |f| f.write(file.read) }
-    end
-
-    def remove_file(path)
-      File.delete(path)
-    end
-
     def excel_parser(type)
       parser_name = "#{type}_#{self.to_s.tableize.singularize}_parser"
       send(parser_name)
@@ -25,7 +17,7 @@ module SpreadsheetParsable
     def preview_stylesheet(type, upload)
       raise ArgumentError, I18n.t('common.upload.empty') unless upload
       path = file_path(upload['file'].original_filename)
-      create_file(path, upload['file'])
+      File.open(path, "wb") { |f| f.write(upload['file'].read) }
 
       parser = excel_parser(type.to_sym)
       parser.parse(path) do |class_name, query, params|
