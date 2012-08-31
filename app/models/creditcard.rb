@@ -24,6 +24,7 @@ class Creditcard < ActiveRecord::Base
     :card_approved_sources_hyundai,
     :card_approved_sources_oversea
   ]
+
   CARD_LIST_FOR_SELECT = [[I18n.t('models.creditcard.used_detail'), CARD_LIST[0]],
                          [I18n.t('models.creditcard.used_hyundai_detail'), CARD_LIST[1]],
                          [I18n.t('models.creditcard.approved_detail'), CARD_LIST[2]],
@@ -31,11 +32,11 @@ class Creditcard < ActiveRecord::Base
                          [I18n.t('models.creditcard.foreign_detail'), CARD_LIST[4]],]
 
   include SpreadsheetParsable
-  include SpreadsheetParsable::CardUsedSourcesInfo
-  include SpreadsheetParsable::CardUsedSourcesHyundaiInfo
-  include SpreadsheetParsable::CardApprovedSourcesInfo
-  include SpreadsheetParsable::CardApprovedSourcesHyundaiInfo
-  include SpreadsheetParsable::CardApprovedSourcesOverseaInfo
+  include SpreadsheetParsable::CardUsedSources::Default
+  include SpreadsheetParsable::CardUsedSources::Hyundai
+  include SpreadsheetParsable::CardApprovedSources::Default
+  include SpreadsheetParsable::CardApprovedSources::Hyundai
+  include SpreadsheetParsable::CardApprovedSources::Oversea
 
   def self.excel_parser(type)
     if type == :card_used_sources
