@@ -1,6 +1,6 @@
 # encoding: UTF-8
 
-module Excels
+module SpreadsheetParsable
   module BankTransfers
     module Shinhan
       extend ActiveSupport::Concern

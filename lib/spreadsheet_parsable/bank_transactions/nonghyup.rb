@@ -1,6 +1,6 @@
 # encoding: UTF-8
 
-module Excels
+module SpreadsheetParsable
   module BankTransactions
     module Nonghyup
       extend ActiveSupport::Concern

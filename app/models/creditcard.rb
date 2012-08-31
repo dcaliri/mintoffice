@@ -31,11 +31,11 @@ class Creditcard < ActiveRecord::Base
                          [I18n.t('models.creditcard.foreign_detail'), CARD_LIST[4]],]
 
   include SpreadsheetParsable
-  include Excels::CardUsedSourcesInfo
-  include Excels::CardUsedSourcesHyundaiInfo
-  include Excels::CardApprovedSourcesInfo
-  include Excels::CardApprovedSourcesHyundaiInfo
-  include Excels::CardApprovedSourcesOverseaInfo
+  include SpreadsheetParsable::CardUsedSourcesInfo
+  include SpreadsheetParsable::CardUsedSourcesHyundaiInfo
+  include SpreadsheetParsable::CardApprovedSourcesInfo
+  include SpreadsheetParsable::CardApprovedSourcesHyundaiInfo
+  include SpreadsheetParsable::CardApprovedSourcesOverseaInfo
 
   def self.excel_parser(type)
     if type == :card_used_sources

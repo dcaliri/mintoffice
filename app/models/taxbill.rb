@@ -10,12 +10,11 @@ class Taxbill < ActiveRecord::Base
   BILL_TYPE = [:purchase, :sale]
 
   include Historiable
-  include Historiable
   include Reportable
 
   include SpreadsheetParsable
-  include Excels::Taxbills::Purchase
-  include Excels::Taxbills::Sale
+  include SpreadsheetParsable::Taxbills::Purchase
+  include SpreadsheetParsable::Taxbills::Sale
 
   attr_accessor :document_id
   before_save :find_document_and_save

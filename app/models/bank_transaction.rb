@@ -22,9 +22,9 @@ class BankTransaction < ActiveRecord::Base
   end
 
   include SpreadsheetParsable
-  include Excels::BankTransactions::Shinhan
-  include Excels::BankTransactions::Ibk
-  include Excels::BankTransactions::Nonghyup
+  include SpreadsheetParsable::BankTransactions::Shinhan
+  include SpreadsheetParsable::BankTransactions::Ibk
+  include SpreadsheetParsable::BankTransactions::Nonghyup
 
   include ResourceExportable
   resource_exportable_configure do |config|

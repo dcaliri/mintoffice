@@ -31,9 +31,9 @@ class BankTransfer < ActiveRecord::Base
   end
 
   include SpreadsheetParsable
-  include Excels::BankTransfers::Shinhan
-  include Excels::BankTransfers::Ibk
-  include Excels::BankTransfers::Nonghyup
+  include SpreadsheetParsable::BankTransfers::Shinhan
+  include SpreadsheetParsable::BankTransfers::Ibk
+  include SpreadsheetParsable::BankTransfers::Nonghyup
 
   include ResourceExportable
   resource_exportable_configure do |config|
