@@ -175,6 +175,7 @@ class BankTransaction < ActiveRecord::Base
     end
   end
 
+  ## Excel Parser ######################################
   include SpreadsheetParsable
   include SpreadsheetParsable::BankTransactions::Shinhan
   include SpreadsheetParsable::BankTransactions::Ibk

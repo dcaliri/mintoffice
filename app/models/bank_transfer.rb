@@ -83,6 +83,7 @@ class BankTransfer < ActiveRecord::Base
     end
   end
 
+  ## Excel Parser ######################################
   include SpreadsheetParsable
   include SpreadsheetParsable::BankTransfers::Shinhan
   include SpreadsheetParsable::BankTransfers::Ibk

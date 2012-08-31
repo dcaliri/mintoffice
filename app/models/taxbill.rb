@@ -139,6 +139,8 @@ class Taxbill < ActiveRecord::Base
     PaymentRequest.generate_payment_request(self, total)
   end
 
+
+  ## Excel Parser ######################################
   include SpreadsheetParsable
   include SpreadsheetParsable::Taxbills::Purchase
   include SpreadsheetParsable::Taxbills::Sale
