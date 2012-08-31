@@ -35,11 +35,14 @@ module SpreadsheetParsable
 
     def create_with_stylesheet(type, name)
       path = file_path(name)
-
       parser = excel_parser(type.to_sym)
-      parser.parse(path) do |class_name, query, params|
-        yield class_name, query, params
+
+      transaction do
+        parser.parse(path) do |class_name, query, params|
+          yield class_name, query, params
+        end
       end
+
       File.delete(path)
     end
   end

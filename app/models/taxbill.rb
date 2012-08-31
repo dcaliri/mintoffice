@@ -152,20 +152,18 @@ class Taxbill < ActiveRecord::Base
   end
 
   def self.create_with_stylesheet(type, name)
-    transaction do
-      super(type, name) do |class_name, query, params|
-        items = TaxbillItem.where(query)
+    super(type, name) do |class_name, query, params|
+      items = TaxbillItem.where(query)
 
-        if items.empty?
-          if type == :purchase
-            create_purchase_info(type, params)
-          else
-            create_sale_info(type, params)
-          end
+      if items.empty?
+        if type == :purchase
+          create_purchase_info(type, params)
         else
-          resource = items.first
-          resource.update_attributes!(params)
+          create_sale_info(type, params)
         end
+      else
+        resource = items.first
+        resource.update_attributes!(params)
       end
     end
   end
