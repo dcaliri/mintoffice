@@ -135,16 +135,6 @@ class Taxbill < ActiveRecord::Base
     end
   end
 
-  def self.excel_parser(type)
-    if type == :purchase
-      purchase_taxbill_parser
-    elsif type == :sale
-      sale_taxbill_parser
-    else
-      raise "Cannot find excel parser. type = #{type}"
-    end
-  end
-
   def self.preview_stylesheet(type, upload)
     raise ArgumentError, I18n.t('common.upload.empty') unless upload
     path = file_path(upload['file'].original_filename)

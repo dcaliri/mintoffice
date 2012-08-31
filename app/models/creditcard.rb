@@ -18,11 +18,11 @@ class Creditcard < ActiveRecord::Base
   include Attachmentable
 
   CARD_LIST = [
-    :card_used_sources,
-    :card_used_sources_hyundai,
-    :card_approved_sources,
-    :card_approved_sources_hyundai,
-    :card_approved_sources_oversea
+    :default_card_used_sources,
+    :hyundai_card_used_sources,
+    :default_card_approved_sources,
+    :hyundai_card_approved_sources,
+    :oversea_card_approved_sources
   ]
 
   CARD_LIST_FOR_SELECT = [[I18n.t('models.creditcard.used_detail'), CARD_LIST[0]],
@@ -39,19 +39,8 @@ class Creditcard < ActiveRecord::Base
   include SpreadsheetParsable::CardApprovedSources::Oversea
 
   def self.excel_parser(type)
-    if type == :card_used_sources
-      used_sources_parser
-    elsif type == :card_used_sources_hyundai
-      hyundai_used_sources_parser
-    elsif type == :card_approved_sources
-      approved_sources_parser
-    elsif type == :card_approved_sources_oversea
-      approved_sources_oversea_parser
-    elsif type == :card_approved_sources_hyundai
-      approved_sources_hyundai_parser
-    else
-      raise "형식을 알 수 없습니다. type = #{type}"
-    end
+    parser_name = "#{type}_parser"
+    send(parser_name)
   end
 
   def self.preview_stylesheet(type, upload)

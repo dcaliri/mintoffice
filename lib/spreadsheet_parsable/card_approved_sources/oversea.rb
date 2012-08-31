@@ -6,7 +6,7 @@ module SpreadsheetParsable
       extend ActiveSupport::Concern
 
       EXCEL_COLUMNS ||= {}
-      EXCEL_COLUMNS[:card_approved_sources_oversea] = {
+      EXCEL_COLUMNS[:oversea_card_approved_sources] = {
         :used_at =>             "이용일시",
         :approve_no =>          "승인번호",
         :card_no =>             "이용카드",
@@ -25,12 +25,12 @@ module SpreadsheetParsable
       }
 
       EXCEL_KEYS ||= {}
-      EXCEL_KEYS[:card_approved_sources_oversea] = {
+      EXCEL_KEYS[:oversea_card_approved_sources] = {
         :approve_no => :integer
       }
 
       EXCEL_OPTIONS ||= {}
-      EXCEL_OPTIONS[:card_approved_sources_oversea] = {
+      EXCEL_OPTIONS[:oversea_card_approved_sources] = {
         :position => {
           :start => {
             x: 2,
@@ -41,12 +41,13 @@ module SpreadsheetParsable
       }
 
       module ClassMethods
-        def approved_sources_oversea_parser
+        # def approved_sources_oversea_parser
+        def oversea_card_approved_sources_parser
           parser = ExcelParser.new
           parser.class_name CardApprovedSource
-          parser.column EXCEL_COLUMNS[:card_approved_sources_oversea]
-          parser.key EXCEL_KEYS[:card_approved_sources_oversea]
-          parser.option EXCEL_OPTIONS[:card_approved_sources_oversea]
+          parser.column EXCEL_COLUMNS[:oversea_card_approved_sources]
+          parser.key EXCEL_KEYS[:oversea_card_approved_sources]
+          parser.option EXCEL_OPTIONS[:oversea_card_approved_sources]
           parser
         end
       end

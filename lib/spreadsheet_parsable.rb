@@ -14,6 +14,13 @@ module SpreadsheetParsable
     def remove_file(path)
       File.delete(path)
     end
+
+    def excel_parser(type)
+      parser_name = "#{type}_#{self.to_s.tableize.singularize}_parser"
+      send(parser_name)
+    rescue NoMethodError
+      raise "Cannot find excel parser. parser_name = #{parser_name}"
+    end
   end
 
   included do

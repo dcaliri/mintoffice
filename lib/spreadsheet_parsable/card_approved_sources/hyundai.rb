@@ -7,7 +7,7 @@ module SpreadsheetParsable
 
 
       EXCEL_COLUMNS ||= {}
-      EXCEL_COLUMNS[:card_approved_sources_hyundai] = {
+      EXCEL_COLUMNS[:hyundai_card_approved_sources] = {
         :used_at =>           "거래일자",
         :used_time =>         "시각",
         :card_no =>           "카드번호",
@@ -23,12 +23,12 @@ module SpreadsheetParsable
       }
 
       EXCEL_KEYS ||= {}
-      EXCEL_KEYS[:card_approved_sources_hyundai] = {
+      EXCEL_KEYS[:hyundai_card_approved_sources] = {
         :approve_no => :integer
       }
 
       EXCEL_OPTIONS ||= {}
-      EXCEL_OPTIONS[:card_approved_sources_hyundai] = {
+      EXCEL_OPTIONS[:hyundai_card_approved_sources] = {
         :position => {
           :start => {
             x: 2,
@@ -39,12 +39,13 @@ module SpreadsheetParsable
       }
 
       module ClassMethods
-        def approved_sources_hyundai_parser
+        # def approved_sources_hyundai_parser
+        def hyuncai_card_approved_sources_parser
           parser = ExcelParser.new
           parser.class_name CardApprovedSource
-          parser.column EXCEL_COLUMNS[:card_approved_sources_hyundai]
-          parser.key EXCEL_KEYS[:card_approved_sources_hyundai]
-          parser.option EXCEL_OPTIONS[:card_approved_sources_hyundai]
+          parser.column EXCEL_COLUMNS[:hyundai_card_approved_sources]
+          parser.key EXCEL_KEYS[:hyundai_card_approved_sources]
+          parser.option EXCEL_OPTIONS[:hyundai_card_approved_sources]
           parser
         end
       end

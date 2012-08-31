@@ -39,7 +39,7 @@ class BankTransaction < ActiveRecord::Base
 
   include ActiveRecord::Extensions::TextSearch
 
-  attr_accessor :no_verify  
+  attr_accessor :no_verify
 
   before_save :verify_with_prev_transaction, unless: :no_verify
   before_create :set_transact_order
@@ -94,20 +94,6 @@ class BankTransaction < ActiveRecord::Base
     end
 
     self.transact_order = latest_order
-  end
-
-  def self.excel_parser(type)
-    if type == :shinhan
-      shinhan_bank_transaction_parser
-    elsif type == :ibk
-      ibk_bank_transaction_parser
-    elsif type == :hsbc
-      hsbc_bank_transaction_parser
-    elsif type == :nonghyup
-      nonghyup_bank_transaction_parser
-    else
-      raise "Cannot find excel parser. type = #{type}"
-    end
   end
 
   ###### DECORATOR ###############

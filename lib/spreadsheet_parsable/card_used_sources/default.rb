@@ -6,7 +6,7 @@ module SpreadsheetParsable
       extend ActiveSupport::Concern
 
       EXCEL_COLUMNS ||= {}
-      EXCEL_COLUMNS[:card_used_sources] = {
+      EXCEL_COLUMNS[:default_card_used_sources] = {
         :card_no =>               "카드번호",
         :bank_account =>          "결제계좌번호",
         :bank_name =>             "결제은행명",
@@ -35,13 +35,13 @@ module SpreadsheetParsable
       }
 
       EXCEL_KEYS ||= {}
-      EXCEL_KEYS[:card_used_sources] = {
+      EXCEL_KEYS[:default_card_used_sources] = {
         :approve_no => :integer,
         :approved_at => :time,
       }
 
       EXCEL_OPTIONS ||= {}
-      EXCEL_OPTIONS[:card_used_sources] = {
+      EXCEL_OPTIONS[:default_card_used_sources] = {
         :position => {
           :start => {
             x: 2,
@@ -52,12 +52,13 @@ module SpreadsheetParsable
       }
 
       module ClassMethods
-        def used_sources_parser
+        # def used_sources_parser
+        def default_card_used_sources_parser
           parser = ExcelParser.new
           parser.class_name CardUsedSource
-          parser.column EXCEL_COLUMNS[:card_used_sources]
-          parser.key EXCEL_KEYS[:card_used_sources]
-          parser.option EXCEL_OPTIONS[:card_used_sources]
+          parser.column EXCEL_COLUMNS[:default_card_used_sources]
+          parser.key EXCEL_KEYS[:default_card_used_sources]
+          parser.option EXCEL_OPTIONS[:default_card_used_sources]
           parser
         end
       end

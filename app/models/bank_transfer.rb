@@ -66,20 +66,6 @@ class BankTransfer < ActiveRecord::Base
     search_by_text(text)
   end
 
-  def self.excel_parser(type)
-    if type == :shinhan
-      shinhan_bank_transfer_parser
-    elsif type == :ibk
-      ibk_bank_transfer_parser
-    elsif type == :hsbc
-      hsbc_bank_transfer_parser
-    elsif type == :nonghyup
-      nonghyup_bank_transfer_parser
-    else
-      raise "Cannot find excel parser. type = #{type}"
-    end
-  end
-
   def self.preview_stylesheet(type, upload)
     raise ArgumentError, I18n.t('common.upload.empty') unless upload
     path = file_path(upload['file'].original_filename)

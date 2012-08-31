@@ -1,7 +1,7 @@
 module Api
   class CardApprovedSourcesController < Api::ApplicationController
     def export
-      type = params[:oversea] ? :card_approved_sources_oversea : :card_approved_sources
+      type = params[:oversea] ? :oversea_card_approved_sources : :default_card_approved_sources
 
       collection = Creditcard.preview_stylesheet(type, 'file' => params[:file])
       raise "approved sources is zero" if collection.empty?
