@@ -190,11 +190,10 @@ class BankTransaction < ActiveRecord::Base
   end
 
   def self.preview_stylesheet(account, type, upload)
-    previews = []
-    super(type, upload) do |class_name, query, params|
-      revise_excel_data(params)
-      previews << account.send(class_name.to_s.tableize).build(params)
-    end
+    previews = super(type, upload) do |class_name, query, params|
+                 revise_excel_data(params)
+                 account.send(class_name.to_s.tableize).build(params)
+               end
 
     old_transaction = previews[-1]
     new_transaction = previews[0]

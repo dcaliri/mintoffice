@@ -72,11 +72,9 @@ class Creditcard < ActiveRecord::Base
   end
 
   def self.preview_stylesheet(type, upload)
-    previews = []
     super(type, upload) do |class_name, query, params|
-      previews << class_name.new(params)
+      class_name.new(params)
     end
-    previews
   end
 
   def self.create_with_stylesheet(type, name)

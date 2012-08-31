@@ -146,11 +146,9 @@ class Taxbill < ActiveRecord::Base
   include SpreadsheetParsable::Taxbills::Sale
 
   def self.preview_stylesheet(type, upload)
-    previews = []
     super(type, upload) do |class_name, query, params|
-      previews << TaxbillItem.new(params)
+      TaxbillItem.new(params)
     end
-    previews
   end
 
   def self.create_with_stylesheet(type, name)

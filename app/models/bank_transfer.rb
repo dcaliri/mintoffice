@@ -90,14 +90,12 @@ class BankTransfer < ActiveRecord::Base
   include SpreadsheetParsable::BankTransfers::Nonghyup
 
   def self.preview_stylesheet(type, upload)
-    previews = []
     super(type, upload) do |class_name, query, params|
       accounts = BankAccount.where(:number => params[:out_bank_account])
       unless accounts.empty?
-        previews << accounts.first.send(class_name.to_s.tableize).build(params)
+        accounts.first.send(class_name.to_s.tableize).build(params)
       end
     end
-    previews
   end
 
   def self.create_with_stylesheet(type, name)

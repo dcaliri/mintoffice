@@ -19,10 +19,12 @@ module SpreadsheetParsable
       path = file_path(upload['file'].original_filename)
       File.open(path, "wb") { |f| f.write(upload['file'].read) }
 
+      preview = []
       parser = excel_parser(type.to_sym)
       parser.parse(path) do |class_name, query, params|
-        yield class_name, query, params
+        preview << yield(class_name, query, params)
       end
+      preview
     end
 
     def create_with_stylesheet(type, name)
