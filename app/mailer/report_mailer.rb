@@ -13,5 +13,6 @@ class ReportMailer
       :subject => subject,
       :body => message
     }.merge(configure)) if from_mail and to_mail
+  rescue
   end
 end

@@ -15,7 +15,7 @@ h3
 	= t('groups.show.sub_group')
 ul
   - group.subgroups.each do |subgroup|
-    li= subgroup.name
+    li= link_to subgroup.name, subgroup
 
 h3
 	= t('groups.show.member')
