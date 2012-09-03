@@ -2,6 +2,8 @@ class ContactOther < ActiveRecord::Base
   belongs_to :contact
   has_and_belongs_to_many :tags, :class_name => 'ContactOtherTag'
 
+  after_update {|model| model.blank_if_destroy}
+
   include Historiable
   def history_parent
     contact
@@ -21,5 +23,9 @@ class ContactOther < ActiveRecord::Base
 
   def self.search(query)
     where("description like ?", query)
+  end
+
+  def blank_if_destroy
+    destroy if description.blank?
   end
 end
