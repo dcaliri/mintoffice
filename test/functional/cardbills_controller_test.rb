@@ -2,8 +2,6 @@ require 'test_helper'
 
 class CardbillsControllerTest < ActionController::TestCase
   fixtures :cardbills
-  fixtures :card_approved_sources
-  fixtures :card_used_sources
 
   test "should index document list" do
     get :index
@@ -18,8 +16,6 @@ class CardbillsControllerTest < ActionController::TestCase
   test "should show document" do
     get :show, :id => current_cardbill.id
     assert_response :success
-    assert_select '.box #descr #show_command a', 2
-    assert_select '.box #descr #show_command', "#{I18n.t('cardbills.show.to_use')}" + " | " + "#{I18n.t('cardbills.show..to_approved')}"
   end
 
   test "should edit document" do

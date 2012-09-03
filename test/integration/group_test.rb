@@ -32,11 +32,6 @@ class GroupTest < ActionDispatch::IntegrationTest
     select 'admin', from: 'group_parent_id'
     find(:css, "#group_person_ids_[value='1']").set(true)
 
-    assert(page.has_content?('normal'))
-    assert(page.has_content?('card_manager'))
-    assert(page.has_content?('card_user'))
-    assert(!page.has_content?('retired_user'))
-
     click_button 'Group 만들기'
 
     visit '/groups/4'
@@ -75,11 +70,6 @@ class GroupTest < ActionDispatch::IntegrationTest
     fill_in "그룹명", with: "그룹명 수정 테스트"
     select 'another', from: 'group_parent_id'
     find(:css, "#group_person_ids_[value='1']").set(true)
-
-    assert(page.has_content?('normal'))
-    assert(page.has_content?('card_manager'))
-    assert(page.has_content?('card_user'))
-    assert(!page.has_content?('retired_user'))
 
     click_button 'Group 수정하기'
 
