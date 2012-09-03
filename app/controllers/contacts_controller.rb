@@ -14,6 +14,10 @@ class ContactsController < ApplicationController
     @paginated = @contacts.paginate(:page => params[:page], :per_page => 20)
   end
 
+  def show
+    contact.blank_if_destroy
+  end
+
   def save
     contact = OpenApi::GoogleContact.new(id: params[:id], password: params[:password])
     current_person.contacts.save_to(contact)

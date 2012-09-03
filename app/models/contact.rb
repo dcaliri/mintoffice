@@ -217,4 +217,13 @@ class Contact < ActiveRecord::Base
   def serializable_hash(options={})
     super(options.merge(only: [:id, :firstname, :lastname, :company_name, :department, :position], include: [:emails, :phone_numbers, :addresses]))
   end
+
+  def blank_if_destroy
+    addresses.map{|address| address.blank_if_destroy}
+    phone_numbers.map{|phone_number| phone_number.blank_if_destroy}
+    emails.map{|email| email.blank_if_destroy}
+    others.map{|other| other.blank_if_destroy}
+
+    reload
+  end
 end
