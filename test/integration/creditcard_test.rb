@@ -13,6 +13,7 @@ class CreditCardTest < ActionDispatch::IntegrationTest
 
     assert(page.has_content?('식대카드'))
     assert(page.has_content?('법인카드'))
+    assert(page.has_content?('현대카드'))
   end
 
   test 'should show creditcard' do

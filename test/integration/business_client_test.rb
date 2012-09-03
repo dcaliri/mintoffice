@@ -82,17 +82,14 @@ class BusinessClientTest < ActionDispatch::IntegrationTest
     click_link '거래처 관리'
     click_link '상세보기'
 
-    assert(page.has_content?('김 관리'))
-
     click_link '담당자 추가하기'
-
     click_link '상세보기'
 
     assert(page.has_content?('이미 존재합니다'))
 
-    visit '/'
-    click_link '인사정보관리 - 사원목록'
+    click_link '담당자 추가하기'
+    find('tr[3]').click_link('상세보기')
 
-    assert(page.has_content?('김 관리'))
+    assert(page.has_content?('김 개똥'))
   end
 end

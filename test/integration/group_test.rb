@@ -84,10 +84,10 @@ class GroupTest < ActionDispatch::IntegrationTest
     click_link '그룹관리'
     click_link '신규 작성'
 
-    assert(page.has_content?("normal"))
-    assert(page.has_content?("card_manager"))
-    assert(page.has_content?("card_user"))
-    assert(!page.has_content?("retired_user"))
+    assert(page.has_content?('김 개똥(normal)'))
+    assert(page.has_content?('카드영수증 매니저(card_manager)'))
+    assert(page.has_content?('카드 사용자(card_user)'))
+    assert(!page.has_content?('퇴 직자(retired_user)'))
   end
 
   test 'should not show retired_user in edit' do
@@ -96,9 +96,9 @@ class GroupTest < ActionDispatch::IntegrationTest
     click_link '상세보기'
     click_link '수정하기'
 
-    assert(page.has_content?("normal"))
-    assert(page.has_content?("card_manager"))
-    assert(page.has_content?("card_user"))
-    assert(!page.has_content?("retired_user"))
+    assert(page.has_content?('김 개똥(normal)'))
+    assert(page.has_content?('카드영수증 매니저(card_manager)'))
+    assert(page.has_content?('카드 사용자(card_user)'))
+    assert(!page.has_content?('퇴 직자(retired_user)'))
   end
 end

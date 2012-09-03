@@ -40,6 +40,18 @@ class TaxBillTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('세금계산서이(가) 성공적으로 생성되었습니다.'))
   end
 
+  test 'should not create a new empty taxbill' do
+    disable_confirm_box
+
+    BusinessClient.destroy_all
+    Taxman.destroy_all
+
+    visit '/'
+    click_link '세금계산서 관리'
+    click_link '신규 작성'
+
+    assert(page.has_content?('세금계산서 관리'))
+  end
 
   test 'should edit taxbill' do
     visit '/'
