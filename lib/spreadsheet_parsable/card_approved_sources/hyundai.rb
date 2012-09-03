@@ -40,7 +40,7 @@ module SpreadsheetParsable
 
       module ClassMethods
         # def approved_sources_hyundai_parser
-        def hyuncai_card_approved_sources_parser
+        def hyundai_card_approved_sources_parser
           parser = ExcelParser.new
           parser.class_name CardApprovedSource
           parser.column EXCEL_COLUMNS[:hyundai_card_approved_sources]
