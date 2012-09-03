@@ -1,12 +1,12 @@
 # encoding: UTF-8
 
-module Excels
+module SpreadsheetParsable
   module Taxbills
-    module Sale
+    module Purchase
       extend ActiveSupport::Concern
 
-      SALE = {
-        :name => :sale,
+      PURCHASE = {
+        :name => :purchase,
         :keys => {
           :approve_no => :integer
         },
@@ -31,6 +31,7 @@ module Excels
           :taxbill_type => "전자세금계산서종류",
           :issue_type => "발급유형",
           :note => "비고",
+          :etc => "기타",
           :bill_action_type => "영수/청구 구분",
           :seller_email => "공급자 이메일",
           :buyer1_email => "공급받는자 이메일1",
@@ -52,15 +53,13 @@ module Excels
           :end => 0
         }
       }
-
-
       module ClassMethods
-        def sale_taxbill_parser
+        def purchase_taxbill_parser
           parser = ExcelParser.new
           parser.class_name Taxbill
-          parser.column SALE[:columns]
-          parser.key SALE[:keys]
-          parser.option :position => SALE[:position]
+          parser.column PURCHASE[:columns]
+          parser.key PURCHASE[:keys]
+          parser.option :position => PURCHASE[:position]
           parser
         end
       end

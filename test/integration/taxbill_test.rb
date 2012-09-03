@@ -165,12 +165,12 @@ class TaxBillTest < ActionDispatch::IntegrationTest
 
     assert(page.has_content?('매입 세금계산서'))
     assert(page.has_content?('2012-08-20'))
-    assert(page.has_content?('Walk'))
+    assert(page.has_content?('민트기술'))
     assert(page.has_content?('₩11,000,000'))
 
     visit '/business_clients'
 
-    assert(page.has_content?('Walk'))
+    assert(page.has_content?('민트기술'))
   end
 
   test 'normal should report to admin' do

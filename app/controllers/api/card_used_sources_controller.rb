@@ -1,10 +1,10 @@
 module Api
   class CardUsedSourcesController < Api::ApplicationController
     def export
-      collection = Creditcard.preview_stylesheet(:card_used_sources, 'file' => params[:file])
+      collection = Creditcard.preview_stylesheet(:default_card_used_sources, 'file' => params[:file])
       raise "used sources is zero" if collection.empty?
 
-      Creditcard.create_with_stylesheet(:card_used_sources, params[:file].original_filename)
+      Creditcard.create_with_stylesheet(:default_card_used_sources, params[:file].original_filename)
       render json: {status: 'ok', result: collection}
     rescue => error
       render json: {status: 'invalid', error: error.message}
