@@ -18,6 +18,7 @@ class CardbillsControllerTest < ActionController::TestCase
   test "should show document" do
     get :show, :id => current_cardbill.id
     assert_response :success
+
     assert_select '.box #descr #show_command a', 2
     assert_select '.box #descr #show_command', "#{I18n.t('cardbills.show.to_use')}" + " " + "#{I18n.t('cardbills.show..to_approved')}"
   end

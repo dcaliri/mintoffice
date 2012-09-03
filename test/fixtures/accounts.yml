@@ -78,10 +78,3 @@ retired_user:
     person_id: 10
     hashed_password: "96043f0adf13e8d440a0e90ec7a2b7757a16bc2c"
     salt: "21757029800.1164294613723833"
-
-unusable_account:
-    id: 11
-    name: "[X] unusable_account"
-    person_id: 11
-    hashed_password: "96043f0adf13e8d440a0e90ec7a2b7757a16bc2c"
-    salt: "21757029800.1164294613723833"
