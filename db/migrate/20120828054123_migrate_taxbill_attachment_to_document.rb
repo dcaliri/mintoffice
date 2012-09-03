@@ -1,6 +1,7 @@
 class MigrateTaxbillAttachmentToDocument < ActiveRecord::Migration
   def up
-    company = Company.find_or_create_by_name("mintech")
+    # company = Company.find_or_create_by_name("mintech")
+    company = Company.find_by_name("mintech") || Company.first
     execute <<-SQL
       INSERT INTO documents (title, company_id, owner_type, owner_id, created_at, updated_at)
       SELECT "taxbill" + id, "#{company.id}", 'Taxbill', id, date('now'), date('now')
@@ -39,8 +40,3 @@ class MigrateTaxbillAttachmentToDocument < ActiveRecord::Migration
     SQL
   end
 end
-
-
-
-
-
