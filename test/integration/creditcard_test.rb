@@ -87,4 +87,49 @@ class CreditCardTest < ActionDispatch::IntegrationTest
 
     assert(page.has_content?('신용카드 관리'))
   end
+
+  test "should upload an hyundaicard used excel file" do
+    BankTransaction.destroy_all
+
+    visit '/'
+    click_link '신용카드 관리'
+    click_link '엑셀 파일로 올리기'
+
+    select '이용내역(현대카드)', from: 'card_type'
+
+    path = File.join(::Rails.root, "test/fixtures/excels/hyundai-card_used_source_fixture.xlsx") 
+    attach_file("upload_file", path)
+
+    click_button '미리보기'
+    click_button '엑셀 파일 올리기'
+
+    click_link '카드별 이용내역'
+
+    assert(page.has_content?('00993527'))
+    assert(page.has_content?('가로수할인마트'))
+    assert(page.has_content?('₩86,100'))
+  end
+
+  test "should upload an hyundaicard approved excel file" do
+    BankTransaction.destroy_all
+
+    visit '/'
+    click_link '신용카드 관리'
+    click_link '엑셀 파일로 올리기'
+
+    select '승인내역(현대카드)', from: 'card_type'
+
+    path = File.join(::Rails.root, "test/fixtures/excels/hyundai-card_approved_source_fixture.xlsx") 
+    attach_file("upload_file", path)
+
+    click_button '미리보기'
+    click_button '엑셀 파일 올리기'
+
+    click_link '카드별 승인내역'
+
+    assert(page.has_content?('00300343'))
+    assert(page.has_content?('아웃백코엑스점'))
+    assert(page.has_content?('₩86,100'))
+  end
+
 end

@@ -9,7 +9,7 @@ class BankAccountTest < ActionDispatch::IntegrationTest
   fixtures :investments
   fixtures :investment_estimations
 
-  test 'should visit document list' do
+  test 'should visit bank_account list' do
     visit '/'
     click_link '은행계좌 목록'
 
@@ -19,7 +19,7 @@ class BankAccountTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('투자자산: ₩1,000,000'))
   end
 
-  test 'should visit the document' do
+  test 'should visit the bank_account' do
     visit '/'
     click_link '은행계좌 목록'
     find_by_id('bank_accounts').click_link('상세보기')
@@ -29,7 +29,7 @@ class BankAccountTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('주요 은행 계좌'))
   end
 
-  test 'should create a new document' do
+  test 'should create a new bank_account' do
     visit '/'
     click_link '은행계좌 목록'
     find_by_id('bank_accounts').click_link('신규 작성')
@@ -43,7 +43,24 @@ class BankAccountTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('개인 은행계좌입니다.'))
   end
 
-  test 'should edit the exist document' do
+  test 'should create a new nonghyup bank_account' do
+    visit '/'
+    click_link '은행계좌 목록'
+    find_by_id('bank_accounts').click_link('신규 작성')
+
+    select '농협', from: 'bank_account_name'
+
+    fill_in "계정", with: "301-0111-7655-02"
+    fill_in "설명", with: "농협 은행계좌입니다."
+
+    click_button "은행계좌 만들기"
+
+    assert(page.has_content?('301-0111-7655-02'))
+    assert(page.has_content?('농협 은행계좌입니다.'))
+  end
+
+  test 'should edit the exist bank_account' do
+
     visit '/'
     click_link '은행계좌 목록'
     find_by_id('bank_accounts').click_link('상세보기')
@@ -58,7 +75,7 @@ class BankAccountTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('수정된 은행계좌입니다.'))
   end
 
-  test "should destroy the document" do
+  test "should destroy the bank_account" do
     visit '/'
     click_link '은행계좌 목록'
     find_by_id('bank_accounts').click_link('상세보기')
@@ -94,7 +111,7 @@ class BankAccountTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('이체 내역'))
   end
 
-  test "should show bank_transactions in document" do
+  test "should show bank_transactions in bank_account" do
     visit '/'
     click_link '은행계좌 목록'
     find_by_id('bank_accounts').click_link('상세보기')
@@ -105,7 +122,7 @@ class BankAccountTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('신한 은행 : 321-123-123456'))
   end  
 
-  test "should show bank_transfers in document" do
+  test "should show bank_transfers in bank_account" do
     visit '/'
     click_link '은행계좌 목록'
     find_by_id('bank_accounts').click_link('상세보기')

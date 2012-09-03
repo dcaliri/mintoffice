@@ -29,6 +29,10 @@ class UsedVacationTest < ActionDispatch::IntegrationTest
 
     assert(page.has_content?('연차를 신청하였습니다. 신청 후에는 결재를 올려주세요.'))
     assert(page.has_content?('test'))
+
+    visit '/'
+
+    assert(page.has_content?('휴가 : 김 관리(기타)'))
   end
 
   test 'should commit report' do
