@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class UsedVacationTest < ActiveSupport::TestCase
-  fixtures :accounts#, :groups_accounts, :groups
+  fixtures :accounts, :groups_people, :groups
   fixtures :used_vacations
 
   setup do
@@ -22,7 +22,21 @@ class UsedVacationTest < ActiveSupport::TestCase
   test "UsedVacation shouldn't create used_vacation with invalid attributes" do
     used_vacation = UsedVacation.new(@valid_attributes)
     used_vacation.period = 0.4
+
     assert used_vacation.invalid?
+
+    used_vacation = UsedVacation.new(@valid_attributes)
+    used_vacation.period = 0.5
+
+    assert used_vacation.valid?
+
+    used_vacation.period = 1.5
+
+    assert used_vacation.valid?
+
+    used_vacation.period = 2.0
+
+    assert used_vacation.valid?
   end
 
   test "UsedVacation during should retreive correct vacation list" do

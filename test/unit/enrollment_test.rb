@@ -10,18 +10,6 @@ class EnrollmentTest < ActiveSupport::TestCase
       company_id: 1,
       person_id: 11
     }
-
-    @invalid_attribute1 = {
-      juminno: "1234567-123456",
-      company_id: 1,
-      person_id: 11
-    }
-
-    @invalid_attribute2 = {
-      juminno: "120101-1111111",
-      company_id: 1,
-      person_id: 11
-    }
   end
 
   test "Enrollment should create enrollment with valid attributes" do
@@ -29,16 +17,13 @@ class EnrollmentTest < ActiveSupport::TestCase
     assert enrollment.valid?
   end
 
-  #test "Enrollment shouldn't create enrollment with invalid attributes" do    
-  #  enrollment = Enrollment.find(current_enrollment.id)
-  #  assert_false enrollment.update_attributes!(@invalid_attribute1)
-  #
-  #  enrollment = Enrollment.find(current_enrollment.id)
-  #  assert_false enrollment.update_attributes!(@invalid_attribute2)
-  #end
-
-  private
-  def current_enrollment
-    @enrollment ||= enrollments(:fixture)
+  test "Enrollment shouldn't create enrollment with invalid attributes" do    
+    enrollment = Enrollment.create!(@valid_attributes)
+    enrollment.juminno = "1234567-123456"
+    assert enrollment.invalid?
+  
+    enrollment = Enrollment.create!(@valid_attributes)
+    enrollment.juminno = "120101-1111111"
+    assert enrollment.invalid?
   end
 end

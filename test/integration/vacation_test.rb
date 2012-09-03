@@ -8,7 +8,7 @@ class VacationTest < ActionDispatch::IntegrationTest
   test 'should visit vacations list for admin' do
     visit '/'
     visit '/vacations'
-
+    
 		assert(page.has_content?('연차 내역'))
   end
 

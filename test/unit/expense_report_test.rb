@@ -1,3 +1,4 @@
+# encoding: UTF-8
 require 'test_helper'
 
 class ExpenseReportTest < ActiveSupport::TestCase
@@ -9,9 +10,20 @@ class ExpenseReportTest < ActiveSupport::TestCase
   fixtures :reports
   fixtures :report_people
   fixtures :report_comments
+  fixtures :bank_transfers
 
   def setup
     Person.current_person = people(:fixture)
+
+    @valid_attributes = {
+      employee_id: 1,
+      target_id: 1,
+      target_type: "BankTransfer",
+      project_id: 1,
+      description: "이체내역 지출내역서",
+      amount: 50000,
+      expensed_at: "#{Time.zone.now}"
+    }
   end
 
   test "user create expense_report" do
@@ -70,6 +82,21 @@ class ExpenseReportTest < ActiveSupport::TestCase
     assert current_report.comments.build(owner: prev_reporter, description: "#{prev_reporter.fullname}"+I18n.t('models.report.to_approve'))
     assert current_report.comments.build(owner: prev_reporter, description: "test")
     assert current_report.save!
+  end
+
+  test "ExpenseReport should create expense_report with valid attributes" do
+    ExpenseReport.destroy_all
+
+    expense_report = ExpenseReport.new(@valid_attributes)
+    assert expense_report.valid?
+  end
+
+  test "ExpenseReport check total amount" do
+    ExpenseReport.destroy_all
+    
+    expense_report = ExpenseReport.new(@valid_attributes)
+    expense_report.amount = 60000
+    assert expense_report.invalid?
   end
 
   private

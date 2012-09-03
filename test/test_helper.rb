@@ -142,12 +142,16 @@ class ActionController::TestCase
 end
 
 class ActiveSupport::TestCase
+  fixtures :people, :companies
   setup :global_setup
   teardown :global_teardown
 
   DatabaseCleaner.strategy = :truncation
   def global_setup
     DatabaseCleaner.start
+
+    Person.current_person = people(:fixture)
+    Company.current_company = companies(:fixture)
   end
 
   def global_teardown
