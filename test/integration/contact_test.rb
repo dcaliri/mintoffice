@@ -33,12 +33,6 @@ class ContactTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('전체 공개 : 김 관리'))
     assert(!page.has_content?('태그목록'))
     assert(!find('#descr dl dd a').has_content?('수정'))
-    count = 0
-    find('#descr dl dd a') do |i|
-      count += 1
-    end
-    save_and_open_page
-    assert_equal(true, count == 4)
   end
 
   test 'should save google contact' do
