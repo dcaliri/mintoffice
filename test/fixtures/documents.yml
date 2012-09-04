@@ -19,7 +19,7 @@ user_document:
 another_company_document:
   id: 3
   title: 다른 회사 문서
-  project_id: 1
+  project_id: 4
   created_at: <%= Time.zone.now %>
   updated_at: <%= Time.zone.now %>
   company_id: 2
