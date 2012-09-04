@@ -1,11 +1,12 @@
 - title t('.title')
 
 #show_command
-  = link_to "인사정보와 연결하기", [:find_employee, document]
-  = " "
-  - unless document.owner
-    = link_to "세금계산서 만들기", new_taxbill_path(document: document)
+  - if document.report.status == :reported
+    = link_to "인사정보와 연결하기", [:find_employee, document]
     = " "
+    - unless document.owner
+      = link_to "세금계산서 만들기", new_taxbill_path(document: document)
+      = " "
   - if document.access?(current_person, :write)
     = link_to t('common.title.edit'), edit_document_path(document)
     = " "
