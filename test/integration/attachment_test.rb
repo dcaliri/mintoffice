@@ -3,6 +3,11 @@ require 'test_helper'
 
 class AttachmentTest < ActionDispatch::IntegrationTest
   fixtures :documents
+  fixtures :reports
+  fixtures :report_people
+  fixtures :report_comments
+  fixtures :projects
+  fixtures :project_assign_infos
 
   test 'should visit attachment list' do
     visit '/'

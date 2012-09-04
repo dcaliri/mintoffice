@@ -79,7 +79,7 @@ retired_user:
     hashed_password: "96043f0adf13e8d440a0e90ec7a2b7757a16bc2c"
     salt: "21757029800.1164294613723833"
 
-retired_user:
+another_admin_account:
     id: 11
     name: "another_admin"
     person_id: 12
