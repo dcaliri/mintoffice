@@ -164,7 +164,7 @@ class Account < ActiveRecord::Base
 
     def has_google_apps_account
       transporter = google_transporter
-      transporter.get_account
+      transporter.get_users
 
       doc = Nokogiri.XML(transporter.response.body, nil, 'UTF-8')
       doc.remove_namespaces!
