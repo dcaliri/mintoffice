@@ -14,9 +14,6 @@ h2= t("common.title.#{action_name}")
         = f.label :password_confirmation, Account.human_attribute_name("password_confirmation")
         = f.password_field :password_confirmation, :size => 40
     p
-      = f.label :google_account, Account.human_attribute_name("google_account")
-      = f.email_field :google_account, :size => 40
-    p
       = f.label :daum_account, Account.human_attribute_name("daum_account")
       = f.email_field :daum_account, :size => 40, placeholder: t('accounts.add.request')
     p
@@ -28,8 +25,5 @@ h2= t("common.title.#{action_name}")
     p
       = f.label :boxcar_account, Account.human_attribute_name("boxcar_account")
       = f.email_field :boxcar_account, :size => 40
-    p
-      = f.label :redmine_account, Account.human_attribute_name("redmine_account")
-      = f.text_field :redmine_account, :size => 40
   p
     = f.submit t("common.button.create")
