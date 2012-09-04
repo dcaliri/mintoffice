@@ -29,9 +29,8 @@ h2
     h3
       = t(".backlink")
     ul
-      - account = document.account_for_tag(Employee.model_name.human)
-      - if account
-        li= link_to Employee.model_name.human, :controller => "employees", :action => "show", :id => account.person.employee
+      - if document.employee
+        li= link_to "인사정보", document.employee
       - if document.owner
         li= link_to "세금계산서", document.owner
   = render "shared/attachments/detail", :target => document

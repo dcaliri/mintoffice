@@ -1,6 +1,6 @@
 class TagsController < ApplicationController
   before_filter :find_owner, :only => :create
-  
+
   def create
     @tag = current_company.tags.find_or_create(params[:tag])
     unless @owner.tags.include?(@tag)

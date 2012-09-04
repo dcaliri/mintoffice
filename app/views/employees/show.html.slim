@@ -39,29 +39,11 @@ h2
           = t("contacts.show.title")
         ul
           = render 'contacts/item_for_employee', contact: @employee.person.contact, menu: false
-      - if current_person.admin? || @employee == current_employee
-        - if current_person.admin?
-          #show_command
-            = link_to t('required_tags.new.title'), :controller => "required_tags",  :action => "new", :modelname => Employee.name, :returnurl => request.url
         h3
           = t('.related_documents')
         ul
           - @employee.documents.each do |document|
             li= link_to document.title, document
-
-          - if !@required_tagnames.blank?
-            - for rtn in @required_tagnames
-              li
-                = rtn
-                = " "
-                - if @required_documents[rtn]
-                  = link_to @required_documents[rtn].title, :controller => "documents", :action => "show", :id => @required_documents[rtn]
-                - else
-                  = link_to " Register", :controller => "documents", :action => "new", :tag => [rtn, Employee.model_name.human, @employee.person.account.name].join(',')
-          - if !@unrequired_documents.blank?
-            - for d in @unrequired_documents
-              li
-                = link_to d.title, :controller => "documents", :action => "show", :id => d
 
         - if @employee.joined?
           h3
