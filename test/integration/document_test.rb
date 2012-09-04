@@ -227,6 +227,9 @@ class DocumentTest < ActionDispatch::IntegrationTest
 
     click_button '만들기'
 
+    assert(!page.has_content?('세금계산서 만들기'))
+    assert(!find('#descr').has_content?('세금계산서'))
+
     fill_in '코멘트', with: '세금계산서 문서 상신'
     click_button '승인'
 
@@ -243,6 +246,13 @@ class DocumentTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('세금 계산서 문서'))
     assert(page.has_content?('테스트 프로젝트'))
     assert(page.has_content?('[개인] 김 관리(읽기/쓰기)'))
+
+    assert(!page.has_content?('세금계산서 만들기'))
+    assert(page.has_content?('세금계산서'))
+
+    click_link '세금계산서'
+
+    assert(page.has_content?('거래처명 : 테스트 거래처 ( 123-321-1234 ) - MINT'))
   end
 
   test 'normal should create a linked_taxbill' do
@@ -259,6 +269,8 @@ class DocumentTest < ActionDispatch::IntegrationTest
     fill_in "문서제목", with: "세금 계산서 문서"
 
     click_button '만들기'
+
+    assert(!page.has_content?('세금계산서 만들기'))
 
     fill_in '코멘트', with: '세금계산서 문서 상신'
     click_button '상신'
@@ -360,6 +372,9 @@ class DocumentTest < ActionDispatch::IntegrationTest
     fill_in "문서제목", with: "수정/삭제 불가 문서"
 
     click_button '만들기'
+
+    assert(!page.has_content?('인사정보와 연결하기'))
+    assert(!find('#descr').has_content?('인사정보'))
 
     fill_in '코멘트', with: '수정/삭제 불가 문서 상신'
     click_button '승인'
