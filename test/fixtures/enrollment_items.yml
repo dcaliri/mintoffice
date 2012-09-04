@@ -1,9 +1,4 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
-
-one:
-  name: MyString
-  enrollment_id: 1
-
-two:
-  name: MyString
+fixture:
+  id: 1
+  name: 이력서
   enrollment_id: 1

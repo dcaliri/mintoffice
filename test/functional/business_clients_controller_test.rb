@@ -1,3 +1,4 @@
+# encoding: UTF-8
 require 'test_helper'
 
 class BusinessClientsControllerTest < ActionController::TestCase
@@ -6,6 +7,15 @@ class BusinessClientsControllerTest < ActionController::TestCase
   test "should see index page" do
     get :index
     assert_response :success
+  end
+
+  test "should'n see index page with another company" do
+    get :index
+    assert_response :success
+    
+    assert_select '#list-table tr td', '테스트 거래처'
+    assert_select '#list-table tr td', '김 개똥 거래처'
+    assert_select '#list-table tr td', {count: 0, text: "다른 회사 거래처"}
   end
 
   test "should see new page" do

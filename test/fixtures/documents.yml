@@ -6,4 +6,22 @@ fixture:
   updated_at: <%= Time.zone.now %>
   company_id: 1
   employee_id: 1
+
+user_document:
+  id: 2
+  title: 유저 정보 문서
+  project_id: 1
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
+  company_id: 1
+  employee_id: 1
+  
+another_company_document:
+  id: 3
+  title: 다른 회사 문서
+  project_id: 1
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
+  company_id: 2
+  employee_id: 1
   

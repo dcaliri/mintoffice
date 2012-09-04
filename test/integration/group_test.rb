@@ -8,6 +8,7 @@ class GroupTest < ActionDispatch::IntegrationTest
     click_link '그룹관리'
 
     assert(page.has_content?('no_admin'))
+    assert(page.has_content?('another'))
   end
 
   test 'should show group_people' do
@@ -100,5 +101,21 @@ class GroupTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('카드영수증 매니저(card_manager)'))
     assert(page.has_content?('카드 사용자(card_user)'))
     assert(!page.has_content?('퇴 직자(retired_user)'))
+  end
+
+  test 'should click group and subgroup link' do
+    visit '/'
+    click_link '그룹관리'
+    click_link '상세보기'
+
+    find('#content').click_link('no_admin')
+    
+    assert(page.has_content?('김 개똥(normal)'))
+    assert(page.has_content?('카드영수증 매니저(card_manager)'))
+    assert(page.has_content?('카드 사용자(card_user)'))
+
+    click_link 'admin'
+
+    assert(find('#content').has_content?("김 관리(admin)"))
   end
 end
