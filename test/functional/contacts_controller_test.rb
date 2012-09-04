@@ -21,6 +21,15 @@ class ContactsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "should'n see index page with another company" do
+    get :index
+    assert_response :success
+    
+    assert_select '#list-table tr td', '김 관리'
+    assert_select '#list-table tr td', '김 개똥'
+    assert_select '#list-table tr td', {count: 0, text: "다른 회사 사장"}
+  end
+
   test "should see new page" do
     get :new
     assert_response :success
