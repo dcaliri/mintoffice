@@ -21,5 +21,6 @@ h2
         = f.select :taxman_id, options_for_select(Taxbill.taxmen_list, taxbill.taxman_id)
       p
         = f.submit
-    = render "shared/attachments/detail", :target => @document
+    - if @document
+      = render "shared/attachments/detail", :target => @document
     .clear
