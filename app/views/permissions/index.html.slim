@@ -1,18 +1,33 @@
-h1
-	= t('permissions.index.title')
-table
-  tr
-    th style="float:left"
-    	= t('permissions.index.name')
-	- @permissions.each do |permission|
-	  tr
-	    td
-	    	=h permission.name
-	    td
-	    	= link_to 'Show', permission
-	    td
-	    	= link_to 'Edit', [:edit, permission]
-	    td
-	    	= link_to 'Destroy', permission, :method => :delete, data: {confirm: t("common.messages.delete_confirm")}
-br
-= link_to 'New permission', [:new, :permission]
+div class={current_person.admin? ? "admin" : ""}
+  .menubar
+    .menubar_item.item1
+      h2= t("main.index.human_resources")
+      ul
+        li= link_to t("employees.index.title"), permission_path(:employees)
+        li= link_to t("vacations.show.title"), permission_path(:vacations)
+        li= link_to t("commutes.index.title"), permission_path(:commutes)
+        li= link_to t("payments.title"), permission_path(:payments)
+
+    .menubar_item.item2
+      h2= t("main.index.finance")
+      ul
+        li= link_to t("pettycashes.index.title"), permission_path(:pettycashes)
+        li= link_to t("cardbills.index.title"), permission_path(:cardbills)
+        li= link_to t("bank_accounts.index.title"), permission_path(:bank_accounts)
+        li= link_to t("bankbooks.title"), permission_path(:bankbooks)
+        li= link_to t("taxbills.index.title"), permission_path(:taxbills)
+        li= link_to t("expense_reports.index.title"), permission_path(:expense_reports)
+        li= link_to t("ledger_accounts.title"), permission_path(:ledger_accounts)
+        li= link_to t("postings.title"), permission_path(:postings)
+
+    .menubar_item.item3
+      h2= t("main.index.project")
+      ul
+        li= link_to t("projects.index.title"), permission_path(:projects)
+
+    .menubar_item.item4
+      h2= t("main.index.document")
+      ul
+        li= link_to t("documents.index.title"), permission_path(:documents)
+        li= link_to t("business_clients.index.title"), permission_path(:business_clients)
+        li= link_to t("contacts.index.title"), permission_path(:contacts)
