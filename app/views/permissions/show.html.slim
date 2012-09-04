@@ -6,23 +6,32 @@ p
 hr
 h2
   = t('permissions.show.account')
-- if !@permission.people.blank?
-  ul
-    - @permission.people.each do |person|
-      li
-  		  = person.name + " "
-  		  = link_to "[X]", :action => 'removeaccount', :id => @permission, :person_id => person
-- else
-  = t('permissions.show.none')
 
+ul
+- if !@permission.people.blank?
+  - @permission.people.each do |person|
+    li
+		  = person.name + " "
+		  = link_to "[X]", :action => 'removeaccount', :id => @permission, participant_type: :person, :participant_id => person
+
+ul
+- if !@permission.groups.blank?
+  - @permission.groups.each do |group|
+    li
+      = group.name + " "
+      = link_to "[X]", :action => 'removeaccount', :id => @permission, participant_type: :group, :participant_id => group
+
+h3 사용자 & 그룹 추가
 = form_tag(:action => "addaccount") do
-  = t('permissions.show.add')
-  ' :
-  = search_field_tag 'accountname', params[:accountname]
-  = submit_tag "추가"
   = hidden_field_tag :id, @permission.id
+  p
+    = label_tag :participant_type
+    = select_tag :participant_type, options_for_select([["사용자", :person], ["그룹", :group]])
+  p
+    = label_tag :participant_name
+    = search_field_tag 'participant_name', params[:participant_name]
+
+  = submit_tag "추가"
 
 hr
-= link_to 'Edit', edit_permission_path(@permission)
-= " "
 = link_to 'Back', permissions_path

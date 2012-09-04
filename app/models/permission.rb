@@ -1,4 +1,5 @@
 class Permission < ActiveRecord::Base
+  has_and_belongs_to_many :groups
   has_and_belongs_to_many :people
 
   validates :name, presence: true, uniqueness: true
@@ -28,10 +29,18 @@ class Permission < ActiveRecord::Base
     return false unless person and person.employee
     return true if person and person.admin?
 
-    if person.permissions.any? { |perm| perm.name == controller_name }
+    if person.permission?(controller_name)
       return true
     else
       return false
     end
+  end
+
+  def self.permission?(name)
+    exists?(name: name.to_s)
+  end
+
+  def to_param
+    name
   end
 end

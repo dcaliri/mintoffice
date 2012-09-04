@@ -18,6 +18,12 @@ class Person < ActiveRecord::Base
 
   cattr_accessor :current_person
 
+  class << self
+    def find_by_account_name(account_name)
+      joins(:account).merge(Account.where(name: account_name)).first
+    end
+  end
+
   def enrollment
     Enrollment.find_by_person_id(id) || create_enrollment!(company_id: Company.current_company.id)
   end
@@ -39,7 +45,7 @@ class Person < ActiveRecord::Base
   end
 
   def permission?(name)
-    admin? or permissions.exists?(name: name.to_s)
+    admin? or permissions.permission?(name.to_s) or groups.any? {|group| group.permissions.permission?(name.to_s)}
   end
 
   def ingroup?(name)
