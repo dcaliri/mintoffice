@@ -82,7 +82,8 @@ class Report < ActiveRecord::Base
     self.status = :rollback
     prev_reporter = self.reporter
     next_reporter = prev_reporter.prev if prev_reporter.prev
-    if next_reporter and prev_status != :reported
+
+    if next_reporter
       next_reporter.owner = true
       next_reporter.save!
 
