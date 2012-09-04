@@ -27,9 +27,10 @@ class Contact < ActiveRecord::Base
   include Attachmentable
   include Taggable
 
+  attr_accessor :validate_additional_info
   validate :validate_if_apply
   def validate_if_apply
-    if person and person.enrollment
+    if validate_additional_info
       errors.add(:address, I18n.t('models.contact.one_more_need_ga')) if addresses.length == 0
       errors.add(:email, I18n.t('models.contact.one_more_need_i')) if emails.length == 0
       errors.add(:number, I18n.t('models.contact.one_more_need_ga')) if phone_numbers.length == 0
