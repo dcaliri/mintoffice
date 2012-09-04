@@ -101,6 +101,8 @@ class NUDocumentTest < ActionDispatch::IntegrationTest
   end
 
   test 'should report admin' do
+    Document.destroy_all
+
     normal_user_access
 
     visit '/'
@@ -116,11 +118,50 @@ class NUDocumentTest < ActionDispatch::IntegrationTest
     click_link '상세보기'
 
     select '김 관리', from: 'reporter'
-    fill_in "코멘트", with: "연차 사용 신청"
+    fill_in "코멘트", with: "문서 상신"
 
     click_button '상신'
 
     assert(page.has_content?('상태 - 결재 대기 중'))
+
+    simple_authenticate
+
+    visit '/'
+    click_link '문서 관리'
+    click_link '상세보기'
+
+    assert(page.has_content?('김 개똥(normal): 문서 상신'))
+    assert(page.has_content?('김 개똥(normal): 김 관리(admin)님에게 결재를 요청하였습니다.'))
+
+    fill_in "코멘트", with: "문서 승인"
+
+    click_button '승인'
+
+    assert(page.has_content?('김 관리(admin): 문서 승인'))
+    assert(page.has_content?('김 관리(admin): 김 관리님이 결재를 승인하였습니다.'))
+
+    normal_user_access
+
+    visit '/documents/4'
+
+    assert(page.has_content?('상태 - 결재 완료'))
+
+    simple_authenticate
+
+    visit '/documents/4'
+
+    fill_in "코멘트", with: "문서 반려"
+
+    click_button '반려'
+
+    assert(page.has_content?('상태 - 반려'))
+
+    normal_user_access
+
+    visit '/documents/4'
+
+    assert(page.has_content?('김 관리(admin): 문서 반려'))
+    assert(page.has_content?('김 관리(admin): 김 관리님이 결재를 반려하였습니다.'))
   end
 
   test 'should search data' do
