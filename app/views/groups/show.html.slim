@@ -7,9 +7,9 @@
 
 h2= group.name
 
-h3 
-	= t('groups.show.parent')
-= group.parent_name
+h3
+  = t('groups.show.parent')
+= link_to group.parent_name, group.parent
 
 h3
 	= t('groups.show.sub_group')
