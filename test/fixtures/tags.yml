@@ -4,3 +4,10 @@ fixture:
   created_at: 2012-07-23 09:18:35.652564
   updated_at: 2012-07-23 09:18:35.652564
   company_id: 1
+
+another_company_tag:
+  id: 2
+  name: test
+  created_at: 2012-07-23 09:18:35.652564
+  updated_at: 2012-07-23 09:18:35.652564
+  company_id: 2

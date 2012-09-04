@@ -69,3 +69,21 @@ admin_has_expense_report:
   created_at: <%= Time.zone.now %>
   updated_at: <%= Time.zone.now %>
   owner: t
+
+admin_has_user_document:
+  id: 9
+  person_id: 1
+  report_id: 7
+  prev_id:
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
+  owner: t
+
+another_company_admin_has_document:
+  id: 10
+  person_id: 12
+  report_id: 8
+  prev_id:
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
+  owner: t

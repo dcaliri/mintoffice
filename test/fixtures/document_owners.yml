@@ -4,3 +4,10 @@ fixture:
   employee_id: 1
   created_at: <%= Time.zone.now %>
   updated_at: <%= Time.zone.now %>
+
+user_document:
+  id: 2
+  document_id: 2
+  employee_id: 1
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>

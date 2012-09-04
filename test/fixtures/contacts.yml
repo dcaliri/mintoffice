@@ -88,3 +88,18 @@ new_employee:
   company_id: 1
   google_id:
   google_etag: 
+
+another_company_employee:
+  id: 7
+  firstname: 사장
+  lastname: 다른 회사
+  company_name: LG
+  position: 사장
+  department: 기술
+  person_id: 12
+  migrated_data: f
+  owner_id:
+  isprivate: f
+  company_id: 2
+  google_id:
+  google_etag: 

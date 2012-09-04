@@ -11,3 +11,10 @@ company:
   created_at: 2012-07-18 16:08:13.117074
   updated_at: 2012-07-18 16:08:13.117074
   company_id: 1
+
+another_company_tag:
+  id: 3
+  name: 다른 회사 태그
+  created_at: 2012-07-18 16:08:13.117074
+  updated_at: 2012-07-18 16:08:13.117074
+  company_id: 2
