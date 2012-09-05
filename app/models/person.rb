@@ -53,7 +53,7 @@ class Person < ActiveRecord::Base
   end
 
   def group_list
-    groups.map{|group| group.all_subgroup}.flatten#.map{|group| group.name}.join(",")
+    groups.map{|group| [group] + group.all_subgroup}.flatten.uniq.map{|group| group.name}.join(", ")
   end
 
   def admin?
