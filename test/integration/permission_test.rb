@@ -13,73 +13,103 @@ class PermissionTest < ActionDispatch::IntegrationTest
   test 'should show permission' do
     visit '/'
     click_link '권한 관리'
-    click_link 'Show'
-
-    assert(page.has_content?('Add User:'))
+    find('.item1').click_link('출퇴근 관리')
+    
+    assert(page.has_content?('사용자 & 그룹 추가'))
   end
 
   test 'should add people_permission in show' do
     visit '/'
     click_link '권한 관리'
-    click_link 'Show'
+    find('.item1').click_link('출퇴근 관리')
 
-    fill_in "accountname", with: "normal"
+    select '사용자', from: 'participant_type'
+    fill_in "participant_name", with: "normal"
     click_button "추가"
 
     assert(page.has_content?('성공적으로 사용자를 등록했습니다.'))
-    assert(page.has_content?('normal'))
+    assert(page.has_content?('김 개똥(normal)'))
+
+    select '사용자', from: 'participant_type'
+    fill_in "participant_name", with: "normal"
+    click_button "추가"
+
+    assert(page.has_content?('이미 등록된 사용자입니다.'))
+
+    select '사용자', from: 'participant_type'
+    fill_in "participant_name", with: "normals"
+    click_button "추가"
+
+    assert(page.has_content?('등록되지 않은 사용자입니다.'))
+
+    normal_user_access
+
+    visit '/'
+    click_link '출퇴근 관리'
+
+    assert(page.has_content?('출퇴근 기록 관리'))
+    assert(page.has_content?('출퇴근 기록 목록'))
   end
 
-  test 'should edit people_permission in show' do
+  test 'should add group_permission in show' do
     visit '/'
     click_link '권한 관리'
-    click_link 'Show'
-    click_link 'Edit'
+    find('.item1').click_link('출퇴근 관리')
 
-    find(:css, "#permission_person_ids_[value='2']").set(true)
+    select '그룹', from: 'participant_type'
+    fill_in "participant_name", with: "no_admin"
+    click_button "추가"
 
-    click_button 'Update'
+    assert(page.has_content?('성공적으로 사용자를 등록했습니다.'))
+    assert(page.has_content?('no_admin'))
 
-    assert(page.has_content?('권한이(가) 성공적으로 업데이트 되었습니다.'))
+    project_admin_access
 
+    visit '/'
+    click_link '출퇴근 관리'
+
+    assert(page.has_content?('출퇴근 기록 관리'))
+    assert(page.has_content?('출퇴근 기록 목록'))
   end
 
-  test 'should create a new permission' do
+  test 'should destroy uesr_permission' do
     visit '/'
     click_link '권한 관리'
-    click_link 'New permission'
+    find('.item1').click_link('출퇴근 관리')
 
-    fill_in "Name", with: "test"
+    select '사용자', from: 'participant_type'
+    fill_in "participant_name", with: "normal"
+    click_button "추가"
+    
+    find('#content li[2]').click_link('[X]')
+    
+    normal_user_access
 
-    click_button 'Create'
+    visit '/'
 
-    assert(page.has_content?('권한이(가) 성공적으로 생성되었습니다.'))
-
+    assert(!page.has_content?('출퇴근 관리'))
   end
 
-  test 'should edit permission' do
+  test 'should destroy group_permission' do
     visit '/'
     click_link '권한 관리'
-    click_link 'Edit'
+    find('.item1').click_link('출퇴근 관리')
 
-    fill_in "Name", with: "test 수정"
+    select '그룹', from: 'participant_type'
+    fill_in "participant_name", with: "no_admin"
+    click_button "추가"
+    
+    click_link '[X]'
+    click_link '[X]'
 
-    find(:css, "#permission_person_ids_[value='1']").set(true)
-    find(:css, "#permission_person_ids_[value='2']").set(true)
+    select '사용자', from: 'participant_type'
+    fill_in "participant_name", with: "admin"
+    click_button "추가"
+    
+    project_admin_access
 
-    click_button 'Update'
-
-    assert(page.has_content?('권한이(가) 성공적으로 업데이트 되었습니다.'))
-  end
-
-  test 'should destroy page' do
     visit '/'
-    click_link '권한 관리'
 
-    disable_confirm_box
-
-    click_link 'Destroy'
-
-    assert(page.has_content?('권한이(가) 성공적으로 제거 되었습니다.'))
+    assert(!page.has_content?('출퇴근 관리'))
   end
 end
