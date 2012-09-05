@@ -37,30 +37,34 @@ class ContactTest < ActiveSupport::TestCase
 
     contact = Contact.new(@valid_attributes)
     assert contact.valid?
+
+    contact = Contact.new(@valid_attributes)
+    contact.validate_additional_info = true
+    assert contact.invalid?
   end
 
   test "Contact shouldn't validate contact without address/email/phone_number" do
     contact = Contact.new(@valid_attributes)
-    contact.person_id = 11
+    contact.validate_additional_info = true
     contact.addresses.build(@contact_address)
     contact.emails.build(@contact_email)
     contact.phone_numbers.build(@contact_phone)
     assert contact.valid?
 
     contact = Contact.new(@valid_attributes)
-    contact.person_id = 11
+    contact.validate_additional_info = true
     contact.emails.build(@contact_email)
     contact.phone_numbers.build(@contact_phone)
     assert contact.invalid?
 
     contact = Contact.new(@valid_attributes)
-    contact.person_id = 11
+    contact.validate_additional_info = true
     contact.addresses.build(@contact_address)
     contact.phone_numbers.build(@contact_phone)
     assert contact.invalid?
 
     contact = Contact.new(@valid_attributes)
-    contact.person_id = 11
+    contact.validate_additional_info = true
     contact.addresses.build(@contact_address)
     contact.emails.build(@contact_email)
     assert contact.invalid?
