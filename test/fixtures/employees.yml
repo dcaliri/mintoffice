@@ -71,7 +71,7 @@ another_company_employee:
   joined_on: 2012-07-18
   retired_on: 2012-07-20
   person_id: 12
-  companyno: 1
+  companyno: 6
   juminno: 123456-3214234
   listed: f
   employment_proof_hash: 
