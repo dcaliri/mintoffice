@@ -15,8 +15,9 @@ class Group < ActiveRecord::Base
   end
 
   def people_with_all_subgroup
-    return [] if subgroups.empty?
-    (people + subgroups.map {|subgroup| subgroup.people_with_all_subgroup}).flatten.uniq
+    result = people
+    return result if subgroups.empty?
+    (result + subgroups.map {|subgroup| subgroup.people_with_all_subgroup}).flatten.uniq
   end
 
   def all_subgroup

@@ -109,7 +109,7 @@ class GroupTest < ActionDispatch::IntegrationTest
     click_link '상세보기'
 
     find('#content').click_link('no_admin')
-    
+
     assert(page.has_content?('김 개똥(normal)'))
     assert(page.has_content?('카드영수증 매니저(card_manager)'))
     assert(page.has_content?('카드 사용자(card_user)'))
