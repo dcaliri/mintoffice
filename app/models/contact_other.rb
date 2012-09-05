@@ -25,7 +25,11 @@ class ContactOther < ActiveRecord::Base
     where("description like ?", query)
   end
 
+  def all_blank?
+    description.blank?
+  end
+
   def blank_if_destroy
-    destroy if description.blank?
+    destroy if all_blank?
   end
 end

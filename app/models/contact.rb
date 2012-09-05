@@ -28,12 +28,13 @@ class Contact < ActiveRecord::Base
   include Taggable
 
   attr_accessor :validate_additional_info
+
   validate :validate_if_apply
   def validate_if_apply
     if validate_additional_info
-      errors.add(:address, I18n.t('models.contact.one_more_need_ga')) if addresses.length == 0
-      errors.add(:email, I18n.t('models.contact.one_more_need_i')) if emails.length == 0
-      errors.add(:number, I18n.t('models.contact.one_more_need_ga')) if phone_numbers.length == 0
+      errors.add(:address, I18n.t('models.contact.one_more_need_ga')) if addresses.length == 0 or addresses.all?{|address| address.all_blank?}
+      errors.add(:email, I18n.t('models.contact.one_more_need_i')) if emails.length == 0 or emails.all?{|email| email.all_blank?}
+      errors.add(:number, I18n.t('models.contact.one_more_need_ga')) if phone_numbers.length == 0 or phone_numbers.all?{|phone| phone.all_blank?}
     end
   end
 

@@ -33,7 +33,11 @@ class ContactPhoneNumber < ActiveRecord::Base
     super(options.merge(only: [:id, :number, :target]))
   end
 
+  def all_blank?
+    number.blank?
+  end
+
   def blank_if_destroy
-    destroy if number.blank?
+    destroy if all_blank?
   end
 end

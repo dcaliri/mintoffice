@@ -33,7 +33,11 @@ class ContactEmail < ActiveRecord::Base
     target ? "(#{target})" : ""
   end
 
+  def all_blank?
+    email.blank?
+  end
+
   def blank_if_destroy
-    destroy if email.blank?
+    destroy if all_blank?
   end
 end

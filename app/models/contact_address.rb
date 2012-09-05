@@ -38,7 +38,7 @@ class ContactAddress < ActiveRecord::Base
     super(options.merge(only: [:id, :country, :province, :city, :other1, :other2, :postal_code, :target]))
   end
 
-  def blank_if_destroy
+  def all_blank?
     columns = self.class.column_names
     columns.delete('id')
     columns.delete('contact_id')
@@ -46,7 +46,11 @@ class ContactAddress < ActiveRecord::Base
     columns.delete('created_at')
     columns.delete('updated_at')
 
-    attrs = columns.map {|column| send(column)}
-    destroy if attrs.all? {|attribute| attribute.blank?}
+    attributes = columns.map {|column| send(column)}
+    attributes.all? {|attribute| attribute.blank?}
+  end
+
+  def blank_if_destroy
+    destroy if all_blank?
   end
 end
