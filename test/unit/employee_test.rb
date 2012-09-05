@@ -48,5 +48,9 @@ class EmployeeTest < ActiveSupport::TestCase
     employee = Employee.new(@valid_attributes)
     employee.companyno = 1
     assert employee.invalid?
+
+    employee = Employee.new(@valid_attributes)
+    employee.retired_on = Date.today
+    assert employee.retire!
   end
 end
