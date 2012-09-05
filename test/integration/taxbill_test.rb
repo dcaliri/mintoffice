@@ -212,8 +212,6 @@ class TaxBillTest < ActionDispatch::IntegrationTest
     click_button '반려'
 
     assert(page.has_content?('상태 - 반려'))
-    assert(page.has_content?('김 관리(admin): 세금계산서 반려'))
-    assert(page.has_content?('김 관리(admin): 김 관리님이 결재를 반려하였습니다.'))
   end
 
   test 'should add permission' do

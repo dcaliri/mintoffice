@@ -38,6 +38,17 @@ class EmployeesControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "should get employment proof" do
+    class ::Company < ActiveRecord::Base
+      def seal
+        "#{Rails.root}/test/fixtures/images/120731092154_Untitled.png"
+      end
+    end
+    
+    get :employment_proof, :id => current_employee.id, purpose: "test"
+    assert_response :success
+  end
+
   private
   def current_employee
     @employee ||= employees(:fixture)
