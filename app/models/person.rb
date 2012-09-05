@@ -52,6 +52,10 @@ class Person < ActiveRecord::Base
     self.groups.where(name: name).present?
   end
 
+  def group_list
+    groups.map{|group| group.all_subgroup}.flatten#.map{|group| group.name}.join(",")
+  end
+
   def admin?
     self.ingroup?("admin")
   end

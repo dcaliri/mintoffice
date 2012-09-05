@@ -14,6 +14,16 @@ class Group < ActiveRecord::Base
     self.where(:name => group).people
   end
 
+  def people_with_all_subgroup
+    return [] if subgroups.empty?
+    (people + subgroups.map {|subgroup| subgroup.people_with_all_subgroup}).flatten
+  end
+
+  def all_subgroup
+    return [] if subgroups.empty?
+    subgroups.map {|subgroup| subgroup.all_subgroup}.flatten
+  end
+
   def self.admins
     where(name: "admin")
   end
