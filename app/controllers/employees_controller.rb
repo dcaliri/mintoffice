@@ -33,23 +33,6 @@ class EmployeesController < ApplicationController
 
   def show
     @employee = Employee.find(params[:id])
-    @related_documents = current_company.tags.related_documents(@employee.person.account.name, Employee.model_name.human)
-    @required_tagnames = RequiredTag.find_all_by_modelname(Employee.name).collect do |rt| rt.tag.name end
-    @required_tagnames = @required_tagnames.uniq.sort
-
-    @required_documents = {}
-    @unrequired_documents = []
-    @related_documents.each do |rd|
-      next unless rd
-      cross = rd.tags.collect(&:name) & @required_tagnames
-      if cross.empty?
-        @unrequired_documents << rd
-      else
-        cross.each do |one|
-          @required_documents[one] = rd
-        end
-      end
-    end
   end
 
   def new

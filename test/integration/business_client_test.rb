@@ -30,6 +30,7 @@ class BusinessClientTest < ActionDispatch::IntegrationTest
     click_button '거래처 만들기'
 
     assert(page.has_content?('거래처이(가) 성공적으로 생성되었습니다.'))
+
     assert(page.has_content?('거래처명 입력 테스트'))
     assert(page.has_content?('123-321-12345'))
     assert(page.has_content?('업종 입력 테스트'))
@@ -81,17 +82,14 @@ class BusinessClientTest < ActionDispatch::IntegrationTest
     click_link '거래처 관리'
     click_link '상세보기'
 
-
-    assert(page.has_content?('김 관리'))
-
     click_link '담당자 추가하기'
-
     click_link '상세보기'
 
     assert(page.has_content?('이미 존재합니다'))
 
-    visit '/'
-    click_link '인사정보관리 - 사원목록'
-    assert(page.has_content?('김 관리'))
+    click_link '담당자 추가하기'
+    find('tr[3]').click_link('상세보기')
+
+    assert(page.has_content?('김 개똥'))
   end
 end

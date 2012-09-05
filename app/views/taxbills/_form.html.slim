@@ -6,16 +6,21 @@ h2
 
 = form_for taxbill, html: {multipart: true, class: "tabular"} do |f|
   = f.error_messages
-  = f.hidden_field :document_id, value: params[:document]
+  - if @document
+    = f.hidden_field :document_id, value: @document.id
   .box
-    p
-      = f.label :billtype
-      = f.select :billtype, options_for_select([t('taxbills.purchase_bill'),t('taxbills.sales_bill')].zip(Taxbill::BILL_TYPE))
-    p
-      = f.label :transacted_at
-      = f.date_select :transacted_at, :order => [:year, :month, :day]
-    p
-      = f.label :taxman_id
-      = f.select :taxman_id, options_for_select(Taxbill.taxmen_list, taxbill.taxman_id)
-  p
-    = f.submit
+    #descr
+      p
+        = f.label :billtype
+        = f.select :billtype, options_for_select([t('taxbills.purchase_bill'),t('taxbills.sales_bill')].zip(Taxbill::BILL_TYPE))
+      p
+        = f.label :transacted_at
+        = f.date_select :transacted_at, :order => [:year, :month, :day]
+      p
+        = f.label :taxman_id
+        = f.select :taxman_id, options_for_select(Taxbill.taxmen_list, taxbill.taxman_id)
+      p
+        = f.submit
+    - if @document
+      = render "shared/attachments/detail", :target => @document
+    .clear

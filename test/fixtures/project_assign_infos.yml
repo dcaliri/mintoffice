@@ -69,3 +69,12 @@ normal_user_registe_end_project:
   created_at: <%= Time.zone.now %>
   updated_at: <%= Time.zone.now %>
   owner: f
+
+another_company_admin_registe_project:
+  id: 9
+  participant_type: "Employee"
+  participant_id: 6
+  project_id: 4
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
+  owner: t

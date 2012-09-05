@@ -2,7 +2,6 @@
 
 class ContactsController < ApplicationController
   expose(:contacts) { current_company.contacts }
-  expose(:contacts) { Contact.where("") }
   expose(:contact)
 
   before_filter :only => [:show] { |c| c.save_attachment_id contact }
@@ -12,6 +11,10 @@ class ContactsController < ApplicationController
   def index
     @contacts = contacts.isprivate(current_person).search(params[:query])
     @paginated = @contacts.paginate(:page => params[:page], :per_page => 20)
+  end
+
+  def show
+    contact.blank_if_destroy
   end
 
   def save

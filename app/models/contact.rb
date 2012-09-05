@@ -27,12 +27,14 @@ class Contact < ActiveRecord::Base
   include Attachmentable
   include Taggable
 
+  attr_accessor :validate_additional_info
+
   validate :validate_if_apply
   def validate_if_apply
-    if person.class == Enrollment
-      errors.add(:address, I18n.t('models.contact.one_more_need_ga')) if addresses.length == 0
-      errors.add(:email, I18n.t('models.contact.one_more_need_i')) if emails.length == 0
-      errors.add(:number, I18n.t('models.contact.one_more_need_ga')) if phone_numbers.length == 0
+    if validate_additional_info
+      errors.add(:address, I18n.t('models.contact.one_more_need_ga')) if addresses.length == 0 or addresses.all?{|address| address.all_blank?}
+      errors.add(:email, I18n.t('models.contact.one_more_need_i')) if emails.length == 0 or emails.all?{|email| email.all_blank?}
+      errors.add(:number, I18n.t('models.contact.one_more_need_ga')) if phone_numbers.length == 0 or phone_numbers.all?{|phone| phone.all_blank?}
     end
   end
 
@@ -216,5 +218,14 @@ class Contact < ActiveRecord::Base
   end
   def serializable_hash(options={})
     super(options.merge(only: [:id, :firstname, :lastname, :company_name, :department, :position], include: [:emails, :phone_numbers, :addresses]))
+  end
+
+  def blank_if_destroy
+    addresses.map{|address| address.blank_if_destroy}
+    phone_numbers.map{|phone_number| phone_number.blank_if_destroy}
+    emails.map{|email| email.blank_if_destroy}
+    others.map{|other| other.blank_if_destroy}
+
+    reload
   end
 end

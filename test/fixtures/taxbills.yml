@@ -10,6 +10,6 @@ sale:
     id: 2
     billtype: sale
     transacted_at: <%= Time.zone.now %>
-    taxman_id: 2
+    taxman_id: 1
     created_at: <%= Time.zone.now %>
     updated_at: <%= Time.zone.now %>

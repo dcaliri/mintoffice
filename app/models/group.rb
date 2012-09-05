@@ -1,5 +1,6 @@
 class Group < ActiveRecord::Base
   has_and_belongs_to_many :people
+  has_and_belongs_to_many :permissions
 
   has_many :subgroups, class_name: 'Group', foreign_key: 'parent_id'
   belongs_to :parent, class_name: 'Group', foreign_key: 'parent_id'
@@ -11,6 +12,17 @@ class Group < ActiveRecord::Base
 
   def self.people_in_group(group)
     self.where(:name => group).people
+  end
+
+  def people_with_all_subgroup
+    result = people
+    return result if subgroups.empty?
+    (result + subgroups.map {|subgroup| subgroup.people_with_all_subgroup}).flatten.uniq
+  end
+
+  def all_subgroup
+    return [] if subgroups.empty?
+    subgroups.map {|subgroup| subgroup.all_subgroup}.flatten
   end
 
   def self.admins

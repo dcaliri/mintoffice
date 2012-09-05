@@ -18,5 +18,4 @@ h2= t(".title")
 
 h3
   = t('creditcards.preview.preview')
-- params[:card_type] = "card_approved_sources" if params[:card_type] == "card_approved_sources_oversea"
-= render "#{params[:card_type]}/list", params[:card_type].to_sym => @collection
+= render_card_list(params[:card_type])

@@ -4,11 +4,11 @@ class SectionEnrollment::EnrollReportsController < ApplicationController
   before_filter :redirect_unless_enroll_permission
 
   def index
-    @enrollments = Enrollment.applied.page(params[:page])
+    @enrollments = current_company.enrollments.applied.page(params[:page])
   end
 
   def show
-    @enrollment = Enrollment.find(params[:id])
+    @enrollment = current_company.enrollments.find(params[:id])
   end
 
   private

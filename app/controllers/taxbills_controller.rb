@@ -17,6 +17,10 @@ class TaxbillsController < ApplicationController
     @taxbills = Taxbill.access_list(current_person).search(params).latest.page(params[:page])
   end
 
+  def new
+    @document = Document.find(params[:document]) if params[:document]
+  end
+
   def create
     taxbill.document = @document
     taxbill.save!

@@ -22,22 +22,12 @@ class TaxBillTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('세금계산서 관리'))
   end
 
-  test 'should show total taxbills and link test' do
+  test 'should show total taxbills' do
     visit '/'
     click_link '세금계산서 관리'
     click_link '합계표 보기'
 
-    click_link '테스트 거래처1'
-
-    assert(page.has_content?('테스트 거래처1'))
-
-    visit '/'
-    click_link '세금계산서 관리'
-    click_link '합계표 보기'
-
-    click_link '테스트 거래처2'
-
-    assert(page.has_content?('테스트 거래처2'))
+    assert(page.has_content?('매입처별 합계'))
   end
 
   test 'should create a new taxbill' do
@@ -48,6 +38,19 @@ class TaxBillTest < ActionDispatch::IntegrationTest
     click_button '세금계산서 만들기'
 
     assert(page.has_content?('세금계산서이(가) 성공적으로 생성되었습니다.'))
+  end
+
+  test 'should not create a new empty taxbill' do
+    disable_confirm_box
+
+    BusinessClient.destroy_all
+    Taxman.destroy_all
+
+    visit '/'
+    click_link '세금계산서 관리'
+    click_link '신규 작성'
+
+    assert(page.has_content?('세금계산서 관리'))
   end
 
   test 'should edit taxbill' do
@@ -74,6 +77,7 @@ class TaxBillTest < ActionDispatch::IntegrationTest
     disable_confirm_box
 
     click_link '삭제하기'
+
 
     assert(page.has_content?('세금계산서이(가) 성공적으로 제거 되었습니다.'))
   end  
@@ -161,12 +165,12 @@ class TaxBillTest < ActionDispatch::IntegrationTest
 
     assert(page.has_content?('매입 세금계산서'))
     assert(page.has_content?('2012-08-20'))
-    assert(page.has_content?('Walk'))
+    assert(page.has_content?('민트기술'))
     assert(page.has_content?('₩11,000,000'))
 
     visit '/business_clients'
 
-    assert(page.has_content?('Walk'))
+    assert(page.has_content?('민트기술'))
   end
 
   test 'normal should report to admin' do
@@ -208,8 +212,6 @@ class TaxBillTest < ActionDispatch::IntegrationTest
     click_button '반려'
 
     assert(page.has_content?('상태 - 반려'))
-    assert(page.has_content?('김 관리(admin): 세금계산서 반려'))
-    assert(page.has_content?('김 관리(admin): 김 관리님이 결재를 반려하였습니다.'))
   end
 
   test 'should add permission' do

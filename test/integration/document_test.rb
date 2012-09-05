@@ -40,7 +40,7 @@ class DocumentTest < ActionDispatch::IntegrationTest
     assert(!page.has_content?('소유자'))
     assert(page.has_content?('테스트 문서'))
     assert(page.has_content?('테스트 프로젝트'))
-    assert(page.has_content?('인사정보: 김 관리'))
+    assert(page.has_content?('인사정보'))
   end
 
   test 'should create a new document' do
@@ -227,6 +227,12 @@ class DocumentTest < ActionDispatch::IntegrationTest
 
     click_button '만들기'
 
+    assert(!page.has_content?('세금계산서 만들기'))
+    assert(!find('#descr').has_content?('세금계산서'))
+
+    fill_in '코멘트', with: '세금계산서 문서 상신'
+    click_button '승인'
+
     click_link '세금계산서 만들기'
 
     select '김 관리 / 테스트 거래처', from: 'taxbill_taxman_id'
@@ -240,6 +246,13 @@ class DocumentTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('세금 계산서 문서'))
     assert(page.has_content?('테스트 프로젝트'))
     assert(page.has_content?('[개인] 김 관리(읽기/쓰기)'))
+
+    assert(!page.has_content?('세금계산서 만들기'))
+    assert(page.has_content?('세금계산서'))
+
+    click_link '세금계산서'
+
+    assert(page.has_content?('거래처명 : 테스트 거래처 ( 123-321-1234 ) - MINT'))
   end
 
   test 'normal should create a linked_taxbill' do
@@ -256,6 +269,24 @@ class DocumentTest < ActionDispatch::IntegrationTest
     fill_in "문서제목", with: "세금 계산서 문서"
 
     click_button '만들기'
+
+    assert(!page.has_content?('세금계산서 만들기'))
+
+    fill_in '코멘트', with: '세금계산서 문서 상신'
+    click_button '상신'
+
+    simple_authenticate
+
+    visit '/'
+    click_link '문서 관리'
+    click_link '상세보기'
+
+    fill_in '코멘트', with: '세금계산서 문서 승인'
+    click_button '승인'
+
+    normal_user_access
+
+    visit '/documents/4'
 
     click_link '세금계산서 만들기'
 
@@ -289,6 +320,13 @@ class DocumentTest < ActionDispatch::IntegrationTest
     click_button '반려'
 
     assert(page.has_content?('상태 - 반려'))
+
+    normal_user_access
+
+    visit '/'
+    click_link '세금계산서 관리'
+    click_link '상세보기'
+    
     assert(page.has_content?('김 관리(admin): 세금계산서 반려'))
     assert(page.has_content?('김 관리(admin): 김 관리님이 결재를 반려하였습니다.'))
   end
@@ -335,16 +373,26 @@ class DocumentTest < ActionDispatch::IntegrationTest
 
     click_button '만들기'
 
+    assert(!page.has_content?('인사정보와 연결하기'))
+    assert(!find('#descr').has_content?('인사정보'))
+
+    fill_in '코멘트', with: '수정/삭제 불가 문서 상신'
+    click_button '승인'
+
     click_link '인사정보와 연결하기'
     click_link '연결하기'
 
     assert(page.has_content?('연결고리'))
-    assert(page.has_content?('인사정보: 김 관리'))
+    assert(page.has_content?('인사정보'))
 
-    find('#descr ul li').click_link('김 관리')
+    find('#descr ul li').click_link('인사정보')
 
     assert(page.has_content?('사장'))
     assert(page.has_content?('123456-1234567'))
     assert(page.has_content?('test@test.com'))
+
+    click_link '수정/삭제 불가 문서'
+
+    assert(page.has_content?('문서 상세 정보'))
   end
 end

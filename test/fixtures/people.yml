@@ -30,3 +30,6 @@ retired_user:
 
 enrollment_user:
   id: 11
+
+another_company_admin:
+  id: 12

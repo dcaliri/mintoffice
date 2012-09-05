@@ -27,3 +27,23 @@ admin_write_access_document:
   access_type: write
   created_at: <%= Time.zone.now %>
   updated_at: <%= Time.zone.now %>
+
+admin_write_access_document2:
+  id: 4
+  owner_type: "Person"
+  owner_id: 1
+  access_target_id: 2
+  access_target_type: Document
+  access_type: write
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
+
+another_company_admin_write_access_document:
+  id: 5
+  owner_type: "Person"
+  owner_id: 12
+  access_target_id: 3
+  access_target_type: Document
+  access_type: write
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>

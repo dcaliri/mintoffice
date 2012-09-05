@@ -19,6 +19,8 @@ class BankTransferTest < ActionDispatch::IntegrationTest
   end
 
   test "should create except_columns" do
+    switch_to_selenium
+
     visit '/'
     click_link '은행계좌 목록'
     click_link '이체내역 보기'
@@ -87,10 +89,12 @@ class BankTransferTest < ActionDispatch::IntegrationTest
   end
 
   test "should edit bank_transfer" do
+    switch_to_selenium
+
     visit '/'
     click_link '은행계좌 목록'
     click_link '이체내역 보기'
-    find("tr.selectable").click
+    click_link '상세보기'
     click_link '수정'
 
     fill_in "이체구분", with: "이체구분 수정 테스트"
@@ -130,15 +134,16 @@ class BankTransferTest < ActionDispatch::IntegrationTest
   end
 
   test "should destroy bank_transfer" do
+    switch_to_selenium
+
     visit '/'
     click_link '은행계좌 목록'
     click_link '이체내역 보기'
 
-    find("tr.selectable").click
-
-    disable_confirm_box
+    click_link '상세보기'
 
     click_link '삭제'
+    page.driver.browser.switch_to.alert.accept
 
     assert(page.has_content?('외부 내용'))
     assert(page.has_content?('임의 내용'))
@@ -146,11 +151,13 @@ class BankTransferTest < ActionDispatch::IntegrationTest
   end
 
   test "should create/show expense_report" do
+    switch_to_selenium
+
     visit '/'
     click_link '은행계좌 목록'
     click_link '이체내역 보기'
 
-    find("tr.selectable").click
+    click_link '상세보기'
 
     click_link '지출내역서 만들기'
 
@@ -168,6 +175,8 @@ class BankTransferTest < ActionDispatch::IntegrationTest
   end
 
   test "should upload an excel file" do
+    switch_to_selenium
+
     BankTransfer.destroy_all
 
     visit '/'
@@ -187,6 +196,8 @@ class BankTransferTest < ActionDispatch::IntegrationTest
   end
 
   test "should upload an nonghyup transfer excel file" do
+    switch_to_selenium
+
     BankTransfer.destroy_all
 
     visit '/'
@@ -202,11 +213,30 @@ class BankTransferTest < ActionDispatch::IntegrationTest
     click_button '미리보기'
     click_button '엑셀 파일'
 
-    select "농협 : 301-0111-7655-01"
-
+    select '농협 : 301-0111-7655-01', from:'bank_account_id'
+    
     assert(page.has_content?('301-0111-7655-01'))
     assert(page.has_content?('신한(조흥)'))
     assert(page.has_content?('28505013648.0'))
+  end
+
+  test "should fail to upload an excel file" do
+    switch_to_selenium
+
+    BankTransfer.destroy_all
+
+    visit '/'
+    click_link '은행계좌 목록'
+    click_link '이체내역 보기'
+    click_link '엑셀 파일로 올리기'
+
+    path = File.join(::Rails.root, "test/fixtures/excels/taxbill_fixture.xls") 
+    attach_file("upload_file", path)
+
+    click_button '미리보기'
+
+    assert(page.has_content?('잘못된 형식의 엑셀파일입니다.'))
+    assert(page.has_content?('이체 내역'))
   end
 
   test "should search transfer data" do
@@ -214,22 +244,22 @@ class BankTransferTest < ActionDispatch::IntegrationTest
     click_link '은행계좌 목록'
     click_link '이체내역 보기'
 
-    find_field('query').set("매니저")
-    find_field('query').native.send_key(:enter)
+    fill_in "query", with: "매니저"
+    click_button "검색"
 
     assert(page.has_content?('매니저'))
     assert(!page.has_content?('임의 내용'))
     assert(!page.has_content?('적금 만기'))
 
-    find_field('query').set("임의 내용")
-    find_field('query').native.send_key(:enter)
+    fill_in "query", with: "임의 내용"
+    click_button "검색"
 
     assert(!page.has_content?('매니저'))
     assert(page.has_content?('임의 내용'))
     assert(!page.has_content?('적금 만기'))
 
-    find_field('query').set("적금 만기")
-    find_field('query').native.send_key(:enter)
+    fill_in "query", with: "적금 만기"
+    click_button "검색"
 
     assert(!page.has_content?('매니저'))
     assert(!page.has_content?('임의 내용'))

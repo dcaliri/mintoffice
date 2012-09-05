@@ -6,6 +6,8 @@ class ContactAddress < ActiveRecord::Base
     tags << tag if tag.present? and !tags.exists?(name: tag.name)
   end
 
+  after_update {|model| model.blank_if_destroy}
+
   include Historiable
   def history_parent
     contact
@@ -34,5 +36,21 @@ class ContactAddress < ActiveRecord::Base
 
   def serializable_hash(options={})
     super(options.merge(only: [:id, :country, :province, :city, :other1, :other2, :postal_code, :target]))
+  end
+
+  def all_blank?
+    columns = self.class.column_names
+    columns.delete('id')
+    columns.delete('contact_id')
+    columns.delete('target')
+    columns.delete('created_at')
+    columns.delete('updated_at')
+
+    attributes = columns.map {|column| send(column)}
+    attributes.all? {|attribute| attribute.blank?}
+  end
+
+  def blank_if_destroy
+    destroy if all_blank?
   end
 end

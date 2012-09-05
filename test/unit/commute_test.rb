@@ -1,12 +1,17 @@
 require 'test_helper'
 
 class CommuteTest < ActiveSupport::TestCase
-  fixtures :accounts, :people, :employees, :commutes
+  fixtures :accounts, :people, :employees#, :commutes
 
   setup do
     @valid_attributes = {
-      go: "2012-07-18 10:02:13.117074",
-      leave: "2012-07-18 18:08:13.117074",
+      go: "#{Time.zone.now}",
+      leave: "#{Time.zone.now}",
+      employee_id: 1
+    }
+
+    @one_more_attributes = {
+      go: "#{Time.zone.now}",
       employee_id: 1
     }
   end
@@ -42,9 +47,9 @@ class CommuteTest < ActiveSupport::TestCase
     assert commute.valid?
   end
 
-  #test "should check to validate unique date" do
-  #  commute = Commute.new(@valid_attributes)
-  #  commute.leave = nil
-  #  assert commute.invalid?
-  #end
+  test "should check unique date" do
+    commute = Commute.create!(@valid_attributes)
+    one_more = Commute.new(@one_more_attributes)
+    assert one_more.invalid?
+  end
 end

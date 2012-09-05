@@ -8,6 +8,7 @@ class GroupsController < ApplicationController
   end
 
   def update
+    group.people = [] if params[:group][:person_ids].nil?
     group.save!
     redirect_to group
   end

@@ -86,12 +86,12 @@ class EmployeeTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('홍 길동'))
     assert(page.has_content?('기술직'))
 
-    find("tr[8]").click_link('상세보기')
+    find("tr[9]").click_link('상세보기')
 
     fill_in "주민등록번호", with: "222222-2222222"
-
+    
     click_button '만들기'
-
+    
     assert(page.has_content?('홍 길동'))
     assert(page.has_content?('no employee'))
     assert(page.has_content?('기술직'))
@@ -162,60 +162,6 @@ class EmployeeTest < ActionDispatch::IntegrationTest
     assert(!page.has_content?('김 관리'))
   end
 
-  test 'should create required tag.' do
-    visit '/'
-    click_link '인사정보관리 - 사원목록'
-    click_link '상세보기'
-
-    click_link '필수 태그 신규 작성'
-
-    assert(page.has_content?('필수 태그 신규 작성'))
-    assert(page.has_content?('모델명'))
-    assert(page.has_content?('태그명'))
-
-    fill_in "태그", with: "employee_tag"
-
-    click_button '만들기'
-
-    assert(page.has_content?('Required Tag was successfully created.'))
-    assert(page.has_content?('employee_tag'))
-
-    click_link 'Register'
-
-    fill_in "문서제목", with: "employee_document"
-
-    assert(page.has_content?('employee_tag,인사정보,admin'))
-
-    click_button '만들기'
-
-    assert(page.has_content?('문서이(가) 성공적으로 생성되었습니다.'))
-    assert(page.has_content?('employee_document'))
-    assert(page.has_content?('employee_tag, 인사정보, admin'))
-
-    visit '/employees/1'
-    click_link 'employee_document'
-
-    assert(page.has_content?('employee_document'))
-    assert(page.has_content?('employee_tag, 인사정보, admin'))
-  end
-
-  test 'should not create same required tag.' do
-    visit '/'
-    click_link '인사정보관리 - 사원목록'
-    click_link '상세보기'
-
-    click_link '필수 태그 신규 작성'
-
-    assert(page.has_content?('필수 태그 신규 작성'))
-    assert(page.has_content?('모델명'))
-    assert(page.has_content?('태그명'))
-
-    fill_in "태그", with: "test"
-
-    click_button '만들기'
-    assert(page.has_content?('모델명 이미 사용중입니다.'))
-  end
-
   test 'should visit employees to find payments' do
     visit '/'
     click_link '인사정보관리 - 사원목록'
@@ -249,8 +195,8 @@ class EmployeeTest < ActionDispatch::IntegrationTest
   test 'should create retired employees' do
     visit '/'
     click_link '인사정보관리 - 사원목록'
-    click_link '상세보기'
-
+    click_link('상세보기')
+    
     click_link '퇴직 처리'
 
     assert(page.has_content?('퇴직 처리'))
@@ -260,25 +206,21 @@ class EmployeeTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('연봉 일할 정산'))
 
     click_button '갱신하기'
-
     assert(page.has_content?('인사정보이(가) 성공적으로 업데이트 되었습니다.'))
   end
 
   test 'should edit the exist employee' do
     visit '/'
     click_link '인사정보관리 - 사원목록'
-    click_link '상세보기'
+    click_link('상세보기')
 
     click_link '수정하기'
-
-    assert(page.has_content?('인사정보 수정'))
 
     fill_in "주민등록번호", with: "123456-0123456"
 
     click_button '갱신하기'
 
     assert(page.has_content?('인사정보이(가) 성공적으로 업데이트 되었습니다.'))
-
     assert(page.has_content?('123456-0123456'))
   end
 

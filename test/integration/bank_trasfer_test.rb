@@ -1,7 +1,7 @@
 # encoding: UTF-8
 require 'test_helper'
 
-class BankTransferTest < ActionDispatch::IntegrationTest
+class BankTranferTest < ActionDispatch::IntegrationTest
   fixtures :bank_accounts
   fixtures :bank_transactions
   fixtures :bank_transfers

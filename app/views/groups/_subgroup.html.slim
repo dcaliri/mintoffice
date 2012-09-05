@@ -1,0 +1,5 @@
+- unless group.subgroups.empty?
+  ul
+    - group.subgroups.each do |subgroup|
+      li= link_to subgroup.name, subgroup
+      = render 'subgroup', group: subgroup

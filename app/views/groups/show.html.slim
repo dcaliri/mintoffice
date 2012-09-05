@@ -7,18 +7,16 @@
 
 h2= group.name
 
-h3 
-	= t('groups.show.parent')
-= group.parent_name
+h3
+  = t('groups.show.parent')
+= link_to group.parent_name, group.parent
 
 h3
 	= t('groups.show.sub_group')
-ul
-  - group.subgroups.each do |subgroup|
-    li= subgroup.name
+= render 'subgroup', group: group
 
 h3
 	= t('groups.show.member')
 ul
-  - group.people.each do |person|
-    li= person.name
+  - group.people_with_all_subgroup.each do |person|
+    li= "#{person.name} - #{person.group_list}"

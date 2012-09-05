@@ -8,7 +8,7 @@ class EmployeeTest < ActiveSupport::TestCase
     @valid_attributes = {
       joined_on: "2012-07-18",
       person_id: 1,
-      companyno: 6,
+      companyno: 7,
       juminno: "121211-1234567",
       listed: false
     }
@@ -48,5 +48,9 @@ class EmployeeTest < ActiveSupport::TestCase
     employee = Employee.new(@valid_attributes)
     employee.companyno = 1
     assert employee.invalid?
+
+    employee = Employee.new(@valid_attributes)
+    employee.retired_on = Date.today
+    assert employee.retire!
   end
 end

@@ -38,6 +38,6 @@ retired_user:
   company_id: 1
   person_id: 10
 
-unusable_account:
-  company_id: 1
-  person_id: 11
+another_company_user:
+  company_id: 2
+  person_id: 12

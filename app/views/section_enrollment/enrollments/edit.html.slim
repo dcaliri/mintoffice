@@ -9,6 +9,7 @@
 
     = f.fields_for :person do |person_field|
       = person_field.fields_for :contact, @contact do |contact_field|
+        = contact_field.hidden_field :validate_additional_info, value: true
         p
           = contact_field.label :lastname
           = contact_field.text_field :lastname

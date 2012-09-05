@@ -108,7 +108,7 @@ class CreditCardTest < ActionDispatch::IntegrationTest
 
     assert(page.has_content?('00993527'))
     assert(page.has_content?('가로수할인마트'))
-    assert(page.has_content?('86100.0'))
+    assert(page.has_content?('₩86,100'))
   end
 
   test "should upload an hyundaicard approved excel file" do
@@ -132,4 +132,5 @@ class CreditCardTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('아웃백코엑스점'))
     assert(page.has_content?('₩86,100'))
   end
+
 end

@@ -63,15 +63,15 @@ retired_user:
   listed: f
   employment_proof_hash: 
 
-unusable_account:
+another_company_employee:
   id: 6
   picture_id: 
   created_at: 2012-07-18 16:17:56.775700
   updated_at: 2012-07-20 13:36:03.201237
   joined_on: 2012-07-18
-  retired_on:
-  person_id: 11
+  retired_on: 2012-07-20
+  person_id: 12
   companyno: 6
-  juminno: 123456-3214235
+  juminno: 123456-3214234
   listed: f
   employment_proof_hash: 

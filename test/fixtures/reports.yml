@@ -33,3 +33,15 @@ cardbill_process_expense_report_cardbill:
     target_id: 3
     target_type: "ExpenseReport"
     status: "not_reported"
+
+user_document:
+    id: 7
+    target_id: 2
+    target_type: "Document"
+    status: "not_reported"
+
+another_company_document:
+    id: 8
+    target_id: 3
+    target_type: "Document"
+    status: "not_reported"

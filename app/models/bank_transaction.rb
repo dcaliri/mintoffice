@@ -21,11 +21,6 @@ class BankTransaction < ActiveRecord::Base
     DEFAULT_COLUMNS
   end
 
-  include SpreadsheetParsable
-  include Excels::BankTransactions::Shinhan
-  include Excels::BankTransactions::Ibk
-  include Excels::BankTransactions::Nonghyup
-
   include ResourceExportable
   resource_exportable_configure do |config|
     config.krw [:in, :out, :remain]
@@ -39,7 +34,7 @@ class BankTransaction < ActiveRecord::Base
 
   include ActiveRecord::Extensions::TextSearch
 
-  attr_accessor :no_verify  
+  attr_accessor :no_verify
 
   before_save :verify_with_prev_transaction, unless: :no_verify
   before_create :set_transact_order
@@ -96,86 +91,11 @@ class BankTransaction < ActiveRecord::Base
     self.transact_order = latest_order
   end
 
-  def self.excel_parser(type)
-    if type == :shinhan
-      shinhan_bank_transaction_parser
-    elsif type == :ibk
-      ibk_bank_transaction_parser
-    elsif type == :hsbc
-      hsbc_bank_transaction_parser
-    elsif type == :nonghyup
-      nonghyup_bank_transaction_parser
-    else
-      raise "Cannot find excel parser. type = #{type}"
-    end
-  end
-
   ###### DECORATOR ###############
   def transacted_at_strftime
     transacted_at.strftime("%Y-%m-%d %H.%M") rescue ""
   end
   ################################
-
-  def self.revise_excel_data(params)
-    unless params[:transacted_time].blank?
-      seconds_of_today = (params[:transacted_time] * 24 * 60 * 60)
-      params[:transacted_at] = Time.at(Time.parse(params[:transacted_at]) + seconds_of_today)
-      params.delete(:transacted_time)
-    end
-  end
-
-  def self.preview_stylesheet(account, type, upload)
-    raise ArgumentError, I18n.t('common.upload.empty') unless upload
-    path = file_path(upload['file'].original_filename)
-    parser = excel_parser(type.to_sym)
-
-    create_file(path, upload['file'])
-    previews = []
-    parser.parse(path) do |class_name, query, params|
-      revise_excel_data(params)
-
-      previews << account.send(class_name.to_s.tableize).build(params)
-    end
-
-    old_transaction = previews[-1]
-    new_transaction = previews[0]
-
-    bank_transactions = account.bank_transactions
-    if old_transaction
-      transacted_at = old_transaction.transacted_at
-      previous_transaction_on_db = bank_transactions.where("transacted_at < ?", transacted_at).order(:transacted_at).last
-    end
-
-    if new_transaction
-      transacted_at = new_transaction.transacted_at
-      next_transaction_on_db = bank_transactions.where("transacted_at > ?", transacted_at).order(:transacted_at).first
-    end
-
-    result = [next_transaction_on_db] + previews + [previous_transaction_on_db]
-    result.extend(ClassMethods)
-    result
-  end
-
-  def self.create_with_stylesheet(account, type, name)
-    path = file_path(name)
-    parser = excel_parser(type.to_sym)
-
-    parser.parse(path) do |class_name, query, params|
-      revise_excel_data(params)
-
-      collections = account.send(class_name.to_s.tableize).where(query)
-      if collections.empty?
-        resource = collections.build(params)
-        resource.no_verify = true
-        resource.save!
-      else
-        resource = collections.first
-        resource.no_verify = true
-        resource.update_attributes!(params)
-      end
-    end
-    File.delete(path)
-  end
 
   def self.latest
     order("transacted_at DESC")
@@ -252,6 +172,62 @@ class BankTransaction < ActiveRecord::Base
       collection.first
     else
       nil
+    end
+  end
+
+  ## Excel Parser ######################################
+  include SpreadsheetParsable
+  include SpreadsheetParsable::BankTransactions::Shinhan
+  include SpreadsheetParsable::BankTransactions::Ibk
+  include SpreadsheetParsable::BankTransactions::Nonghyup
+
+  def self.revise_excel_data(params)
+    unless params[:transacted_time].blank?
+      seconds_of_today = (params[:transacted_time] * 24 * 60 * 60)
+      params[:transacted_at] = Time.at(Time.parse(params[:transacted_at]) + seconds_of_today)
+      params.delete(:transacted_time)
+    end
+  end
+
+  def self.preview_stylesheet(account, type, upload)
+    previews = super(type, upload) do |class_name, query, params|
+                 revise_excel_data(params)
+                 account.send(class_name.to_s.tableize).build(params)
+               end
+
+    old_transaction = previews[-1]
+    new_transaction = previews[0]
+
+    bank_transactions = account.bank_transactions
+    if old_transaction
+      transacted_at = old_transaction.transacted_at
+      previous_transaction_on_db = bank_transactions.where("transacted_at < ?", transacted_at).order(:transacted_at).last
+    end
+
+    if new_transaction
+      transacted_at = new_transaction.transacted_at
+      next_transaction_on_db = bank_transactions.where("transacted_at > ?", transacted_at).order(:transacted_at).first
+    end
+
+    result = [next_transaction_on_db] + previews + [previous_transaction_on_db]
+    result.extend(ClassMethods)
+    result
+  end
+
+  def self.create_with_stylesheet(account, type, name)
+    super(type, name) do |class_name, query, params|
+      revise_excel_data(params)
+
+      collections = account.send(class_name.to_s.tableize).where(query)
+      if collections.empty?
+        resource = collections.build(params)
+        resource.no_verify = true
+        resource.save!
+      else
+        resource = collections.first
+        resource.no_verify = true
+        resource.update_attributes!(params)
+      end
     end
   end
 end

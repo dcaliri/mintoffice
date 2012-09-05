@@ -240,7 +240,6 @@ class BankTransactionTest < ActionDispatch::IntegrationTest
 
     assert(page.has_content?('잘못된 형식의 엑셀파일입니다.'))
     assert(page.has_content?('입출금 내역'))
->>>>>>> release/m18.5
   end
 
   test "should search transaction data" do

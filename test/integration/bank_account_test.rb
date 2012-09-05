@@ -46,7 +46,7 @@ class BankAccountTest < ActionDispatch::IntegrationTest
   test 'should create a new nonghyup bank_account' do
     visit '/'
     click_link '은행계좌 목록'
-    click_link '은행계좌 만들기'
+    find_by_id('bank_accounts').click_link('신규 작성')
 
     select '농협', from: 'bank_account_name'
 
@@ -60,6 +60,7 @@ class BankAccountTest < ActionDispatch::IntegrationTest
   end
 
   test 'should edit the exist bank_account' do
+
     visit '/'
     click_link '은행계좌 목록'
     find_by_id('bank_accounts').click_link('상세보기')
