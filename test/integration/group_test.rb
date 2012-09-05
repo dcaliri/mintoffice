@@ -18,8 +18,13 @@ class GroupTest < ActionDispatch::IntegrationTest
 
     assert(page.has_content?('부모'))
     assert(page.has_content?('서브그룹'))
+    assert(page.has_content?('no_admin'))
+    assert(page.has_content?('another'))
     assert(page.has_content?('소속 맴버'))
-    assert(page.has_content?('김 관리(admin)'))
+    assert(page.has_content?('김 관리(admin) - admin'))
+    assert(page.has_content?('김 개똥(normal) - no_admin'))
+    assert(page.has_content?('카드영수증 매니저(card_manager) - no_admin'))
+    assert(page.has_content?('카드 사용자(card_user) - no_admin'))
   end
 
   test 'should create a new group' do
