@@ -12,11 +12,11 @@ class MainControllerTest < ActionController::TestCase
     get :index
     assert_response :success
     assert_select '.nav-collapse .nav .dropdown', 5
-	assert_select '.nav-collapse .nav .dropdown .dropdown-toggle', '관리자 메뉴'
+    assert_select '.nav-collapse .nav .dropdown .dropdown-toggle', '관리자 메뉴'
   end
 
   test "normal should not see normal bar" do
-  	switch_to_normal
+    switch_to_normal
 
     get :index
     assert_response :success
