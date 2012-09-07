@@ -24,6 +24,18 @@ class BankTransfersControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  # test "should preview bank transfer" do
+  #   excel_file = fixture_file_upload('excels/nonghyup_bank_transfer_fixture.xlsx', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+  #   post :preview, bank_type: 'nonghyup', upload: excel_file
+  #   assert_response :success
+  # end
+
+  test "should fail to preview bank transfer" do
+    excel_file = fixture_file_upload('excels/nonghyup_bank_transfer_fixture.xlsx', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    post :preview, bank_type: 'shinhan', upload: excel_file
+    assert_response :redirect
+  end
+
   test "should see excel page" do
     get :excel
     assert_response :success

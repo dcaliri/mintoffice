@@ -29,6 +29,18 @@ class BankTransactionsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  # test "should see preview page" do
+  #   excel_file = fixture_file_upload('excels/nonghyup_bank_transaction_fixture.xls', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+  #   get :preview, bank_account_id: nonghyup_bank_account.id, upload: excel_file
+  #   assert_response :success
+  # end
+
+  test "should fail to see preview page" do
+    excel_file = fixture_file_upload('excels/nonghyup_bank_transaction_fixture.xls', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    get :preview, bank_account_id: current_bank_account.id, upload: excel_file
+    assert_response :redirect
+  end
+
   test "should see excel of bank transaction page" do
     get :excel
     assert_response :success
@@ -41,10 +53,14 @@ class BankTransactionsControllerTest < ActionController::TestCase
 
   private
   def current_bank_account
-    @bank_account ||= bank_accounts(:shinhan_bank)
+    @current_bank_account ||= bank_accounts(:shinhan_bank)
+  end
+
+  def nonghyup_bank_account
+    @nonghyup_bank_account ||= bank_accounts(:nonghyup_bank)
   end
 
   def current_bank_transaction
-    @bank_transaction ||= bank_transactions(:hana)
+    @current_bank_transaction ||= bank_transactions(:hana)
   end
 end
