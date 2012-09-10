@@ -1,3 +1,4 @@
+# encoding: UTF-8
 require 'test_helper'
 
 class BankTransactionsControllerTest < ActionController::TestCase
@@ -31,15 +32,20 @@ class BankTransactionsControllerTest < ActionController::TestCase
 
   # test "should see preview page" do
   #   excel_file = fixture_file_upload('excels/nonghyup_bank_transaction_fixture.xls', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
-  #   get :preview, bank_account_id: nonghyup_bank_account.id, upload: excel_file
+  #   post :preview, bank_account: nonghyup_bank_account, upload: excel_file
   #   assert_response :success
   # end
 
-  test "should fail to see preview page" do
-    excel_file = fixture_file_upload('excels/nonghyup_bank_transaction_fixture.xls', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
-    get :preview, bank_account_id: current_bank_account.id, upload: excel_file
-    assert_response :redirect
-  end
+  # test "should fail to see preview page" do
+  #   excel_file = fixture_file_upload('excels/nonghyup_bank_transaction_fixture.xls', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+  #   post :preview, bank_account: current_bank_account, upload: excel_file
+  #   assert_response :redirect
+
+  #   get :excel
+  #   assert_response :success
+
+  #   assert_equal flash[:alert], "잘못된 형식의 엑셀파일입니다."
+  # end
 
   test "should see excel of bank transaction page" do
     get :excel
