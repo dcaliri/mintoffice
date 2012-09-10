@@ -122,7 +122,7 @@ class UsedVacationTest < ActionDispatch::IntegrationTest
     fill_in "사유", with: "수정된 사유"
 
     click_button '연차 사용 신청'
-    save_and_open_page
+    
     assert(page.has_content?('수정된 사유'))
     assert(page.has_content?('0.5 일'))
 
@@ -130,7 +130,7 @@ class UsedVacationTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('0.5 일'))
 
     visit '/'
-    save_and_open_page
+    
     assert(page.has_content?('휴가 : 김 관리(병원 치료)'))
   end
 
