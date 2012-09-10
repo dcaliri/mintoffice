@@ -92,8 +92,7 @@ class AccountsController < ApplicationController
   def changepw
     account = Account.find(params[:id])
     if params[:password] != params[:password_confirmation]
-      flash.now[:notice] = I18n.t("accounts.changepw.password_confirm_wrong")
-      redirect_to :changepw_form
+      redirect_to [:changepw, account], notice: I18n.t("accounts.changepw.password_confirm_wrong")
     else
       account.password = params[:password]
       account.save
