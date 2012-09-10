@@ -5,7 +5,7 @@ set :domain, "o.mintech.kr"
 set :application, 'mintoffice'
 set :deploy_to, "/home/#{user}/www/#{application}"
 
-set :rvm_ruby_string, 'ruby-1.9.2-p290'
+set :rvm_ruby_string, 'ruby-1.9.3-head'
 set :rvm_type, :user
 require "rvm/capistrano"
 
