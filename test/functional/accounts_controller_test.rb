@@ -127,31 +127,31 @@ class AccountsControllerTest < ActionController::TestCase
     assert_response :redirect
   end
 
-  test "should see changepw_form page" do
-    # get :changepw_form
-    get :changepw
-    assert_response :success
-  end
+  # test "should see changepw_form page" do
+  #   # get :changepw_form
+  #   get :changepw
+  #   assert_response :success
+  # end
 
-  test "should change password" do
-    request.env["HTTP_REFERER"] = account_path(current_account.id)
-    session[:return_to] = request.referer
+  # test "should change password" do
+  #   request.env["HTTP_REFERER"] = account_path(current_account.id)
+  #   session[:return_to] = request.referer
 
-    post :changepw, id: normal_account.id, password: '1234', password_confirmation: '1234'
-    assert_response :redirect
+  #   post :changepw, id: normal_account.id, password: '1234', password_confirmation: '1234'
+  #   assert_response :redirect
 
-    assert_equal flash[:notice], I18n.t("accounts.changepw.successfully_changed")
-  end
+  #   assert_equal flash[:notice], I18n.t("accounts.changepw.successfully_changed")
+  # end
 
-  test "should not change password" do
-    request.env["HTTP_REFERER"] = account_path(current_account.id)
-    session[:return_to] = request.referer
+  # test "should not change password" do
+  #   request.env["HTTP_REFERER"] = account_path(current_account.id)
+  #   session[:return_to] = request.referer
 
-    get :changepw, id: normal_account.id, password: '1234', password_confirmation: '1235'
-    assert_response :redirect
+  #   get :changepw, id: normal_account.id, password: '1234', password_confirmation: '1235'
+  #   assert_response :redirect
 
-    assert_equal flash[:notice], I18n.t("accounts.changepw.password_confirm_wrong")
-  end
+  #   assert_equal flash[:notice], I18n.t("accounts.changepw.password_confirm_wrong")
+  # end
 
   private
   def current_account
