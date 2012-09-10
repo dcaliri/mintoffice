@@ -5,13 +5,14 @@
     = link_to image_tag(picture_attachment_path(attachment, :w => "600", :h => "800")), picture_attachment_path(attachment), target: :blank
     br
     center
-      = link_to t("common.link.download"), :controller => "attachments", :action => "download", :id => attachment.id
+      = link_to t("common.link.download"), [:download, attachment], class: 'download-attachment'
       - if attachments.count > 0
         '  ...
         - 0.upto(attachments.count - 1) do |i|
           = link_to (i+1).to_s, {:at => i}, :id => attachments[i].id, :class => "move-attachment"
 
 .clear
+
 - content_for :javascript do
   | <script type="text/javascript">
     $(function(){
@@ -19,8 +20,11 @@
         e.preventDefault();
 
         var imageUrl = "/attachments/" + e.target.id + '/picture';
+        var downloadUrl = "/attachments/" + e.target.id + '/download';
+
         $('#attach img').attr('src', imageUrl + "?h=800&amp;w=600");
         $('#attach a').attr('href', imageUrl);
+        $('#attach a.download-attachment').attr('href', downloadUrl);
       });
     });
       </script>
