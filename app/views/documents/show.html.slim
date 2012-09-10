@@ -2,8 +2,9 @@
 
 #show_command
   - if document.report.status == :reported
-    = link_to "인사정보와 연결하기", [:find_employee, document]
-    = " "
+    - unless document.employee
+      = link_to "인사정보와 연결하기", [:find_employee, document]
+      = " "
     - unless document.owner
       = link_to "세금계산서 만들기", new_taxbill_path(document: document)
       = " "
