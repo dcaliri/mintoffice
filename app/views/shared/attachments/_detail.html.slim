@@ -10,24 +10,17 @@
         '  ...
         - 0.upto(attachments.count - 1) do |i|
           = link_to (i+1).to_s, {:at => i}, :id => attachments[i].id, :class => "move-attachment"
-          = debug attachments[i].contenttype
 
 .clear
 - content_for :javascript do
   | <script type="text/javascript">
     $(function(){
       $('.move-attachment').click(function(e){
-        if (e.target.contenttype == 'image/png'){
-          e.preventDefault();
+        e.preventDefault();
 
-          var imageUrl = "/attachments/" + e.target.id + '/picture';
-          $('#attach img').attr('src', imageUrl + "?h=800&amp;w=600");
-          $('#attach a').attr('href', imageUrl);
-        } else {
-          e.preventDefault();
-
-          var imageUrl = "/attachments/" + e.target.id + '/download';
-        }
+        var imageUrl = "/attachments/" + e.target.id + '/picture';
+        $('#attach img').attr('src', imageUrl + "?h=800&amp;w=600");
+        $('#attach a').attr('href', imageUrl);
       });
     });
       </script>
