@@ -21,7 +21,7 @@ class ContactsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should'n see index page with another company" do
+  test "should fail to see index page with another company" do
     get :index
     assert_response :success
     

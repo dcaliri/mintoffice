@@ -5,9 +5,19 @@ class BankAccountsControllerTest < ActionController::TestCase
 
   setup do
     @valid_attributes = {
-      name: "test",
-      number: "123-1123-123456",
-      note: "test bank account"
+      bank_account_id: 1,
+      transacted_at: "2012-04-16 10:57:18.000000",
+      transaction_type: "이자",
+      in: 13993,
+      out: 0,
+      note: "2012년결산",
+      remain: 165,
+      branchname: nil,
+      out_bank_account: nil,
+      out_bank_name: "하나 은행",
+      promissory_check_amount: nil,
+      cms_code: nil,
+      transact_order: 0
     }
   end
 
