@@ -11,7 +11,7 @@ class Document < ActiveRecord::Base
   include Taggable
   include Reportable
 
-  self.per_page = 20
+  self.per_page = 2
 
   class << self
     def search(params)
