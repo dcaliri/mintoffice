@@ -25,11 +25,8 @@ h3 사용자 & 그룹 추가
 = form_tag(:action => "addaccount") do
   = hidden_field_tag :id, @permission.id
   p
-    = label_tag :participant_type
-    = select_tag :participant_type, options_for_select([["사용자", :person], ["그룹", :group]])
-  p
-    = label_tag :participant_name
-    = search_field_tag 'participant_name', params[:participant_name]
+    = label_tag :participant
+    = select_tag :participant, options_for_people_and_group_select
 
   = submit_tag "추가"
 
