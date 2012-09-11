@@ -15,25 +15,16 @@ class PermissionsControllerTest < ActionController::TestCase
   end
 
   test "should add account" do
-    post :addaccount, id: current_permission.name, participant_type: :person, participant_name: add_account.name
+    post :addaccount, id: current_permission.name, participant: "person-#{add_account.id}"
     assert_response :redirect
     assert_redirected_to :action => 'show', :id => current_permission.name
-    
+
     get :show, :id => current_permission.name
     assert_response :success
 
     assert_select '.notice', '성공적으로 사용자를 등록했습니다.'
 
-    post :addaccount, id: current_permission.name, participant_type: :person
-    assert_response :redirect
-    assert_redirected_to :action => 'show', :id => current_permission.name
-
-    get :show, :id => current_permission.name
-    assert_response :success
-
-    assert_select '.alert', '등록되지 않은 사용자입니다.'
-
-    post :addaccount, id: current_permission.name, participant_type: :person, participant_name: add_account.name
+    post :addaccount, id: current_permission.name, participant: "person-#{add_account.id}"
     assert_response :redirect
     assert_redirected_to :action => 'show', :id => current_permission.name
 
@@ -49,7 +40,7 @@ class PermissionsControllerTest < ActionController::TestCase
   end
 
   test "should remove account" do
-    post :addaccount, id: current_permission.name, participant_type: :person, participant_name: add_account.name
+    post :addaccount, id: current_permission.name, participant: "person-#{add_account.id}"
 
     post :removeaccount, id: current_permission.name, participant_type: :person, participant_id: add_account.id
     assert_response :redirect
