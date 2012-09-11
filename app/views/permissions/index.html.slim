@@ -3,10 +3,7 @@ div class={current_person.admin? ? "admin" : ""}
     .menubar_item.item1
       h2= t("main.index.human_resources")
       ul
-        li= link_to t("employees.index.title"), permission_path(:employees)
-        li= link_to t("vacations.show.title"), permission_path(:vacations)
         li= link_to t("commutes.index.title"), permission_path(:commutes)
-        li= link_to t("payments.title"), permission_path(:payments)
 
     .menubar_item.item2
       h2= t("main.index.finance")
@@ -21,13 +18,6 @@ div class={current_person.admin? ? "admin" : ""}
         li= link_to t("postings.title"), permission_path(:postings)
 
     .menubar_item.item3
-      h2= t("main.index.project")
-      ul
-        li= link_to t("projects.index.title"), permission_path(:projects)
-
-    .menubar_item.item4
       h2= t("main.index.document")
       ul
-        li= link_to t("documents.index.title"), permission_path(:documents)
         li= link_to t("business_clients.index.title"), permission_path(:business_clients)
-        li= link_to t("contacts.index.title"), permission_path(:contacts)
