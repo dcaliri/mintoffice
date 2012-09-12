@@ -1,5 +1,7 @@
 #show_command
-  = link_to t("common.title.new"), [:new, :card_history]
+  .btn-group
+    = link_to t("common.title.new"), [:new, :card_history]
+    = link_to "카드 이용내역 생성", [:generate, :card_histories], method: :post
 
 h2 ...
 
@@ -19,9 +21,9 @@ h2 ...
     - @card_histories.each do |card_history|
       tr.selectable.link_to*{"data-url" => card_history_path(card_history)}
         td= card_history.transacted_at
-        td= card_history.amount
-        td= card_history.amount_local
-        td= card_history.amount_dollar
+        td= number_to_currency card_history.amount
+        td= number_to_currency card_history.amount_local
+        td= number_to_currency card_history.amount_dollar
         td= card_history.country
         td= card_history.store_name
         td= card_history.approved_status

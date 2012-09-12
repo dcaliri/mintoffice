@@ -1,7 +1,12 @@
-class CardHistoriesController < ApplicationController 
+# encoding: UTF-8
 
+class CardHistoriesController < ApplicationController
   def index
     @card_histories = card_histories.page(params[:page])
+  end
+
+  def show
+    @card_history = card_histories.find(params[:id])
   end
 
   def new
@@ -14,8 +19,9 @@ class CardHistoriesController < ApplicationController
     redirect_to card_history
   end
 
-  def show
-    @card_history = card_histories.find(params[:id])
+  def generate
+    card_histories.generate
+    redirect_to :back, notice: "성공적으로 카드 사용내역을 생성했습니다."
   end
 
   def edit

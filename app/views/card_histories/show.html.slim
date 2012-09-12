@@ -11,11 +11,11 @@ h3 카드 사용내역 정보
     dt= CardHistory.human_attribute_name(:transacted_at)
     dd= @card_history.transacted_at
     dt= CardHistory.human_attribute_name(:amount)
-    dd= @card_history.amount
+    dd= number_to_currency @card_history.amount
     dt= CardHistory.human_attribute_name(:amount_local)
-    dd= @card_history.amount_local
+    dd= number_to_currency @card_history.amount_local
     dt= CardHistory.human_attribute_name(:amount_dollar)
-    dd= @card_history.amount_dollar
+    dd= number_to_currency @card_history.amount_dollar
     dt= CardHistory.human_attribute_name(:country)
     dd= @card_history.country
     dt= CardHistory.human_attribute_name(:store_name)
