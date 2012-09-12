@@ -8,6 +8,8 @@
 h3 카드 사용내역 정보
 .box
   dl
+    dt= CardHistory.human_attribute_name(:creditcard_name)
+    dd= @card_history.creditcard_name
     dt= CardHistory.human_attribute_name(:transacted_at)
     dd= @card_history.transacted_at
     dt= CardHistory.human_attribute_name(:amount)

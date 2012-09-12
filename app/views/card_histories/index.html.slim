@@ -8,6 +8,7 @@ h2 ...
 - unless @card_histories.empty?
   table#list-table
     tr
+      th= CardHistory.human_attribute_name("creditcard_name")
       th= CardHistory.human_attribute_name("transacted_at")
       th= CardHistory.human_attribute_name("amount")
       th= CardHistory.human_attribute_name("amount_local")
@@ -20,6 +21,7 @@ h2 ...
       th.link_button_area
     - @card_histories.each do |card_history|
       tr.selectable.link_to*{"data-url" => card_history_path(card_history)}
+        td= card_history.creditcard_name
         td= card_history.transacted_at
         td= number_to_currency card_history.amount
         td= number_to_currency card_history.amount_local

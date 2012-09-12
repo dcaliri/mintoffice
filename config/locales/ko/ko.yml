@@ -258,6 +258,7 @@ ko:
                 nation_statement: 국내외
                 refuse_reason: 거절사유
             card_history:
+                creditcard_name: 신용카드
                 transacted_at: 거래일자
                 amount: 승인금액(원화)
                 amount_local: 승인금액(지역화)

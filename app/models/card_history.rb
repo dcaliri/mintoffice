@@ -1,4 +1,6 @@
 class CardHistory < ActiveRecord::Base
+  belongs_to :creditcard
+
   class << self
     def generate
       transaction do
@@ -17,6 +19,8 @@ class CardHistory < ActiveRecord::Base
   end
 
   def insert_info(used_source, approved_source)
+    self.creditcard = used_source.creditcard || approved_source.creditcard
+
     self.transacted_at = approved_source.used_at
     self.amount = approved_source.money
     self.amount_local = approved_source.money_foreign
@@ -28,4 +32,7 @@ class CardHistory < ActiveRecord::Base
     self.paid_at = used_source.approved_at
   end
 
+  def creditcard_name
+    creditcard.cardno_long rescue ""
+  end
 end
