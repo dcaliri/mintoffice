@@ -107,6 +107,7 @@ ko:
             bonus: 상여금
             business_client: 거래처
             card_approved_source: 카드 승인내역
+            card_history: 카드 사용내역
             card_used_source: 카드 이용내역
             cardbill: "카드 영수증"
             change_history: 변경사항
@@ -256,6 +257,16 @@ ko:
                 nation: 국가명
                 nation_statement: 국내외
                 refuse_reason: 거절사유
+            card_history:
+                transacted_at: 거래일자
+                amount: 승인금액(원화)
+                amount_local: 승인금액(지역화)
+                amount_dollar: 지역화($)
+                country: 시용국가
+                store_name: 가맹점
+                approved_status: 승인상태
+                approved_number: 승인번호
+                paid_at: 결제일자
             card_used_source:
                 card_no: 카드번호
                 bank_account: 결제계좌번호
@@ -968,6 +979,8 @@ ko:
             submit: 카드영수증 생성
             success: "%{owner} 이(가) 총 %{amount}개의 카드영수증을 생성했습니다."
         title: 카드승인내역
+    card_histories:
+        title: 카드 사용내역
     card_used_sources:
         index:
             title: 카드별 이용내역
