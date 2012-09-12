@@ -1,0 +1,42 @@
+#show_command
+  = link_to t('common.title.new'), [:new, :hyundai_card_approved_history]
+  = " "
+  = link_to t('common.title.back'), :creditcards
+
+h2 카드 승인내역
+
+- unless @approved_histories.empty?
+  table#list-table
+    tr
+      th= HyundaiCardApprovedHistory.human_attribute_name("transacted_date")
+      th= HyundaiCardApprovedHistory.human_attribute_name("transacted_time")
+      th= HyundaiCardApprovedHistory.human_attribute_name("card_number")
+      th= HyundaiCardApprovedHistory.human_attribute_name("money")
+      th= HyundaiCardApprovedHistory.human_attribute_name("money_us")
+      th= HyundaiCardApprovedHistory.human_attribute_name("card_holder_name")
+      th= HyundaiCardApprovedHistory.human_attribute_name("store_name")
+      th= HyundaiCardApprovedHistory.human_attribute_name("nation")
+      th= HyundaiCardApprovedHistory.human_attribute_name("status")
+      th= HyundaiCardApprovedHistory.human_attribute_name("approve_number")
+      th= HyundaiCardApprovedHistory.human_attribute_name("nation_statement")
+      th= HyundaiCardApprovedHistory.human_attribute_name("refuse_reason")
+      th.link_button_area
+      - @approved_histories.all.each do |approved_history|
+        tr.selectable.link_to*{"data-url" => hyundai_card_approved_history_path(approved_history)}
+          td= approved_history.transacted_date
+          td= approved_history.transacted_time
+          td= approved_history.card_number
+          td= number_to_currency approved_history.money
+          td= number_to_currency approved_history.money_us
+          td= approved_history.card_holder_name
+          td= approved_history.store_name
+          td= approved_history.nation
+          td= approved_history.status
+          td= approved_history.approve_number
+          td= approved_history.nation_statement
+          td= approved_history.refuse_reason
+          td.link_button_area
+            = link_to t('common.button.detail_veiw'), approved_history, class: 'btn btn-primary'
+
+- else
+  h4= t('.empty')

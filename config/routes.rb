@@ -42,6 +42,9 @@ Mintoffice::Application.routes.draw do
   draw :test
   draw :vacations
 
+  resources :shinhan_card_approved_histories
+  resources :hyundai_card_approved_histories
+
   root to: 'main#index'
 
   match ':controller/:action/:id'
