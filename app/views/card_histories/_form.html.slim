@@ -1,0 +1,37 @@
+#show_command
+  = link_to t("common.title.back"), :card_histories
+
+h2= t("common.title.#{action_name}")
+
+= form_for @card_history, html: {class: "tabular"} do |f|
+  = f.error_messages
+  .box
+    p
+      = f.label :transacted_at
+      = f.datetime_select :transacted_at, :order => [:year, :month, :day, :hour, :minute]
+    p
+      = f.label :amount
+      = f.text_field :amount
+    p
+      = f.label :amount_local
+      = f.text_field :amount_local
+    p
+      = f.label :amount_dollar
+      = f.text_field :amount_dollar
+    p
+      = f.label :country
+      = f.text_field :country
+    p
+      = f.label :store_name
+      = f.text_field :store_name
+    p
+      = f.label :approved_status
+      = f.text_field :approved_status
+    p
+      = f.label :approved_number
+      = f.text_field :approved_number
+    p
+      = f.label :paid_at
+      = f.date_select :paid_at, :order => [:year, :month, :day, :hour, :minute]
+  p
+    = f.submit
