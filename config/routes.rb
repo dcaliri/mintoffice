@@ -44,6 +44,7 @@ Mintoffice::Application.routes.draw do
 
   resources :shinhan_card_approved_histories
   resources :hyundai_card_approved_histories
+  resources :oversea_card_approved_histories
 
   root to: 'main#index'
 
