@@ -23,5 +23,7 @@ Mintoffice::Application.routes.draw do
     end
   end
 
+  resources :card_histories
+
   resources :cardbills
 end

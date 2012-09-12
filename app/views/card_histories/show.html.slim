@@ -1,0 +1,28 @@
+#show_command
+  = link_to t('common.title.edit'), [:edit, @card_history]
+  = " "
+  = link_to t('common.title.destroy'), @card_history, :method => :delete, data: {confirm: t("common.messages.delete_confirm")}
+  = " "
+  = link_to t('common.title.list'), :card_histories
+
+h3= "Payroll Category"
+.box
+  dl
+    dt= CardHistory.human_attribute_name(:transacted_at)
+    dd= @card_history.transacted_at
+    dt= CardHistory.human_attribute_name(:amount)
+    dd= @card_history.amount
+    dt= CardHistory.human_attribute_name(:amount_local)
+    dd= @card_history.amount_local
+    dt= CardHistory.human_attribute_name(:amount_dollar)
+    dd= @card_history.amount_dollar
+    dt= CardHistory.human_attribute_name(:country)
+    dd= @card_history.country
+    dt= CardHistory.human_attribute_name(:store_name)
+    dd= @card_history.store_name
+    dt= CardHistory.human_attribute_name(:approved_status)
+    dd= @card_history.approved_status
+    dt= CardHistory.human_attribute_name(:approved_number)
+    dd= @card_history.approved_number
+    dt= CardHistory.human_attribute_name(:paid_at)
+    dd= @card_history.paid_at
