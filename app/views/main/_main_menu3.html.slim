@@ -6,6 +6,7 @@ div.container
 			p
 				ul
 					- @reports.each do |report|
-						li= link_to report.target.summary, report.target
+						- if report.target
+							li= link_to report.target.summary, report.target
 		div.span4
 			= render partial: "this_week"

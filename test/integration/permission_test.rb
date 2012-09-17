@@ -23,24 +23,16 @@ class PermissionTest < ActionDispatch::IntegrationTest
     click_link '권한 관리'
     find('.item1').click_link('출퇴근 관리')
 
-    select '사용자', from: 'participant_type'
-    fill_in "participant_name", with: "normal"
+    select '[개인] 김 개똥(normal)', from: 'participant'
     click_button "추가"
 
     assert(page.has_content?('성공적으로 사용자를 등록했습니다.'))
     assert(page.has_content?('김 개똥(normal)'))
 
-    select '사용자', from: 'participant_type'
-    fill_in "participant_name", with: "normal"
+    select '[개인] 김 개똥(normal)', from: 'participant'
     click_button "추가"
 
     assert(page.has_content?('이미 등록된 사용자입니다.'))
-
-    select '사용자', from: 'participant_type'
-    fill_in "participant_name", with: "normals"
-    click_button "추가"
-
-    assert(page.has_content?('등록되지 않은 사용자입니다.'))
 
     normal_user_access
 
@@ -56,8 +48,7 @@ class PermissionTest < ActionDispatch::IntegrationTest
     click_link '권한 관리'
     find('.item1').click_link('출퇴근 관리')
 
-    select '그룹', from: 'participant_type'
-    fill_in "participant_name", with: "no_admin"
+    select '[그룹] no_admin', from: 'participant'
     click_button "추가"
 
     assert(page.has_content?('성공적으로 사용자를 등록했습니다.'))
@@ -77,8 +68,7 @@ class PermissionTest < ActionDispatch::IntegrationTest
     click_link '권한 관리'
     find('.item1').click_link('출퇴근 관리')
 
-    select '사용자', from: 'participant_type'
-    fill_in "participant_name", with: "normal"
+    select '[개인] 김 개똥(normal)', from: 'participant'
     click_button "추가"
     
     find('#content li[2]').click_link('[X]')
@@ -95,15 +85,13 @@ class PermissionTest < ActionDispatch::IntegrationTest
     click_link '권한 관리'
     find('.item1').click_link('출퇴근 관리')
 
-    select '그룹', from: 'participant_type'
-    fill_in "participant_name", with: "no_admin"
+    select '[그룹] no_admin', from: 'participant'
     click_button "추가"
     
     click_link '[X]'
     click_link '[X]'
 
-    select '사용자', from: 'participant_type'
-    fill_in "participant_name", with: "admin"
+    select '[개인] 김 개똥(normal)', from: 'participant'
     click_button "추가"
     
     project_admin_access
