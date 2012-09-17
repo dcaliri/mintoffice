@@ -62,10 +62,6 @@ class NUUsedVacationTest < ActionDispatch::IntegrationTest
     click_button '상신'
 
     assert(page.has_content?('상태 - 결재 대기 중'))
-
-    visit '/'
-    
-    assert(page.has_content?('휴가 : 김 개똥(기타)'))
   end
 
   test 'should create a new half day vacation and report admin' do
@@ -105,10 +101,6 @@ class NUUsedVacationTest < ActionDispatch::IntegrationTest
     click_link '목록'
 
     assert(page.has_content?('0.5 일'))
-
-    visit '/'
-    
-    assert(page.has_content?('휴가 : 김 개똥(기타)'))
   end
 
   test 'should show employee data' do
