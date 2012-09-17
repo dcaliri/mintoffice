@@ -21,7 +21,7 @@ div.container
   ul.thumbnails
     - @employees.each do |employee|
       li.span4
-        div.thumbnail
+        = div_for employee, class: 'thumbnail' do
           - unless employee.attachments.empty?
             = image_tag picture_attachment_path(employee.attachments.first)
           - else
