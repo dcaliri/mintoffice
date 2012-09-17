@@ -22,7 +22,10 @@ div.container
     - @employees.each do |employee|
       li.span4
         div.thumbnail
-          ' <img src='http://t0.gstatic.com/images?q=tbn:ANd9GcRi-8XnnXwAZmz_5R5LHRHMNlnYYHCP4WqRdu6vhf_ru8wLK9XB3IrNrwix' width="150" height="150" />
+          - unless employee.attachments.empty?
+            = image_tag picture_attachment_path(employee.attachments.first)
+          - else
+            ' <img src='http://t0.gstatic.com/images?q=tbn:ANd9GcRi-8XnnXwAZmz_5R5LHRHMNlnYYHCP4WqRdu6vhf_ru8wLK9XB3IrNrwix' width="150" height="150" />
           h3= employee.companyno.to_s + ". " + employee.fullname
           = link_to t('common.button.detail_veiw'), employee, class: 'btn pull-right'
           p= employee.position
