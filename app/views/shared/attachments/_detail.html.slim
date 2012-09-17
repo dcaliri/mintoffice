@@ -2,16 +2,19 @@
 - unless attachments.nil? || attachments.empty?
   - attachment = attachments.first
   #attach
-    = link_to image_tag(picture_attachment_path(attachment, :w => "600", :h => "800")), picture_attachment_path(attachment), target: :blank
+    = link_to image_tag(picture_attachment_path(attachment, :w => "600", :h => "800")), picture_attachment_path(attachment), class: 'picture', target: :blank
     br
     center
-      = link_to t("common.link.download"), :controller => "attachments", :action => "download", :id => attachment.id
+      = link_to t("common.link.download"), [:download, attachment], class: 'download-attachment btn btn-success btn-large'
       - if attachments.count > 0
-        '  ...
-        - 0.upto(attachments.count - 1) do |i|
-          = link_to (i+1).to_s, {:at => i}, :id => attachments[i].id, :class => "move-attachment"
+        .pagination
+          ul
+            - 0.upto(attachments.count - 1) do |i|
+              li*{'class' => i == 0 ? 'active' : ''}
+                = link_to (i+1).to_s, {:at => i}, :id => attachments[i].id, :class => "move-attachment"
 
 .clear
+
 - content_for :javascript do
   | <script type="text/javascript">
     $(function(){
@@ -19,8 +22,14 @@
         e.preventDefault();
 
         var imageUrl = "/attachments/" + e.target.id + '/picture';
+        var downloadUrl = "/attachments/" + e.target.id + '/download';
+
         $('#attach img').attr('src', imageUrl + "?h=800&amp;w=600");
-        $('#attach a').attr('href', imageUrl);
+        $('#attach a.picture').attr('href', imageUrl);
+        $('#attach a.download-attachment').attr('href', downloadUrl);
+
+        $('#attach li').removeClass('active');
+        $(this).parent().addClass('active');
       });
     });
       </script>

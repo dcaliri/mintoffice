@@ -1,5 +1,12 @@
-- unless group.subgroups.empty?
-  ul
+/ - unless group.subgroups.empty?
+/   ul
+/     - group.subgroups.each do |subgroup|
+/       li= link_to subgroup.name, subgroup
+/       = render 'subgroup', group: subgroup
+ul
+  - group.people.each do |person|
+    li= person.name
+  - unless group.subgroups.empty?
     - group.subgroups.each do |subgroup|
       li= link_to subgroup.name, subgroup
       = render 'subgroup', group: subgroup

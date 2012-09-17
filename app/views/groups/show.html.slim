@@ -12,8 +12,10 @@ h3
 = link_to group.parent_name, group.parent
 
 h3
-	= t('groups.show.sub_group')
-= render 'subgroup', group: group
+  = t('groups.show.sub_group')
+ul
+  li= group.name
+  = render 'subgroup', group: group
 
 h3
 	= t('groups.show.member')

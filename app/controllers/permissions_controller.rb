@@ -6,16 +6,14 @@ class PermissionsController < ApplicationController
   end
 
   def addaccount
-    participant_type = params[:participant_type].to_sym
-    collection_name  = params[:participant_type].to_s.tableize
+    participant_info = params[:participant].split('-')
+    participant_type = participant_info.first
+    participant_id = participant_info.last
+
+    collection_name  = participant_type.tableize
 
     @permission = Permission.find_by_name(params[:id])
-
-    if participant_type == :person
-      @participant = Person.find_by_account_name(params[:participant_name])
-    else
-      @participant = Group.find_by_name(params[:participant_name])
-    end
+    @participant = participant_type.classify.constantize.find(participant_id)
 
     if !@participant
       redirect_to @permission, alert: "등록되지 않은 사용자입니다."

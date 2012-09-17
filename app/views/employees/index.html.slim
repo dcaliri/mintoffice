@@ -1,5 +1,5 @@
 - content_for :search do
-  = form_tag({:action => "index"}, :method => :get ) do
+  = form_tag({:action => "index"}, :method => :get) do
     = hidden_field_tag 'retired', @retired
     = t("common.title.search")
     ' :
@@ -15,31 +15,15 @@ h2
   = t('employees.index.total')
   ' :
   = @employees.size
-table#list-table
-  tr
-    th
-      = Employee.human_attribute_name('companyno')
-    th
-      = Employee.human_attribute_name('fullname')
-    th
-      = Employee.human_attribute_name('position')
-    th
-      = Employee.human_attribute_name('account.name')
-    th
-      = Employee.human_attribute_name('joined_on')
-    th.link_button_area
 
-  - @employees.each do |employee|
-    tr.selectable.link_to*{"data-url" => employee_path(employee)}
-      td align="right"
-        =h employee.companyno
-      td
-        =h employee.fullname
-      td
-        =h employee.position
-      td
-        =h employee.person.account.name
-      td
-        =h employee.joined_on
-      td.link_button_area
-            = link_to t('common.button.detail_veiw'), employee, class: 'btn btn-primary'
+
+div.container
+  ul.thumbnails
+    - @employees.each do |employee|
+      li.span4
+        div.thumbnail
+          ' <img src='http://t0.gstatic.com/images?q=tbn:ANd9GcRi-8XnnXwAZmz_5R5LHRHMNlnYYHCP4WqRdu6vhf_ru8wLK9XB3IrNrwix' width="150" height="150" />
+          h3= employee.companyno.to_s + ". " + employee.fullname
+          = link_to t('common.button.detail_veiw'), employee, class: 'btn pull-right'
+          p= employee.position
+          p= Employee.human_attribute_name('joined_on').to_s + ": " + employee.joined_on.to_s

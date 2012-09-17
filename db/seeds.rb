@@ -7,7 +7,7 @@
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Major.create(:name => 'Daley', :city => cities.first)
 
-unless Company.all.empty?
+if Company.all.empty?
   company = Company.create!(name: "mintech")
   company.save!
 end

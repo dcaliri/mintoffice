@@ -86,19 +86,27 @@ class AccountsController < ApplicationController
   end
 
   def changepw_form
-    session[:return_to] = request.referer
+    session[:return_to] = session[:return_to] || request.referer
   end
 
   def changepw
     account = Account.find(params[:id])
-    if params[:password] != params[:password_confirmation]
-      flash.now[:notice] = I18n.t("accounts.changepw.password_confirm_wrong")
-      redirect_to :changepw_form
+    password  = params[:password]
+    password_confirmation = params[:password_confirmation]
+
+    if password.blank? and password_confirmation.blank?
+      redirect_to [:changepw, account], notice: I18n.t("accounts.changepw.password_confirm_blank")
+    elsif password != password_confirmation
+      redirect_to [:changepw, account], notice: I18n.t("accounts.changepw.password_confirm_wrong")
     else
-      account.password = params[:password]
+      account.password = password
       account.save
       flash[:notice] = I18n.t("accounts.changepw.successfully_changed")
-      redirect_to session[:return_to]
+
+      return_to = session[:return_to]
+      session[:return_to] = nil
+
+      redirect_to return_to
     end
   end
 
