@@ -5,8 +5,8 @@ div.container
 				' 미결제 목록 (결재대기중)
 			p
 				ul
-					- @reports.each do |report|
-						- if report.target
-							li= link_to report.target.summary, report.target
+					/- @reports.each do |report|
+					/	- if report.target
+					/		li= link_to report.target.summary, report.target
 		div.span4
 			= render partial: "this_week"
