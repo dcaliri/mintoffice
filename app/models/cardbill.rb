@@ -36,6 +36,10 @@ class Cardbill < ActiveRecord::Base
     end
   end
 
+  def summary
+    "[카드영수증] 번호: #{cardno}, 사용일자: #{transdate}, 금액: #{ActionController::Base.helpers.number_to_currency(totalamount)}"
+  end
+
   class << self
     def search(params)
       result = search_by_text(params[:query]).search_by_creditcard(params[:creditcard_id])
