@@ -38,7 +38,7 @@ class NUEmployeeTest < ActionDispatch::IntegrationTest
     visit '/'
     click_link '인사정보관리 - 사원목록'
 
-    find('tr[3]').click_link('상세보기')
+    find('#employee_2').click_link('상세보기')
 
     assert(page.has_content?('김 개똥'))
     assert(page.has_content?('사원'))
@@ -51,7 +51,7 @@ class NUEmployeeTest < ActionDispatch::IntegrationTest
     visit '/'
     click_link '인사정보관리 - 사원목록'
 
-    find('tr[3]').click_link('상세보기')
+    find('#employee_2').click_link('상세보기')
 
     click_link '주소록 찾기'
 

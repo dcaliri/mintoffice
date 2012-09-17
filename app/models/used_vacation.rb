@@ -23,6 +23,10 @@ class UsedVacation < ActiveRecord::Base
     vacation
   end
 
+  def summary
+    "[연차] #{from} ~ #{to} 기간: #{period} 사유: #{note}"
+  end
+
   include Reportable
   def redirect_when_reported
     [vacation, self]

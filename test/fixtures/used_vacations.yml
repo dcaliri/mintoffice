@@ -1,8 +1,8 @@
 fixture:
   id: 1
   vacation_id: 1
-  from: 2012-07-19
-  to: 2012-07-19
+  from: <%= Time.zone.now %>
+  to: <%= Time.zone.now %>
   note: test
   created_at: 2012-07-19 16:45:39.546339
   updated_at: 2012-07-19 16:45:39.546339
