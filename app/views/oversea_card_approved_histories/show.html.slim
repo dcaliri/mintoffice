@@ -20,11 +20,11 @@ h3 해외카드 승인내역
     dt= OverseaCardApprovedHistory.human_attribute_name("store_name")
     dd= number_to_currency @approved_history.store_name
     dt= OverseaCardApprovedHistory.human_attribute_name("money")
-    dd= @approved_history.money
+    dd= number_to_currency @approved_history.money
     dt= OverseaCardApprovedHistory.human_attribute_name("money_locale")
-    dd= @approved_history.money_locale
+    dd= number_to_currency @approved_history.money_locale
     dt= OverseaCardApprovedHistory.human_attribute_name("money_locale_currency")
-    dd= @approved_history.money_locale_currency
+    dd= number_to_currency @approved_history.money_locale_currency
     dt= OverseaCardApprovedHistory.human_attribute_name("money_locale_name")
     dd= @approved_history.money_locale_name
     dt= OverseaCardApprovedHistory.human_attribute_name("money_us")
