@@ -3,11 +3,12 @@
 class UsedVacationsController < ApplicationController
   def redirect_unless_permission; end
 
-  expose(:vacation)
-  expose(:used_vacations) { vacation.used }
+  # expose(:vacation)
+  # expose(:used_vacations) { vacation.used }
   expose(:used_vacation)
+  expose(:vacation) { used_vacation.vacation }
 
-  expose(:employee) { vacation.employee }
+  expose(:employee) { used_vacation.vacation.employee }
 
   before_filter {|controller| controller.redirect_unless_me(employee)}
   before_filter :another_person_cant_access_yearly, :only => [:edit]
