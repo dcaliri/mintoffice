@@ -9,6 +9,10 @@ class CardHistoriesController < ApplicationController
     @card_history = CardHistory.find(params[:id])
   end
 
+  def raw
+    redirect_to params[:move_to].to_sym
+  end
+
   def new
     @card_history = CardHistory.new
   end

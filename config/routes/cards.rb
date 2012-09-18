@@ -25,6 +25,7 @@ Mintoffice::Application.routes.draw do
 
   resources :card_histories do
     collection do
+      get 'raw'
       post 'generate', as: :generate
     end
   end
