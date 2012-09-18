@@ -1,0 +1,84 @@
+#show_command
+  = link_to t("common.title.back"), :shinhan_card_used_histories
+
+h2= t("common.title.#{action_name}")
+
+= form_for @used_history, html: {class: "tabular"} do |f|
+  .box
+    p
+      = f.label :card_no
+      = f.text_field :card_no
+    p
+      = f.label :bank_account
+      = f.text_field :bank_account
+    p
+      = f.label :bank_name
+      = f.text_field :bank_name
+    p
+      = f.label :card_holder_name
+      = f.text_field :card_holder_name
+    p
+      = f.label :used_area
+      = f.text_field :used_area
+    p
+      = f.label :approve_no
+      = f.text_field :approve_no
+    p
+      = f.label :approved_at
+      = f.datetime_select :approved_at, :order => [:year, :month, :day, :hour, :minute]
+    p
+      = f.label :approved_time
+      = f.datetime_select :approved_time, :order => [:year, :month, :day, :hour, :minute]
+    p
+      = f.label :sales_type
+      = f.text_field :sales_type
+    p
+      = f.label :money_krw
+      = f.text_field :money_krw
+    p
+      = f.label :money_foreign
+      = f.text_field :money_foreign
+    p
+      = f.label :price
+      = f.text_field :price
+    p
+      = f.label :tax
+      = f.text_field :tax
+    p
+      = f.label :tip
+      = f.text_field :tip
+    p
+      = f.label :monthly_duration
+      = f.text_field :monthly_duration
+    p
+      = f.label :exchange_krw
+      = f.text_field :exchange_krw
+    p
+      = f.label :foreign_country_code
+      = f.text_field :foreign_country_code
+    p
+      = f.label :foreign_country_name
+      = f.text_field :foreign_country_name
+    p
+      = f.label :store_business_no
+      = f.text_field :store_business_no
+    p
+      = f.label :store_name
+      = f.text_field :store_name
+    p
+      = f.label :store_type
+      = f.text_field :store_type
+    p
+      = f.label :store_zipcode
+      = f.text_field :store_zipcode
+    p
+      = f.label :store_addr1
+      = f.text_field :store_addr1
+    p
+      = f.label :store_addr2
+      = f.text_field :store_addr2
+    p
+      = f.label :store_tel
+      = f.text_field :store_tel
+    p
+      = f.submit

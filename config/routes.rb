@@ -42,6 +42,9 @@ Mintoffice::Application.routes.draw do
   draw :test
   draw :vacations
 
+  resources :shinhan_card_used_histories
+  resources :hyundai_card_used_histories
+
   resources :shinhan_card_approved_histories
   resources :hyundai_card_approved_histories
   resources :oversea_card_approved_histories
