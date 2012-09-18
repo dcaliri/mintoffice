@@ -21,7 +21,8 @@ class ExpenseReport < ActiveRecord::Base
   end
 
   def summary
-    "[지출내역서] 소유자: #{employee.fullname} 프로젝트: #{project.name} 사유: #{description}, 금액: #{ActionController::Base.helpers.number_to_currency(amount)}"
+    username = report.reporter.prev.fullname rescue ""
+    "[지출내역서] #{username} 소유자: #{employee.fullname} 프로젝트: #{project.name} 사유: #{description}, 금액: #{ActionController::Base.helpers.number_to_currency(amount)}"
   end
 
   def add_permission_of_project_owner

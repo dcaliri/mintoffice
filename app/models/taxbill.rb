@@ -16,8 +16,9 @@ class Taxbill < ActiveRecord::Base
   before_save :find_document_and_save
 
   def summary
+    username = report.reporter.prev.fullname rescue ""
     billtype = billtype == 'purchase' ? I18n.t('taxbills.purchase_bill') : I18n.t('taxbills.sales_bill')
-    "[#{billtype}] 담당자: #{taxman.business_client.name}, 금액: #{ActionController::Base.helpers.number_to_currency(total)}"
+    "[#{billtype}] #{username} 담당자: #{taxman.business_client.name}, 금액: #{ActionController::Base.helpers.number_to_currency(total)}"
   end
 
   def self.no_taxman_and_client

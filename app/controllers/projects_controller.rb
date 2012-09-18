@@ -5,7 +5,7 @@ class ProjectsController < ApplicationController
   expose(:project)
 
   def index
-    if current_employee.admin?
+    if current_person.admin?
       project_list = projects
     else
       project_list = current_employee.related_projects

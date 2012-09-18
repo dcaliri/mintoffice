@@ -24,7 +24,8 @@ class UsedVacation < ActiveRecord::Base
   end
 
   def summary
-    "[연차] #{from} ~ #{to} 기간: #{period} 사유: #{note}"
+    username = report.reporter.prev.fullname rescue ""
+    "[연차] #{username} #{from} ~ #{to} 기간: #{period} 사유: #{note}"
   end
 
   include Reportable
