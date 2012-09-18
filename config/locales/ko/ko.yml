@@ -277,6 +277,24 @@ ko:
                 store_addr1: 가맹점주소1
                 store_addr2: 가맹점주소2
                 store_tel: 가맹점전화번호
+            hyundai_card_used_history:
+                used_at: 이용일자
+                card_no: 카드번호
+                card_holder_name: 이용자명
+                store_name: 가맹점명
+                tax_type: 과세유형
+                price: 이용금액
+                approve_no: 승인번호
+                sales_statement: 전표구분
+                nation_statement: 국내외구분
+                money_krw: 현지금액
+                exchange_krw: 미화금액
+                exchange_us: 미화환율
+                prepayment_statement: 선납구분
+                accepted_at: 접수일자
+                approved_at: 결제일자
+                apply_sales_statement: 전표신청
+                purchase_statement: 구매여부
             hyundai_card_approved_history:
               transacted_date: 거래일자
               transacted_time: 시각
