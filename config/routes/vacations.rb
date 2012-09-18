@@ -4,6 +4,8 @@ Mintoffice::Application.routes.draw do
       put 'approve'
     end
   end
+  resources :used_vacations, :path => "used"
+
 
   resources :vacation_types
 end

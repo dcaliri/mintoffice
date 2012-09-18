@@ -1,0 +1,45 @@
+- content_for :search do
+  = form_tag({:action => "index"}, :method => :get ) do
+    = hidden_field_tag 'retired', @retired
+    = t("common.title.search")
+    ' :
+    = search_field_tag 'q', params[:q]
+    = submit_tag t('common.button.search')
+    - if current_person.admin?
+      = select_tag :search_type, options_for_select(Employee::SEARCH_TYPE, params[:search_type]), "onchange" => "this.form.submit()"
+
+#show_command
+  - if current_person.admin?
+    = link_to t('employees.new.title'), find_contact_employees_path
+h2
+  = t('employees.index.total')
+  ' :
+  = @employees.size
+table#list-table
+  tr
+    th
+      = Employee.human_attribute_name('companyno')
+    th
+      = Employee.human_attribute_name('fullname')
+    th
+      = Employee.human_attribute_name('position')
+    th
+      = Employee.human_attribute_name('account.name')
+    th
+      = Employee.human_attribute_name('joined_on')
+    th.link_button_area
+
+  - @employees.each do |employee|
+    tr.selectable.link_to*{"data-url" => employee_path(employee)}
+      td align="right"
+        =h employee.companyno
+      td
+        =h employee.fullname
+      td
+        =h employee.position
+      td
+        =h employee.person.account.name
+      td
+        =h employee.joined_on
+      td.link_button_area
+            = link_to t('common.button.detail_veiw'), employee, class: 'btn btn-primary'

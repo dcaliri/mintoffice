@@ -29,10 +29,6 @@ class UsedVacationTest < ActionDispatch::IntegrationTest
 
     assert(page.has_content?('연차를 신청하였습니다. 신청 후에는 결재를 올려주세요.'))
     assert(page.has_content?('test'))
-
-    visit '/'
-
-    assert(page.has_content?('휴가 : 김 관리(기타)'))
   end
 
   test 'should create a new half day vacation' do
@@ -52,10 +48,6 @@ class UsedVacationTest < ActionDispatch::IntegrationTest
 
     click_link '목록'
     assert(page.has_content?('0.5 일'))
-
-    visit '/'
-
-    assert(page.has_content?('휴가 : 김 관리(기타)'))
   end
 
   test 'should commit report' do
@@ -103,10 +95,6 @@ class UsedVacationTest < ActionDispatch::IntegrationTest
     click_button '연차 사용 신청'
 
     assert(page.has_content?('수정된 사유'))
-
-    visit '/'
-
-    assert(page.has_content?('휴가 : 김 관리(병원 치료)'))
   end
 
   test 'should edit to half day' do
@@ -128,10 +116,6 @@ class UsedVacationTest < ActionDispatch::IntegrationTest
 
     click_link '목록'
     assert(page.has_content?('0.5 일'))
-
-    visit '/'
-    
-    assert(page.has_content?('휴가 : 김 관리(병원 치료)'))
   end
 
   test 'should destroy used_vacation' do

@@ -58,6 +58,10 @@ module Reportable
   def email_notify_body(action, from, to, url, comment)
   end
 
+  def summary
+    report.target_type
+  end
+
   module ClassMethods
     def no_permission
       includes(:report => :accessors).merge(AccessPerson.no_permission)

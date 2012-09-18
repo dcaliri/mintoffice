@@ -28,43 +28,43 @@ class AttachmentsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should download this attachment file" do
-  	get :show, id: current_attachment.id
-    assert_response :success
+  # test "should download this attachment file" do
+  # 	get :show, id: current_attachment.id
+  #   assert_response :success
 
-    post :download, id: current_attachment.id
-    assert_response :success
-  end
+  #   post :download, id: current_attachment.id
+  #   assert_response :success
+  # end
 
-  test "should fail to download this attachment file" do
-    post :download, id: current_attachment.id
-    assert_response :redirect
+  # test "should fail to download this attachment file" do
+  #   post :download, id: current_attachment.id
+  #   assert_response :redirect
 
-    assert_equal flash[:notice], I18n.t("permissions.permission_denied")
-  end
+  #   assert_equal flash[:notice], I18n.t("permissions.permission_denied")
+  # end
 
-  test "should show and download picture" do
-  	get :show, id: current_attachment.id
-    assert_response :success
+  # test "should show and download picture" do
+  # 	get :show, id: current_attachment.id
+  #   assert_response :success
 
-    post :picture, id: current_attachment.id, w: '600', h: '800'
-    assert_response :success
+  #   post :picture, id: current_attachment.id, w: '600', h: '800'
+  #   assert_response :success
 
-    post :picture, id: current_attachment.id
-    assert_response :success
-  end
+  #   post :picture, id: current_attachment.id
+  #   assert_response :success
+  # end
 
-  test "should fail to show and download picture" do
-    post :picture, id: current_attachment.id, w: '600', h: '800'
-    assert_response :redirect
+  # test "should fail to show and download picture" do
+  #   post :picture, id: current_attachment.id, w: '600', h: '800'
+  #   assert_response :redirect
 
-    assert_equal flash[:notice], I18n.t("permissions.permission_denied")
+  #   assert_equal flash[:notice], I18n.t("permissions.permission_denied")
 
-    post :picture, id: current_attachment.id
-    assert_response :redirect
+  #   post :picture, id: current_attachment.id
+  #   assert_response :redirect
 
-    assert_equal flash[:notice], I18n.t("permissions.permission_denied")
-  end
+  #   assert_equal flash[:notice], I18n.t("permissions.permission_denied")
+  # end
 
   test "should see new page" do
     get :new

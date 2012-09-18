@@ -28,6 +28,10 @@ class Document < ActiveRecord::Base
     end
   end
 
+  def summary
+    "[문서]#{title}"
+  end
+
   def add_tags(tag_list)
     unless tag_list.blank?
       tag_list.split(',').each do |tag|
