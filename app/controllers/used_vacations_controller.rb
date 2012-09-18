@@ -6,11 +6,17 @@ class UsedVacationsController < ApplicationController
   expose(:vacation)
   expose(:used_vacations) { vacation.used }
   expose(:used_vacation)
-
-  expose(:employee) { vacation.employee }
+  expose(:employee) do 
+    vacation = vacation || UsedVacation.find(params[:id]).vacation
+    vacation.employee
+  end
 
   before_filter {|controller| controller.redirect_unless_me(employee)}
   before_filter :another_person_cant_access_yearly, :only => [:edit]
+
+  def show
+    @used_vacation = UsedVacation.find(params[:id])
+  end
 
   def create
     used_vacation.save!
@@ -22,7 +28,7 @@ class UsedVacationsController < ApplicationController
       used_vacation.save!
       redirect_to [vacation, used_vacation]
     else
-      render :action => :edit
+      render 'edit'
     end
   end
 

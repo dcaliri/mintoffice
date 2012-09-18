@@ -29,7 +29,8 @@ class Document < ActiveRecord::Base
   end
 
   def summary
-    "[문서]#{title}"
+    username = report.reporter.prev.fullname rescue ""
+    "[문서] #{username} #{title}"
   end
 
   def add_tags(tag_list)
