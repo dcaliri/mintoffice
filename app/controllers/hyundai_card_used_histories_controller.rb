@@ -31,6 +31,17 @@ class HyundaiCardUsedHistoriesController < ApplicationController
     render 'edit'
   end
 
+  def preview
+    @used_histories = HyundaiCardUsedHistory.preview_stylesheet(params[:upload])
+  rescue => error
+    redirect_to [:excel, :hyundai_card_used_histories], alert: error.message
+  end
+
+  def upload
+    HyundaiCardUsedHistory.create_with_stylesheet(params[:upload])
+    redirect_to :hyundai_card_used_histories
+  end
+
   def destroy
     @used_history = HyundaiCardUsedHistory.find(params[:id])
     @used_history.destroy

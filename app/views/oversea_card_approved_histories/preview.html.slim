@@ -1,0 +1,18 @@
+#show_command
+  = link_to t('common.title.back'), :oversea_card_approved_histories
+
+h2= t(".title")
+
+= form_tag [:upload, :oversea_card_approved_histories], multipart: true, class: "tabular" do
+  .box
+    p
+      = label_tag :file, t('.file')
+      = text_field_tag :upload, params[:upload][:file].original_filename
+    p
+      = submit_tag t('.submit')
+
+  br
+
+h3
+  = t('creditcards.preview.preview')
+= render 'list', menu: false

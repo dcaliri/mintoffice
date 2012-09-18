@@ -42,12 +42,45 @@ Mintoffice::Application.routes.draw do
   draw :test
   draw :vacations
 
-  resources :shinhan_card_used_histories
-  resources :hyundai_card_used_histories
+  resources :shinhan_card_used_histories do
+    collection do
+      get 'excel'
+      post 'preview'
+      post 'upload'
+    end
+  end
 
-  resources :shinhan_card_approved_histories
-  resources :hyundai_card_approved_histories
-  resources :oversea_card_approved_histories
+  resources :hyundai_card_used_histories do
+    collection do
+      get 'excel'
+      post 'preview'
+      post 'upload'
+    end
+  end
+
+  resources :shinhan_card_approved_histories do
+    collection do
+      get 'excel'
+      post 'preview'
+      post 'upload'
+    end
+  end
+
+  resources :hyundai_card_approved_histories do
+    collection do
+      get 'excel'
+      post 'preview'
+      post 'upload'
+    end
+  end
+
+  resources :oversea_card_approved_histories do
+    collection do
+      get 'excel'
+      post 'preview'
+      post 'upload'
+    end
+  end
 
   root to: 'main#index'
 

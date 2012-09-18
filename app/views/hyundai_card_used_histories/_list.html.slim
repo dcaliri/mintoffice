@@ -1,12 +1,3 @@
-#show_command
-  = link_to t('common.title.excel'), [:excel, :hyundai_card_used_histories]
-  = " "
-  = link_to t('common.title.new'), [:new, :hyundai_card_used_history]
-  = " "
-  = link_to t('common.title.back'), :creditcards
-
-h2 카드 승인내역
-
 - unless @used_histories.empty?
   table#list-table
     tr
@@ -27,10 +18,11 @@ h2 카드 승인내역
       th= HyundaiCardUsedHistory.human_attribute_name("approved_at")
       th= HyundaiCardUsedHistory.human_attribute_name("apply_sales_statement")
       th= HyundaiCardUsedHistory.human_attribute_name("purchase_statement")
-
-      th.link_button_area
-      - @used_histories.all.each do |used_history|
-        tr.selectable.link_to*{"data-url" => hyundai_card_used_history_path(used_history)}
+      - if menu
+        th.link_button_area
+      - @used_histories.each do |used_history|
+        - data = menu ? {"data-url" => hyundai_card_used_history_path(used_history)} : {}
+        tr.selectable.link_to*data
           td= used_history.used_at
           td= used_history.card_no
           td= used_history.card_holder_name
@@ -48,8 +40,9 @@ h2 카드 승인내역
           td= used_history.approved_at
           td= used_history.apply_sales_statement
           td= used_history.purchase_statement
-          td.link_button_area
-            = link_to t('common.button.detail_veiw'), used_history, class: 'btn btn-primary'
+          - if menu
+            td.link_button_area
+              = link_to t('common.button.detail_veiw'), used_history, class: 'btn btn-primary'
 
 - else
   h4= t('.empty')

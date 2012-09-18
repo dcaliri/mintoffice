@@ -5,26 +5,38 @@ module SpreadsheetParsable
     module Hyundai
       extend ActiveSupport::Concern
 
+      # t.date     "transacted_date"
+      # t.time     "transacted_time"
+      # t.string   "card_number"
+      # t.string   "money"
+      # t.string   "money_us"
+      # t.string   "card_holder_name"
+      # t.string   "store_name"
+      # t.string   "nation"
+      # t.string   "status"
+      # t.string   "approve_number"
+      # t.string   "nation_statement"
+      # t.string   "refuse_reason"
 
       EXCEL_COLUMNS ||= {}
       EXCEL_COLUMNS[:hyundai_card_approved_sources] = {
-        :used_at =>           "거래일자",
-        :used_time =>         "시각",
-        :card_no =>           "카드번호",
+        :transacted_date =>   "거래일자",
+        :transacted_time =>   "시각",
+        :card_number =>       "카드번호",
         :money =>             "승인금액",
         :money_us =>          "승인금액($)",
         :card_holder_name =>  "이용자명",
         :store_name =>        "가맹점명",
         :nation =>            "국가명",
         :status =>            "상태",
-        :approve_no =>        "승인번호",
+        :approve_number =>    "승인번호",
         :nation_statement =>  "국내외",
         :refuse_reason =>     "거절사유"
       }
 
       EXCEL_KEYS ||= {}
       EXCEL_KEYS[:hyundai_card_approved_sources] = {
-        :approve_no => :integer
+        :approve_number => :integer
       }
 
       EXCEL_OPTIONS ||= {}

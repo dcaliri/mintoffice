@@ -9,6 +9,7 @@ class CreateShinhanCardApprovedHistories < ActiveRecord::Migration
       t.decimal  :money, precision: 10, scale: 2
       t.string   :used_type
       t.string   :monthly_duration
+      t.datetime :card_type
       t.datetime :canceled_at
       t.string   :purchase_status
       t.date     :will_be_paied_at

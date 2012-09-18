@@ -5,12 +5,11 @@ module SpreadsheetParsable
     module Default
       extend ActiveSupport::Concern
 
-
       EXCEL_COLUMNS ||= {}
       EXCEL_COLUMNS[:default_card_approved_sources] = {
         :used_at =>           "이용일시",
         :approve_no =>        "승인번호",
-        :card_no =>           "이용카드",
+        :card_name =>         "이용카드",
         :card_holder_name =>  "이용자명",
         :store_name =>        "가맹점명",
         :money =>             "이용금액",
@@ -18,7 +17,7 @@ module SpreadsheetParsable
         :monthly_duration =>  "할부개월수",
         :card_type =>         "카드구분",
         :canceled_at =>       "취소일자",
-        :status =>            "매입상태",
+        :purchase_status =>   "매입상태",
         :will_be_paied_at =>  "결제예정일"
       }
 

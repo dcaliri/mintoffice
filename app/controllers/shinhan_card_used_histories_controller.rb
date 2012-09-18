@@ -31,6 +31,17 @@ class ShinhanCardUsedHistoriesController < ApplicationController
     render 'edit'
   end
 
+  def preview
+    @used_histories = ShinhanCardUsedHistory.preview_stylesheet(params[:upload])
+  rescue => error
+    redirect_to [:excel, :shinhan_card_used_histories], alert: error.message
+  end
+
+  def upload
+    ShinhanCardUsedHistory.create_with_stylesheet(params[:upload])
+    redirect_to :shinhan_card_used_histories
+  end
+
   def destroy
     @used_history = ShinhanCardUsedHistory.find(params[:id])
     @used_history.destroy

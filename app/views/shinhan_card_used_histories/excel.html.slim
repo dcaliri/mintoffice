@@ -1,0 +1,11 @@
+#show_command
+  = link_to t('common.title.back'), :shinhan_card_used_histories
+h2 ..
+
+= form_tag [:preview, :shinhan_card_used_histories], multipart: true, class: "tabular" do
+  .box
+    p
+      = label_tag :file, t('.file')
+      = file_field :upload, :file
+    p
+      = submit_tag t('creditcards.excel.submit')
