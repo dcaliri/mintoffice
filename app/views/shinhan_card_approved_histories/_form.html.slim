@@ -1,0 +1,37 @@
+#show_command
+  = link_to t("common.title.back"), :shinhan_card_approved_histories
+
+h2= t("common.title.#{action_name}")
+
+= form_for @approved_history, html: {class: "tabular"} do |f|
+  = f.error_messages
+  .box
+    p
+      = f.label :used_at
+      = f.datetime_select :used_at, order: [:year, :month, :day, :hour, :minute]
+    p
+      = f.label :approve_no
+      = f.text_field :approve_no
+    p
+      = f.label :card_name
+      = f.text_field :card_name
+    p
+      = f.label :money
+      = f.text_field :money
+    p
+      = f.label :used_type
+      = f.text_field :used_type
+    p
+      = f.label :monthly_duration
+      = f.text_field :monthly_duration
+    p
+      = f.label :canceled_at
+      = f.datetime_select :canceled_at, order: [:year, :month, :day, :hour, :minute]
+    p
+      = f.label :purchase_status
+      = f.text_field :purchase_status
+    p
+      = f.label :will_be_paied_at
+      = f.datetime_select :will_be_paied_at, order: [:year, :month, :day]
+  p
+    = f.submit
