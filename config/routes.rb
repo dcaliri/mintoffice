@@ -42,6 +42,18 @@ Mintoffice::Application.routes.draw do
   draw :test
   draw :vacations
 
+  resources :card_histories do
+    collection do
+      get 'raw'
+      post 'generate', as: :generate
+
+      post 'export'
+      get 'cardbills/generate', action: :generate_form, as: :generate_form
+      post 'cardbills/generate', action: :generate, as: :generate
+      get 'cardbills/empty', action: :find_empty_cardbill, as: :find_empty_cardbill
+    end
+  end
+
   resources :shinhan_card_used_histories do
     collection do
       get 'excel'

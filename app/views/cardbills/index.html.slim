@@ -20,7 +20,6 @@ table#list-table
     th= Cardbill.human_attribute_name('transdate')
     th= Cardbill.human_attribute_name('totalamount')
     th= Cardbill.human_attribute_name('storename')
-    th= Cardbill.human_attribute_name('storeaddr')
     th= Cardbill.human_attribute_name('approveno')
     th.link_button_area
 
@@ -35,8 +34,6 @@ table#list-table
           = number_to_currency cardbill.totalamount
         td
           =h cardbill.storename
-        td
-          =h cardbill.storeaddr
         td
           =h cardbill.approveno
         td.link_button_area

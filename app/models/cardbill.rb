@@ -3,6 +3,7 @@
 class Cardbill < ActiveRecord::Base
   default_scope order('transdate desc')
 
+  has_one :card_history
   belongs_to :creditcard
   has_many :expense_reports, as: :target
 
@@ -22,8 +23,6 @@ class Cardbill < ActiveRecord::Base
   validates_presence_of :approveno
   validates_numericality_of :totalamount
   validates_numericality_of :amount
-  validates_numericality_of :servicecharge
-  validates_numericality_of :vat
 
   before_save :strip_approve_no
   def strip_approve_no
@@ -52,7 +51,7 @@ class Cardbill < ActiveRecord::Base
 
     def search_by_text(query)
       query = "%#{query}%"
-      where('storename like ? OR storeaddr like ?', query, query)
+      where('storename like ?', query)
     end
 
     def search_by_creditcard(query)

@@ -1,9 +1,59 @@
 class CardHistory < ActiveRecord::Base
+  scope :latest, order('created_at DESC')
+
+  belongs_to :cardbill
   belongs_to :used, polymorphic: true, foreign_type: "card_used_history_type", foreign_key: "card_used_history_id"
   belongs_to :approved, polymorphic: true, foreign_type: "card_approved_history_type", foreign_key: "card_approved_history_id"
   belongs_to :creditcard
 
   class << self
+    def no_canceled
+     where('approved_status NOT LIKE ?', I18n.t('models.card_approved_source.cancel'))
+    end
+
+    def find_empty_cardbill
+      no_canceled.where(cardbill_id: nil)
+    end
+
+    def generate_cardbill(owner)
+      total_count = 0
+      find_empty_cardbill.each do |history|
+
+        # t.datetime "transacted_at"
+        # t.decimal  "amount",                     :precision => 10, :scale => 2
+        # t.decimal  "amount_local",               :precision => 10, :scale => 2
+        # t.decimal  "amount_dollar",              :precision => 10, :scale => 2
+        # t.string   "country"
+        # t.string   "store_name"
+        # t.string   "approved_status"
+        # t.string   "approved_number"
+        # t.date     "paid_at"
+
+        cardbill = history.creditcard.cardbills.build(
+          amount: history.amount,
+          approveno: history.approved_number,
+          totalamount: history.amount,
+          transdate: history.transacted_at,
+          storename: history.store_name
+        )
+
+        cardbill.card_history = history
+
+        report = cardbill.build_report
+
+        raise cardbill.errors.inspect if cardbill.invalid?
+
+        cardbill.save!
+
+        cardbill.report.reporters.destroy_all
+        cardbill.report.accessors.destroy_all
+        cardbill.report.permission owner, :write
+
+        total_count += 1
+      end
+      total_count
+    end
+
     def generate
       transaction do
         generate_shinhan_card_history

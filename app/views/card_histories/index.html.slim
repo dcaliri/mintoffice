@@ -1,37 +1,8 @@
 #show_command
   .btn-group
+    = link_to "카드영수증이 없는 목록 보기", [:find_empty_cardbill, :card_histories]
     = link_to t("common.title.new"), [:new, :card_history]
     = link_to "카드 사용내역 생성", [:generate, :card_histories], method: :post
 
 h2 ...
-
-- unless @card_histories.empty?
-  table#list-table
-    tr
-      th= CardHistory.human_attribute_name("creditcard_name")
-      th= CardHistory.human_attribute_name("transacted_at")
-      th= CardHistory.human_attribute_name("amount")
-      th= CardHistory.human_attribute_name("amount_local")
-      th= CardHistory.human_attribute_name("amount_dollar")
-      th= CardHistory.human_attribute_name("country")
-      th= CardHistory.human_attribute_name("store_name")
-      th= CardHistory.human_attribute_name("approved_status")
-      th= CardHistory.human_attribute_name("approved_number")
-      th= CardHistory.human_attribute_name("paid_at")
-      th.link_button_area
-    - @card_histories.each do |card_history|
-      tr.selectable.link_to*{"data-url" => card_history_path(card_history)}
-        td= card_history.creditcard_name
-        td=l card_history.transacted_at
-        td= number_to_currency card_history.amount
-        td= number_to_currency card_history.amount_local
-        td= number_to_currency card_history.amount_dollar
-        td= card_history.country
-        td= card_history.store_name
-        td= card_history.approved_status
-        td= card_history.approved_number
-        td= card_history.paid_at
-        td.link_button_area
-          = link_to t('common.button.detail_veiw'), card_history, class: 'btn btn-primary'
-- else
-  h3 카드 사용내역이 없습니다
+= render 'list'
