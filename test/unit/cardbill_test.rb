@@ -14,11 +14,8 @@ class CardbillTest < ActiveSupport::TestCase
     @valid_attributes = {
       transdate: Time.now,
       amount: 10908,
-      vat: 0,
-      servicecharge: 1092,
       totalamount: 12000,
       storename: "버터플라이",
-      storeaddr: "서울 금천구 가산동",
       approveno: 27001012,
       creditcard_id: 1
     }
@@ -128,14 +125,6 @@ class CardbillTest < ActiveSupport::TestCase
 
     cardbill = Cardbill.new(@valid_attributes)
     cardbill.amount = "test"
-    assert cardbill.invalid?
-
-    cardbill = Cardbill.new(@valid_attributes)
-    cardbill.servicecharge = "test"
-    assert cardbill.invalid?
-
-    cardbill = Cardbill.new(@valid_attributes)
-    cardbill.vat = "test"
     assert cardbill.invalid?
   end
 
