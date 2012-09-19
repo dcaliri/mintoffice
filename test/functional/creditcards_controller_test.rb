@@ -27,12 +27,7 @@ class CreditcardsControllerTest < ActionController::TestCase
     get :total
     assert_response :success
   end
-
-  test "should see excel page" do
-    get :excel
-    assert_response :success
-  end
-
+  
   def current_creditcard
     @creditcard ||= creditcards(:shinhan_card)
   end

@@ -76,16 +76,7 @@ class Cardbill < ActiveRecord::Base
     end
   end
 
-  def used
-    collection = CardUsedSource.where(approve_no: approveno)
-    return collection.first unless collection.empty?
-  end
-
-  def approved
-    collection = CardApprovedSource.where(approve_no: approveno)
-    return collection.first unless collection.empty?
-  end
-
+  
   def cardno_long
     unless self.creditcard.nil?
       self.creditcard.cardno_long
@@ -98,38 +89,4 @@ class Cardbill < ActiveRecord::Base
     totalamount - expense_reports.total_amount
   end
 
-  def approved_mismatch
-    mismatch?(:totalamount) || mismatch?(:transdate)
-  end
-
-  def mismatch?(type=nil)
-    if type == nil
-      types = [:totalamount, :transdate]
-    else
-      types = [type]
-    end
-
-    result = types.any? do |type|
-      case type
-      when :totalamount
-        approved &&  totalamount != approved.money
-      when :transdate
-        approved && transdate.between?(approved.used_at - 1.hour, approved.used_at + 1.hour) == false
-      else
-        false
-      end
-    end
-
-    result ? 'misnatch-sources' : nil
-  end
-
-  def status
-    if approved == nil || used == nil
-      "not-connected-to-sources"
-    elsif mismatch?
-      "misnatch-sources"
-    else
-      "verified"
-    end
-  end
 end

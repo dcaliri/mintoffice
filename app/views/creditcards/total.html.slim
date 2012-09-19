@@ -4,8 +4,8 @@
 - newest = Time.zone.now
 - oldest = Time.zone.now - 1.year
 
-- newest = Creditcard.newest_approved_source.to_date
-- oldest = Creditcard.oldest_approved_source.to_date
+- newest = Creditcard.newest_history_source.to_date
+- oldest = Creditcard.oldest_history_source.to_date
 
 - period = Time.zone.parse("#{newest.year}-#{newest.month}-01 00:00:00").to_date
 table#list-table
@@ -17,7 +17,7 @@ table#list-table
         = t('creditcards.total.card_detail')
   tbody
     - ([""] + newest.step(oldest, -1).to_a).each do |period|
-      - total_price = CardApprovedSource.no_canceled.by_date(period).total_price
+      - total_price = CardHistory.no_canceled.by_date(period).total_price
       - unless total_price == 0
         tr
           td
