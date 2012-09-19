@@ -20,6 +20,12 @@ class CardHistory < ActiveRecord::Base
       end
     end
 
+    def group_by_name_and_tax
+      all.group_by{|cards| cards.store_name }.map do |name, cards|
+        {name: name, tax: cards.sum{|card| card.tax || 0}}
+      end
+    end
+
     def total_price
       sum{|history| history.amount }
     end
