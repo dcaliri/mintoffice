@@ -1,4 +1,8 @@
 #show_command
+  = link_to "이용내역", @card_history.used
+  = " "
+  = link_to "승인내역", @card_history.approved
+  = " "
   = link_to t('common.title.edit'), [:edit, @card_history]
   = " "
   = link_to t('common.title.destroy'), @card_history, :method => :delete, data: {confirm: t("common.messages.delete_confirm")}

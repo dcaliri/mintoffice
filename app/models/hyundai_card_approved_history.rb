@@ -1,4 +1,6 @@
 class HyundaiCardApprovedHistory < ActiveRecord::Base  
+  has_one :card_history, as: :approved
+  
   include SpreadsheetParsable
   include SpreadsheetParsable::CardApprovedSources::Hyundai
 

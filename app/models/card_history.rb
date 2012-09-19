@@ -1,4 +1,6 @@
 class CardHistory < ActiveRecord::Base
+  belongs_to :used, polymorphic: true, foreign_type: "card_used_history_type", foreign_key: "card_used_history_id"
+  belongs_to :approved, polymorphic: true, foreign_type: "card_approved_history_type", foreign_key: "card_approved_history_id"
   belongs_to :creditcard
 
   class << self
@@ -30,6 +32,8 @@ class CardHistory < ActiveRecord::Base
         history.approved_number = approved_history.approve_no
         history.paid_at = approved_history.will_be_paied_at
 
+        history.used = used_history
+        history.approved = approved_history
         history.save!
       end
     end
@@ -55,6 +59,8 @@ class CardHistory < ActiveRecord::Base
         history.approved_number = approved_history.approve_number
         history.paid_at = used_history.approved_at
 
+        history.used = used_history
+        history.approved = approved_history
         history.save!
       end
     end
