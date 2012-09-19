@@ -9,11 +9,8 @@ class CardbillsControllerTest < ActionController::TestCase
     @valid_attributes = {
       transdate: "#{Time.zone.now}",
       amount: 10908,
-      vat: 0,
-      servicecharge: 1092,
       totalamount: 12000,
       storename: "test",
-      storeaddr: "test",
       approveno: "27001012",
       creditcard_id: 1
     }
@@ -21,11 +18,8 @@ class CardbillsControllerTest < ActionController::TestCase
     @invalid_attributes = {
       transdate: "#{Time.zone.now}",
       amount: 10908,
-      vat: 0,
-      servicecharge: 1092,
       totalamount: nil,
       storename: "test",
-      storeaddr: "test",
       approveno: "27001012",
       creditcard_id: 1
     }

@@ -6,10 +6,7 @@ class UsedVacationsController < ApplicationController
   expose(:vacation)
   expose(:used_vacations) { vacation.used }
   expose(:used_vacation)
-  expose(:employee) do 
-    vacation = vacation || UsedVacation.find(params[:id]).vacation
-    vacation.employee
-  end
+  expose(:employee) { vacation.employee }
 
   before_filter {|controller| controller.redirect_unless_me(employee)}
   before_filter :another_person_cant_access_yearly, :only => [:edit]
