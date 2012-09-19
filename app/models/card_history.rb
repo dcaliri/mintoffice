@@ -10,6 +10,19 @@ class CardHistory < ActiveRecord::Base
     def no_canceled
      where('approved_status NOT LIKE ?', I18n.t('models.card_approved_source.cancel'))
     end
+    
+    def by_date(date)
+      if date == "all" or date.nil?
+        where("")
+      else
+        date = Date.parse(date) if date.class == String && !date.blank?
+        where(paid_at: date.to_time)
+      end
+    end
+
+    def total_price
+      sum{|history| history.amount }
+    end
 
     def find_empty_cardbill
       no_canceled.where(cardbill_id: nil)
@@ -18,16 +31,6 @@ class CardHistory < ActiveRecord::Base
     def generate_cardbill(owner)
       total_count = 0
       find_empty_cardbill.each do |history|
-
-        # t.datetime "transacted_at"
-        # t.decimal  "amount",                     :precision => 10, :scale => 2
-        # t.decimal  "amount_local",               :precision => 10, :scale => 2
-        # t.decimal  "amount_dollar",              :precision => 10, :scale => 2
-        # t.string   "country"
-        # t.string   "store_name"
-        # t.string   "approved_status"
-        # t.string   "approved_number"
-        # t.date     "paid_at"
 
         cardbill = history.creditcard.cardbills.build(
           amount: history.amount,

@@ -1,7 +1,5 @@
 #show_command
-  = link_to t('card_used_sources.index.title'), card_used_sources_path(creditcard_id: @creditcard.id)
-  = " "
-  = link_to t('card_approved_sources.index.title'), card_approved_sources_path(creditcard_id: @creditcard.id)
+  = link_to "사용내역 보기", card_histories_path(creditcard_id: @creditcard.id)
   = " "
   = link_to t("common.title.edit"), edit_creditcard_path(@creditcard)
   = " "
