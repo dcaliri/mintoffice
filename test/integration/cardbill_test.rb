@@ -89,12 +89,10 @@ class CardBillTest < ActionDispatch::IntegrationTest
     click_link '수정하기'
 
     fill_in "가맹점", with: "수정된 가맹점"
-    fill_in "가맹점 주소", with: "수정된 가맹점 주소"
 
     click_button '카드 영수증 수정하기'
 
     assert(page.has_content?('수정된 가맹점'))
-    assert(page.has_content?('수정된 가맹점 주소'))
   end
 
   test 'should add permission and delete permission' do

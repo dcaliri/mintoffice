@@ -25,13 +25,10 @@ class CardApprovedTest < ActiveSupport::TestCase
 
     cardbill = current_card_approved_source.creditcard.cardbills.build(
       amount: 				used_source.price,
-      servicecharge: 	used_source.tax,
-      vat: 						used_source.tip,
       approveno: 			current_card_approved_source.approve_no,
       totalamount: 		current_card_approved_source.money,
       transdate: 			current_card_approved_source.used_at,
-      storename: 			current_card_approved_source.store_name,
-      storeaddr: 			used_source.store_addr1 + " " + used_source.store_addr2,
+      storename: 			current_card_approved_source.store_name
     )
 
     report = cardbill.build_report

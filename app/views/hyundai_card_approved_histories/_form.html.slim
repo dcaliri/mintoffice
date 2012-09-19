@@ -1,0 +1,47 @@
+
+#show_command
+  = link_to t("common.title.back"), :hyundai_card_approved_histories
+
+h2= t("common.title.#{action_name}")
+
+= form_for @approved_history, html: {class: "tabular"} do |f|
+  = f.error_messages
+  .box
+    p
+      = f.label :transacted_date
+      = f.datetime_select :transacted_date, order: [:year, :month, :day]
+    p
+      = f.label :transacted_time
+      = f.datetime_select :transacted_time, order: [:hour, :minute]
+    p
+      = f.label :card_number
+      = f.text_field :card_number
+    p
+      = f.label :money
+      = f.text_field :money
+    p
+      = f.label :money_us
+      = f.text_field :money_us
+    p
+      = f.label :card_holder_name
+      = f.text_field :card_holder_name
+    p
+      = f.label :store_name
+      = f.text_field :store_name
+    p
+      = f.label :nation
+      = f.text_field :nation
+    p
+      = f.label :status
+      = f.text_field :status
+    p
+      = f.label :approve_number
+      = f.text_field :approve_number
+    p
+      = f.label :nation_statement
+      = f.text_field :nation_statement
+    p
+      = f.label :refuse_reason
+      = f.text_field :refuse_reason
+  p
+    = f.submit

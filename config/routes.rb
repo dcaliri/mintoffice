@@ -42,6 +42,7 @@ Mintoffice::Application.routes.draw do
   draw :test
   draw :vacations
 
+
   root to: 'main#index'
 
   match ':controller/:action/:id'

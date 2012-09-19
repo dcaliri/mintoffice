@@ -112,13 +112,10 @@ class CardApprovedSource < ActiveRecord::Base
 
         cardbill = approved_source.creditcard.cardbills.build(
           amount: used_source.price,
-          servicecharge: used_source.tax.to_i,
-          vat: used_source.tip.to_i,
           approveno: approved_source.approve_no,
           totalamount: approved_source.money,
           transdate: approved_source.used_at,
           storename: approved_source.store_name,
-          storeaddr: "#{used_source.store_addr1} #{used_source.store_addr2}",
         )
 
         report = cardbill.build_report
