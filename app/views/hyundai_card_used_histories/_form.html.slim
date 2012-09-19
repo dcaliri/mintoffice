@@ -1,0 +1,62 @@
+
+#show_command
+  = link_to t("common.title.back"), :hyundai_card_used_histories
+
+h2= t("common.title.#{action_name}")
+
+= form_for @used_history, html: {class: "tabular"} do |f|
+  = f.error_messages
+  .box
+    p
+      = f.label :used_at
+      = f.datetime_select :used_at, order: [:year, :month, :day]
+    p
+      = f.label :card_no
+      = f.text_field :card_no
+    p
+      = f.label :card_holder_name
+      = f.text_field :card_holder_name
+    p
+      = f.label :store_name
+      = f.text_field :store_name
+    p
+      = f.label :tax_type
+      = f.text_field :tax_type
+    p
+      = f.label :price
+      = f.text_field :price
+    p
+      = f.label :approve_no
+      = f.text_field :approve_no
+    p
+      = f.label :sales_statement
+      = f.text_field :sales_statement
+    p
+      = f.label :nation_statement
+      = f.text_field :nation_statement
+    p
+      = f.label :money_krw
+      = f.text_field :money_krw
+    p
+      = f.label :exchange_krw
+      = f.text_field :money_krw
+    p
+      = f.label :exchange_us
+      = f.text_field :exchange_us
+    p
+      = f.label :prepayment_statement
+      = f.text_field :prepayment_statement
+    p
+      = f.label :accepted_at
+      = f.datetime_select :accepted_at, order: [:year, :month, :day]
+    p
+      = f.label :approved_at
+      = f.datetime_select :approved_at, order: [:year, :month, :day]
+    p
+      = f.label :apply_sales_statement
+      = f.text_field :apply_sales_statement
+    p
+      = f.label :purchase_statement
+      = f.text_field :purchase_statement
+  p
+    = f.submit

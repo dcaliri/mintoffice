@@ -109,6 +109,8 @@ ko:
             card_approved_source: 카드 승인내역
             card_history: 카드 사용내역
             card_used_source: 카드 이용내역
+            shinhan_card_used_history: 신한카드 이용내역
+            hyundai_card_used_history: 현대카드 이용내역
             shinhan_card_approved_history: 신한카드 승인내역
             hyundai_card_approved_history: 현대카드 승인내역
             oversea_card_approved_history: 해외카드 승인내역
@@ -248,6 +250,51 @@ ko:
                 canceled_at: 취소일자
                 purchase_status: 매입상태
                 will_be_paied_at: 결제예정일
+            shinhan_card_used_history:
+                card_no: 카드번호
+                bank_account: 결제계좌번호
+                bank_name: 결제은행명
+                card_holder_name: 카드소유자명
+                used_area: 사용구분
+                approve_no: 승인번호
+                approved_at: 승인일자
+                approved_time: 승인시간
+                sales_type: 매출종류코드
+                money_krw: 승인금액(원화)
+                money_foreign: 승인금액(외화)
+                price: 공금가액(원화)
+                tax: 부가세
+                tip: 봉사료
+                total: 총합
+                monthly_duration: 할부기간
+                exchange_krw: 외화거래일환률
+                foreign_country_code: 외화거래국가코드
+                foreign_country_name: 외화거래국가명
+                store_business_no: 가맹점사업자번호
+                store_name: 가맹점명
+                store_type: 가맹점업종명
+                store_zipcode: 가맹점우편번호
+                store_addr1: 가맹점주소1
+                store_addr2: 가맹점주소2
+                store_tel: 가맹점전화번호
+            hyundai_card_used_history:
+                used_at: 이용일자
+                card_no: 카드번호
+                card_holder_name: 이용자명
+                store_name: 가맹점명
+                tax_type: 과세유형
+                price: 이용금액
+                approve_no: 승인번호
+                sales_statement: 전표구분
+                nation_statement: 국내외구분
+                money_krw: 현지금액
+                exchange_krw: 미화금액
+                exchange_us: 미화환율
+                prepayment_statement: 선납구분
+                accepted_at: 접수일자
+                approved_at: 결제일자
+                apply_sales_statement: 전표신청
+                purchase_statement: 구매여부
             hyundai_card_approved_history:
               transacted_date: 거래일자
               transacted_time: 시각
@@ -988,6 +1035,10 @@ ko:
             title: 거래처 수정
             picture: 사업자등록증
         title: 거래처 관리
+    shinhan_card_used_histories:
+      title: 신한카드 이용내역
+    hyundai_card_used_histories:
+      title: 현대카드 이용내역
     shinhan_card_approved_histories:
       title: 신한카드 승인내역
     hyundai_card_approved_histories:

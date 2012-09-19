@@ -10,7 +10,7 @@ h3 해외카드 승인내역
 .box
   dl
     dt= OverseaCardApprovedHistory.human_attribute_name("used_at")
-    dd= @approved_history.used_at
+    dd=l @approved_history.used_at
     dt= OverseaCardApprovedHistory.human_attribute_name("approved_number")
     dd= @approved_history.approved_number
     dt= OverseaCardApprovedHistory.human_attribute_name("card_name")
@@ -20,11 +20,11 @@ h3 해외카드 승인내역
     dt= OverseaCardApprovedHistory.human_attribute_name("store_name")
     dd= number_to_currency @approved_history.store_name
     dt= OverseaCardApprovedHistory.human_attribute_name("money")
-    dd= @approved_history.money
+    dd= number_to_currency @approved_history.money
     dt= OverseaCardApprovedHistory.human_attribute_name("money_locale")
-    dd= @approved_history.money_locale
+    dd= number_to_currency @approved_history.money_locale
     dt= OverseaCardApprovedHistory.human_attribute_name("money_locale_currency")
-    dd= @approved_history.money_locale_currency
+    dd= number_to_currency @approved_history.money_locale_currency
     dt= OverseaCardApprovedHistory.human_attribute_name("money_locale_name")
     dd= @approved_history.money_locale_name
     dt= OverseaCardApprovedHistory.human_attribute_name("money_us")
@@ -34,8 +34,8 @@ h3 해외카드 승인내역
     dt= OverseaCardApprovedHistory.human_attribute_name("card_type")
     dd= @approved_history.card_type
     dt= OverseaCardApprovedHistory.human_attribute_name("refused_at")
-    dd= @approved_history.refused_at
+    dd=l @approved_history.refused_at
     dt= OverseaCardApprovedHistory.human_attribute_name("purchase_status")
     dd= @approved_history.purchase_status
     dt= OverseaCardApprovedHistory.human_attribute_name("will_be_paied_at")
-    dd= @approved_history.will_be_paied_at
+    dd=l @approved_history.will_be_paied_at

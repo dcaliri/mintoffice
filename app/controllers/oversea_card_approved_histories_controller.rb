@@ -31,6 +31,17 @@ class OverseaCardApprovedHistoriesController < ApplicationController
     render 'edit'
   end
 
+  def preview
+    @approved_histories = OverseaCardApprovedHistory.preview_stylesheet(params[:upload])
+  rescue => error
+    redirect_to [:excel, :oversea_card_approved_histories], alert: error.message
+  end
+
+  def upload
+    OverseaCardApprovedHistory.create_with_stylesheet(params[:upload])
+    redirect_to :oversea_card_approved_histories
+  end
+
   def destroy
     @approved_history = OverseaCardApprovedHistory.find(params[:id])
     @approved_history.destroy

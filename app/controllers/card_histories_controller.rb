@@ -1,6 +1,8 @@
 # encoding: UTF-8
 
 class CardHistoriesController < ApplicationController
+  include AccessorsHelper
+  
   def index
     @card_histories = CardHistory.page(params[:page])
   end
@@ -38,5 +40,19 @@ class CardHistoriesController < ApplicationController
     @card_history = CardHistory.find(params[:id])
     @card_history.destroy
     redirect_to :CardHistory
+  end
+
+  def raw
+    redirect_to params[:move_to].to_sym
+  end
+
+  def find_empty_cardbill
+    @card_histories = CardHistory.find_empty_cardbill.latest.page(params[:page])
+  end
+
+  def generate
+    owner = find_access_owner(params[:owner])
+    total_count = CardHistory.generate_cardbill(owner)
+    redirect_to :card_histories, notice: t('card_approved_sources.generate.success', owner: owner.name, amount: total_count)
   end
 end

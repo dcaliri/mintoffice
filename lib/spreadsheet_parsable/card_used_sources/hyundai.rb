@@ -17,8 +17,8 @@ module SpreadsheetParsable
         :sales_statement =>       "전표구분",
         :nation_statement =>      "국내외구분",
         :money_krw =>             "현지금액",
-        :money_foreign =>         "미화금액",
-        :exchange_krw =>          "미화환율",
+        :exchange_krw =>          "미화금액",
+        :exchange_us =>           "미화환율",
         :prepayment_statement =>  "선납구분",
         :accepted_at =>           "접수일자",
         :approved_at =>           "결재일자",
@@ -29,7 +29,7 @@ module SpreadsheetParsable
       EXCEL_KEYS ||= {}
       EXCEL_KEYS[:hyundai_card_used_sources] = {
         :approve_no => :integer,
-        :approved_at => :time,
+        # :approved_at => :time,
       }
 
       EXCEL_OPTIONS ||= {}
