@@ -42,6 +42,15 @@ Mintoffice::Application.routes.draw do
   draw :test
   draw :vacations
 
+  resources :creditcards do
+    collection do
+      get 'total'
+      get 'excel'
+      post 'preview'
+      post 'excel', :action => 'upload'
+    end
+  end
+
   resources :card_histories do
     collection do
       get 'raw'
