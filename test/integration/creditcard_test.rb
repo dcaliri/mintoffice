@@ -3,8 +3,6 @@ require 'test_helper'
 
 class CreditCardTest < ActionDispatch::IntegrationTest
   fixtures :creditcards
-  fixtures :card_approved_sources
-  fixtures :card_used_sources
   fixtures :bank_accounts
 
   test 'should visit creditcard list' do

@@ -3,8 +3,6 @@ require 'test_helper'
 
 class CardbillsControllerTest < ActionController::TestCase
   fixtures :cardbills
-  fixtures :card_approved_sources
-  fixtures :card_used_sources
 
   setup do
     @valid_attributes = {

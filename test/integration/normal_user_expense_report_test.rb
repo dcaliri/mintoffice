@@ -7,8 +7,6 @@ class NUExpenseReportTest < ActionDispatch::IntegrationTest
   fixtures :ledger_accounts
   fixtures :creditcards
   fixtures :card_histories
-  fixtures :card_used_sources
-  fixtures :card_approved_sources
   fixtures :projects
   fixtures :project_assign_infos
   fixtures :reports

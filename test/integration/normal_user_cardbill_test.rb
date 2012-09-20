@@ -4,10 +4,8 @@ require 'test_helper'
 class NUCardBillTest < ActionDispatch::IntegrationTest
   fixtures :cardbills
   fixtures :creditcards
-  fixtures :access_people
   fixtures :card_histories
-  fixtures :card_used_sources
-  fixtures :card_approved_sources
+  fixtures :access_people
   fixtures :projects
   fixtures :project_assign_infos
 
