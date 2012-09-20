@@ -26,6 +26,10 @@ class Report < ActiveRecord::Base
   include Permissionable
 
   class << self
+    def for_timeline
+      joins(:reporters).search_by_status([:reporting, :rollback]).merge(ReportPerson.by_me)
+    end
+    
     def search_by_status(status)
       status = :default if status.blank?
       
