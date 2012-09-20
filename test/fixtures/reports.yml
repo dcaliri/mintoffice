@@ -45,3 +45,9 @@ another_company_document:
     target_id: 3
     target_type: "Document"
     status: "not_reported"
+
+used_vacation:
+    id: 9
+    target_id: 1
+    target_type: "UsedVacation"
+    status: "not_reported"

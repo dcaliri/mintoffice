@@ -4,6 +4,7 @@ require 'test_helper'
 class VacationTest < ActionDispatch::IntegrationTest
   fixtures :vacations
   fixtures :used_vacations
+  fixtures :reports
 
   test 'should visit vacations list for admin' do
     visit '/'
