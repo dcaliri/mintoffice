@@ -1,9 +1,8 @@
+# encoding: UTF-8
 require 'test_helper'
 
 class CardbillsControllerTest < ActionController::TestCase
   fixtures :cardbills
-  fixtures :card_approved_sources
-  fixtures :card_used_sources
 
   setup do
     @valid_attributes = {
@@ -54,8 +53,8 @@ class CardbillsControllerTest < ActionController::TestCase
     get :show, :id => current_cardbill.id
     assert_response :success
 
-    assert_select '.box #descr #show_command a', 2
-    assert_select '.box #descr #show_command', "#{I18n.t('cardbills.show.to_use')}" + " " + "#{I18n.t('cardbills.show..to_approved')}"
+    assert_select '.box #descr #show_command a', 1
+    assert_select '.box #descr #show_command', "사용내역 보기"
   end
 
   test "should edit document" do

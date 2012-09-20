@@ -108,7 +108,6 @@ class ExpenseReportTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('5,800'))
     assert(page.has_content?('6,000'))
     assert(page.has_content?('버터플라이'))
-    assert(page.has_content?('sk트윈타워 A동'))
   end
 
   test 'should approve expense and create postings' do

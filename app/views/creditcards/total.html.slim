@@ -4,8 +4,8 @@
 - newest = Time.zone.now
 - oldest = Time.zone.now - 1.year
 
-- newest = Creditcard.newest_approved_source.to_date
-- oldest = Creditcard.oldest_approved_source.to_date
+- newest = Creditcard.newest_history_source.to_date
+- oldest = Creditcard.oldest_history_source.to_date
 
 - period = Time.zone.parse("#{newest.year}-#{newest.month}-01 00:00:00").to_date
 table#list-table
@@ -17,7 +17,7 @@ table#list-table
         = t('creditcards.total.card_detail')
   tbody
     - ([""] + newest.step(oldest, -1).to_a).each do |period|
-      - total_price = CardApprovedSource.no_canceled.by_date(period).total_price
+      - total_price = CardHistory.no_canceled.by_date(period).total_price
       - unless total_price == 0
         tr
           td
@@ -35,9 +35,9 @@ table#list-table
                   th
                     = Creditcard.human_attribute_name(:total)
                 - Creditcard.all.each do |card|
-                  - total_price = card.card_approved_sources.no_canceled.by_date(period).total_price
+                  - total_price = card.card_histories.no_canceled.by_date(period).total_price
                   - unless total_price == 0
-                    tr.selectable onclick="location.href='#{card_approved_sources_path(creditcard_id: card, will_be_paid_at: period, no_canceled: true)}'"
+                    tr.selectable onclick="location.href='#{card_histories_path(creditcard_id: card, will_be_paid_at: period, no_canceled: true)}'"
                       td
                         = card.cardholder
                       td
@@ -51,7 +51,7 @@ table#list-table
                     = CardUsedSource.human_attribute_name(:total)
                   td
                   td
-                  - approved = CardApprovedSource.by_date(period)
+                  - approved = CardHistory.by_date(period)
                   td.numrow
                     = number_to_currency approved.total_price
               tbody

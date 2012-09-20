@@ -10,7 +10,7 @@ class TaxbillsController < ApplicationController
   def total
     @purchases = Taxbill.purchases
     @sales = Taxbill.sales
-    @cards = CardUsedSource
+    @cards = CardHistory
   end
 
   def index
