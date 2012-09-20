@@ -6,6 +6,7 @@ class NUExpenseReportTest < ActionDispatch::IntegrationTest
   fixtures :postings
   fixtures :ledger_accounts
   fixtures :creditcards
+  fixtures :card_histories
   fixtures :card_used_sources
   fixtures :card_approved_sources
   fixtures :projects
@@ -26,7 +27,7 @@ class NUExpenseReportTest < ActionDispatch::IntegrationTest
   test 'should visit expense list' do
     visit '/'
     click_link '신용카드 관리'
-    click_link '카드별 승인내역'
+    click_link '카드 사용내역'
     click_link '카드영수증이 없는 목록 보기'
     click_link '신용카드 영수증 생성'
 
@@ -56,7 +57,7 @@ class NUExpenseReportTest < ActionDispatch::IntegrationTest
   test 'should show expense' do
     visit '/'
     click_link '신용카드 관리'
-    click_link '카드별 승인내역'
+    click_link '카드 사용내역'
     click_link '카드영수증이 없는 목록 보기'
     click_link '신용카드 영수증 생성'
 
@@ -87,7 +88,7 @@ class NUExpenseReportTest < ActionDispatch::IntegrationTest
   test 'should report admin' do
     visit '/'
     click_link '신용카드 관리'
-    click_link '카드별 승인내역'
+    click_link '카드 사용내역'
     click_link '카드영수증이 없는 목록 보기'
     click_link '신용카드 영수증 생성'
 
@@ -122,7 +123,7 @@ class NUExpenseReportTest < ActionDispatch::IntegrationTest
   test 'should edit expense_report' do
     visit '/'
     click_link '신용카드 관리'
-    click_link '카드별 승인내역'
+    click_link '카드 사용내역'
     click_link '카드영수증이 없는 목록 보기'
     click_link '신용카드 영수증 생성'
 
@@ -158,7 +159,7 @@ class NUExpenseReportTest < ActionDispatch::IntegrationTest
   test 'should destroy expense_report' do
     visit '/'
     click_link '신용카드 관리'
-    click_link '카드별 승인내역'
+    click_link '카드 사용내역'
     click_link '카드영수증이 없는 목록 보기'
     click_link '신용카드 영수증 생성'
 
