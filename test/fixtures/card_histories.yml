@@ -1,0 +1,7 @@
+exist_cardbill:
+    id: 1
+    creditcard_id: 1
+    cardbill_id: 1
+    amount: 12000
+    paid_at: <%= Date.today %>
+    transacted_at: <%= DateTime.now %>

@@ -5,6 +5,7 @@ class CardBillTest < ActionDispatch::IntegrationTest
   fixtures :cardbills
   fixtures :creditcards
   fixtures :access_people
+  fixtures :card_histories
   fixtures :card_used_sources
   fixtures :card_approved_sources
   fixtures :projects
@@ -39,16 +40,6 @@ class CardBillTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('카드 영수증 내역'))
   end
 
-  test 'should show used_sources' do
-    visit '/'
-    click_link '카드 영수증 목록'
-    click_link '상세보기'
-
-    click_link '사용 내역'
-
-    assert(page.has_content?('신용카드 이용내역'))
-  end
-
   test 'should create/show expense_reports' do
     visit '/'
     click_link '카드 영수증 목록'
@@ -71,14 +62,14 @@ class CardBillTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('테스트 프로젝트'))
   end
 
-  test 'should show approved_sources' do
+  test 'should show card history' do
     visit '/'
     click_link '카드 영수증 목록'
     click_link '상세보기'
 
-    click_link '승인내역'
+    click_link '사용내역 보기'
 
-    assert(page.has_content?('카드승인내역'))
+    assert(page.has_content?('카드 사용내역 정보'))
   end
 
   test 'should edit cardbill' do
