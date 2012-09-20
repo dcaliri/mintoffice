@@ -22,9 +22,18 @@ class CardHistory < ActiveRecord::Base
 
     def group_by_name_and_tax
       all.group_by{|cards| cards.store_name }.map do |name, cards|
-        {name: name, tax: cards.sum{|card| card.tax || 0}}
+        {name: name, tax: 0}
       end
     end
+
+    def oldest_at
+    resource = order('transacted_at DESC').last
+    if resource && resource.transacted_at
+      resource.transacted_at
+    else
+      Time.zone.now
+    end
+  end
 
     def total_price
       sum{|history| history.amount }
