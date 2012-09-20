@@ -1,0 +1,20 @@
+exist_cardbill:
+    id: 1
+    creditcard_id: 1
+    cardbill_id: 1
+    amount: 12000
+    paid_at: <%= Date.today %>
+    transacted_at: <%= DateTime.now %>
+    store_name: 김밥천국
+    approved_number: 111
+    approved_status: OK
+
+unexist_cardbill:
+    id: 2
+    creditcard_id: 1
+    amount: 10000
+    paid_at: <%= Date.today %>
+    transacted_at: <%= DateTime.now %>
+    store_name: 틈새라면
+    approved_number: 123
+    approved_status: OK

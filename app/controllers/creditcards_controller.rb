@@ -36,17 +36,6 @@ class CreditcardsController < ApplicationController
     render 'edit'
   end
 
-  def preview
-    @collection = Creditcard.preview_stylesheet(params[:card_type], params[:upload])
-  rescue => error
-    redirect_to [:excel, :creditcards], alert: error.message
-  end
-
-  def upload
-    Creditcard.create_with_stylesheet(params[:card_type], params[:upload])
-    redirect_to :creditcards
-  end
-
   def destroy
     @creditcard = Creditcard.find(params[:id])
     @creditcard.destroy

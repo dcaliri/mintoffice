@@ -41,57 +41,21 @@ class Creditcard < ActiveRecord::Base
   end
 
   class << self
-    def approved_per_period(query)
-      collection = CardApprovedSource.where('will_be_paied_at IS NOT NULL').order(query)
+    def history_per_period(query)
+      collection = CardHistory.where('paid_at IS NOT NULL').order(query)
       if collection.empty?
         Time.zone.now
       else
-        collection.first.will_be_paied_at
+        collection.first.paid_at
       end
     end
 
-    def newest_approved_source
-      approved_per_period('will_be_paied_at DESC')
+    def newest_history_source
+      history_per_period('paid_at DESC')
     end
 
-    def oldest_approved_source
-      approved_per_period('will_be_paied_at ASC') - 1.month
-    end
-  end
-
-  ## Excel Parser ######################################
-  include SpreadsheetParsable
-  include SpreadsheetParsable::CardUsedSources::Default
-  include SpreadsheetParsable::CardUsedSources::Hyundai
-  include SpreadsheetParsable::CardApprovedSources::Default
-  include SpreadsheetParsable::CardApprovedSources::Hyundai
-  include SpreadsheetParsable::CardApprovedSources::Oversea
-
-  def self.excel_parser(type)
-    parser_name = "#{type}_parser"
-    send(parser_name)
-  end
-
-  def self.preview_stylesheet(type, upload)
-    super(type, upload) do |class_name, query, params|
-      class_name.new(params)
-    end
-  end
-
-  def self.create_with_stylesheet(type, name)
-    super(type, name) do |class_name, query, params|
-      creditcards = Creditcard.where(:short_name => params[:card_no])
-
-      unless creditcards.empty?
-        creditcard = creditcards.first
-        collections = creditcard.send(class_name.to_s.tableize).where(query)
-        if collections.empty?
-          collections.create!(params)
-        else
-          resource = collections.first
-          resource.update_attributes!(params)
-        end
-      end
+    def oldest_history_source
+      history_per_period('paid_at ASC') - 1.month
     end
   end
 end
