@@ -63,22 +63,13 @@ class CreditCardTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('신용카드이(가) 성공적으로 업데이트 되었습니다.'))
   end
 
-  test 'should show card_used_sources' do
+  test 'should show card histories' do
     visit '/'
     click_link '신용카드 관리'
     click_link '상세보기'
-    click_link '카드별 이용내역'
+    click_link '사용내역 보기'
 
-    assert(page.has_content?('신용카드 이용내역'))
-  end
-
-  test 'should show card_approved_sources' do
-    visit '/'
-    click_link '신용카드 관리'
-    click_link '상세보기'
-    click_link '카드별 승인내역'
-
-    assert(page.has_content?('카드승인내역'))
+    assert(page.has_content?('카드 사용내역'))
   end
 
   test 'should show total' do
