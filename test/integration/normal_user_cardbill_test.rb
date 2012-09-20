@@ -51,13 +51,12 @@ class NUCardBillTest < ActionDispatch::IntegrationTest
 
     visit '/'
     click_link '카드 영수증 목록'
-    click_link '상세보기'
     
-    assert(page.has_content?('GS25'))
-    assert(page.has_content?('6,000'))
-    assert(page.has_content?('5,800'))
-    assert(page.has_content?('200'))
-    assert(page.has_content?('sk트윈타워 A동'))
+    click_link '상세보기'
+
+    assert(page.has_content?('틈새라면'))
+    assert(page.has_content?('₩10,000'))
+    assert(page.has_content?('₩10,000'))
   end
 
   test 'should edit cardbill' do
@@ -80,12 +79,10 @@ class NUCardBillTest < ActionDispatch::IntegrationTest
     click_link '수정하기'
 
     fill_in "가맹점", with: "수정된 가맹점"
-    fill_in "가맹점 주소", with: "수정된 가맹점 주소"
 
     click_button '카드 영수증 수정하기'
 
     assert(page.has_content?('수정된 가맹점'))
-    assert(page.has_content?('수정된 가맹점 주소'))
   end
 
   test 'should create/show expense_reports' do
@@ -168,9 +165,9 @@ class NUCardBillTest < ActionDispatch::IntegrationTest
 
     assert(!page.has_content?('버터플라이'))
 
-    fill_in "query", with: "GS25"
+    fill_in "query", with: "틈새라면"
     click_button "검색"
 
-    assert(page.has_content?('GS25'))
+    assert(page.has_content?('틈새라면'))
   end
 end

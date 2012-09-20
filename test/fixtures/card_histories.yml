@@ -5,6 +5,7 @@ exist_cardbill:
     amount: 12000
     paid_at: <%= Date.today %>
     transacted_at: <%= DateTime.now %>
+    store_name: 김밥천국
     approved_number: 111
     approved_status: OK
 
@@ -14,5 +15,6 @@ unexist_cardbill:
     amount: 10000
     paid_at: <%= Date.today %>
     transacted_at: <%= DateTime.now %>
+    store_name: 틈새라면
     approved_number: 123
     approved_status: OK
