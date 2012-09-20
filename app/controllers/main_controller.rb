@@ -2,7 +2,8 @@ class MainController < ApplicationController
   layout "main", :except => ['login', 'pdf']
 
   def index
-      @reports = Report.joins(:reporters).search_by_status(:default)
+      # @reports = Report.joins(:reporters).search_by_status(:default)
+      @reports = Report.joins(:reporters).search_by_status([:reporting, :rollback])
       @page = params[:page].nil? ? 0 : params[:page].to_i
       @start_day = (Time.zone.now + @page.week).beginning_of_week
       @end_day = (Time.zone.now + @page.week).end_of_week
