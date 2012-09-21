@@ -15,7 +15,7 @@ Mintoffice::Application.routes.draw do
 
       post 'export'
       get 'cardbills/generate', action: :generate_form, as: :generate_form
-      post 'cardbills/generate', action: :generate, as: :generate
+      post 'cardbills/generate', action: :generate_cardbill, as: :generate_cardbill
       get 'cardbills/empty', action: :find_empty_cardbill, as: :find_empty_cardbill
     end
   end

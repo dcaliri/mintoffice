@@ -50,7 +50,7 @@ class CardHistoriesController < ApplicationController
     @card_histories = CardHistory.find_empty_cardbill.latest.page(params[:page])
   end
 
-  def generate
+  def generate_cardbill
     owner = find_access_owner(params[:owner])
     total_count = CardHistory.generate_cardbill(owner)
     redirect_to :card_histories, notice: t('card_approved_sources.generate.success', owner: owner.name, amount: total_count)
