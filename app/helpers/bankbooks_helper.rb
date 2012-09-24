@@ -1,9 +1,13 @@
 # encoding: UTF-8
 
 module BankbooksHelper
-  def options_for_bankbooks_select(bankbook = nil)
+  def options_for_bankbooks_select(bankbook = nil, options = {})
     id = bankbook ? bankbook.id : nil
-    collection = Bankbook.no_holder
+    unless options[:no_holder]
+      collection = Bankbook.all
+    else
+      collection = Bankbook.no_holder
+    end
     collection += [bankbook] if id
 
     collection = collection.map{|resource| [resource.name, resource.id]}

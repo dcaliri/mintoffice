@@ -1,5 +1,6 @@
 class Bankbook < ActiveRecord::Base
   belongs_to :holder, polymorphic: true
+  has_many :payment_records
 
   validates :name, presence: true
   validates :number, presence: true
