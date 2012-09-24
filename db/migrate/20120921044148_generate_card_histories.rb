@@ -29,16 +29,17 @@ class GenerateCardHistories < ActiveRecord::Migration
           history = CardHistory.find_by_approved_number(used_history.approve_no)
           history = creditcard.card_histories.build unless history
 
-          transacted_at = DateTime.new(
-            used_history.approved_at.year,
-            used_history.approved_at.month,
-            used_history.approved_at.day,
-            used_history.approved_time.hour, 
-            used_history.approved_time.min,
-            used_history.approved_time.sec
-          )
+          if used_history.approved_at and used_history.approved_time
+            history.transacted_at = DateTime.new(
+              used_history.approved_at.year,
+              used_history.approved_at.month,
+              used_history.approved_at.day,
+              used_history.approved_time.hour, 
+              used_history.approved_time.min,
+              used_history.approved_time.sec
+            )
+          end
 
-          history.transacted_at = transacted_at
           history.amount = used_history.price
           history.amount_local = used_history.money_foreign
           history.amount_dollar = used_history.money_krw
@@ -65,16 +66,17 @@ class GenerateCardHistories < ActiveRecord::Migration
           history = CardHistory.find_by_approved_number(used_history.approve_no)
           history = creditcard.card_histories.build unless history
 
-          transacted_at = DateTime.new(
-            approved_history.transacted_date.year,
-            approved_history.transacted_date.month,
-            approved_history.transacted_date.day,
-            approved_history.transacted_time.hour, 
-            approved_history.transacted_time.min,
-            approved_history.transacted_time.sec
-          )
+          if approved_history.transacted_date and approved_history.transacted_time
+            history.transacted_at = DateTime.new(
+              approved_history.transacted_date.year,
+              approved_history.transacted_date.month,
+              approved_history.transacted_date.day,
+              approved_history.transacted_time.hour, 
+              approved_history.transacted_time.min,
+              approved_history.transacted_time.sec
+            )
+          end
           
-          history.transacted_at = transacted_at
           history.amount = approved_history.money
           history.amount_local = approved_history.money_us
           history.amount_dollar = approved_history.money

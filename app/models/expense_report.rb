@@ -26,7 +26,7 @@ class ExpenseReport < ActiveRecord::Base
   end
 
   def add_permission_of_project_owner
-    report.permission project.owner.person, :write if project.owner
+    report.permission project.owner.person, :write if project and project.owner
   end
 
   def make_posting
@@ -44,7 +44,7 @@ class ExpenseReport < ActiveRecord::Base
   end
 
   def approve?(person)
-    (project.owner and project.owner.person == person) or super
+    (project and project.owner and project.owner.person == person) or super
   end
 
   def access?(person, access_type = :read)
