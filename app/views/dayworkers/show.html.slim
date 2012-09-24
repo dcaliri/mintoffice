@@ -20,5 +20,5 @@ div#show_command
   = link_to t('dayworkers.find_address'), [:find_contact, dayworker]
 
 h3= '...'
-- unless dayworker.person.contact.nil?
+- if dayworker.person.contact
   = render 'contacts/item_for_employee', contact: dayworker.person.contact, menu: false
