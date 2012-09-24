@@ -184,6 +184,7 @@ ko:
                 name: 통장명
                 number: 통장번호
                 bankname: 은행명
+                bank_code: 은행 코드
                 account_holder: 예금주
             bank_transaction:
                 account: 은행계좌
