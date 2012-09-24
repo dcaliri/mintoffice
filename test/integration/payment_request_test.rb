@@ -128,7 +128,7 @@ class PaymentRequestTest < ActionDispatch::IntegrationTest
 
     click_link '지급청구 보기'
 
-    assert(page.has_content?('기업 은행'))
+    assert(page.has_content?('기업은행'))
     assert(page.has_content?('274-062855-01-012'))
     assert(page.has_content?('김 기업'))
     assert(page.has_content?('20,000'))

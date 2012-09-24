@@ -18,19 +18,22 @@ module ResourceExportable
       book = Spreadsheet::Workbook.new
       sheet = book.create_worksheet :name => 'Sheet1'
 
-      columns.each_with_index do |column, index|
-        sheet.row(0).insert index, collections.human_attribute_name(column)
+      current_row = 0
+      if self.options.header
+        columns.each_with_index do |column, index|
+          sheet.row(current_row).insert index, collections.human_attribute_name(column)
+        end
+        current_row += 1
       end
 
-      current_row = 0
       collections.all.each do |resource|
-        current_row = current_row + 1
         columns.each_with_index do |column, index|
           record = resource.send(column)
           record = record.strftime("%Y-%m-%d(%H:%m:%S)") if record.respond_to?(:strftime)
           record = number_to_currency(record) if options.krw.include?(column)
           sheet.row(current_row).insert index, record
         end
+        current_row = current_row + 1
       end
 
       book.write filename

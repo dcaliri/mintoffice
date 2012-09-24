@@ -25,6 +25,10 @@ module ResourceExportable
       opts[:krw] = to
     end
 
+    def no_header
+      opts[:header] = false
+    end
+
     def align(direction, key)
       opts[:align][direction] = key
     end
@@ -42,6 +46,7 @@ module ResourceExportable
         subtitle: "",
         layout_type: :landscape,
         krw: [],
+        header: true,
         align: {
           left: [],
           right: []

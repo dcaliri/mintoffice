@@ -51,3 +51,15 @@ used_vacation:
     target_id: 1
     target_type: "UsedVacation"
     status: "not_reported"
+
+purchase_taxbill:
+    id: 10
+    target_id: 1
+    target_type: "Taxbill"
+    status: "not_reported"
+
+sale_taxbill:
+    id: 11
+    target_id: 2
+    target_type: "Taxbill"
+    status: "not_reported"
