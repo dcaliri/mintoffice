@@ -3,10 +3,11 @@
 class PaymentRequest < ActiveRecord::Base
   belongs_to :basis, polymorphic: true
 
-  DEFAULT_COLUMNS = [:bank_name,
+  DEFAULT_COLUMNS = [:bankbook_code,
                      :account_number,
                      :account_holder,
-                     :amount
+                     :amount,
+                     :bankbook_name
                      ]
   def self.default_columns
     DEFAULT_COLUMNS
@@ -14,7 +15,18 @@ class PaymentRequest < ActiveRecord::Base
 
   include ResourceExportable
   resource_exportable_configure do |config|
+    config.no_header
     config.krw [:amount]
+  end
+
+  def bankbook_code
+    bankbook = basis.bankbook
+    bankbook.bank_code.to_s.rjust(3, '0') if bankbook
+  end
+
+  def bankbook_name
+    bankbook = basis.bankbook
+    bankbook.name if bankbook
   end
 
   def request_status
