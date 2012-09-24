@@ -13,8 +13,8 @@ h2= t("common.title.#{action_name}")
       = f.label :number
       = f.text_field :number
     p
-      = f.label :bankname
-      = f.text_field :bankname
+      = f.label :bank_code
+      = f.select :bank_code, options_for_bankname_select(@bankbook)
     p
       = f.label :account_holder
       = f.text_field :account_holder
