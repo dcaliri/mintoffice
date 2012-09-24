@@ -6,7 +6,7 @@ class PaymentRecord < ActiveRecord::Base
   before_save :save_bankook
 
   def generate_payment_request
-    PaymentRequest.generate_payment_request(self, 0) # self.total)
+    PaymentRequest.generate_payment_request(self, self.amount)
   end
 
 private
