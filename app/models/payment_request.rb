@@ -20,7 +20,7 @@ class PaymentRequest < ActiveRecord::Base
   end
 
   def bankbook_code
-    bankbook = basis.bankbook
+    bankbook = basis.bankbook rescue nil
     bankbook.bank_code.to_s.rjust(3, '0') if bankbook
   end
 
@@ -41,7 +41,7 @@ class PaymentRequest < ActiveRecord::Base
   end
 
   def bankbook_name
-    bankbook = basis.bankbook
+    bankbook = basis.bankbook rescue nil
     bankbook.name if bankbook
   end
 
