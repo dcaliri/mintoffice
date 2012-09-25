@@ -14,5 +14,5 @@ h2= t("common.title.#{action_name}")
       = f.text_field :amount
     p
       = f.label :bankbook_id
-      = f.select :bankbook_id, options_for_bankbooks_select(@payment_record.bankbook)
+      = f.select :bankbook_id, options_for_bankbooks_select(@payment_record.bankbook, no_holder: false)
   = f.submit

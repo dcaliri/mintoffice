@@ -32,16 +32,19 @@ class Report < ActiveRecord::Base
     
     def search_by_status(status)
       status = :default if status.blank?
-      
-      unless status.is_a? Array
-        case status
-        when :all
-          where("")
-        when :default
-          where('reports.status != ?', :reported).merge(ReportPerson.by_me)
-        end
-      else
+      if status.is_a? Array
         status = status.map(&:to_sym)
+      else
+        status = status.to_sym
+      end
+      
+      case status
+      when :all
+        where("")
+      when :default
+        where('reports.status != ?', :reported).merge(ReportPerson.by_me)
+      else
+        status = [status] unless status.is_a? Array
         where(status: status)
       end
     end

@@ -4,10 +4,10 @@ class PaymentRequest < ActiveRecord::Base
   belongs_to :basis, polymorphic: true
 
   DEFAULT_COLUMNS = [:bankbook_code,
-                     :account_number,
-                     :account_holder,
-                     :amount,
-                     :bankbook_name
+                     :account_number_for_excel,
+                     :amount_for_excel,
+                     :deposit_info,
+                     :withdraw_info
                      ]
   def self.default_columns
     DEFAULT_COLUMNS
@@ -20,12 +20,28 @@ class PaymentRequest < ActiveRecord::Base
   end
 
   def bankbook_code
-    bankbook = basis.bankbook
+    bankbook = basis.bankbook rescue nil
     bankbook.bank_code.to_s.rjust(3, '0') if bankbook
   end
 
+  def account_number_for_excel
+    account_number.gsub(/[^0-9]/, '')
+  end
+
+  def amount_for_excel
+    amount.to_i.to_s
+  end
+
+  def deposit_info
+    account_holder
+  end
+
+  def withdraw_info
+    Company.current_company.name
+  end
+
   def bankbook_name
-    bankbook = basis.bankbook
+    bankbook = basis.bankbook rescue nil
     bankbook.name if bankbook
   end
 
