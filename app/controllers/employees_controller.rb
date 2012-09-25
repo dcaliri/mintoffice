@@ -10,6 +10,7 @@ class EmployeesController < ApplicationController
   def index
     params[:search_type] ||= :join
     @employees = Employee.search(current_person, params[:search_type], params[:q])
+    @employees.each {|employee| save_attachment_id employee}
   end
 
   def edit_required_tag
