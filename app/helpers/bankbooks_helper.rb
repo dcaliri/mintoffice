@@ -1,14 +1,16 @@
 # encoding: UTF-8
 
 module BankbooksHelper
-  def options_for_bankbooks_select(bankbook = nil, options = {})
+  def options_for_bankbooks_select(bankbook = nil, opts = {})
+    options = {no_holder: true}.merge(opts)
+
     id = bankbook ? bankbook.id : nil
     unless options[:no_holder]
       collection = Bankbook.all
     else
       collection = Bankbook.no_holder
     end
-    collection += [bankbook] if id
+    collection += [bankbook] if id and !collection.include? bankbook
 
     collection = collection.map{|resource| [resource.name, resource.id]}
     collection += [["없음", nil]]
