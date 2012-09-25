@@ -38,7 +38,7 @@ class UsedVacation < ActiveRecord::Base
   end
 
   def self.total
-    all.sum {|vacation| vacation.period || 0}
+    # all.sum {|vacation| vacation.period || 0}
   end
 
   def self.during(range)
