@@ -8,10 +8,12 @@
 h2= t('common.title.list')
 table#list-table
   tr
+    th= Dayworker.human_attribute_name('name')
     th= Dayworker.human_attribute_name('juminno')
     th.link_button_area
     - dayworkers.each do |dayworker|
       tr.selectable.link_to*{"data-url" => dayworker_path(dayworker)}
+        td= dayworker.name
         td=h dayworker.juminno
         td.link_button_area
           = link_to t('common.button.detail_veiw'), dayworker, class: 'btn btn-primary'
