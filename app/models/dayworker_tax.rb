@@ -1,6 +1,7 @@
 class DayworkerTax < ActiveRecord::Base
-  has_one :payment_request, as: :basis
   belongs_to :dayworker, :class_name => "Dayworker", :foreign_key => "dayworker_id"
+
+  include PaymentRequestable
 
   def bankbook
     dayworker.bankbook rescue nil

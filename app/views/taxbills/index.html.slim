@@ -43,6 +43,7 @@
         th= BusinessClient.human_attribute_name('name')
         th= BusinessClient.human_attribute_name('owner')
         th= Taxbill.human_attribute_name('total')
+        th= PaymentRequest.human_attribute_name(:request_status)
         th.link_button_area
       - @taxbills.each do |taxbill|
         tr.selectable.link_to*{"data-url" => taxbill_path(taxbill)}
@@ -63,6 +64,8 @@
               td
           td class="numrow"
             =h number_to_currency taxbill.total
+          td
+            = taxbill.request_status
           td.link_button_area
             = link_to t('common.button.detail_veiw'), taxbill, class: 'btn btn-primary'
     br

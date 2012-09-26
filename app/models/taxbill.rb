@@ -1,7 +1,6 @@
 # encoding: UTF-8
 
 class Taxbill < ActiveRecord::Base
-  has_one :payment_request, as: :basis
   has_one :document, as: :owner
 
   belongs_to :taxman
@@ -11,6 +10,7 @@ class Taxbill < ActiveRecord::Base
 
   include Historiable
   include Reportable
+  include PaymentRequestable
 
   attr_accessor :document_id
   before_save :find_document_and_save
@@ -144,7 +144,6 @@ class Taxbill < ActiveRecord::Base
   def generate_payment_request
     PaymentRequest.generate_payment_request(self, total)
   end
-
 
   ## Excel Parser ######################################
   include SpreadsheetParsable
