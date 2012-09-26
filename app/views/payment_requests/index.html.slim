@@ -1,11 +1,12 @@
 - content_for :search do
   = form_tag({:action => "index"}, :method => :get) do
-    = select_tag :complete, options_for_select({'미지급 항목 보기' => false, '지급 항목 보기' => true}, params[:complete]), "onchange" => "this.form.submit()"
+    = select_tag :complete, options_for_select({'미지급 청구 목록' => false, '지급 완료 청구 목록' => true}, params[:complete]), "onchange" => "this.form.submit()"
 
 #show_command
   .btn-group
     = link_to t("common.title.new"), [:new, :payment_request]
-    = link_to "지급 완료", [:complete, :payment_requests], method: :put
+    - if params[:complete] == false
+      = link_to "모두 지급 완료 처리", [:complete, :payment_requests], method: :put
 
 h2 ...
 
