@@ -33,7 +33,11 @@ class Employee < ActiveRecord::Base
   def find_contact
     if self.contact_id
       contact = Contact.find(self.contact_id.to_i)
-      self.person.contact = contact
+      if contact.person
+        self.person = contact.person
+      else
+        self.person.contact = contact
+      end
       contact.save!
     end
   end
