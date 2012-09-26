@@ -10,6 +10,7 @@ h2= t('common.title.show')
 .box
   #descr
     ul
+      li= Dayworker.human_attribute_name('name') + " : " + dayworker.name
       li= Dayworker.human_attribute_name('juminno') + " : " + dayworker.juminno.to_s
       li= Dayworker.human_attribute_name('bankbook') + " : " + dayworker.bankbook.name rescue ""
 

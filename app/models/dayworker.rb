@@ -8,6 +8,11 @@ class Dayworker < ActiveRecord::Base
 
   attr_accessor :bankbook_id
   before_save :save_bankook
+
+  def name
+    person.contact.name rescue ""
+  end
+
 private
   def save_bankook
     unless bankbook_id.blank?
