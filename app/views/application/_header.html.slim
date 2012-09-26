@@ -42,6 +42,14 @@ div#main_nav.navbar.navbar-fixed-top
                 li= link_to t("ledger_accounts.title"), :ledger_accounts
               - if current_person.permission? 'postings'
                 li= link_to t("postings.title"), :postings
+              - if current_person.permission? 'creditcards'
+                li= link_to t("creditcards.title"), :creditcards
+              - if current_person.permission? 'dayworker_taxes'
+                li= link_to t("dayworker_taxes.title"), :dayworker_taxes
+              - if current_person.permission? 'payment_records'
+                li= link_to t("payment_records.title"), :payment_records
+              - if current_person.permission? 'payment_requests'
+                li= link_to t("payment_requests.title"), :payment_requests
 
         ul.nav
           li.dropdown
@@ -75,15 +83,11 @@ div#main_nav.navbar.navbar-fixed-top
                 li= link_to t("accounts.index.title"), :accounts
                 li= link_to t("groups.title"), :groups
                 li= link_to t("payrolls.title"), :payrolls
-                li= link_to t("creditcards.title"), :creditcards
                 li= link_to t("attachments.title"), :attachments
                 li= link_to t("permissions.title"), :permissions
                 li= link_to t("change_histories.title"), :change_histories
                 li= link_to t("holidays.title"), :holidays
-                li= link_to t("dayworker_taxes.title"), :dayworker_taxes
-                li= link_to t("payment_records.title"), :payment_records
                 li= link_to t("enrollments.title"), :enroll_reports
-                li= link_to t("payment_requests.title"), :payment_requests
                 li= link_to t("companies.title"), current_company
 
         ul.nav.pull-right
