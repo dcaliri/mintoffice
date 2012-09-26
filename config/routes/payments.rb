@@ -14,6 +14,7 @@ Mintoffice::Application.routes.draw do
 
     collection do
       post 'export'
+      put 'complete', action: :complete_all
     end
   end
 end
