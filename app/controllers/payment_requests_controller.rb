@@ -49,4 +49,9 @@ class PaymentRequestsController < ApplicationController
     @payment_request.complete!
     redirect_to @payment_request, notice: "지급을 완료하였습니다."
   end
+
+  def complete_all
+    PaymentRequest.complete!
+    redirect_to :payment_requests, notice: "지급을 완료하였습니다."
+  end
 end

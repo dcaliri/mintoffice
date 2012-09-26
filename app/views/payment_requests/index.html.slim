@@ -1,5 +1,7 @@
 #show_command
-  = link_to t("common.title.new"), [:new, :payment_request]
+  .btn-group
+    = link_to t("common.title.new"), [:new, :payment_request]
+    = link_to "지급 완료", [:complete, :payment_requests], method: :put
 
 h2 ...
 
