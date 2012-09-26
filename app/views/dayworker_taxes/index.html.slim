@@ -16,6 +16,7 @@ table#list-table
     th= DayworkerTax.human_attribute_name('amount')
     th= DayworkerTax.human_attribute_name('tax_amount')
     th= DayworkerTax.human_attribute_name('pay_amount')
+    th= PaymentRequest.human_attribute_name(:request_status)
     th.link_button_area
     - dayworker_taxes.each do |dayworker_tax|
       tr.selectable.link_to*{"data-url" => dayworker_taxis_path(dayworker_tax)}
@@ -25,5 +26,6 @@ table#list-table
         td.numrow= number_to_currency dayworker_tax.amount
         td.numrow= number_to_currency dayworker_tax.tax_amount
         td.numrow= number_to_currency dayworker_tax.pay_amount
+        td= dayworker_tax.request_status
         td.link_button_area
           = link_to t('common.button.detail_veiw'), dayworker_tax, class: 'btn btn-primary'

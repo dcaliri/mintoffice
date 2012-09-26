@@ -485,6 +485,7 @@ ko:
                 total: 총 사용금액
                 bank_account_id: 결제은행
             dayworker:
+                name: 이름
                 juminno: 주민등록번호
                 bankbook: 통장
                 bankbook_id: 통장

@@ -19,6 +19,10 @@ class PaymentRequest < ActiveRecord::Base
     config.krw [:amount]
   end
 
+  def payment_status
+    read_attribute(:payment_status).to_sym
+  end
+
   def bankbook_code
     bankbook = basis.bankbook rescue nil
     bankbook.bank_code.to_s.rjust(3, '0') if bankbook
@@ -57,17 +61,28 @@ class PaymentRequest < ActiveRecord::Base
     BankTransaction.where(out_bank_account: account_number, out: amount).first
   end
 
-  def self.generate_payment_request(basis, amount)
-    bankbook = basis.bankbook
-    new do |request|
-      if bankbook
-        request.bank_name = bankbook.bankname
-        request.account_number = bankbook.number
-        request.account_holder = bankbook.account_holder
-      end
-
-      request.amount = amount
-      request.basis = basis
+  class << self
+    def complete(status)
+      where(complete: status)
     end
+
+    def generate_payment_request(basis, amount)
+      bankbook = basis.bankbook
+      new do |request|
+        if bankbook
+          request.bank_name = bankbook.bankname
+          request.account_number = bankbook.number
+          request.account_holder = bankbook.account_holder
+        end
+
+        request.amount = amount
+        request.basis = basis
+      end
+    end
+
+    def complete!
+      self.update_all(complete: true)
+    end
+
   end
 end

@@ -1,5 +1,11 @@
+- content_for :search do
+  = form_tag({:action => "index"}, :method => :get) do
+    = select_tag :complete, options_for_select({'미지급 항목 보기' => false, '지급 항목 보기' => true}, params[:complete]), "onchange" => "this.form.submit()"
+
 #show_command
-  = link_to t("common.title.new"), [:new, :payment_request]
+  .btn-group
+    = link_to t("common.title.new"), [:new, :payment_request]
+    = link_to "지급 완료", [:complete, :payment_requests], method: :put
 
 h2 ...
 
@@ -23,6 +29,7 @@ table#list-table
 
 center
   = will_paginate @payment_requests
+
 #export-menu
   = t('common.export') + " : "
-  = link_to t('bank_transfers.export.excel'), [:export, :payment_requests], method: :post
+  = link_to t('bank_transfers.export.excel'), export_payment_requests_path(complete: params[:complete]), method: :post

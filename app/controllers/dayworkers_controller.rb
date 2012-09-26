@@ -9,7 +9,13 @@ class DayworkersController < ApplicationController
   end
 
   def select_contact
-    dayworker.person.contact = Contact.find(params[:contact])
+    contact = Contact.find(params[:contact])
+    if contact.person
+      dayworker.person = contact.person
+    else
+      dayworker.person.contact = contact
+    end
+
     dayworker.save!
     redirect_to dayworker
   end

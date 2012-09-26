@@ -6,6 +6,6 @@ fixture:
   amount: 11000
   created_at: <%= Time.zone.now %>
   updated_at: <%= Time.zone.now %>
-  complete:
+  complete: false
   basis_type:
   basis_id:
