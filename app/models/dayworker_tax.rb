@@ -7,6 +7,6 @@ class DayworkerTax < ActiveRecord::Base
   end
 
   def generate_payment_request
-    PaymentRequest.generate_payment_request(self, amount)
+    PaymentRequest.generate_payment_request(self, pay_amount)
   end
 end
