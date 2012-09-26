@@ -7,6 +7,5 @@ fixture:
   created_at: <%= Time.zone.now %>
   updated_at: <%= Time.zone.now %>
   complete: false
-  # complete:
   basis_type:
   basis_id:
