@@ -37,7 +37,10 @@ class Payment < ActiveRecord::Base
   end
 
   def self.by_month(period)
-    where(pay_finish: (period..period.end_of_month))
+    start = period.change(month: period.month - 1, day: Company.current_company.payday - 1)
+    finish = period.change(day: Company.current_company.payday)
+
+    where(pay_finish: (start..finish))
   end
 
   def self.pay_from(period)

@@ -14,7 +14,6 @@ class UsedVacationsController < ApplicationController
   end
 
   before_filter {|controller| controller.redirect_unless_me(employee)}
-  before_filter :another_person_cant_access_yearly, :only => [:edit]
 
   def show
     @used_vacation = UsedVacation.find(params[:id])
@@ -48,9 +47,5 @@ class UsedVacationsController < ApplicationController
   def destroy
     used_vacation.destroy
     redirect_to vacation_path(employee)
-  end
-
-  def another_person_cant_access_yearly
-    force_redirect if !current_person.admin?
   end
 end
