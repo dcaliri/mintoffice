@@ -1,8 +1,10 @@
 # encoding: UTF-8
 
 class PaymentRequestsController < ApplicationController
+  before_filter :set_complete_params, only: [:index, :export]
+
   def index
-    @payment_requests = PaymentRequest.page(params[:page])
+    @payment_requests = PaymentRequest.complete(params[:complete]).page(params[:page])
   end
 
   def show
@@ -40,7 +42,7 @@ class PaymentRequestsController < ApplicationController
   end
 
   def export
-    @payment_requests = PaymentRequest.scoped
+    @payment_requests = PaymentRequest.complete(params[:complete])
     send_file @payment_requests.export(:xls)
   end
 
@@ -53,5 +55,11 @@ class PaymentRequestsController < ApplicationController
   def complete_all
     PaymentRequest.complete!
     redirect_to :payment_requests, notice: "지급을 완료하였습니다."
+  end
+
+  private
+  def set_complete_params
+    params[:complete] ||= false
+    params[:complete] = (params[:complete] == 'true')
   end
 end
