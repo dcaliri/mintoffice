@@ -21,6 +21,7 @@ div#main_nav.navbar.navbar-fixed-top
                   li= link_to t("commutes.index.title"), commute_path(current_employee)
                 - if current_person.has_payment_info
                   li= link_to t("payments.title"), payment_path(current_employee)
+                li= link_to t("payrolls.title"), :payrolls
 
         ul.nav
           li.dropdown
@@ -82,7 +83,6 @@ div#main_nav.navbar.navbar-fixed-top
                 li= link_to t("payments.title"), :payments
                 li= link_to t("accounts.index.title"), :accounts
                 li= link_to t("groups.title"), :groups
-                li= link_to t("payrolls.title"), :payrolls
                 li= link_to t("attachments.title"), :attachments
                 li= link_to t("permissions.title"), :permissions
                 li= link_to t("change_histories.title"), :change_histories
