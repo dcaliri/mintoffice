@@ -17,6 +17,9 @@ h2
       = f.label :juminno, Employee.human_attribute_name('juminno')
       = f.text_field :juminno
     p
+      = f.label :bankbook_name
+      = f.select :bankbook_id, options_for_bankbooks_select(@employee.bankbook)
+    p
       = f.label :joined_on, Employee.human_attribute_name('joined_on')
       = f.date_select :joined_on, :order => [:year, :month, :day]
     p

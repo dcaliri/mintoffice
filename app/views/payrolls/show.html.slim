@@ -1,20 +1,25 @@
 
 #show_command
-  = link_to t("common.title.new"), new_payroll_payroll_item_path(payroll)
+  = link_to "지급청구 보기", payroll.payment_request
   = " "
-  = link_to t('common.title.edit'), edit_payroll_path(payroll)
-  = " "
-  = link_to t('common.title.list'), [:payrolls]
+  - if current_person.admin?
+    = link_to t("common.title.new"), new_payroll_payroll_item_path(payroll)
+    = " "
+    = link_to t('common.title.edit'), edit_payroll_path(payroll)
+    = " "
+  = link_to t('common.title.list'), :payrolls
 h2= "#{payroll.payday} : #{payroll.employee.fullname}"
 
 table#list-table
   tr
     th= PayrollCategory.human_attribute_name("title")
     th= PayrollItem.human_attribute_name("amount")
-    th= t("common.menu")
+    - if current_person.admin?
+      th= t("common.menu")
   - payroll.items.each do |item|
     tr
       td= item.payroll_category.title rescue ""
       td.numrow= number_to_currency item.amount
-      td= link_to t("common.title.edit"), edit_payroll_payroll_item_path(payroll,item)
+      - if current_person.admin?
+        td= link_to t("common.title.edit"), edit_payroll_payroll_item_path(payroll,item)
     

@@ -66,8 +66,7 @@ class PaymentRequest < ActiveRecord::Base
       where(complete: status)
     end
 
-    def generate_payment_request(basis, amount)
-      bankbook = basis.bankbook
+    def generate_payment_request(basis, bankbook, amount)
       new do |request|
         if bankbook
           request.bank_name = bankbook.bankname

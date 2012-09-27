@@ -550,6 +550,7 @@ ko:
                 joined_on: 입사일
                 email: 이메일
                 listed: 목록 출력 여부
+                bankbook_name: 통장
                 localized_status:
                   reporting: 입사지원 심사중
                   rollback: 입사지원 수정 요청
@@ -567,6 +568,9 @@ ko:
                 email: "이메일주소"
             payroll:
                 payday: 지급일
+                payable: 지급항목
+                deductable: 공제항목
+                difference: 차인지급액
             payroll_category:
                 prtype: 지급/차감 구분
                 code: 연결코드

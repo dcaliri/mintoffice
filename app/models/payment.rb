@@ -2,6 +2,7 @@
 
 class Payment < ActiveRecord::Base
   belongs_to :employee
+  belongs_to :payroll
 
   before_save :modify_bonus_date
   def modify_bonus_date
@@ -28,6 +29,7 @@ class Payment < ActiveRecord::Base
   def self.payment_in?(from, to)
     where(pay_finish: from..to)
   end
+
   def self.total_bonus(bonuses)
     bonuses.sum {|after| after[1].to_i }
   end
@@ -42,6 +44,33 @@ class Payment < ActiveRecord::Base
 
     where(pay_finish: (start..finish))
   end
+
+  def self.generate_payrolls(payday)
+    payments = by_month(payday)
+    grouped = payments.group_by{|payment| payment.employee}
+
+    basic_category = PayrollCategory.find_by_code(1001)
+    bonus_category = PayrollCategory.find_by_code(1002)
+
+    grouped.each do |employee, employees_payments|
+      payroll = employee.payrolls.build(payday: payday)
+      employees_payments.each do |payment|
+        next if payment.payroll
+
+        category_id = if payment.payment_type.to_sym == :default
+                        basic_category.id
+                      else
+                        bonus_category.id
+                      end
+        
+        payroll.items.build(amount: payment.amount, payroll_category_id: category_id)
+        payroll.payments << payment
+      end
+
+      payroll.save! unless payroll.items.length == 0
+    end
+  end
+
 
   def self.pay_from(period)
     where('pay_finish > ?', period)
