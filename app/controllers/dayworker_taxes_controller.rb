@@ -12,6 +12,11 @@ class DayworkerTaxesController < ApplicationController
     redirect_to dayworker_tax
   end
 
+  def destroy
+    dayworker_tax.destroy
+    redirect_to :dayworker_taxes
+  end
+
   def payment_request
     @payment_request = dayworker_tax.generate_payment_request
     render 'payment_requests/new'

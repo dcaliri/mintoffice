@@ -50,7 +50,7 @@ class PaymentRequest < ActiveRecord::Base
   end
 
   def request_status
-    self.complete ? "완료" : "미완료"
+    self.complete ? "지급 완료" : "미완료"
   end
 
   def complete!
