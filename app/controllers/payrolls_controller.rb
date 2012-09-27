@@ -10,7 +10,7 @@ class PayrollsController < ApplicationController
 
   def index
     @payrolls = Payroll.by_period(@period)
-    @payrolls = @payrolls.by_employee(current_person.employee)
+    @payrolls = @payrolls.by_employee(current_person.employee) unless current_person.admin?
   end
 
   def create
