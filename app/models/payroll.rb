@@ -19,6 +19,10 @@ class Payroll < ActiveRecord::Base
         scoped
       end
     end
+
+    def by_employee(employee)
+      where(employee_id: employee.id)
+    end
   end
 
   def payable
