@@ -1,3 +1,7 @@
+- content_for :search do
+  = form_tag :payrolls, method: :get do
+    = select_tag :period, options_for_payroll_period_select(params[:period]), "onchange" => "this.form.submit()"
+
 #show_command
   = link_to t("payroll_categories.title"), :payroll_categories
   = " "
@@ -5,7 +9,7 @@
 
 h2 ...
 
-- unless payrolls.empty?
+- unless @payrolls.empty?
   table#list-table
     tr
       th= Payroll.human_attribute_name("payday")
@@ -14,7 +18,7 @@ h2 ...
       th= Payroll.human_attribute_name("deductable")
       th= Payroll.human_attribute_name("difference")
       th.link_button_area
-    - payrolls.each do |payroll|
+    - @payrolls.each do |payroll|
       tr.selectable.link_to*{"data-url" => payroll_path(payroll)}
         td= payroll.payday
         td= payroll.employee.fullname
