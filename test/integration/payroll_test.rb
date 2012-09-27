@@ -34,6 +34,7 @@ class PayrollTest < ActionDispatch::IntegrationTest
   test 'should edit payroll' do
     visit '/'
     click_link '급여대장'
+    
     click_link '상세보기'
 
     click_link '수정하기'
