@@ -10,11 +10,17 @@ h2 ...
     tr
       th= Payroll.human_attribute_name("payday")
       th= Employee.human_attribute_name("fullname")
+      th= Payroll.human_attribute_name("payable")
+      th= Payroll.human_attribute_name("deductable")
+      th= Payroll.human_attribute_name("difference")
       th.link_button_area
     - payrolls.each do |payroll|
       tr.selectable.link_to*{"data-url" => payroll_path(payroll)}
         td= payroll.payday
         td= payroll.employee.fullname
+        td= number_to_currency payroll.payable_total
+        td= number_to_currency payroll.deductable_total
+        td= number_to_currency payroll.difference_total
         td.link_button_area
           = link_to t('common.button.detail_veiw'), payroll, class: 'btn btn-primary'
 - else

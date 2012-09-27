@@ -568,6 +568,9 @@ ko:
                 email: "이메일주소"
             payroll:
                 payday: 지급일
+                payable: 지급항목
+                deductable: 공제항목
+                difference: 차인지급액
             payroll_category:
                 prtype: 지급/차감 구분
                 code: 연결코드
