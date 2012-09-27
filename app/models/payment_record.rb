@@ -4,6 +4,6 @@ class PaymentRecord < ActiveRecord::Base
   include PaymentRequestable
 
   def generate_payment_request
-    PaymentRequest.generate_payment_request(self, self.amount)
+    PaymentRequest.generate_payment_request(self, bankbook, self.amount)
   end
 end

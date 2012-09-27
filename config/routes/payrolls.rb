@@ -4,6 +4,8 @@ Mintoffice::Application.routes.draw do
     collection do
       get 'generate_form'
       post 'generate'
+
+      post 'generate_payment_request'
     end
 
     resources :payroll_items, path: "items"

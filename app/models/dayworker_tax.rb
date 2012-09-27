@@ -3,11 +3,8 @@ class DayworkerTax < ActiveRecord::Base
 
   include PaymentRequestable
 
-  def bankbook
-    dayworker.bankbook rescue nil
-  end
-
   def generate_payment_request
-    PaymentRequest.generate_payment_request(self, pay_amount)
+    bankbook = dayworker.bankbook rescue nil
+    PaymentRequest.generate_payment_request(self, bankbook, pay_amount)
   end
 end

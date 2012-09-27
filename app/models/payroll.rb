@@ -6,9 +6,10 @@ class Payroll < ActiveRecord::Base
   has_many :payments
   accepts_nested_attributes_for :items, :allow_destroy => :true, :reject_if => REJECT_IF_EMPTY
 
-
   scope :latest, order('payday DESC')
   scope :oldest, order('payday ASC')
+
+  include PaymentRequestable
 
   class << self
     def by_period(period)
@@ -22,6 +23,20 @@ class Payroll < ActiveRecord::Base
 
     def by_employee(employee)
       where(employee_id: employee.id)
+    end
+
+    def generate_payment_request
+      transaction do
+        find_each do |payroll|
+          next if payroll.payment_request
+
+          bankbook = payroll.employee.bankbook
+          total = payroll.difference_total
+          request = PaymentRequest.generate_payment_request(payroll, bankbook, total)
+          
+          request.save!
+        end
+      end
     end
   end
 

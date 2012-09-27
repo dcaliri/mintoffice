@@ -9,6 +9,8 @@
     = " "
     = link_to "급여대장 생성", [:generate_form, :payrolls]
     = " "
+    = link_to "청구 생성", [:generate_payment_request, :payrolls], method: :post
+    = " "
     = link_to t('common.title.new'), [:new, :payroll]
 
 h2 ...
@@ -21,6 +23,7 @@ h2 ...
       th= Payroll.human_attribute_name("payable")
       th= Payroll.human_attribute_name("deductable")
       th= Payroll.human_attribute_name("difference")
+      th= PaymentRequest.human_attribute_name(:request_status)
       th.link_button_area
     - @payrolls.each do |payroll|
       tr.selectable.link_to*{"data-url" => payroll_path(payroll)}
@@ -29,6 +32,7 @@ h2 ...
         td= number_to_currency payroll.payable_total
         td= number_to_currency payroll.deductable_total
         td= number_to_currency payroll.difference_total
+        td= payroll.request_status
         td.link_button_area
           = link_to t('common.button.detail_veiw'), payroll, class: 'btn btn-primary'
 - else
