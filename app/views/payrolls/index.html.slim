@@ -5,6 +5,8 @@
 #show_command
   = link_to t("payroll_categories.title"), :payroll_categories
   = " "
+  = link_to "급여대장 생성", [:generate_form, :payrolls]
+  = " "
   = link_to t('common.title.new'), [:new, :payroll]
 
 h2 ...

@@ -3,6 +3,7 @@ class Payroll < ActiveRecord::Base
 
   belongs_to :employee
   has_many :items, :class_name => "PayrollItem"
+  has_many :payments
   accepts_nested_attributes_for :items, :allow_destroy => :true, :reject_if => REJECT_IF_EMPTY
 
 

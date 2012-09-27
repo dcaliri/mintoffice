@@ -1,0 +1,9 @@
+#show_command
+  = link_to t('common.title.back'), :payrolls
+
+= form_tag [:generate, :payrolls] do
+  p
+    = label_tag :payday, "지급일"
+    = text_field_tag :payday, current_company.payday
+  p
+    = submit_tag "급여대장 생성"
