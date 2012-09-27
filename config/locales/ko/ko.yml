@@ -550,6 +550,7 @@ ko:
                 joined_on: 입사일
                 email: 이메일
                 listed: 목록 출력 여부
+                bankbook_name: 통장
                 localized_status:
                   reporting: 입사지원 심사중
                   rollback: 입사지원 수정 요청
