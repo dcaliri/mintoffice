@@ -2,7 +2,7 @@ class Dayworker < ActiveRecord::Base
   belongs_to :person
   
   include Attachmentable
-  include Bankbookable
+  belongs_to :bankbook
 
   before_create :create_person_if_not
 

@@ -5,11 +5,16 @@ module BankbooksHelper
     options = {no_holder: true}.merge(opts)
 
     id = bankbook ? bankbook.id : nil
-    unless options[:no_holder]
-      collection = Bankbook.all
+    unless options[:collection]
+      unless options[:no_holder]
+        collection = Bankbook.scoped
+      else
+        collection = Bankbook.no_holder
+      end
     else
-      collection = Bankbook.no_holder
+      collection = options[:collection]
     end
+
     collection += [bankbook] if id and !collection.include? bankbook
 
     collection = collection.map{|resource| [resource.name, resource.id]}
