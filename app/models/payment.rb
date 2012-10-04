@@ -47,27 +47,34 @@ class Payment < ActiveRecord::Base
 
   def self.generate_payrolls(payday)
     payments = by_month(payday)
+    
     grouped = payments.group_by{|payment| payment.employee}
 
     basic_category = PayrollCategory.find_by_code(1001)
     bonus_category = PayrollCategory.find_by_code(1002)
+
+    basic_amount = 0
+    bonus_amount = 0
 
     grouped.each do |employee, employees_payments|
       payroll = employee.payrolls.build(payday: payday)
       employees_payments.each do |payment|
         next if payment.payroll or payment.amount == 0
 
-        category_id = if payment.payment_type.to_sym == :default
-                        basic_category.id
-                      else
-                        bonus_category.id
-                      end
-        
-        payroll.items.build(amount: payment.amount, payroll_category_id: category_id)
-        payroll.payments << payment
+        if payment.payment_type.to_sym == :default
+          basic_amount += payment.amount
+        else
+          bonus_amount += payment.amount
+        end
       end
 
-      payroll.save! unless payroll.items.length == 0 or payroll.items.total == 0
+      next if basic_amount == 0 and bonus_amount == 0
+      next if basic_amount + bonus_amount == 0
+
+      payroll.items.build(amount: basic_amount, payroll_category_id: basic_category) if basic_amount
+      payroll.items.build(amount: bonus_amount, payroll_category_id: bonus_category) if bonus_amount
+
+      payroll.save!
     end
   end
 
