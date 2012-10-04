@@ -7,6 +7,8 @@
     = " "
     = link_to t('common.title.edit'), edit_payroll_path(payroll)
     = " "
+    = link_to t('common.title.destroy'), payroll, :method => :delete, data: {confirm: t("common.messages.delete_confirm")}
+    = " "
   = link_to t('common.title.list'), :payrolls
 h2= "#{payroll.payday} : #{payroll.employee.fullname}"
 
