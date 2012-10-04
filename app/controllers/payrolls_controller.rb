@@ -2,6 +2,7 @@
 
 class PayrollsController < ApplicationController
   before_filter :find_period
+  before_filter :redirect_unless_me, except: [:index, :generate, :generate_payment_request, :generate_form]
   def redirect_unless_permission; end
 
   expose (:payroll)
@@ -31,9 +32,11 @@ class PayrollsController < ApplicationController
   end
 
   def generate_payment_request
-    @no_bankbook_employees = Employee.no_bankbook
+    @payrolls = Payroll.by_period(@period)
+    @no_bankbook_employees = @payrolls.no_bankbook
+
     if @no_bankbook_employees.empty?
-      Payroll.generate_payment_request
+      @payrolls.generate_payment_request
       redirect_to :back, notice: "성공적으로 지급 청구를 생성하였습니다."
     else
       employess = @no_bankbook_employees.map{|employee| employee.fullname}.join(', ')
@@ -45,5 +48,11 @@ class PayrollsController < ApplicationController
   private
   def find_period
     @period = Date.parse(params[:period]) if params[:period].present?
+  end
+
+  def redirect_unless_me
+    unless current_person.admin? or payroll.employee.person == current_person
+      force_redirect
+    end
   end
 end

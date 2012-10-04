@@ -1,9 +1,7 @@
 #show_command
-  - if @payment_record.payment_request
-    = link_to "지급청구 보기", @payment_record.payment_request
-  - else
+  - unless @payment_record.payment_request
     = link_to "지급청구 생성", [:payment_request, @payment_record]
-  = " "
+    = " "
 
   = link_to t('common.title.edit'), [:edit, @payment_record]
   = " "
@@ -18,3 +16,7 @@ dl
   =dtdd @payment_record, "amount"
   dt= @payment_record.class.human_attribute_name(:bankbook)
   dd= @payment_record.bankbook.name rescue ""
+- if @payment_record.payment_request
+  h3 관련 문서
+  ul
+    li= link_to "지급청구 보기", @payment_record.payment_request  

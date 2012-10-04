@@ -1,16 +1,14 @@
 - title t('dayworker_taxes.title')
 
 #show_command
-  - if dayworker_tax.payment_request
-    = link_to "지급청구 보기", dayworker_tax.payment_request
-  - else
+  - unless dayworker_tax.payment_request
     = link_to "지급청구 생성", [:payment_request, dayworker_tax]
   = " "
   = link_to t('common.title.edit'), edit_dayworker_taxis_path(dayworker_tax)
   = " "
-  = link_to t('common.title.list'), dayworker_taxes_path
-  = " "
   = link_to t('common.title.destroy'), dayworker_tax, method: :delete, confirm: "Are you sure?"
+  = " "
+  = link_to t('common.title.list'), dayworker_taxes_path
 
 h2= t('common.title.show')
 
@@ -20,3 +18,8 @@ dl
   =dtdd dayworker_tax, "amount"
   =dtdd dayworker_tax, "tax_amount"
   =dtdd dayworker_tax, "pay_amount"
+
+- if dayworker_tax.payment_request
+  h3 관련문서
+  ul
+    li= link_to "지급청구 보기", dayworker_tax.payment_request
