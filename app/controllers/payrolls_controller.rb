@@ -32,9 +32,11 @@ class PayrollsController < ApplicationController
   end
 
   def generate_payment_request
-    @no_bankbook_employees = Employee.no_bankbook
+    @payrolls = Payroll.by_period(@period)
+    @no_bankbook_employees = @payrolls.no_bankbook
+
     if @no_bankbook_employees.empty?
-      Payroll.generate_payment_request
+      @payrolls.generate_payment_request
       redirect_to :back, notice: "성공적으로 지급 청구를 생성하였습니다."
     else
       employess = @no_bankbook_employees.map{|employee| employee.fullname}.join(', ')

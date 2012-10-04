@@ -27,7 +27,7 @@ class Payroll < ActiveRecord::Base
 
     def generate_payment_request
       transaction do
-        find_each do |payroll|
+        all.each do |payroll|
           next if payroll.payment_request
 
           bankbook = payroll.employee.bankbook
@@ -37,6 +37,11 @@ class Payroll < ActiveRecord::Base
           request.save!
         end
       end
+    end
+
+    def no_bankbook
+      employees = includes(employee: :bankbook).merge(Employee.not_retired).map{|payroll| payroll.employee}.uniq
+      employees.select{|resource| !resource.bankbook}
     end
   end
 
