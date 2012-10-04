@@ -39,7 +39,7 @@ class Payment < ActiveRecord::Base
   end
 
   def self.by_month(period)
-    start = period.change(month: period.month - 1, day: Company.current_company.payday - 1)
+    start = period.change(day: Company.current_company.payday - 1) - 1.month
     finish = period.change(day: Company.current_company.payday)
 
     where(pay_finish: (start..finish))
@@ -55,7 +55,7 @@ class Payment < ActiveRecord::Base
     grouped.each do |employee, employees_payments|
       payroll = employee.payrolls.build(payday: payday)
       employees_payments.each do |payment|
-        next if payment.payroll
+        next if payment.payroll or payment.amount == 0
 
         category_id = if payment.payment_type.to_sym == :default
                         basic_category.id
@@ -67,7 +67,7 @@ class Payment < ActiveRecord::Base
         payroll.payments << payment
       end
 
-      payroll.save! unless payroll.items.length == 0
+      payroll.save! unless payroll.items.length == 0 or payroll.items.total == 0
     end
   end
 

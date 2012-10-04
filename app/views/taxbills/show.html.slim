@@ -2,9 +2,7 @@
 
 #show_command
   - if taxbill.report.status == :reported
-    - if taxbill.payment_request
-      = link_to "지급청구 보기", taxbill.payment_request
-    - else
+    - unless taxbill.payment_request
       = link_to "지급청구 생성", [:payment_request, taxbill]
 
   = " "
@@ -42,6 +40,10 @@ h2
   - if taxbill.document
     = render "shared/attachments/detail", :target => taxbill.document
   .clear
+  - if taxbill.report.status == :reported and taxbill.payment_request
+    h3 관련 문서
+    ul
+      li= link_to "지급청구 보기", taxbill.payment_request
 
   div
     h3

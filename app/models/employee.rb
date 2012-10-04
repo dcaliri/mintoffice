@@ -77,7 +77,7 @@ class Employee < ActiveRecord::Base
     end
 
     def not_retired
-      where("retired_on IS NULL")
+      where(retired_on: nil)
     end
 
     def enabled
