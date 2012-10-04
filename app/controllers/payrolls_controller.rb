@@ -2,6 +2,7 @@
 
 class PayrollsController < ApplicationController
   before_filter :find_period
+  before_filter :redirect_unless_me, except: [:index, :generate, :generate_payment_request, :generate_form]
   def redirect_unless_permission; end
 
   expose (:payroll)
@@ -45,5 +46,11 @@ class PayrollsController < ApplicationController
   private
   def find_period
     @period = Date.parse(params[:period]) if params[:period].present?
+  end
+
+  def redirect_unless_me
+    unless current_person.admin? or payroll.employee.person == current_person
+      force_redirect
+    end
   end
 end
