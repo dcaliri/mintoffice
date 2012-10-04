@@ -67,7 +67,7 @@ class Payment < ActiveRecord::Base
         payroll.payments << payment
       end
 
-      payroll.save! unless payroll.items.length == 0
+      payroll.save! unless payroll.items.length == 0 or payroll.items.total == 0
     end
   end
 
