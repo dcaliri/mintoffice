@@ -15,12 +15,17 @@ class PayrollsController < ApplicationController
 
   def create
     payroll.save!
-    redirect_to [:payrolls]
+    redirect_to :payrolls
   end
 
   def update
     payroll.save!
-    redirect_to [:payroll]
+    redirect_to :payroll
+  end
+
+  def destroy
+    payroll.destroy
+    redirect_to :payrolls
   end
 
   def generate
