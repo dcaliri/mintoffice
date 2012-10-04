@@ -4,3 +4,4 @@ fixture:
     created_at: <%= Time.zone.now %>
     updated_at: <%= Time.zone.now %>
     person_id: 1
+    bankbook_id: 3
