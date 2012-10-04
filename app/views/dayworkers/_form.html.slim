@@ -13,7 +13,7 @@ h2= t("common.title.#{form_type}")
       = f.text_field :juminno
     p
       = f.label :bankbook_id
-      = f.select :bankbook_id, options_for_bankbooks_select(dayworker.bankbook)
+      = f.select :bankbook_id, options_for_bankbooks_select(dayworker.bankbook, collection: Bankbook.select{|bankbook| !bankbook.dayworker})
     p
       = render 'shared/attachments/form', form: f
   = f.submit t("dayworkers.#{form_type}.submit")

@@ -22,7 +22,9 @@ class Employee < ActiveRecord::Base
   include Historiable
   include Attachmentable
   include EmploymentProof
-  include Bankbookable
+  
+  belongs_to :bankbook
+  delegate :name, :to => :bankbook, prefix: true, allow_nil: true
 
   validates_format_of :juminno, :with => /^\d{6}-\d{7}$/, :message => I18n.t('employees.error.juminno_invalid')
   validates_uniqueness_of :juminno

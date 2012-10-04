@@ -3,6 +3,8 @@
 class Bankbook < ActiveRecord::Base
   belongs_to :holder, polymorphic: true
   has_many :payment_records
+  has_one :employee
+  has_one :dayworker
 
   validates :name, presence: true
   validates :number, presence: true

@@ -29,8 +29,6 @@ hsbc:
   account_holder: 김 기업
   created_at: <%= Time.zone.now %>
   updated_at: <%= Time.zone.now %>
-  holder_type: Dayworker
-  holder_id: 1
   bankname: HSBC 은행
   bank_code: 54
 
