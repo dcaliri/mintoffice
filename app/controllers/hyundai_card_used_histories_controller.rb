@@ -1,6 +1,12 @@
 class HyundaiCardUsedHistoriesController < ApplicationController
   def index
-    @used_histories = HyundaiCardUsedHistory.page(params[:page])
+    collection = unless params[:creditcard_id].blank?
+              Creditcard.find(params[:creditcard_id]).hyundai_card_used_histories
+             else
+              HyundaiCardUsedHistory.scoped
+             end
+
+    @used_histories = collection.page(params[:page])
   end
 
   def show

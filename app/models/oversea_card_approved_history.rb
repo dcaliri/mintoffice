@@ -1,4 +1,6 @@
 class OverseaCardApprovedHistory < ActiveRecord::Base
+  belongs_to :creditcard
+  
   include SpreadsheetParsable
   include SpreadsheetParsable::CardApprovedSources::Oversea
 

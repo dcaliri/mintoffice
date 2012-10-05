@@ -1,4 +1,5 @@
 class ShinhanCardUsedHistory < ActiveRecord::Base
+  belongs_to :creditcard
   has_one :card_history, as: :used
   
   include SpreadsheetParsable

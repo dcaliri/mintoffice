@@ -1,6 +1,12 @@
 class ShinhanCardApprovedHistoriesController < ApplicationController
   def index
-    @approved_histories = ShinhanCardApprovedHistory.page(params[:page])
+    collection = unless params[:creditcard_id].blank?
+                  Creditcard.find(params[:creditcard_id]).shinhan_card_approved_histories
+                 else
+                  ShinhanCardApprovedHistory.scoped
+                 end
+
+    @approved_histories = collection.page(params[:page])
   end
 
   def show

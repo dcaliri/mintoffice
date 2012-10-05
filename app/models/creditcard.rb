@@ -5,6 +5,12 @@ class Creditcard < ActiveRecord::Base
   has_many :card_histories
   belongs_to :bank_account
 
+  has_many :shinhan_card_used_histories
+  has_many :shinhan_card_approved_histories
+  has_many :hyundai_card_used_histories
+  has_many :hyundai_card_approved_histories
+  has_many :oversea_card_approved_histories
+
   validates_presence_of :cardno
   validates_presence_of :expireyear
   validates_presence_of :expiremonth

@@ -1,6 +1,12 @@
 class OverseaCardApprovedHistoriesController < ApplicationController
-    def index
-    @approved_histories = OverseaCardApprovedHistory.page(params[:page])
+  def index
+    collection = unless params[:creditcard_id].blank?
+             Creditcard.find(params[:creditcard_id]).oversea_card_approved_histories
+           else
+             OverseaCardApprovedHistory.scoped
+           end
+
+    @approved_histories = collection.page(params[:page])
   end
 
   def show

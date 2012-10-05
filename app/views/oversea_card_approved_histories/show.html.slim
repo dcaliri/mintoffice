@@ -1,5 +1,8 @@
-
 #show_command
+  - if @approved_history.creditcard
+    = link_to "신용카드 보기", @approved_history.creditcard
+    = " "
+
   = link_to t('common.title.edit'), [:edit, @approved_history]
   = " "
   = link_to t('common.title.destroy'), @approved_history, :method => :delete, data: {confirm: t("common.messages.delete_confirm")}
