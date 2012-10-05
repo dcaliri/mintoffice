@@ -4,7 +4,13 @@ class CardHistoriesController < ApplicationController
   include AccessorsHelper
   
   def index
-    @card_histories = CardHistory.page(params[:page])
+    collection = unless params[:creditcard_id].blank?
+                  Creditcard.find(params[:creditcard_id]).card_histories
+                 else
+                  CardHistory.scoped
+                 end
+
+    @card_histories = collection.page(params[:page])
   end
 
   def show
@@ -47,7 +53,7 @@ class CardHistoriesController < ApplicationController
   end
 
   def find_empty_cardbill
-    @card_histories = CardHistory.find_empty_cardbill.latest.page(params[:page])
+    @card_histories = CardHistory.find_empty_cardbill.page(params[:page])
   end
 
   def generate_cardbill

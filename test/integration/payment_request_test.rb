@@ -17,7 +17,7 @@ class PaymentRequestTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('1111-111-111111'))
     assert(page.has_content?('test holder'))
     assert(page.has_content?('11,000'))
-    assert(page.has_content?('미완료'))
+    assert(page.has_content?('청구후 지급전'))
   end
 
   test 'should show payment request' do
@@ -29,7 +29,7 @@ class PaymentRequestTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('1111-111-111111'))
     assert(page.has_content?('test holder'))
     assert(page.has_content?('11,000'))
-    assert(page.has_content?('미완료'))
+    assert(page.has_content?('청구후 지급전'))
   end
 
   test 'should edit payment request' do
@@ -50,7 +50,7 @@ class PaymentRequestTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('2222-222-222222'))
     assert(page.has_content?('예금주 수정'))
     assert(page.has_content?('101,010'))
-    assert(page.has_content?('미완료'))
+    assert(page.has_content?('청구후 지급전'))
   end
 
   test 'should complete payment request' do

@@ -1,4 +1,5 @@
 class ShinhanCardApprovedHistory < ActiveRecord::Base
+  belongs_to :creditcard
   has_one :card_history, as: :approved
 
   include SpreadsheetParsable

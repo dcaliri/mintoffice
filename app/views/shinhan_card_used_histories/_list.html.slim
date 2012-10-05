@@ -39,6 +39,7 @@
           - if menu
             td.link_button_area
               = link_to t('common.button.detail_veiw'), used_history, class: 'btn btn-primary'
-
+  center
+    = will_paginate @used_histories
 - else
   h4= t('.empty')

@@ -1,3 +1,7 @@
+- content_for :search do
+  = form_tag :card_histories, :method => :get do
+    = select_tag :creditcard_id, options_for_creditcard_select(params[:creditcard_id]), "onchange" => "this.form.submit()"
+
 - unless @card_histories.empty?
   table#list-table
     tr
@@ -26,5 +30,7 @@
         td= card_history.paid_at
         td.link_button_area
           = link_to t('common.button.detail_veiw'), card_history, class: 'btn btn-primary'
+  center
+    = will_paginate @card_histories
 - else
   h3 카드 사용내역이 없습니다
