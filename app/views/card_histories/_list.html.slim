@@ -26,5 +26,7 @@
         td= card_history.paid_at
         td.link_button_area
           = link_to t('common.button.detail_veiw'), card_history, class: 'btn btn-primary'
+  center
+    = will_paginate @card_histories
 - else
   h3 카드 사용내역이 없습니다

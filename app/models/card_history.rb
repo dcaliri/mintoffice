@@ -1,10 +1,12 @@
 class CardHistory < ActiveRecord::Base
-  scope :latest, order('created_at DESC')
+  default_scope order('created_at DESC')
 
   belongs_to :cardbill
   belongs_to :used, polymorphic: true, foreign_type: "card_used_history_type", foreign_key: "card_used_history_id"
   belongs_to :approved, polymorphic: true, foreign_type: "card_approved_history_type", foreign_key: "card_approved_history_id"
   belongs_to :creditcard
+
+  self.per_page = 20
 
   class << self
     def no_canceled

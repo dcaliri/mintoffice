@@ -47,7 +47,7 @@ class CardHistoriesController < ApplicationController
   end
 
   def find_empty_cardbill
-    @card_histories = CardHistory.find_empty_cardbill.latest.page(params[:page])
+    @card_histories = CardHistory.find_empty_cardbill.page(params[:page])
   end
 
   def generate_cardbill
