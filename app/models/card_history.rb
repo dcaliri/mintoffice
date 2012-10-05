@@ -23,9 +23,8 @@ class CardHistory < ActiveRecord::Base
     end
 
     def group_by_name_and_tax
-      all.group_by{|card_history| card_history.creditcard.cardno_long }.map do |name, cards|
-        {name: name, tax: 0}
-        # {name: name, tax: cards.sum{|card| card.amount} / 10}
+      all.group_by{|card_history| card_history.creditcard.cardno_long }.map do |name, card_histories|
+        {name: name, tax: card_histories.sum{|card| card.tax}}
       end
     end
 
