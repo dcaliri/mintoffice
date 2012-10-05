@@ -1,0 +1,13 @@
+table#list-table
+  tr
+    th= PayrollCategory.human_attribute_name("title")
+    th= PayrollItem.human_attribute_name("amount")
+    - if current_person.admin?
+      th= t("common.menu")
+  - items.each do |item|
+    tr
+      td= item.payroll_category.title rescue ""
+      td.numrow= number_to_currency item.amount
+      - if current_person.admin?
+        td= link_to t("common.title.edit"), edit_payroll_payroll_item_path(payroll, item)
+    
