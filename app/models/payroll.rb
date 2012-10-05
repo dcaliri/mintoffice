@@ -30,7 +30,7 @@ class Payroll < ActiveRecord::Base
         all.each do |payroll|
           next if payroll.payment_request
 
-          bankbook = payroll.employee.bankbook
+          bankbook = payroll.bankbook
           total = payroll.difference_total
           request = PaymentRequest.generate_payment_request(payroll, bankbook, total)
           
@@ -43,6 +43,10 @@ class Payroll < ActiveRecord::Base
       employees = includes(employee: :bankbook).merge(Employee.not_retired).map{|payroll| payroll.employee}.uniq
       employees.select{|resource| !resource.bankbook}
     end
+  end
+
+  def bankbook
+    employee.bankbook rescue nil
   end
 
   def payable

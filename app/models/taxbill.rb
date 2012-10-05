@@ -137,8 +137,11 @@ class Taxbill < ActiveRecord::Base
     end
   end
 
+  def bankbook
+    taxman.business_client.bankbook rescue nil
+  end
+
   def generate_payment_request
-    bankbook = taxman.business_client.bankbook rescue nil
     PaymentRequest.generate_payment_request(self, bankbook, total)
   end
 

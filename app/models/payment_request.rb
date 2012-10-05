@@ -29,7 +29,7 @@ class PaymentRequest < ActiveRecord::Base
   end
 
   def account_number_for_excel
-    account_number.gsub(/[^0-9]/, '')
+    account_number.gsub(/[^0-9]/, '') rescue ""
   end
 
   def amount_for_excel
