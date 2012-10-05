@@ -1,7 +1,6 @@
 - content_for :search do
   = form_tag :card_histories, :method => :get do
     = select_tag :creditcard_id, options_for_creditcard_select(params[:creditcard_id]), "onchange" => "this.form.submit()"
-    = submit_tag t('common.button.search')
 
 - unless @card_histories.empty?
   table#list-table
