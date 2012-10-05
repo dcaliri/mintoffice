@@ -1,6 +1,6 @@
 class HyundaiCardApprovedHistoriesController < ApplicationController
     def index
-    @approved_histories = HyundaiCardApprovedHistory.scoped
+    @approved_histories = HyundaiCardApprovedHistory.page(params[:page])
   end
 
   def show

@@ -1,6 +1,6 @@
 class ShinhanCardApprovedHistoriesController < ApplicationController
   def index
-    @approved_histories = ShinhanCardApprovedHistory.scoped
+    @approved_histories = ShinhanCardApprovedHistory.page(params[:page])
   end
 
   def show

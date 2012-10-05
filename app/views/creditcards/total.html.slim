@@ -11,10 +11,8 @@
 table#list-table
   thead
     tr
-      th
-        = t('creditcards.total.payment_date')
-      th
-        = t('creditcards.total.card_detail')
+      th= t('creditcards.total.payment_date')
+      th= t('creditcards.total.card_detail')
   tbody
     - ([""] + newest.step(oldest, -1).to_a).each do |period|
       - total_price = CardHistory.no_canceled.by_date(period).total_price
@@ -47,8 +45,7 @@ table#list-table
                       td.numrow
                         = number_to_currency total_price
                 tr style="background-color: yellow;"
-                  td
-                    = CardUsedSource.human_attribute_name(:total)
+                  td 총합
                   td
                   td
                   - approved = CardHistory.by_date(period)

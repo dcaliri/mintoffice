@@ -1,6 +1,6 @@
 class OverseaCardApprovedHistoriesController < ApplicationController
     def index
-    @approved_histories = OverseaCardApprovedHistory.scoped
+    @approved_histories = OverseaCardApprovedHistory.page(params[:page])
   end
 
   def show

@@ -1,6 +1,6 @@
 class HyundaiCardUsedHistoriesController < ApplicationController
   def index
-    @used_histories = HyundaiCardUsedHistory.scoped
+    @used_histories = HyundaiCardUsedHistory.page(params[:page])
   end
 
   def show
