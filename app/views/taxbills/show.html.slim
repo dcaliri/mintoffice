@@ -30,20 +30,18 @@ h2
         = taxbill.taxman.fullname
       = dtdd taxbill.taxman, "email"
       = dtdd taxbill.taxman, "phonenumber"
-    - if taxbill.document
-      div
-        h3 관련 문서
-        ul
+    div
+      h3 관련 문서
+      ul
+        - if taxbill.document
           li
             = "세금계산서 "
             = link_to taxbill.document.title, taxbill.document
+        - if taxbill.payment_request
+          li= link_to "지급청구 보기", taxbill.payment_request
   - if taxbill.document
     = render "shared/attachments/detail", :target => taxbill.document
   .clear
-  - if taxbill.report.status == :reported and taxbill.payment_request
-    h3 관련 문서
-    ul
-      li= link_to "지급청구 보기", taxbill.payment_request
 
   div
     h3
