@@ -26,8 +26,8 @@ module Api
 
       class_name.create_with_stylesheet(params[:file].original_filename)
       render json: {status: 'ok', result: collection}
-    # rescue => error
-    #   render json: {status: 'invalid', error: error.message}
+    rescue => error
+      render json: {status: 'invalid', error: error.message}
     end
   end
 end

@@ -19,12 +19,10 @@ Mintoffice::Application.routes.draw do
       post 'export'
     end
 
-    namespace :api do
-      post 'shinhan_card_used_histories/export', controller: 'card_histories', action: 'shinhan_card_used_histories'
-      post 'shinhan_card_approved_histories/export', controller: 'card_histories', action: 'shinhan_card_approved_histories'
-      post 'hyundai_card_used_histories/export', controller: 'card_histories', action: 'hyundai_card_used_histories'
-      post 'hyundai_card_approved_histories/export', controller: 'card_histories', action: 'hyundai_card_approved_histories'
-      post 'oversea_card_approved_histories/export', controller: 'card_histories', action: 'oversea_card_approved_histories'
-    end
+    post 'shinhan_card_used_histories/export', controller: 'card_histories', action: 'shinhan_card_used_histories'
+    post 'shinhan_card_approved_histories/export', controller: 'card_histories', action: 'shinhan_card_approved_histories'
+    post 'hyundai_card_used_histories/export', controller: 'card_histories', action: 'hyundai_card_used_histories'
+    post 'hyundai_card_approved_histories/export', controller: 'card_histories', action: 'hyundai_card_approved_histories'
+    post 'oversea_card_approved_histories/export', controller: 'card_histories', action: 'oversea_card_approved_histories'
   end
 end
