@@ -41,7 +41,7 @@ module SpreadsheetParsable
         # def approved_sources_hyundai_parser
         def hyundai_card_approved_sources_parser
           parser = ExcelParser.new
-          parser.class_name CardApprovedSource
+          parser.class_name HyundaiCardApprovedHistory
           parser.column EXCEL_COLUMNS[:hyundai_card_approved_sources]
           parser.key EXCEL_KEYS[:hyundai_card_approved_sources]
           parser.option EXCEL_OPTIONS[:hyundai_card_approved_sources]
