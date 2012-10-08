@@ -7,9 +7,8 @@ module TaxbillsHelper
   def oldest_year
     purchase = @purchases.oldest_at
     sales = @sales.oldest_at
-    card = @cards.oldest_at
 
-    [purchase, sales, card].min.year
+    [purchase, sales].min.year
   end
 
   def options_for_bill_type_select(billtype=nil)
