@@ -17,6 +17,8 @@ class Employee < ActiveRecord::Base
 
   has_many :documents
 
+  has_many :assets, foreign_key: 'owner_id'
+
   serialize :employment_proof_hash, Array
 
   include Historiable

@@ -9,5 +9,8 @@ h2= t("common.title.#{action_name}")
     p
       = f.label :description
       = f.text_area :description
+    p
+      = f.label :owner
+      = f.select :owner_id, options_for_employees_select(@asset.owner)
   p
     = f.submit

@@ -1,6 +1,13 @@
 class AssetsController < ApplicationController
+  before_filter :redirect_unless_owner, except: :index
+
   def index
-    @assets = Asset.scoped
+    @assets = if current_person.admin?
+                Asset.scoped
+              else
+                current_person.employee.assets
+              end
+    @assets = @assets.page(params[:page])
   end
 
   def show
@@ -31,9 +38,21 @@ class AssetsController < ApplicationController
     render 'edit'
   end
 
+  def return
+    @asset = Asset.find(params[:id])
+    @asset.return!
+    redirect_to @asset
+  end
+
   def destroy
     @asset = Asset.find(params[:id])
     @asset.destroy
     redirect_to :assets
+  end
+
+private
+  def redirect_unless_owner
+    @asset = Asset.find(params[:id])
+    force_redirect unless current_person.admin? or @asset.owner == current_person.employee
   end
 end

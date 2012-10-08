@@ -42,7 +42,9 @@ Mintoffice::Application.routes.draw do
   draw :test
   draw :vacations
 
-  resources :assets
+  resources :assets do
+    put 'return', on: :member
+  end
 
   root to: 'main#index'
 

@@ -167,6 +167,7 @@ ko:
             asset:
                 title: 이름
                 description: 설명
+                owner: 소유자
             attachment:
                 comments: 주석
                 contenttype: 파일형식
