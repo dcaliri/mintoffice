@@ -51,7 +51,8 @@ div#main_nav.navbar.navbar-fixed-top
                 li= link_to t("payment_records.title"), :payment_records
               - if current_person.permission? 'payment_requests'
                 li= link_to t("payment_requests.title"), :payment_requests
-
+              - if current_person.permission? 'assets'
+                li= link_to t("assets.title"), :assets
         ul.nav
           li.dropdown
             a.dropdown-toggle*{"data-toggle"=>"dropdown", "href"=>"#"}

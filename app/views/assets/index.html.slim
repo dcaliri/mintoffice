@@ -1,0 +1,22 @@
+#show_command
+  = link_to t("common.title.new"), [:new, :asset]
+  = " "
+  = link_to t('common.title.back'), :root
+
+h2 ...
+
+table#list-table
+  tr
+    th= Asset.human_attribute_name("title")
+    th= Asset.human_attribute_name("description")
+    th= Asset.human_attribute_name("owner")
+    th.link_button_area
+  - @assets.each do |asset|
+    tr.selectable.link_to*{"data-url" => asset_path(asset)}
+      td= asset.title
+      td= asset.description
+      td= asset.owner_name
+      td.link_button_area
+        = link_to t('common.button.detail_veiw'), asset, class: 'btn btn-primary'
+center
+  = will_paginate @assets
