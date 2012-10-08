@@ -41,7 +41,7 @@ module SpreadsheetParsable
         # def approved_sources_parser
         def default_approved_sources_parser
           parser = ExcelParser.new
-          parser.class_name CardApprovedSource
+          parser.class_name ShinhanCardApprovedHistory
           parser.column EXCEL_COLUMNS[:default_card_approved_sources]
           parser.key EXCEL_KEYS[:default_card_approved_sources]
           parser.option EXCEL_OPTIONS[:default_card_approved_sources]

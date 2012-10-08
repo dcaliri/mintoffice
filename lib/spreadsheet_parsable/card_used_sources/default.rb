@@ -55,7 +55,7 @@ module SpreadsheetParsable
         # def used_sources_parser
         def default_card_used_sources_parser
           parser = ExcelParser.new
-          parser.class_name CardUsedSource
+          parser.class_name ShinhanCardUsedHistory
           parser.column EXCEL_COLUMNS[:default_card_used_sources]
           parser.key EXCEL_KEYS[:default_card_used_sources]
           parser.option EXCEL_OPTIONS[:default_card_used_sources]
