@@ -13,9 +13,9 @@ h3 현대카드 승인내역
 .box
   dl
     dt= HyundaiCardApprovedHistory.human_attribute_name("transacted_date")
-    dd= @approved_history.transacted_date
+    dd=ldate @approved_history.transacted_date
     dt= HyundaiCardApprovedHistory.human_attribute_name("transacted_time")
-    dd= @approved_history.transacted_time
+    dd=ldate @approved_history.transacted_time
     dt= HyundaiCardApprovedHistory.human_attribute_name("card_number")
     dd= @approved_history.card_number
     dt= HyundaiCardApprovedHistory.human_attribute_name("money")

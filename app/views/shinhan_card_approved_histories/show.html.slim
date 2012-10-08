@@ -12,7 +12,7 @@ h3 신한카드 승인내역
 .box
   dl
     dt= ShinhanCardApprovedHistory.human_attribute_name("used_at")
-    dd= @approved_history.used_at
+    dd=ldate @approved_history.used_at
     dt= ShinhanCardApprovedHistory.human_attribute_name("approve_no")
     dd= @approved_history.approve_no
     dt= ShinhanCardApprovedHistory.human_attribute_name("card_name")
@@ -28,8 +28,8 @@ h3 신한카드 승인내역
     dt= ShinhanCardApprovedHistory.human_attribute_name("monthly_duration")
     dd= @approved_history.monthly_duration
     dt= ShinhanCardApprovedHistory.human_attribute_name("canceled_at")
-    dd= @approved_history.canceled_at
+    dd=ldate @approved_history.canceled_at
     dt= ShinhanCardApprovedHistory.human_attribute_name("purchase_status")
     dd= @approved_history.purchase_status
     dt= ShinhanCardApprovedHistory.human_attribute_name("will_be_paied_at")
-    dd= @approved_history.will_be_paied_at
+    dd=ldate @approved_history.will_be_paied_at

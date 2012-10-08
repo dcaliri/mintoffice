@@ -1,5 +1,9 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
+  def ldate(dt, hash = {})
+    dt ? l(dt, hash) : nil
+  end
+  
   def tiny_picture_path (attachment)
     url_for :controller => "attachments", :action => 'picture', :id => attachment.id, :w => "100", :h => "80"
   end

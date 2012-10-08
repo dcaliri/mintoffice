@@ -27,8 +27,8 @@
           td= used_history.card_holder_name
           td= used_history.used_area
           td= used_history.approve_no
-          td= used_history.approved_at
-          td= used_history.approved_time
+          td=ldate used_history.approved_at
+          td=ldate used_history.approved_time
           td= number_to_currency used_history.sales_type
           td= number_to_currency used_history.money_krw
           td= number_to_currency used_history.money_foreign
