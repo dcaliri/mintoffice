@@ -47,7 +47,7 @@ module SpreadsheetParsable
         # def hyundai_used_sources_parser
         def hyundai_card_used_sources_parser
           parser = ExcelParser.new
-          parser.class_name CardUsedSource
+          parser.class_name HyundaiCardUsedHistory
           parser.column EXCEL_COLUMNS[:hyundai_card_used_sources]
           parser.key EXCEL_KEYS[:hyundai_card_used_sources]
           parser.option EXCEL_OPTIONS[:hyundai_card_used_sources]

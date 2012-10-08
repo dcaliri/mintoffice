@@ -1,7 +1,7 @@
 class AssetsController < ApplicationController
   def redirect_unless_permission; end
   
-  before_filter :redirect_unless_owner, except: [:index, :new]
+  before_filter :redirect_unless_owner, except: [:index, :new, :create]
 
   def index
     @assets = if current_person.admin?

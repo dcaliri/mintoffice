@@ -44,7 +44,7 @@ module SpreadsheetParsable
         # def approved_sources_oversea_parser
         def oversea_card_approved_sources_parser
           parser = ExcelParser.new
-          parser.class_name CardApprovedSource
+          parser.class_name OverseaCardApprovedHistory
           parser.column EXCEL_COLUMNS[:oversea_card_approved_sources]
           parser.key EXCEL_KEYS[:oversea_card_approved_sources]
           parser.option EXCEL_OPTIONS[:oversea_card_approved_sources]
