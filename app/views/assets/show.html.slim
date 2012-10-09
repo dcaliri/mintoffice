@@ -17,3 +17,5 @@ h3 자산 정보
     dd= @asset.description
     dt= Asset.human_attribute_name(:owner)
     dd= @asset.owner_name
+
+  = render 'changelog', target: @asset
