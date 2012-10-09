@@ -1,5 +1,5 @@
 class CardHistory < ActiveRecord::Base
-  default_scope order('created_at DESC')
+  default_scope order('transacted_at DESC')
 
   belongs_to :cardbill
   belongs_to :used, polymorphic: true, foreign_type: "card_used_history_type", foreign_key: "card_used_history_id"
