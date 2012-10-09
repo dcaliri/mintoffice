@@ -19,7 +19,7 @@
     - @card_histories.each do |card_history|
       tr.selectable.link_to*{"data-url" => card_history_path(card_history)}
         td= card_history.creditcard_name
-        td= card_history.transacted_at
+        td=ldate card_history.transacted_at
         td= number_to_currency card_history.amount
         td= number_to_currency card_history.amount_local
         td= number_to_currency card_history.amount_dollar
