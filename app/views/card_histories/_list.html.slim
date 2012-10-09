@@ -9,7 +9,6 @@
       th= CardHistory.human_attribute_name("transacted_at")
       th= CardHistory.human_attribute_name("amount")
       th= CardHistory.human_attribute_name("amount_local")
-      th= CardHistory.human_attribute_name("amount_dollar")
       th= CardHistory.human_attribute_name("country")
       th= CardHistory.human_attribute_name("store_name")
       th= CardHistory.human_attribute_name("approved_status")
@@ -21,8 +20,7 @@
         td= card_history.creditcard_name
         td=ldate card_history.transacted_at
         td.numrow= number_to_currency card_history.amount
-        td.numrow= number_to_currency card_history.amount_local
-        td.numrow= number_to_currency card_history.amount_dollar
+        td.numrow= number_to_currency card_history.amount_local, unit: ''
         td= card_history.country
         td= card_history.store_name
         td= card_history.approved_status
