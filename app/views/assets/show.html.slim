@@ -14,7 +14,7 @@ h3 자산 정보
     dt= Asset.human_attribute_name(:title)
     dd= @asset.title
     dt= Asset.human_attribute_name(:description)
-    dd= @asset.description
+    dd= simple_format @asset.description
     dt= Asset.human_attribute_name(:owner)
     dd= @asset.owner_name
 
