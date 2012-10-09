@@ -9,9 +9,9 @@ div.container
 						- if report.target
 							li
 								- if report.status == :reporting
-									span.label.label-info= report.status
+									span.label.label-info= report.localize_status
 								- else
-									span.label.label-warning= report.status
+									span.label.label-warning= report.localize_status
 								= link_to report.target.summary, report.target
 		div.span4
 			= render partial: "this_week"
