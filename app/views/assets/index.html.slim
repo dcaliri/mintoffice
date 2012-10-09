@@ -3,9 +3,10 @@
   = " "
   = link_to t('common.title.back'), :root
 
-- content_for :search do
-  = form_tag :assets, method: :get do
-    = select_tag :owner, options_for_select([["소유자 있음", true], ["소유자 없음", false]], params[:owner]), "onchange" => "this.form.submit()"
+- if current_person.admin?
+  - content_for :search do
+    = form_tag :assets, method: :get do
+      = select_tag :owner, options_for_select([["소유자 있음", true], ["소유자 없음", false]], params[:owner]), "onchange" => "this.form.submit()"
 
 h2 ...
 
