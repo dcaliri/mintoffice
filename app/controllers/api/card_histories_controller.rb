@@ -21,10 +21,10 @@ module Api
     end
 
     def export(class_name, file)
-      collection = class_name.preview_stylesheet('file' => params[:file])
+      collection = class_name.preview_stylesheet('file' => file)
       raise "excel file is empty" if collection.empty?
 
-      class_name.create_with_stylesheet(params[:file].original_filename)
+      class_name.create_with_stylesheet(file.original_filename)
       render json: {status: 'ok', result: collection}
     rescue => error
       render json: {status: 'invalid', error: error.message}
