@@ -43,7 +43,7 @@ class AssetsController < ApplicationController
   def return
     @asset = Asset.find(params[:id])
     @asset.return!
-    redirect_to @asset
+    redirect_to :assets
   end
 
   def destroy
