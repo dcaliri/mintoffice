@@ -12,6 +12,17 @@ class Asset < ActiveRecord::Base
     }
   end
 
+  class << self
+    def by_owner(condition)
+      if condition
+        table = arel_table
+        where(table[:owner_id].not_eq(nil))
+      else
+        where(owner_id: nil)
+      end
+    end
+  end
+
   def return!
     update_column(:owner_id, nil)
   end
