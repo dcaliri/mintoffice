@@ -1,5 +1,5 @@
 class CardHistory < ActiveRecord::Base
-  default_scope order('created_at DESC')
+  default_scope order('transacted_at DESC')
 
   belongs_to :cardbill
   belongs_to :used, polymorphic: true, foreign_type: "card_used_history_type", foreign_key: "card_used_history_id"
@@ -82,7 +82,9 @@ class CardHistory < ActiveRecord::Base
     end
 
     def generate_shinhan_card_history
+        
       ShinhanCardUsedHistory.find_each do |used_history|
+        
         approved_history = ShinhanCardApprovedHistory.find_by_approve_no(used_history.approve_no)
         next unless used_history and approved_history
 

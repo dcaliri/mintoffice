@@ -55,7 +55,9 @@ class ExcelParser
     position[:start][:x].upto(sheet.last_row + position[:end]) do |i|
       params = {}
       column_keys.each_with_index do |column, j|
-        params[column] = sheet.cell(i, j + position[:start][:y])
+        value = sheet.cell(i, j + position[:start][:y])
+        value.strip! if value.respond_to? :strip!
+        params[column] = value
       end
 
       query = {}

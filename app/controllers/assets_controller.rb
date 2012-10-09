@@ -9,7 +9,14 @@ class AssetsController < ApplicationController
               else
                 current_person.employee.assets
               end
-    @assets = @assets.page(params[:page])
+    
+    owner = if params[:owner].nil?
+              true
+            else
+              params[:owner].to_bool
+            end
+            
+    @assets = @assets.by_owner(owner).page(params[:page])
   end
 
   def show
@@ -43,7 +50,7 @@ class AssetsController < ApplicationController
   def return
     @asset = Asset.find(params[:id])
     @asset.return!
-    redirect_to @asset
+    redirect_to :assets
   end
 
   def destroy
