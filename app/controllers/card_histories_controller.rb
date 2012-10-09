@@ -45,7 +45,7 @@ class CardHistoriesController < ApplicationController
   def destroy
     @card_history = CardHistory.find(params[:id])
     @card_history.destroy
-    redirect_to :CardHistory
+    redirect_to :card_histories
   end
 
   def raw

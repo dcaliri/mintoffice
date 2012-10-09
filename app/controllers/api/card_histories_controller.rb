@@ -25,6 +25,8 @@ module Api
       raise "excel file is empty" if collection.empty?
 
       class_name.create_with_stylesheet(file.original_filename)
+      CardHistory.generate
+
       render json: {status: 'ok', result: collection}
     rescue => error
       render json: {status: 'invalid', error: error.message}
@@ -34,7 +36,6 @@ end
 
 
 # curl -F "file=@h-common-use.xlsx;" -H "api-key: c389b8fd0716c0db8c8f8b7da0c1255c21cdb47f" "http://mintoffice.dev/api/hyundai_card_used_histories/export"
-
 
 # curl "http://mintoffice.dev/api/login.json?user=admin&password=1234"
 # curl -F "file=@shinhan_card_used_histories.xls;" -H "api-key: c389b8fd0716c0db8c8f8b7da0c1255c21cdb47f" "http://mintoffice.dev/api/shinhan_card_used_histories/export"

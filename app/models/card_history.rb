@@ -82,7 +82,9 @@ class CardHistory < ActiveRecord::Base
     end
 
     def generate_shinhan_card_history
+        
       ShinhanCardUsedHistory.find_each do |used_history|
+        
         approved_history = ShinhanCardApprovedHistory.find_by_approve_no(used_history.approve_no)
         next unless used_history and approved_history
 
