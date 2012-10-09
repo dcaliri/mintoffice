@@ -359,7 +359,7 @@ ko:
                 creditcard_name: 신용카드
                 transacted_at: 거래일자
                 amount: 승인금액(원화)
-                amount_local: 승인금액(지역화)
+                amount_local: 현지금액
                 amount_dollar: 지역화($)
                 country: 시용국가
                 store_name: 가맹점

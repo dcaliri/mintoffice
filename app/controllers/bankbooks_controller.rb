@@ -1,4 +1,9 @@
 class BankbooksController < ApplicationController
+  before_filter :only => [:show] do |c| 
+    @bankbook = Bankbook.find(params[:id])
+    c.save_attachment_id @bankbook
+  end
+
   def index
     @bankbook = Bankbook.scoped
   end
