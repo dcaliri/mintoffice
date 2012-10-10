@@ -1,6 +1,7 @@
 # encoding: UTF-8
 
 class Asset < ActiveRecord::Base
+  default_scope joins(:owner).order('employees.id ASC')
   belongs_to :owner, class_name: 'Employee', foreign_key: 'owner_id'
 
   include Historiable

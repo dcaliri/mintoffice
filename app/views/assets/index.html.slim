@@ -12,13 +12,13 @@ h2 ...
 
 table#list-table
   tr
-    th= Asset.human_attribute_name("title")
     th= Asset.human_attribute_name("owner")
+    th= Asset.human_attribute_name("title")
     th.link_button_area
   - @assets.each do |asset|
     tr.selectable.link_to*{"data-url" => asset_path(asset)}
-      td= asset.title
       td= asset.owner_name
+      td= asset.title
       td.link_button_area
         = link_to t('common.button.detail_veiw'), asset, class: 'btn btn-primary'
 center
