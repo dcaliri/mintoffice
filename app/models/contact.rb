@@ -192,6 +192,8 @@ class Contact < ActiveRecord::Base
         })
       end
 
+      raise resource.errors.inspect if resource.invalid?
+
       resource.save
     end
 
