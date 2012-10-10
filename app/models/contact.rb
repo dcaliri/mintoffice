@@ -199,7 +199,7 @@ class Contact < ActiveRecord::Base
       google_contact.load.each do |information|
         collection = where(google_id: information.id)
         if collection.empty?
-          resource = collection.new
+          resource = Company.current_company.contacts.build
         else
           resource = collection.first
         end
