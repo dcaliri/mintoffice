@@ -31,7 +31,7 @@ class AccessPerson < ActiveRecord::Base
 
       collection = where(access_query)
       exist_person = collection.where(owner_type: "Person").exists?(owner_id: owner.id)
-      exist_group = collection.where(owner_type: "Group").exists?(owner_id: owner.groups.map(&:id))
+      exist_group = collection.where(owner_type: "Group").exists?(owner_id: owner.group_list.map(&:id))
 
       exist_person or exist_group
     end
