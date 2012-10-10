@@ -9,7 +9,7 @@ module PaymentRequestable
       status = status.to_sym
       case status
       when :not_created
-        scoped.merge(where(payment_request_count: 0))
+        scoped.merge(where(payment_requests_count: 0))
       when :not_complete
         scoped.merge(PaymentRequest.complete(false))
       when :complete
