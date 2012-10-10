@@ -31,21 +31,25 @@ class Creditcard < ActiveRecord::Base
   end
 
   class << self
-    def history_per_period(query)
-      collection = CardHistory.where('paid_at IS NOT NULL').order(query)
+    def history_per_period(order)
+      collection = CardHistory.unscoped.where('paid_at IS NOT NULL').order(:paid_at)
       if collection.empty?
         Time.zone.now
       else
-        collection.first.paid_at
+        if order == :newest
+          collection.last.paid_at
+        else
+          collection.first.paid_at
+        end
       end
     end
 
-    def newest_history_source
-      history_per_period('paid_at DESC')
+    def newest_history
+      history_per_period(:newest)
     end
 
-    def oldest_history_source
-      history_per_period('paid_at ASC') - 1.month
+    def oldest_history
+      history_per_period(:oldest) - 1.month
     end
   end
 end
