@@ -20,9 +20,9 @@ class Group < ActiveRecord::Base
     (result + subgroups.map {|subgroup| subgroup.people_with_all_subgroup}).flatten.uniq
   end
 
-  def all_subgroup
-    return [] if subgroups.empty?
-    subgroups.map {|subgroup| subgroup.all_subgroup}.flatten
+  def all_subgroups
+    return [self] if subgroups.empty?
+    subgroups.map {|subgroup| subgroup.all_subgroups}.flatten
   end
 
   def self.admins

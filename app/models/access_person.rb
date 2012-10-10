@@ -18,7 +18,8 @@ class AccessPerson < ActiveRecord::Base
         arel = self.arel_table
         query = arel[:owner_type].eq("Person").and(arel[:owner_id].eq(owner.id))
         unless owner.groups.empty?
-          query = query.or(arel[:owner_type].eq("Group").and(arel[:owner_id].eq(owner.groups.first.id)))
+          group_ids = owner.group_list.map(&:id)
+          query = query.or(arel[:owner_type].eq("Group").and(arel[:owner_id].in(group_ids)))
         end
         where(query)
       end
