@@ -1,11 +1,9 @@
 #show_command
   = link_to t('common.title.back'), :creditcards
 
-- newest = Time.zone.now
-- oldest = Time.zone.now - 1.year
+- newest = Creditcard.newest_history.to_date
+- oldest = Creditcard.oldest_history.to_date
 
-- newest = Creditcard.newest_history_source.to_date
-- oldest = Creditcard.oldest_history_source.to_date
 
 - period = Time.zone.parse("#{newest.year}-#{newest.month}-01 00:00:00").to_date
 table#list-table

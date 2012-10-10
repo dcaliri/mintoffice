@@ -15,10 +15,10 @@ class CardHistory < ActiveRecord::Base
     
     def by_date(date)
       if date == "all" or date.nil?
-        where("")
+        scoped
       else
         date = Date.parse(date) if date.class == String && !date.blank?
-        where(paid_at: date.to_time)
+        where(paid_at: date)
       end
     end
 

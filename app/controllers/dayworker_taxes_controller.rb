@@ -1,6 +1,9 @@
 class DayworkerTaxesController < ApplicationController
-  expose (:dayworker_taxes) { DayworkerTax.all }
   expose (:dayworker_tax)
+
+  def index
+    @dayworker_taxes = DayworkerTax.search(params[:query], params[:request_status])
+  end
 
   def create
     dayworker_tax.save!

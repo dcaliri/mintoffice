@@ -1,6 +1,6 @@
 class PaymentRecordsController < ApplicationController
   def index
-    @payment_records = PaymentRecord.all
+    @payment_records = PaymentRecord.search(params[:query], params[:request_status])
   end
 
   def show

@@ -21,4 +21,4 @@ h3
 	= t('groups.show.member')
 ul
   - group.people_with_all_subgroup.each do |person|
-    li= "#{person.name} - #{person.group_list}"
+    li= "#{person.name} - #{person.group_list.map{|group| group.name}.join(', ')}"
