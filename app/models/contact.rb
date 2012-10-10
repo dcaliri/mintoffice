@@ -70,9 +70,9 @@ class Contact < ActiveRecord::Base
 
     def search_by_name_query
       if ActiveRecord::Base.connection.adapter_name == 'SQLite'
-        "lastname || firstname like ?"
+        "contacts.lastname || contacts.firstname like ?"
       else
-        "CONCAT(lastname, firstname) like ?"
+        "CONCAT(contacts.lastname, contacts.firstname) like ?"
       end
     end
 

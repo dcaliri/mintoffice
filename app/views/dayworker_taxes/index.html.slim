@@ -1,9 +1,16 @@
 - title t('dayworker_taxes.title')
 
+- content_for :search do
+  = form_tag :dayworker_taxes, :method => :get do
+    = t("common.title.search")
+    '  :
+    = search_field_tag :query, params[:query]
+    = select_tag :request_status, options_for_payment_request_select, "onchange" => "this.form.submit()"
+
 #show_command
-  = link_to t("dayworkers.title"), :controller => "dayworkers"
+  = link_to t("dayworkers.title"), :dayworkers
   = " "
-  = link_to t('common.title.new'), new_dayworker_taxis_path
+  = link_to t('common.title.new'), [:new, :dayworker_taxis]
   = " "
   = link_to t('common.title.back'), :root
 
@@ -18,7 +25,7 @@ table#list-table
     th= DayworkerTax.human_attribute_name('pay_amount')
     th= PaymentRequest.human_attribute_name(:request_status)
     th.link_button_area
-    - dayworker_taxes.each do |dayworker_tax|
+    - @dayworker_taxes.each do |dayworker_tax|
       tr.selectable.link_to*{"data-url" => dayworker_taxis_path(dayworker_tax)}
         td=h dayworker_tax.dayworker.juminno
         td=h dayworker_tax.apply_day

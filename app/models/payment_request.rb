@@ -1,7 +1,7 @@
 # encoding: UTF-8
 
 class PaymentRequest < ActiveRecord::Base
-  belongs_to :basis, polymorphic: true
+  belongs_to :basis, polymorphic: true, counter_cache: true
 
   DEFAULT_COLUMNS = [:bankbook_code,
                      :account_number_for_excel,
@@ -17,10 +17,6 @@ class PaymentRequest < ActiveRecord::Base
   resource_exportable_configure do |config|
     config.no_header
     config.krw [:amount]
-  end
-
-  def payment_status
-    read_attribute(:payment_status).to_sym
   end
 
   def bankbook_code
