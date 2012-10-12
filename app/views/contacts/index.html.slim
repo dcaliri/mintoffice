@@ -6,6 +6,8 @@
     = submit_tag t('common.button.search')
 
 #show_command
+  = link_to "중복 연락처 찾기", [:find_duplicate, :contacts]
+  = " "
   = link_to t('contacts.save.link'), [:save, :contacts]
   = " "
   = link_to t('contacts.load.link'), [:load, :contacts]

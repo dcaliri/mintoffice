@@ -192,6 +192,8 @@ class Contact < ActiveRecord::Base
         })
       end
 
+      raise resource.errors.inspect if resource.invalid?
+
       resource.save
     end
 
@@ -199,7 +201,7 @@ class Contact < ActiveRecord::Base
       google_contact.load.each do |information|
         collection = where(google_id: information.id)
         if collection.empty?
-          resource = collection.new
+          resource = Company.current_company.contacts.build
         else
           resource = collection.first
         end
@@ -209,6 +211,27 @@ class Contact < ActiveRecord::Base
     end
   end
 
+  def self.find_duplicate
+    result = []
+    all.each do |contact|
+      unless contact.firstname.blank? and contact.lastname.blank?
+        collection = where(firstname: contact.firstname, lastname: contact.lastname)
+        result << collection.all if collection.count > 1
+      end
+
+      contact.emails.each do |email|
+        collection = joins(:emails).merge(ContactEmail.where(email: email.email))
+        result << collection.all if collection.count > 1
+      end
+
+      contact.phone_numbers.each do |phone_number|
+        collection = joins(:phone_numbers).merge(ContactPhoneNumber.where(number: phone_number.number))
+        result << collection.all if collection.count > 1
+      end
+    end
+    result.uniq
+  end
+
   def name
     if firstname and lastname
       lastname + " " + firstname
@@ -216,6 +239,7 @@ class Contact < ActiveRecord::Base
       ""
     end
   end
+
   def serializable_hash(options={})
     super(options.merge(only: [:id, :firstname, :lastname, :company_name, :department, :position], include: [:emails, :phone_numbers, :addresses]))
   end

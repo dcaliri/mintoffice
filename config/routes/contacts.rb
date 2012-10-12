@@ -5,6 +5,9 @@ Mintoffice::Application.routes.draw do
       get 'load', action: :load_form
       post 'save'
       post 'load'
+
+      get 'find_duplicate'
+      delete 'merge'
     end
 
     resources :contact_emails, :path => 'emails', :only => :destroy

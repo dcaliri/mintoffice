@@ -11,6 +11,7 @@ Mintoffice::Application.routes.draw do
   draw :accessors
   draw :accounts
   draw :api
+  draw :assets
   draw :attachment
   draw :banks
   draw :business_clients
@@ -41,10 +42,6 @@ Mintoffice::Application.routes.draw do
   draw :taxbills
   draw :test
   draw :vacations
-
-  resources :assets do
-    put 'return', on: :member
-  end
 
   root to: 'main#index'
 
