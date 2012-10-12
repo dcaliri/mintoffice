@@ -213,7 +213,7 @@ class Contact < ActiveRecord::Base
 
   def self.find_duplicate
     result = []
-    find_each do |contact|
+    all.each do |contact|
       unless contact.firstname.blank? and contact.lastname.blank?
         collection = where(firstname: contact.firstname, lastname: contact.lastname)
         result << collection.all if collection.count > 1
