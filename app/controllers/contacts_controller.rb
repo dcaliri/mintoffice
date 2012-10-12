@@ -25,8 +25,7 @@ class ContactsController < ApplicationController
     unless params[:survivor].blank?
       ids = params[:contact_ids] - [params[:survivor]]
       ids.each do |id|
-        contact = Contact.find(id)
-        contact.destroy
+        contacts.where('id IN (?)', ids).destroy_all
       end
 
       redirect_to [:find_duplicate, :contacts], notice: "성공적으로 중복을 제거했습니다."
