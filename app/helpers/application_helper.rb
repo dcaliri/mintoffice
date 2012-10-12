@@ -37,5 +37,11 @@ module ApplicationHelper
 #    end
   end
 
+  def interleave(arg)
+    maximum = arg.map{|list| list.size}.max
+    zipped = Array.new(maximum).zip(*arg)
+    zipped.map{|_, *etc| etc}
+  end
+
   include ExceptColumnView
 end

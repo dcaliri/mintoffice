@@ -1,0 +1,32 @@
+- unless @duplicate_list.empty?
+  - @duplicate_list.each do |contacts|
+    = form_tag [:merge, :contacts], method: :delete do
+      - contacts.each do |contact|
+        = hidden_field_tag "contact_ids[]", contact.id
+      .box
+        table#list-table
+          tr
+            th 이름
+            - contacts.each do |contact|
+              td
+                = contact.name
+                = " "
+                = radio_button_tag "survivor", contact.id
+          tr
+            th 회사
+            - contacts.each do |contact|
+              td= contact.company_name
+          - interleave_phone_numbers(contacts).each_with_index do |numbers, i|
+            tr
+              th= "#{i == 0 ? '전화번호' : ''}"
+              - numbers.each do |number|
+                td= number
+          - interleave_emails(contacts).each_with_index do |emails, i|
+            tr
+              th= "#{i == 0 ? '이메일' : ''}"
+              - emails.each do |email|
+                td= email
+        = submit_tag "선택"
+        br
+- else
+  h3 중복 연락처가 없습니다.
