@@ -45,8 +45,8 @@ class UsedVacation < ActiveRecord::Base
 
   def self.during(range)
     where("(`used_vacations`.`from` >= ? AND `used_vacations`.`from` <= ? ) OR \
-          (`used_vacations`.`to` > ? AND `used_vacations`.`to` < ? ) OR \
-          (`used_vacations`.`from` <= ? AND `used_vacations`.`to` > ?)",
+          (`used_vacations`.`to` >= ? AND `used_vacations`.`to` <= ? ) OR \
+          (`used_vacations`.`from` <= ? AND `used_vacations`.`to` >= ?)",
       range.begin.to_date, range.end.to_date, range.begin.to_date, range.end.to_date, range.begin.to_date, range.end.to_date)
   end
 
