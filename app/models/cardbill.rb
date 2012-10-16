@@ -3,6 +3,7 @@
 class Cardbill < ActiveRecord::Base
   default_scope order('transdate desc')
 
+  has_one :card_history
   belongs_to :creditcard
   has_many :expense_reports, as: :target
 
@@ -22,8 +23,6 @@ class Cardbill < ActiveRecord::Base
   validates_presence_of :approveno
   validates_numericality_of :totalamount
   validates_numericality_of :amount
-  validates_numericality_of :servicecharge
-  validates_numericality_of :vat
 
   before_save :strip_approve_no
   def strip_approve_no
@@ -37,7 +36,8 @@ class Cardbill < ActiveRecord::Base
   end
 
   def summary
-    "[카드영수증] 번호: #{cardno}, 사용일자: #{transdate}, 금액: #{ActionController::Base.helpers.number_to_currency(totalamount)}"
+    username = report.reporter.prev.fullname rescue ""
+    "[카드영수증] #{username} 번호: #{cardno}, 사용일자: #{transdate}, 금액: #{ActionController::Base.helpers.number_to_currency(totalamount)}"
   end
 
   class << self
@@ -52,7 +52,7 @@ class Cardbill < ActiveRecord::Base
 
     def search_by_text(query)
       query = "%#{query}%"
-      where('storename like ? OR storeaddr like ?', query, query)
+      where('storename like ?', query)
     end
 
     def search_by_creditcard(query)
@@ -76,16 +76,7 @@ class Cardbill < ActiveRecord::Base
     end
   end
 
-  def used
-    collection = CardUsedSource.where(approve_no: approveno)
-    return collection.first unless collection.empty?
-  end
-
-  def approved
-    collection = CardApprovedSource.where(approve_no: approveno)
-    return collection.first unless collection.empty?
-  end
-
+  
   def cardno_long
     unless self.creditcard.nil?
       self.creditcard.cardno_long
@@ -98,38 +89,4 @@ class Cardbill < ActiveRecord::Base
     totalamount - expense_reports.total_amount
   end
 
-  def approved_mismatch
-    mismatch?(:totalamount) || mismatch?(:transdate)
-  end
-
-  def mismatch?(type=nil)
-    if type == nil
-      types = [:totalamount, :transdate]
-    else
-      types = [type]
-    end
-
-    result = types.any? do |type|
-      case type
-      when :totalamount
-        approved &&  totalamount != approved.money
-      when :transdate
-        approved && transdate.between?(approved.used_at - 1.hour, approved.used_at + 1.hour) == false
-      else
-        false
-      end
-    end
-
-    result ? 'misnatch-sources' : nil
-  end
-
-  def status
-    if approved == nil || used == nil
-      "not-connected-to-sources"
-    elsif mismatch?
-      "misnatch-sources"
-    else
-      "verified"
-    end
-  end
 end

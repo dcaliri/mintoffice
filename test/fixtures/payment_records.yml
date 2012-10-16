@@ -3,3 +3,4 @@ fixture:
   name: 월급 지급
   created_at: <%= Time.zone.now %>
   updated_at: <%= Time.zone.now %>
+  bankbook_id: 2

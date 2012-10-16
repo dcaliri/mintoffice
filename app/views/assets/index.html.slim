@@ -1,0 +1,25 @@
+#show_command
+  = link_to t("common.title.new"), [:new, :asset]
+  = " "
+  = link_to t('common.title.back'), :root
+
+- if current_person.admin?
+  - content_for :search do
+    = form_tag :assets, method: :get do
+      = select_tag :owner, options_for_select([["소유자 있음", true], ["소유자 없음", false]], params[:owner]), "onchange" => "this.form.submit()"
+
+h2 ...
+
+table#list-table
+  tr
+    th= Asset.human_attribute_name("owner")
+    th= Asset.human_attribute_name("title")
+    th.link_button_area
+  - @assets.each do |asset|
+    tr.selectable.link_to*{"data-url" => asset_path(asset)}
+      td= asset.owner_name
+      td= asset.title
+      td.link_button_area
+        = link_to t('common.button.detail_veiw'), asset, class: 'btn btn-primary'
+center
+  = will_paginate @assets

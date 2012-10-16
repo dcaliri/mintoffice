@@ -1,20 +1,31 @@
 
 #show_command
-  = link_to t("common.title.new"), new_payroll_payroll_item_path(payroll)
+  - if payroll.payment_request
+    = link_to "지급청구 보기", payroll.payment_request
+    = " "
+  - if current_person.admin?
+    = link_to t("common.title.new"), new_payroll_payroll_item_path(payroll)
+    = " "
+    = link_to t('common.title.edit'), edit_payroll_path(payroll)
+    = " "
+    = link_to t('common.title.destroy'), payroll, :method => :delete, data: {confirm: t("common.messages.delete_confirm")}
+    = " "
+  = link_to t('common.title.list'), :payrolls
+h2
+  = payroll.payday
+  | : 
+  = payroll.employee.fullname
   = " "
-  = link_to t('common.title.edit'), edit_payroll_path(payroll)
-  = " "
-  = link_to t('common.title.list'), [:payrolls]
-h2= "#{payroll.payday} : #{payroll.employee.fullname}"
+  = number_to_currency payroll.difference_total
 
-table#list-table
-  tr
-    th= PayrollCategory.human_attribute_name("title")
-    th= PayrollItem.human_attribute_name("amount")
-    th= t("common.menu")
-  - payroll.items.each do |item|
-    tr
-      td= item.payroll_category.title rescue ""
-      td.numrow= number_to_currency item.amount
-      td= link_to t("common.title.edit"), edit_payroll_payroll_item_path(payroll,item)
-    
+h3
+  | 지급항목:
+  = " "
+  = number_to_currency payroll.payable_total
+= render 'payroll_items/list', payroll: payroll, items: payroll.payable
+
+h3
+  | 공제항목:
+  = " "
+  = number_to_currency payroll.deductable_total
+= render 'payroll_items/list', payroll: payroll, items: payroll.deductable

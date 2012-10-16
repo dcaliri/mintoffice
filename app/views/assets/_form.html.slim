@@ -1,0 +1,20 @@
+h2= t("common.title.#{action_name}")
+
+= form_for @asset do |f|
+  = f.error_messages
+  .box
+    p
+      = f.label :title
+      = f.text_field :title
+    p
+      = f.label :description
+      = f.text_area :description
+    - if current_person.admin?
+      p
+        = f.label :owner
+        = f.select :owner_id, options_for_employees_select(@asset.owner)
+    - else
+      p
+        = f.hidden_field :owner_id, value: current_person.employee.id
+  p
+    = f.submit

@@ -10,7 +10,7 @@ h2= t("common.title.#{form_type}")
   .box
     p
       = f.label :dayworker
-      = f.collection_select(:dayworker_id, Dayworker.all, :id, :juminno)
+      = f.select :dayworker_id, options_for_dayworkers_select(dayworker_tax)
     p
       = f.label :apply_day
       = f.date_select :apply_day,  :order => [:year, :month, :day], :default => Time.zone.now

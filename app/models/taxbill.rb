@@ -1,7 +1,6 @@
 # encoding: UTF-8
 
 class Taxbill < ActiveRecord::Base
-  has_one :payment_request, as: :basis
   has_one :document, as: :owner
 
   belongs_to :taxman
@@ -11,13 +10,15 @@ class Taxbill < ActiveRecord::Base
 
   include Historiable
   include Reportable
+  include PaymentRequestable
 
   attr_accessor :document_id
   before_save :find_document_and_save
 
   def summary
+    username = report.reporter.prev.fullname rescue ""
     billtype = billtype == 'purchase' ? I18n.t('taxbills.purchase_bill') : I18n.t('taxbills.sales_bill')
-    "[#{billtype}] 담당자: #{taxman.business_client.name}, 금액: #{ActionController::Base.helpers.number_to_currency(total)}"
+    "[#{billtype}] #{username} 담당자: #{taxman.business_client.name}, 금액: #{ActionController::Base.helpers.number_to_currency(total)}"
   end
 
   def self.no_taxman_and_client
@@ -141,9 +142,8 @@ class Taxbill < ActiveRecord::Base
   end
 
   def generate_payment_request
-    PaymentRequest.generate_payment_request(self, total)
+    PaymentRequest.generate_payment_request(self, bankbook, total)
   end
-
 
   ## Excel Parser ######################################
   include SpreadsheetParsable

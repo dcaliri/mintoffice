@@ -6,7 +6,7 @@ class Permission < ActiveRecord::Base
 
   def self.can_access? (person, controller_name, action_name)
     exception_list = [
-        "attachments.picture", "attachments.download",
+        "attachments.picture", "attachments.download", "attachments.delete",
         "documents.*",
         "employees.index", "employees.show", "employees.new_employment_proof", "employees.employment_proof",
         "main.*",

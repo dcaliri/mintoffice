@@ -1,20 +1,18 @@
 class PaymentRecord < ActiveRecord::Base
-  has_one :payment_request, as: :basis
-  has_one :bankbook, as: :holder
+  belongs_to :bankbook
+  
+  include PaymentRequestable
 
-  attr_accessor :bankbook_id
-  before_save :save_bankook
+  class << self
+    def search(text, request_status)
+      text = "%#{text}%"
 
-  def generate_payment_request
-    PaymentRequest.generate_payment_request(self, 0) # self.total)
+      includes(:payment_request).where('payment_records.name LIKE ?', text).search_by_request_status(request_status)
+    end
   end
 
-private
-  def save_bankook
-    unless bankbook_id.blank?
-      self.bankbook = Bankbook.find(bankbook_id)
-    else
-      self.bankbook = nil
-    end
+
+  def generate_payment_request
+    PaymentRequest.generate_payment_request(self, bankbook, self.amount)
   end
 end

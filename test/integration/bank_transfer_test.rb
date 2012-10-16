@@ -213,7 +213,7 @@ class BankTransferTest < ActionDispatch::IntegrationTest
     click_button '미리보기'
     click_button '엑셀 파일'
 
-    select '농협 : 301-0111-7655-01', from:'bank_account_id'
+    select '농협 : 301-0111-7655-01', from: 'bank_account_id'
     
     assert(page.has_content?('301-0111-7655-01'))
     assert(page.has_content?('신한(조흥)'))

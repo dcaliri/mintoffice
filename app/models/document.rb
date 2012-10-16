@@ -11,7 +11,7 @@ class Document < ActiveRecord::Base
   include Taggable
   include Reportable
 
-  self.per_page = 2
+  self.per_page = 20
 
   class << self
     def search(params)
@@ -29,7 +29,8 @@ class Document < ActiveRecord::Base
   end
 
   def summary
-    "[문서]#{title}"
+    username = report.reporter.prev.fullname rescue ""
+    "[문서] #{username} #{title}"
   end
 
   def add_tags(tag_list)

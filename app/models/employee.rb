@@ -17,11 +17,16 @@ class Employee < ActiveRecord::Base
 
   has_many :documents
 
+  has_many :assets, foreign_key: 'owner_id'
+
   serialize :employment_proof_hash, Array
 
   include Historiable
   include Attachmentable
   include EmploymentProof
+  
+  belongs_to :bankbook
+  delegate :name, :to => :bankbook, prefix: true, allow_nil: true
 
   validates_format_of :juminno, :with => /^\d{6}-\d{7}$/, :message => I18n.t('employees.error.juminno_invalid')
   validates_uniqueness_of :juminno
@@ -33,7 +38,11 @@ class Employee < ActiveRecord::Base
   def find_contact
     if self.contact_id
       contact = Contact.find(self.contact_id.to_i)
-      self.person.contact = contact
+      if contact.person
+        self.person = contact.person
+      else
+        self.person.contact = contact
+      end
       contact.save!
     end
   end
@@ -72,7 +81,7 @@ class Employee < ActiveRecord::Base
     end
 
     def not_retired
-      where("retired_on IS NULL")
+      where(retired_on: nil)
     end
 
     def enabled

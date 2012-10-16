@@ -17,6 +17,23 @@ class ContactsController < ApplicationController
     contact.blank_if_destroy
   end
 
+  def find_duplicate
+    @duplicate_list = contacts.find_duplicate
+  end
+
+  def merge
+    unless params[:survivor].blank?
+      ids = params[:contact_ids] - [params[:survivor]]
+      ids.each do |id|
+        contacts.where('id IN (?)', ids).destroy_all
+      end
+
+      redirect_to [:find_duplicate, :contacts], notice: "성공적으로 중복을 제거했습니다."
+    else
+      redirect_to [:find_duplicate, :contacts], alert: "연락처를 선택해주세요."
+    end
+  end
+
   def save
     contact = OpenApi::GoogleContact.new(id: params[:id], password: params[:password])
     current_person.contacts.save_to(contact)

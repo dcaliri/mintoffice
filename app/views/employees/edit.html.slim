@@ -22,6 +22,10 @@ h2
     p
       = f.label :juminno, Employee.human_attribute_name('juminno')
       = f.text_field :juminno
+    p
+      = f.label :bankbook_name
+      = f.select :bankbook_id, options_for_bankbooks_select(@employee.bankbook, collection: Bankbook.select{|bankbook| !bankbook.employee})
+
     - if current_person.admin?
       p
         = render 'shared/attachments/form', form: f

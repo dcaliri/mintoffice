@@ -24,7 +24,10 @@ class UsedVacation < ActiveRecord::Base
   end
 
   def summary
-    "[연차] #{from} ~ #{to} 기간: #{period} 사유: #{note}"
+    username = report.reporter.prev.fullname rescue ""
+    vacation_type = type.title rescue ""
+    
+    "[연차] #{username}님이 #{vacation_type}으로 연차를 신청하였습니다. (기간 : #{from} ~ #{to}, 사유 : #{note} )"
   end
 
   include Reportable
@@ -37,13 +40,13 @@ class UsedVacation < ActiveRecord::Base
   end
 
   def self.total
-    all.sum {|vacation| vacation.period || 0}
+    report_status(:reported).sum {|vacation| vacation.period || 0}
   end
 
   def self.during(range)
     where("(`used_vacations`.`from` >= ? AND `used_vacations`.`from` <= ? ) OR \
-          (`used_vacations`.`to` > ? AND `used_vacations`.`to` < ? ) OR \
-          (`used_vacations`.`from` <= ? AND `used_vacations`.`to` > ?)",
+          (`used_vacations`.`to` >= ? AND `used_vacations`.`to` <= ? ) OR \
+          (`used_vacations`.`from` <= ? AND `used_vacations`.`to` >= ?)",
       range.begin.to_date, range.end.to_date, range.begin.to_date, range.end.to_date, range.begin.to_date, range.end.to_date)
   end
 

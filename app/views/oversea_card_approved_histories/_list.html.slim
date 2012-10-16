@@ -1,0 +1,44 @@
+- unless @approved_histories.empty?
+  table#list-table
+    tr
+      th= OverseaCardApprovedHistory.human_attribute_name("used_at")
+      th= OverseaCardApprovedHistory.human_attribute_name("approved_number")
+      th= OverseaCardApprovedHistory.human_attribute_name("card_name")
+      th= OverseaCardApprovedHistory.human_attribute_name("card_holder_name")
+      th= OverseaCardApprovedHistory.human_attribute_name("store_name")
+      th= OverseaCardApprovedHistory.human_attribute_name("money")
+      th= OverseaCardApprovedHistory.human_attribute_name("money_locale")
+      th= OverseaCardApprovedHistory.human_attribute_name("money_locale_currency")
+      th= OverseaCardApprovedHistory.human_attribute_name("money_locale_name")
+      th= OverseaCardApprovedHistory.human_attribute_name("money_us")
+      th= OverseaCardApprovedHistory.human_attribute_name("used_type")
+      th= OverseaCardApprovedHistory.human_attribute_name("card_type")
+      th= OverseaCardApprovedHistory.human_attribute_name("refused_at")
+      th= OverseaCardApprovedHistory.human_attribute_name("purchase_status")
+      th= OverseaCardApprovedHistory.human_attribute_name("will_be_paied_at")
+      - if menu
+        th.link_button_area
+      - @approved_histories.each do |approved_history|
+        - data = menu ? {"data-url" => oversea_card_approved_history_path(approved_history)} : {}
+        tr.selectable.link_to*data
+          td=ldate approved_history.used_at
+          td= approved_history.approved_number
+          td= approved_history.card_name
+          td= approved_history.card_holder_name
+          td= approved_history.store_name
+          td= number_to_currency approved_history.money
+          td= number_to_currency approved_history.money_locale
+          td= number_to_currency approved_history.money_locale_currency
+          td= number_to_currency approved_history.money_locale_name
+          td= number_to_currency approved_history.money_us
+          td= approved_history.used_type
+          td= approved_history.card_type
+          td=ldate approved_history.refused_at
+          td= approved_history.purchase_status
+          td=ldate approved_history.will_be_paied_at
+          - if menu
+            td.link_button_area
+              = link_to t('common.button.detail_veiw'), approved_history, class: 'btn btn-primary'
+
+- else
+  h4= t('.empty')

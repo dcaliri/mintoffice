@@ -21,11 +21,12 @@ class ExpenseReport < ActiveRecord::Base
   end
 
   def summary
-    "[지출내역서] 소유자: #{employee.fullname} 프로젝트: #{project.name} 사유: #{description}, 금액: #{ActionController::Base.helpers.number_to_currency(amount)}"
+    username = report.reporter.prev.fullname rescue ""
+    "[지출내역서] #{username} 소유자: #{employee.fullname} 프로젝트: #{project.name} 사유: #{description}, 금액: #{ActionController::Base.helpers.number_to_currency(amount)}"
   end
 
   def add_permission_of_project_owner
-    report.permission project.owner.person, :write if project.owner
+    report.permission project.owner.person, :write if project and project.owner
   end
 
   def make_posting
@@ -43,7 +44,7 @@ class ExpenseReport < ActiveRecord::Base
   end
 
   def approve?(person)
-    (project.owner and project.owner.person == person) or super
+    (project and project.owner and project.owner.person == person) or super
   end
 
   def access?(person, access_type = :read)

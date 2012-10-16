@@ -1,0 +1,47 @@
+#show_command
+  - if @used_history.creditcard
+    = link_to "신용카드 보기", @used_history.creditcard
+    = " "
+  = link_to t('common.title.edit'), [:edit, @used_history]
+  = " "
+  = link_to t('common.title.destroy'), @used_history, :method => :delete, data: {confirm: t("common.messages.delete_confirm")}
+  = " "
+  = link_to t('common.title.list'), :hyundai_card_used_histories
+
+h3 현대카드 승인내역
+.box
+  dl
+    dt= HyundaiCardUsedHistory.human_attribute_name("used_at")
+    dd= @used_history.used_at
+    dt= HyundaiCardUsedHistory.human_attribute_name("card_no")
+    dd= @used_history.card_no
+    dt= HyundaiCardUsedHistory.human_attribute_name("card_holder_name")
+    dd= @used_history.card_holder_name
+    dt= HyundaiCardUsedHistory.human_attribute_name("store_name")
+    dd= number_to_currency @used_history.store_name
+    dt= HyundaiCardUsedHistory.human_attribute_name("tax_type")
+    dd= number_to_currency @used_history.tax_type
+    dt= HyundaiCardUsedHistory.human_attribute_name("price")
+    dd= number_to_currency @used_history.price
+    dt= HyundaiCardUsedHistory.human_attribute_name("approve_no")
+    dd= @used_history.approve_no
+    dt= HyundaiCardUsedHistory.human_attribute_name("sales_statement")
+    dd= @used_history.sales_statement
+    dt= HyundaiCardUsedHistory.human_attribute_name("nation_statement")
+    dd= @used_history.nation_statement
+    dt= HyundaiCardUsedHistory.human_attribute_name("money_krw")
+    dd= number_to_currency @used_history.money_krw
+    dt= HyundaiCardUsedHistory.human_attribute_name("exchange_krw")
+    dd= number_to_currency @used_history.exchange_krw
+    dt= HyundaiCardUsedHistory.human_attribute_name("exchange_us")
+    dd= number_to_currency @used_history.exchange_us
+    dt= HyundaiCardUsedHistory.human_attribute_name("prepayment_statement")
+    dd= @used_history.prepayment_statement
+    dt= HyundaiCardUsedHistory.human_attribute_name("accepted_at")
+    dd= @used_history.accepted_at
+    dt= HyundaiCardUsedHistory.human_attribute_name("approved_at")
+    dd= @used_history.approved_at
+    dt= HyundaiCardUsedHistory.human_attribute_name("apply_sales_statement")
+    dd= @used_history.apply_sales_statement
+    dt= HyundaiCardUsedHistory.human_attribute_name("purchase_statement")
+    dd= @used_history.purchase_statement

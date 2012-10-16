@@ -14,7 +14,7 @@ class DayWorkerTest < ActionDispatch::IntegrationTest
   test 'should show dayworker' do
     visit '/dayworkers'
     click_link '상세보기'
-
+    
     assert(page.has_content?('111111-1111111'))
     assert(page.has_content?('HSBC 통장'))
   end

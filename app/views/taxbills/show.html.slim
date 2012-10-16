@@ -1,10 +1,9 @@
 - title t('.title')
 
 #show_command
-  - if taxbill.payment_request
-    = link_to "지급청구 보기", taxbill.payment_request
-  - else
-    = link_to "지급청구 생성", [:payment_request, taxbill]
+  - if taxbill.report.status == :reported
+    - unless taxbill.payment_request
+      = link_to "지급청구 생성", [:payment_request, taxbill]
 
   = " "
   - if taxbill.access?(current_person, :write)
@@ -31,13 +30,15 @@ h2
         = taxbill.taxman.fullname
       = dtdd taxbill.taxman, "email"
       = dtdd taxbill.taxman, "phonenumber"
-    - if taxbill.document
-      div
-        h3 관련 문서
-        ul
+    div
+      h3 관련 문서
+      ul
+        - if taxbill.document
           li
             = "세금계산서 "
             = link_to taxbill.document.title, taxbill.document
+        - if taxbill.payment_request
+          li= link_to "지급청구 보기", taxbill.payment_request
   - if taxbill.document
     = render "shared/attachments/detail", :target => taxbill.document
   .clear

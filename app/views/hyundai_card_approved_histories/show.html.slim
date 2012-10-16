@@ -1,0 +1,38 @@
+
+#show_command
+  - if @approved_history.creditcard
+    = link_to "신용카드 보기", @approved_history.creditcard
+    = " "
+  = link_to t('common.title.edit'), [:edit, @approved_history]
+  = " "
+  = link_to t('common.title.destroy'), @approved_history, :method => :delete, data: {confirm: t("common.messages.delete_confirm")}
+  = " "
+  = link_to t('common.title.list'), :hyundai_card_approved_histories
+
+h3 현대카드 승인내역
+.box
+  dl
+    dt= HyundaiCardApprovedHistory.human_attribute_name("transacted_date")
+    dd=ldate @approved_history.transacted_date
+    dt= HyundaiCardApprovedHistory.human_attribute_name("transacted_time")
+    dd=ldate @approved_history.transacted_time
+    dt= HyundaiCardApprovedHistory.human_attribute_name("card_number")
+    dd= @approved_history.card_number
+    dt= HyundaiCardApprovedHistory.human_attribute_name("money")
+    dd= number_to_currency @approved_history.money
+    dt= HyundaiCardApprovedHistory.human_attribute_name("money_us")
+    dd= number_to_currency @approved_history.money_us
+    dt= HyundaiCardApprovedHistory.human_attribute_name("card_holder_name")
+    dd= @approved_history.card_holder_name
+    dt= HyundaiCardApprovedHistory.human_attribute_name("store_name")
+    dd= @approved_history.store_name
+    dt= HyundaiCardApprovedHistory.human_attribute_name("nation")
+    dd= @approved_history.nation
+    dt= HyundaiCardApprovedHistory.human_attribute_name("status")
+    dd= @approved_history.status
+    dt= HyundaiCardApprovedHistory.human_attribute_name("approve_number")
+    dd= @approved_history.approve_number
+    dt= HyundaiCardApprovedHistory.human_attribute_name("nation_statement")
+    dd= @approved_history.nation_statement
+    dt= HyundaiCardApprovedHistory.human_attribute_name("refuse_reason")
+    dd= @approved_history.refuse_reason

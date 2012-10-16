@@ -1,5 +1,9 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
+  def ldate(dt, hash = {})
+    dt ? l(dt, hash) : nil
+  end
+  
   def tiny_picture_path (attachment)
     url_for :controller => "attachments", :action => 'picture', :id => attachment.id, :w => "100", :h => "80"
   end
@@ -31,6 +35,12 @@ module ApplicationHelper
       html += content_tag :dd, ns(obj.send(p_str.to_sym)), nil, false
       html
 #    end
+  end
+
+  def interleave(arg)
+    maximum = arg.map{|list| list.size}.max
+    zipped = Array.new(maximum).zip(*arg)
+    zipped.map{|_, *etc| etc}
   end
 
   include ExceptColumnView

@@ -1,0 +1,20 @@
+#show_command
+  = link_to t('card_approved_sources.generate.link'), [:generate_form, :card_histories]
+  = " "
+  = link_to t('common.title.back'), :card_histories
+
+h2
+  = t('card_approved_sources.find_empty_cardbills.title')
+  = " - "
+  = @card_histories.count
+  = t('card_approved_sources.find_empty_cardbills.count')
+
+- unless @card_histories.empty?
+  = render 'list'
+
+  br
+  center
+    = will_paginate @card_histories
+
+- else
+  h4= t('.empty')

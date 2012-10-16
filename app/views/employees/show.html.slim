@@ -15,6 +15,7 @@
 
 h2
   = @employee.fullname
+
 .box
   #descr
     dl
@@ -29,6 +30,8 @@ h2
         = @employee.person.account.name
       - if current_person.admin? || @employee == current_employee
         = dtdd @employee, "juminno"
+      dt= Employee.human_attribute_name(:bankbook_name)
+      dd= @employee.bankbook_name
       = dtdd @employee, "joined_on"
       - if @employee.retired_on
         = dtdd @employee, "retired_on"

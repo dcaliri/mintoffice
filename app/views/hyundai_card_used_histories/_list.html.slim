@@ -1,0 +1,47 @@
+- unless @used_histories.empty?
+  table#list-table
+    tr
+      th= HyundaiCardUsedHistory.human_attribute_name("used_at")
+      th= HyundaiCardUsedHistory.human_attribute_name("card_no")
+      th= HyundaiCardUsedHistory.human_attribute_name("card_holder_name")
+      th= HyundaiCardUsedHistory.human_attribute_name("store_name")
+      th= HyundaiCardUsedHistory.human_attribute_name("tax_type")
+      th= HyundaiCardUsedHistory.human_attribute_name("price")
+      th= HyundaiCardUsedHistory.human_attribute_name("approve_no")
+      th= HyundaiCardUsedHistory.human_attribute_name("sales_statement")
+      th= HyundaiCardUsedHistory.human_attribute_name("nation_statement")
+      th= HyundaiCardUsedHistory.human_attribute_name("money_krw")
+      th= HyundaiCardUsedHistory.human_attribute_name("exchange_krw")
+      th= HyundaiCardUsedHistory.human_attribute_name("exchange_us")
+      th= HyundaiCardUsedHistory.human_attribute_name("prepayment_statement")
+      th= HyundaiCardUsedHistory.human_attribute_name("accepted_at")
+      th= HyundaiCardUsedHistory.human_attribute_name("approved_at")
+      th= HyundaiCardUsedHistory.human_attribute_name("apply_sales_statement")
+      th= HyundaiCardUsedHistory.human_attribute_name("purchase_statement")
+      - if menu
+        th.link_button_area
+      - @used_histories.each do |used_history|
+        - data = menu ? {"data-url" => hyundai_card_used_history_path(used_history)} : {}
+        tr.selectable.link_to*data
+          td= used_history.used_at
+          td= used_history.card_no
+          td= used_history.card_holder_name
+          td= used_history.store_name
+          td= used_history.tax_type
+          td= number_to_currency used_history.price
+          td= used_history.approve_no
+          td= used_history.sales_statement
+          td= used_history.nation_statement
+          td= number_to_currency used_history.money_krw
+          td= number_to_currency used_history.exchange_krw
+          td= number_to_currency used_history.exchange_us
+          td= used_history.prepayment_statement
+          td= used_history.accepted_at
+          td= used_history.approved_at
+          td= used_history.apply_sales_statement
+          td= used_history.purchase_statement
+          - if menu
+            td.link_button_area
+              = link_to t('common.button.detail_veiw'), used_history, class: 'btn btn-primary'
+- else
+  h4= t('.empty')

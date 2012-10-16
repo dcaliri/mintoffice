@@ -2,6 +2,7 @@
 
 class AttachmentsController < ApplicationController
   protect_from_forgery :except => [:save]
+
   def index
     @attachments = Attachment.paginate(:page => params[:page], :per_page => 20).order('created_at DESC')
   end

@@ -29,14 +29,14 @@ class BankBookTest < ActionDispatch::IntegrationTest
 
     fill_in '통장명', with: '적금 통장'
     fill_in '통장번호', with: '111-111111-111'
-    fill_in '은행명', with: '적금 은행'
+    select '기업은행 (003)', from: '은행 코드'
     fill_in '예금주', with: '김 인턴'
 
     click_button '통장 만들기'
 
     assert(page.has_content?('적금 통장'))
     assert(page.has_content?('111-111111-111'))
-    assert(page.has_content?('적금 은행'))
+    assert(page.has_content?('기업은행'))
     assert(page.has_content?('김 인턴'))
   end
 
@@ -49,14 +49,14 @@ class BankBookTest < ActionDispatch::IntegrationTest
 
     fill_in '통장명', with: '수정 통장'
     fill_in '통장번호', with: '222-22222-222'
-    fill_in '은행명', with: '수정 은행'
+    select '국민은행 (004)', from: '은행 코드'
     fill_in '예금주', with: '김 수정'
 
     click_button '통장 수정하기'
 
     assert(page.has_content?('수정 통장'))
     assert(page.has_content?('222-22222-222'))
-    assert(page.has_content?('수정 은행'))
+    assert(page.has_content?('국민은행'))
     assert(page.has_content?('김 수정'))
   end
 

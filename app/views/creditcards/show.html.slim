@@ -1,7 +1,21 @@
 #show_command
-  = link_to t('card_used_sources.index.title'), card_used_sources_path(creditcard_id: @creditcard.id)
-  = " "
-  = link_to t('card_approved_sources.index.title'), card_approved_sources_path(creditcard_id: @creditcard.id)
+  - unless @creditcard.shinhan_card_used_histories.empty?
+    = link_to "이용내역 원본 보기", shinhan_card_used_histories_path(creditcard_id: @creditcard)
+    = " "
+  - unless @creditcard.shinhan_card_approved_histories.empty?
+    = link_to "승인내역 원본 보기", shinhan_card_approved_histories_path(creditcard_id: @creditcard)
+    = " "
+  - unless @creditcard.hyundai_card_used_histories.empty?
+    = link_to "이용내역 원본 보기", hyundai_card_used_histories_path(creditcard_id: @creditcard)
+    = " "
+  - unless @creditcard.hyundai_card_approved_histories.empty?
+    = link_to "승인내역 원본 보기", hyundai_card_approved_histories_path(creditcard_id: @creditcard)
+    = " "
+  - unless @creditcard.oversea_card_approved_histories.empty?
+    = link_to "승인내역 보기", oversea_card_approved_histories_path(creditcard_id: @creditcard)
+    = " "
+
+  = link_to "사용내역 보기", card_histories_path(creditcard_id: @creditcard.id)
   = " "
   = link_to t("common.title.edit"), edit_creditcard_path(@creditcard)
   = " "

@@ -1,0 +1,11 @@
+#show_command
+  = link_to t('common.title.back'), :oversea_card_approved_histories
+h2 ..
+
+= form_tag [:preview, :oversea_card_approved_histories], multipart: true, class: "tabular" do
+  .box
+    p
+      = label_tag :file, t('.file')
+      = file_field :upload, :file
+    p
+      = submit_tag t('creditcards.excel.submit')

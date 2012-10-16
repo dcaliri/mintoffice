@@ -10,6 +10,7 @@ h2= t('common.title.show')
 .box
   #descr
     ul
+      li= Dayworker.human_attribute_name('name') + " : " + dayworker.name
       li= Dayworker.human_attribute_name('juminno') + " : " + dayworker.juminno.to_s
       li= Dayworker.human_attribute_name('bankbook') + " : " + dayworker.bankbook.name rescue ""
 
@@ -20,5 +21,5 @@ div#show_command
   = link_to t('dayworkers.find_address'), [:find_contact, dayworker]
 
 h3= '...'
-- unless dayworker.person.contact.nil?
+- if dayworker.person.contact
   = render 'contacts/item_for_employee', contact: dayworker.person.contact, menu: false

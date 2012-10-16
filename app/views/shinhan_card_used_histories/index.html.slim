@@ -1,0 +1,11 @@
+#show_command
+  = link_to t('common.title.excel'), [:excel, :shinhan_card_used_histories]
+  = " "
+  = link_to t('common.title.new'), [:new, :shinhan_card_used_history]
+  = " "
+  = link_to t('common.title.back'), :card_histories
+
+h2 카드 승인내역
+= render 'list', menu: true
+center
+  = will_paginate @used_histories

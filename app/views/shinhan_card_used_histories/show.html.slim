@@ -1,0 +1,70 @@
+#show_command
+  - if @used_history.creditcard
+    = link_to "신용카드 보기", @used_history.creditcard
+    = " "
+  = link_to t('common.title.edit'), [:edit, @used_history]
+  = " "
+  = link_to t('common.title.destroy'), @used_history, :method => :delete, data: {confirm: t("common.messages.delete_confirm")}
+  = " "
+  = link_to t('common.title.list'), :shinhan_card_used_histories
+
+h3 신한카드 승인내역
+.box
+  dl
+    dt= ShinhanCardUsedHistory.human_attribute_name("card_no")
+    dd= @used_history.card_no
+    dt= ShinhanCardUsedHistory.human_attribute_name("bank_account")
+    dd= @used_history.bank_account
+    dt= ShinhanCardUsedHistory.human_attribute_name("bank_name")
+    dd= @used_history.bank_name
+    dt= ShinhanCardUsedHistory.human_attribute_name("card_holder_name")
+    dd= @used_history.card_holder_name
+    dt= ShinhanCardUsedHistory.human_attribute_name("used_area")
+    dd= @used_history.used_area
+    dt= ShinhanCardUsedHistory.human_attribute_name("approve_no")
+    dd= @used_history.approve_no
+    dt= ShinhanCardUsedHistory.human_attribute_name("approved_at")
+    dd=ldate @used_history.approved_at
+    dt= ShinhanCardUsedHistory.human_attribute_name("approved_time")
+    dd=ldate @used_history.approved_time
+    dt= ShinhanCardUsedHistory.human_attribute_name("sales_type")
+    dd= @used_history.sales_type
+    dt= ShinhanCardUsedHistory.human_attribute_name("money_krw")
+    dd= number_to_currency @used_history.money_krw
+    dt= ShinhanCardUsedHistory.human_attribute_name("money_foreign")
+    dd= number_to_currency @used_history.money_foreign
+    dt= ShinhanCardUsedHistory.human_attribute_name("price")
+    dd= number_to_currency @used_history.price
+    dt= ShinhanCardUsedHistory.human_attribute_name("tax")
+    dd= number_to_currency @used_history.tax
+    dt= ShinhanCardUsedHistory.human_attribute_name("tip")
+    dd= number_to_currency @used_history.tip
+    dt= ShinhanCardUsedHistory.human_attribute_name("monthly_duration")
+    dd= @used_history.monthly_duration
+    dt= ShinhanCardUsedHistory.human_attribute_name("exchange_krw")
+    dd= @used_history.exchange_krw
+    dt= ShinhanCardUsedHistory.human_attribute_name("foreign_country_code")
+    dd= @used_history.foreign_country_code
+    dt= ShinhanCardUsedHistory.human_attribute_name("foreign_country_name")
+    dd= @used_history.foreign_country_name
+    dt= ShinhanCardUsedHistory.human_attribute_name("store_business_no")
+    dd= @used_history.store_business_no
+    dt= ShinhanCardUsedHistory.human_attribute_name("foreign_country_name")
+    dd= @used_history.foreign_country_name
+    dt= ShinhanCardUsedHistory.human_attribute_name("store_business_no")
+    dd= @used_history.store_business_no
+    dt= ShinhanCardUsedHistory.human_attribute_name("store_business_no")
+    dd= @used_history.store_business_no
+    dt= ShinhanCardUsedHistory.human_attribute_name("store_name")
+    dd= @used_history.store_name
+    dt= ShinhanCardUsedHistory.human_attribute_name("store_type")
+    dd= @used_history.store_type
+    dt= ShinhanCardUsedHistory.human_attribute_name("store_zipcode")
+    dd= @used_history.store_zipcode
+    dt= ShinhanCardUsedHistory.human_attribute_name("store_addr1")
+    dd= @used_history.store_addr1
+    dt= ShinhanCardUsedHistory.human_attribute_name("store_addr2")
+    dd= @used_history.store_addr2
+    dt= ShinhanCardUsedHistory.human_attribute_name("store_tel")
+    dd= @used_history.store_tel
+

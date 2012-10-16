@@ -1,0 +1,10 @@
+#show_command
+  .btn-group
+    = link_to "카드 이용내역", :shinhan_card_used_histories
+    = link_to "카드영수증이 없는 목록 보기", [:find_empty_cardbill, :card_histories]
+    = link_to "카드 사용내역 생성", [:generate, :card_histories], method: :post
+    = link_to t("common.title.new"), [:new, :card_history]
+    = link_to t("common.title.back"), :creditcards
+
+h2 ...
+= render 'list'

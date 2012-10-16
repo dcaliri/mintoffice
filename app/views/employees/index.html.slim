@@ -23,9 +23,9 @@ div.container
       li.span4
         = div_for employee, class: 'thumbnail' do
           - unless employee.attachments.empty?
-            = image_tag picture_attachment_path(employee.attachments.first)
+            = image_tag picture_attachment_path(employee.attachments.first, w: 223, h: 227)
           - else
-            ' <img src='http://t0.gstatic.com/images?q=tbn:ANd9GcRi-8XnnXwAZmz_5R5LHRHMNlnYYHCP4WqRdu6vhf_ru8wLK9XB3IrNrwix' width="150" height="150" />
+            ' <img src='http://t0.gstatic.com/images?q=tbn:ANd9GcRi-8XnnXwAZmz_5R5LHRHMNlnYYHCP4WqRdu6vhf_ru8wLK9XB3IrNrwix' />
           h3= employee.companyno.to_s + ". " + employee.fullname
           = link_to t('common.button.detail_veiw'), employee, class: 'btn pull-right'
           p= employee.position

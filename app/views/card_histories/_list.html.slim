@@ -1,0 +1,34 @@
+- content_for :search do
+  = form_tag :card_histories, :method => :get do
+    = select_tag :creditcard_id, options_for_creditcard_select(params[:creditcard_id]), "onchange" => "this.form.submit()"
+
+- unless @card_histories.empty?
+  table#list-table
+    tr
+      th= CardHistory.human_attribute_name("creditcard_name")
+      th= CardHistory.human_attribute_name("transacted_at")
+      th= CardHistory.human_attribute_name("amount")
+      th= CardHistory.human_attribute_name("amount_local")
+      th= CardHistory.human_attribute_name("country")
+      th= CardHistory.human_attribute_name("store_name")
+      th= CardHistory.human_attribute_name("approved_status")
+      th= CardHistory.human_attribute_name("approved_number")
+      th= CardHistory.human_attribute_name("paid_at")
+      th.link_button_area
+    - @card_histories.each do |card_history|
+      tr.selectable.link_to*{"data-url" => card_history_path(card_history)}
+        td= card_history.creditcard_name
+        td=ldate card_history.transacted_at
+        td.numrow= number_to_currency card_history.amount
+        td.numrow= number_to_currency card_history.amount_local, unit: ''
+        td= card_history.country
+        td= card_history.store_name
+        td= card_history.approved_status
+        td= card_history.approved_number
+        td= card_history.paid_at
+        td.link_button_area
+          = link_to t('common.button.detail_veiw'), card_history, class: 'btn btn-primary'
+  center
+    = will_paginate @card_histories
+- else
+  h3 카드 사용내역이 없습니다

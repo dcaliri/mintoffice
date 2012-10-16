@@ -36,6 +36,16 @@ class PayrollCategory < ActiveRecord::Base
     [:local_incometax, 2006],
     [:healthcare_adjustment, 2007]
   ]
+
+  class << self
+    def payable
+      where(prtype: 1)
+    end
+
+    def deductable
+      where(prtype: 2)
+    end
+  end
   
 end
 

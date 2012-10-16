@@ -3,8 +3,6 @@ require 'test_helper'
 
 class CreditCardTest < ActionDispatch::IntegrationTest
   fixtures :creditcards
-  fixtures :card_approved_sources
-  fixtures :card_used_sources
   fixtures :bank_accounts
 
   test 'should visit creditcard list' do
@@ -63,22 +61,13 @@ class CreditCardTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('신용카드이(가) 성공적으로 업데이트 되었습니다.'))
   end
 
-  test 'should show card_used_sources' do
+  test 'should show card histories' do
     visit '/'
     click_link '신용카드 관리'
     click_link '상세보기'
-    click_link '카드별 이용내역'
+    click_link '사용내역 보기'
 
-    assert(page.has_content?('신용카드 이용내역'))
-  end
-
-  test 'should show card_approved_sources' do
-    visit '/'
-    click_link '신용카드 관리'
-    click_link '상세보기'
-    click_link '카드별 승인내역'
-
-    assert(page.has_content?('카드승인내역'))
+    assert(page.has_content?('카드 사용내역'))
   end
 
   test 'should show total' do
@@ -88,49 +77,4 @@ class CreditCardTest < ActionDispatch::IntegrationTest
 
     assert(page.has_content?('신용카드 관리'))
   end
-
-  test "should upload an hyundaicard used excel file" do
-    BankTransaction.destroy_all
-
-    visit '/'
-    click_link '신용카드 관리'
-    click_link '엑셀 파일로 올리기'
-
-    select '이용내역(현대카드)', from: 'card_type'
-
-    path = File.join(::Rails.root, "test/fixtures/excels/hyundai-card_used_source_fixture.xlsx") 
-    attach_file("upload_file", path)
-
-    click_button '미리보기'
-    click_button '엑셀 파일 올리기'
-
-    click_link '카드별 이용내역'
-
-    assert(page.has_content?('00993527'))
-    assert(page.has_content?('가로수할인마트'))
-    assert(page.has_content?('₩86,100'))
-  end
-
-  test "should upload an hyundaicard approved excel file" do
-    BankTransaction.destroy_all
-
-    visit '/'
-    click_link '신용카드 관리'
-    click_link '엑셀 파일로 올리기'
-
-    select '승인내역(현대카드)', from: 'card_type'
-
-    path = File.join(::Rails.root, "test/fixtures/excels/hyundai-card_approved_source_fixture.xlsx") 
-    attach_file("upload_file", path)
-
-    click_button '미리보기'
-    click_button '엑셀 파일 올리기'
-
-    click_link '카드별 승인내역'
-
-    assert(page.has_content?('00300343'))
-    assert(page.has_content?('아웃백코엑스점'))
-    assert(page.has_content?('₩86,100'))
-  end
-
 end

@@ -1,0 +1,7 @@
+- content_for :search do
+  = form_tag [:raw, :card_histories], method: :get, class: 'card-histories-search-form' do
+    p
+      = label_tag :move_to
+      = select_tag :move_to, options_for_raw_card_histories_select, "onchange" => "this.form.submit()"
+    p
+      = submit_tag "move", class: 'raw-search-submit-button'

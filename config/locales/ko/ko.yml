@@ -100,6 +100,7 @@ ko:
     activerecord:
         models:
             attachment: 첨부파일
+            asset: 자산
             bank_account: 은행계좌
             bankbook: 통장
             bank_transaction: 입출금 내역
@@ -107,7 +108,13 @@ ko:
             bonus: 상여금
             business_client: 거래처
             card_approved_source: 카드 승인내역
+            card_history: 카드 사용내역
             card_used_source: 카드 이용내역
+            shinhan_card_used_history: 신한카드 이용내역
+            hyundai_card_used_history: 현대카드 이용내역
+            shinhan_card_approved_history: 신한카드 승인내역
+            hyundai_card_approved_history: 현대카드 승인내역
+            oversea_card_approved_history: 해외카드 승인내역
             cardbill: "카드 영수증"
             change_history: 변경사항
             commute: 출퇴근
@@ -157,6 +164,11 @@ ko:
             access_person:
                 access_type: 권한
                 accessor: 대상
+            asset:
+                title: 이름
+                description: 설명
+                owner: 소유자
+                owner_id: 소유자
             attachment:
                 comments: 주석
                 contenttype: 파일형식
@@ -178,6 +190,7 @@ ko:
                 name: 통장명
                 number: 통장번호
                 bankname: 은행명
+                bank_code: 은행 코드
                 account_holder: 예금주
             bank_transaction:
                 account: 은행계좌
@@ -232,6 +245,92 @@ ko:
                 bankbook: 통장
                 bankbook_id: 통장
                 owner: 대표자
+            shinhan_card_approved_history:
+                used_at: 이용일시
+                approve_no: 승인번호
+                card_name: 이용카드
+                card_holder_name: 이용자명
+                store_name: 가맹점
+                money: 이용금액
+                used_type: 이용구분
+                monthly_duration: 할부개월수
+                canceled_at: 취소일자
+                purchase_status: 매입상태
+                will_be_paied_at: 결제예정일
+            shinhan_card_used_history:
+                card_no: 카드번호
+                bank_account: 결제계좌번호
+                bank_name: 결제은행명
+                card_holder_name: 카드소유자명
+                used_area: 사용구분
+                approve_no: 승인번호
+                approved_at: 승인일자
+                approved_time: 승인시간
+                sales_type: 매출종류코드
+                money_krw: 승인금액(원화)
+                money_foreign: 승인금액(외화)
+                price: 공금가액(원화)
+                tax: 부가세
+                tip: 봉사료
+                total: 총합
+                monthly_duration: 할부기간
+                exchange_krw: 외화거래일환률
+                foreign_country_code: 외화거래국가코드
+                foreign_country_name: 외화거래국가명
+                store_business_no: 가맹점사업자번호
+                store_name: 가맹점명
+                store_type: 가맹점업종명
+                store_zipcode: 가맹점우편번호
+                store_addr1: 가맹점주소1
+                store_addr2: 가맹점주소2
+                store_tel: 가맹점전화번호
+            hyundai_card_used_history:
+                used_at: 이용일자
+                card_no: 카드번호
+                card_holder_name: 이용자명
+                store_name: 가맹점명
+                tax_type: 과세유형
+                price: 이용금액
+                approve_no: 승인번호
+                sales_statement: 전표구분
+                nation_statement: 국내외구분
+                money_krw: 현지금액
+                exchange_krw: 미화금액
+                exchange_us: 미화환율
+                prepayment_statement: 선납구분
+                accepted_at: 접수일자
+                approved_at: 결제일자
+                apply_sales_statement: 전표신청
+                purchase_statement: 구매여부
+            hyundai_card_approved_history:
+              transacted_date: 거래일자
+              transacted_time: 시각
+              card_number: 카드번호
+              money: 승인금액
+              money_us: 승인금액($)
+              card_holder_name: 이용자명
+              store_name: 가맹점명
+              nation: 국가명
+              status: 상태
+              approve_number: 승인번호
+              nation_statement: 국내외
+              refuse_reason: 거절사유
+            oversea_card_approved_history:
+              used_at: 이용일시
+              approved_number: 승인번호
+              card_name: 이용카드
+              card_holder_name: 이용자명
+              store_name: 가맹점명
+              money: 이용금액
+              money_locale: 현지금액
+              money_locale_currency: 현지통화
+              money_locale_name: 현지통화명
+              money_us: 미화금액
+              used_type: 이용구분
+              card_type: 카드구분
+              refused_at: 취소일자
+              purchase_status: 매입상태
+              will_be_paied_at: 결제예정일
             card_approved_source:
                 used_at: 이용일시
                 approve_no: 승인번호
@@ -256,6 +355,17 @@ ko:
                 nation: 국가명
                 nation_statement: 국내외
                 refuse_reason: 거절사유
+            card_history:
+                creditcard_name: 신용카드
+                transacted_at: 거래일자
+                amount: 승인금액(원화)
+                amount_local: 현지금액
+                amount_dollar: 지역화($)
+                country: 시용국가
+                store_name: 가맹점
+                approved_status: 승인상태
+                approved_number: 승인번호
+                paid_at: 결제일자
             card_used_source:
                 card_no: 카드번호
                 bank_account: 결제계좌번호
@@ -381,6 +491,7 @@ ko:
                 total: 총 사용금액
                 bank_account_id: 결제은행
             dayworker:
+                name: 이름
                 juminno: 주민등록번호
                 bankbook: 통장
                 bankbook_id: 통장
@@ -445,6 +556,7 @@ ko:
                 joined_on: 입사일
                 email: 이메일
                 listed: 목록 출력 여부
+                bankbook_name: 통장
                 localized_status:
                   reporting: 입사지원 심사중
                   rollback: 입사지원 수정 요청
@@ -462,6 +574,9 @@ ko:
                 email: "이메일주소"
             payroll:
                 payday: 지급일
+                payable: 지급항목
+                deductable: 공제항목
+                difference: 차인지급액
             payroll_category:
                 prtype: 지급/차감 구분
                 code: 연결코드
@@ -762,6 +877,8 @@ ko:
         new:
             title: 첨부파일 신규 작성
         title: 첨부파일 관리
+    assets:
+        title: 자산 관리
     application:
       oauth_login:
         login_with_google: 구글 계정으로 로그인
@@ -830,7 +947,7 @@ ko:
             total: 합계
         title: 은행계좌 관리
     bankbooks:
-        title: 통장 관리
+        title: 지급통장 관리
     bank_transactions:
         title: 입출금 내역
         index:
@@ -932,6 +1049,16 @@ ko:
             title: 거래처 수정
             picture: 사업자등록증
         title: 거래처 관리
+    shinhan_card_used_histories:
+      title: 신한카드 이용내역
+    hyundai_card_used_histories:
+      title: 현대카드 이용내역
+    shinhan_card_approved_histories:
+      title: 신한카드 승인내역
+    hyundai_card_approved_histories:
+      title: 현대카드 승인내역
+    oversea_card_approved_histories:
+      title: 해외카드 승인내역
     card_approved_sources:
         index:
             title: 카드별 승인내역
@@ -968,6 +1095,8 @@ ko:
             submit: 카드영수증 생성
             success: "%{owner} 이(가) 총 %{amount}개의 카드영수증을 생성했습니다."
         title: 카드승인내역
+    card_histories:
+        title: 카드 사용내역
     card_used_sources:
         index:
             title: 카드별 이용내역

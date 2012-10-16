@@ -45,3 +45,21 @@ another_company_document:
     target_id: 3
     target_type: "Document"
     status: "not_reported"
+
+used_vacation:
+    id: 9
+    target_id: 1
+    target_type: "UsedVacation"
+    status: "not_reported"
+
+purchase_taxbill:
+    id: 10
+    target_id: 1
+    target_type: "Taxbill"
+    status: "not_reported"
+
+sale_taxbill:
+    id: 11
+    target_id: 2
+    target_type: "Taxbill"
+    status: "not_reported"

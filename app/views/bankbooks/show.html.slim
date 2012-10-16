@@ -7,16 +7,19 @@
 
 h3= @bankbook.name
 .box
-  dl
-    dt
-      = Bankbook.human_attribute_name(:number)
-    dd
-      = @bankbook.number
-    dt
-      = Bankbook.human_attribute_name(:bankname)
-    dd
-      = @bankbook.bankname
-    dt
-      = Bankbook.human_attribute_name(:account_holder)
-    dd
-      = @bankbook.account_holder
+  #descr
+    dl
+      dt
+        = Bankbook.human_attribute_name(:number)
+      dd
+        = @bankbook.number
+      dt
+        = Bankbook.human_attribute_name(:bankname)
+      dd
+        = @bankbook.bankname
+      dt
+        = Bankbook.human_attribute_name(:account_holder)
+      dd
+        = @bankbook.account_holder
+  = render "shared/attachments/detail", :target => @bankbook
+  .clear

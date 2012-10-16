@@ -1,0 +1,21 @@
+#show_command
+  - if @asset.owner
+    = link_to "반납", [:return, @asset], method: :put
+    = " "
+  = link_to t('common.title.edit'), [:edit, @asset]
+  = " "
+  = link_to t('common.title.destroy'), @asset, :method => :delete, data: {confirm: t("common.messages.delete_confirm")}
+  = " "
+  = link_to t('common.title.list'), :assets
+
+h3 자산 정보
+.box
+  dl
+    dt= Asset.human_attribute_name(:title)
+    dd= @asset.title
+    dt= Asset.human_attribute_name(:description)
+    dd= simple_format @asset.description
+    dt= Asset.human_attribute_name(:owner)
+    dd= @asset.owner_name
+
+  = render 'changelog', target: @asset

@@ -1,19 +1,15 @@
+# encoding: UTF-8
 require 'test_helper'
 
 class CardbillsControllerTest < ActionController::TestCase
   fixtures :cardbills
-  fixtures :card_approved_sources
-  fixtures :card_used_sources
 
   setup do
     @valid_attributes = {
       transdate: "#{Time.zone.now}",
       amount: 10908,
-      vat: 0,
-      servicecharge: 1092,
       totalamount: 12000,
       storename: "test",
-      storeaddr: "test",
       approveno: "27001012",
       creditcard_id: 1
     }
@@ -21,11 +17,8 @@ class CardbillsControllerTest < ActionController::TestCase
     @invalid_attributes = {
       transdate: "#{Time.zone.now}",
       amount: 10908,
-      vat: 0,
-      servicecharge: 1092,
       totalamount: nil,
       storename: "test",
-      storeaddr: "test",
       approveno: "27001012",
       creditcard_id: 1
     }
@@ -60,8 +53,8 @@ class CardbillsControllerTest < ActionController::TestCase
     get :show, :id => current_cardbill.id
     assert_response :success
 
-    assert_select '.box #descr #show_command a', 2
-    assert_select '.box #descr #show_command', "#{I18n.t('cardbills.show.to_use')}" + " " + "#{I18n.t('cardbills.show..to_approved')}"
+    assert_select '.box #descr #show_command a', 1
+    assert_select '.box #descr #show_command', "사용내역 보기"
   end
 
   test "should edit document" do

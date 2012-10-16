@@ -11,6 +11,7 @@ Mintoffice::Application.routes.draw do
   draw :accessors
   draw :accounts
   draw :api
+  draw :assets
   draw :attachment
   draw :banks
   draw :business_clients

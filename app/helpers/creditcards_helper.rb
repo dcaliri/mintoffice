@@ -1,15 +1,12 @@
+# encoding: UTF-8
+
 module CreditcardsHelper
-  def render_card_list(card_type)
-    folder = case card_type
-             when "default_card_used_sources"
-               "card_used_sources"
-             when "default_card_approved_sources"
-               "card_approved_sources"
-             when "oversea_card_approved_sources"
-               "card_approved_sources"
-             else
-              card_type
-             end
-    render "#{folder}/list", folder.to_sym => @collection
+  def options_for_creditcard_select(default = nil)
+    default = nil if default.blank?
+    
+    collection = Creditcard.all.map{|creditcard| [creditcard.cardno_long, creditcard.id]}
+    collection.unshift ["전체", nil]
+
+    options_for_select(collection, default)
   end
 end

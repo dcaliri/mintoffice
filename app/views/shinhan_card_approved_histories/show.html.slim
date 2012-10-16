@@ -1,0 +1,35 @@
+#show_command
+  - if @approved_history.creditcard
+    = link_to "신용카드 보기", @approved_history.creditcard
+    = " "
+  = link_to t('common.title.edit'), [:edit, @approved_history]
+  = " "
+  = link_to t('common.title.destroy'), @approved_history, :method => :delete, data: {confirm: t("common.messages.delete_confirm")}
+  = " "
+  = link_to t('common.title.list'), :shinhan_card_approved_histories
+
+h3 신한카드 승인내역
+.box
+  dl
+    dt= ShinhanCardApprovedHistory.human_attribute_name("used_at")
+    dd=ldate @approved_history.used_at
+    dt= ShinhanCardApprovedHistory.human_attribute_name("approve_no")
+    dd= @approved_history.approve_no
+    dt= ShinhanCardApprovedHistory.human_attribute_name("card_name")
+    dd= @approved_history.card_name
+    dt= ShinhanCardApprovedHistory.human_attribute_name("card_holder_name")
+    dd= @approved_history.card_holder_name
+    dt= ShinhanCardApprovedHistory.human_attribute_name("store_name")
+    dd= @approved_history.store_name
+    dt= ShinhanCardApprovedHistory.human_attribute_name("money")
+    dd= @approved_history.money
+    dt= ShinhanCardApprovedHistory.human_attribute_name("used_type")
+    dd= @approved_history.used_type
+    dt= ShinhanCardApprovedHistory.human_attribute_name("monthly_duration")
+    dd= @approved_history.monthly_duration
+    dt= ShinhanCardApprovedHistory.human_attribute_name("canceled_at")
+    dd=ldate @approved_history.canceled_at
+    dt= ShinhanCardApprovedHistory.human_attribute_name("purchase_status")
+    dd= @approved_history.purchase_status
+    dt= ShinhanCardApprovedHistory.human_attribute_name("will_be_paied_at")
+    dd=ldate @approved_history.will_be_paied_at

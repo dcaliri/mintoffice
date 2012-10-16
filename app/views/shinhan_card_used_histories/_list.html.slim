@@ -1,0 +1,43 @@
+- unless @used_histories.empty?
+  table#list-table
+    tr
+      th= ShinhanCardUsedHistory.human_attribute_name("card_no")
+      th= ShinhanCardUsedHistory.human_attribute_name("bank_account")
+      th= ShinhanCardUsedHistory.human_attribute_name("bank_name")
+      th= ShinhanCardUsedHistory.human_attribute_name("card_holder_name")
+      th= ShinhanCardUsedHistory.human_attribute_name("used_area")
+      th= ShinhanCardUsedHistory.human_attribute_name("approve_no")
+      th= ShinhanCardUsedHistory.human_attribute_name("approved_at")
+      th= ShinhanCardUsedHistory.human_attribute_name("approved_time")
+      th= ShinhanCardUsedHistory.human_attribute_name("sales_type")
+      th= ShinhanCardUsedHistory.human_attribute_name("money_krw")
+      th= ShinhanCardUsedHistory.human_attribute_name("money_foreign")
+      th= ShinhanCardUsedHistory.human_attribute_name("price")
+      th= ShinhanCardUsedHistory.human_attribute_name("tax")
+      th= ShinhanCardUsedHistory.human_attribute_name("tip")
+      th= ShinhanCardUsedHistory.human_attribute_name("store_name")
+      - if menu
+        th.link_button_area
+      - @used_histories.each do |used_history|
+        - data = menu ? {"data-url" => shinhan_card_used_history_path(used_history)} : {}
+        tr.selectable.link_to*data
+          td= used_history.card_no
+          td= used_history.bank_account
+          td= used_history.bank_name
+          td= used_history.card_holder_name
+          td= used_history.used_area
+          td= used_history.approve_no
+          td=ldate used_history.approved_at
+          td=ldate used_history.approved_time
+          td= number_to_currency used_history.sales_type
+          td= number_to_currency used_history.money_krw
+          td= number_to_currency used_history.money_foreign
+          td= number_to_currency used_history.price
+          td= number_to_currency used_history.tax
+          td= number_to_currency used_history.tip
+          td= used_history.store_name
+          - if menu
+            td.link_button_area
+              = link_to t('common.button.detail_veiw'), used_history, class: 'btn btn-primary'
+- else
+  h4= t('.empty')

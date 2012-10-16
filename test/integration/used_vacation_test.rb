@@ -6,6 +6,7 @@ class UsedVacationTest < ActionDispatch::IntegrationTest
   fixtures :used_vacations
   fixtures :vacation_types
   fixtures :vacation_type_infos
+  fixtures :reports
 
   test 'should view used_vacation' do
     visit '/'

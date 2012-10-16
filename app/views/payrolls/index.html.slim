@@ -1,20 +1,38 @@
+- if current_person.admin?
+  - content_for :search do
+    = form_tag :payrolls, method: :get do
+      = select_tag :period, options_for_payroll_period_select(params[:period]), "onchange" => "this.form.submit()"
+
 #show_command
-  = link_to t("payroll_categories.title"), :payroll_categories
-  = " "
-  = link_to t('common.title.new'), [:new, :payroll]
+  - if current_person.admin?
+    = link_to t("payroll_categories.title"), :payroll_categories
+    = " "
+    = link_to "급여대장 생성", [:generate_form, :payrolls]
+    = " "
+    = link_to "청구 생성", [:generate_payment_request, :payrolls], method: :post
+    = " "
+    = link_to t('common.title.new'), [:new, :payroll]
 
 h2 ...
 
-- unless payrolls.empty?
+- unless @payrolls.empty?
   table#list-table
     tr
       th= Payroll.human_attribute_name("payday")
       th= Employee.human_attribute_name("fullname")
+      th= Payroll.human_attribute_name("payable")
+      th= Payroll.human_attribute_name("deductable")
+      th= Payroll.human_attribute_name("difference")
+      th= PaymentRequest.human_attribute_name(:request_status)
       th.link_button_area
-    - payrolls.each do |payroll|
+    - @payrolls.each do |payroll|
       tr.selectable.link_to*{"data-url" => payroll_path(payroll)}
         td= payroll.payday
         td= payroll.employee.fullname
+        td= number_to_currency payroll.payable_total
+        td= number_to_currency payroll.deductable_total
+        td= number_to_currency payroll.difference_total
+        td= payroll.request_status
         td.link_button_area
           = link_to t('common.button.detail_veiw'), payroll, class: 'btn btn-primary'
 - else

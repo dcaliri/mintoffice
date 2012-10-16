@@ -16,6 +16,7 @@ div class={current_person.admin? ? "admin" : ""}
         li= link_to t("expense_reports.index.title"), permission_path(:expense_reports)
         li= link_to t("ledger_accounts.title"), permission_path(:ledger_accounts)
         li= link_to t("postings.title"), permission_path(:postings)
+        li= link_to t("assets.title"), permission_path(:assets)
 
     .menubar_item.item3
       h2= t("main.index.document")
