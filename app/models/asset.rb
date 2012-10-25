@@ -26,7 +26,7 @@ class Asset < ActiveRecord::Base
 
   def return!
     # update_column(:owner_id, nil)
-    self.class.where(:id => self.id).unscoped.update_all(:owner_id => nil)
+    self.class.unscoped.where(:id => self.id).update_all(:owner_id => nil)
   end
 
   def owner_name
