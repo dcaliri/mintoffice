@@ -1,7 +1,7 @@
 # encoding: UTF-8
 
 class Asset < ActiveRecord::Base
-  default_scope joins(:owner).order('employees.id ASC')
+  default_scope includes(:owner).order('employees.id ASC')
   belongs_to :owner, class_name: 'Employee', foreign_key: 'owner_id'
 
   include Historiable
@@ -25,7 +25,8 @@ class Asset < ActiveRecord::Base
   end
 
   def return!
-    update_column(:owner_id, nil)
+    # update_column(:owner_id, nil)
+    self.class.where(:id => self.id).unscoped.update_all(:owner_id => nil)
   end
 
   def owner_name
