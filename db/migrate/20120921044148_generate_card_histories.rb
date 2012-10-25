@@ -95,13 +95,13 @@ class GenerateCardHistories < ActiveRecord::Migration
   end
 
   def up
-    CardHistory.generate
-    Cardbill.find_each do |cardbill|
-      history = CardHistory.find_by_approved_number(cardbill.approveno)
-      if history
-        cardbill.card_history = history
-      end
-    end
+    # CardHistory.generate
+    # Cardbill.find_each do |cardbill|
+    #   history = CardHistory.find_by_approved_number(cardbill.approveno)
+    #   if history
+    #     cardbill.card_history = history
+    #   end
+    # end
   end
 
   def down
