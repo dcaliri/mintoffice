@@ -5,7 +5,7 @@ set :domain, "o.mintech.kr"
 set :application, 'mintoffice'
 set :deploy_to, "/home/#{user}/www/#{application}"
 
-set :rvm_ruby_string, 'ruby-1.9.3-head'
+set :rvm_ruby_string, 'ruby-1.9.3-p327'
 set :rvm_type, :user
 require "rvm/capistrano"
 
@@ -15,11 +15,13 @@ set :repository,  "git@mintech.kr:#{application}.git"
 set :scm, :git
 set :branch, 'master'
 set :scm_verbose, true
+set :deploy_via, :copy
+set :copy_strategy, :export
 
 set :use_sudo, false
 set :rails_env, :production
 
-set :port, 3022
+set :port, 22
 ssh_options[:forward_agent] = true
 
 role :web, domain                          # Your HTTP server, Apache/etc
