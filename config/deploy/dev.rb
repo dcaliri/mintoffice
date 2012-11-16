@@ -1,4 +1,4 @@
-#load 'deploy/assets'
+load 'deploy/assets'
 
 set :user, 'wangsy'
 set :domain, "steve"
