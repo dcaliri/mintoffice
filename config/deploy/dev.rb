@@ -1,11 +1,11 @@
-load 'deploy/assets'
+#load 'deploy/assets'
 
-set :user, 'rails'
-set :domain, "dev-o.mintech.kr"
-set :application, 'mintoffice'
+set :user, 'wangsy'
+set :domain, "steve"
 set :deploy_to, "/home/#{user}/www/#{application}"
 
-set :rvm_ruby_string, 'ruby-1.9.3-p286'
+set :application, 'mintoffice'
+set :rvm_ruby_string, 'ruby-1.9.3-p327'
 set :rvm_type, :user
 require "rvm/capistrano"
 
@@ -19,13 +19,11 @@ set :deploy_via, :copy
 set :copy_strategy, :export
 
 set :use_sudo, false
-set :rails_env, :dev
 
-set :port, 22
+set :port, 3022
 ssh_options[:forward_agent] = true
-ssh_options[:keys] = %w('~/.ssh/rd_dsa')
 
-server "dev-o.mintech.kr", :app, :web, :db, :primary => true
+server "steve", :app, :web, :db, :primary => true
 
 set :unicorn_env, :dev
 require "capistrano-unicorn"
