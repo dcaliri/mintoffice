@@ -20,7 +20,7 @@ set :copy_strategy, :export
 
 set :use_sudo, false
 
-set :port, 3022
+set :port, 22
 ssh_options[:forward_agent] = true
 
 server "steve", :app, :web, :db, :primary => true
