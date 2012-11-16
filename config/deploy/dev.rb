@@ -5,7 +5,7 @@ set :domain, "steve"
 set :deploy_to, "/home/#{user}/www/#{application}"
 
 set :application, 'mintoffice'
-set :rvm_ruby_string, 'ruby-1.9.3-p327'
+set :rvm_ruby_string, 'ruby-1.9.3-head'
 set :rvm_type, :user
 require "rvm/capistrano"
 
