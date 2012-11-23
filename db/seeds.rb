@@ -20,6 +20,10 @@ unless Account.exists?(name: 'admin')
   person = account.person
   Person.current_person = person
 
+  contact = Contact.create(firstname:'admin', lastname:'admin', company_name: 'mint')
+  contact.company = company
+  person.contact = contact
+
   employee = person.create_employee(juminno: '771122-1111111', joined_on: Date.today)
 
   employee.person.permissions.build(name: 'users')
