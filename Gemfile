@@ -26,7 +26,7 @@ gem 'capistrano'
 gem 'capistrano-unicorn'
 gem 'rvm-capistrano'
 
-group :assets do
+group :assets, :dev do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
 
