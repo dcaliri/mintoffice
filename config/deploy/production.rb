@@ -23,7 +23,7 @@ set :use_sudo, false
 set :port, 22
 ssh_options[:forward_agent] = true
 
-server "o.mintech.kr, :app, :web, :db, :primary => true
+server "o.mintech.kr", :app, :web, :db, :primary => true
 
 set :rails_env, :production
 set :unicorn_env, :production
