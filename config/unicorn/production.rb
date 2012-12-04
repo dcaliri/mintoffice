@@ -1,5 +1,5 @@
-worker_processes 1
-working_directory "/home/wangsy/www/mintoffice/current/"
+worker_processes 4
+working_directory "/home/wangsy/www_production/mintoffice/current/"
 
 # This loads the application in the master process before forking
 # worker processes
@@ -11,12 +11,12 @@ timeout 30
 
 # This is where we specify the socket.
 # We will point the upstream Nginx module to this socket later on
-listen "/home/wangsy/www/mintoffice/current/tmp/sockets/unicorn.sock", :backlog => 64
-pid "/home/wangsy/www/mintoffice/current/tmp/pids/unicorn.pid"
+listen "/home/wangsy/www_production/mintoffice/current/tmp/sockets/unicorn.sock", :backlog => 64
+pid "/home/wangsy/www_production/mintoffice/current/tmp/pids/unicorn.pid"
 
 # Set the path of the log files inside the log folder of the testapp
-stderr_path "/home/wangsy/www/mintoffice/current/log/unicorn.stderr.log"
-stdout_path "/home/wangsy/www/mintoffice/current/log/unicorn.stdout.log"
+stderr_path "/home/wangsy/www_production/mintoffice/current/log/unicorn.stderr.log"
+stdout_path "/home/wangsy/www_production/mintoffice/current/log/unicorn.stdout.log"
 
 before_fork do |server, worker|
 # This option works in together with preload_app true setting
