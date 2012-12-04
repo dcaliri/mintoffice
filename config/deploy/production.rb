@@ -2,16 +2,16 @@
 
 set :user, 'wangsy'
 set :domain, "o.mintech.kr"
-set :deploy_to, "/home/#{user}/www/#{application}"
+set :deploy_to, "/home/#{user}/www_production/#{application}"
 
 set :application, 'mintoffice'
-set :rvm_ruby_string, 'ruby-1.9.3-p327'
+set :rvm_ruby_string, 'ruby-1.9.2-p290'
 set :rvm_type, :user
 require "rvm/capistrano"
 
 require "bundler/capistrano"
 
-set :repository,  "git@mintech.kr:#{application}.git"
+set :repository,  "git@g.mintech.kr:#{application}.git"
 set :scm, :git
 set :branch, 'master'
 set :scm_verbose, true
