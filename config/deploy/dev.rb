@@ -31,7 +31,7 @@ require "capistrano-unicorn"
 
 namespace :deploy do
   task :relink_directories, :roles => :app do 
-    run "mkdir -p #{release_path}/tmp/sockets"
+    #run "mkdir -p #{release_path}/tmp/sockets"
     run "if [ -e #{deploy_to}/shared/database.yml ]; then cp #{deploy_to}/shared/database.yml #{release_path}/config/; fi"
     run "if [ -e #{deploy_to}/shared/oauth_key.yml ]; then cp #{deploy_to}/shared/oauth_key.yml #{release_path}/config/; fi"
     run "if [ -e #{deploy_to}/shared/google_apps.yml ]; then cp #{deploy_to}/shared/google_apps.yml #{release_path}/config/; fi"
