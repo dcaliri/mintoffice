@@ -24,7 +24,7 @@ unless Account.exists?(name: 'admin')
   contact.company = company
   person.contact = contact
 
-  employee = person.create_employee(juminno: '771122-1111111', joined_on: Date.today)
+  employee = person.create_employee(juminno: '771122-1111111', joined_on: Date.today, companyno: 1)
 
   employee.person.permissions.build(name: 'users')
   employee.person.permissions.build(name: 'pettycashes')
@@ -46,8 +46,15 @@ end
 
 unless Account.exists?(name: "test")
   account = Account.create!(name: 'test', password: '1234')
-end
+  person = account.person
+  Person.current_person = person
+  contact = Contact.create(firstname:'test', lastname:'test', company_name: 'mint')
+  contact.company = company
+  person.contact = contact
 
+  employee = person.create_employee(juminno: '771122-1111112', joined_on: Date.today, companyno: 2)
+  employee.save!
+end
 
 if company.contact_address_tags.empty?
   company.contact_address_tags.create!(name: "집")
