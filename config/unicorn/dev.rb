@@ -12,8 +12,8 @@ timeout 30
 # This is where we specify the socket.
 # We will point the upstream Nginx module to this socket later on
 
-listen "/home/wangsy/www/mintoffice/shared/tmp/sockets/unicorn.sock", :backlog => 64
-pid "/home/wangsy/www/mintoffice/shared/tmp/pids/unicorn.pid"
+listen "/home/wangsy/www/mintoffice/shared/sockets/unicorn.sock", :backlog => 64
+pid "/home/wangsy/www/mintoffice/shared/pids/unicorn.pid"
 
 # Set the path of the log files inside the log folder of the testapp
 stderr_path "/home/wangsy/www/mintoffice/current/log/unicorn.stderr.log"
