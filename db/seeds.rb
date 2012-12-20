@@ -20,7 +20,11 @@ unless Account.exists?(name: 'admin')
   person = account.person
   Person.current_person = person
 
-  employee = person.create_employee(juminno: '771122-1111111', joined_on: Date.today)
+  contact = Contact.create(firstname:'admin', lastname:'admin', company_name: 'mint')
+  contact.company = company
+  person.contact = contact
+
+  employee = person.create_employee(juminno: '771122-1111111', joined_on: Date.today, companyno: 1)
 
   employee.person.permissions.build(name: 'users')
   employee.person.permissions.build(name: 'pettycashes')
@@ -42,8 +46,15 @@ end
 
 unless Account.exists?(name: "test")
   account = Account.create!(name: 'test', password: '1234')
-end
+  person = account.person
+  Person.current_person = person
+  contact = Contact.create(firstname:'test', lastname:'test', company_name: 'mint')
+  contact.company = company
+  person.contact = contact
 
+  employee = person.create_employee(juminno: '771122-1111112', joined_on: Date.today, companyno: 2)
+  employee.save!
+end
 
 if company.contact_address_tags.empty?
   company.contact_address_tags.create!(name: "집")
@@ -78,4 +89,23 @@ if VacationType.all.empty?
   VacationType.create!(title: "예비군")
 end
 
+if Taxman.all.empty?
+  
 
+end
+
+if BusinessClient.all.empty?
+  business_client = BusinessClient.create!(name: "Apple", registration_number: "110-00-010000", category: "도소매", business_status: "제조")
+  business_client.company = company
+  business_client.save!
+
+  person = Person.create!
+  person.create_contact!(firstname:'Tim', lastname:'Cook', company_name: 'Apple', company: company)
+
+  Taxman.create!(business_client:business_client, person:person)
+end  
+
+if Taxbill.all.empty?
+  document = Document.create!(title: "taxbill", company: company)
+  taxbill = Taxbill.create!(billtype: :purchase, transacted_at: Date.today, taxman: Taxman.all.first, document: document)
+end

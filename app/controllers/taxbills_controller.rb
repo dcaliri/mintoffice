@@ -5,7 +5,7 @@ class TaxbillsController < ApplicationController
   before_filter :access_check, except: [:index, :new, :create, :total, :excel, :preview, :import]
 
   expose(:taxbills) { Taxbill.all }
-  expose(:taxbill)
+  expose(:taxbill) { Taxbill.find(params[:id]) }
 
   def total
     @purchases = Taxbill.purchases
