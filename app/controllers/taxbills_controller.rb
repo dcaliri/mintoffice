@@ -1,11 +1,11 @@
 class TaxbillsController < ApplicationController
   before_filter :manage_search_option, :only => :index
-  before_filter :only => [:show] { |c| c.save_attachment_id taxbill.document if taxbill.document }
+  #before_filter :only => [:show] { |c| c.save_attachment_id taxbill.document if taxbill.document }
 
   before_filter :access_check, except: [:index, :new, :create, :total, :excel, :preview, :import]
 
   expose(:taxbills) { Taxbill.all }
-  expose(:taxbill)
+  expose(:taxbill) { Taxbill.find(params[:id]) }
 
   def total
     @purchases = Taxbill.purchases

@@ -89,4 +89,23 @@ if VacationType.all.empty?
   VacationType.create!(title: "예비군")
 end
 
+if Taxman.all.empty?
+  
 
+end
+
+if BusinessClient.all.empty?
+  business_client = BusinessClient.create!(name: "Apple", registration_number: "110-00-010000", category: "도소매", business_status: "제조")
+  business_client.company = company
+  business_client.save!
+
+  person = Person.create!
+  person.create_contact!(firstname:'Tim', lastname:'Cook', company_name: 'Apple', company: company)
+
+  Taxman.create!(business_client:business_client, person:person)
+end  
+
+if Taxbill.all.empty?
+  document = Document.create!(title: "taxbill", company: company)
+  taxbill = Taxbill.create!(billtype: :purchase, transacted_at: Date.today, taxman: Taxman.all.first, document: document)
+end
