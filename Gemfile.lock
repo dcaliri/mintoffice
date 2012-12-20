@@ -248,7 +248,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bootstrap-sass (= 2.1.1.0)
+  bootstrap-sass
   bootstrap-will_paginate
   by_star
   capistrano

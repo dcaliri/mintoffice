@@ -21,7 +21,7 @@ gem 'google_apps'
 gem 'pony'
 gem 'by_star'
 
-gem 'bootstrap-sass', '= 2.1.1.0'
+gem 'bootstrap-sass'#, '= 2.1.1.0'
 
 gem 'unicorn'
 gem 'capistrano'
