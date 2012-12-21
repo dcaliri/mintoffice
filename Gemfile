@@ -1,5 +1,6 @@
 source :rubygems
 
+gem 'net-ssh', '2.5.2'
 gem 'rails', '3.2.7'
 gem 'jquery-rails'
 gem 'slim'
@@ -20,18 +21,20 @@ gem 'google_apps'
 gem 'pony'
 gem 'by_star'
 
+gem 'bootstrap-sass'#, '= 2.1.1.0'
+
 gem 'unicorn'
 gem 'capistrano'
 gem 'capistrano-unicorn'
 gem 'rvm-capistrano'
 
-group :assets do
+group :assets, :dev do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
 
-  gem 'therubyracer'
+  gem 'therubyracer', :platforms => :ruby, :require => 'v8'
+  gem 'libv8'
   gem 'uglifier', '>= 1.0.3'
-  gem 'bootstrap-sass'  
 end
 
 group :development do

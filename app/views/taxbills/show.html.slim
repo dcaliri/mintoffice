@@ -49,8 +49,5 @@ h2
       = taxbill.transacted_at.strftime("%Y-%m-%d") rescue ""
 
     = render "taxbills/error", :target => taxbill
-= render 'changelog', target: taxbill
 = render 'reports/info', target: taxbill
-
-
-
+= render 'changelog', target: taxbill
