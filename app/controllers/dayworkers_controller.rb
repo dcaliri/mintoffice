@@ -1,5 +1,5 @@
 class DayworkersController < ApplicationController
-  expose (:dayworkers) { Dayworker.all }
+  expose (:dayworkers) { Dayworker.scoped }
   expose (:dayworker)
 
   before_filter :only => [:show] {|c| c.save_attachment_id dayworker}
