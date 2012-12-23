@@ -12,7 +12,7 @@ class MainController < ApplicationController
       year = params[:year].nil? ? Time.zone.now.year : params[:year].to_i
       month = params[:month].nil? ? Time.zone.now.month : params[:month].to_i
       startdate = Time.zone.local(year, month, 1, 0,0,0) - 1.month
-      enddate = startdate.end_of_month + 1.month
+      enddate = startdate.end_of_month + 2.month
       @holidays = Holiday.during(startdate..enddate)
       @vacations = UsedVacation.report_status(:reported).during(startdate..enddate)
 
