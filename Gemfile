@@ -22,6 +22,7 @@ gem 'pony'
 gem 'by_star'
 
 gem 'bootstrap-sass'#, '= 2.1.1.0'
+gem 'simple_calendar'
 
 gem 'unicorn'
 gem 'capistrano'

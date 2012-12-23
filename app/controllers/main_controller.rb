@@ -3,11 +3,20 @@ class MainController < ApplicationController
 
   def index
       @reports = Report.for_timeline
-      @page = params[:page].nil? ? 0 : params[:page].to_i
-      @start_day = (Time.zone.now + @page.week).beginning_of_week
-      @end_day = (Time.zone.now + @page.week).end_of_week
-      @holidays = Holiday.during(@start_day.to_date..@end_day.to_date)
-      @vacations = UsedVacation.report_status(:reported).during(@start_day..@end_day)
+      # @page = params[:page].nil? ? 0 : params[:page].to_i
+      # @start_day = (Time.zone.now + @page.week).beginning_of_week
+      # @end_day = (Time.zone.now + @page.week).end_of_week
+      # @holidays = Holiday.during(@start_day.to_date..@end_day.to_date)
+      # @vacations = UsedVacation.report_status(:reported).during(@start_day..@end_day)
+
+      year = params[:year].nil? ? Time.zone.now.year : params[:year].to_i
+      month = params[:month].nil? ? Time.zone.now.month : params[:month].to_i
+      startdate = Time.zone.local(year, month, 1, 0,0,0) - 1.month
+      enddate = startdate.end_of_month + 1.month
+      @holidays = Holiday.during(startdate..enddate)
+      @vacations = UsedVacation.report_status(:reported).during(startdate..enddate)
+
+      @events = @holidays + @vacations.collect { |vacation| vacation.events }.flatten
   end
 
   def pdf
