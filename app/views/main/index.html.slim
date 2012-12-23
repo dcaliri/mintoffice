@@ -1,4 +1,6 @@
 #logo
   = image_tag 'mint_logo.png'
 
+= calendar @events do |event|
+	= event.title
 = render partial: "main_menu3"
