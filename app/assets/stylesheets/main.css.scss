@@ -523,10 +523,20 @@ ul#css3menu li.sublast>a{
 
 .holiday {
   color: red;
+  font-weight: bold;
 }
 
-.today {
+.vacation {
+  color: blue;
+  font-weight: bold;
+}
+
+.table-striped tr:nth-child(odd) td.today {
 	background-color: yellow;
+}
+
+.table-striped tr:nth-child(even) td.today {
+  background-color: yellow;
 }
 
 

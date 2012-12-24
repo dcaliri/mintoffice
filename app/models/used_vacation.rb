@@ -36,9 +36,11 @@ class UsedVacation < ActiveRecord::Base
       event = Event.new
       event.title = title
       event.start_time = day
-      events << event
+      if Holiday.during(day..day).empty?
+        events << event
+      end
       day += 1.day
-      break unless day < to
+      break unless day <= to
     end
     events
   end
