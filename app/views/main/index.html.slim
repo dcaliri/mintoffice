@@ -1,4 +1,9 @@
 #logo
   = image_tag 'mint_logo.png'
 
+= calendar @events do |event|
+	- if event.class.name == 'Holiday'
+		div.holiday = event.title
+	- else
+		div.vacation = event.title
 = render partial: "main_menu3"

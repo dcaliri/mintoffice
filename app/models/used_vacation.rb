@@ -1,4 +1,7 @@
 #encoding: UTF-8
+class Event
+  attr_accessor :title, :start_time
+end
 
 class UsedVacation < ActiveRecord::Base
   belongs_to :vacation
@@ -16,6 +19,30 @@ class UsedVacation < ActiveRecord::Base
       self.vacation_types.clear
       self.vacation_types << type
     end
+  end
+
+  def title
+    "#{self.type.title} : #{self.vacation.employee.fullname}"
+  end
+
+  def start_time
+    from
+  end
+
+  def events
+    day = from
+    events = []
+    loop do
+      event = Event.new
+      event.title = title
+      event.start_time = day
+      if Holiday.during(day..day).empty?
+        events << event
+      end
+      day += 1.day
+      break unless day <= to
+    end
+    events
   end
 
   include Historiable
