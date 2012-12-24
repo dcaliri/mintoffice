@@ -1,5 +1,13 @@
 class Holiday < ActiveRecord::Base
 
+  def title
+    dayname
+  end
+
+  def start_time
+    theday
+  end
+  
   def self.during(range)
     where(theday: range).order(:theday)
   end

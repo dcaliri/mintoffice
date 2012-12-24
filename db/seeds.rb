@@ -52,8 +52,8 @@ unless Account.exists?(name: "test")
   contact.company = company
   person.contact = contact
 
-  employee = person.create_employee(juminno: '771122-1111112', joined_on: Date.today, companyno: 2)
-  employee.save!
+  test_employee = person.create_employee(juminno: '771122-1111112', joined_on: Date.today, companyno: 2)
+  test_employee.save!
 end
 
 if company.contact_address_tags.empty?
@@ -89,10 +89,10 @@ if VacationType.all.empty?
   VacationType.create!(title: "예비군")
 end
 
-if Taxman.all.empty?
-  
-
-end
+vacation = Vacation.create!( from:Date.today, to:(Date.today + 1.year), period:24, employee:test_employee)
+used_vacation = UsedVacation.create!(vacation:vacation, from:(Date.today + 1.day), to:(Date.today + 3.day), period:2, note:"just vaction")
+used_vacation.vacation_types << VacationType.all.first
+used_vacation.save!
 
 if BusinessClient.all.empty?
   business_client = BusinessClient.create!(name: "Apple", registration_number: "110-00-010000", category: "도소매", business_status: "제조")
