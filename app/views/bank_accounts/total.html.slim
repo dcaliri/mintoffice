@@ -25,7 +25,7 @@ table#list-table
               th= BankAccount.human_attribute_name(:total_in)
               th= BankAccount.human_attribute_name(:total_out)
               th= BankAccount.human_attribute_name(:margin)
-            - BankAccount.all.each do |account|
+            - BankAccount.access_list(current_person).each do |account|
               tr
                 td= account.name
                 td= account.number
@@ -37,16 +37,17 @@ table#list-table
                   = number_to_currency transactions.total_out
                 td.numrow
                   = number_to_currency transactions.margin
-            tr style="background-color:yellow;"
-              td
-                = t('bank_accounts.total.total')
-              td
-              td
-              - transactions = BankTransaction.where(transacted_at: period.all_month)
-              td.numrow
-                = number_to_currency transactions.total_in
-              td.numrow
-                = number_to_currency transactions.total_out
-              td.numrow
-                = number_to_currency transactions.margin
+            - if current_person.admin?
+              tr style="background-color:yellow;"
+                td
+                  = t('bank_accounts.total.total')
+                td
+                td
+                - transactions = BankTransaction.where(transacted_at: period.all_month)
+                td.numrow
+                  = number_to_currency transactions.total_in
+                td.numrow
+                  = number_to_currency transactions.total_out
+                td.numrow
+                  = number_to_currency transactions.margin
       - period -= 1.month

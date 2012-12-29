@@ -1,5 +1,5 @@
 class GroupsController < ApplicationController
-  expose(:groups) { Group.all }
+  expose(:groups) { Group.scoped }
   expose(:group)
 
   def create
