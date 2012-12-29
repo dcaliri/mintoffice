@@ -7,6 +7,7 @@ class BankAccount < ActiveRecord::Base
 
   include Historiable
   include Attachmentable
+  include Reportable
 
   BANK_LIST = [
     [I18n.t('models.bank_account.shinhan'), :shinhan],
