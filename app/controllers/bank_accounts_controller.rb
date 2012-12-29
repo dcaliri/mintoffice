@@ -1,5 +1,5 @@
 class BankAccountsController < ApplicationController
-  expose(:bank_accounts) { BankAccount.scoped }
+  expose(:bank_accounts) { BankAccount.scoped.access_list(current_person) }
   expose(:bank_account)
 
   before_filter :only => [:show] { |c| c.save_attachment_id bank_account }

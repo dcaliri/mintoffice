@@ -42,6 +42,7 @@ group :development do
   gem 'pow-client'
   gem 'sextant'
   #gem 'debugger'
+  gem 'meta_request', '0.2.0'
 end
 
 group :test do
