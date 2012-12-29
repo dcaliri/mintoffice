@@ -5,8 +5,8 @@ class BankAccountsController < ApplicationController
   before_filter :only => [:show] { |c| c.save_attachment_id bank_account }
 
   def index
-    @promissories = Promissory.scoped
-    @investments = Investment.scoped
+    @promissories = Promissory.scoped.access_list(current_person)
+    @investments = Investment.scoped.access_list(current_person)
     @total_amount = bank_accounts.remain + @promissories.total_amount + @investments.total_amount
   end
 
