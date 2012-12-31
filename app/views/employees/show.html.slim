@@ -1,70 +1,66 @@
-- title t('.title')
+/!- title t('.title')
 
-#show_command
-  - if current_person.admin? or @employee == current_employee
-    - if @employee.joined?
-      = link_to t('employees.show.pdf'), [:employment_proof, @employee]
-      = " "
-  - if current_person.admin? and !@employee.retired_on
-    - if @employee.joined?
-      = link_to t('employees.retire.title'), :action => :retire, :id => @employee
-      = " "
-    = link_to t('common.title.edit'), edit_employee_path(@employee)
-    = " "
-  = link_to t('common.title.back'), employees_path
+ul.breadcrumb
+  li
+    = link_to t('.title'), employees_path
+    span.divider= '/'
+  li
+    = @employee.fullname
 
-h2
-  = @employee.fullname
+.page-header
+  h2
+    = "#{@employee.companyno}. #{@employee.fullname}"
+    small= " - #{@employee.position}"
 
-.box
-  #descr
-    dl
-      dt
-        = Employee.human_attribute_name('companyno')
-      dd
-        = @employee.companyno
-      = dtdd @employee, "position"
-      dt
-        = Employee.human_attribute_name('person_id')
-      dd
-        = @employee.person.account.name
-      - if current_person.admin? || @employee == current_employee
-        = dtdd @employee, "juminno"
-      dt= Employee.human_attribute_name(:bankbook_name)
-      dd= @employee.bankbook_name
-      = dtdd @employee, "joined_on"
+.row-fluid
+  .span6
+    = render "shared/attachments/detail_b", :target => @employee
+
+  .span6
+    table cellpadding="4px"
+      tr
+        th= Employee.human_attribute_name('joined_on')
+        td= @employee.joined_on
       - if @employee.retired_on
-        = dtdd @employee, "retired_on"
-      - if @employee.person.contact
-        #show_command
-          = link_to t('employees.show.find_address'), @employee.person.contact
-        h3
-          = t("contacts.show.title")
-        ul
-          = render 'contacts/item_for_employee', contact: @employee.person.contact, menu: false
-        h3
-          = t('.related_documents')
-        ul
-          - @employee.documents.each do |document|
-            li= link_to document.title, document
+        tr
+          th= Employee.human_attribute_name('retired_on')
+          td= @employee.retired_on
+      tr
+        th= Employee.human_attribute_name('person_id')
+        td= @employee.person.account.name
+      - if current_person.admin? || @employee == current_employee
+        tr
+          th= Employee.human_attribute_name('juminno')
+          td= @employee.juminno
 
+    - if @employee.person.contact
+      h3= t("contacts.show.title")
+      = link_to t('employees.show.find_address'), @employee.person.contact, class:"btn"
+      ul
+        = render 'contacts/item_for_employee', contact: @employee.person.contact, menu: false
+
+    h3= t('.related_documents')
+    ul
+      - @employee.documents.each do |document|
+        li= link_to document.title, document
+
+    - if @employee.joined?
+      h3= t(".related_admin_actions")
+      ul
+        - if current_person.admin? || @employee == current_employee
+          li
+            = link_to t('payments.title'), payment_path(@employee)
+          li
+            = link_to t('vacations.show.link'), vacation_path(@employee)
+    .btn-group
+      - if current_person.admin? or @employee == current_employee
         - if @employee.joined?
-          h3
-            = t(".related_admin_actions")
-          ul
-            - if current_person.admin? || @employee == current_employee
-              li
-                = link_to t('payments.title'), payment_path(@employee)
-              li
-                = link_to t('vacations.show.link'), vacation_path(@employee)
-  #attach
-    = render "shared/attachments/detail", :target => @employee
-  .clear
+          = link_to t('employees.show.pdf'), [:employment_proof, @employee], class:"btn"
+      - if current_person.admin? and !@employee.retired_on
+        - if @employee.joined?
+          = link_to t('employees.retire.title'), [:retire, @employee], class:"btn"
+        = link_to t('common.title.edit'), edit_employee_path(@employee), class:"btn"
+      = link_to t('common.title.back'), employees_path, class:"btn"
 
-
-- if current_person.admin?
-  = render 'changelog', target: @employee
-
-
-
-
+    - if current_person.admin?
+      = render 'changelog', target: @employee
