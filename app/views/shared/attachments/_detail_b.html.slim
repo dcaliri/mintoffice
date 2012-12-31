@@ -1,16 +1,17 @@
 - attachments = target.attachments
 - unless attachments.nil? || attachments.empty?
   - attachment = attachments.first
-  = link_to image_tag(picture_attachment_path(attachment, :w => "600", :h => "800")), picture_attachment_path(attachment), class: 'picture', target: :blank
-  br
-  center
-    = link_to t("common.link.download"), [:download, attachment], class: 'download-attachment btn btn-success btn-large'
-    - if attachments.count > 0
-      .pagination
-        ul
-          - 0.upto(attachments.count - 1) do |i|
-            li*{'class' => i == 0 ? 'active' : ''}
-              = link_to (i+1).to_s, {:at => i}, :id => attachments[i].id, :class => "move-attachment"
+  #attaches
+    = link_to image_tag(picture_attachment_path(attachment, :w => "600", :h => "800")), picture_attachment_path(attachment), class: 'picture', target: :blank
+    br
+    center
+      = link_to t("common.link.download"), [:download, attachment], class: 'download-attachment btn btn-success btn-large'
+      - if attachments.count > 0
+        .pagination
+          ul
+            - 0.upto(attachments.count - 1) do |i|
+              li*{'class' => i == 0 ? 'active' : ''}
+                = link_to (i+1).to_s, {:at => i}, :id => attachments[i].id, :class => "move-attachment"
 
 - content_for :javascript do
   | <script type="text/javascript">
@@ -21,11 +22,11 @@
         var imageUrl = "/attachments/" + e.target.id + '/picture';
         var downloadUrl = "/attachments/" + e.target.id + '/download';
 
-        $('#attach img').attr('src', imageUrl + "?h=800&amp;w=600");
-        $('#attach a.picture').attr('href', imageUrl);
-        $('#attach a.download-attachment').attr('href', downloadUrl);
+        $('#attaches img').attr('src', imageUrl + "?h=800&amp;w=600");
+        $('#attaches a.picture').attr('href', imageUrl);
+        $('#attaches a.download-attachment').attr('href', downloadUrl);
 
-        $('#attach li').removeClass('active');
+        $('#attaches li').removeClass('active');
         $(this).parent().addClass('active');
       });
     });
