@@ -9,6 +9,7 @@ Mintoffice::Application.routes.draw do
 
     member do
       get 'employment_proof', action: :new_employment_proof, as: :employment_proof
+      get 'retire', action: :retire, as: :retire
       post 'employment_proof', as: :employment_proof
     end
 
