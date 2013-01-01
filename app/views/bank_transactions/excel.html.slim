@@ -7,7 +7,7 @@ h2= t("common.title.#{action_name}")
   .box
     p
       = label_tag :bank_account, t('.type')
-      = select_tag :bank_account, options_from_collection_for_select(BankAccount.all, :id, :description, params[:bank_account])
+      = select_tag :bank_account, options_from_collection_for_select(BankAccount.access_list(current_person).all, :id, :description, params[:bank_account])
     p
       = label_tag :file, t('.file')
       = file_field :upload, :file

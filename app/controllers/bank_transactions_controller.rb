@@ -1,12 +1,12 @@
 # encoding: UTF-8
 
 class BankTransactionsController < ApplicationController
-  expose(:bank_account) { BankAccount.find(params[:bank_account_id]) unless params[:bank_account_id].blank? }
+  expose(:bank_account) { BankAccount.access_list(current_person).find(params[:bank_account_id]) unless params[:bank_account_id].blank? }
   expose(:bank_transaction)
   expose(:bank_transfer) { BankTransfer.find(params[:from]) if params[:from] }
 
   def index
-    params[:bank_account_id] ||= (BankAccount.count == 0 ? nil : BankAccount.first.id)
+    params[:bank_account_id] ||= (BankAccount.access_list(current_person).count == 0 ? nil : BankAccount.access_list(current_person).first.id)
     transactions = bank_account ? bank_account.bank_transactions : BankTransaction
     @bank_transactions = transactions.search(params[:query]).latest.page(params[:page])
   end
