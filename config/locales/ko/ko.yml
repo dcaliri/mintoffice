@@ -1726,6 +1726,11 @@ ko:
             title: 구글 앱스 계정이 등록된 사용자들
         error:
     vacations:
+        common:
+            total_vacation: 할당 연차
+            used_vacation: 사용 연차
+            remain_vacation: 잔여 연차
+            days: 일
         index:
             title: 연차 정보
             info: "할당 연차: %{total}일, 사용 연차: %{used}일, 잔여 연차: %{remain}일"
@@ -1738,6 +1743,7 @@ ko:
             title: 연차 내역
             link: 연차 관리
             info: "할당 연차: %{total}일, 사용 연차: %{used}일, 잔여 연차: %{remain}일"
+            info2: "<strong>할당 연차</strong>: %{total}일, <strong>사용 연차</strong>: %{used}일, <strong>잔여 연차</strong>: %{remain}일"
         new:
             title: 새로운 연차 할당하기
             link: 연차 할당

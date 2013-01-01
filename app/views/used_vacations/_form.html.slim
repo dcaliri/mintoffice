@@ -1,27 +1,20 @@
-#show_command
+/#show_command
   = link_to t('common.title.back'), [employee, vacation]
 
 h2= t("common.title.#{action_name}")
 
-= form_for [vacation, used_vacation], html: {class: "tabular"} do |f|
+= form_for [vacation, used_vacation] do |f|
   = f.error_messages
-  .box
-    p
-      = f.label :type_
-      = f.select :type_, vacation_type_select_list(used_vacation.type_id)
-    p
-      = f.label :from
-      = f.date_select :from, :order => [:year, :month, :day], :default => Time.zone.now
-    p
-      = f.label :to
-      = f.date_select :to, :order => [:year, :month, :day], :default => Time.zone.now
-    p
-      = f.label :period
-      = f.number_field :period, min: 0, max: 10, step: 0.5, value: used_vacation.new_record? ? 1.0 : used_vacation.period
-      br
-      = t("used_vacations.period_help")
-    p
-      = f.label :note
-      = f.text_area :note
-  p
-    = f.submit t("used_vacations.new.link")
+  fieldset
+    = f.label :type_
+    = f.select :type_, vacation_type_select_list(used_vacation.type_id)
+    = f.label :from
+    = f.date_select :from, :order => [:year, :month, :day], :default => Time.zone.now
+    = f.label :to
+    = f.date_select :to, :order => [:year, :month, :day], :default => Time.zone.now
+    = f.label :note
+    = f.text_area :note, {rows:"3"}
+    = f.label :period
+    = f.number_field :period, min: 0, max: 10, step: 0.5, value: used_vacation.new_record? ? 1.0 : used_vacation.period
+    span.help-block= t("used_vacations.period_help")
+    button.btn type="submit" =t("used_vacations.new.link")

@@ -1,55 +1,52 @@
-#show_command
-  - if current_person.admin?
-    = link_to t('vacations.new.link'), [:new, employee, :vacation]
-    = " "
-  = link_to t('employees.show.title'), employee_path(employee)
-h2= employee.fullname
+ul.breadcrumb
+  li
+    span= t('.title')
+    span.divider= '/'
+  li
+    = employee.fullname
+
 
 - unless @vacations.empty?
   - @vacations.each do |vacation|
-    div style="float: right;"
-      = link_to t('used_vacations.new.link'), [:new, vacation, :used_vacation]
-      - if current_person.admin?
-        = " "
-        = link_to t('common.link.edit'), [:edit, employee, vacation]
-        = " "
-        = link_to t('common.link.destroy'), [employee, vacation], :method => :delete, data: {confirm: t("common.messages.delete_confirm")}
-    h3= "#{vacation.from} ~ #{vacation.to} : #{t('vacations.show.info', total: vacation.period, used: vacation.used.total, remain: vacation.remain)}"
-
-    - unless vacation.used.empty?
-      table#list-table
-        tr
-          th= Vacation.human_attribute_name(:from)
-          th= Vacation.human_attribute_name(:to)
-          th= Vacation.human_attribute_name(:period)
-          th= UsedVacation.human_attribute_name(:type_title)
-          th= Vacation.human_attribute_name(:note)
-          th= Report.human_attribute_name('status')
-          th.link_button_area
-        - vacation.used.each do |used|
-          tr.selectable.selectable.link_to*{"data-url" => vacation_used_vacation_path(vacation, used)}
-            td
-              = used.from
-            td
-              = used.to
-            td
-              = "#{used.period} #{t('datetime.prompts.day')}"
-            td
-              = used.type_title
-            td
-              = used.note
-            td
-              = used.localize_status
-            td.link_button_area
-              = link_to t('common.button.detail_veiw'), vacation_used_vacation_path(vacation, used), class: 'btn btn-primary'
-
-      br
-    - else
-      h4= t('used_vacations.show.empty')
-    = render 'changelog', target: vacation
-
+    .container-fluid
+      .row-fluid
+        .span5
+          .well
+            h3= "#{vacation.from} ~ #{vacation.to}"
+            p #{t('vacations.common.total_vacation')}: #{vacation.period}#{t('vacations.common.days')}
+            p #{t('vacations.common.used_vacation')}: #{vacation.used.total}#{t('vacations.common.days')}
+            p #{t('vacations.common.remain_vacation')}: #{vacation.remain}#{t('vacations.common.days')}
+            p
+              = link_to t('used_vacations.new.link'), [:new, vacation, :used_vacation], class: "btn btn-primary"
+              - if current_person.admin?
+                .btn-group
+                  = link_to t('common.link.edit'), [:edit, employee, vacation], class: "btn btn-inverse"
+                  = link_to t('common.link.destroy'), [employee, vacation], :method => :delete, data: {confirm: t("common.messages.delete_confirm")}, class: "btn btn-inverse"
+        .span7
+          - unless vacation.used.empty?
+            - vacation.used.each do |used|
+              h4
+                - if used.report.status == :not_reported || used.report.status == :reporting
+                  span.label.label-info= used.localize_status
+                - elsif used.report.status == :rollback
+                  span.label.label-warning= used.localize_status
+                - else
+                  span.label= used.localize_status
+                |  #{used.from}~#{used.to} (#{used.period}#{t('datetime.prompts.day')})
+              p
+                |  (#{used.type_title}) - #{used.note}
+              = link_to t('common.button.detail_veiw'), vacation_used_vacation_path(vacation, used), class: 'btn'
+              hr
+          - else
+            h4= t('used_vacations.show.empty')
+      hr
 - else
   h4= t('.empty')
-
-
   p=
+p
+  = link_to t('employees.show.title'), employee_path(employee), class: "btn"
+p
+  - if current_person.admin?
+    = link_to t('vacations.new.link'), [:new, employee, :vacation], class: "btn btn-inverse"
+
+/= render 'changelog', target: vacation
