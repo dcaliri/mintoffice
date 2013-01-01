@@ -54,19 +54,19 @@ a img {
   border: 0;
 }
 
-form fieldset {
+form .box fieldset {
   background: #efe;
   margin-bottom: 20px;
 }
 
-form legend {
+form .box legend {
   color: #dfd;
   background: #141;
   font-family: sans-serif;
   padding: 0.2em 1em;
 }
 
-form label {
+form .box label {
   width: 10em;
   float: left;
   text-align: right;
@@ -75,15 +75,15 @@ form label {
   display: block;
 }
 
-form select, form textarea, form input {
+form .box select, form .box textarea, form .box input {
   margin-left: 0.5em;
 }
 
-form .submit {
+form .box .submit {
   margin-left: 4em;
 }
 
-form div {
+form .box div {
   margin: 0.5em 0;
 }
 
@@ -236,7 +236,7 @@ div.flash.alert {
   padding-left: 180px;
 }
 
-input, select {
+.box input, select {
   //margin-bottom: 1px;
   margin-top: 1px;
   vertical-align: middle;
