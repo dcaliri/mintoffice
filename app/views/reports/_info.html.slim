@@ -18,7 +18,7 @@ p
         = select_tag :reporter, options_for_select(reporter_list.map{|person| [person.fullname, person.id]}, (report.reporter.id if report.reporter))
       p
         = label_tag :comment, t('activerecord.attributes.report.comment')
-        = text_field_tag :comment
+        = text_field_tag :comment, nil, class: "span12"
       p
         - if report.rollback?
           = submit_tag t('reports.info.rollback'), name: 'rollback', class:'btn'
@@ -30,7 +30,7 @@ p
       = hidden_field_tag :target_id, target.id
       p
         = label_tag :comment, t('activerecord.attributes.report.comment')
-        = text_field_tag :comment
+        = text_field_tag :comment, nil, class: "span12"
       p
         - if report.rollback?
           = submit_tag t('reports.info.rollback'), name: 'rollback', class:'btn'
@@ -41,5 +41,5 @@ p
 
 - if current_person.admin?
   = render 'accessors/info', access_target: report
-
+  
 br
