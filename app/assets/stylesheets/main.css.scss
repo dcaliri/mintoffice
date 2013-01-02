@@ -317,5 +317,7 @@ dd {
   background-color: yellow;
 }
 
-
-
+td.wday-0, td.wday-6, .table-striped tr:nth-child(odd) td.wday-0,.table-striped tr:nth-child(odd) td.wday-6, .calendar thead:first-child tr:first-child > th:first-child, .calendar thead:first-child tr:first-child > th:nth-child(7) {
+  color: red;
+  background-color: MistyRose;
+}
