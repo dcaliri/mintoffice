@@ -6,5 +6,9 @@ div.hidden-phone
 		- if event.class.name == 'Holiday'
 			div.holiday = event.title
 		- else
-			div.vacation = event.title
+			div.vacation
+				- if current_person.admin? or event.used.vacation.employee.person == current_person
+		            = link_to event.title, vacation_used_vacation_path(event.used.vacation, event.used)
+		        - else
+		        	= event.title
 = render partial: "main_menu3"
