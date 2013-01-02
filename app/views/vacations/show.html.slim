@@ -24,7 +24,7 @@ ul.breadcrumb
                   = link_to t('common.link.destroy'), [employee, vacation], :method => :delete, data: {confirm: t("common.messages.delete_confirm")}, class: "btn btn-inverse"
         .span7
           - unless vacation.used.empty?
-            - vacation.used.each do |used|
+            - vacation.used.latest.each do |used|
               h4
                 - if used.report.status == :not_reported || used.report.status == :reporting
                   span.label.label-info= used.localize_status
