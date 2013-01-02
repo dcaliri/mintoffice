@@ -1,5 +1,5 @@
 - if current_person.admin?
-	button.btn type="button" data-toggle="collapse" data-target="#changelog"
+	button.btn.btn-inverse type="button" data-toggle="collapse" data-target="#changelog"
 		= t("common.changes")
 	#changelog class="collapse"
 		= render 'changelog_item', target: target

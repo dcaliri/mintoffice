@@ -58,9 +58,8 @@ ul.breadcrumb
           = link_to t('employees.show.pdf'), [:employment_proof, @employee], class:"btn"
       - if current_person.admin? and !@employee.retired_on
         - if @employee.joined?
-          = link_to t('employees.retire.title'), [:retire, @employee], class:"btn"
-        = link_to t('common.title.edit'), edit_employee_path(@employee), class:"btn"
-      = link_to t('common.title.back'), employees_path, class:"btn"
+          = link_to t('employees.retire.title'), [:retire, @employee], class:"btn btn-inverse"
+        = link_to t('common.title.edit'), edit_employee_path(@employee), class:"btn btn-inverse"
 
     - if current_person.admin?
-      = render 'changelog', target: @employee
+      p= render 'changelog', target: @employee

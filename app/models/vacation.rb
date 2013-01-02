@@ -1,6 +1,6 @@
 class Vacation < ActiveRecord::Base
   belongs_to :employee
-  has_many :used, class_name: 'UsedVacation'
+  has_many :used, class_name: 'UsedVacation', order: '"from" DESC'
 
   include Historiable
 
