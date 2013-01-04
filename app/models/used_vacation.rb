@@ -1,6 +1,6 @@
 #encoding: UTF-8
 class Event
-  attr_accessor :title, :start_time
+  attr_accessor :title, :start_time, :used
 end
 
 class UsedVacation < ActiveRecord::Base
@@ -10,6 +10,7 @@ class UsedVacation < ActiveRecord::Base
   has_many :vacation_types, through: :vacation_type_infos
 
   validate :valid_period
+  scope :latest, order('"from" DESC')
 
   attr_accessor :type_
   before_save :save_vacation_type
@@ -36,6 +37,7 @@ class UsedVacation < ActiveRecord::Base
       event = Event.new
       event.title = title
       event.start_time = day
+      event.used = self
       if Holiday.during(day..day).empty? and ! day.saturday? and ! day.sunday?
         events << event
       end
