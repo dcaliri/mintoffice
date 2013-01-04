@@ -22,6 +22,12 @@ class UsedVacation < ActiveRecord::Base
     end
   end
 
+  class << self
+    def latest
+      order('"from" DESC')
+    end
+  end
+  
   def title
     "#{self.type.title} : #{self.vacation.employee.fullname}"
   end
