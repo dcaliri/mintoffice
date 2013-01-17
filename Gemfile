@@ -1,7 +1,7 @@
 source :rubygems
 
 gem 'net-ssh', '2.5.2'
-gem 'rails', '3.2.7'
+gem 'rails' #, '3.2.7'
 gem 'jquery-rails'
 gem 'slim'
 gem 'dynamic_form'
