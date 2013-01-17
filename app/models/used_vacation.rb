@@ -10,6 +10,7 @@ class UsedVacation < ActiveRecord::Base
   has_many :vacation_types, through: :vacation_type_infos
 
   validate :valid_period
+  scope :latest, order('`from` DESC')
 
   attr_accessor :type_
   before_save :save_vacation_type
