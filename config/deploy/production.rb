@@ -25,7 +25,7 @@ ssh_options[:forward_agent] = true
 
 server "o.mintech.kr", :app, :web, :db, :primary => true
 
-set :rails_env, :production
+set :rails_env, "production"
 set :unicorn_env, :production
 require "capistrano-unicorn"
 
