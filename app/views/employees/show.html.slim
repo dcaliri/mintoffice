@@ -42,8 +42,8 @@ ul.breadcrumb
     h3= t('.related_documents')
     ul
       - @employee.documents.each do |document|
-        li= link_to document.title, document
-
+        - if document.access?(current_person)
+          li= link_to document.title, document 
     - if @employee.joined?
       h3= t(".related_admin_actions")
       ul
