@@ -5,7 +5,6 @@ ul.breadcrumb
   li
     = employee.fullname
 
-
 - unless @vacations.empty?
   - @vacations.each do |vacation|
     .container-fluid
@@ -34,6 +33,7 @@ ul.breadcrumb
               hr
           - else
             h4= t('used_vacations.show.empty')
+      = render 'changelog', target: vacation
       hr
 - else
   h4= t('.empty')
@@ -43,5 +43,3 @@ p
 p
   - if current_person.admin?
     = link_to t('vacations.new.link'), [:new, employee, :vacation], class: "btn btn-inverse"
-
-/= render 'changelog', target: vacation
