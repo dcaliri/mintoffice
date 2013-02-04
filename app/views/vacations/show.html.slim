@@ -26,12 +26,7 @@ ul.breadcrumb
           - unless vacation.used.empty?
             - vacation.used.latest.each do |used|
               h4
-                - if used.report.status == :not_reported || used.report.status == :reporting
-                  span.label.label-info= used.localize_status
-                - elsif used.report.status == :rollback
-                  span.label.label-warning= used.localize_status
-                - else
-                  span.label= used.localize_status
+                = report_status(used.report.status, used.localize_status)
                 |  #{used.from}~#{used.to} (#{used.period}#{t('datetime.prompts.day')})
               p
                 |  (#{used.type_title}) - #{used.note}
