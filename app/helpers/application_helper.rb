@@ -43,5 +43,15 @@ module ApplicationHelper
     zipped.map{|_, *etc| etc}
   end
 
+  def report_status(status,msg)
+    if status == :not_reported || status == :reporting
+      content_tag :span, msg, :class => "label label-info"
+    elsif status == :rollback
+      content_tag :span, msg, :class => "label label-warning"
+    else
+      content_tag :span, msg, :class => "label"
+    end
+  end
+
   include ExceptColumnView
 end

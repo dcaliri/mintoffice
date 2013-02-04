@@ -24,4 +24,4 @@ ul
       = label_tag :accessor, t('activerecord.attributes.access_person.accessor')
       = select_tag :accessor, options_for_people_and_group_select, class: "span12"
     p
-      = submit_tag
+      = submit_tag t("common.button.change"), class: "btn"

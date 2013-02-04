@@ -24,6 +24,7 @@ ul.breadcrumb
         = link_to t('common.title.edit'), [:edit, @used_vacation.vacation, @used_vacation], class: "btn"
         = " "
         = link_to t('common.title.destroy'), [@used_vacation.vacation, @used_vacation], :method => :delete, data: {confirm: t("common.messages.delete_confirm")}, class: "btn btn-danger"
+        p
     .span4
       .well
         = render 'reports/info', target: @used_vacation
