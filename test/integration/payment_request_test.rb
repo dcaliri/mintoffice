@@ -79,6 +79,7 @@ class PaymentRequestTest < ActionDispatch::IntegrationTest
     switch_to_selenium
 
     visit '/'
+    click_link '회계관리'
     click_link '지급 청구 목록'
     click_link 'Excel'
 

@@ -47,8 +47,9 @@ class UsedVacationTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('test'))
     assert(page.has_content?('0.5 일'))
 
-    click_link '목록'
-    assert(page.has_content?('0.5 일'))
+    visit '/vacations/1'
+    
+    assert(page.has_content?('(0.5일)'))
   end
 
   test 'should commit report' do
@@ -73,7 +74,7 @@ class UsedVacationTest < ActionDispatch::IntegrationTest
     select '읽기', from: 'access_type'
     select '김 개똥', from: 'accessor'
 
-    click_button 'Save changes'
+    click_button '변경하기'
 
     assert(page.has_content?('성공적으로 권한을 설정하였습니다.'))
 
@@ -115,8 +116,9 @@ class UsedVacationTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('수정된 사유'))
     assert(page.has_content?('0.5 일'))
 
-    click_link '목록'
-    assert(page.has_content?('0.5 일'))
+    visit '/vacations/1'
+
+    assert(page.has_content?('(0.5일)'))
   end
 
   test 'should destroy used_vacation' do

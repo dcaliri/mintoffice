@@ -29,6 +29,7 @@ class GetEmploymentProofTest < ActionDispatch::IntegrationTest
     end
     
     visit '/'
+    click_link '인사관리'
     click_link '인사정보관리 - 사원목록'
 
     visit '/employees/1'
@@ -50,6 +51,7 @@ class GetEmploymentProofTest < ActionDispatch::IntegrationTest
     end
     
     visit '/'
+    click_link '인사관리'
     click_link '인사정보관리 - 사원목록'
 
     visit '/employees/2'
@@ -74,6 +76,7 @@ class GetEmploymentProofTest < ActionDispatch::IntegrationTest
     
     normal_user_access
 
+    click_link '인사관리'
     click_link '인사정보관리 - 사원목록'
 
     visit '/employees/2'
@@ -95,6 +98,7 @@ class GetEmploymentProofTest < ActionDispatch::IntegrationTest
     
     normal_user_access
 
+    click_link '인사관리'
     click_link '인사정보관리 - 사원목록'
 
     visit '/employees/1/employment_proof'

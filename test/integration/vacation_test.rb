@@ -79,7 +79,7 @@ class VacationTest < ActionDispatch::IntegrationTest
 
     click_link '목록'
 
-    assert(page.has_content?('연차 관리'))
+    assert(page.has_content?('연차 내역'))
   end
 
   test 'admin should show old user vacations' do

@@ -115,7 +115,7 @@ class PaymentTest < ActionDispatch::IntegrationTest
     click_button '추가하기'
     click_button '추가하기'
 
-    assert(!page.has_content?('2012.08'))
-    assert(page.has_content?('2012.09.25'))
+    assert(!page.has_content?("#{Time.zone.now.year}.08"))
+    assert(page.has_content?("#{Time.zone.now.year}.09.25"))
   end
 end

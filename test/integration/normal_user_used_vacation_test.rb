@@ -98,9 +98,9 @@ class NUUsedVacationTest < ActionDispatch::IntegrationTest
 
     assert(page.has_content?('상태 - 결재 대기 중'))
 
-    click_link '목록'
-
-    assert(page.has_content?('0.5 일'))
+    visit '/vacations/2'
+    
+    assert(page.has_content?('(0.5일)'))
   end
 
   test 'should show employee data' do

@@ -63,3 +63,15 @@ sale_taxbill:
     target_id: 2
     target_type: "Taxbill"
     status: "not_reported"
+
+bank_account:
+    id: 12
+    target_id: 1
+    target_type: "BankAccount"
+    status: "reported"
+
+cardbill_two:
+    id: 13
+    target_id: 2
+    target_type: "Cardbill"
+    status: "reported"
