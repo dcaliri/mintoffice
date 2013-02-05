@@ -15,6 +15,7 @@ class ExpenseReportTest < ActionDispatch::IntegrationTest
   fixtures :bank_transfers
   fixtures :access_people
 
+
   test 'should visit expense list' do
     visit '/'
     click_link '지출내역서 관리'
