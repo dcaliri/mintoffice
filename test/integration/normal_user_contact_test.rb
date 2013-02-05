@@ -42,35 +42,35 @@ class NUContactTest < ActionDispatch::IntegrationTest
     assert(page.has_content?('전체 공개 : 김 관리'))
   end
 
-  test 'should save google contact' do
-    normal_user_access
+  # test 'should save google contact' do
+  #   normal_user_access
 
-    visit '/'
-    click_link '연락처'
-    click_link '구글 연락처에 저장하기'
+  #   visit '/'
+  #   click_link '연락처'
+  #   click_link '구글 연락처에 저장하기'
 
-    fill_in "Id", with: "zzilssun@wangsy.com"
-    fill_in "Password", with: "sojl1024"
+  #   fill_in "Id", with: ""
+  #   fill_in "Password", with: ""
 
-    click_button '저장하기'
+  #   click_button '저장하기'
 
-    assert(page.has_content?('성공적으로 연락처를 저장했습니다.'))
-  end
+  #   assert(page.has_content?('성공적으로 연락처를 저장했습니다.'))
+  # end
 
-  test 'should load google contact' do
-    normal_user_access
+  # test 'should load google contact' do
+  #   normal_user_access
 
-    visit '/'
-    click_link '연락처'
-    click_link '구글 연락처에서 읽어오기'
+  #   visit '/'
+  #   click_link '연락처'
+  #   click_link '구글 연락처에서 읽어오기'
 
-    fill_in "Id", with: "zzilssun@wangsy.com"
-    fill_in "Password", with: "sojl1024"
+  #   fill_in "Id", with: ""
+  #   fill_in "Password", with: ""
 
-    click_button '읽어오기'
+  #   click_button '읽어오기'
 
-    assert(page.has_content?('성공적으로 연락처를 읽어왔습니다.'))
-  end
+  #   assert(page.has_content?('성공적으로 연락처를 읽어왔습니다.'))
+  # end
 
   test 'should create a new contact' do
     normal_user_access

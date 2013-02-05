@@ -22,6 +22,7 @@ class BankTransferTest < ActionDispatch::IntegrationTest
     switch_to_selenium
 
     visit '/'
+    click_link '회계관리'
     click_link '은행계좌 목록'
     click_link '이체내역 보기'
     click_link '컬럼 선택하기'
@@ -92,6 +93,7 @@ class BankTransferTest < ActionDispatch::IntegrationTest
     switch_to_selenium
 
     visit '/'
+    click_link '회계관리'
     click_link '은행계좌 목록'
     click_link '이체내역 보기'
     click_link '상세보기'
@@ -137,6 +139,7 @@ class BankTransferTest < ActionDispatch::IntegrationTest
     switch_to_selenium
 
     visit '/'
+    click_link '회계관리'
     click_link '은행계좌 목록'
     click_link '이체내역 보기'
 
@@ -154,6 +157,7 @@ class BankTransferTest < ActionDispatch::IntegrationTest
     switch_to_selenium
 
     visit '/'
+    click_link '회계관리'
     click_link '은행계좌 목록'
     click_link '이체내역 보기'
 
@@ -180,6 +184,7 @@ class BankTransferTest < ActionDispatch::IntegrationTest
     BankTransfer.destroy_all
 
     visit '/'
+    click_link '회계관리'
     click_link '은행계좌 목록'
     click_link '이체내역 보기'
     click_link '엑셀 파일로 올리기'
@@ -201,6 +206,7 @@ class BankTransferTest < ActionDispatch::IntegrationTest
     BankTransfer.destroy_all
 
     visit '/'
+    click_link '회계관리'
     click_link '은행계좌 목록'
     click_link '이체내역 보기'
     click_link '엑셀 파일로 올리기'
@@ -226,6 +232,7 @@ class BankTransferTest < ActionDispatch::IntegrationTest
     BankTransfer.destroy_all
 
     visit '/'
+    click_link '회계관리'
     click_link '은행계좌 목록'
     click_link '이체내역 보기'
     click_link '엑셀 파일로 올리기'

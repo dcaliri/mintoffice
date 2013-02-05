@@ -87,3 +87,21 @@ another_company_admin_has_document:
   created_at: <%= Time.zone.now %>
   updated_at: <%= Time.zone.now %>
   owner: t
+
+admin_has_bank_account:
+  id: 11
+  person_id: 1
+  report_id: 12
+  prev_id:
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
+  owner: t
+
+admin_has_cardbill_two:
+  id: 12
+  person_id: 1
+  report_id: 13
+  prev_id:
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
+  owner: t

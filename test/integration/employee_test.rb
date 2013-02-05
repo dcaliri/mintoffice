@@ -228,15 +228,17 @@ class EmployeeTest < ActionDispatch::IntegrationTest
     visit '/'
     click_link '인사정보관리 - 사원목록'
     click_link '상세보기'
-    click_link '돌아가기'
+    click_link '인사정보'
 
-    assert(page.has_content?('인사정보관리'))
+    assert(page.has_content?('총인원:'))
+    assert(page.has_content?('새로운 인사정보 입력'))
   end
 
   test 'should show retired employee' do
     switch_to_selenium
     
     visit '/'
+    click_link '인사관리'
     click_link '인사정보관리 - 사원목록'
     
     select '퇴직자', from: 'search_type'

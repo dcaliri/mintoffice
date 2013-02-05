@@ -34,7 +34,8 @@ group :assets, :dev do
   gem 'coffee-rails', '~> 3.2.1'
 
   gem 'therubyracer', :platforms => :ruby, :require => 'v8'
-  gem 'libv8'
+  #gem 'libv8'
+  gem 'libv8', '~> 3.11.8'
   gem 'uglifier', '>= 1.0.3'
 end
 
