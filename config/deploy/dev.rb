@@ -25,7 +25,7 @@ ssh_options[:forward_agent] = true
 
 server "steve", :app, :web, :db, :primary => true
 
-set :rails_env, :dev
+set :rails_env, "dev"
 set :unicorn_env, :dev
 require "capistrano-unicorn"
 
