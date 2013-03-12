@@ -11,4 +11,14 @@ div.hidden-phone
 		            = link_to event.title, vacation_used_vacation_path(event.used.vacation, event.used)
 		        - else
 		        	= event.title
+
+div.visible-phone
+	ul
+		- for event in @events
+			li
+				- if current_person.admin? or event.used.vacation.employee.person == current_person
+					= link_to "#{event.start_time} #{event.title}", vacation_used_vacation_path(event.used.vacation, event.used)
+				- else 
+					= "#{event.start_time} #{event.title}"
+
 = render partial: "main_menu3"
