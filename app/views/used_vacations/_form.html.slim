@@ -10,8 +10,10 @@ h2= t("common.title.#{action_name}")
     = f.select :type_, vacation_type_select_list(used_vacation.type_id)
     = f.label :from
     = f.date_select :from, :order => [:year, :month, :day], :default => Time.zone.now
+    = f.select :from_half, options_for_select([['오전', 'AM'], ['오후', 'PM']])
     = f.label :to
     = f.date_select :to, :order => [:year, :month, :day], :default => Time.zone.now
+    = f.select :to_half, options_for_select([['오전', 'AM'], ['오후', 'PM']])
     = f.label :note
     = f.text_area :note, {rows:"3"}
     = f.label :period

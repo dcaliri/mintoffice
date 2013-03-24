@@ -13,8 +13,14 @@ ul.breadcrumb
     .span8
       dl
         = dtdd @used_vacation, "type_title"
-        = dtdd @used_vacation, "from"
-        = dtdd @used_vacation, "to"
+        dt
+          = @used_vacation.class.human_attribute_name('from')
+        dd
+          = "#{@used_vacation.from} #{@used_vacation.from_half}"
+        dt
+          = @used_vacation.class.human_attribute_name('to')
+        dd
+          = "#{@used_vacation.to} #{@used_vacation.to_half}"
         dt
           = @used_vacation.class.human_attribute_name('period')
         dd
