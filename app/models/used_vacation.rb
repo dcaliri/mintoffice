@@ -13,7 +13,7 @@ class UsedVacation < ActiveRecord::Base
   scope :latest, order('`from` DESC')
 
   attr_accessor :type_
-  before_save :save_vacation_type
+  before_save :save_vacation_type, :calculate_period
   def save_vacation_type
     if type_
       type = VacationType.find(type_)
@@ -22,8 +22,12 @@ class UsedVacation < ActiveRecord::Base
     end
   end
 
+  def calculate_period
+    self.period = events.size - (self.from_half == 'PM' ? 0.5 : 0) - (self.to_half == 'AM' ? 0.5 : 0)
+  end
+
   def title
-    "#{self.type.title} : #{self.vacation.employee.fullname}"
+    self.type.nil? ? "" : "#{self.type.title} : #{self.vacation.employee.fullname}"
   end
 
   def start_time
@@ -65,6 +69,9 @@ class UsedVacation < ActiveRecord::Base
   end
 
   def valid_period
+    puts "-----"
+    puts period
+    puts "-----"
     errors.add(:period, "1 or 0.5") unless period - period.to_i == 0 || period - period.to_i == 0.5
   end
 

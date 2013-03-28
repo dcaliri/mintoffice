@@ -1,6 +1,7 @@
 Mintoffice::Application.routes.draw do
   namespace :api do
     match 'login', controller: :accounts, action: :login
+    match 'check_period', controller: :vacations, action: :check_period
 
     resources :commutes do
       collection do

@@ -44,6 +44,13 @@ class UsedVacationsController < ApplicationController
     redirect_to vacation_path(employee)
   end
 
+  def check_period
+    from = Date.new(params[:from_year], params[:from_month], params[:from_day])
+    to = Date.new(params[:to_year], params[:to_month], params[:to_day])
+    used = UsedVacation.new(from: from, to: to, from_half: params[:from_half], to_half: params[:to_half])
+    render text: "$(period).html = #{used.calculate_period}"
+  end
+
   def destroy
     used_vacation.destroy
     redirect_to vacation_path(employee)
