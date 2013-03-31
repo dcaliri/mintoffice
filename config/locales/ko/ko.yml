@@ -735,6 +735,7 @@ ko:
                 type_title: 항목
             vacation_type:
                 title: 항목
+                deductible: 연차 차감 여부
             account:
                 name: 계정명
                 password: 비밀번호
@@ -1665,7 +1666,7 @@ ko:
             title: 연차 수정하기
             link: 연차 사용 수정
         title: 연차 신청
-        period_help: "* 반차의 경우 0.5 단위로 입력 합니다."
+        period_help: "연차차감 대상이 아닌 경우에는 0으로 표시됩니다."
         approval_completed: 승인 완료
         approval_waiting : 승인 대기
         vacation: "휴가 : "
@@ -1755,3 +1756,4 @@ ko:
         title: "연차 관리"
     vacation_types:
         title: 연차 항목
+

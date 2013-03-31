@@ -6,9 +6,11 @@ h2 ..
 table#list-table
   tr
     th= VacationType.human_attribute_name("title")
+    th= VacationType.human_attribute_name("deductible")
     th.link_button_area
   - @types.each do |type|
     tr.selectable.link_to*{"data-url" => vacation_type_path(type)}
       td= type.title
+      td= type.deductible? ? "YES" : "NO"
       td.link_button_area
         = link_to t('common.button.detail_veiw'), type, class: 'btn btn-primary'
