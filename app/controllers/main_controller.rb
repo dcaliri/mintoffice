@@ -16,9 +16,14 @@ class MainController < ApplicationController
       enddate = startdate.end_of_month + 2.month
       
       @holidays = Holiday.during(startdate..enddate)
-      @vacations = UsedVacation.report_status(:reported).during(startdate..enddate)
+      @vacations = UsedVacation.report_status(:all).during(startdate..enddate)
 
       @events = @holidays + @vacations.collect { |vacation| vacation.events }.flatten
+
+      startdate2 = Time.zone.local(year, month, 1, 0,0,0)
+      enddate2 = startdate.end_of_month
+      
+      @vacations2 = UsedVacation.report_status(:all).during(startdate..enddate)
   end
 
   def pdf

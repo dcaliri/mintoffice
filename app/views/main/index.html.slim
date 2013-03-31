@@ -11,4 +11,17 @@ div.hidden-phone
 		            = link_to event.title, vacation_used_vacation_path(event.used.vacation, event.used)
 		        - else
 		        	= event.title
+
+div.visible-phone
+	ul
+		- @vacations2.each do |used|
+			li= link_to used.title, vacation_used_vacation_path(used.vacation, used)
+
 = render partial: "main_menu3"
+
+javascript:
+	$(document).ready(function () {
+		$( ".holiday" ).each(function() {
+				$(this).parent().parent().addClass("wday-6");
+		});
+    });

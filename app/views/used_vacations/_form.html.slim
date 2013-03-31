@@ -9,12 +9,53 @@ h2= t("common.title.#{action_name}")
     = f.label :type_
     = f.select :type_, vacation_type_select_list(used_vacation.type_id)
     = f.label :from
-    = f.date_select :from, :order => [:year, :month, :day], :default => Time.zone.now
+    = f.date_select(:from, {:order => [:year, :month, :day], :default => Time.zone.now}, {:class => "check"})
+    = f.select(:from_half, options_for_select([['오전', 'AM'], ['오후', 'PM']]), {}, {:class => "check"})
     = f.label :to
-    = f.date_select :to, :order => [:year, :month, :day], :default => Time.zone.now
+    = f.date_select(:to, {:order => [:year, :month, :day], :default => Time.zone.now}, {:class => "check"})
+    = f.select(:to_half, options_for_select([['오전', 'AM'], ['오후', 'PM']]), {}, {:class => "check"})
     = f.label :note
     = f.text_area :note, {rows:"3"}
     = f.label :period
-    = f.number_field :period, min: 0, max: 10, step: 0.5, value: used_vacation.new_record? ? 1.0 : used_vacation.period
+    = f.number_field :period, min: 0, max: 10, step: 0.5, value: used_vacation.new_record? ? 1.0 : used_vacation.period, readonly: ''
     span.help-block= t("used_vacations.period_help")
     button.btn type="submit" =t("used_vacations.new.link")
+    javascript:
+        var deductible = 0;
+        $(document).ready(function () {
+            checkPeriod();
+        });
+        
+        $(".check").change(function() {
+            checkPeriod();
+        });
+        $("#used_vacation_type_").change(function() {
+            checkPeriod();
+        });
+        function checkPeriod() {
+            var data = {
+            from_year: $("#used_vacation_from_1i").val(),
+            from_month: $("#used_vacation_from_2i").val(),
+            from_day: $("#used_vacation_from_3i").val(),
+            from_half: $("#used_vacation_from_half").val(),
+            to_year: $("#used_vacation_to_1i").val(),
+            to_month: $("#used_vacation_to_2i").val(),
+            to_day: $("#used_vacation_to_3i").val(),
+            to_half: $("#used_vacation_to_half").val(),
+            vacation_type_id: $("#used_vacation_type_ option:selected").val(),
+            };
+            var request = $.ajax({
+                url: "/api/check_period",
+                type: "GET",
+                data: data,
+                dataType: "html"
+            });
+ 
+            request.done(function(msg) {
+                eval(msg);
+            });
+ 
+            request.fail(function(jqXHR, textStatus) {
+                //alert( "Request failed: " + textStatus );
+            });
+        }

@@ -20,6 +20,7 @@ class BankTransactionTest < ActionDispatch::IntegrationTest
     switch_to_selenium
     
     visit '/'
+    click_link '회계관리'
     click_link '은행계좌 목록'
     click_link '입출금내역 보기'
     click_link '검증하기'
@@ -71,7 +72,8 @@ class BankTransactionTest < ActionDispatch::IntegrationTest
     switch_to_selenium
 
     visit '/'
-    click_link '은행계좌 목록'
+    click_link '회계관리'
+    click_link('은행계좌 목록')
     click_link '입출금내역 보기'
     
     assert(page.has_content?('이자'))
@@ -132,6 +134,7 @@ class BankTransactionTest < ActionDispatch::IntegrationTest
     switch_to_selenium
 
     visit '/'
+    click_link '회계관리'
     click_link '은행계좌 목록'
     click_link '입출금내역 보기'
     click_link '상세보기'
@@ -164,6 +167,7 @@ class BankTransactionTest < ActionDispatch::IntegrationTest
     switch_to_selenium
 
     visit '/'
+    click_link '회계관리'
     click_link '은행계좌 목록'
     click_link '입출금내역 보기'
 
@@ -183,6 +187,7 @@ class BankTransactionTest < ActionDispatch::IntegrationTest
     BankTransaction.destroy_all
 
     visit '/'
+    click_link '회계관리'
     click_link '은행계좌 목록'
     click_link '입출금내역 보기'
     click_link '엑셀 파일로 올리기'
@@ -204,6 +209,7 @@ class BankTransactionTest < ActionDispatch::IntegrationTest
     BankTransaction.destroy_all
 
     visit '/'
+    click_link '회계관리'
     click_link '은행계좌 목록'
     click_link '입출금내역 보기'
     click_link '엑셀 파일로 올리기'
@@ -229,6 +235,7 @@ class BankTransactionTest < ActionDispatch::IntegrationTest
     BankTransaction.destroy_all
 
     visit '/'
+    click_link '회계관리'
     click_link '은행계좌 목록'
     click_link '입출금내역 보기'
     click_link '엑셀 파일로 올리기'

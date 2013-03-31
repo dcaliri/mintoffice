@@ -155,6 +155,7 @@ class TaxBillTest < ActionDispatch::IntegrationTest
     switch_to_selenium
 
     visit '/'
+    click_link '회계관리'
     click_link '세금계산서 관리'
 
     click_link '엑셀 파일 올리기'
@@ -223,7 +224,7 @@ class TaxBillTest < ActionDispatch::IntegrationTest
     select '읽기', from: 'access_type'
     select '[개인] 김 개똥', from: 'accessor'
 
-    click_button 'Save changes'
+    click_button '변경하기'
 
     normal_user_access
 

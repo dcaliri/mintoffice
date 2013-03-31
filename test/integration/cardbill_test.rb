@@ -8,6 +8,9 @@ class CardBillTest < ActionDispatch::IntegrationTest
   fixtures :card_histories
   fixtures :projects
   fixtures :project_assign_infos
+  fixtures :reports
+  fixtures :report_people
+  fixtures :report_comments
 
   test 'should visit cardbill list' do
     visit '/'
@@ -29,6 +32,7 @@ class CardBillTest < ActionDispatch::IntegrationTest
     switch_to_selenium
 
     visit '/'
+    click_link '회계관리'
     click_link '카드 영수증 목록'
     select('권한을 알 수 없는 내역 보기', :from => 'empty_permission')
     assert(page.has_content?('Total: 1'))
@@ -92,7 +96,7 @@ class CardBillTest < ActionDispatch::IntegrationTest
     select('쓰기', :from => 'access_type')
     select('김 개똥', :from => 'accessor')
 
-    click_button 'Save changes'
+    click_button '변경하기'
 
     assert(page.has_content?('성공적으로 권한을 설정하였습니다.'))
 

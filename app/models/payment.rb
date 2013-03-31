@@ -53,10 +53,11 @@ class Payment < ActiveRecord::Base
     basic_category = PayrollCategory.find_by_code(1001)
     bonus_category = PayrollCategory.find_by_code(1002)
 
-    basic_amount = 0
-    bonus_amount = 0
 
     grouped.each do |employee, employees_payments|
+      basic_amount = 0
+      bonus_amount = 0
+
       payroll = employee.payrolls.build(payday: payday)
       employees_payments.each do |payment|
         next if payment.payroll or payment.amount == 0
@@ -71,8 +72,8 @@ class Payment < ActiveRecord::Base
       next if basic_amount == 0 and bonus_amount == 0
       next if basic_amount + bonus_amount == 0
 
-      payroll.items.build(amount: basic_amount, payroll_category_id: basic_category) if basic_amount
-      payroll.items.build(amount: bonus_amount, payroll_category_id: bonus_category) if bonus_amount
+      payroll.items.build(amount: basic_amount, payroll_category_id: basic_category.id) if basic_amount
+      payroll.items.build(amount: bonus_amount, payroll_category_id: bonus_category.id) if bonus_amount
 
       payroll.save!
     end

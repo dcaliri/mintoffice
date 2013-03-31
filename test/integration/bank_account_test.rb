@@ -8,6 +8,9 @@ class BankAccountTest < ActionDispatch::IntegrationTest
   fixtures :promissories
   fixtures :investments
   fixtures :investment_estimations
+  fixtures :reports
+  fixtures :report_people
+  fixtures :report_comments
 
   test 'should visit bank_account list' do
     visit '/'
