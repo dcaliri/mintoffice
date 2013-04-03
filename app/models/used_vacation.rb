@@ -23,11 +23,11 @@ class UsedVacation < ActiveRecord::Base
   end
 
   def calculate_period
-    self.period = events.size - (self.from_half == 'PM' ? 0.5 : 0) - (self.to_half == 'AM' ? 0.5 : 0)
+    self.period = (self.type.deductible? ? 1 : 0 )* (events.size - (self.from_half == 'PM' ? 0.5 : 0) - (self.to_half == 'AM' ? 0.5 : 0))
   end
 
   def title
-    self.type.nil? ? "" : "#{self.type.title} : #{self.vacation.employee.fullname}"
+    (self.type.nil? or self.vacation.nil?) ? "" : "#{self.type.title} : #{self.vacation.employee.fullname}"
   end
 
   def start_time
